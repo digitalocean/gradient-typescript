@@ -4,7 +4,6 @@ import { APIResource } from '../../core/resource';
 import * as AgentsAPI from './agents';
 import * as APIKeysAPI from './api-keys';
 import {
-  APIAgentAPIKeyInfo,
   APIKeyCreateParams,
   APIKeyCreateResponse,
   APIKeyDeleteParams,
@@ -58,8 +57,6 @@ import {
 } from './versions';
 import * as APIKeysAPIKeysAPI from '../api-keys/api-keys';
 import * as KnowledgeBasesKnowledgeBasesAPI from '../knowledge-bases/knowledge-bases';
-import * as KeysAPI from '../providers/anthropic/keys';
-import * as OpenAIKeysAPI from '../providers/openai/keys';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
@@ -130,9 +127,9 @@ export class Agents extends APIResource {
 }
 
 export interface APIAgent {
-  anthropic_api_key?: KeysAPI.APIAnthropicAPIKeyInfo;
+  anthropic_api_key?: APIAnthropicAPIKeyInfo;
 
-  api_key_infos?: Array<APIKeysAPI.APIAgentAPIKeyInfo>;
+  api_key_infos?: Array<APIAgentAPIKeyInfo>;
 
   api_keys?: Array<APIAgent.APIKey>;
 
@@ -172,7 +169,7 @@ export interface APIAgent {
 
   name?: string;
 
-  openai_api_key?: OpenAIKeysAPI.APIOpenAIAPIKeyInfo;
+  openai_api_key?: APIOpenAIAPIKeyInfo;
 
   parent_agents?: Array<APIAgent>;
 
@@ -362,6 +359,34 @@ export namespace APIAgent {
   }
 }
 
+export interface APIAgentAPIKeyInfo {
+  created_at?: string;
+
+  created_by?: string;
+
+  deleted_at?: string;
+
+  name?: string;
+
+  secret_key?: string;
+
+  uuid?: string;
+}
+
+export interface APIAnthropicAPIKeyInfo {
+  created_at?: string;
+
+  created_by?: string;
+
+  deleted_at?: string;
+
+  name?: string;
+
+  updated_at?: string;
+
+  uuid?: string;
+}
+
 export type APIDeploymentVisibility =
   | 'VISIBILITY_UNKNOWN'
   | 'VISIBILITY_DISABLED'
@@ -407,6 +432,22 @@ export interface APIModel {
   uuid?: string;
 
   version?: APIKeysAPIKeysAPI.APIModelVersion;
+}
+
+export interface APIOpenAIAPIKeyInfo {
+  created_at?: string;
+
+  created_by?: string;
+
+  deleted_at?: string;
+
+  models?: Array<APIModel>;
+
+  name?: string;
+
+  updated_at?: string;
+
+  uuid?: string;
 }
 
 export type APIRetrievalMethod =
@@ -733,8 +774,11 @@ Agents.ChildAgents = ChildAgents;
 export declare namespace Agents {
   export {
     type APIAgent as APIAgent,
+    type APIAgentAPIKeyInfo as APIAgentAPIKeyInfo,
+    type APIAnthropicAPIKeyInfo as APIAnthropicAPIKeyInfo,
     type APIDeploymentVisibility as APIDeploymentVisibility,
     type APIModel as APIModel,
+    type APIOpenAIAPIKeyInfo as APIOpenAIAPIKeyInfo,
     type APIRetrievalMethod as APIRetrievalMethod,
     type AgentCreateResponse as AgentCreateResponse,
     type AgentRetrieveResponse as AgentRetrieveResponse,
@@ -750,7 +794,6 @@ export declare namespace Agents {
 
   export {
     APIKeys as APIKeys,
-    type APIAgentAPIKeyInfo as APIAgentAPIKeyInfo,
     type APIKeyCreateResponse as APIKeyCreateResponse,
     type APIKeyUpdateResponse as APIKeyUpdateResponse,
     type APIKeyListResponse as APIKeyListResponse,

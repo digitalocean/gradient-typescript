@@ -3,8 +3,11 @@
 Types:
 
 - <code><a href="./src/resources/agents/agents.ts">APIAgent</a></code>
+- <code><a href="./src/resources/agents/agents.ts">APIAgentAPIKeyInfo</a></code>
+- <code><a href="./src/resources/agents/agents.ts">APIAnthropicAPIKeyInfo</a></code>
 - <code><a href="./src/resources/agents/agents.ts">APIDeploymentVisibility</a></code>
 - <code><a href="./src/resources/agents/agents.ts">APIModel</a></code>
+- <code><a href="./src/resources/agents/agents.ts">APIOpenAIAPIKeyInfo</a></code>
 - <code><a href="./src/resources/agents/agents.ts">APIRetrievalMethod</a></code>
 - <code><a href="./src/resources/agents/agents.ts">AgentCreateResponse</a></code>
 - <code><a href="./src/resources/agents/agents.ts">AgentRetrieveResponse</a></code>
@@ -26,7 +29,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/agents/api-keys.ts">APIAgentAPIKeyInfo</a></code>
 - <code><a href="./src/resources/agents/api-keys.ts">APIKeyCreateResponse</a></code>
 - <code><a href="./src/resources/agents/api-keys.ts">APIKeyUpdateResponse</a></code>
 - <code><a href="./src/resources/agents/api-keys.ts">APIKeyListResponse</a></code>
@@ -106,7 +108,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/providers/anthropic/keys.ts">APIAnthropicAPIKeyInfo</a></code>
 - <code><a href="./src/resources/providers/anthropic/keys.ts">KeyCreateResponse</a></code>
 - <code><a href="./src/resources/providers/anthropic/keys.ts">KeyRetrieveResponse</a></code>
 - <code><a href="./src/resources/providers/anthropic/keys.ts">KeyUpdateResponse</a></code>
@@ -129,7 +130,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/providers/openai/keys.ts">APIOpenAIAPIKeyInfo</a></code>
 - <code><a href="./src/resources/providers/openai/keys.ts">KeyCreateResponse</a></code>
 - <code><a href="./src/resources/providers/openai/keys.ts">KeyRetrieveResponse</a></code>
 - <code><a href="./src/resources/providers/openai/keys.ts">KeyUpdateResponse</a></code>

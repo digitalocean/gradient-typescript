@@ -60,37 +60,23 @@ export class Keys extends APIResource {
   }
 }
 
-export interface APIAnthropicAPIKeyInfo {
-  created_at?: string;
-
-  created_by?: string;
-
-  deleted_at?: string;
-
-  name?: string;
-
-  updated_at?: string;
-
-  uuid?: string;
-}
-
 /**
  * CreateAnthropicAPIKeyOutput is used to return the newly created Anthropic API
  * key.
  */
 export interface KeyCreateResponse {
-  api_key_info?: APIAnthropicAPIKeyInfo;
+  api_key_info?: AgentsAPI.APIAnthropicAPIKeyInfo;
 }
 
 export interface KeyRetrieveResponse {
-  api_key_info?: APIAnthropicAPIKeyInfo;
+  api_key_info?: AgentsAPI.APIAnthropicAPIKeyInfo;
 }
 
 /**
  * UpdateAnthropicAPIKeyOutput is used to return the updated Anthropic API key.
  */
 export interface KeyUpdateResponse {
-  api_key_info?: APIAnthropicAPIKeyInfo;
+  api_key_info?: AgentsAPI.APIAnthropicAPIKeyInfo;
 }
 
 /**
@@ -98,7 +84,7 @@ export interface KeyUpdateResponse {
  * a specific agent.
  */
 export interface KeyListResponse {
-  api_key_infos?: Array<APIAnthropicAPIKeyInfo>;
+  api_key_infos?: Array<AgentsAPI.APIAnthropicAPIKeyInfo>;
 
   links?: VersionsAPI.APILinks;
 
@@ -109,7 +95,7 @@ export interface KeyListResponse {
  * DeleteAnthropicAPIKeyOutput is used to return the deleted Anthropic API key.
  */
 export interface KeyDeleteResponse {
-  api_key_info?: APIAnthropicAPIKeyInfo;
+  api_key_info?: AgentsAPI.APIAnthropicAPIKeyInfo;
 }
 
 export interface KeyListAgentsResponse {
@@ -160,7 +146,6 @@ export interface KeyListAgentsParams {
 
 export declare namespace Keys {
   export {
-    type APIAnthropicAPIKeyInfo as APIAnthropicAPIKeyInfo,
     type KeyCreateResponse as KeyCreateResponse,
     type KeyRetrieveResponse as KeyRetrieveResponse,
     type KeyUpdateResponse as KeyUpdateResponse,

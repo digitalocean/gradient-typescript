@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as AgentsAPI from './agents';
 import * as VersionsAPI from './versions';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
@@ -74,30 +75,16 @@ export class APIKeys extends APIResource {
   }
 }
 
-export interface APIAgentAPIKeyInfo {
-  created_at?: string;
-
-  created_by?: string;
-
-  deleted_at?: string;
-
-  name?: string;
-
-  secret_key?: string;
-
-  uuid?: string;
-}
-
 export interface APIKeyCreateResponse {
-  api_key_info?: APIAgentAPIKeyInfo;
+  api_key_info?: AgentsAPI.APIAgentAPIKeyInfo;
 }
 
 export interface APIKeyUpdateResponse {
-  api_key_info?: APIAgentAPIKeyInfo;
+  api_key_info?: AgentsAPI.APIAgentAPIKeyInfo;
 }
 
 export interface APIKeyListResponse {
-  api_key_infos?: Array<APIAgentAPIKeyInfo>;
+  api_key_infos?: Array<AgentsAPI.APIAgentAPIKeyInfo>;
 
   links?: VersionsAPI.APILinks;
 
@@ -105,11 +92,11 @@ export interface APIKeyListResponse {
 }
 
 export interface APIKeyDeleteResponse {
-  api_key_info?: APIAgentAPIKeyInfo;
+  api_key_info?: AgentsAPI.APIAgentAPIKeyInfo;
 }
 
 export interface APIKeyRegenerateResponse {
-  api_key_info?: APIAgentAPIKeyInfo;
+  api_key_info?: AgentsAPI.APIAgentAPIKeyInfo;
 }
 
 export interface APIKeyCreateParams {
@@ -168,7 +155,6 @@ export interface APIKeyRegenerateParams {
 
 export declare namespace APIKeys {
   export {
-    type APIAgentAPIKeyInfo as APIAgentAPIKeyInfo,
     type APIKeyCreateResponse as APIKeyCreateResponse,
     type APIKeyUpdateResponse as APIKeyUpdateResponse,
     type APIKeyListResponse as APIKeyListResponse,

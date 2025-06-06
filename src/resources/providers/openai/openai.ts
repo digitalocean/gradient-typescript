@@ -3,7 +3,6 @@
 import { APIResource } from '../../../core/resource';
 import * as KeysAPI from './keys';
 import {
-  APIOpenAIAPIKeyInfo,
   KeyCreateParams,
   KeyCreateResponse,
   KeyDeleteResponse,
@@ -26,7 +25,6 @@ OpenAI.Keys = Keys;
 export declare namespace OpenAI {
   export {
     Keys as Keys,
-    type APIOpenAIAPIKeyInfo as APIOpenAIAPIKeyInfo,
     type KeyCreateResponse as KeyCreateResponse,
     type KeyRetrieveResponse as KeyRetrieveResponse,
     type KeyUpdateResponse as KeyUpdateResponse,
