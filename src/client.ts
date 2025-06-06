@@ -722,6 +722,4 @@ export declare namespace DigitaloceanGenaiSDK {
   };
 
   export { Models as Models, type Model as Model, type ModelListResponse as ModelListResponse };
-
-  export type APIAgent = API.APIAgent;
 }

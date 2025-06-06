@@ -1,9 +1,3 @@
-# Shared
-
-Types:
-
-- <code><a href="./src/resources/shared.ts">APIAgent</a></code>
-
 # Genai
 
 Types:
@@ -18,6 +12,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/genai/agents/agents.ts">APIAgent</a></code>
 - <code><a href="./src/resources/genai/agents/agents.ts">APIDeploymentVisibility</a></code>
 - <code><a href="./src/resources/genai/agents/agents.ts">APIModel</a></code>
 - <code><a href="./src/resources/genai/agents/agents.ts">APIRetrievalMethod</a></code>

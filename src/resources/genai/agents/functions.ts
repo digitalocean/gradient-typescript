@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as Shared from '../../shared';
+import * as AgentsAPI from './agents';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -50,15 +50,15 @@ export class Functions extends APIResource {
 }
 
 export interface FunctionCreateResponse {
-  agent?: Shared.APIAgent;
+  agent?: AgentsAPI.APIAgent;
 }
 
 export interface FunctionUpdateResponse {
-  agent?: Shared.APIAgent;
+  agent?: AgentsAPI.APIAgent;
 }
 
 export interface FunctionDeleteResponse {
-  agent?: Shared.APIAgent;
+  agent?: AgentsAPI.APIAgent;
 }
 
 export interface FunctionCreateParams {
