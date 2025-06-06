@@ -29,11 +29,61 @@ import {
   ChatCreateCompletionResponse,
 } from './resources/chat';
 import { EmbeddingCreateParams, EmbeddingCreateResponse, Embeddings } from './resources/embeddings';
+import {
+  APIIndexingJob,
+  IndexingJobCreateParams,
+  IndexingJobCreateResponse,
+  IndexingJobListParams,
+  IndexingJobListResponse,
+  IndexingJobRetrieveDataSourcesResponse,
+  IndexingJobRetrieveResponse,
+  IndexingJobUpdateCancelParams,
+  IndexingJobUpdateCancelResponse,
+  IndexingJobs,
+} from './resources/indexing-jobs';
 import { Model, ModelListResponse, Models } from './resources/models';
+import { RegionListParams, RegionListResponse, Regions } from './resources/regions';
 import { readEnv } from './internal/utils/env';
 import { formatRequestDetails, loggerFor } from './internal/utils/log';
 import { isEmptyObj } from './internal/utils/values';
-import { Genai, GenaiRetrieveRegionsParams, GenaiRetrieveRegionsResponse } from './resources/genai/genai';
+import {
+  APIAgent,
+  APIDeploymentVisibility,
+  APIModel,
+  APIRetrievalMethod,
+  AgentCreateParams,
+  AgentCreateResponse,
+  AgentDeleteResponse,
+  AgentListParams,
+  AgentListResponse,
+  AgentRetrieveResponse,
+  AgentUpdateParams,
+  AgentUpdateResponse,
+  AgentUpdateStatusParams,
+  AgentUpdateStatusResponse,
+  Agents,
+} from './resources/agents/agents';
+import {
+  APIAgreement,
+  APIKeyListParams,
+  APIKeyListResponse,
+  APIKeys,
+  APIModelVersion,
+} from './resources/api-keys/api-keys';
+import { Auth } from './resources/auth/auth';
+import {
+  APIKnowledgeBase,
+  KnowledgeBaseCreateParams,
+  KnowledgeBaseCreateResponse,
+  KnowledgeBaseDeleteResponse,
+  KnowledgeBaseListParams,
+  KnowledgeBaseListResponse,
+  KnowledgeBaseRetrieveResponse,
+  KnowledgeBaseUpdateParams,
+  KnowledgeBaseUpdateResponse,
+  KnowledgeBases,
+} from './resources/knowledge-bases/knowledge-bases';
+import { Providers } from './resources/providers/providers';
 
 export interface ClientOptions {
   /**
@@ -689,12 +739,24 @@ export class DigitaloceanGenaiSDK {
 
   static toFile = Uploads.toFile;
 
-  genai: API.Genai = new API.Genai(this);
+  agents: API.Agents = new API.Agents(this);
+  providers: API.Providers = new API.Providers(this);
+  auth: API.Auth = new API.Auth(this);
+  regions: API.Regions = new API.Regions(this);
+  indexingJobs: API.IndexingJobs = new API.IndexingJobs(this);
+  knowledgeBases: API.KnowledgeBases = new API.KnowledgeBases(this);
+  apiKeys: API.APIKeys = new API.APIKeys(this);
   chat: API.Chat = new API.Chat(this);
   embeddings: API.Embeddings = new API.Embeddings(this);
   models: API.Models = new API.Models(this);
 }
-DigitaloceanGenaiSDK.Genai = Genai;
+DigitaloceanGenaiSDK.Agents = Agents;
+DigitaloceanGenaiSDK.Providers = Providers;
+DigitaloceanGenaiSDK.Auth = Auth;
+DigitaloceanGenaiSDK.Regions = Regions;
+DigitaloceanGenaiSDK.IndexingJobs = IndexingJobs;
+DigitaloceanGenaiSDK.KnowledgeBases = KnowledgeBases;
+DigitaloceanGenaiSDK.APIKeys = APIKeys;
 DigitaloceanGenaiSDK.Chat = Chat;
 DigitaloceanGenaiSDK.Embeddings = Embeddings;
 DigitaloceanGenaiSDK.Models = Models;
@@ -702,9 +764,65 @@ export declare namespace DigitaloceanGenaiSDK {
   export type RequestOptions = Opts.RequestOptions;
 
   export {
-    Genai as Genai,
-    type GenaiRetrieveRegionsResponse as GenaiRetrieveRegionsResponse,
-    type GenaiRetrieveRegionsParams as GenaiRetrieveRegionsParams,
+    Agents as Agents,
+    type APIAgent as APIAgent,
+    type APIDeploymentVisibility as APIDeploymentVisibility,
+    type APIModel as APIModel,
+    type APIRetrievalMethod as APIRetrievalMethod,
+    type AgentCreateResponse as AgentCreateResponse,
+    type AgentRetrieveResponse as AgentRetrieveResponse,
+    type AgentUpdateResponse as AgentUpdateResponse,
+    type AgentListResponse as AgentListResponse,
+    type AgentDeleteResponse as AgentDeleteResponse,
+    type AgentUpdateStatusResponse as AgentUpdateStatusResponse,
+    type AgentCreateParams as AgentCreateParams,
+    type AgentUpdateParams as AgentUpdateParams,
+    type AgentListParams as AgentListParams,
+    type AgentUpdateStatusParams as AgentUpdateStatusParams,
+  };
+
+  export { Providers as Providers };
+
+  export { Auth as Auth };
+
+  export {
+    Regions as Regions,
+    type RegionListResponse as RegionListResponse,
+    type RegionListParams as RegionListParams,
+  };
+
+  export {
+    IndexingJobs as IndexingJobs,
+    type APIIndexingJob as APIIndexingJob,
+    type IndexingJobCreateResponse as IndexingJobCreateResponse,
+    type IndexingJobRetrieveResponse as IndexingJobRetrieveResponse,
+    type IndexingJobListResponse as IndexingJobListResponse,
+    type IndexingJobRetrieveDataSourcesResponse as IndexingJobRetrieveDataSourcesResponse,
+    type IndexingJobUpdateCancelResponse as IndexingJobUpdateCancelResponse,
+    type IndexingJobCreateParams as IndexingJobCreateParams,
+    type IndexingJobListParams as IndexingJobListParams,
+    type IndexingJobUpdateCancelParams as IndexingJobUpdateCancelParams,
+  };
+
+  export {
+    KnowledgeBases as KnowledgeBases,
+    type APIKnowledgeBase as APIKnowledgeBase,
+    type KnowledgeBaseCreateResponse as KnowledgeBaseCreateResponse,
+    type KnowledgeBaseRetrieveResponse as KnowledgeBaseRetrieveResponse,
+    type KnowledgeBaseUpdateResponse as KnowledgeBaseUpdateResponse,
+    type KnowledgeBaseListResponse as KnowledgeBaseListResponse,
+    type KnowledgeBaseDeleteResponse as KnowledgeBaseDeleteResponse,
+    type KnowledgeBaseCreateParams as KnowledgeBaseCreateParams,
+    type KnowledgeBaseUpdateParams as KnowledgeBaseUpdateParams,
+    type KnowledgeBaseListParams as KnowledgeBaseListParams,
+  };
+
+  export {
+    APIKeys as APIKeys,
+    type APIAgreement as APIAgreement,
+    type APIModelVersion as APIModelVersion,
+    type APIKeyListResponse as APIKeyListResponse,
+    type APIKeyListParams as APIKeyListParams,
   };
 
   export {

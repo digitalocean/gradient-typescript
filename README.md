@@ -29,7 +29,7 @@ const client = new DigitaloceanGenaiSDK({
   apiKey: process.env['DIGITALOCEAN_GENAI_SDK_API_KEY'], // This is the default and can be omitted
 });
 
-const versions = await client.genai.agents.versions.list('REPLACE_ME');
+const versions = await client.agents.versions.list('REPLACE_ME');
 
 console.log(versions.agent_versions);
 ```
@@ -46,8 +46,9 @@ const client = new DigitaloceanGenaiSDK({
   apiKey: process.env['DIGITALOCEAN_GENAI_SDK_API_KEY'], // This is the default and can be omitted
 });
 
-const versions: DigitaloceanGenaiSDK.Genai.Agents.VersionListResponse =
-  await client.genai.agents.versions.list('REPLACE_ME');
+const versions: DigitaloceanGenaiSDK.Agents.VersionListResponse = await client.agents.versions.list(
+  'REPLACE_ME',
+);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -60,7 +61,7 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const versions = await client.genai.agents.versions.list('REPLACE_ME').catch(async (err) => {
+const versions = await client.agents.versions.list('REPLACE_ME').catch(async (err) => {
   if (err instanceof DigitaloceanGenaiSDK.APIError) {
     console.log(err.status); // 400
     console.log(err.name); // BadRequestError
@@ -100,7 +101,7 @@ const client = new DigitaloceanGenaiSDK({
 });
 
 // Or, configure per-request:
-await client.genai.agents.versions.list('REPLACE_ME', {
+await client.agents.versions.list('REPLACE_ME', {
   maxRetries: 5,
 });
 ```
@@ -117,7 +118,7 @@ const client = new DigitaloceanGenaiSDK({
 });
 
 // Override per-request:
-await client.genai.agents.versions.list('REPLACE_ME', {
+await client.agents.versions.list('REPLACE_ME', {
   timeout: 5 * 1000,
 });
 ```
@@ -140,13 +141,11 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new DigitaloceanGenaiSDK();
 
-const response = await client.genai.agents.versions.list('REPLACE_ME').asResponse();
+const response = await client.agents.versions.list('REPLACE_ME').asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: versions, response: raw } = await client.genai.agents.versions
-  .list('REPLACE_ME')
-  .withResponse();
+const { data: versions, response: raw } = await client.agents.versions.list('REPLACE_ME').withResponse();
 console.log(raw.headers.get('X-My-Header'));
 console.log(versions.agent_versions);
 ```
