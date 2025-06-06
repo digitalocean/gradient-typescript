@@ -2,7 +2,6 @@
 
 export {
   Keys,
-  type APIOpenAIAPIKeyInfo,
   type KeyCreateResponse,
   type KeyRetrieveResponse,
   type KeyUpdateResponse,

@@ -10,8 +10,11 @@ export {
 export {
   Agents,
   type APIAgent,
+  type APIAgentAPIKeyInfo,
+  type APIAnthropicAPIKeyInfo,
   type APIDeploymentVisibility,
   type APIModel,
+  type APIOpenAIAPIKeyInfo,
   type APIRetrievalMethod,
   type AgentCreateResponse,
   type AgentRetrieveResponse,

@@ -3,7 +3,6 @@
 import { APIResource } from '../../../core/resource';
 import * as KeysAPI from './keys';
 import {
-  APIAnthropicAPIKeyInfo,
   KeyCreateParams,
   KeyCreateResponse,
   KeyDeleteResponse,
@@ -26,7 +25,6 @@ Anthropic.Keys = Keys;
 export declare namespace Anthropic {
   export {
     Keys as Keys,
-    type APIAnthropicAPIKeyInfo as APIAnthropicAPIKeyInfo,
     type KeyCreateResponse as KeyCreateResponse,
     type KeyRetrieveResponse as KeyRetrieveResponse,
     type KeyUpdateResponse as KeyUpdateResponse,

@@ -48,8 +48,11 @@ import { formatRequestDetails, loggerFor } from './internal/utils/log';
 import { isEmptyObj } from './internal/utils/values';
 import {
   APIAgent,
+  APIAgentAPIKeyInfo,
+  APIAnthropicAPIKeyInfo,
   APIDeploymentVisibility,
   APIModel,
+  APIOpenAIAPIKeyInfo,
   APIRetrievalMethod,
   AgentCreateParams,
   AgentCreateResponse,
@@ -766,8 +769,11 @@ export declare namespace DigitaloceanGenaiSDK {
   export {
     Agents as Agents,
     type APIAgent as APIAgent,
+    type APIAgentAPIKeyInfo as APIAgentAPIKeyInfo,
+    type APIAnthropicAPIKeyInfo as APIAnthropicAPIKeyInfo,
     type APIDeploymentVisibility as APIDeploymentVisibility,
     type APIModel as APIModel,
+    type APIOpenAIAPIKeyInfo as APIOpenAIAPIKeyInfo,
     type APIRetrievalMethod as APIRetrievalMethod,
     type AgentCreateResponse as AgentCreateResponse,
     type AgentRetrieveResponse as AgentRetrieveResponse,

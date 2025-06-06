@@ -3,7 +3,6 @@
 export { Anthropic } from './anthropic';
 export {
   Keys,
-  type APIAnthropicAPIKeyInfo,
   type KeyCreateResponse,
   type KeyRetrieveResponse,
   type KeyUpdateResponse,

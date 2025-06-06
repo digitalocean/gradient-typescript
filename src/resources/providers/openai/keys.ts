@@ -58,38 +58,22 @@ export class Keys extends APIResource {
   }
 }
 
-export interface APIOpenAIAPIKeyInfo {
-  created_at?: string;
-
-  created_by?: string;
-
-  deleted_at?: string;
-
-  models?: Array<AgentsAPI.APIModel>;
-
-  name?: string;
-
-  updated_at?: string;
-
-  uuid?: string;
-}
-
 /**
  * CreateOpenAIAPIKeyOutput is used to return the newly created OpenAI API key.
  */
 export interface KeyCreateResponse {
-  api_key_info?: APIOpenAIAPIKeyInfo;
+  api_key_info?: AgentsAPI.APIOpenAIAPIKeyInfo;
 }
 
 export interface KeyRetrieveResponse {
-  api_key_info?: APIOpenAIAPIKeyInfo;
+  api_key_info?: AgentsAPI.APIOpenAIAPIKeyInfo;
 }
 
 /**
  * UpdateOpenAIAPIKeyOutput is used to return the updated OpenAI API key.
  */
 export interface KeyUpdateResponse {
-  api_key_info?: APIOpenAIAPIKeyInfo;
+  api_key_info?: AgentsAPI.APIOpenAIAPIKeyInfo;
 }
 
 /**
@@ -97,7 +81,7 @@ export interface KeyUpdateResponse {
  * specific agent.
  */
 export interface KeyListResponse {
-  api_key_infos?: Array<APIOpenAIAPIKeyInfo>;
+  api_key_infos?: Array<AgentsAPI.APIOpenAIAPIKeyInfo>;
 
   links?: VersionsAPI.APILinks;
 
@@ -108,7 +92,7 @@ export interface KeyListResponse {
  * DeleteOpenAIAPIKeyOutput is used to return the deleted OpenAI API key.
  */
 export interface KeyDeleteResponse {
-  api_key_info?: APIOpenAIAPIKeyInfo;
+  api_key_info?: AgentsAPI.APIOpenAIAPIKeyInfo;
 }
 
 export interface KeyRetrieveAgentsResponse {
@@ -159,7 +143,6 @@ export interface KeyRetrieveAgentsParams {
 
 export declare namespace Keys {
   export {
-    type APIOpenAIAPIKeyInfo as APIOpenAIAPIKeyInfo,
     type KeyCreateResponse as KeyCreateResponse,
     type KeyRetrieveResponse as KeyRetrieveResponse,
     type KeyUpdateResponse as KeyUpdateResponse,
