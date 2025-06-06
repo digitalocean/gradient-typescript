@@ -16,6 +16,7 @@ import {
 } from './indexing-jobs';
 import * as AgentsAPI from './agents/agents';
 import {
+  APIAgent,
   APIDeploymentVisibility,
   APIModel,
   APIRetrievalMethod,
@@ -117,6 +118,7 @@ export declare namespace Genai {
 
   export {
     Agents as Agents,
+    type APIAgent as APIAgent,
     type APIDeploymentVisibility as APIDeploymentVisibility,
     type APIModel as APIModel,
     type APIRetrievalMethod as APIRetrievalMethod,

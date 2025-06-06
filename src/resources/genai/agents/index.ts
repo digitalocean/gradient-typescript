@@ -16,6 +16,7 @@ export {
 } from './api-keys';
 export {
   Agents,
+  type APIAgent,
   type APIDeploymentVisibility,
   type APIModel,
   type APIRetrievalMethod,

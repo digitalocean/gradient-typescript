@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../core/resource';
 import * as AgentsAPI from './agents';
-import * as Shared from '../../shared';
 import * as APIKeysAPI from './api-keys';
 import {
   APIAgentAPIKeyInfo,
@@ -59,6 +58,8 @@ import {
 } from './versions';
 import * as KnowledgeBasesKnowledgeBasesAPI from '../knowledge-bases/knowledge-bases';
 import * as ModelsAPI from '../models/models';
+import * as KeysAPI from '../providers/anthropic/keys';
+import * as OpenAIKeysAPI from '../providers/openai/keys';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -128,6 +129,239 @@ export class Agents extends APIResource {
   }
 }
 
+export interface APIAgent {
+  anthropic_api_key?: KeysAPI.APIAnthropicAPIKeyInfo;
+
+  api_key_infos?: Array<APIKeysAPI.APIAgentAPIKeyInfo>;
+
+  api_keys?: Array<APIAgent.APIKey>;
+
+  chatbot?: APIAgent.Chatbot;
+
+  chatbot_identifiers?: Array<APIAgent.ChatbotIdentifier>;
+
+  child_agents?: Array<APIAgent>;
+
+  created_at?: string;
+
+  deployment?: APIAgent.Deployment;
+
+  description?: string;
+
+  functions?: Array<APIAgent.Function>;
+
+  guardrails?: Array<APIAgent.Guardrail>;
+
+  if_case?: string;
+
+  /**
+   * Agent instruction. Instructions help your agent to perform its job effectively.
+   * See
+   * [Write Effective Agent Instructions](https://docs.digitalocean.com/products/genai-platform/concepts/best-practices/#agent-instructions)
+   * for best practices.
+   */
+  instruction?: string;
+
+  k?: number;
+
+  knowledge_bases?: Array<KnowledgeBasesKnowledgeBasesAPI.APIKnowledgeBase>;
+
+  max_tokens?: number;
+
+  model?: APIModel;
+
+  name?: string;
+
+  openai_api_key?: OpenAIKeysAPI.APIOpenAIAPIKeyInfo;
+
+  parent_agents?: Array<APIAgent>;
+
+  project_id?: string;
+
+  provide_citations?: boolean;
+
+  region?: string;
+
+  retrieval_method?: APIRetrievalMethod;
+
+  route_created_at?: string;
+
+  route_created_by?: string;
+
+  route_name?: string;
+
+  route_uuid?: string;
+
+  tags?: Array<string>;
+
+  temperature?: number;
+
+  template?: APIAgent.Template;
+
+  top_p?: number;
+
+  updated_at?: string;
+
+  url?: string;
+
+  user_id?: string;
+
+  uuid?: string;
+}
+
+export namespace APIAgent {
+  export interface APIKey {
+    api_key?: string;
+  }
+
+  export interface Chatbot {
+    button_background_color?: string;
+
+    logo?: string;
+
+    name?: string;
+
+    primary_color?: string;
+
+    secondary_color?: string;
+
+    starting_message?: string;
+  }
+
+  export interface ChatbotIdentifier {
+    agent_chatbot_identifier?: string;
+  }
+
+  export interface Deployment {
+    created_at?: string;
+
+    name?: string;
+
+    status?:
+      | 'STATUS_UNKNOWN'
+      | 'STATUS_WAITING_FOR_DEPLOYMENT'
+      | 'STATUS_DEPLOYING'
+      | 'STATUS_RUNNING'
+      | 'STATUS_FAILED'
+      | 'STATUS_WAITING_FOR_UNDEPLOYMENT'
+      | 'STATUS_UNDEPLOYING'
+      | 'STATUS_UNDEPLOYMENT_FAILED'
+      | 'STATUS_DELETED';
+
+    updated_at?: string;
+
+    url?: string;
+
+    uuid?: string;
+
+    visibility?: AgentsAPI.APIDeploymentVisibility;
+  }
+
+  export interface Function {
+    api_key?: string;
+
+    created_at?: string;
+
+    created_by?: string;
+
+    description?: string;
+
+    faas_name?: string;
+
+    faas_namespace?: string;
+
+    input_schema?: unknown;
+
+    name?: string;
+
+    output_schema?: unknown;
+
+    updated_at?: string;
+
+    url?: string;
+
+    uuid?: string;
+  }
+
+  export interface Guardrail {
+    agent_uuid?: string;
+
+    created_at?: string;
+
+    default_response?: string;
+
+    description?: string;
+
+    guardrail_uuid?: string;
+
+    is_attached?: boolean;
+
+    is_default?: boolean;
+
+    metadata?: unknown;
+
+    name?: string;
+
+    priority?: number;
+
+    type?:
+      | 'GUARDRAIL_TYPE_UNKNOWN'
+      | 'GUARDRAIL_TYPE_JAILBREAK'
+      | 'GUARDRAIL_TYPE_SENSITIVE_DATA'
+      | 'GUARDRAIL_TYPE_CONTENT_MODERATION';
+
+    updated_at?: string;
+
+    uuid?: string;
+  }
+
+  export interface Template {
+    created_at?: string;
+
+    description?: string;
+
+    guardrails?: Array<Template.Guardrail>;
+
+    instruction?: string;
+
+    k?: number;
+
+    knowledge_bases?: Array<KnowledgeBasesKnowledgeBasesAPI.APIKnowledgeBase>;
+
+    long_description?: string;
+
+    max_tokens?: number;
+
+    model?: AgentsAPI.APIModel;
+
+    name?: string;
+
+    short_description?: string;
+
+    summary?: string;
+
+    tags?: Array<string>;
+
+    temperature?: number;
+
+    template_type?: 'AGENT_TEMPLATE_TYPE_STANDARD' | 'AGENT_TEMPLATE_TYPE_ONE_CLICK';
+
+    top_p?: number;
+
+    updated_at?: string;
+
+    uuid?: string;
+  }
+
+  export namespace Template {
+    export interface Guardrail {
+      priority?: number;
+
+      uuid?: string;
+    }
+  }
+}
+
 export type APIDeploymentVisibility =
   | 'VISIBILITY_UNKNOWN'
   | 'VISIBILITY_DISABLED'
@@ -183,15 +417,15 @@ export type APIRetrievalMethod =
   | 'RETRIEVAL_METHOD_NONE';
 
 export interface AgentCreateResponse {
-  agent?: Shared.APIAgent;
+  agent?: APIAgent;
 }
 
 export interface AgentRetrieveResponse {
-  agent?: Shared.APIAgent;
+  agent?: APIAgent;
 }
 
 export interface AgentUpdateResponse {
-  agent?: Shared.APIAgent;
+  agent?: APIAgent;
 }
 
 export interface AgentListResponse {
@@ -373,11 +607,11 @@ export namespace AgentListResponse {
 }
 
 export interface AgentDeleteResponse {
-  agent?: Shared.APIAgent;
+  agent?: APIAgent;
 }
 
 export interface AgentUpdateStatusResponse {
-  agent?: Shared.APIAgent;
+  agent?: APIAgent;
 }
 
 export interface AgentCreateParams {
@@ -498,6 +732,7 @@ Agents.ChildAgents = ChildAgents;
 
 export declare namespace Agents {
   export {
+    type APIAgent as APIAgent,
     type APIDeploymentVisibility as APIDeploymentVisibility,
     type APIModel as APIModel,
     type APIRetrievalMethod as APIRetrievalMethod,
