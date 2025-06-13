@@ -12,7 +12,6 @@ import type { APIResponseProps } from './internal/parse';
 import { getPlatformHeaders } from './internal/detect-platform';
 import * as Shims from './internal/shims';
 import * as Opts from './internal/request-options';
-import * as qs from './internal/qs';
 import { VERSION } from './version';
 import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
@@ -29,20 +28,9 @@ import {
   ChatCreateCompletionResponse,
 } from './resources/chat';
 import { EmbeddingCreateParams, EmbeddingCreateResponse, Embeddings } from './resources/embeddings';
-import {
-  APIIndexingJob,
-  IndexingJobCreateParams,
-  IndexingJobCreateResponse,
-  IndexingJobListParams,
-  IndexingJobListResponse,
-  IndexingJobRetrieveDataSourcesResponse,
-  IndexingJobRetrieveResponse,
-  IndexingJobUpdateCancelParams,
-  IndexingJobUpdateCancelResponse,
-  IndexingJobs,
-} from './resources/indexing-jobs';
+import { APIIndexingJob, IndexingJobs } from './resources/indexing-jobs';
 import { Model, ModelListResponse, Models } from './resources/models';
-import { RegionListParams, RegionListResponse, Regions } from './resources/regions';
+import { Regions } from './resources/regions';
 import { readEnv } from './internal/utils/env';
 import { formatRequestDetails, loggerFor } from './internal/utils/log';
 import { isEmptyObj } from './internal/utils/values';
@@ -54,38 +42,11 @@ import {
   APIModel,
   APIOpenAIAPIKeyInfo,
   APIRetrievalMethod,
-  AgentCreateParams,
-  AgentCreateResponse,
-  AgentDeleteResponse,
-  AgentListParams,
-  AgentListResponse,
-  AgentRetrieveResponse,
-  AgentUpdateParams,
-  AgentUpdateResponse,
-  AgentUpdateStatusParams,
-  AgentUpdateStatusResponse,
   Agents,
 } from './resources/agents/agents';
-import {
-  APIAgreement,
-  APIKeyListParams,
-  APIKeyListResponse,
-  APIKeys,
-  APIModelVersion,
-} from './resources/api-keys/api-keys';
+import { APIAgreement, APIKeys, APIModelVersion } from './resources/api-keys/api-keys';
 import { Auth } from './resources/auth/auth';
-import {
-  APIKnowledgeBase,
-  KnowledgeBaseCreateParams,
-  KnowledgeBaseCreateResponse,
-  KnowledgeBaseDeleteResponse,
-  KnowledgeBaseListParams,
-  KnowledgeBaseListResponse,
-  KnowledgeBaseRetrieveResponse,
-  KnowledgeBaseUpdateParams,
-  KnowledgeBaseUpdateResponse,
-  KnowledgeBases,
-} from './resources/knowledge-bases/knowledge-bases';
+import { APIKnowledgeBase, KnowledgeBases } from './resources/knowledge-bases/knowledge-bases';
 import { Providers } from './resources/providers/providers';
 
 export interface ClientOptions {
@@ -97,7 +58,7 @@ export interface ClientOptions {
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
    *
-   * Defaults to process.env['DIGITALOCEAN_GENAI_SDK_BASE_URL'].
+   * Defaults to process.env['GRADIENT_AI_BASE_URL'].
    */
   baseURL?: string | null | undefined;
 
@@ -149,7 +110,7 @@ export interface ClientOptions {
   /**
    * Set the log level.
    *
-   * Defaults to process.env['DIGITALOCEAN_GENAI_SDK_LOG'] or 'warn' if it isn't set.
+   * Defaults to process.env['GRADIENT_AI_LOG'] or 'warn' if it isn't set.
    */
   logLevel?: LogLevel | undefined;
 
@@ -162,9 +123,9 @@ export interface ClientOptions {
 }
 
 /**
- * API Client for interfacing with the Digitalocean Genai SDK API.
+ * API Client for interfacing with the Gradient AI API.
  */
-export class DigitaloceanGenaiSDK {
+export class GradientAI {
   apiKey: string;
 
   baseURL: string;
@@ -180,10 +141,10 @@ export class DigitaloceanGenaiSDK {
   private _options: ClientOptions;
 
   /**
-   * API Client for interfacing with the Digitalocean Genai SDK API.
+   * API Client for interfacing with the Gradient AI API.
    *
    * @param {string | undefined} [opts.apiKey=process.env['DIGITALOCEAN_GENAI_SDK_API_KEY'] ?? undefined]
-   * @param {string} [opts.baseURL=process.env['DIGITALOCEAN_GENAI_SDK_BASE_URL'] ?? https://api.digitalocean.com/] - Override the default base URL for the API.
+   * @param {string} [opts.baseURL=process.env['GRADIENT_AI_BASE_URL'] ?? https://api.digitalocean.com/] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
    * @param {Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
@@ -192,13 +153,13 @@ export class DigitaloceanGenaiSDK {
    * @param {Record<string, string | undefined>} opts.defaultQuery - Default query parameters to include with every request to the API.
    */
   constructor({
-    baseURL = readEnv('DIGITALOCEAN_GENAI_SDK_BASE_URL'),
+    baseURL = readEnv('GRADIENT_AI_BASE_URL'),
     apiKey = readEnv('DIGITALOCEAN_GENAI_SDK_API_KEY'),
     ...opts
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
-      throw new Errors.DigitaloceanGenaiSDKError(
-        "The DIGITALOCEAN_GENAI_SDK_API_KEY environment variable is missing or empty; either provide it, or instantiate the DigitaloceanGenaiSDK client with an apiKey option, like new DigitaloceanGenaiSDK({ apiKey: 'My API Key' }).",
+      throw new Errors.GradientAIError(
+        "The DIGITALOCEAN_GENAI_SDK_API_KEY environment variable is missing or empty; either provide it, or instantiate the GradientAI client with an apiKey option, like new GradientAI({ apiKey: 'My API Key' }).",
       );
     }
 
@@ -209,18 +170,14 @@ export class DigitaloceanGenaiSDK {
     };
 
     this.baseURL = options.baseURL!;
-    this.timeout = options.timeout ?? DigitaloceanGenaiSDK.DEFAULT_TIMEOUT /* 1 minute */;
+    this.timeout = options.timeout ?? GradientAI.DEFAULT_TIMEOUT /* 1 minute */;
     this.logger = options.logger ?? console;
     const defaultLogLevel = 'warn';
     // Set default logLevel early so that we can log a warning in parseLogLevel.
     this.logLevel = defaultLogLevel;
     this.logLevel =
       parseLogLevel(options.logLevel, 'ClientOptions.logLevel', this) ??
-      parseLogLevel(
-        readEnv('DIGITALOCEAN_GENAI_SDK_LOG'),
-        "process.env['DIGITALOCEAN_GENAI_SDK_LOG']",
-        this,
-      ) ??
+      parseLogLevel(readEnv('GRADIENT_AI_LOG'), "process.env['GRADIENT_AI_LOG']", this) ??
       defaultLogLevel;
     this.fetchOptions = options.fetchOptions;
     this.maxRetries = options.maxRetries ?? 2;
@@ -261,8 +218,24 @@ export class DigitaloceanGenaiSDK {
     return buildHeaders([{ Authorization: `Bearer ${this.apiKey}` }]);
   }
 
+  /**
+   * Basic re-implementation of `qs.stringify` for primitive types.
+   */
   protected stringifyQuery(query: Record<string, unknown>): string {
-    return qs.stringify(query, { arrayFormat: 'comma' });
+    return Object.entries(query)
+      .filter(([_, value]) => typeof value !== 'undefined')
+      .map(([key, value]) => {
+        if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
+          return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
+        }
+        if (value === null) {
+          return `${encodeURIComponent(key)}=`;
+        }
+        throw new Errors.GradientAIError(
+          `Cannot stringify type ${typeof value}; Expected string, number, boolean, or null. If you need to pass nested query parameters, you can manually encode them, e.g. { query: { 'foo[key1]': value1, 'foo[key2]': value2 } }, and please open a GitHub issue requesting better support for your use case.`,
+        );
+      })
+      .join('&');
   }
 
   private getUserAgent(): string {
@@ -723,10 +696,10 @@ export class DigitaloceanGenaiSDK {
     }
   }
 
-  static DigitaloceanGenaiSDK = this;
+  static GradientAI = this;
   static DEFAULT_TIMEOUT = 60000; // 1 minute
 
-  static DigitaloceanGenaiSDKError = Errors.DigitaloceanGenaiSDKError;
+  static GradientAIError = Errors.GradientAIError;
   static APIError = Errors.APIError;
   static APIConnectionError = Errors.APIConnectionError;
   static APIConnectionTimeoutError = Errors.APIConnectionTimeoutError;
@@ -753,17 +726,17 @@ export class DigitaloceanGenaiSDK {
   embeddings: API.Embeddings = new API.Embeddings(this);
   models: API.Models = new API.Models(this);
 }
-DigitaloceanGenaiSDK.Agents = Agents;
-DigitaloceanGenaiSDK.Providers = Providers;
-DigitaloceanGenaiSDK.Auth = Auth;
-DigitaloceanGenaiSDK.Regions = Regions;
-DigitaloceanGenaiSDK.IndexingJobs = IndexingJobs;
-DigitaloceanGenaiSDK.KnowledgeBases = KnowledgeBases;
-DigitaloceanGenaiSDK.APIKeys = APIKeys;
-DigitaloceanGenaiSDK.Chat = Chat;
-DigitaloceanGenaiSDK.Embeddings = Embeddings;
-DigitaloceanGenaiSDK.Models = Models;
-export declare namespace DigitaloceanGenaiSDK {
+GradientAI.Agents = Agents;
+GradientAI.Providers = Providers;
+GradientAI.Auth = Auth;
+GradientAI.Regions = Regions;
+GradientAI.IndexingJobs = IndexingJobs;
+GradientAI.KnowledgeBases = KnowledgeBases;
+GradientAI.APIKeys = APIKeys;
+GradientAI.Chat = Chat;
+GradientAI.Embeddings = Embeddings;
+GradientAI.Models = Models;
+export declare namespace GradientAI {
   export type RequestOptions = Opts.RequestOptions;
 
   export {
@@ -775,61 +748,19 @@ export declare namespace DigitaloceanGenaiSDK {
     type APIModel as APIModel,
     type APIOpenAIAPIKeyInfo as APIOpenAIAPIKeyInfo,
     type APIRetrievalMethod as APIRetrievalMethod,
-    type AgentCreateResponse as AgentCreateResponse,
-    type AgentRetrieveResponse as AgentRetrieveResponse,
-    type AgentUpdateResponse as AgentUpdateResponse,
-    type AgentListResponse as AgentListResponse,
-    type AgentDeleteResponse as AgentDeleteResponse,
-    type AgentUpdateStatusResponse as AgentUpdateStatusResponse,
-    type AgentCreateParams as AgentCreateParams,
-    type AgentUpdateParams as AgentUpdateParams,
-    type AgentListParams as AgentListParams,
-    type AgentUpdateStatusParams as AgentUpdateStatusParams,
   };
 
   export { Providers as Providers };
 
   export { Auth as Auth };
 
-  export {
-    Regions as Regions,
-    type RegionListResponse as RegionListResponse,
-    type RegionListParams as RegionListParams,
-  };
+  export { Regions as Regions };
 
-  export {
-    IndexingJobs as IndexingJobs,
-    type APIIndexingJob as APIIndexingJob,
-    type IndexingJobCreateResponse as IndexingJobCreateResponse,
-    type IndexingJobRetrieveResponse as IndexingJobRetrieveResponse,
-    type IndexingJobListResponse as IndexingJobListResponse,
-    type IndexingJobRetrieveDataSourcesResponse as IndexingJobRetrieveDataSourcesResponse,
-    type IndexingJobUpdateCancelResponse as IndexingJobUpdateCancelResponse,
-    type IndexingJobCreateParams as IndexingJobCreateParams,
-    type IndexingJobListParams as IndexingJobListParams,
-    type IndexingJobUpdateCancelParams as IndexingJobUpdateCancelParams,
-  };
+  export { IndexingJobs as IndexingJobs, type APIIndexingJob as APIIndexingJob };
 
-  export {
-    KnowledgeBases as KnowledgeBases,
-    type APIKnowledgeBase as APIKnowledgeBase,
-    type KnowledgeBaseCreateResponse as KnowledgeBaseCreateResponse,
-    type KnowledgeBaseRetrieveResponse as KnowledgeBaseRetrieveResponse,
-    type KnowledgeBaseUpdateResponse as KnowledgeBaseUpdateResponse,
-    type KnowledgeBaseListResponse as KnowledgeBaseListResponse,
-    type KnowledgeBaseDeleteResponse as KnowledgeBaseDeleteResponse,
-    type KnowledgeBaseCreateParams as KnowledgeBaseCreateParams,
-    type KnowledgeBaseUpdateParams as KnowledgeBaseUpdateParams,
-    type KnowledgeBaseListParams as KnowledgeBaseListParams,
-  };
+  export { KnowledgeBases as KnowledgeBases, type APIKnowledgeBase as APIKnowledgeBase };
 
-  export {
-    APIKeys as APIKeys,
-    type APIAgreement as APIAgreement,
-    type APIModelVersion as APIModelVersion,
-    type APIKeyListResponse as APIKeyListResponse,
-    type APIKeyListParams as APIKeyListParams,
-  };
+  export { APIKeys as APIKeys, type APIAgreement as APIAgreement, type APIModelVersion as APIModelVersion };
 
   export {
     Chat as Chat,

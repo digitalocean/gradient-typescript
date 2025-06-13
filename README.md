@@ -1,8 +1,8 @@
-# Digitalocean Genai SDK TypeScript API Library
+# Gradient AI TypeScript API Library
 
-[![NPM version](https://img.shields.io/npm/v/digitalocean-genai-sdk.svg)](https://npmjs.org/package/digitalocean-genai-sdk) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/digitalocean-genai-sdk)
+[![NPM version](https://img.shields.io/npm/v/gradientai.svg)](https://npmjs.org/package/gradientai) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/gradientai)
 
-This library provides convenient access to the Digitalocean Genai SDK REST API from server-side TypeScript or JavaScript.
+This library provides convenient access to the Gradient AI REST API from server-side TypeScript or JavaScript.
 
 The REST API documentation can be found on [developers.digitalocean.com](https://developers.digitalocean.com/documentation/v2/). The full API of this library can be found in [api.md](api.md).
 
@@ -15,7 +15,7 @@ npm install git+ssh://git@github.com:stainless-sdks/digitalocean-genai-sdk-types
 ```
 
 > [!NOTE]
-> Once this package is [published to npm](https://app.stainless.com/docs/guides/publish), this will become: `npm install digitalocean-genai-sdk`
+> Once this package is [published to npm](https://app.stainless.com/docs/guides/publish), this will become: `npm install gradientai`
 
 ## Usage
 
@@ -23,9 +23,9 @@ The full API of this library can be found in [api.md](api.md).
 
 <!-- prettier-ignore -->
 ```js
-import DigitaloceanGenaiSDK from 'digitalocean-genai-sdk';
+import GradientAI from 'gradientai';
 
-const client = new DigitaloceanGenaiSDK({
+const client = new GradientAI({
   apiKey: process.env['DIGITALOCEAN_GENAI_SDK_API_KEY'], // This is the default and can be omitted
 });
 
@@ -40,15 +40,13 @@ This library includes TypeScript definitions for all request params and response
 
 <!-- prettier-ignore -->
 ```ts
-import DigitaloceanGenaiSDK from 'digitalocean-genai-sdk';
+import GradientAI from 'gradientai';
 
-const client = new DigitaloceanGenaiSDK({
+const client = new GradientAI({
   apiKey: process.env['DIGITALOCEAN_GENAI_SDK_API_KEY'], // This is the default and can be omitted
 });
 
-const versions: DigitaloceanGenaiSDK.Agents.VersionListResponse = await client.agents.versions.list(
-  'REPLACE_ME',
-);
+const versions: GradientAI.Agents.VersionListResponse = await client.agents.versions.list('REPLACE_ME');
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -62,7 +60,7 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 const versions = await client.agents.versions.list('REPLACE_ME').catch(async (err) => {
-  if (err instanceof DigitaloceanGenaiSDK.APIError) {
+  if (err instanceof GradientAI.APIError) {
     console.log(err.status); // 400
     console.log(err.name); // BadRequestError
     console.log(err.headers); // {server: 'nginx', ...}
@@ -96,7 +94,7 @@ You can use the `maxRetries` option to configure or disable this:
 <!-- prettier-ignore -->
 ```js
 // Configure the default for all requests:
-const client = new DigitaloceanGenaiSDK({
+const client = new GradientAI({
   maxRetries: 0, // default is 2
 });
 
@@ -113,7 +111,7 @@ Requests time out after 1 minute by default. You can configure this with a `time
 <!-- prettier-ignore -->
 ```ts
 // Configure the default for all requests:
-const client = new DigitaloceanGenaiSDK({
+const client = new GradientAI({
   timeout: 20 * 1000, // 20 seconds (default is 1 minute)
 });
 
@@ -139,7 +137,7 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 
 <!-- prettier-ignore -->
 ```ts
-const client = new DigitaloceanGenaiSDK();
+const client = new GradientAI();
 
 const response = await client.agents.versions.list('REPLACE_ME').asResponse();
 console.log(response.headers.get('X-My-Header'));
@@ -160,13 +158,13 @@ console.log(versions.agent_versions);
 
 The log level can be configured in two ways:
 
-1. Via the `DIGITALOCEAN_GENAI_SDK_LOG` environment variable
+1. Via the `GRADIENT_AI_LOG` environment variable
 2. Using the `logLevel` client option (overrides the environment variable if set)
 
 ```ts
-import DigitaloceanGenaiSDK from 'digitalocean-genai-sdk';
+import GradientAI from 'gradientai';
 
-const client = new DigitaloceanGenaiSDK({
+const client = new GradientAI({
   logLevel: 'debug', // Show all log messages
 });
 ```
@@ -192,13 +190,13 @@ When providing a custom logger, the `logLevel` option still controls which messa
 below the configured level will not be sent to your logger.
 
 ```ts
-import DigitaloceanGenaiSDK from 'digitalocean-genai-sdk';
+import GradientAI from 'gradientai';
 import pino from 'pino';
 
 const logger = pino();
 
-const client = new DigitaloceanGenaiSDK({
-  logger: logger.child({ name: 'DigitaloceanGenaiSDK' }),
+const client = new GradientAI({
+  logger: logger.child({ name: 'GradientAI' }),
   logLevel: 'debug', // Send all messages to pino, allowing it to filter
 });
 ```
@@ -262,10 +260,10 @@ globalThis.fetch = fetch;
 Or pass it to the client:
 
 ```ts
-import DigitaloceanGenaiSDK from 'digitalocean-genai-sdk';
+import GradientAI from 'gradientai';
 import fetch from 'my-fetch';
 
-const client = new DigitaloceanGenaiSDK({ fetch });
+const client = new GradientAI({ fetch });
 ```
 
 ### Fetch options
@@ -273,9 +271,9 @@ const client = new DigitaloceanGenaiSDK({ fetch });
 If you want to set custom `fetch` options without overriding the `fetch` function, you can provide a `fetchOptions` object when instantiating the client or making a request. (Request-specific options override client options.)
 
 ```ts
-import DigitaloceanGenaiSDK from 'digitalocean-genai-sdk';
+import GradientAI from 'gradientai';
 
-const client = new DigitaloceanGenaiSDK({
+const client = new GradientAI({
   fetchOptions: {
     // `RequestInit` options
   },
@@ -290,11 +288,11 @@ options to requests:
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/node.svg" align="top" width="18" height="21"> **Node** <sup>[[docs](https://github.com/nodejs/undici/blob/main/docs/docs/api/ProxyAgent.md#example---proxyagent-with-fetch)]</sup>
 
 ```ts
-import DigitaloceanGenaiSDK from 'digitalocean-genai-sdk';
+import GradientAI from 'gradientai';
 import * as undici from 'undici';
 
 const proxyAgent = new undici.ProxyAgent('http://localhost:8888');
-const client = new DigitaloceanGenaiSDK({
+const client = new GradientAI({
   fetchOptions: {
     dispatcher: proxyAgent,
   },
@@ -304,9 +302,9 @@ const client = new DigitaloceanGenaiSDK({
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/bun.svg" align="top" width="18" height="21"> **Bun** <sup>[[docs](https://bun.sh/guides/http/proxy)]</sup>
 
 ```ts
-import DigitaloceanGenaiSDK from 'digitalocean-genai-sdk';
+import GradientAI from 'gradientai';
 
-const client = new DigitaloceanGenaiSDK({
+const client = new GradientAI({
   fetchOptions: {
     proxy: 'http://localhost:8888',
   },
@@ -316,10 +314,10 @@ const client = new DigitaloceanGenaiSDK({
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/deno.svg" align="top" width="18" height="21"> **Deno** <sup>[[docs](https://docs.deno.com/api/deno/~/Deno.createHttpClient)]</sup>
 
 ```ts
-import DigitaloceanGenaiSDK from 'npm:digitalocean-genai-sdk';
+import GradientAI from 'npm:gradientai';
 
 const httpClient = Deno.createHttpClient({ proxy: { url: 'http://localhost:8888' } });
-const client = new DigitaloceanGenaiSDK({
+const client = new GradientAI({
   fetchOptions: {
     client: httpClient,
   },

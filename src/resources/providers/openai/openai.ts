@@ -2,19 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import * as KeysAPI from './keys';
-import {
-  KeyCreateParams,
-  KeyCreateResponse,
-  KeyDeleteResponse,
-  KeyListParams,
-  KeyListResponse,
-  KeyRetrieveAgentsParams,
-  KeyRetrieveAgentsResponse,
-  KeyRetrieveResponse,
-  KeyUpdateParams,
-  KeyUpdateResponse,
-  Keys,
-} from './keys';
+import { Keys } from './keys';
 
 export class OpenAI extends APIResource {
   keys: KeysAPI.Keys = new KeysAPI.Keys(this._client);
@@ -23,17 +11,5 @@ export class OpenAI extends APIResource {
 OpenAI.Keys = Keys;
 
 export declare namespace OpenAI {
-  export {
-    Keys as Keys,
-    type KeyCreateResponse as KeyCreateResponse,
-    type KeyRetrieveResponse as KeyRetrieveResponse,
-    type KeyUpdateResponse as KeyUpdateResponse,
-    type KeyListResponse as KeyListResponse,
-    type KeyDeleteResponse as KeyDeleteResponse,
-    type KeyRetrieveAgentsResponse as KeyRetrieveAgentsResponse,
-    type KeyCreateParams as KeyCreateParams,
-    type KeyUpdateParams as KeyUpdateParams,
-    type KeyListParams as KeyListParams,
-    type KeyRetrieveAgentsParams as KeyRetrieveAgentsParams,
-  };
+  export { Keys as Keys };
 }

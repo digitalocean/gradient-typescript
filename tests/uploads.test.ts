@@ -1,6 +1,6 @@
 import fs from 'fs';
-import type { ResponseLike } from 'digitalocean-genai-sdk/internal/to-file';
-import { toFile } from 'digitalocean-genai-sdk/core/uploads';
+import type { ResponseLike } from 'gradientai/internal/to-file';
+import { toFile } from 'gradientai/core/uploads';
 import { File } from 'node:buffer';
 
 class MyClass {
@@ -97,7 +97,7 @@ describe('missing File error message', () => {
   });
 
   test('is thrown', async () => {
-    const uploads = await import('digitalocean-genai-sdk/core/uploads');
+    const uploads = await import('gradientai/core/uploads');
     await expect(
       uploads.toFile(mockResponse({ url: 'https://example.com/my/audio.mp3' })),
     ).rejects.toMatchInlineSnapshot(

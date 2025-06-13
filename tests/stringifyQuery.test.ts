@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { DigitaloceanGenaiSDK } from 'digitalocean-genai-sdk';
+import { GradientAI } from 'gradientai';
 
-const { stringifyQuery } = DigitaloceanGenaiSDK.prototype as any;
+const { stringifyQuery } = GradientAI.prototype as any;
 
 describe(stringifyQuery, () => {
   for (const [input, expected] of [
@@ -18,6 +18,12 @@ describe(stringifyQuery, () => {
   ]) {
     it(`${JSON.stringify(input)} -> ${expected}`, () => {
       expect(stringifyQuery(input)).toEqual(expected);
+    });
+  }
+
+  for (const value of [[], {}, new Date()]) {
+    it(`${JSON.stringify(value)} -> <error>`, () => {
+      expect(() => stringifyQuery({ value })).toThrow(`Cannot stringify type ${typeof value}`);
     });
   }
 });
