@@ -5,8 +5,8 @@
   "compilerOptions": {
     "rootDir": "./dist/src",
     "paths": {
-      "digitalocean-genai-sdk/*": ["dist/src/*"],
-      "digitalocean-genai-sdk": ["dist/src/index.ts"]
+      "gradientai/*": ["dist/src/*"],
+      "gradientai": ["dist/src/index.ts"]
     },
     "noEmit": false,
     "declaration": true,

@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import DigitaloceanGenaiSDK from 'digitalocean-genai-sdk';
+import GradientAI from 'gradientai';
 
-const client = new DigitaloceanGenaiSDK({
+const client = new GradientAI({
   apiKey: 'My API Key',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });

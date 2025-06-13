@@ -55,12 +55,12 @@ $ cd digitalocean-genai-sdk-typescript
 # With yarn
 $ yarn link
 $ cd ../my-package
-$ yarn link digitalocean-genai-sdk
+$ yarn link gradientai
 
 # With pnpm
 $ pnpm link --global
 $ cd ../my-package
-$ pnpm link -—global digitalocean-genai-sdk
+$ pnpm link -—global gradientai
 ```
 
 ## Running tests

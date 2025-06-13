@@ -25,7 +25,7 @@ export default tseslint.config(
         {
           patterns: [
             {
-              regex: '^digitalocean-genai-sdk(/.*)?',
+              regex: '^gradientai(/.*)?',
               message: 'Use a relative import, not a package import.',
             },
           ],

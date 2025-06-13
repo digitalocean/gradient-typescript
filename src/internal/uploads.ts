@@ -1,6 +1,6 @@
 import { type RequestOptions } from './request-options';
 import type { FilePropertyBag, Fetch } from './builtin-types';
-import type { DigitaloceanGenaiSDK } from '../client';
+import type { GradientAI } from '../client';
 import { ReadableStreamFrom } from './shims';
 
 export type BlobPart = string | ArrayBuffer | ArrayBufferView | Blob | DataView;
@@ -74,7 +74,7 @@ export const isAsyncIterable = (value: any): value is AsyncIterable<any> =>
  */
 export const maybeMultipartFormRequestOptions = async (
   opts: RequestOptions,
-  fetch: DigitaloceanGenaiSDK | Fetch,
+  fetch: GradientAI | Fetch,
 ): Promise<RequestOptions> => {
   if (!hasUploadableValue(opts.body)) return opts;
 
@@ -85,7 +85,7 @@ type MultipartFormRequestOptions = Omit<RequestOptions, 'body'> & { body: unknow
 
 export const multipartFormRequestOptions = async (
   opts: MultipartFormRequestOptions,
-  fetch: DigitaloceanGenaiSDK | Fetch,
+  fetch: GradientAI | Fetch,
 ): Promise<RequestOptions> => {
   return { ...opts, body: await createForm(opts.body, fetch) };
 };
@@ -98,7 +98,7 @@ const supportsFormDataMap = new WeakMap<Fetch, Promise<boolean>>();
  * This function detects if the fetch function provided supports the global FormData object to avoid
  * confusing error messages later on.
  */
-function supportsFormData(fetchObject: DigitaloceanGenaiSDK | Fetch): Promise<boolean> {
+function supportsFormData(fetchObject: GradientAI | Fetch): Promise<boolean> {
   const fetch: Fetch = typeof fetchObject === 'function' ? fetchObject : (fetchObject as any).fetch;
   const cached = supportsFormDataMap.get(fetch);
   if (cached) return cached;
@@ -124,7 +124,7 @@ function supportsFormData(fetchObject: DigitaloceanGenaiSDK | Fetch): Promise<bo
 
 export const createForm = async <T = Record<string, unknown>>(
   body: T | undefined,
-  fetch: DigitaloceanGenaiSDK | Fetch,
+  fetch: GradientAI | Fetch,
 ): Promise<FormData> => {
   if (!(await supportsFormData(fetch))) {
     throw new TypeError(

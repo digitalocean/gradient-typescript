@@ -6,22 +6,5 @@ export {
   type APIKnowledgeBaseDataSource,
   type APISpacesDataSource,
   type APIWebCrawlerDataSource,
-  type DataSourceCreateResponse,
-  type DataSourceListResponse,
-  type DataSourceDeleteResponse,
-  type DataSourceCreateParams,
-  type DataSourceListParams,
-  type DataSourceDeleteParams,
 } from './data-sources';
-export {
-  KnowledgeBases,
-  type APIKnowledgeBase,
-  type KnowledgeBaseCreateResponse,
-  type KnowledgeBaseRetrieveResponse,
-  type KnowledgeBaseUpdateResponse,
-  type KnowledgeBaseListResponse,
-  type KnowledgeBaseDeleteResponse,
-  type KnowledgeBaseCreateParams,
-  type KnowledgeBaseUpdateParams,
-  type KnowledgeBaseListParams,
-} from './knowledge-bases';
+export { KnowledgeBases, type APIKnowledgeBase } from './knowledge-bases';

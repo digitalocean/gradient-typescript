@@ -3,48 +3,13 @@
 import { APIResource } from '../../core/resource';
 import * as AgentsAPI from './agents';
 import * as APIKeysAPI from './api-keys';
-import {
-  APIKeyCreateParams,
-  APIKeyCreateResponse,
-  APIKeyDeleteParams,
-  APIKeyDeleteResponse,
-  APIKeyListParams,
-  APIKeyListResponse,
-  APIKeyRegenerateParams,
-  APIKeyRegenerateResponse,
-  APIKeyUpdateParams,
-  APIKeyUpdateResponse,
-  APIKeys,
-} from './api-keys';
+import { APIKeys } from './api-keys';
 import * as ChildAgentsAPI from './child-agents';
-import {
-  ChildAgentAddParams,
-  ChildAgentAddResponse,
-  ChildAgentDeleteParams,
-  ChildAgentDeleteResponse,
-  ChildAgentUpdateParams,
-  ChildAgentUpdateResponse,
-  ChildAgentViewResponse,
-  ChildAgents,
-} from './child-agents';
+import { ChildAgents } from './child-agents';
 import * as FunctionsAPI from './functions';
-import {
-  FunctionCreateParams,
-  FunctionCreateResponse,
-  FunctionDeleteParams,
-  FunctionDeleteResponse,
-  FunctionUpdateParams,
-  FunctionUpdateResponse,
-  Functions,
-} from './functions';
+import { Functions } from './functions';
 import * as KnowledgeBasesAPI from './knowledge-bases';
-import {
-  APILinkKnowledgeBaseOutput,
-  KnowledgeBaseAttachSingleParams,
-  KnowledgeBaseDetachParams,
-  KnowledgeBaseDetachResponse,
-  KnowledgeBases,
-} from './knowledge-bases';
+import { APILinkKnowledgeBaseOutput, KnowledgeBases } from './knowledge-bases';
 import * as VersionsAPI from './versions';
 import {
   APILinks,
@@ -57,9 +22,6 @@ import {
 } from './versions';
 import * as APIKeysAPIKeysAPI from '../api-keys/api-keys';
 import * as KnowledgeBasesKnowledgeBasesAPI from '../knowledge-bases/knowledge-bases';
-import { APIPromise } from '../../core/api-promise';
-import { RequestOptions } from '../../internal/request-options';
-import { path } from '../../internal/utils/path';
 
 export class Agents extends APIResource {
   apiKeys: APIKeysAPI.APIKeys = new APIKeysAPI.APIKeys(this._client);
@@ -67,63 +29,6 @@ export class Agents extends APIResource {
   versions: VersionsAPI.Versions = new VersionsAPI.Versions(this._client);
   knowledgeBases: KnowledgeBasesAPI.KnowledgeBases = new KnowledgeBasesAPI.KnowledgeBases(this._client);
   childAgents: ChildAgentsAPI.ChildAgents = new ChildAgentsAPI.ChildAgents(this._client);
-
-  /**
-   * To create a new agent, send a POST request to `/v2/gen-ai/agents`. The response
-   * body contains a JSON object with the newly created agent object.
-   */
-  create(body: AgentCreateParams, options?: RequestOptions): APIPromise<AgentCreateResponse> {
-    return this._client.post('/v2/genai/agents', { body, ...options });
-  }
-
-  /**
-   * To retrieve details of an agent, GET request to `/v2/gen-ai/agents/{uuid}`. The
-   * response body is a JSON object containing the agent.
-   */
-  retrieve(uuid: string, options?: RequestOptions): APIPromise<AgentRetrieveResponse> {
-    return this._client.get(path`/v2/genai/agents/${uuid}`, options);
-  }
-
-  /**
-   * To update an agent, send a PUT request to `/v2/gen-ai/agents/{uuid}`. The
-   * response body is a JSON object containing the agent.
-   */
-  update(
-    pathUuid: string,
-    body: AgentUpdateParams,
-    options?: RequestOptions,
-  ): APIPromise<AgentUpdateResponse> {
-    return this._client.put(path`/v2/genai/agents/${pathUuid}`, { body, ...options });
-  }
-
-  /**
-   * To list all agents, send a GET request to `/v2/gen-ai/agents`.
-   */
-  list(
-    query: AgentListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<AgentListResponse> {
-    return this._client.get('/v2/genai/agents', { query, ...options });
-  }
-
-  /**
-   * To delete an agent, send a DELETE request to `/v2/gen-ai/agents/{uuid}`.
-   */
-  delete(uuid: string, options?: RequestOptions): APIPromise<AgentDeleteResponse> {
-    return this._client.delete(path`/v2/genai/agents/${uuid}`, options);
-  }
-
-  /**
-   * Check whether an agent is public or private. To update the agent status, send a
-   * PUT request to `/v2/gen-ai/agents/{uuid}/deployment_visibility`.
-   */
-  updateStatus(
-    pathUuid: string,
-    body: AgentUpdateStatusParams,
-    options?: RequestOptions,
-  ): APIPromise<AgentUpdateStatusResponse> {
-    return this._client.put(path`/v2/genai/agents/${pathUuid}/deployment_visibility`, { body, ...options });
-  }
 }
 
 export interface APIAgent {
@@ -457,314 +362,6 @@ export type APIRetrievalMethod =
   | 'RETRIEVAL_METHOD_SUB_QUERIES'
   | 'RETRIEVAL_METHOD_NONE';
 
-export interface AgentCreateResponse {
-  agent?: APIAgent;
-}
-
-export interface AgentRetrieveResponse {
-  agent?: APIAgent;
-}
-
-export interface AgentUpdateResponse {
-  agent?: APIAgent;
-}
-
-export interface AgentListResponse {
-  agents?: Array<AgentListResponse.Agent>;
-
-  links?: VersionsAPI.APILinks;
-
-  meta?: VersionsAPI.APIMeta;
-}
-
-export namespace AgentListResponse {
-  export interface Agent {
-    chatbot?: Agent.Chatbot;
-
-    chatbot_identifiers?: Array<Agent.ChatbotIdentifier>;
-
-    created_at?: string;
-
-    deployment?: Agent.Deployment;
-
-    description?: string;
-
-    if_case?: string;
-
-    /**
-     * Agent instruction. Instructions help your agent to perform its job effectively.
-     * See
-     * [Write Effective Agent Instructions](https://docs.digitalocean.com/products/genai-platform/concepts/best-practices/#agent-instructions)
-     * for best practices.
-     */
-    instruction?: string;
-
-    k?: number;
-
-    /**
-     * Specifies the maximum number of tokens the model can process in a single input
-     * or output, set as a number between 1 and 512. This determines the length of each
-     * response.
-     */
-    max_tokens?: number;
-
-    model?: AgentsAPI.APIModel;
-
-    name?: string;
-
-    project_id?: string;
-
-    provide_citations?: boolean;
-
-    region?: string;
-
-    retrieval_method?: AgentsAPI.APIRetrievalMethod;
-
-    route_created_at?: string;
-
-    route_created_by?: string;
-
-    route_name?: string;
-
-    route_uuid?: string;
-
-    tags?: Array<string>;
-
-    /**
-     * Controls the model’s creativity, specified as a number between 0 and 1. Lower
-     * values produce more predictable and conservative responses, while higher values
-     * encourage creativity and variation.
-     */
-    temperature?: number;
-
-    template?: Agent.Template;
-
-    /**
-     * Defines the cumulative probability threshold for word selection, specified as a
-     * number between 0 and 1. Higher values allow for more diverse outputs, while
-     * lower values ensure focused and coherent responses.
-     */
-    top_p?: number;
-
-    updated_at?: string;
-
-    url?: string;
-
-    user_id?: string;
-
-    uuid?: string;
-  }
-
-  export namespace Agent {
-    export interface Chatbot {
-      button_background_color?: string;
-
-      logo?: string;
-
-      name?: string;
-
-      primary_color?: string;
-
-      secondary_color?: string;
-
-      starting_message?: string;
-    }
-
-    export interface ChatbotIdentifier {
-      agent_chatbot_identifier?: string;
-    }
-
-    export interface Deployment {
-      created_at?: string;
-
-      name?: string;
-
-      status?:
-        | 'STATUS_UNKNOWN'
-        | 'STATUS_WAITING_FOR_DEPLOYMENT'
-        | 'STATUS_DEPLOYING'
-        | 'STATUS_RUNNING'
-        | 'STATUS_FAILED'
-        | 'STATUS_WAITING_FOR_UNDEPLOYMENT'
-        | 'STATUS_UNDEPLOYING'
-        | 'STATUS_UNDEPLOYMENT_FAILED'
-        | 'STATUS_DELETED';
-
-      updated_at?: string;
-
-      url?: string;
-
-      uuid?: string;
-
-      visibility?: AgentsAPI.APIDeploymentVisibility;
-    }
-
-    export interface Template {
-      created_at?: string;
-
-      description?: string;
-
-      guardrails?: Array<Template.Guardrail>;
-
-      instruction?: string;
-
-      k?: number;
-
-      knowledge_bases?: Array<KnowledgeBasesKnowledgeBasesAPI.APIKnowledgeBase>;
-
-      long_description?: string;
-
-      max_tokens?: number;
-
-      model?: AgentsAPI.APIModel;
-
-      name?: string;
-
-      short_description?: string;
-
-      summary?: string;
-
-      tags?: Array<string>;
-
-      temperature?: number;
-
-      template_type?: 'AGENT_TEMPLATE_TYPE_STANDARD' | 'AGENT_TEMPLATE_TYPE_ONE_CLICK';
-
-      top_p?: number;
-
-      updated_at?: string;
-
-      uuid?: string;
-    }
-
-    export namespace Template {
-      export interface Guardrail {
-        priority?: number;
-
-        uuid?: string;
-      }
-    }
-  }
-}
-
-export interface AgentDeleteResponse {
-  agent?: APIAgent;
-}
-
-export interface AgentUpdateStatusResponse {
-  agent?: APIAgent;
-}
-
-export interface AgentCreateParams {
-  anthropic_key_uuid?: string;
-
-  description?: string;
-
-  /**
-   * Agent instruction. Instructions help your agent to perform its job effectively.
-   * See
-   * [Write Effective Agent Instructions](https://docs.digitalocean.com/products/genai-platform/concepts/best-practices/#agent-instructions)
-   * for best practices.
-   */
-  instruction?: string;
-
-  knowledge_base_uuid?: Array<string>;
-
-  /**
-   * Identifier for the foundation model.
-   */
-  model_uuid?: string;
-
-  name?: string;
-
-  open_ai_key_uuid?: string;
-
-  project_id?: string;
-
-  region?: string;
-
-  tags?: Array<string>;
-}
-
-export interface AgentUpdateParams {
-  anthropic_key_uuid?: string;
-
-  description?: string;
-
-  /**
-   * Agent instruction. Instructions help your agent to perform its job effectively.
-   * See
-   * [Write Effective Agent Instructions](https://docs.digitalocean.com/products/genai-platform/concepts/best-practices/#agent-instructions)
-   * for best practices.
-   */
-  instruction?: string;
-
-  k?: number;
-
-  /**
-   * Specifies the maximum number of tokens the model can process in a single input
-   * or output, set as a number between 1 and 512. This determines the length of each
-   * response.
-   */
-  max_tokens?: number;
-
-  /**
-   * Identifier for the foundation model.
-   */
-  model_uuid?: string;
-
-  name?: string;
-
-  open_ai_key_uuid?: string;
-
-  project_id?: string;
-
-  provide_citations?: boolean;
-
-  retrieval_method?: APIRetrievalMethod;
-
-  tags?: Array<string>;
-
-  /**
-   * Controls the model’s creativity, specified as a number between 0 and 1. Lower
-   * values produce more predictable and conservative responses, while higher values
-   * encourage creativity and variation.
-   */
-  temperature?: number;
-
-  /**
-   * Defines the cumulative probability threshold for word selection, specified as a
-   * number between 0 and 1. Higher values allow for more diverse outputs, while
-   * lower values ensure focused and coherent responses.
-   */
-  top_p?: number;
-
-  body_uuid?: string;
-}
-
-export interface AgentListParams {
-  /**
-   * only list agents that are deployed.
-   */
-  only_deployed?: boolean;
-
-  /**
-   * page number.
-   */
-  page?: number;
-
-  /**
-   * items per page.
-   */
-  per_page?: number;
-}
-
-export interface AgentUpdateStatusParams {
-  body_uuid?: string;
-
-  visibility?: APIDeploymentVisibility;
-}
-
 Agents.APIKeys = APIKeys;
 Agents.Functions = Functions;
 Agents.Versions = Versions;
@@ -780,41 +377,11 @@ export declare namespace Agents {
     type APIModel as APIModel,
     type APIOpenAIAPIKeyInfo as APIOpenAIAPIKeyInfo,
     type APIRetrievalMethod as APIRetrievalMethod,
-    type AgentCreateResponse as AgentCreateResponse,
-    type AgentRetrieveResponse as AgentRetrieveResponse,
-    type AgentUpdateResponse as AgentUpdateResponse,
-    type AgentListResponse as AgentListResponse,
-    type AgentDeleteResponse as AgentDeleteResponse,
-    type AgentUpdateStatusResponse as AgentUpdateStatusResponse,
-    type AgentCreateParams as AgentCreateParams,
-    type AgentUpdateParams as AgentUpdateParams,
-    type AgentListParams as AgentListParams,
-    type AgentUpdateStatusParams as AgentUpdateStatusParams,
   };
 
-  export {
-    APIKeys as APIKeys,
-    type APIKeyCreateResponse as APIKeyCreateResponse,
-    type APIKeyUpdateResponse as APIKeyUpdateResponse,
-    type APIKeyListResponse as APIKeyListResponse,
-    type APIKeyDeleteResponse as APIKeyDeleteResponse,
-    type APIKeyRegenerateResponse as APIKeyRegenerateResponse,
-    type APIKeyCreateParams as APIKeyCreateParams,
-    type APIKeyUpdateParams as APIKeyUpdateParams,
-    type APIKeyListParams as APIKeyListParams,
-    type APIKeyDeleteParams as APIKeyDeleteParams,
-    type APIKeyRegenerateParams as APIKeyRegenerateParams,
-  };
+  export { APIKeys as APIKeys };
 
-  export {
-    Functions as Functions,
-    type FunctionCreateResponse as FunctionCreateResponse,
-    type FunctionUpdateResponse as FunctionUpdateResponse,
-    type FunctionDeleteResponse as FunctionDeleteResponse,
-    type FunctionCreateParams as FunctionCreateParams,
-    type FunctionUpdateParams as FunctionUpdateParams,
-    type FunctionDeleteParams as FunctionDeleteParams,
-  };
+  export { Functions as Functions };
 
   export {
     Versions as Versions,
@@ -826,22 +393,7 @@ export declare namespace Agents {
     type VersionListParams as VersionListParams,
   };
 
-  export {
-    KnowledgeBases as KnowledgeBases,
-    type APILinkKnowledgeBaseOutput as APILinkKnowledgeBaseOutput,
-    type KnowledgeBaseDetachResponse as KnowledgeBaseDetachResponse,
-    type KnowledgeBaseAttachSingleParams as KnowledgeBaseAttachSingleParams,
-    type KnowledgeBaseDetachParams as KnowledgeBaseDetachParams,
-  };
+  export { KnowledgeBases as KnowledgeBases, type APILinkKnowledgeBaseOutput as APILinkKnowledgeBaseOutput };
 
-  export {
-    ChildAgents as ChildAgents,
-    type ChildAgentUpdateResponse as ChildAgentUpdateResponse,
-    type ChildAgentDeleteResponse as ChildAgentDeleteResponse,
-    type ChildAgentAddResponse as ChildAgentAddResponse,
-    type ChildAgentViewResponse as ChildAgentViewResponse,
-    type ChildAgentUpdateParams as ChildAgentUpdateParams,
-    type ChildAgentDeleteParams as ChildAgentDeleteParams,
-    type ChildAgentAddParams as ChildAgentAddParams,
-  };
+  export { ChildAgents as ChildAgents };
 }

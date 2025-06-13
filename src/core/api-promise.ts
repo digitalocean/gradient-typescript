@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { type DigitaloceanGenaiSDK } from '../client';
+import { type GradientAI } from '../client';
 
 import { type PromiseOrValue } from '../internal/types';
 import { APIResponseProps, defaultParseResponse } from '../internal/parse';
@@ -11,13 +11,13 @@ import { APIResponseProps, defaultParseResponse } from '../internal/parse';
  */
 export class APIPromise<T> extends Promise<T> {
   private parsedPromise: Promise<T> | undefined;
-  #client: DigitaloceanGenaiSDK;
+  #client: GradientAI;
 
   constructor(
-    client: DigitaloceanGenaiSDK,
+    client: GradientAI,
     private responsePromise: Promise<APIResponseProps>,
     private parseResponse: (
-      client: DigitaloceanGenaiSDK,
+      client: GradientAI,
       props: APIResponseProps,
     ) => PromiseOrValue<T> = defaultParseResponse,
   ) {

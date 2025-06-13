@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import DigitaloceanGenaiSDK from 'digitalocean-genai-sdk';
+import GradientAI from 'gradientai';
 
-const client = new DigitaloceanGenaiSDK({
+const client = new GradientAI({
   apiKey: 'My API Key',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
@@ -37,6 +37,6 @@ describe('resource versions', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.agents.versions.list('uuid', { page: 0, per_page: 0 }, { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(DigitaloceanGenaiSDK.NotFoundError);
+    ).rejects.toThrow(GradientAI.NotFoundError);
   });
 });

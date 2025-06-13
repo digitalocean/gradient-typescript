@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import * as TokenAPI from './token';
-import { Token, TokenCreateParams, TokenCreateResponse } from './token';
+import { Token } from './token';
 
 export class Agents extends APIResource {
   token: TokenAPI.Token = new TokenAPI.Token(this._client);
@@ -11,9 +11,5 @@ export class Agents extends APIResource {
 Agents.Token = Token;
 
 export declare namespace Agents {
-  export {
-    Token as Token,
-    type TokenCreateResponse as TokenCreateResponse,
-    type TokenCreateParams as TokenCreateParams,
-  };
+  export { Token as Token };
 }

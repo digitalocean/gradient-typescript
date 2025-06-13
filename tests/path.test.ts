@@ -1,4 +1,4 @@
-import { createPathTagFunction, encodeURIPath } from 'digitalocean-genai-sdk/internal/utils/path';
+import { createPathTagFunction, encodeURIPath } from 'gradientai/internal/utils/path';
 import { inspect } from 'node:util';
 
 describe('path template tag function', () => {

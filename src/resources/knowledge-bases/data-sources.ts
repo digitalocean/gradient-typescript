@@ -2,58 +2,8 @@
 
 import { APIResource } from '../../core/resource';
 import * as IndexingJobsAPI from '../indexing-jobs';
-import * as VersionsAPI from '../agents/versions';
-import { APIPromise } from '../../core/api-promise';
-import { RequestOptions } from '../../internal/request-options';
-import { path } from '../../internal/utils/path';
 
-export class DataSources extends APIResource {
-  /**
-   * To add a data source to a knowledge base, send a POST request to
-   * `/v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources`.
-   */
-  create(
-    knowledgeBaseUuid: string,
-    body: DataSourceCreateParams,
-    options?: RequestOptions,
-  ): APIPromise<DataSourceCreateResponse> {
-    return this._client.post(path`/v2/genai/knowledge_bases/${knowledgeBaseUuid}/data_sources`, {
-      body,
-      ...options,
-    });
-  }
-
-  /**
-   * To list all data sources for a knowledge base, send a GET request to
-   * `/v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources`.
-   */
-  list(
-    knowledgeBaseUuid: string,
-    query: DataSourceListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<DataSourceListResponse> {
-    return this._client.get(path`/v2/genai/knowledge_bases/${knowledgeBaseUuid}/data_sources`, {
-      query,
-      ...options,
-    });
-  }
-
-  /**
-   * To delete a data source from a knowledge base, send a DELETE request to
-   * `/v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources/{data_source_uuid}`.
-   */
-  delete(
-    dataSourceUuid: string,
-    params: DataSourceDeleteParams,
-    options?: RequestOptions,
-  ): APIPromise<DataSourceDeleteResponse> {
-    const { knowledge_base_uuid } = params;
-    return this._client.delete(
-      path`/v2/genai/knowledge_bases/${knowledge_base_uuid}/data_sources/${dataSourceUuid}`,
-      options,
-    );
-  }
-}
+export class DataSources extends APIResource {}
 
 /**
  * File to upload as data source for knowledge base.
@@ -122,78 +72,11 @@ export interface APIWebCrawlerDataSource {
   embed_media?: boolean;
 }
 
-export interface DataSourceCreateResponse {
-  knowledge_base_data_source?: APIKnowledgeBaseDataSource;
-}
-
-export interface DataSourceListResponse {
-  knowledge_base_data_sources?: Array<APIKnowledgeBaseDataSource>;
-
-  links?: VersionsAPI.APILinks;
-
-  meta?: VersionsAPI.APIMeta;
-}
-
-export interface DataSourceDeleteResponse {
-  data_source_uuid?: string;
-
-  knowledge_base_uuid?: string;
-}
-
-export interface DataSourceCreateParams {
-  aws_data_source?: DataSourceCreateParams.AwsDataSource;
-
-  body_knowledge_base_uuid?: string;
-
-  spaces_data_source?: APISpacesDataSource;
-
-  web_crawler_data_source?: APIWebCrawlerDataSource;
-}
-
-export namespace DataSourceCreateParams {
-  export interface AwsDataSource {
-    bucket_name?: string;
-
-    item_path?: string;
-
-    key_id?: string;
-
-    region?: string;
-
-    secret_key?: string;
-  }
-}
-
-export interface DataSourceListParams {
-  /**
-   * page number.
-   */
-  page?: number;
-
-  /**
-   * items per page.
-   */
-  per_page?: number;
-}
-
-export interface DataSourceDeleteParams {
-  /**
-   * knowledge base id
-   */
-  knowledge_base_uuid: string;
-}
-
 export declare namespace DataSources {
   export {
     type APIFileUploadDataSource as APIFileUploadDataSource,
     type APIKnowledgeBaseDataSource as APIKnowledgeBaseDataSource,
     type APISpacesDataSource as APISpacesDataSource,
     type APIWebCrawlerDataSource as APIWebCrawlerDataSource,
-    type DataSourceCreateResponse as DataSourceCreateResponse,
-    type DataSourceListResponse as DataSourceListResponse,
-    type DataSourceDeleteResponse as DataSourceDeleteResponse,
-    type DataSourceCreateParams as DataSourceCreateParams,
-    type DataSourceListParams as DataSourceListParams,
-    type DataSourceDeleteParams as DataSourceDeleteParams,
   };
 }

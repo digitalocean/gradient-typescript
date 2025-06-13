@@ -1,5 +1,5 @@
-import { multipartFormRequestOptions, createForm } from 'digitalocean-genai-sdk/internal/uploads';
-import { toFile } from 'digitalocean-genai-sdk/core/uploads';
+import { multipartFormRequestOptions, createForm } from 'gradientai/internal/uploads';
+import { toFile } from 'gradientai/core/uploads';
 
 describe('form data validation', () => {
   test('valid values do not error', async () => {

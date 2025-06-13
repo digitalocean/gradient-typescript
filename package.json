@@ -1,8 +1,8 @@
 {
-  "name": "digitalocean-genai-sdk",
+  "name": "gradientai",
   "version": "0.0.1-alpha.0",
-  "description": "The official TypeScript library for the Digitalocean Genai SDK API",
-  "author": "Digitalocean Genai SDK <>",
+  "description": "The official TypeScript library for the Gradient AI API",
+  "author": "Gradient AI <>",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "type": "commonjs",
@@ -47,8 +47,8 @@
     "typescript": "5.8.3"
   },
   "imports": {
-    "digitalocean-genai-sdk": ".",
-    "digitalocean-genai-sdk/*": "./src/*"
+    "gradientai": ".",
+    "gradientai/*": "./src/*"
   },
   "exports": {
     ".": {
