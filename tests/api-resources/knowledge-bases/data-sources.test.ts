@@ -43,4 +43,25 @@ describe('resource dataSources', () => {
       ),
     ).rejects.toThrow(GradientAI.NotFoundError);
   });
+
+  // skipped: tests are disabled for the time being
+  test.skip('delete: only required params', async () => {
+    const responsePromise = client.knowledgeBases.dataSources.delete('data_source_uuid', {
+      knowledge_base_uuid: 'knowledge_base_uuid',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('delete: required and optional params', async () => {
+    const response = await client.knowledgeBases.dataSources.delete('data_source_uuid', {
+      knowledge_base_uuid: 'knowledge_base_uuid',
+    });
+  });
 });

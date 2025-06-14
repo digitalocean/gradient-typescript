@@ -11,12 +11,15 @@ import {
   APIWebCrawlerDataSource,
   DataSourceCreateParams,
   DataSourceCreateResponse,
+  DataSourceDeleteParams,
+  DataSourceDeleteResponse,
   DataSourceListParams,
   DataSourceListResponse,
   DataSources,
 } from './data-sources';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
+import { path } from '../../internal/utils/path';
 
 export class KnowledgeBases extends APIResource {
   dataSources: DataSourcesAPI.DataSources = new DataSourcesAPI.DataSources(this._client);
@@ -29,6 +32,26 @@ export class KnowledgeBases extends APIResource {
   }
 
   /**
+   * To retrive information about an existing knowledge base, send a GET request to
+   * `/v2/gen-ai/knowledge_bases/{uuid}`.
+   */
+  retrieve(uuid: string, options?: RequestOptions): APIPromise<KnowledgeBaseRetrieveResponse> {
+    return this._client.get(path`/v2/gen-ai/knowledge_bases/${uuid}`, options);
+  }
+
+  /**
+   * To update a knowledge base, send a PUT request to
+   * `/v2/gen-ai/knowledge_bases/{uuid}`.
+   */
+  update(
+    pathUuid: string,
+    body: KnowledgeBaseUpdateParams,
+    options?: RequestOptions,
+  ): APIPromise<KnowledgeBaseUpdateResponse> {
+    return this._client.put(path`/v2/gen-ai/knowledge_bases/${pathUuid}`, { body, ...options });
+  }
+
+  /**
    * To list all knowledge bases, send a GET request to `/v2/gen-ai/knowledge_bases`.
    */
   list(
@@ -36,6 +59,14 @@ export class KnowledgeBases extends APIResource {
     options?: RequestOptions,
   ): APIPromise<KnowledgeBaseListResponse> {
     return this._client.get('/v2/gen-ai/knowledge_bases', { query, ...options });
+  }
+
+  /**
+   * To delete a knowledge base, send a DELETE request to
+   * `/v2/gen-ai/knowledge_bases/{uuid}`.
+   */
+  delete(uuid: string, options?: RequestOptions): APIPromise<KnowledgeBaseDeleteResponse> {
+    return this._client.delete(path`/v2/gen-ai/knowledge_bases/${uuid}`, options);
   }
 }
 
@@ -71,12 +102,38 @@ export interface KnowledgeBaseCreateResponse {
   knowledge_base?: APIKnowledgeBase;
 }
 
+export interface KnowledgeBaseRetrieveResponse {
+  database_status?:
+    | 'CREATING'
+    | 'ONLINE'
+    | 'POWEROFF'
+    | 'REBUILDING'
+    | 'REBALANCING'
+    | 'DECOMMISSIONED'
+    | 'FORKING'
+    | 'MIGRATING'
+    | 'RESIZING'
+    | 'RESTORING'
+    | 'POWERING_ON'
+    | 'UNHEALTHY';
+
+  knowledge_base?: APIKnowledgeBase;
+}
+
+export interface KnowledgeBaseUpdateResponse {
+  knowledge_base?: APIKnowledgeBase;
+}
+
 export interface KnowledgeBaseListResponse {
   knowledge_bases?: Array<APIKnowledgeBase>;
 
   links?: VersionsAPI.APILinks;
 
   meta?: VersionsAPI.APIMeta;
+}
+
+export interface KnowledgeBaseDeleteResponse {
+  uuid?: string;
 }
 
 export interface KnowledgeBaseCreateParams {
@@ -142,6 +199,29 @@ export namespace KnowledgeBaseCreateParams {
   }
 }
 
+export interface KnowledgeBaseUpdateParams {
+  /**
+   * the id of the DigitalOcean database this knowledge base will use, optiona.
+   */
+  database_id?: string;
+
+  /**
+   * Identifier for the foundation model.
+   */
+  embedding_model_uuid?: string;
+
+  name?: string;
+
+  project_id?: string;
+
+  /**
+   * Tags to organize your knowledge base.
+   */
+  tags?: Array<string>;
+
+  body_uuid?: string;
+}
+
 export interface KnowledgeBaseListParams {
   /**
    * page number.
@@ -160,8 +240,12 @@ export declare namespace KnowledgeBases {
   export {
     type APIKnowledgeBase as APIKnowledgeBase,
     type KnowledgeBaseCreateResponse as KnowledgeBaseCreateResponse,
+    type KnowledgeBaseRetrieveResponse as KnowledgeBaseRetrieveResponse,
+    type KnowledgeBaseUpdateResponse as KnowledgeBaseUpdateResponse,
     type KnowledgeBaseListResponse as KnowledgeBaseListResponse,
+    type KnowledgeBaseDeleteResponse as KnowledgeBaseDeleteResponse,
     type KnowledgeBaseCreateParams as KnowledgeBaseCreateParams,
+    type KnowledgeBaseUpdateParams as KnowledgeBaseUpdateParams,
     type KnowledgeBaseListParams as KnowledgeBaseListParams,
   };
 
@@ -173,7 +257,9 @@ export declare namespace KnowledgeBases {
     type APIWebCrawlerDataSource as APIWebCrawlerDataSource,
     type DataSourceCreateResponse as DataSourceCreateResponse,
     type DataSourceListResponse as DataSourceListResponse,
+    type DataSourceDeleteResponse as DataSourceDeleteResponse,
     type DataSourceCreateParams as DataSourceCreateParams,
     type DataSourceListParams as DataSourceListParams,
+    type DataSourceDeleteParams as DataSourceDeleteParams,
   };
 }

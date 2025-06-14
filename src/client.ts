@@ -12,6 +12,7 @@ import type { APIResponseProps } from './internal/parse';
 import { getPlatformHeaders } from './internal/detect-platform';
 import * as Shims from './internal/shims';
 import * as Opts from './internal/request-options';
+import * as qs from './internal/qs';
 import { VERSION } from './version';
 import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
@@ -41,7 +42,7 @@ import {
   IndexingJobs,
 } from './resources/indexing-jobs';
 import { Model, ModelListResponse, Models } from './resources/models';
-import { Regions } from './resources/regions';
+import { RegionListParams, RegionListResponse, Regions } from './resources/regions';
 import { readEnv } from './internal/utils/env';
 import { formatRequestDetails, loggerFor } from './internal/utils/log';
 import { isEmptyObj } from './internal/utils/values';
@@ -55,18 +56,34 @@ import {
   APIRetrievalMethod,
   AgentCreateParams,
   AgentCreateResponse,
+  AgentDeleteResponse,
   AgentListParams,
   AgentListResponse,
+  AgentRetrieveResponse,
+  AgentUpdateParams,
+  AgentUpdateResponse,
+  AgentUpdateStatusParams,
+  AgentUpdateStatusResponse,
   Agents,
 } from './resources/agents/agents';
-import { APIAgreement, APIKeys, APIModelVersion } from './resources/api-keys/api-keys';
+import {
+  APIAgreement,
+  APIKeyListParams,
+  APIKeyListResponse,
+  APIKeys,
+  APIModelVersion,
+} from './resources/api-keys/api-keys';
 import { Auth } from './resources/auth/auth';
 import {
   APIKnowledgeBase,
   KnowledgeBaseCreateParams,
   KnowledgeBaseCreateResponse,
+  KnowledgeBaseDeleteResponse,
   KnowledgeBaseListParams,
   KnowledgeBaseListResponse,
+  KnowledgeBaseRetrieveResponse,
+  KnowledgeBaseUpdateParams,
+  KnowledgeBaseUpdateResponse,
   KnowledgeBases,
 } from './resources/knowledge-bases/knowledge-bases';
 import { Providers } from './resources/providers/providers';
@@ -240,24 +257,8 @@ export class GradientAI {
     return buildHeaders([{ Authorization: `Bearer ${this.apiKey}` }]);
   }
 
-  /**
-   * Basic re-implementation of `qs.stringify` for primitive types.
-   */
   protected stringifyQuery(query: Record<string, unknown>): string {
-    return Object.entries(query)
-      .filter(([_, value]) => typeof value !== 'undefined')
-      .map(([key, value]) => {
-        if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
-          return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
-        }
-        if (value === null) {
-          return `${encodeURIComponent(key)}=`;
-        }
-        throw new Errors.GradientAIError(
-          `Cannot stringify type ${typeof value}; Expected string, number, boolean, or null. If you need to pass nested query parameters, you can manually encode them, e.g. { query: { 'foo[key1]': value1, 'foo[key2]': value2 } }, and please open a GitHub issue requesting better support for your use case.`,
-        );
-      })
-      .join('&');
+    return qs.stringify(query, { arrayFormat: 'comma' });
   }
 
   private getUserAgent(): string {
@@ -771,16 +772,26 @@ export declare namespace GradientAI {
     type APIOpenAIAPIKeyInfo as APIOpenAIAPIKeyInfo,
     type APIRetrievalMethod as APIRetrievalMethod,
     type AgentCreateResponse as AgentCreateResponse,
+    type AgentRetrieveResponse as AgentRetrieveResponse,
+    type AgentUpdateResponse as AgentUpdateResponse,
     type AgentListResponse as AgentListResponse,
+    type AgentDeleteResponse as AgentDeleteResponse,
+    type AgentUpdateStatusResponse as AgentUpdateStatusResponse,
     type AgentCreateParams as AgentCreateParams,
+    type AgentUpdateParams as AgentUpdateParams,
     type AgentListParams as AgentListParams,
+    type AgentUpdateStatusParams as AgentUpdateStatusParams,
   };
 
   export { Providers as Providers };
 
   export { Auth as Auth };
 
-  export { Regions as Regions };
+  export {
+    Regions as Regions,
+    type RegionListResponse as RegionListResponse,
+    type RegionListParams as RegionListParams,
+  };
 
   export {
     IndexingJobs as IndexingJobs,
@@ -799,12 +810,22 @@ export declare namespace GradientAI {
     KnowledgeBases as KnowledgeBases,
     type APIKnowledgeBase as APIKnowledgeBase,
     type KnowledgeBaseCreateResponse as KnowledgeBaseCreateResponse,
+    type KnowledgeBaseRetrieveResponse as KnowledgeBaseRetrieveResponse,
+    type KnowledgeBaseUpdateResponse as KnowledgeBaseUpdateResponse,
     type KnowledgeBaseListResponse as KnowledgeBaseListResponse,
+    type KnowledgeBaseDeleteResponse as KnowledgeBaseDeleteResponse,
     type KnowledgeBaseCreateParams as KnowledgeBaseCreateParams,
+    type KnowledgeBaseUpdateParams as KnowledgeBaseUpdateParams,
     type KnowledgeBaseListParams as KnowledgeBaseListParams,
   };
 
-  export { APIKeys as APIKeys, type APIAgreement as APIAgreement, type APIModelVersion as APIModelVersion };
+  export {
+    APIKeys as APIKeys,
+    type APIAgreement as APIAgreement,
+    type APIModelVersion as APIModelVersion,
+    type APIKeyListResponse as APIKeyListResponse,
+    type APIKeyListParams as APIKeyListParams,
+  };
 
   export {
     Chat as Chat,
