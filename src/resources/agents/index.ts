@@ -28,7 +28,15 @@ export {
   type AgentListParams,
 } from './agents';
 export { ChildAgents } from './child-agents';
-export { Functions, type FunctionCreateResponse, type FunctionCreateParams } from './functions';
+export {
+  Functions,
+  type FunctionCreateResponse,
+  type FunctionUpdateResponse,
+  type FunctionDeleteResponse,
+  type FunctionCreateParams,
+  type FunctionUpdateParams,
+  type FunctionDeleteParams,
+} from './functions';
 export { KnowledgeBases, type APILinkKnowledgeBaseOutput } from './knowledge-bases';
 export {
   Versions,
