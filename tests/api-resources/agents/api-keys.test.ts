@@ -21,6 +21,28 @@ describe('resource apiKeys', () => {
   });
 
   // skipped: tests are disabled for the time being
+  test.skip('update: only required params', async () => {
+    const responsePromise = client.agents.apiKeys.update('api_key_uuid', { path_agent_uuid: 'agent_uuid' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('update: required and optional params', async () => {
+    const response = await client.agents.apiKeys.update('api_key_uuid', {
+      path_agent_uuid: 'agent_uuid',
+      body_agent_uuid: 'agent_uuid',
+      body_api_key_uuid: 'api_key_uuid',
+      name: 'name',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('list', async () => {
     const responsePromise = client.agents.apiKeys.list('agent_uuid');
     const rawResponse = await responsePromise.asResponse();
@@ -42,5 +64,22 @@ describe('resource apiKeys', () => {
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(GradientAI.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('delete: only required params', async () => {
+    const responsePromise = client.agents.apiKeys.delete('api_key_uuid', { agent_uuid: 'agent_uuid' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('delete: required and optional params', async () => {
+    const response = await client.agents.apiKeys.delete('api_key_uuid', { agent_uuid: 'agent_uuid' });
   });
 });

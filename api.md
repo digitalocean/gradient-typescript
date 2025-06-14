@@ -22,12 +22,16 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/agents/api-keys.ts">APIKeyCreateResponse</a></code>
+- <code><a href="./src/resources/agents/api-keys.ts">APIKeyUpdateResponse</a></code>
 - <code><a href="./src/resources/agents/api-keys.ts">APIKeyListResponse</a></code>
+- <code><a href="./src/resources/agents/api-keys.ts">APIKeyDeleteResponse</a></code>
 
 Methods:
 
 - <code title="post /v2/gen-ai/agents/{agent_uuid}/api_keys">client.agents.apiKeys.<a href="./src/resources/agents/api-keys.ts">create</a>(agentUuid, { ...params }) -> APIKeyCreateResponse</code>
+- <code title="put /v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}">client.agents.apiKeys.<a href="./src/resources/agents/api-keys.ts">update</a>(apiKeyUuid, { ...params }) -> APIKeyUpdateResponse</code>
 - <code title="get /v2/gen-ai/agents/{agent_uuid}/api_keys">client.agents.apiKeys.<a href="./src/resources/agents/api-keys.ts">list</a>(agentUuid, { ...params }) -> APIKeyListResponse</code>
+- <code title="delete /v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}">client.agents.apiKeys.<a href="./src/resources/agents/api-keys.ts">delete</a>(apiKeyUuid, { ...params }) -> APIKeyDeleteResponse</code>
 
 ## Functions
 

@@ -3,9 +3,13 @@
 export {
   APIKeys,
   type APIKeyCreateResponse,
+  type APIKeyUpdateResponse,
   type APIKeyListResponse,
+  type APIKeyDeleteResponse,
   type APIKeyCreateParams,
+  type APIKeyUpdateParams,
   type APIKeyListParams,
+  type APIKeyDeleteParams,
 } from './api-keys';
 export {
   Agents,

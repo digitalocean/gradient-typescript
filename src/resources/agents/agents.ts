@@ -6,8 +6,12 @@ import * as APIKeysAPI from './api-keys';
 import {
   APIKeyCreateParams,
   APIKeyCreateResponse,
+  APIKeyDeleteParams,
+  APIKeyDeleteResponse,
   APIKeyListParams,
   APIKeyListResponse,
+  APIKeyUpdateParams,
+  APIKeyUpdateResponse,
   APIKeys,
 } from './api-keys';
 import * as ChildAgentsAPI from './child-agents';
@@ -642,9 +646,13 @@ export declare namespace Agents {
   export {
     APIKeys as APIKeys,
     type APIKeyCreateResponse as APIKeyCreateResponse,
+    type APIKeyUpdateResponse as APIKeyUpdateResponse,
     type APIKeyListResponse as APIKeyListResponse,
+    type APIKeyDeleteResponse as APIKeyDeleteResponse,
     type APIKeyCreateParams as APIKeyCreateParams,
+    type APIKeyUpdateParams as APIKeyUpdateParams,
     type APIKeyListParams as APIKeyListParams,
+    type APIKeyDeleteParams as APIKeyDeleteParams,
   };
 
   export { Functions as Functions };
