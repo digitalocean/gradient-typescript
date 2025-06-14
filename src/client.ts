@@ -42,6 +42,10 @@ import {
   APIModel,
   APIOpenAIAPIKeyInfo,
   APIRetrievalMethod,
+  AgentCreateParams,
+  AgentCreateResponse,
+  AgentListParams,
+  AgentListResponse,
   Agents,
 } from './resources/agents/agents';
 import { APIAgreement, APIKeys, APIModelVersion } from './resources/api-keys/api-keys';
@@ -748,6 +752,10 @@ export declare namespace GradientAI {
     type APIModel as APIModel,
     type APIOpenAIAPIKeyInfo as APIOpenAIAPIKeyInfo,
     type APIRetrievalMethod as APIRetrievalMethod,
+    type AgentCreateResponse as AgentCreateResponse,
+    type AgentListResponse as AgentListResponse,
+    type AgentCreateParams as AgentCreateParams,
+    type AgentListParams as AgentListParams,
   };
 
   export { Providers as Providers };

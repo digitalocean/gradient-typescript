@@ -10,6 +10,10 @@ export {
   type APIModel,
   type APIOpenAIAPIKeyInfo,
   type APIRetrievalMethod,
+  type AgentCreateResponse,
+  type AgentListResponse,
+  type AgentCreateParams,
+  type AgentListParams,
 } from './agents';
 export { ChildAgents } from './child-agents';
 export { Functions } from './functions';

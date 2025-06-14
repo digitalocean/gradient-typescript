@@ -9,6 +9,13 @@ Types:
 - <code><a href="./src/resources/agents/agents.ts">APIModel</a></code>
 - <code><a href="./src/resources/agents/agents.ts">APIOpenAIAPIKeyInfo</a></code>
 - <code><a href="./src/resources/agents/agents.ts">APIRetrievalMethod</a></code>
+- <code><a href="./src/resources/agents/agents.ts">AgentCreateResponse</a></code>
+- <code><a href="./src/resources/agents/agents.ts">AgentListResponse</a></code>
+
+Methods:
+
+- <code title="post /v2/gen-ai/agents">client.agents.<a href="./src/resources/agents/agents.ts">create</a>({ ...params }) -> AgentCreateResponse</code>
+- <code title="get /v2/gen-ai/agents">client.agents.<a href="./src/resources/agents/agents.ts">list</a>({ ...params }) -> AgentListResponse</code>
 
 ## APIKeys
 
