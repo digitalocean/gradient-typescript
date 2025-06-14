@@ -28,7 +28,18 @@ import {
   ChatCreateCompletionResponse,
 } from './resources/chat';
 import { EmbeddingCreateParams, EmbeddingCreateResponse, Embeddings } from './resources/embeddings';
-import { APIIndexingJob, IndexingJobs } from './resources/indexing-jobs';
+import {
+  APIIndexingJob,
+  IndexingJobCreateParams,
+  IndexingJobCreateResponse,
+  IndexingJobListParams,
+  IndexingJobListResponse,
+  IndexingJobRetrieveDataSourcesResponse,
+  IndexingJobRetrieveResponse,
+  IndexingJobUpdateCancelParams,
+  IndexingJobUpdateCancelResponse,
+  IndexingJobs,
+} from './resources/indexing-jobs';
 import { Model, ModelListResponse, Models } from './resources/models';
 import { Regions } from './resources/regions';
 import { readEnv } from './internal/utils/env';
@@ -50,7 +61,14 @@ import {
 } from './resources/agents/agents';
 import { APIAgreement, APIKeys, APIModelVersion } from './resources/api-keys/api-keys';
 import { Auth } from './resources/auth/auth';
-import { APIKnowledgeBase, KnowledgeBases } from './resources/knowledge-bases/knowledge-bases';
+import {
+  APIKnowledgeBase,
+  KnowledgeBaseCreateParams,
+  KnowledgeBaseCreateResponse,
+  KnowledgeBaseListParams,
+  KnowledgeBaseListResponse,
+  KnowledgeBases,
+} from './resources/knowledge-bases/knowledge-bases';
 import { Providers } from './resources/providers/providers';
 
 export interface ClientOptions {
@@ -764,9 +782,27 @@ export declare namespace GradientAI {
 
   export { Regions as Regions };
 
-  export { IndexingJobs as IndexingJobs, type APIIndexingJob as APIIndexingJob };
+  export {
+    IndexingJobs as IndexingJobs,
+    type APIIndexingJob as APIIndexingJob,
+    type IndexingJobCreateResponse as IndexingJobCreateResponse,
+    type IndexingJobRetrieveResponse as IndexingJobRetrieveResponse,
+    type IndexingJobListResponse as IndexingJobListResponse,
+    type IndexingJobRetrieveDataSourcesResponse as IndexingJobRetrieveDataSourcesResponse,
+    type IndexingJobUpdateCancelResponse as IndexingJobUpdateCancelResponse,
+    type IndexingJobCreateParams as IndexingJobCreateParams,
+    type IndexingJobListParams as IndexingJobListParams,
+    type IndexingJobUpdateCancelParams as IndexingJobUpdateCancelParams,
+  };
 
-  export { KnowledgeBases as KnowledgeBases, type APIKnowledgeBase as APIKnowledgeBase };
+  export {
+    KnowledgeBases as KnowledgeBases,
+    type APIKnowledgeBase as APIKnowledgeBase,
+    type KnowledgeBaseCreateResponse as KnowledgeBaseCreateResponse,
+    type KnowledgeBaseListResponse as KnowledgeBaseListResponse,
+    type KnowledgeBaseCreateParams as KnowledgeBaseCreateParams,
+    type KnowledgeBaseListParams as KnowledgeBaseListParams,
+  };
 
   export { APIKeys as APIKeys, type APIAgreement as APIAgreement, type APIModelVersion as APIModelVersion };
 
