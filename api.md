@@ -40,10 +40,14 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/agents/functions.ts">FunctionCreateResponse</a></code>
+- <code><a href="./src/resources/agents/functions.ts">FunctionUpdateResponse</a></code>
+- <code><a href="./src/resources/agents/functions.ts">FunctionDeleteResponse</a></code>
 
 Methods:
 
 - <code title="post /v2/gen-ai/agents/{agent_uuid}/functions">client.agents.functions.<a href="./src/resources/agents/functions.ts">create</a>(agentUuid, { ...params }) -> FunctionCreateResponse</code>
+- <code title="put /v2/gen-ai/agents/{agent_uuid}/functions/{function_uuid}">client.agents.functions.<a href="./src/resources/agents/functions.ts">update</a>(functionUuid, { ...params }) -> FunctionUpdateResponse</code>
+- <code title="delete /v2/gen-ai/agents/{agent_uuid}/functions/{function_uuid}">client.agents.functions.<a href="./src/resources/agents/functions.ts">delete</a>(functionUuid, { ...params }) -> FunctionDeleteResponse</code>
 
 ## Versions
 
@@ -64,6 +68,10 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/agents/knowledge-bases.ts">APILinkKnowledgeBaseOutput</a></code>
+
+Methods:
+
+- <code title="post /v2/gen-ai/agents/{agent_uuid}/knowledge_bases">client.agents.knowledgeBases.<a href="./src/resources/agents/knowledge-bases.ts">attach</a>(agentUuid) -> APILinkKnowledgeBaseOutput</code>
 
 ## ChildAgents
 

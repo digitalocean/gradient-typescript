@@ -19,7 +19,15 @@ import {
 import * as ChildAgentsAPI from './child-agents';
 import { ChildAgents } from './child-agents';
 import * as FunctionsAPI from './functions';
-import { FunctionCreateParams, FunctionCreateResponse, Functions } from './functions';
+import {
+  FunctionCreateParams,
+  FunctionCreateResponse,
+  FunctionDeleteParams,
+  FunctionDeleteResponse,
+  FunctionUpdateParams,
+  FunctionUpdateResponse,
+  Functions,
+} from './functions';
 import * as KnowledgeBasesAPI from './knowledge-bases';
 import { APILinkKnowledgeBaseOutput, KnowledgeBases } from './knowledge-bases';
 import * as VersionsAPI from './versions';
@@ -662,7 +670,11 @@ export declare namespace Agents {
   export {
     Functions as Functions,
     type FunctionCreateResponse as FunctionCreateResponse,
+    type FunctionUpdateResponse as FunctionUpdateResponse,
+    type FunctionDeleteResponse as FunctionDeleteResponse,
     type FunctionCreateParams as FunctionCreateParams,
+    type FunctionUpdateParams as FunctionUpdateParams,
+    type FunctionDeleteParams as FunctionDeleteParams,
   };
 
   export {
