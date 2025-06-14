@@ -10,6 +10,8 @@ import {
   APIKeyDeleteResponse,
   APIKeyListParams,
   APIKeyListResponse,
+  APIKeyRegenerateParams,
+  APIKeyRegenerateResponse,
   APIKeyUpdateParams,
   APIKeyUpdateResponse,
   APIKeys,
@@ -17,7 +19,7 @@ import {
 import * as ChildAgentsAPI from './child-agents';
 import { ChildAgents } from './child-agents';
 import * as FunctionsAPI from './functions';
-import { Functions } from './functions';
+import { FunctionCreateParams, FunctionCreateResponse, Functions } from './functions';
 import * as KnowledgeBasesAPI from './knowledge-bases';
 import { APILinkKnowledgeBaseOutput, KnowledgeBases } from './knowledge-bases';
 import * as VersionsAPI from './versions';
@@ -649,13 +651,19 @@ export declare namespace Agents {
     type APIKeyUpdateResponse as APIKeyUpdateResponse,
     type APIKeyListResponse as APIKeyListResponse,
     type APIKeyDeleteResponse as APIKeyDeleteResponse,
+    type APIKeyRegenerateResponse as APIKeyRegenerateResponse,
     type APIKeyCreateParams as APIKeyCreateParams,
     type APIKeyUpdateParams as APIKeyUpdateParams,
     type APIKeyListParams as APIKeyListParams,
     type APIKeyDeleteParams as APIKeyDeleteParams,
+    type APIKeyRegenerateParams as APIKeyRegenerateParams,
   };
 
-  export { Functions as Functions };
+  export {
+    Functions as Functions,
+    type FunctionCreateResponse as FunctionCreateResponse,
+    type FunctionCreateParams as FunctionCreateParams,
+  };
 
   export {
     Versions as Versions,

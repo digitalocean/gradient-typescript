@@ -60,6 +60,19 @@ export class APIKeys extends APIResource {
     const { agent_uuid } = params;
     return this._client.delete(path`/v2/gen-ai/agents/${agent_uuid}/api_keys/${apiKeyUuid}`, options);
   }
+
+  /**
+   * To regenerate an agent API key, send a PUT request to
+   * `/v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}/regenerate`.
+   */
+  regenerate(
+    apiKeyUuid: string,
+    params: APIKeyRegenerateParams,
+    options?: RequestOptions,
+  ): APIPromise<APIKeyRegenerateResponse> {
+    const { agent_uuid } = params;
+    return this._client.put(path`/v2/gen-ai/agents/${agent_uuid}/api_keys/${apiKeyUuid}/regenerate`, options);
+  }
 }
 
 export interface APIKeyCreateResponse {
@@ -79,6 +92,10 @@ export interface APIKeyListResponse {
 }
 
 export interface APIKeyDeleteResponse {
+  api_key_info?: AgentsAPI.APIAgentAPIKeyInfo;
+}
+
+export interface APIKeyRegenerateResponse {
   api_key_info?: AgentsAPI.APIAgentAPIKeyInfo;
 }
 
@@ -129,15 +146,24 @@ export interface APIKeyDeleteParams {
   agent_uuid: string;
 }
 
+export interface APIKeyRegenerateParams {
+  /**
+   * agent id
+   */
+  agent_uuid: string;
+}
+
 export declare namespace APIKeys {
   export {
     type APIKeyCreateResponse as APIKeyCreateResponse,
     type APIKeyUpdateResponse as APIKeyUpdateResponse,
     type APIKeyListResponse as APIKeyListResponse,
     type APIKeyDeleteResponse as APIKeyDeleteResponse,
+    type APIKeyRegenerateResponse as APIKeyRegenerateResponse,
     type APIKeyCreateParams as APIKeyCreateParams,
     type APIKeyUpdateParams as APIKeyUpdateParams,
     type APIKeyListParams as APIKeyListParams,
     type APIKeyDeleteParams as APIKeyDeleteParams,
+    type APIKeyRegenerateParams as APIKeyRegenerateParams,
   };
 }

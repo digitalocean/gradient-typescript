@@ -25,6 +25,7 @@ Types:
 - <code><a href="./src/resources/agents/api-keys.ts">APIKeyUpdateResponse</a></code>
 - <code><a href="./src/resources/agents/api-keys.ts">APIKeyListResponse</a></code>
 - <code><a href="./src/resources/agents/api-keys.ts">APIKeyDeleteResponse</a></code>
+- <code><a href="./src/resources/agents/api-keys.ts">APIKeyRegenerateResponse</a></code>
 
 Methods:
 
@@ -32,8 +33,17 @@ Methods:
 - <code title="put /v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}">client.agents.apiKeys.<a href="./src/resources/agents/api-keys.ts">update</a>(apiKeyUuid, { ...params }) -> APIKeyUpdateResponse</code>
 - <code title="get /v2/gen-ai/agents/{agent_uuid}/api_keys">client.agents.apiKeys.<a href="./src/resources/agents/api-keys.ts">list</a>(agentUuid, { ...params }) -> APIKeyListResponse</code>
 - <code title="delete /v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}">client.agents.apiKeys.<a href="./src/resources/agents/api-keys.ts">delete</a>(apiKeyUuid, { ...params }) -> APIKeyDeleteResponse</code>
+- <code title="put /v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}/regenerate">client.agents.apiKeys.<a href="./src/resources/agents/api-keys.ts">regenerate</a>(apiKeyUuid, { ...params }) -> APIKeyRegenerateResponse</code>
 
 ## Functions
+
+Types:
+
+- <code><a href="./src/resources/agents/functions.ts">FunctionCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /v2/gen-ai/agents/{agent_uuid}/functions">client.agents.functions.<a href="./src/resources/agents/functions.ts">create</a>(agentUuid, { ...params }) -> FunctionCreateResponse</code>
 
 ## Versions
 

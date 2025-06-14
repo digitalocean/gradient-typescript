@@ -82,4 +82,21 @@ describe('resource apiKeys', () => {
   test.skip('delete: required and optional params', async () => {
     const response = await client.agents.apiKeys.delete('api_key_uuid', { agent_uuid: 'agent_uuid' });
   });
+
+  // skipped: tests are disabled for the time being
+  test.skip('regenerate: only required params', async () => {
+    const responsePromise = client.agents.apiKeys.regenerate('api_key_uuid', { agent_uuid: 'agent_uuid' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('regenerate: required and optional params', async () => {
+    const response = await client.agents.apiKeys.regenerate('api_key_uuid', { agent_uuid: 'agent_uuid' });
+  });
 });
