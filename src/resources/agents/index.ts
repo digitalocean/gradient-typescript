@@ -6,10 +6,12 @@ export {
   type APIKeyUpdateResponse,
   type APIKeyListResponse,
   type APIKeyDeleteResponse,
+  type APIKeyRegenerateResponse,
   type APIKeyCreateParams,
   type APIKeyUpdateParams,
   type APIKeyListParams,
   type APIKeyDeleteParams,
+  type APIKeyRegenerateParams,
 } from './api-keys';
 export {
   Agents,
@@ -26,7 +28,7 @@ export {
   type AgentListParams,
 } from './agents';
 export { ChildAgents } from './child-agents';
-export { Functions } from './functions';
+export { Functions, type FunctionCreateResponse, type FunctionCreateParams } from './functions';
 export { KnowledgeBases, type APILinkKnowledgeBaseOutput } from './knowledge-bases';
 export {
   Versions,
