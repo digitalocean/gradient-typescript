@@ -37,6 +37,22 @@ export class DataSources extends APIResource {
       ...options,
     });
   }
+
+  /**
+   * To delete a data source from a knowledge base, send a DELETE request to
+   * `/v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources/{data_source_uuid}`.
+   */
+  delete(
+    dataSourceUuid: string,
+    params: DataSourceDeleteParams,
+    options?: RequestOptions,
+  ): APIPromise<DataSourceDeleteResponse> {
+    const { knowledge_base_uuid } = params;
+    return this._client.delete(
+      path`/v2/gen-ai/knowledge_bases/${knowledge_base_uuid}/data_sources/${dataSourceUuid}`,
+      options,
+    );
+  }
 }
 
 /**
@@ -118,6 +134,12 @@ export interface DataSourceListResponse {
   meta?: VersionsAPI.APIMeta;
 }
 
+export interface DataSourceDeleteResponse {
+  data_source_uuid?: string;
+
+  knowledge_base_uuid?: string;
+}
+
 export interface DataSourceCreateParams {
   aws_data_source?: DataSourceCreateParams.AwsDataSource;
 
@@ -154,6 +176,13 @@ export interface DataSourceListParams {
   per_page?: number;
 }
 
+export interface DataSourceDeleteParams {
+  /**
+   * knowledge base id
+   */
+  knowledge_base_uuid: string;
+}
+
 export declare namespace DataSources {
   export {
     type APIFileUploadDataSource as APIFileUploadDataSource,
@@ -162,7 +191,9 @@ export declare namespace DataSources {
     type APIWebCrawlerDataSource as APIWebCrawlerDataSource,
     type DataSourceCreateResponse as DataSourceCreateResponse,
     type DataSourceListResponse as DataSourceListResponse,
+    type DataSourceDeleteResponse as DataSourceDeleteResponse,
     type DataSourceCreateParams as DataSourceCreateParams,
     type DataSourceListParams as DataSourceListParams,
+    type DataSourceDeleteParams as DataSourceDeleteParams,
   };
 }

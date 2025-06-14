@@ -14,12 +14,67 @@ export class KnowledgeBases extends APIResource {
   attach(agentUuid: string, options?: RequestOptions): APIPromise<APILinkKnowledgeBaseOutput> {
     return this._client.post(path`/v2/gen-ai/agents/${agentUuid}/knowledge_bases`, options);
   }
+
+  /**
+   * To attach a knowledge base to an agent, send a POST request to
+   * `/v2/gen-ai/agents/{agent_uuid}/knowledge_bases/{knowledge_base_uuid}`
+   */
+  attachSingle(
+    knowledgeBaseUuid: string,
+    params: KnowledgeBaseAttachSingleParams,
+    options?: RequestOptions,
+  ): APIPromise<APILinkKnowledgeBaseOutput> {
+    const { agent_uuid } = params;
+    return this._client.post(
+      path`/v2/gen-ai/agents/${agent_uuid}/knowledge_bases/${knowledgeBaseUuid}`,
+      options,
+    );
+  }
+
+  /**
+   * To detach a knowledge base from an agent, send a DELETE request to
+   * `/v2/gen-ai/agents/{agent_uuid}/knowledge_bases/{knowledge_base_uuid}`.
+   */
+  detach(
+    knowledgeBaseUuid: string,
+    params: KnowledgeBaseDetachParams,
+    options?: RequestOptions,
+  ): APIPromise<KnowledgeBaseDetachResponse> {
+    const { agent_uuid } = params;
+    return this._client.delete(
+      path`/v2/gen-ai/agents/${agent_uuid}/knowledge_bases/${knowledgeBaseUuid}`,
+      options,
+    );
+  }
 }
 
 export interface APILinkKnowledgeBaseOutput {
   agent?: AgentsAPI.APIAgent;
 }
 
+export interface KnowledgeBaseDetachResponse {
+  agent?: AgentsAPI.APIAgent;
+}
+
+export interface KnowledgeBaseAttachSingleParams {
+  /**
+   * A unique identifier for an agent.
+   */
+  agent_uuid: string;
+}
+
+export interface KnowledgeBaseDetachParams {
+  /**
+   * agent id
+   */
+  agent_uuid: string;
+}
+
 export declare namespace KnowledgeBases {
-  export { type APILinkKnowledgeBaseOutput as APILinkKnowledgeBaseOutput };
+  export {
+    type APILinkKnowledgeBaseOutput as APILinkKnowledgeBaseOutput,
+    type KnowledgeBaseDetachResponse as KnowledgeBaseDetachResponse,
+    type KnowledgeBaseAttachSingleParams as KnowledgeBaseAttachSingleParams,
+    type KnowledgeBaseDetachParams as KnowledgeBaseDetachParams,
+  };
 }

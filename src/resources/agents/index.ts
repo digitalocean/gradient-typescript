@@ -23,11 +23,26 @@ export {
   type APIOpenAIAPIKeyInfo,
   type APIRetrievalMethod,
   type AgentCreateResponse,
+  type AgentRetrieveResponse,
+  type AgentUpdateResponse,
   type AgentListResponse,
+  type AgentDeleteResponse,
+  type AgentUpdateStatusResponse,
   type AgentCreateParams,
+  type AgentUpdateParams,
   type AgentListParams,
+  type AgentUpdateStatusParams,
 } from './agents';
-export { ChildAgents } from './child-agents';
+export {
+  ChildAgents,
+  type ChildAgentUpdateResponse,
+  type ChildAgentDeleteResponse,
+  type ChildAgentAddResponse,
+  type ChildAgentViewResponse,
+  type ChildAgentUpdateParams,
+  type ChildAgentDeleteParams,
+  type ChildAgentAddParams,
+} from './child-agents';
 export {
   Functions,
   type FunctionCreateResponse,
@@ -37,7 +52,13 @@ export {
   type FunctionUpdateParams,
   type FunctionDeleteParams,
 } from './functions';
-export { KnowledgeBases, type APILinkKnowledgeBaseOutput } from './knowledge-bases';
+export {
+  KnowledgeBases,
+  type APILinkKnowledgeBaseOutput,
+  type KnowledgeBaseDetachResponse,
+  type KnowledgeBaseAttachSingleParams,
+  type KnowledgeBaseDetachParams,
+} from './knowledge-bases';
 export {
   Versions,
   type APILinks,

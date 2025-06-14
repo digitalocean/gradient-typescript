@@ -7,10 +7,10 @@ const client = new GradientAI({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource agents', () => {
+describe('resource keys', () => {
   // skipped: tests are disabled for the time being
   test.skip('create', async () => {
-    const responsePromise = client.agents.create({});
+    const responsePromise = client.providers.anthropic.keys.create({});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,7 +22,7 @@ describe('resource agents', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('retrieve', async () => {
-    const responsePromise = client.agents.retrieve('uuid');
+    const responsePromise = client.providers.anthropic.keys.retrieve('api_key_uuid');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -34,7 +34,7 @@ describe('resource agents', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update', async () => {
-    const responsePromise = client.agents.update('uuid', {});
+    const responsePromise = client.providers.anthropic.keys.update('api_key_uuid', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -46,7 +46,7 @@ describe('resource agents', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('list', async () => {
-    const responsePromise = client.agents.list();
+    const responsePromise = client.providers.anthropic.keys.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -60,13 +60,13 @@ describe('resource agents', () => {
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.agents.list({ only_deployed: true, page: 0, per_page: 0 }, { path: '/_stainless_unknown_path' }),
+      client.providers.anthropic.keys.list({ page: 0, per_page: 0 }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(GradientAI.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
   test.skip('delete', async () => {
-    const responsePromise = client.agents.delete('uuid');
+    const responsePromise = client.providers.anthropic.keys.delete('api_key_uuid');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -77,8 +77,8 @@ describe('resource agents', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('updateStatus', async () => {
-    const responsePromise = client.agents.updateStatus('uuid', {});
+  test.skip('listAgents', async () => {
+    const responsePromise = client.providers.anthropic.keys.listAgents('uuid');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -86,5 +86,17 @@ describe('resource agents', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('listAgents: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.providers.anthropic.keys.listAgents(
+        'uuid',
+        { page: 0, per_page: 0 },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(GradientAI.NotFoundError);
   });
 });

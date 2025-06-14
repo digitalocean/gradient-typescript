@@ -17,7 +17,16 @@ import {
   APIKeys,
 } from './api-keys';
 import * as ChildAgentsAPI from './child-agents';
-import { ChildAgents } from './child-agents';
+import {
+  ChildAgentAddParams,
+  ChildAgentAddResponse,
+  ChildAgentDeleteParams,
+  ChildAgentDeleteResponse,
+  ChildAgentUpdateParams,
+  ChildAgentUpdateResponse,
+  ChildAgentViewResponse,
+  ChildAgents,
+} from './child-agents';
 import * as FunctionsAPI from './functions';
 import {
   FunctionCreateParams,
@@ -29,7 +38,13 @@ import {
   Functions,
 } from './functions';
 import * as KnowledgeBasesAPI from './knowledge-bases';
-import { APILinkKnowledgeBaseOutput, KnowledgeBases } from './knowledge-bases';
+import {
+  APILinkKnowledgeBaseOutput,
+  KnowledgeBaseAttachSingleParams,
+  KnowledgeBaseDetachParams,
+  KnowledgeBaseDetachResponse,
+  KnowledgeBases,
+} from './knowledge-bases';
 import * as VersionsAPI from './versions';
 import {
   APILinks,
@@ -44,6 +59,7 @@ import * as APIKeysAPIKeysAPI from '../api-keys/api-keys';
 import * as KnowledgeBasesKnowledgeBasesAPI from '../knowledge-bases/knowledge-bases';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
+import { path } from '../../internal/utils/path';
 
 export class Agents extends APIResource {
   apiKeys: APIKeysAPI.APIKeys = new APIKeysAPI.APIKeys(this._client);
@@ -61,6 +77,26 @@ export class Agents extends APIResource {
   }
 
   /**
+   * To retrieve details of an agent, GET request to `/v2/gen-ai/agents/{uuid}`. The
+   * response body is a JSON object containing the agent.
+   */
+  retrieve(uuid: string, options?: RequestOptions): APIPromise<AgentRetrieveResponse> {
+    return this._client.get(path`/v2/gen-ai/agents/${uuid}`, options);
+  }
+
+  /**
+   * To update an agent, send a PUT request to `/v2/gen-ai/agents/{uuid}`. The
+   * response body is a JSON object containing the agent.
+   */
+  update(
+    pathUuid: string,
+    body: AgentUpdateParams,
+    options?: RequestOptions,
+  ): APIPromise<AgentUpdateResponse> {
+    return this._client.put(path`/v2/gen-ai/agents/${pathUuid}`, { body, ...options });
+  }
+
+  /**
    * To list all agents, send a GET request to `/v2/gen-ai/agents`.
    */
   list(
@@ -68,6 +104,25 @@ export class Agents extends APIResource {
     options?: RequestOptions,
   ): APIPromise<AgentListResponse> {
     return this._client.get('/v2/gen-ai/agents', { query, ...options });
+  }
+
+  /**
+   * To delete an agent, send a DELETE request to `/v2/gen-ai/agents/{uuid}`.
+   */
+  delete(uuid: string, options?: RequestOptions): APIPromise<AgentDeleteResponse> {
+    return this._client.delete(path`/v2/gen-ai/agents/${uuid}`, options);
+  }
+
+  /**
+   * Check whether an agent is public or private. To update the agent status, send a
+   * PUT request to `/v2/gen-ai/agents/{uuid}/deployment_visibility`.
+   */
+  updateStatus(
+    pathUuid: string,
+    body: AgentUpdateStatusParams,
+    options?: RequestOptions,
+  ): APIPromise<AgentUpdateStatusResponse> {
+    return this._client.put(path`/v2/gen-ai/agents/${pathUuid}/deployment_visibility`, { body, ...options });
   }
 }
 
@@ -406,6 +461,14 @@ export interface AgentCreateResponse {
   agent?: APIAgent;
 }
 
+export interface AgentRetrieveResponse {
+  agent?: APIAgent;
+}
+
+export interface AgentUpdateResponse {
+  agent?: APIAgent;
+}
+
 export interface AgentListResponse {
   agents?: Array<AgentListResponse.Agent>;
 
@@ -584,6 +647,14 @@ export namespace AgentListResponse {
   }
 }
 
+export interface AgentDeleteResponse {
+  agent?: APIAgent;
+}
+
+export interface AgentUpdateStatusResponse {
+  agent?: APIAgent;
+}
+
 export interface AgentCreateParams {
   anthropic_key_uuid?: string;
 
@@ -615,6 +686,62 @@ export interface AgentCreateParams {
   tags?: Array<string>;
 }
 
+export interface AgentUpdateParams {
+  anthropic_key_uuid?: string;
+
+  description?: string;
+
+  /**
+   * Agent instruction. Instructions help your agent to perform its job effectively.
+   * See
+   * [Write Effective Agent Instructions](https://docs.digitalocean.com/products/genai-platform/concepts/best-practices/#agent-instructions)
+   * for best practices.
+   */
+  instruction?: string;
+
+  k?: number;
+
+  /**
+   * Specifies the maximum number of tokens the model can process in a single input
+   * or output, set as a number between 1 and 512. This determines the length of each
+   * response.
+   */
+  max_tokens?: number;
+
+  /**
+   * Identifier for the foundation model.
+   */
+  model_uuid?: string;
+
+  name?: string;
+
+  open_ai_key_uuid?: string;
+
+  project_id?: string;
+
+  provide_citations?: boolean;
+
+  retrieval_method?: APIRetrievalMethod;
+
+  tags?: Array<string>;
+
+  /**
+   * Controls the model’s creativity, specified as a number between 0 and 1. Lower
+   * values produce more predictable and conservative responses, while higher values
+   * encourage creativity and variation.
+   */
+  temperature?: number;
+
+  /**
+   * Defines the cumulative probability threshold for word selection, specified as a
+   * number between 0 and 1. Higher values allow for more diverse outputs, while
+   * lower values ensure focused and coherent responses.
+   */
+  top_p?: number;
+
+  body_uuid?: string;
+}
+
 export interface AgentListParams {
   /**
    * only list agents that are deployed.
@@ -630,6 +757,12 @@ export interface AgentListParams {
    * items per page.
    */
   per_page?: number;
+}
+
+export interface AgentUpdateStatusParams {
+  body_uuid?: string;
+
+  visibility?: APIDeploymentVisibility;
 }
 
 Agents.APIKeys = APIKeys;
@@ -648,9 +781,15 @@ export declare namespace Agents {
     type APIOpenAIAPIKeyInfo as APIOpenAIAPIKeyInfo,
     type APIRetrievalMethod as APIRetrievalMethod,
     type AgentCreateResponse as AgentCreateResponse,
+    type AgentRetrieveResponse as AgentRetrieveResponse,
+    type AgentUpdateResponse as AgentUpdateResponse,
     type AgentListResponse as AgentListResponse,
+    type AgentDeleteResponse as AgentDeleteResponse,
+    type AgentUpdateStatusResponse as AgentUpdateStatusResponse,
     type AgentCreateParams as AgentCreateParams,
+    type AgentUpdateParams as AgentUpdateParams,
     type AgentListParams as AgentListParams,
+    type AgentUpdateStatusParams as AgentUpdateStatusParams,
   };
 
   export {
@@ -687,7 +826,22 @@ export declare namespace Agents {
     type VersionListParams as VersionListParams,
   };
 
-  export { KnowledgeBases as KnowledgeBases, type APILinkKnowledgeBaseOutput as APILinkKnowledgeBaseOutput };
+  export {
+    KnowledgeBases as KnowledgeBases,
+    type APILinkKnowledgeBaseOutput as APILinkKnowledgeBaseOutput,
+    type KnowledgeBaseDetachResponse as KnowledgeBaseDetachResponse,
+    type KnowledgeBaseAttachSingleParams as KnowledgeBaseAttachSingleParams,
+    type KnowledgeBaseDetachParams as KnowledgeBaseDetachParams,
+  };
 
-  export { ChildAgents as ChildAgents };
+  export {
+    ChildAgents as ChildAgents,
+    type ChildAgentUpdateResponse as ChildAgentUpdateResponse,
+    type ChildAgentDeleteResponse as ChildAgentDeleteResponse,
+    type ChildAgentAddResponse as ChildAgentAddResponse,
+    type ChildAgentViewResponse as ChildAgentViewResponse,
+    type ChildAgentUpdateParams as ChildAgentUpdateParams,
+    type ChildAgentDeleteParams as ChildAgentDeleteParams,
+    type ChildAgentAddParams as ChildAgentAddParams,
+  };
 }

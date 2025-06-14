@@ -2,7 +2,19 @@
 
 import { APIResource } from '../../../core/resource';
 import * as KeysAPI from './keys';
-import { Keys } from './keys';
+import {
+  KeyCreateParams,
+  KeyCreateResponse,
+  KeyDeleteResponse,
+  KeyListAgentsParams,
+  KeyListAgentsResponse,
+  KeyListParams,
+  KeyListResponse,
+  KeyRetrieveResponse,
+  KeyUpdateParams,
+  KeyUpdateResponse,
+  Keys,
+} from './keys';
 
 export class Anthropic extends APIResource {
   keys: KeysAPI.Keys = new KeysAPI.Keys(this._client);
@@ -11,5 +23,17 @@ export class Anthropic extends APIResource {
 Anthropic.Keys = Keys;
 
 export declare namespace Anthropic {
-  export { Keys as Keys };
+  export {
+    Keys as Keys,
+    type KeyCreateResponse as KeyCreateResponse,
+    type KeyRetrieveResponse as KeyRetrieveResponse,
+    type KeyUpdateResponse as KeyUpdateResponse,
+    type KeyListResponse as KeyListResponse,
+    type KeyDeleteResponse as KeyDeleteResponse,
+    type KeyListAgentsResponse as KeyListAgentsResponse,
+    type KeyCreateParams as KeyCreateParams,
+    type KeyUpdateParams as KeyUpdateParams,
+    type KeyListParams as KeyListParams,
+    type KeyListAgentsParams as KeyListAgentsParams,
+  };
 }
