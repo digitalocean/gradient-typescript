@@ -2,7 +2,7 @@
 
 import type { GradientAI } from '../client';
 
-export class APIResource {
+export abstract class APIResource {
   protected _client: GradientAI;
 
   constructor(client: GradientAI) {
