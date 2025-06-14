@@ -3,7 +3,13 @@
 import { APIResource } from '../../core/resource';
 import * as AgentsAPI from './agents';
 import * as APIKeysAPI from './api-keys';
-import { APIKeys } from './api-keys';
+import {
+  APIKeyCreateParams,
+  APIKeyCreateResponse,
+  APIKeyListParams,
+  APIKeyListResponse,
+  APIKeys,
+} from './api-keys';
 import * as ChildAgentsAPI from './child-agents';
 import { ChildAgents } from './child-agents';
 import * as FunctionsAPI from './functions';
@@ -633,7 +639,13 @@ export declare namespace Agents {
     type AgentListParams as AgentListParams,
   };
 
-  export { APIKeys as APIKeys };
+  export {
+    APIKeys as APIKeys,
+    type APIKeyCreateResponse as APIKeyCreateResponse,
+    type APIKeyListResponse as APIKeyListResponse,
+    type APIKeyCreateParams as APIKeyCreateParams,
+    type APIKeyListParams as APIKeyListParams,
+  };
 
   export { Functions as Functions };
 
