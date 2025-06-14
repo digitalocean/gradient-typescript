@@ -24,8 +24,26 @@ export {
   type ChatCreateCompletionParams,
 } from './chat';
 export { Embeddings, type EmbeddingCreateResponse, type EmbeddingCreateParams } from './embeddings';
-export { IndexingJobs, type APIIndexingJob } from './indexing-jobs';
-export { KnowledgeBases, type APIKnowledgeBase } from './knowledge-bases/knowledge-bases';
+export {
+  IndexingJobs,
+  type APIIndexingJob,
+  type IndexingJobCreateResponse,
+  type IndexingJobRetrieveResponse,
+  type IndexingJobListResponse,
+  type IndexingJobRetrieveDataSourcesResponse,
+  type IndexingJobUpdateCancelResponse,
+  type IndexingJobCreateParams,
+  type IndexingJobListParams,
+  type IndexingJobUpdateCancelParams,
+} from './indexing-jobs';
+export {
+  KnowledgeBases,
+  type APIKnowledgeBase,
+  type KnowledgeBaseCreateResponse,
+  type KnowledgeBaseListResponse,
+  type KnowledgeBaseCreateParams,
+  type KnowledgeBaseListParams,
+} from './knowledge-bases/knowledge-bases';
 export { Models, type Model, type ModelListResponse } from './models';
 export { Providers } from './providers/providers';
 export { Regions } from './regions';
