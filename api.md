@@ -19,6 +19,16 @@ Methods:
 
 ## APIKeys
 
+Types:
+
+- <code><a href="./src/resources/agents/api-keys.ts">APIKeyCreateResponse</a></code>
+- <code><a href="./src/resources/agents/api-keys.ts">APIKeyListResponse</a></code>
+
+Methods:
+
+- <code title="post /v2/gen-ai/agents/{agent_uuid}/api_keys">client.agents.apiKeys.<a href="./src/resources/agents/api-keys.ts">create</a>(agentUuid, { ...params }) -> APIKeyCreateResponse</code>
+- <code title="get /v2/gen-ai/agents/{agent_uuid}/api_keys">client.agents.apiKeys.<a href="./src/resources/agents/api-keys.ts">list</a>(agentUuid, { ...params }) -> APIKeyListResponse</code>
+
 ## Functions
 
 ## Versions
