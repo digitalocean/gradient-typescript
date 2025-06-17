@@ -21,8 +21,6 @@ import {
   Chat,
   ChatCompletionRequestMessageContentPartText,
   ChatCompletionTokenLogprob,
-  ChatCreateCompletionParams,
-  ChatCreateCompletionResponse,
 } from './resources/chat';
 import { EmbeddingCreateParams, EmbeddingCreateResponse, Embeddings } from './resources/embeddings';
 import {
@@ -848,8 +846,6 @@ export declare namespace GradientAI {
     Chat as Chat,
     type ChatCompletionRequestMessageContentPartText as ChatCompletionRequestMessageContentPartText,
     type ChatCompletionTokenLogprob as ChatCompletionTokenLogprob,
-    type ChatCreateCompletionResponse as ChatCreateCompletionResponse,
-    type ChatCreateCompletionParams as ChatCreateCompletionParams,
   };
 
   export {
