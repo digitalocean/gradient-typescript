@@ -35,7 +35,7 @@ import {
   IndexingJobUpdateCancelResponse,
   IndexingJobs,
 } from './resources/indexing-jobs';
-import { Model, ModelListResponse, Models } from './resources/models';
+import { Model, ModelListParams, ModelListResponse, Models } from './resources/models';
 import { RegionListParams, RegionListResponse, Regions } from './resources/regions';
 import {
   APIAgent,
@@ -854,5 +854,10 @@ export declare namespace GradientAI {
     type EmbeddingCreateParams as EmbeddingCreateParams,
   };
 
-  export { Models as Models, type Model as Model, type ModelListResponse as ModelListResponse };
+  export {
+    Models as Models,
+    type Model as Model,
+    type ModelListResponse as ModelListResponse,
+    type ModelListParams as ModelListParams,
+  };
 }
