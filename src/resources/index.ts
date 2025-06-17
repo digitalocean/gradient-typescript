@@ -32,8 +32,6 @@ export {
   Chat,
   type ChatCompletionRequestMessageContentPartText,
   type ChatCompletionTokenLogprob,
-  type ChatCreateCompletionResponse,
-  type ChatCreateCompletionParams,
 } from './chat';
 export { Embeddings, type EmbeddingCreateResponse, type EmbeddingCreateParams } from './embeddings';
 export {
