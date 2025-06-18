@@ -17,12 +17,7 @@ import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
-import {
-  Chat,
-  ChatCompletionRequestMessageContentPartText,
-  ChatCompletionTokenLogprob,
-} from './resources/chat';
-import { EmbeddingCreateParams, EmbeddingCreateResponse, Embeddings } from './resources/embeddings';
+import { Chat, ChatCompletionTokenLogprob } from './resources/chat';
 import {
   APIIndexingJob,
   IndexingJobCreateParams,
@@ -761,7 +756,6 @@ export class GradientAI {
   knowledgeBases: API.KnowledgeBases = new API.KnowledgeBases(this);
   apiKeys: API.APIKeys = new API.APIKeys(this);
   chat: API.Chat = new API.Chat(this);
-  embeddings: API.Embeddings = new API.Embeddings(this);
   models: API.Models = new API.Models(this);
 }
 GradientAI.Agents = Agents;
@@ -772,7 +766,6 @@ GradientAI.IndexingJobs = IndexingJobs;
 GradientAI.KnowledgeBases = KnowledgeBases;
 GradientAI.APIKeys = APIKeys;
 GradientAI.Chat = Chat;
-GradientAI.Embeddings = Embeddings;
 GradientAI.Models = Models;
 export declare namespace GradientAI {
   export type RequestOptions = Opts.RequestOptions;
@@ -842,17 +835,7 @@ export declare namespace GradientAI {
     type APIKeyListParams as APIKeyListParams,
   };
 
-  export {
-    Chat as Chat,
-    type ChatCompletionRequestMessageContentPartText as ChatCompletionRequestMessageContentPartText,
-    type ChatCompletionTokenLogprob as ChatCompletionTokenLogprob,
-  };
-
-  export {
-    Embeddings as Embeddings,
-    type EmbeddingCreateResponse as EmbeddingCreateResponse,
-    type EmbeddingCreateParams as EmbeddingCreateParams,
-  };
+  export { Chat as Chat, type ChatCompletionTokenLogprob as ChatCompletionTokenLogprob };
 
   export {
     Models as Models,

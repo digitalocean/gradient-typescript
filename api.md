@@ -152,14 +152,6 @@ Methods:
 
 ### Token
 
-Types:
-
-- <code><a href="./src/resources/auth/agents/token.ts">TokenCreateResponse</a></code>
-
-Methods:
-
-- <code title="post /v2/gen-ai/auth/agents/{agent_uuid}/token">client.auth.agents.token.<a href="./src/resources/auth/agents/token.ts">create</a>(agentUuid, { ...params }) -> TokenCreateResponse</code>
-
 # Regions
 
 Types:
@@ -261,18 +253,7 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/chat.ts">ChatCompletionRequestMessageContentPartText</a></code>
 - <code><a href="./src/resources/chat.ts">ChatCompletionTokenLogprob</a></code>
-
-# Embeddings
-
-Types:
-
-- <code><a href="./src/resources/embeddings.ts">EmbeddingCreateResponse</a></code>
-
-Methods:
-
-- <code title="post /embeddings">client.embeddings.<a href="./src/resources/embeddings.ts">create</a>({ ...params }) -> EmbeddingCreateResponse</code>
 
 # Models
 

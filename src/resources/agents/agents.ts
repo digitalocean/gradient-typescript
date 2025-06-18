@@ -73,7 +73,11 @@ export class Agents extends APIResource {
    * body contains a JSON object with the newly created agent object.
    */
   create(body: AgentCreateParams, options?: RequestOptions): APIPromise<AgentCreateResponse> {
-    return this._client.post('/v2/gen-ai/agents', { body, ...options });
+    return this._client.post('/v2/gen-ai/agents', {
+      body,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -81,7 +85,10 @@ export class Agents extends APIResource {
    * response body is a JSON object containing the agent.
    */
   retrieve(uuid: string, options?: RequestOptions): APIPromise<AgentRetrieveResponse> {
-    return this._client.get(path`/v2/gen-ai/agents/${uuid}`, options);
+    return this._client.get(path`/v2/gen-ai/agents/${uuid}`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -93,7 +100,11 @@ export class Agents extends APIResource {
     body: AgentUpdateParams,
     options?: RequestOptions,
   ): APIPromise<AgentUpdateResponse> {
-    return this._client.put(path`/v2/gen-ai/agents/${pathUuid}`, { body, ...options });
+    return this._client.put(path`/v2/gen-ai/agents/${pathUuid}`, {
+      body,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -103,14 +114,21 @@ export class Agents extends APIResource {
     query: AgentListParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<AgentListResponse> {
-    return this._client.get('/v2/gen-ai/agents', { query, ...options });
+    return this._client.get('/v2/gen-ai/agents', {
+      query,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
    * To delete an agent, send a DELETE request to `/v2/gen-ai/agents/{uuid}`.
    */
   delete(uuid: string, options?: RequestOptions): APIPromise<AgentDeleteResponse> {
-    return this._client.delete(path`/v2/gen-ai/agents/${uuid}`, options);
+    return this._client.delete(path`/v2/gen-ai/agents/${uuid}`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -122,7 +140,11 @@ export class Agents extends APIResource {
     body: AgentUpdateStatusParams,
     options?: RequestOptions,
   ): APIPromise<AgentUpdateStatusResponse> {
-    return this._client.put(path`/v2/gen-ai/agents/${pathUuid}/deployment_visibility`, { body, ...options });
+    return this._client.put(path`/v2/gen-ai/agents/${pathUuid}/deployment_visibility`, {
+      body,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 }
 
@@ -204,6 +226,8 @@ export interface APIAgent {
   user_id?: string;
 
   uuid?: string;
+
+  workspace?: unknown;
 }
 
 export namespace APIAgent {

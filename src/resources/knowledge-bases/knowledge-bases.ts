@@ -28,7 +28,11 @@ export class KnowledgeBases extends APIResource {
    * To create a knowledge base, send a POST request to `/v2/gen-ai/knowledge_bases`.
    */
   create(body: KnowledgeBaseCreateParams, options?: RequestOptions): APIPromise<KnowledgeBaseCreateResponse> {
-    return this._client.post('/v2/gen-ai/knowledge_bases', { body, ...options });
+    return this._client.post('/v2/gen-ai/knowledge_bases', {
+      body,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -36,7 +40,10 @@ export class KnowledgeBases extends APIResource {
    * `/v2/gen-ai/knowledge_bases/{uuid}`.
    */
   retrieve(uuid: string, options?: RequestOptions): APIPromise<KnowledgeBaseRetrieveResponse> {
-    return this._client.get(path`/v2/gen-ai/knowledge_bases/${uuid}`, options);
+    return this._client.get(path`/v2/gen-ai/knowledge_bases/${uuid}`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -48,7 +55,11 @@ export class KnowledgeBases extends APIResource {
     body: KnowledgeBaseUpdateParams,
     options?: RequestOptions,
   ): APIPromise<KnowledgeBaseUpdateResponse> {
-    return this._client.put(path`/v2/gen-ai/knowledge_bases/${pathUuid}`, { body, ...options });
+    return this._client.put(path`/v2/gen-ai/knowledge_bases/${pathUuid}`, {
+      body,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -58,7 +69,11 @@ export class KnowledgeBases extends APIResource {
     query: KnowledgeBaseListParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<KnowledgeBaseListResponse> {
-    return this._client.get('/v2/gen-ai/knowledge_bases', { query, ...options });
+    return this._client.get('/v2/gen-ai/knowledge_bases', {
+      query,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -66,7 +81,10 @@ export class KnowledgeBases extends APIResource {
    * `/v2/gen-ai/knowledge_bases/{uuid}`.
    */
   delete(uuid: string, options?: RequestOptions): APIPromise<KnowledgeBaseDeleteResponse> {
-    return this._client.delete(path`/v2/gen-ai/knowledge_bases/${uuid}`, options);
+    return this._client.delete(path`/v2/gen-ai/knowledge_bases/${uuid}`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 }
 
@@ -182,6 +200,8 @@ export interface KnowledgeBaseCreateParams {
 
 export namespace KnowledgeBaseCreateParams {
   export interface Datasource {
+    aws_data_source?: Datasource.AwsDataSource;
+
     bucket_name?: string;
 
     bucket_region?: string;
@@ -196,6 +216,20 @@ export namespace KnowledgeBaseCreateParams {
     spaces_data_source?: DataSourcesAPI.APISpacesDataSource;
 
     web_crawler_data_source?: DataSourcesAPI.APIWebCrawlerDataSource;
+  }
+
+  export namespace Datasource {
+    export interface AwsDataSource {
+      bucket_name?: string;
+
+      item_path?: string;
+
+      key_id?: string;
+
+      region?: string;
+
+      secret_key?: string;
+    }
   }
 }
 

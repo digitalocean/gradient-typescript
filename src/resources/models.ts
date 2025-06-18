@@ -13,7 +13,10 @@ export class Models extends APIResource {
    * the owner and permissioning.
    */
   retrieve(model: string, options?: RequestOptions): APIPromise<Model> {
-    return this._client.get(path`/models/${model}`, options);
+    return this._client.get(path`/models/${model}`, {
+      defaultBaseURL: 'https://inference.do-ai.run/v1',
+      ...options,
+    });
   }
 
   /**
@@ -23,7 +26,11 @@ export class Models extends APIResource {
     query: ModelListParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ModelListResponse> {
-    return this._client.get('/v2/gen-ai/models', { query, ...options });
+    return this._client.get('/v2/gen-ai/models', {
+      query,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 }
 

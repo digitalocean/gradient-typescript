@@ -17,7 +17,11 @@ export class APIKeys extends APIResource {
     body: APIKeyCreateParams,
     options?: RequestOptions,
   ): APIPromise<APIKeyCreateResponse> {
-    return this._client.post(path`/v2/gen-ai/agents/${agentUuid}/api_keys`, { body, ...options });
+    return this._client.post(path`/v2/gen-ai/agents/${agentUuid}/api_keys`, {
+      body,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -32,6 +36,7 @@ export class APIKeys extends APIResource {
     const { path_agent_uuid, ...body } = params;
     return this._client.put(path`/v2/gen-ai/agents/${path_agent_uuid}/api_keys/${apiKeyUuid}`, {
       body,
+      defaultBaseURL: 'https://api.digitalocean.com',
       ...options,
     });
   }
@@ -45,7 +50,11 @@ export class APIKeys extends APIResource {
     query: APIKeyListParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<APIKeyListResponse> {
-    return this._client.get(path`/v2/gen-ai/agents/${agentUuid}/api_keys`, { query, ...options });
+    return this._client.get(path`/v2/gen-ai/agents/${agentUuid}/api_keys`, {
+      query,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -58,7 +67,10 @@ export class APIKeys extends APIResource {
     options?: RequestOptions,
   ): APIPromise<APIKeyDeleteResponse> {
     const { agent_uuid } = params;
-    return this._client.delete(path`/v2/gen-ai/agents/${agent_uuid}/api_keys/${apiKeyUuid}`, options);
+    return this._client.delete(path`/v2/gen-ai/agents/${agent_uuid}/api_keys/${apiKeyUuid}`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -71,7 +83,10 @@ export class APIKeys extends APIResource {
     options?: RequestOptions,
   ): APIPromise<APIKeyRegenerateResponse> {
     const { agent_uuid } = params;
-    return this._client.put(path`/v2/gen-ai/agents/${agent_uuid}/api_keys/${apiKeyUuid}/regenerate`, options);
+    return this._client.put(path`/v2/gen-ai/agents/${agent_uuid}/api_keys/${apiKeyUuid}/regenerate`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 }
 

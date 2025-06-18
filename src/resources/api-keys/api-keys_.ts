@@ -11,7 +11,11 @@ export class APIKeys extends APIResource {
    * To create a model API key, send a POST request to `/v2/gen-ai/models/api_keys`.
    */
   create(body: APIKeyCreateParams, options?: RequestOptions): APIPromise<APIKeyCreateResponse> {
-    return this._client.post('/v2/gen-ai/models/api_keys', { body, ...options });
+    return this._client.post('/v2/gen-ai/models/api_keys', {
+      body,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -23,7 +27,11 @@ export class APIKeys extends APIResource {
     body: APIKeyUpdateParams,
     options?: RequestOptions,
   ): APIPromise<APIKeyUpdateResponse> {
-    return this._client.put(path`/v2/gen-ai/models/api_keys/${apiKeyUuid}`, { body, ...options });
+    return this._client.put(path`/v2/gen-ai/models/api_keys/${apiKeyUuid}`, {
+      body,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -33,7 +41,11 @@ export class APIKeys extends APIResource {
     query: APIKeyListParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<APIKeyListResponse> {
-    return this._client.get('/v2/gen-ai/models/api_keys', { query, ...options });
+    return this._client.get('/v2/gen-ai/models/api_keys', {
+      query,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -41,7 +53,10 @@ export class APIKeys extends APIResource {
    * `/v2/gen-ai/models/api_keys/{api_key_uuid}`.
    */
   delete(apiKeyUuid: string, options?: RequestOptions): APIPromise<APIKeyDeleteResponse> {
-    return this._client.delete(path`/v2/gen-ai/models/api_keys/${apiKeyUuid}`, options);
+    return this._client.delete(path`/v2/gen-ai/models/api_keys/${apiKeyUuid}`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -49,7 +64,10 @@ export class APIKeys extends APIResource {
    * `/v2/gen-ai/models/api_keys/{api_key_uuid}/regenerate`.
    */
   updateRegenerate(apiKeyUuid: string, options?: RequestOptions): APIPromise<APIKeyUpdateRegenerateResponse> {
-    return this._client.put(path`/v2/gen-ai/models/api_keys/${apiKeyUuid}/regenerate`, options);
+    return this._client.put(path`/v2/gen-ai/models/api_keys/${apiKeyUuid}/regenerate`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 }
 

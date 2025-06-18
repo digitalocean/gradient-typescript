@@ -4,18 +4,6 @@ import { APIResource } from '../core/resource';
 
 export class Chat extends APIResource {}
 
-export interface ChatCompletionRequestMessageContentPartText {
-  /**
-   * The text content.
-   */
-  text: string;
-
-  /**
-   * The type of the content part.
-   */
-  type: 'text';
-}
-
 export interface ChatCompletionTokenLogprob {
   /**
    * The token.
@@ -70,8 +58,5 @@ export namespace ChatCompletionTokenLogprob {
 }
 
 export declare namespace Chat {
-  export {
-    type ChatCompletionRequestMessageContentPartText as ChatCompletionRequestMessageContentPartText,
-    type ChatCompletionTokenLogprob as ChatCompletionTokenLogprob,
-  };
+  export { type ChatCompletionTokenLogprob as ChatCompletionTokenLogprob };
 }

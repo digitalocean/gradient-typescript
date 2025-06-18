@@ -12,7 +12,11 @@ export class Regions extends APIResource {
     query: RegionListParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<RegionListResponse> {
-    return this._client.get('/v2/gen-ai/regions', { query, ...options });
+    return this._client.get('/v2/gen-ai/regions', {
+      query,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 }
 

@@ -27,7 +27,11 @@ export class APIKeys extends APIResource {
     query: APIKeyListParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<APIKeyListResponse> {
-    return this._client.get('/v2/gen-ai/models', { query, ...options });
+    return this._client.get('/v2/gen-ai/models', {
+      query,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 }
 

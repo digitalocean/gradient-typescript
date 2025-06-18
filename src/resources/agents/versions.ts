@@ -16,7 +16,11 @@ export class Versions extends APIResource {
     body: VersionUpdateParams,
     options?: RequestOptions,
   ): APIPromise<VersionUpdateResponse> {
-    return this._client.put(path`/v2/gen-ai/agents/${pathUuid}/versions`, { body, ...options });
+    return this._client.put(path`/v2/gen-ai/agents/${pathUuid}/versions`, {
+      body,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -28,7 +32,11 @@ export class Versions extends APIResource {
     query: VersionListParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<VersionListResponse> {
-    return this._client.get(path`/v2/gen-ai/agents/${uuid}/versions`, { query, ...options });
+    return this._client.get(path`/v2/gen-ai/agents/${uuid}/versions`, {
+      query,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 }
 

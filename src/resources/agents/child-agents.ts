@@ -19,7 +19,7 @@ export class ChildAgents extends APIResource {
     const { path_parent_agent_uuid, ...body } = params;
     return this._client.put(
       path`/v2/gen-ai/agents/${path_parent_agent_uuid}/child_agents/${childAgentUuid}`,
-      { body, ...options },
+      { body, defaultBaseURL: 'https://api.digitalocean.com', ...options },
     );
   }
 
@@ -33,10 +33,10 @@ export class ChildAgents extends APIResource {
     options?: RequestOptions,
   ): APIPromise<ChildAgentDeleteResponse> {
     const { parent_agent_uuid } = params;
-    return this._client.delete(
-      path`/v2/gen-ai/agents/${parent_agent_uuid}/child_agents/${childAgentUuid}`,
-      options,
-    );
+    return this._client.delete(path`/v2/gen-ai/agents/${parent_agent_uuid}/child_agents/${childAgentUuid}`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -51,7 +51,7 @@ export class ChildAgents extends APIResource {
     const { path_parent_agent_uuid, ...body } = params;
     return this._client.post(
       path`/v2/gen-ai/agents/${path_parent_agent_uuid}/child_agents/${childAgentUuid}`,
-      { body, ...options },
+      { body, defaultBaseURL: 'https://api.digitalocean.com', ...options },
     );
   }
 
@@ -60,7 +60,10 @@ export class ChildAgents extends APIResource {
    * `/v2/gen-ai/agents/{uuid}/child_agents`.
    */
   view(uuid: string, options?: RequestOptions): APIPromise<ChildAgentViewResponse> {
-    return this._client.get(path`/v2/gen-ai/agents/${uuid}/child_agents`, options);
+    return this._client.get(path`/v2/gen-ai/agents/${uuid}/child_agents`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 }
 
