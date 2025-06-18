@@ -1,6 +1,6 @@
 # Gradient AI TypeScript API Library
 
-[![NPM version](https://img.shields.io/npm/v/gradientai.svg)](https://npmjs.org/package/gradientai) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/gradientai)
+[![NPM version](<https://img.shields.io/npm/v/gradientai.svg?label=npm%20(stable)>)](https://npmjs.org/package/gradientai) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/gradientai)
 
 This library provides convenient access to the Gradient AI REST API from server-side TypeScript or JavaScript.
 
