@@ -146,12 +146,6 @@ Methods:
 - <code title="delete /v2/gen-ai/openai/keys/{api_key_uuid}">client.providers.openai.keys.<a href="./src/resources/providers/openai/keys.ts">delete</a>(apiKeyUuid) -> KeyDeleteResponse</code>
 - <code title="get /v2/gen-ai/openai/keys/{uuid}/agents">client.providers.openai.keys.<a href="./src/resources/providers/openai/keys.ts">retrieveAgents</a>(uuid, { ...params }) -> KeyRetrieveAgentsResponse</code>
 
-# Auth
-
-## Agents
-
-### Token
-
 # Regions
 
 Types:
@@ -251,9 +245,15 @@ Methods:
 
 # Chat
 
+## Completions
+
 Types:
 
-- <code><a href="./src/resources/chat.ts">ChatCompletionTokenLogprob</a></code>
+- <code><a href="./src/resources/chat/completions.ts">CompletionCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /chat/completions">client.chat.completions.<a href="./src/resources/chat/completions.ts">create</a>({ ...params }) -> CompletionCreateResponse</code>
 
 # Models
 

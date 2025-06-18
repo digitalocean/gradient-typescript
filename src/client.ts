@@ -17,7 +17,6 @@ import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
-import { Chat, ChatCompletionTokenLogprob } from './resources/chat';
 import {
   APIIndexingJob,
   IndexingJobCreateParams,
@@ -59,7 +58,7 @@ import {
   APIKeys,
   APIModelVersion,
 } from './resources/api-keys/api-keys';
-import { Auth } from './resources/auth/auth';
+import { Chat } from './resources/chat/chat';
 import {
   APIKnowledgeBase,
   KnowledgeBaseCreateParams,
@@ -750,7 +749,6 @@ export class GradientAI {
 
   agents: API.Agents = new API.Agents(this);
   providers: API.Providers = new API.Providers(this);
-  auth: API.Auth = new API.Auth(this);
   regions: API.Regions = new API.Regions(this);
   indexingJobs: API.IndexingJobs = new API.IndexingJobs(this);
   knowledgeBases: API.KnowledgeBases = new API.KnowledgeBases(this);
@@ -760,7 +758,6 @@ export class GradientAI {
 }
 GradientAI.Agents = Agents;
 GradientAI.Providers = Providers;
-GradientAI.Auth = Auth;
 GradientAI.Regions = Regions;
 GradientAI.IndexingJobs = IndexingJobs;
 GradientAI.KnowledgeBases = KnowledgeBases;
@@ -792,8 +789,6 @@ export declare namespace GradientAI {
   };
 
   export { Providers as Providers };
-
-  export { Auth as Auth };
 
   export {
     Regions as Regions,
@@ -835,7 +830,7 @@ export declare namespace GradientAI {
     type APIKeyListParams as APIKeyListParams,
   };
 
-  export { Chat as Chat, type ChatCompletionTokenLogprob as ChatCompletionTokenLogprob };
+  export { Chat as Chat };
 
   export {
     Models as Models,
