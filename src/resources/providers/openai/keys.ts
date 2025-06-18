@@ -12,7 +12,11 @@ export class Keys extends APIResource {
    * To create an OpenAI API key, send a POST request to `/v2/gen-ai/openai/keys`.
    */
   create(body: KeyCreateParams, options?: RequestOptions): APIPromise<KeyCreateResponse> {
-    return this._client.post('/v2/gen-ai/openai/keys', { body, ...options });
+    return this._client.post('/v2/gen-ai/openai/keys', {
+      body,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -20,7 +24,10 @@ export class Keys extends APIResource {
    * `/v2/gen-ai/openai/keys/{api_key_uuid}`.
    */
   retrieve(apiKeyUuid: string, options?: RequestOptions): APIPromise<KeyRetrieveResponse> {
-    return this._client.get(path`/v2/gen-ai/openai/keys/${apiKeyUuid}`, options);
+    return this._client.get(path`/v2/gen-ai/openai/keys/${apiKeyUuid}`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -28,14 +35,22 @@ export class Keys extends APIResource {
    * `/v2/gen-ai/openai/keys/{api_key_uuid}`.
    */
   update(apiKeyUuid: string, body: KeyUpdateParams, options?: RequestOptions): APIPromise<KeyUpdateResponse> {
-    return this._client.put(path`/v2/gen-ai/openai/keys/${apiKeyUuid}`, { body, ...options });
+    return this._client.put(path`/v2/gen-ai/openai/keys/${apiKeyUuid}`, {
+      body,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
    * To list all OpenAI API keys, send a GET request to `/v2/gen-ai/openai/keys`.
    */
   list(query: KeyListParams | null | undefined = {}, options?: RequestOptions): APIPromise<KeyListResponse> {
-    return this._client.get('/v2/gen-ai/openai/keys', { query, ...options });
+    return this._client.get('/v2/gen-ai/openai/keys', {
+      query,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -43,7 +58,10 @@ export class Keys extends APIResource {
    * `/v2/gen-ai/openai/keys/{api_key_uuid}`.
    */
   delete(apiKeyUuid: string, options?: RequestOptions): APIPromise<KeyDeleteResponse> {
-    return this._client.delete(path`/v2/gen-ai/openai/keys/${apiKeyUuid}`, options);
+    return this._client.delete(path`/v2/gen-ai/openai/keys/${apiKeyUuid}`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -54,7 +72,11 @@ export class Keys extends APIResource {
     query: KeyRetrieveAgentsParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<KeyRetrieveAgentsResponse> {
-    return this._client.get(path`/v2/gen-ai/openai/keys/${uuid}/agents`, { query, ...options });
+    return this._client.get(path`/v2/gen-ai/openai/keys/${uuid}/agents`, {
+      query,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 }
 

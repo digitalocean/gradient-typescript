@@ -28,12 +28,7 @@ export {
   type AgentUpdateStatusParams,
 } from './agents/agents';
 export { Auth } from './auth/auth';
-export {
-  Chat,
-  type ChatCompletionRequestMessageContentPartText,
-  type ChatCompletionTokenLogprob,
-} from './chat';
-export { Embeddings, type EmbeddingCreateResponse, type EmbeddingCreateParams } from './embeddings';
+export { Chat, type ChatCompletionTokenLogprob } from './chat';
 export {
   IndexingJobs,
   type APIIndexingJob,

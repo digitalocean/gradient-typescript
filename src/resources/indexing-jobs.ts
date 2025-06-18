@@ -12,7 +12,11 @@ export class IndexingJobs extends APIResource {
    * `/v2/gen-ai/indexing_jobs`.
    */
   create(body: IndexingJobCreateParams, options?: RequestOptions): APIPromise<IndexingJobCreateResponse> {
-    return this._client.post('/v2/gen-ai/indexing_jobs', { body, ...options });
+    return this._client.post('/v2/gen-ai/indexing_jobs', {
+      body,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -20,7 +24,10 @@ export class IndexingJobs extends APIResource {
    * `/v2/gen-ai/indexing_jobs/{uuid}`.
    */
   retrieve(uuid: string, options?: RequestOptions): APIPromise<IndexingJobRetrieveResponse> {
-    return this._client.get(path`/v2/gen-ai/indexing_jobs/${uuid}`, options);
+    return this._client.get(path`/v2/gen-ai/indexing_jobs/${uuid}`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -31,7 +38,11 @@ export class IndexingJobs extends APIResource {
     query: IndexingJobListParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<IndexingJobListResponse> {
-    return this._client.get('/v2/gen-ai/indexing_jobs', { query, ...options });
+    return this._client.get('/v2/gen-ai/indexing_jobs', {
+      query,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -42,7 +53,10 @@ export class IndexingJobs extends APIResource {
     indexingJobUuid: string,
     options?: RequestOptions,
   ): APIPromise<IndexingJobRetrieveDataSourcesResponse> {
-    return this._client.get(path`/v2/gen-ai/indexing_jobs/${indexingJobUuid}/data_sources`, options);
+    return this._client.get(path`/v2/gen-ai/indexing_jobs/${indexingJobUuid}/data_sources`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -54,7 +68,11 @@ export class IndexingJobs extends APIResource {
     body: IndexingJobUpdateCancelParams,
     options?: RequestOptions,
   ): APIPromise<IndexingJobUpdateCancelResponse> {
-    return this._client.put(path`/v2/gen-ai/indexing_jobs/${pathUuid}/cancel`, { body, ...options });
+    return this._client.put(path`/v2/gen-ai/indexing_jobs/${pathUuid}/cancel`, {
+      body,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 }
 

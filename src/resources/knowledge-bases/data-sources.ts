@@ -19,6 +19,7 @@ export class DataSources extends APIResource {
   ): APIPromise<DataSourceCreateResponse> {
     return this._client.post(path`/v2/gen-ai/knowledge_bases/${knowledgeBaseUuid}/data_sources`, {
       body,
+      defaultBaseURL: 'https://api.digitalocean.com',
       ...options,
     });
   }
@@ -34,6 +35,7 @@ export class DataSources extends APIResource {
   ): APIPromise<DataSourceListResponse> {
     return this._client.get(path`/v2/gen-ai/knowledge_bases/${knowledgeBaseUuid}/data_sources`, {
       query,
+      defaultBaseURL: 'https://api.digitalocean.com',
       ...options,
     });
   }
@@ -50,7 +52,7 @@ export class DataSources extends APIResource {
     const { knowledge_base_uuid } = params;
     return this._client.delete(
       path`/v2/gen-ai/knowledge_bases/${knowledge_base_uuid}/data_sources/${dataSourceUuid}`,
-      options,
+      { defaultBaseURL: 'https://api.digitalocean.com', ...options },
     );
   }
 }
@@ -67,6 +69,8 @@ export interface APIFileUploadDataSource {
 }
 
 export interface APIKnowledgeBaseDataSource {
+  aws_data_source?: APIKnowledgeBaseDataSource.AwsDataSource;
+
   bucket_name?: string;
 
   created_at?: string;
@@ -89,6 +93,16 @@ export interface APIKnowledgeBaseDataSource {
   uuid?: string;
 
   web_crawler_data_source?: APIWebCrawlerDataSource;
+}
+
+export namespace APIKnowledgeBaseDataSource {
+  export interface AwsDataSource {
+    bucket_name?: string;
+
+    item_path?: string;
+
+    region?: string;
+  }
 }
 
 export interface APISpacesDataSource {
