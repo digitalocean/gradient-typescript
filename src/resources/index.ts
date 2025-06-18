@@ -27,8 +27,7 @@ export {
   type AgentListParams,
   type AgentUpdateStatusParams,
 } from './agents/agents';
-export { Auth } from './auth/auth';
-export { Chat, type ChatCompletionTokenLogprob } from './chat';
+export { Chat } from './chat/chat';
 export {
   IndexingJobs,
   type APIIndexingJob,
