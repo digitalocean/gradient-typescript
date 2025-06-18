@@ -2,23 +2,10 @@
 
 import { APIResource } from '../core/resource';
 import * as VersionsAPI from './agents/versions';
-import * as APIKeysAPI from './api-keys/api-keys';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
-import { path } from '../internal/utils/path';
 
 export class Models extends APIResource {
-  /**
-   * Retrieves a model instance, providing basic information about the model such as
-   * the owner and permissioning.
-   */
-  retrieve(model: string, options?: RequestOptions): APIPromise<Model> {
-    return this._client.get(path`/models/${model}`, {
-      defaultBaseURL: 'https://inference.do-ai.run/v1',
-      ...options,
-    });
-  }
-
   /**
    * To list all models, send a GET request to `/v2/gen-ai/models`.
    */
@@ -69,7 +56,7 @@ export interface ModelListResponse {
 
 export namespace ModelListResponse {
   export interface Model {
-    agreement?: APIKeysAPI.APIAgreement;
+    agreement?: Model.Agreement;
 
     created_at?: string;
 
@@ -87,7 +74,27 @@ export namespace ModelListResponse {
 
     uuid?: string;
 
-    version?: APIKeysAPI.APIModelVersion;
+    version?: Model.Version;
+  }
+
+  export namespace Model {
+    export interface Agreement {
+      description?: string;
+
+      name?: string;
+
+      url?: string;
+
+      uuid?: string;
+    }
+
+    export interface Version {
+      major?: number;
+
+      minor?: number;
+
+      patch?: number;
+    }
   }
 }
 

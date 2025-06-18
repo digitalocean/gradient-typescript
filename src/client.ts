@@ -18,6 +18,18 @@ import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
 import {
+  APIKeyCreateParams,
+  APIKeyCreateResponse,
+  APIKeyDeleteResponse,
+  APIKeyListParams,
+  APIKeyListResponse,
+  APIKeyUpdateParams,
+  APIKeyUpdateRegenerateResponse,
+  APIKeyUpdateResponse,
+  APIKeys,
+  APIModelAPIKeyInfo,
+} from './resources/api-keys';
+import {
   APIIndexingJob,
   IndexingJobCreateParams,
   IndexingJobCreateResponse,
@@ -51,13 +63,6 @@ import {
   AgentUpdateStatusResponse,
   Agents,
 } from './resources/agents/agents';
-import {
-  APIAgreement,
-  APIKeyListParams,
-  APIKeyListResponse,
-  APIKeys,
-  APIModelVersion,
-} from './resources/api-keys/api-keys';
 import { Chat } from './resources/chat/chat';
 import {
   APIKnowledgeBase,
@@ -824,9 +829,14 @@ export declare namespace GradientAI {
 
   export {
     APIKeys as APIKeys,
-    type APIAgreement as APIAgreement,
-    type APIModelVersion as APIModelVersion,
+    type APIModelAPIKeyInfo as APIModelAPIKeyInfo,
+    type APIKeyCreateResponse as APIKeyCreateResponse,
+    type APIKeyUpdateResponse as APIKeyUpdateResponse,
     type APIKeyListResponse as APIKeyListResponse,
+    type APIKeyDeleteResponse as APIKeyDeleteResponse,
+    type APIKeyUpdateRegenerateResponse as APIKeyUpdateRegenerateResponse,
+    type APIKeyCreateParams as APIKeyCreateParams,
+    type APIKeyUpdateParams as APIKeyUpdateParams,
     type APIKeyListParams as APIKeyListParams,
   };
 

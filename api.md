@@ -216,32 +216,20 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/api-keys/api-keys.ts">APIAgreement</a></code>
-- <code><a href="./src/resources/api-keys/api-keys.ts">APIModelVersion</a></code>
-- <code><a href="./src/resources/api-keys/api-keys.ts">APIKeyListResponse</a></code>
+- <code><a href="./src/resources/api-keys.ts">APIModelAPIKeyInfo</a></code>
+- <code><a href="./src/resources/api-keys.ts">APIKeyCreateResponse</a></code>
+- <code><a href="./src/resources/api-keys.ts">APIKeyUpdateResponse</a></code>
+- <code><a href="./src/resources/api-keys.ts">APIKeyListResponse</a></code>
+- <code><a href="./src/resources/api-keys.ts">APIKeyDeleteResponse</a></code>
+- <code><a href="./src/resources/api-keys.ts">APIKeyUpdateRegenerateResponse</a></code>
 
 Methods:
 
-- <code title="get /v2/gen-ai/models">client.apiKeys.<a href="./src/resources/api-keys/api-keys.ts">list</a>({ ...params }) -> APIKeyListResponse</code>
-
-## APIKeys
-
-Types:
-
-- <code><a href="./src/resources/api-keys/api-keys_.ts">APIModelAPIKeyInfo</a></code>
-- <code><a href="./src/resources/api-keys/api-keys_.ts">APIKeyCreateResponse</a></code>
-- <code><a href="./src/resources/api-keys/api-keys_.ts">APIKeyUpdateResponse</a></code>
-- <code><a href="./src/resources/api-keys/api-keys_.ts">APIKeyListResponse</a></code>
-- <code><a href="./src/resources/api-keys/api-keys_.ts">APIKeyDeleteResponse</a></code>
-- <code><a href="./src/resources/api-keys/api-keys_.ts">APIKeyUpdateRegenerateResponse</a></code>
-
-Methods:
-
-- <code title="post /v2/gen-ai/models/api_keys">client.apiKeys.apiKeys.<a href="./src/resources/api-keys/api-keys_.ts">create</a>({ ...params }) -> APIKeyCreateResponse</code>
-- <code title="put /v2/gen-ai/models/api_keys/{api_key_uuid}">client.apiKeys.apiKeys.<a href="./src/resources/api-keys/api-keys_.ts">update</a>(apiKeyUuid, { ...params }) -> APIKeyUpdateResponse</code>
-- <code title="get /v2/gen-ai/models/api_keys">client.apiKeys.apiKeys.<a href="./src/resources/api-keys/api-keys_.ts">list</a>({ ...params }) -> APIKeyListResponse</code>
-- <code title="delete /v2/gen-ai/models/api_keys/{api_key_uuid}">client.apiKeys.apiKeys.<a href="./src/resources/api-keys/api-keys_.ts">delete</a>(apiKeyUuid) -> APIKeyDeleteResponse</code>
-- <code title="put /v2/gen-ai/models/api_keys/{api_key_uuid}/regenerate">client.apiKeys.apiKeys.<a href="./src/resources/api-keys/api-keys_.ts">updateRegenerate</a>(apiKeyUuid) -> APIKeyUpdateRegenerateResponse</code>
+- <code title="post /v2/gen-ai/models/api_keys">client.apiKeys.<a href="./src/resources/api-keys.ts">create</a>({ ...params }) -> APIKeyCreateResponse</code>
+- <code title="put /v2/gen-ai/models/api_keys/{api_key_uuid}">client.apiKeys.<a href="./src/resources/api-keys.ts">update</a>(apiKeyUuid, { ...params }) -> APIKeyUpdateResponse</code>
+- <code title="get /v2/gen-ai/models/api_keys">client.apiKeys.<a href="./src/resources/api-keys.ts">list</a>({ ...params }) -> APIKeyListResponse</code>
+- <code title="delete /v2/gen-ai/models/api_keys/{api_key_uuid}">client.apiKeys.<a href="./src/resources/api-keys.ts">delete</a>(apiKeyUuid) -> APIKeyDeleteResponse</code>
+- <code title="put /v2/gen-ai/models/api_keys/{api_key_uuid}/regenerate">client.apiKeys.<a href="./src/resources/api-keys.ts">updateRegenerate</a>(apiKeyUuid) -> APIKeyUpdateRegenerateResponse</code>
 
 # Chat
 
@@ -264,5 +252,4 @@ Types:
 
 Methods:
 
-- <code title="get /models/{model}">client.models.<a href="./src/resources/models.ts">retrieve</a>(model) -> Model</code>
 - <code title="get /v2/gen-ai/models">client.models.<a href="./src/resources/models.ts">list</a>({ ...params }) -> ModelListResponse</code>

@@ -2,11 +2,16 @@
 
 export {
   APIKeys,
-  type APIAgreement,
-  type APIModelVersion,
+  type APIModelAPIKeyInfo,
+  type APIKeyCreateResponse,
+  type APIKeyUpdateResponse,
   type APIKeyListResponse,
+  type APIKeyDeleteResponse,
+  type APIKeyUpdateRegenerateResponse,
+  type APIKeyCreateParams,
+  type APIKeyUpdateParams,
   type APIKeyListParams,
-} from './api-keys/api-keys';
+} from './api-keys';
 export {
   Agents,
   type APIAgent,

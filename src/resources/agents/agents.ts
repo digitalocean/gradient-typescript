@@ -55,7 +55,6 @@ import {
   VersionUpdateResponse,
   Versions,
 } from './versions';
-import * as APIKeysAPIKeysAPI from '../api-keys/api-keys';
 import * as KnowledgeBasesKnowledgeBasesAPI from '../knowledge-bases/knowledge-bases';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
@@ -419,7 +418,7 @@ export type APIDeploymentVisibility =
   | 'VISIBILITY_PRIVATE';
 
 export interface APIModel {
-  agreement?: APIKeysAPIKeysAPI.APIAgreement;
+  agreement?: APIModel.Agreement;
 
   created_at?: string;
 
@@ -455,7 +454,27 @@ export interface APIModel {
 
   uuid?: string;
 
-  version?: APIKeysAPIKeysAPI.APIModelVersion;
+  version?: APIModel.Version;
+}
+
+export namespace APIModel {
+  export interface Agreement {
+    description?: string;
+
+    name?: string;
+
+    url?: string;
+
+    uuid?: string;
+  }
+
+  export interface Version {
+    major?: number;
+
+    minor?: number;
+
+    patch?: number;
+  }
 }
 
 export interface APIOpenAIAPIKeyInfo {
