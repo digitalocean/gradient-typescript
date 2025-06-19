@@ -10,7 +10,7 @@ const client = new GradientAI({
 describe('resource apiKeys', () => {
   // skipped: tests are disabled for the time being
   test.skip('create', async () => {
-    const responsePromise = client.apiKeys.create({});
+    const responsePromise = client.inference.apiKeys.create({});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,7 +22,7 @@ describe('resource apiKeys', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update', async () => {
-    const responsePromise = client.apiKeys.update('api_key_uuid', {});
+    const responsePromise = client.inference.apiKeys.update('api_key_uuid', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -34,7 +34,7 @@ describe('resource apiKeys', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('list', async () => {
-    const responsePromise = client.apiKeys.list();
+    const responsePromise = client.inference.apiKeys.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -48,13 +48,13 @@ describe('resource apiKeys', () => {
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.apiKeys.list({ page: 0, per_page: 0 }, { path: '/_stainless_unknown_path' }),
+      client.inference.apiKeys.list({ page: 0, per_page: 0 }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(GradientAI.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
   test.skip('delete', async () => {
-    const responsePromise = client.apiKeys.delete('api_key_uuid');
+    const responsePromise = client.inference.apiKeys.delete('api_key_uuid');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -66,7 +66,7 @@ describe('resource apiKeys', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('updateRegenerate', async () => {
-    const responsePromise = client.apiKeys.updateRegenerate('api_key_uuid');
+    const responsePromise = client.inference.apiKeys.updateRegenerate('api_key_uuid');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

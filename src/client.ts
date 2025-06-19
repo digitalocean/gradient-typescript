@@ -18,18 +18,6 @@ import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
 import {
-  APIKeyCreateParams,
-  APIKeyCreateResponse,
-  APIKeyDeleteResponse,
-  APIKeyListParams,
-  APIKeyListResponse,
-  APIKeyUpdateParams,
-  APIKeyUpdateRegenerateResponse,
-  APIKeyUpdateResponse,
-  APIKeys,
-  APIModelAPIKeyInfo,
-} from './resources/api-keys';
-import {
   APIIndexingJob,
   IndexingJobCreateParams,
   IndexingJobCreateResponse,
@@ -64,6 +52,7 @@ import {
   Agents,
 } from './resources/agents/agents';
 import { Chat } from './resources/chat/chat';
+import { Inference } from './resources/inference/inference';
 import {
   APIKnowledgeBase,
   KnowledgeBaseCreateParams,
@@ -757,8 +746,8 @@ export class GradientAI {
   regions: API.Regions = new API.Regions(this);
   indexingJobs: API.IndexingJobs = new API.IndexingJobs(this);
   knowledgeBases: API.KnowledgeBases = new API.KnowledgeBases(this);
-  apiKeys: API.APIKeys = new API.APIKeys(this);
   chat: API.Chat = new API.Chat(this);
+  inference: API.Inference = new API.Inference(this);
   models: API.Models = new API.Models(this);
 }
 GradientAI.Agents = Agents;
@@ -766,8 +755,8 @@ GradientAI.Providers = Providers;
 GradientAI.Regions = Regions;
 GradientAI.IndexingJobs = IndexingJobs;
 GradientAI.KnowledgeBases = KnowledgeBases;
-GradientAI.APIKeys = APIKeys;
 GradientAI.Chat = Chat;
+GradientAI.Inference = Inference;
 GradientAI.Models = Models;
 export declare namespace GradientAI {
   export type RequestOptions = Opts.RequestOptions;
@@ -827,20 +816,9 @@ export declare namespace GradientAI {
     type KnowledgeBaseListParams as KnowledgeBaseListParams,
   };
 
-  export {
-    APIKeys as APIKeys,
-    type APIModelAPIKeyInfo as APIModelAPIKeyInfo,
-    type APIKeyCreateResponse as APIKeyCreateResponse,
-    type APIKeyUpdateResponse as APIKeyUpdateResponse,
-    type APIKeyListResponse as APIKeyListResponse,
-    type APIKeyDeleteResponse as APIKeyDeleteResponse,
-    type APIKeyUpdateRegenerateResponse as APIKeyUpdateRegenerateResponse,
-    type APIKeyCreateParams as APIKeyCreateParams,
-    type APIKeyUpdateParams as APIKeyUpdateParams,
-    type APIKeyListParams as APIKeyListParams,
-  };
-
   export { Chat as Chat };
+
+  export { Inference as Inference };
 
   export {
     Models as Models,
