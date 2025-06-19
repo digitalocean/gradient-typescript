@@ -249,12 +249,12 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/inference/models.ts">ModelRetrieveResponse</a></code>
+- <code><a href="./src/resources/inference/models.ts">Model</a></code>
 - <code><a href="./src/resources/inference/models.ts">ModelListResponse</a></code>
 
 Methods:
 
-- <code title="get /models/{model}">client.inference.models.<a href="./src/resources/inference/models.ts">retrieve</a>(model) -> ModelRetrieveResponse</code>
+- <code title="get /models/{model}">client.inference.models.<a href="./src/resources/inference/models.ts">retrieve</a>(model) -> Model</code>
 - <code title="get /models">client.inference.models.<a href="./src/resources/inference/models.ts">list</a>() -> ModelListResponse</code>
 
 # Models
