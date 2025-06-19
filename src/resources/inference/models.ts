@@ -10,7 +10,7 @@ export class Models extends APIResource {
    * Retrieves a model instance, providing basic information about the model such as
    * the owner and permissioning.
    */
-  retrieve(model: string, options?: RequestOptions): APIPromise<ModelRetrieveResponse> {
+  retrieve(model: string, options?: RequestOptions): APIPromise<Model> {
     return this._client.get(path`/models/${model}`, {
       defaultBaseURL: 'https://inference.do-ai.run/v1',
       ...options,
@@ -29,7 +29,7 @@ export class Models extends APIResource {
 /**
  * Describes a model offering that can be used with the API.
  */
-export interface ModelRetrieveResponse {
+export interface Model {
   /**
    * The model identifier, which can be referenced in the API endpoints.
    */
@@ -52,38 +52,11 @@ export interface ModelRetrieveResponse {
 }
 
 export interface ModelListResponse {
-  data: Array<ModelListResponse.Data>;
+  data: Array<Model>;
 
   object: 'list';
 }
 
-export namespace ModelListResponse {
-  /**
-   * Describes a model offering that can be used with the API.
-   */
-  export interface Data {
-    /**
-     * The model identifier, which can be referenced in the API endpoints.
-     */
-    id: string;
-
-    /**
-     * The Unix timestamp (in seconds) when the model was created.
-     */
-    created: number;
-
-    /**
-     * The object type, which is always "model".
-     */
-    object: 'model';
-
-    /**
-     * The organization that owns the model.
-     */
-    owned_by: string;
-  }
-}
-
 export declare namespace Models {
-  export { type ModelRetrieveResponse as ModelRetrieveResponse, type ModelListResponse as ModelListResponse };
+  export { type Model as Model, type ModelListResponse as ModelListResponse };
 }
