@@ -21,29 +21,46 @@ export class Models extends APIResource {
   }
 }
 
-/**
- * Describes a model offering that can be used with the API.
- */
 export interface Model {
-  /**
-   * The model identifier, which can be referenced in the API endpoints.
-   */
-  id: string;
+  agreement?: Model.Agreement;
 
-  /**
-   * The Unix timestamp (in seconds) when the model was created.
-   */
-  created: number;
+  created_at?: string;
 
-  /**
-   * The object type, which is always "model".
-   */
-  object: 'model';
+  is_foundational?: boolean;
 
-  /**
-   * The organization that owns the model.
-   */
-  owned_by: string;
+  name?: string;
+
+  parent_uuid?: string;
+
+  updated_at?: string;
+
+  upload_complete?: boolean;
+
+  url?: string;
+
+  uuid?: string;
+
+  version?: Model.Version;
+}
+
+export namespace Model {
+  export interface Agreement {
+    description?: string;
+
+    name?: string;
+
+    url?: string;
+
+    uuid?: string;
+  }
+
+  export interface Version {
+    major?: number;
+
+    minor?: number;
+
+    patch?: number;
+  }
 }
 
 export interface ModelListResponse {
@@ -51,51 +68,7 @@ export interface ModelListResponse {
 
   meta?: VersionsAPI.APIMeta;
 
-  models?: Array<ModelListResponse.Model>;
-}
-
-export namespace ModelListResponse {
-  export interface Model {
-    agreement?: Model.Agreement;
-
-    created_at?: string;
-
-    is_foundational?: boolean;
-
-    name?: string;
-
-    parent_uuid?: string;
-
-    updated_at?: string;
-
-    upload_complete?: boolean;
-
-    url?: string;
-
-    uuid?: string;
-
-    version?: Model.Version;
-  }
-
-  export namespace Model {
-    export interface Agreement {
-      description?: string;
-
-      name?: string;
-
-      url?: string;
-
-      uuid?: string;
-    }
-
-    export interface Version {
-      major?: number;
-
-      minor?: number;
-
-      patch?: number;
-    }
-  }
+  models?: Array<Model>;
 }
 
 export interface ModelListParams {

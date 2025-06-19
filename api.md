@@ -212,25 +212,6 @@ Methods:
 - <code title="get /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources">client.knowledgeBases.dataSources.<a href="./src/resources/knowledge-bases/data-sources.ts">list</a>(knowledgeBaseUuid, { ...params }) -> DataSourceListResponse</code>
 - <code title="delete /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources/{data_source_uuid}">client.knowledgeBases.dataSources.<a href="./src/resources/knowledge-bases/data-sources.ts">delete</a>(dataSourceUuid, { ...params }) -> DataSourceDeleteResponse</code>
 
-# APIKeys
-
-Types:
-
-- <code><a href="./src/resources/api-keys.ts">APIModelAPIKeyInfo</a></code>
-- <code><a href="./src/resources/api-keys.ts">APIKeyCreateResponse</a></code>
-- <code><a href="./src/resources/api-keys.ts">APIKeyUpdateResponse</a></code>
-- <code><a href="./src/resources/api-keys.ts">APIKeyListResponse</a></code>
-- <code><a href="./src/resources/api-keys.ts">APIKeyDeleteResponse</a></code>
-- <code><a href="./src/resources/api-keys.ts">APIKeyUpdateRegenerateResponse</a></code>
-
-Methods:
-
-- <code title="post /v2/gen-ai/models/api_keys">client.apiKeys.<a href="./src/resources/api-keys.ts">create</a>({ ...params }) -> APIKeyCreateResponse</code>
-- <code title="put /v2/gen-ai/models/api_keys/{api_key_uuid}">client.apiKeys.<a href="./src/resources/api-keys.ts">update</a>(apiKeyUuid, { ...params }) -> APIKeyUpdateResponse</code>
-- <code title="get /v2/gen-ai/models/api_keys">client.apiKeys.<a href="./src/resources/api-keys.ts">list</a>({ ...params }) -> APIKeyListResponse</code>
-- <code title="delete /v2/gen-ai/models/api_keys/{api_key_uuid}">client.apiKeys.<a href="./src/resources/api-keys.ts">delete</a>(apiKeyUuid) -> APIKeyDeleteResponse</code>
-- <code title="put /v2/gen-ai/models/api_keys/{api_key_uuid}/regenerate">client.apiKeys.<a href="./src/resources/api-keys.ts">updateRegenerate</a>(apiKeyUuid) -> APIKeyUpdateRegenerateResponse</code>
-
 # Chat
 
 ## Completions
@@ -242,6 +223,39 @@ Types:
 Methods:
 
 - <code title="post /chat/completions">client.chat.completions.<a href="./src/resources/chat/completions.ts">create</a>({ ...params }) -> CompletionCreateResponse</code>
+
+# Inference
+
+## APIKeys
+
+Types:
+
+- <code><a href="./src/resources/inference/api-keys.ts">APIModelAPIKeyInfo</a></code>
+- <code><a href="./src/resources/inference/api-keys.ts">APIKeyCreateResponse</a></code>
+- <code><a href="./src/resources/inference/api-keys.ts">APIKeyUpdateResponse</a></code>
+- <code><a href="./src/resources/inference/api-keys.ts">APIKeyListResponse</a></code>
+- <code><a href="./src/resources/inference/api-keys.ts">APIKeyDeleteResponse</a></code>
+- <code><a href="./src/resources/inference/api-keys.ts">APIKeyUpdateRegenerateResponse</a></code>
+
+Methods:
+
+- <code title="post /v2/gen-ai/models/api_keys">client.inference.apiKeys.<a href="./src/resources/inference/api-keys.ts">create</a>({ ...params }) -> APIKeyCreateResponse</code>
+- <code title="put /v2/gen-ai/models/api_keys/{api_key_uuid}">client.inference.apiKeys.<a href="./src/resources/inference/api-keys.ts">update</a>(apiKeyUuid, { ...params }) -> APIKeyUpdateResponse</code>
+- <code title="get /v2/gen-ai/models/api_keys">client.inference.apiKeys.<a href="./src/resources/inference/api-keys.ts">list</a>({ ...params }) -> APIKeyListResponse</code>
+- <code title="delete /v2/gen-ai/models/api_keys/{api_key_uuid}">client.inference.apiKeys.<a href="./src/resources/inference/api-keys.ts">delete</a>(apiKeyUuid) -> APIKeyDeleteResponse</code>
+- <code title="put /v2/gen-ai/models/api_keys/{api_key_uuid}/regenerate">client.inference.apiKeys.<a href="./src/resources/inference/api-keys.ts">updateRegenerate</a>(apiKeyUuid) -> APIKeyUpdateRegenerateResponse</code>
+
+## Models
+
+Types:
+
+- <code><a href="./src/resources/inference/models.ts">ModelRetrieveResponse</a></code>
+- <code><a href="./src/resources/inference/models.ts">ModelListResponse</a></code>
+
+Methods:
+
+- <code title="get /models/{model}">client.inference.models.<a href="./src/resources/inference/models.ts">retrieve</a>(model) -> ModelRetrieveResponse</code>
+- <code title="get /models">client.inference.models.<a href="./src/resources/inference/models.ts">list</a>() -> ModelListResponse</code>
 
 # Models
 
