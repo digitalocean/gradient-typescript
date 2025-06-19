@@ -186,7 +186,7 @@ export interface APIAgent {
 
   max_tokens?: number;
 
-  model?: APIModel;
+  model?: APIAgent.Model;
 
   name?: string;
 
@@ -335,6 +335,66 @@ export namespace APIAgent {
     uuid?: string;
   }
 
+  export interface Model {
+    agreement?: Model.Agreement;
+
+    created_at?: string;
+
+    inference_name?: string;
+
+    inference_version?: string;
+
+    is_foundational?: boolean;
+
+    metadata?: unknown;
+
+    name?: string;
+
+    parent_uuid?: string;
+
+    provider?: 'MODEL_PROVIDER_DIGITALOCEAN' | 'MODEL_PROVIDER_ANTHROPIC' | 'MODEL_PROVIDER_OPENAI';
+
+    updated_at?: string;
+
+    upload_complete?: boolean;
+
+    url?: string;
+
+    usecases?: Array<
+      | 'MODEL_USECASE_UNKNOWN'
+      | 'MODEL_USECASE_AGENT'
+      | 'MODEL_USECASE_FINETUNED'
+      | 'MODEL_USECASE_KNOWLEDGEBASE'
+      | 'MODEL_USECASE_GUARDRAIL'
+      | 'MODEL_USECASE_REASONING'
+      | 'MODEL_USECASE_SERVERLESS'
+    >;
+
+    uuid?: string;
+
+    version?: Model.Version;
+  }
+
+  export namespace Model {
+    export interface Agreement {
+      description?: string;
+
+      name?: string;
+
+      url?: string;
+
+      uuid?: string;
+    }
+
+    export interface Version {
+      major?: number;
+
+      minor?: number;
+
+      patch?: number;
+    }
+  }
+
   export interface Template {
     created_at?: string;
 
@@ -352,7 +412,7 @@ export namespace APIAgent {
 
     max_tokens?: number;
 
-    model?: AgentsAPI.APIModel;
+    model?: Template.Model;
 
     name?: string;
 
@@ -378,6 +438,66 @@ export namespace APIAgent {
       priority?: number;
 
       uuid?: string;
+    }
+
+    export interface Model {
+      agreement?: Model.Agreement;
+
+      created_at?: string;
+
+      inference_name?: string;
+
+      inference_version?: string;
+
+      is_foundational?: boolean;
+
+      metadata?: unknown;
+
+      name?: string;
+
+      parent_uuid?: string;
+
+      provider?: 'MODEL_PROVIDER_DIGITALOCEAN' | 'MODEL_PROVIDER_ANTHROPIC' | 'MODEL_PROVIDER_OPENAI';
+
+      updated_at?: string;
+
+      upload_complete?: boolean;
+
+      url?: string;
+
+      usecases?: Array<
+        | 'MODEL_USECASE_UNKNOWN'
+        | 'MODEL_USECASE_AGENT'
+        | 'MODEL_USECASE_FINETUNED'
+        | 'MODEL_USECASE_KNOWLEDGEBASE'
+        | 'MODEL_USECASE_GUARDRAIL'
+        | 'MODEL_USECASE_REASONING'
+        | 'MODEL_USECASE_SERVERLESS'
+      >;
+
+      uuid?: string;
+
+      version?: Model.Version;
+    }
+
+    export namespace Model {
+      export interface Agreement {
+        description?: string;
+
+        name?: string;
+
+        url?: string;
+
+        uuid?: string;
+      }
+
+      export interface Version {
+        major?: number;
+
+        minor?: number;
+
+        patch?: number;
+      }
     }
   }
 }
@@ -417,66 +537,6 @@ export type APIDeploymentVisibility =
   | 'VISIBILITY_PUBLIC'
   | 'VISIBILITY_PRIVATE';
 
-export interface APIModel {
-  agreement?: APIModel.Agreement;
-
-  created_at?: string;
-
-  inference_name?: string;
-
-  inference_version?: string;
-
-  is_foundational?: boolean;
-
-  metadata?: unknown;
-
-  name?: string;
-
-  parent_uuid?: string;
-
-  provider?: 'MODEL_PROVIDER_DIGITALOCEAN' | 'MODEL_PROVIDER_ANTHROPIC' | 'MODEL_PROVIDER_OPENAI';
-
-  updated_at?: string;
-
-  upload_complete?: boolean;
-
-  url?: string;
-
-  usecases?: Array<
-    | 'MODEL_USECASE_UNKNOWN'
-    | 'MODEL_USECASE_AGENT'
-    | 'MODEL_USECASE_FINETUNED'
-    | 'MODEL_USECASE_KNOWLEDGEBASE'
-    | 'MODEL_USECASE_GUARDRAIL'
-    | 'MODEL_USECASE_REASONING'
-    | 'MODEL_USECASE_SERVERLESS'
-  >;
-
-  uuid?: string;
-
-  version?: APIModel.Version;
-}
-
-export namespace APIModel {
-  export interface Agreement {
-    description?: string;
-
-    name?: string;
-
-    url?: string;
-
-    uuid?: string;
-  }
-
-  export interface Version {
-    major?: number;
-
-    minor?: number;
-
-    patch?: number;
-  }
-}
-
 export interface APIOpenAIAPIKeyInfo {
   created_at?: string;
 
@@ -484,13 +544,75 @@ export interface APIOpenAIAPIKeyInfo {
 
   deleted_at?: string;
 
-  models?: Array<APIModel>;
+  models?: Array<APIOpenAIAPIKeyInfo.Model>;
 
   name?: string;
 
   updated_at?: string;
 
   uuid?: string;
+}
+
+export namespace APIOpenAIAPIKeyInfo {
+  export interface Model {
+    agreement?: Model.Agreement;
+
+    created_at?: string;
+
+    inference_name?: string;
+
+    inference_version?: string;
+
+    is_foundational?: boolean;
+
+    metadata?: unknown;
+
+    name?: string;
+
+    parent_uuid?: string;
+
+    provider?: 'MODEL_PROVIDER_DIGITALOCEAN' | 'MODEL_PROVIDER_ANTHROPIC' | 'MODEL_PROVIDER_OPENAI';
+
+    updated_at?: string;
+
+    upload_complete?: boolean;
+
+    url?: string;
+
+    usecases?: Array<
+      | 'MODEL_USECASE_UNKNOWN'
+      | 'MODEL_USECASE_AGENT'
+      | 'MODEL_USECASE_FINETUNED'
+      | 'MODEL_USECASE_KNOWLEDGEBASE'
+      | 'MODEL_USECASE_GUARDRAIL'
+      | 'MODEL_USECASE_REASONING'
+      | 'MODEL_USECASE_SERVERLESS'
+    >;
+
+    uuid?: string;
+
+    version?: Model.Version;
+  }
+
+  export namespace Model {
+    export interface Agreement {
+      description?: string;
+
+      name?: string;
+
+      url?: string;
+
+      uuid?: string;
+    }
+
+    export interface Version {
+      major?: number;
+
+      minor?: number;
+
+      patch?: number;
+    }
+  }
 }
 
 export type APIRetrievalMethod =
@@ -551,7 +673,7 @@ export namespace AgentListResponse {
      */
     max_tokens?: number;
 
-    model?: AgentsAPI.APIModel;
+    model?: Agent.Model;
 
     name?: string;
 
@@ -642,6 +764,66 @@ export namespace AgentListResponse {
       visibility?: AgentsAPI.APIDeploymentVisibility;
     }
 
+    export interface Model {
+      agreement?: Model.Agreement;
+
+      created_at?: string;
+
+      inference_name?: string;
+
+      inference_version?: string;
+
+      is_foundational?: boolean;
+
+      metadata?: unknown;
+
+      name?: string;
+
+      parent_uuid?: string;
+
+      provider?: 'MODEL_PROVIDER_DIGITALOCEAN' | 'MODEL_PROVIDER_ANTHROPIC' | 'MODEL_PROVIDER_OPENAI';
+
+      updated_at?: string;
+
+      upload_complete?: boolean;
+
+      url?: string;
+
+      usecases?: Array<
+        | 'MODEL_USECASE_UNKNOWN'
+        | 'MODEL_USECASE_AGENT'
+        | 'MODEL_USECASE_FINETUNED'
+        | 'MODEL_USECASE_KNOWLEDGEBASE'
+        | 'MODEL_USECASE_GUARDRAIL'
+        | 'MODEL_USECASE_REASONING'
+        | 'MODEL_USECASE_SERVERLESS'
+      >;
+
+      uuid?: string;
+
+      version?: Model.Version;
+    }
+
+    export namespace Model {
+      export interface Agreement {
+        description?: string;
+
+        name?: string;
+
+        url?: string;
+
+        uuid?: string;
+      }
+
+      export interface Version {
+        major?: number;
+
+        minor?: number;
+
+        patch?: number;
+      }
+    }
+
     export interface Template {
       created_at?: string;
 
@@ -659,7 +841,7 @@ export namespace AgentListResponse {
 
       max_tokens?: number;
 
-      model?: AgentsAPI.APIModel;
+      model?: Template.Model;
 
       name?: string;
 
@@ -685,6 +867,66 @@ export namespace AgentListResponse {
         priority?: number;
 
         uuid?: string;
+      }
+
+      export interface Model {
+        agreement?: Model.Agreement;
+
+        created_at?: string;
+
+        inference_name?: string;
+
+        inference_version?: string;
+
+        is_foundational?: boolean;
+
+        metadata?: unknown;
+
+        name?: string;
+
+        parent_uuid?: string;
+
+        provider?: 'MODEL_PROVIDER_DIGITALOCEAN' | 'MODEL_PROVIDER_ANTHROPIC' | 'MODEL_PROVIDER_OPENAI';
+
+        updated_at?: string;
+
+        upload_complete?: boolean;
+
+        url?: string;
+
+        usecases?: Array<
+          | 'MODEL_USECASE_UNKNOWN'
+          | 'MODEL_USECASE_AGENT'
+          | 'MODEL_USECASE_FINETUNED'
+          | 'MODEL_USECASE_KNOWLEDGEBASE'
+          | 'MODEL_USECASE_GUARDRAIL'
+          | 'MODEL_USECASE_REASONING'
+          | 'MODEL_USECASE_SERVERLESS'
+        >;
+
+        uuid?: string;
+
+        version?: Model.Version;
+      }
+
+      export namespace Model {
+        export interface Agreement {
+          description?: string;
+
+          name?: string;
+
+          url?: string;
+
+          uuid?: string;
+        }
+
+        export interface Version {
+          major?: number;
+
+          minor?: number;
+
+          patch?: number;
+        }
       }
     }
   }
@@ -820,7 +1062,6 @@ export declare namespace Agents {
     type APIAgentAPIKeyInfo as APIAgentAPIKeyInfo,
     type APIAnthropicAPIKeyInfo as APIAnthropicAPIKeyInfo,
     type APIDeploymentVisibility as APIDeploymentVisibility,
-    type APIModel as APIModel,
     type APIOpenAIAPIKeyInfo as APIOpenAIAPIKeyInfo,
     type APIRetrievalMethod as APIRetrievalMethod,
     type AgentCreateResponse as AgentCreateResponse,

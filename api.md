@@ -6,7 +6,6 @@ Types:
 - <code><a href="./src/resources/agents/agents.ts">APIAgentAPIKeyInfo</a></code>
 - <code><a href="./src/resources/agents/agents.ts">APIAnthropicAPIKeyInfo</a></code>
 - <code><a href="./src/resources/agents/agents.ts">APIDeploymentVisibility</a></code>
-- <code><a href="./src/resources/agents/agents.ts">APIModel</a></code>
 - <code><a href="./src/resources/agents/agents.ts">APIOpenAIAPIKeyInfo</a></code>
 - <code><a href="./src/resources/agents/agents.ts">APIRetrievalMethod</a></code>
 - <code><a href="./src/resources/agents/agents.ts">AgentCreateResponse</a></code>
@@ -261,7 +260,7 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/models.ts">Model</a></code>
+- <code><a href="./src/resources/models.ts">APIModel</a></code>
 - <code><a href="./src/resources/models.ts">ModelListResponse</a></code>
 
 Methods:
