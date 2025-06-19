@@ -29,14 +29,13 @@ import {
   IndexingJobUpdateCancelResponse,
   IndexingJobs,
 } from './resources/indexing-jobs';
-import { Model, ModelListParams, ModelListResponse, Models } from './resources/models';
+import { APIModel, ModelListParams, ModelListResponse, Models } from './resources/models';
 import { RegionListParams, RegionListResponse, Regions } from './resources/regions';
 import {
   APIAgent,
   APIAgentAPIKeyInfo,
   APIAnthropicAPIKeyInfo,
   APIDeploymentVisibility,
-  APIModel,
   APIOpenAIAPIKeyInfo,
   APIRetrievalMethod,
   AgentCreateParams,
@@ -767,7 +766,6 @@ export declare namespace GradientAI {
     type APIAgentAPIKeyInfo as APIAgentAPIKeyInfo,
     type APIAnthropicAPIKeyInfo as APIAnthropicAPIKeyInfo,
     type APIDeploymentVisibility as APIDeploymentVisibility,
-    type APIModel as APIModel,
     type APIOpenAIAPIKeyInfo as APIOpenAIAPIKeyInfo,
     type APIRetrievalMethod as APIRetrievalMethod,
     type AgentCreateResponse as AgentCreateResponse,
@@ -822,7 +820,7 @@ export declare namespace GradientAI {
 
   export {
     Models as Models,
-    type Model as Model,
+    type APIModel as APIModel,
     type ModelListResponse as ModelListResponse,
     type ModelListParams as ModelListParams,
   };

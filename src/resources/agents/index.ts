@@ -19,7 +19,6 @@ export {
   type APIAgentAPIKeyInfo,
   type APIAnthropicAPIKeyInfo,
   type APIDeploymentVisibility,
-  type APIModel,
   type APIOpenAIAPIKeyInfo,
   type APIRetrievalMethod,
   type AgentCreateResponse,

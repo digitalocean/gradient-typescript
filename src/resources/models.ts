@@ -21,8 +21,8 @@ export class Models extends APIResource {
   }
 }
 
-export interface Model {
-  agreement?: Model.Agreement;
+export interface APIModel {
+  agreement?: APIModel.Agreement;
 
   created_at?: string;
 
@@ -40,10 +40,10 @@ export interface Model {
 
   uuid?: string;
 
-  version?: Model.Version;
+  version?: APIModel.Version;
 }
 
-export namespace Model {
+export namespace APIModel {
   export interface Agreement {
     description?: string;
 
@@ -68,7 +68,7 @@ export interface ModelListResponse {
 
   meta?: VersionsAPI.APIMeta;
 
-  models?: Array<Model>;
+  models?: Array<APIModel>;
 }
 
 export interface ModelListParams {
@@ -112,7 +112,7 @@ export interface ModelListParams {
 
 export declare namespace Models {
   export {
-    type Model as Model,
+    type APIModel as APIModel,
     type ModelListResponse as ModelListResponse,
     type ModelListParams as ModelListParams,
   };

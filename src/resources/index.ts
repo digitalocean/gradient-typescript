@@ -6,7 +6,6 @@ export {
   type APIAgentAPIKeyInfo,
   type APIAnthropicAPIKeyInfo,
   type APIDeploymentVisibility,
-  type APIModel,
   type APIOpenAIAPIKeyInfo,
   type APIRetrievalMethod,
   type AgentCreateResponse,
@@ -46,6 +45,6 @@ export {
   type KnowledgeBaseUpdateParams,
   type KnowledgeBaseListParams,
 } from './knowledge-bases/knowledge-bases';
-export { Models, type Model, type ModelListResponse, type ModelListParams } from './models';
+export { Models, type APIModel, type ModelListResponse, type ModelListParams } from './models';
 export { Providers } from './providers/providers';
 export { Regions, type RegionListResponse, type RegionListParams } from './regions';
