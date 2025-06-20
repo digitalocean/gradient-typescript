@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../core/resource';
 import * as IndexingJobsAPI from '../indexing-jobs';
-import * as VersionsAPI from '../doagents/versions';
+import * as VersionsAPI from '../agents/versions';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';

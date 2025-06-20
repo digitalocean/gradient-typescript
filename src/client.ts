@@ -31,7 +31,6 @@ import {
 } from './resources/indexing-jobs';
 import { APIModel, ModelListParams, ModelListResponse, Models } from './resources/models';
 import { RegionListParams, RegionListResponse, Regions } from './resources/regions';
-import { Chat } from './resources/chat/chat';
 import {
   APIAgent,
   APIAgentAPIKeyInfo,
@@ -39,18 +38,19 @@ import {
   APIDeploymentVisibility,
   APIOpenAIAPIKeyInfo,
   APIRetrievalMethod,
-  DoagentCreateParams,
-  DoagentCreateResponse,
-  DoagentDeleteResponse,
-  DoagentListParams,
-  DoagentListResponse,
-  DoagentRetrieveResponse,
-  DoagentUpdateParams,
-  DoagentUpdateResponse,
-  DoagentUpdateStatusParams,
-  DoagentUpdateStatusResponse,
-  Doagents,
-} from './resources/doagents/doagents';
+  AgentCreateParams,
+  AgentCreateResponse,
+  AgentDeleteResponse,
+  AgentListParams,
+  AgentListResponse,
+  AgentRetrieveResponse,
+  AgentUpdateParams,
+  AgentUpdateResponse,
+  AgentUpdateStatusParams,
+  AgentUpdateStatusResponse,
+  Agents,
+} from './resources/agents/agents';
+import { Chat } from './resources/chat/chat';
 import { Inference } from './resources/inference/inference';
 import {
   APIKnowledgeBase,
@@ -740,7 +740,7 @@ export class GradientAI {
 
   static toFile = Uploads.toFile;
 
-  doagents: API.Doagents = new API.Doagents(this);
+  agents: API.Agents = new API.Agents(this);
   providers: API.Providers = new API.Providers(this);
   regions: API.Regions = new API.Regions(this);
   indexingJobs: API.IndexingJobs = new API.IndexingJobs(this);
@@ -749,7 +749,7 @@ export class GradientAI {
   inference: API.Inference = new API.Inference(this);
   models: API.Models = new API.Models(this);
 }
-GradientAI.Doagents = Doagents;
+GradientAI.Agents = Agents;
 GradientAI.Providers = Providers;
 GradientAI.Regions = Regions;
 GradientAI.IndexingJobs = IndexingJobs;
@@ -761,23 +761,23 @@ export declare namespace GradientAI {
   export type RequestOptions = Opts.RequestOptions;
 
   export {
-    Doagents as Doagents,
+    Agents as Agents,
     type APIAgent as APIAgent,
     type APIAgentAPIKeyInfo as APIAgentAPIKeyInfo,
     type APIAnthropicAPIKeyInfo as APIAnthropicAPIKeyInfo,
     type APIDeploymentVisibility as APIDeploymentVisibility,
     type APIOpenAIAPIKeyInfo as APIOpenAIAPIKeyInfo,
     type APIRetrievalMethod as APIRetrievalMethod,
-    type DoagentCreateResponse as DoagentCreateResponse,
-    type DoagentRetrieveResponse as DoagentRetrieveResponse,
-    type DoagentUpdateResponse as DoagentUpdateResponse,
-    type DoagentListResponse as DoagentListResponse,
-    type DoagentDeleteResponse as DoagentDeleteResponse,
-    type DoagentUpdateStatusResponse as DoagentUpdateStatusResponse,
-    type DoagentCreateParams as DoagentCreateParams,
-    type DoagentUpdateParams as DoagentUpdateParams,
-    type DoagentListParams as DoagentListParams,
-    type DoagentUpdateStatusParams as DoagentUpdateStatusParams,
+    type AgentCreateResponse as AgentCreateResponse,
+    type AgentRetrieveResponse as AgentRetrieveResponse,
+    type AgentUpdateResponse as AgentUpdateResponse,
+    type AgentListResponse as AgentListResponse,
+    type AgentDeleteResponse as AgentDeleteResponse,
+    type AgentUpdateStatusResponse as AgentUpdateStatusResponse,
+    type AgentCreateParams as AgentCreateParams,
+    type AgentUpdateParams as AgentUpdateParams,
+    type AgentListParams as AgentListParams,
+    type AgentUpdateStatusParams as AgentUpdateStatusParams,
   };
 
   export { Providers as Providers };

@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as DoagentsAPI from './doagents';
+import * as AgentsAPI from './agents';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
@@ -52,11 +52,11 @@ export class KnowledgeBases extends APIResource {
 }
 
 export interface APILinkKnowledgeBaseOutput {
-  agent?: DoagentsAPI.APIAgent;
+  agent?: AgentsAPI.APIAgent;
 }
 
 export interface KnowledgeBaseDetachResponse {
-  agent?: DoagentsAPI.APIAgent;
+  agent?: AgentsAPI.APIAgent;
 }
 
 export interface KnowledgeBaseAttachSingleParams {
