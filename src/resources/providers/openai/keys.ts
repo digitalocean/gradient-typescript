@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as AgentsAPI from '../../agents/agents';
-import * as VersionsAPI from '../../agents/versions';
+import * as DoagentsAPI from '../../doagents/doagents';
+import * as VersionsAPI from '../../doagents/versions';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -84,18 +84,18 @@ export class Keys extends APIResource {
  * CreateOpenAIAPIKeyOutput is used to return the newly created OpenAI API key.
  */
 export interface KeyCreateResponse {
-  api_key_info?: AgentsAPI.APIOpenAIAPIKeyInfo;
+  api_key_info?: DoagentsAPI.APIOpenAIAPIKeyInfo;
 }
 
 export interface KeyRetrieveResponse {
-  api_key_info?: AgentsAPI.APIOpenAIAPIKeyInfo;
+  api_key_info?: DoagentsAPI.APIOpenAIAPIKeyInfo;
 }
 
 /**
  * UpdateOpenAIAPIKeyOutput is used to return the updated OpenAI API key.
  */
 export interface KeyUpdateResponse {
-  api_key_info?: AgentsAPI.APIOpenAIAPIKeyInfo;
+  api_key_info?: DoagentsAPI.APIOpenAIAPIKeyInfo;
 }
 
 /**
@@ -103,7 +103,7 @@ export interface KeyUpdateResponse {
  * specific agent.
  */
 export interface KeyListResponse {
-  api_key_infos?: Array<AgentsAPI.APIOpenAIAPIKeyInfo>;
+  api_key_infos?: Array<DoagentsAPI.APIOpenAIAPIKeyInfo>;
 
   links?: VersionsAPI.APILinks;
 
@@ -114,11 +114,11 @@ export interface KeyListResponse {
  * DeleteOpenAIAPIKeyOutput is used to return the deleted OpenAI API key.
  */
 export interface KeyDeleteResponse {
-  api_key_info?: AgentsAPI.APIOpenAIAPIKeyInfo;
+  api_key_info?: DoagentsAPI.APIOpenAIAPIKeyInfo;
 }
 
 export interface KeyRetrieveAgentsResponse {
-  agents?: Array<AgentsAPI.APIAgent>;
+  agents?: Array<DoagentsAPI.APIAgent>;
 
   links?: VersionsAPI.APILinks;
 

@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as AgentsAPI from './agents';
+import * as DoagentsAPI from './doagents';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
@@ -138,7 +138,7 @@ export namespace VersionListResponse {
 
     provide_citations?: boolean;
 
-    retrieval_method?: AgentsAPI.APIRetrievalMethod;
+    retrieval_method?: DoagentsAPI.APIRetrievalMethod;
 
     tags?: Array<string>;
 

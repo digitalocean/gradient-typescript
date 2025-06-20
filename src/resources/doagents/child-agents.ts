@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as AgentsAPI from './agents';
+import * as DoagentsAPI from './doagents';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
@@ -96,7 +96,7 @@ export interface ChildAgentAddResponse {
 }
 
 export interface ChildAgentViewResponse {
-  children?: Array<AgentsAPI.APIAgent>;
+  children?: Array<DoagentsAPI.APIAgent>;
 }
 
 export interface ChildAgentUpdateParams {

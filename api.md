@@ -1,103 +1,103 @@
-# Agents
+# Doagents
 
 Types:
 
-- <code><a href="./src/resources/agents/agents.ts">APIAgent</a></code>
-- <code><a href="./src/resources/agents/agents.ts">APIAgentAPIKeyInfo</a></code>
-- <code><a href="./src/resources/agents/agents.ts">APIAnthropicAPIKeyInfo</a></code>
-- <code><a href="./src/resources/agents/agents.ts">APIDeploymentVisibility</a></code>
-- <code><a href="./src/resources/agents/agents.ts">APIOpenAIAPIKeyInfo</a></code>
-- <code><a href="./src/resources/agents/agents.ts">APIRetrievalMethod</a></code>
-- <code><a href="./src/resources/agents/agents.ts">AgentCreateResponse</a></code>
-- <code><a href="./src/resources/agents/agents.ts">AgentRetrieveResponse</a></code>
-- <code><a href="./src/resources/agents/agents.ts">AgentUpdateResponse</a></code>
-- <code><a href="./src/resources/agents/agents.ts">AgentListResponse</a></code>
-- <code><a href="./src/resources/agents/agents.ts">AgentDeleteResponse</a></code>
-- <code><a href="./src/resources/agents/agents.ts">AgentUpdateStatusResponse</a></code>
+- <code><a href="./src/resources/doagents/doagents.ts">APIAgent</a></code>
+- <code><a href="./src/resources/doagents/doagents.ts">APIAgentAPIKeyInfo</a></code>
+- <code><a href="./src/resources/doagents/doagents.ts">APIAnthropicAPIKeyInfo</a></code>
+- <code><a href="./src/resources/doagents/doagents.ts">APIDeploymentVisibility</a></code>
+- <code><a href="./src/resources/doagents/doagents.ts">APIOpenAIAPIKeyInfo</a></code>
+- <code><a href="./src/resources/doagents/doagents.ts">APIRetrievalMethod</a></code>
+- <code><a href="./src/resources/doagents/doagents.ts">DoagentCreateResponse</a></code>
+- <code><a href="./src/resources/doagents/doagents.ts">DoagentRetrieveResponse</a></code>
+- <code><a href="./src/resources/doagents/doagents.ts">DoagentUpdateResponse</a></code>
+- <code><a href="./src/resources/doagents/doagents.ts">DoagentListResponse</a></code>
+- <code><a href="./src/resources/doagents/doagents.ts">DoagentDeleteResponse</a></code>
+- <code><a href="./src/resources/doagents/doagents.ts">DoagentUpdateStatusResponse</a></code>
 
 Methods:
 
-- <code title="post /v2/gen-ai/agents">client.agents.<a href="./src/resources/agents/agents.ts">create</a>({ ...params }) -> AgentCreateResponse</code>
-- <code title="get /v2/gen-ai/agents/{uuid}">client.agents.<a href="./src/resources/agents/agents.ts">retrieve</a>(uuid) -> AgentRetrieveResponse</code>
-- <code title="put /v2/gen-ai/agents/{uuid}">client.agents.<a href="./src/resources/agents/agents.ts">update</a>(pathUuid, { ...params }) -> AgentUpdateResponse</code>
-- <code title="get /v2/gen-ai/agents">client.agents.<a href="./src/resources/agents/agents.ts">list</a>({ ...params }) -> AgentListResponse</code>
-- <code title="delete /v2/gen-ai/agents/{uuid}">client.agents.<a href="./src/resources/agents/agents.ts">delete</a>(uuid) -> AgentDeleteResponse</code>
-- <code title="put /v2/gen-ai/agents/{uuid}/deployment_visibility">client.agents.<a href="./src/resources/agents/agents.ts">updateStatus</a>(pathUuid, { ...params }) -> AgentUpdateStatusResponse</code>
+- <code title="post /v2/gen-ai/agents">client.doagents.<a href="./src/resources/doagents/doagents.ts">create</a>({ ...params }) -> DoagentCreateResponse</code>
+- <code title="get /v2/gen-ai/agents/{uuid}">client.doagents.<a href="./src/resources/doagents/doagents.ts">retrieve</a>(uuid) -> DoagentRetrieveResponse</code>
+- <code title="put /v2/gen-ai/agents/{uuid}">client.doagents.<a href="./src/resources/doagents/doagents.ts">update</a>(pathUuid, { ...params }) -> DoagentUpdateResponse</code>
+- <code title="get /v2/gen-ai/agents">client.doagents.<a href="./src/resources/doagents/doagents.ts">list</a>({ ...params }) -> DoagentListResponse</code>
+- <code title="delete /v2/gen-ai/agents/{uuid}">client.doagents.<a href="./src/resources/doagents/doagents.ts">delete</a>(uuid) -> DoagentDeleteResponse</code>
+- <code title="put /v2/gen-ai/agents/{uuid}/deployment_visibility">client.doagents.<a href="./src/resources/doagents/doagents.ts">updateStatus</a>(pathUuid, { ...params }) -> DoagentUpdateStatusResponse</code>
 
 ## APIKeys
 
 Types:
 
-- <code><a href="./src/resources/agents/api-keys.ts">APIKeyCreateResponse</a></code>
-- <code><a href="./src/resources/agents/api-keys.ts">APIKeyUpdateResponse</a></code>
-- <code><a href="./src/resources/agents/api-keys.ts">APIKeyListResponse</a></code>
-- <code><a href="./src/resources/agents/api-keys.ts">APIKeyDeleteResponse</a></code>
-- <code><a href="./src/resources/agents/api-keys.ts">APIKeyRegenerateResponse</a></code>
+- <code><a href="./src/resources/doagents/api-keys.ts">APIKeyCreateResponse</a></code>
+- <code><a href="./src/resources/doagents/api-keys.ts">APIKeyUpdateResponse</a></code>
+- <code><a href="./src/resources/doagents/api-keys.ts">APIKeyListResponse</a></code>
+- <code><a href="./src/resources/doagents/api-keys.ts">APIKeyDeleteResponse</a></code>
+- <code><a href="./src/resources/doagents/api-keys.ts">APIKeyRegenerateResponse</a></code>
 
 Methods:
 
-- <code title="post /v2/gen-ai/agents/{agent_uuid}/api_keys">client.agents.apiKeys.<a href="./src/resources/agents/api-keys.ts">create</a>(agentUuid, { ...params }) -> APIKeyCreateResponse</code>
-- <code title="put /v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}">client.agents.apiKeys.<a href="./src/resources/agents/api-keys.ts">update</a>(apiKeyUuid, { ...params }) -> APIKeyUpdateResponse</code>
-- <code title="get /v2/gen-ai/agents/{agent_uuid}/api_keys">client.agents.apiKeys.<a href="./src/resources/agents/api-keys.ts">list</a>(agentUuid, { ...params }) -> APIKeyListResponse</code>
-- <code title="delete /v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}">client.agents.apiKeys.<a href="./src/resources/agents/api-keys.ts">delete</a>(apiKeyUuid, { ...params }) -> APIKeyDeleteResponse</code>
-- <code title="put /v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}/regenerate">client.agents.apiKeys.<a href="./src/resources/agents/api-keys.ts">regenerate</a>(apiKeyUuid, { ...params }) -> APIKeyRegenerateResponse</code>
+- <code title="post /v2/gen-ai/agents/{agent_uuid}/api_keys">client.doagents.apiKeys.<a href="./src/resources/doagents/api-keys.ts">create</a>(agentUuid, { ...params }) -> APIKeyCreateResponse</code>
+- <code title="put /v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}">client.doagents.apiKeys.<a href="./src/resources/doagents/api-keys.ts">update</a>(apiKeyUuid, { ...params }) -> APIKeyUpdateResponse</code>
+- <code title="get /v2/gen-ai/agents/{agent_uuid}/api_keys">client.doagents.apiKeys.<a href="./src/resources/doagents/api-keys.ts">list</a>(agentUuid, { ...params }) -> APIKeyListResponse</code>
+- <code title="delete /v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}">client.doagents.apiKeys.<a href="./src/resources/doagents/api-keys.ts">delete</a>(apiKeyUuid, { ...params }) -> APIKeyDeleteResponse</code>
+- <code title="put /v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}/regenerate">client.doagents.apiKeys.<a href="./src/resources/doagents/api-keys.ts">regenerate</a>(apiKeyUuid, { ...params }) -> APIKeyRegenerateResponse</code>
 
 ## Functions
 
 Types:
 
-- <code><a href="./src/resources/agents/functions.ts">FunctionCreateResponse</a></code>
-- <code><a href="./src/resources/agents/functions.ts">FunctionUpdateResponse</a></code>
-- <code><a href="./src/resources/agents/functions.ts">FunctionDeleteResponse</a></code>
+- <code><a href="./src/resources/doagents/functions.ts">FunctionCreateResponse</a></code>
+- <code><a href="./src/resources/doagents/functions.ts">FunctionUpdateResponse</a></code>
+- <code><a href="./src/resources/doagents/functions.ts">FunctionDeleteResponse</a></code>
 
 Methods:
 
-- <code title="post /v2/gen-ai/agents/{agent_uuid}/functions">client.agents.functions.<a href="./src/resources/agents/functions.ts">create</a>(agentUuid, { ...params }) -> FunctionCreateResponse</code>
-- <code title="put /v2/gen-ai/agents/{agent_uuid}/functions/{function_uuid}">client.agents.functions.<a href="./src/resources/agents/functions.ts">update</a>(functionUuid, { ...params }) -> FunctionUpdateResponse</code>
-- <code title="delete /v2/gen-ai/agents/{agent_uuid}/functions/{function_uuid}">client.agents.functions.<a href="./src/resources/agents/functions.ts">delete</a>(functionUuid, { ...params }) -> FunctionDeleteResponse</code>
+- <code title="post /v2/gen-ai/agents/{agent_uuid}/functions">client.doagents.functions.<a href="./src/resources/doagents/functions.ts">create</a>(agentUuid, { ...params }) -> FunctionCreateResponse</code>
+- <code title="put /v2/gen-ai/agents/{agent_uuid}/functions/{function_uuid}">client.doagents.functions.<a href="./src/resources/doagents/functions.ts">update</a>(functionUuid, { ...params }) -> FunctionUpdateResponse</code>
+- <code title="delete /v2/gen-ai/agents/{agent_uuid}/functions/{function_uuid}">client.doagents.functions.<a href="./src/resources/doagents/functions.ts">delete</a>(functionUuid, { ...params }) -> FunctionDeleteResponse</code>
 
 ## Versions
 
 Types:
 
-- <code><a href="./src/resources/agents/versions.ts">APILinks</a></code>
-- <code><a href="./src/resources/agents/versions.ts">APIMeta</a></code>
-- <code><a href="./src/resources/agents/versions.ts">VersionUpdateResponse</a></code>
-- <code><a href="./src/resources/agents/versions.ts">VersionListResponse</a></code>
+- <code><a href="./src/resources/doagents/versions.ts">APILinks</a></code>
+- <code><a href="./src/resources/doagents/versions.ts">APIMeta</a></code>
+- <code><a href="./src/resources/doagents/versions.ts">VersionUpdateResponse</a></code>
+- <code><a href="./src/resources/doagents/versions.ts">VersionListResponse</a></code>
 
 Methods:
 
-- <code title="put /v2/gen-ai/agents/{uuid}/versions">client.agents.versions.<a href="./src/resources/agents/versions.ts">update</a>(pathUuid, { ...params }) -> VersionUpdateResponse</code>
-- <code title="get /v2/gen-ai/agents/{uuid}/versions">client.agents.versions.<a href="./src/resources/agents/versions.ts">list</a>(uuid, { ...params }) -> VersionListResponse</code>
+- <code title="put /v2/gen-ai/agents/{uuid}/versions">client.doagents.versions.<a href="./src/resources/doagents/versions.ts">update</a>(pathUuid, { ...params }) -> VersionUpdateResponse</code>
+- <code title="get /v2/gen-ai/agents/{uuid}/versions">client.doagents.versions.<a href="./src/resources/doagents/versions.ts">list</a>(uuid, { ...params }) -> VersionListResponse</code>
 
 ## KnowledgeBases
 
 Types:
 
-- <code><a href="./src/resources/agents/knowledge-bases.ts">APILinkKnowledgeBaseOutput</a></code>
-- <code><a href="./src/resources/agents/knowledge-bases.ts">KnowledgeBaseDetachResponse</a></code>
+- <code><a href="./src/resources/doagents/knowledge-bases.ts">APILinkKnowledgeBaseOutput</a></code>
+- <code><a href="./src/resources/doagents/knowledge-bases.ts">KnowledgeBaseDetachResponse</a></code>
 
 Methods:
 
-- <code title="post /v2/gen-ai/agents/{agent_uuid}/knowledge_bases">client.agents.knowledgeBases.<a href="./src/resources/agents/knowledge-bases.ts">attach</a>(agentUuid) -> APILinkKnowledgeBaseOutput</code>
-- <code title="post /v2/gen-ai/agents/{agent_uuid}/knowledge_bases/{knowledge_base_uuid}">client.agents.knowledgeBases.<a href="./src/resources/agents/knowledge-bases.ts">attachSingle</a>(knowledgeBaseUuid, { ...params }) -> APILinkKnowledgeBaseOutput</code>
-- <code title="delete /v2/gen-ai/agents/{agent_uuid}/knowledge_bases/{knowledge_base_uuid}">client.agents.knowledgeBases.<a href="./src/resources/agents/knowledge-bases.ts">detach</a>(knowledgeBaseUuid, { ...params }) -> KnowledgeBaseDetachResponse</code>
+- <code title="post /v2/gen-ai/agents/{agent_uuid}/knowledge_bases">client.doagents.knowledgeBases.<a href="./src/resources/doagents/knowledge-bases.ts">attach</a>(agentUuid) -> APILinkKnowledgeBaseOutput</code>
+- <code title="post /v2/gen-ai/agents/{agent_uuid}/knowledge_bases/{knowledge_base_uuid}">client.doagents.knowledgeBases.<a href="./src/resources/doagents/knowledge-bases.ts">attachSingle</a>(knowledgeBaseUuid, { ...params }) -> APILinkKnowledgeBaseOutput</code>
+- <code title="delete /v2/gen-ai/agents/{agent_uuid}/knowledge_bases/{knowledge_base_uuid}">client.doagents.knowledgeBases.<a href="./src/resources/doagents/knowledge-bases.ts">detach</a>(knowledgeBaseUuid, { ...params }) -> KnowledgeBaseDetachResponse</code>
 
 ## ChildAgents
 
 Types:
 
-- <code><a href="./src/resources/agents/child-agents.ts">ChildAgentUpdateResponse</a></code>
-- <code><a href="./src/resources/agents/child-agents.ts">ChildAgentDeleteResponse</a></code>
-- <code><a href="./src/resources/agents/child-agents.ts">ChildAgentAddResponse</a></code>
-- <code><a href="./src/resources/agents/child-agents.ts">ChildAgentViewResponse</a></code>
+- <code><a href="./src/resources/doagents/child-agents.ts">ChildAgentUpdateResponse</a></code>
+- <code><a href="./src/resources/doagents/child-agents.ts">ChildAgentDeleteResponse</a></code>
+- <code><a href="./src/resources/doagents/child-agents.ts">ChildAgentAddResponse</a></code>
+- <code><a href="./src/resources/doagents/child-agents.ts">ChildAgentViewResponse</a></code>
 
 Methods:
 
-- <code title="put /v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}">client.agents.childAgents.<a href="./src/resources/agents/child-agents.ts">update</a>(childAgentUuid, { ...params }) -> ChildAgentUpdateResponse</code>
-- <code title="delete /v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}">client.agents.childAgents.<a href="./src/resources/agents/child-agents.ts">delete</a>(childAgentUuid, { ...params }) -> ChildAgentDeleteResponse</code>
-- <code title="post /v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}">client.agents.childAgents.<a href="./src/resources/agents/child-agents.ts">add</a>(childAgentUuid, { ...params }) -> ChildAgentAddResponse</code>
-- <code title="get /v2/gen-ai/agents/{uuid}/child_agents">client.agents.childAgents.<a href="./src/resources/agents/child-agents.ts">view</a>(uuid) -> ChildAgentViewResponse</code>
+- <code title="put /v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}">client.doagents.childAgents.<a href="./src/resources/doagents/child-agents.ts">update</a>(childAgentUuid, { ...params }) -> ChildAgentUpdateResponse</code>
+- <code title="delete /v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}">client.doagents.childAgents.<a href="./src/resources/doagents/child-agents.ts">delete</a>(childAgentUuid, { ...params }) -> ChildAgentDeleteResponse</code>
+- <code title="post /v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}">client.doagents.childAgents.<a href="./src/resources/doagents/child-agents.ts">add</a>(childAgentUuid, { ...params }) -> ChildAgentAddResponse</code>
+- <code title="get /v2/gen-ai/agents/{uuid}/child_agents">client.doagents.childAgents.<a href="./src/resources/doagents/child-agents.ts">view</a>(uuid) -> ChildAgentViewResponse</code>
 
 # Providers
 

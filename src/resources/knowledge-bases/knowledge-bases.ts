@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../core/resource';
 import * as IndexingJobsAPI from '../indexing-jobs';
-import * as VersionsAPI from '../agents/versions';
+import * as VersionsAPI from '../doagents/versions';
 import * as DataSourcesAPI from './data-sources';
 import {
   APIFileUploadDataSource,

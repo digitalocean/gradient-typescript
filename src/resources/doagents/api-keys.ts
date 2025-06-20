@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as AgentsAPI from './agents';
+import * as DoagentsAPI from './doagents';
 import * as VersionsAPI from './versions';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
@@ -91,15 +91,15 @@ export class APIKeys extends APIResource {
 }
 
 export interface APIKeyCreateResponse {
-  api_key_info?: AgentsAPI.APIAgentAPIKeyInfo;
+  api_key_info?: DoagentsAPI.APIAgentAPIKeyInfo;
 }
 
 export interface APIKeyUpdateResponse {
-  api_key_info?: AgentsAPI.APIAgentAPIKeyInfo;
+  api_key_info?: DoagentsAPI.APIAgentAPIKeyInfo;
 }
 
 export interface APIKeyListResponse {
-  api_key_infos?: Array<AgentsAPI.APIAgentAPIKeyInfo>;
+  api_key_infos?: Array<DoagentsAPI.APIAgentAPIKeyInfo>;
 
   links?: VersionsAPI.APILinks;
 
@@ -107,11 +107,11 @@ export interface APIKeyListResponse {
 }
 
 export interface APIKeyDeleteResponse {
-  api_key_info?: AgentsAPI.APIAgentAPIKeyInfo;
+  api_key_info?: DoagentsAPI.APIAgentAPIKeyInfo;
 }
 
 export interface APIKeyRegenerateResponse {
-  api_key_info?: AgentsAPI.APIAgentAPIKeyInfo;
+  api_key_info?: DoagentsAPI.APIAgentAPIKeyInfo;
 }
 
 export interface APIKeyCreateParams {
