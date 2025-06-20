@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as AgentsAPI from '../../agents/agents';
-import * as VersionsAPI from '../../agents/versions';
+import * as DoagentsAPI from '../../doagents/doagents';
+import * as VersionsAPI from '../../doagents/versions';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -87,18 +87,18 @@ export class Keys extends APIResource {
  * key.
  */
 export interface KeyCreateResponse {
-  api_key_info?: AgentsAPI.APIAnthropicAPIKeyInfo;
+  api_key_info?: DoagentsAPI.APIAnthropicAPIKeyInfo;
 }
 
 export interface KeyRetrieveResponse {
-  api_key_info?: AgentsAPI.APIAnthropicAPIKeyInfo;
+  api_key_info?: DoagentsAPI.APIAnthropicAPIKeyInfo;
 }
 
 /**
  * UpdateAnthropicAPIKeyOutput is used to return the updated Anthropic API key.
  */
 export interface KeyUpdateResponse {
-  api_key_info?: AgentsAPI.APIAnthropicAPIKeyInfo;
+  api_key_info?: DoagentsAPI.APIAnthropicAPIKeyInfo;
 }
 
 /**
@@ -106,7 +106,7 @@ export interface KeyUpdateResponse {
  * a specific agent.
  */
 export interface KeyListResponse {
-  api_key_infos?: Array<AgentsAPI.APIAnthropicAPIKeyInfo>;
+  api_key_infos?: Array<DoagentsAPI.APIAnthropicAPIKeyInfo>;
 
   links?: VersionsAPI.APILinks;
 
@@ -117,11 +117,11 @@ export interface KeyListResponse {
  * DeleteAnthropicAPIKeyOutput is used to return the deleted Anthropic API key.
  */
 export interface KeyDeleteResponse {
-  api_key_info?: AgentsAPI.APIAnthropicAPIKeyInfo;
+  api_key_info?: DoagentsAPI.APIAnthropicAPIKeyInfo;
 }
 
 export interface KeyListAgentsResponse {
-  agents?: Array<AgentsAPI.APIAgent>;
+  agents?: Array<DoagentsAPI.APIAgent>;
 
   links?: VersionsAPI.APILinks;
 

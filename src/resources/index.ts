@@ -1,25 +1,25 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+export { Chat } from './chat/chat';
 export {
-  Agents,
+  Doagents,
   type APIAgent,
   type APIAgentAPIKeyInfo,
   type APIAnthropicAPIKeyInfo,
   type APIDeploymentVisibility,
   type APIOpenAIAPIKeyInfo,
   type APIRetrievalMethod,
-  type AgentCreateResponse,
-  type AgentRetrieveResponse,
-  type AgentUpdateResponse,
-  type AgentListResponse,
-  type AgentDeleteResponse,
-  type AgentUpdateStatusResponse,
-  type AgentCreateParams,
-  type AgentUpdateParams,
-  type AgentListParams,
-  type AgentUpdateStatusParams,
-} from './agents/agents';
-export { Chat } from './chat/chat';
+  type DoagentCreateResponse,
+  type DoagentRetrieveResponse,
+  type DoagentUpdateResponse,
+  type DoagentListResponse,
+  type DoagentDeleteResponse,
+  type DoagentUpdateStatusResponse,
+  type DoagentCreateParams,
+  type DoagentUpdateParams,
+  type DoagentListParams,
+  type DoagentUpdateStatusParams,
+} from './doagents/doagents';
 export {
   IndexingJobs,
   type APIIndexingJob,

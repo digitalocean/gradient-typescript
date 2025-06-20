@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as AgentsAPI from './agents';
+import * as DoagentsAPI from './doagents';
 import * as APIKeysAPI from './api-keys';
 import {
   APIKeyCreateParams,
@@ -60,7 +60,7 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Agents extends APIResource {
+export class Doagents extends APIResource {
   apiKeys: APIKeysAPI.APIKeys = new APIKeysAPI.APIKeys(this._client);
   functions: FunctionsAPI.Functions = new FunctionsAPI.Functions(this._client);
   versions: VersionsAPI.Versions = new VersionsAPI.Versions(this._client);
@@ -71,7 +71,7 @@ export class Agents extends APIResource {
    * To create a new agent, send a POST request to `/v2/gen-ai/agents`. The response
    * body contains a JSON object with the newly created agent object.
    */
-  create(body: AgentCreateParams, options?: RequestOptions): APIPromise<AgentCreateResponse> {
+  create(body: DoagentCreateParams, options?: RequestOptions): APIPromise<DoagentCreateResponse> {
     return this._client.post('/v2/gen-ai/agents', {
       body,
       defaultBaseURL: 'https://api.digitalocean.com',
@@ -83,7 +83,7 @@ export class Agents extends APIResource {
    * To retrieve details of an agent, GET request to `/v2/gen-ai/agents/{uuid}`. The
    * response body is a JSON object containing the agent.
    */
-  retrieve(uuid: string, options?: RequestOptions): APIPromise<AgentRetrieveResponse> {
+  retrieve(uuid: string, options?: RequestOptions): APIPromise<DoagentRetrieveResponse> {
     return this._client.get(path`/v2/gen-ai/agents/${uuid}`, {
       defaultBaseURL: 'https://api.digitalocean.com',
       ...options,
@@ -96,9 +96,9 @@ export class Agents extends APIResource {
    */
   update(
     pathUuid: string,
-    body: AgentUpdateParams,
+    body: DoagentUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<AgentUpdateResponse> {
+  ): APIPromise<DoagentUpdateResponse> {
     return this._client.put(path`/v2/gen-ai/agents/${pathUuid}`, {
       body,
       defaultBaseURL: 'https://api.digitalocean.com',
@@ -110,9 +110,9 @@ export class Agents extends APIResource {
    * To list all agents, send a GET request to `/v2/gen-ai/agents`.
    */
   list(
-    query: AgentListParams | null | undefined = {},
+    query: DoagentListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<AgentListResponse> {
+  ): APIPromise<DoagentListResponse> {
     return this._client.get('/v2/gen-ai/agents', {
       query,
       defaultBaseURL: 'https://api.digitalocean.com',
@@ -123,7 +123,7 @@ export class Agents extends APIResource {
   /**
    * To delete an agent, send a DELETE request to `/v2/gen-ai/agents/{uuid}`.
    */
-  delete(uuid: string, options?: RequestOptions): APIPromise<AgentDeleteResponse> {
+  delete(uuid: string, options?: RequestOptions): APIPromise<DoagentDeleteResponse> {
     return this._client.delete(path`/v2/gen-ai/agents/${uuid}`, {
       defaultBaseURL: 'https://api.digitalocean.com',
       ...options,
@@ -136,9 +136,9 @@ export class Agents extends APIResource {
    */
   updateStatus(
     pathUuid: string,
-    body: AgentUpdateStatusParams,
+    body: DoagentUpdateStatusParams,
     options?: RequestOptions,
-  ): APIPromise<AgentUpdateStatusResponse> {
+  ): APIPromise<DoagentUpdateStatusResponse> {
     return this._client.put(path`/v2/gen-ai/agents/${pathUuid}/deployment_visibility`, {
       body,
       defaultBaseURL: 'https://api.digitalocean.com',
@@ -274,7 +274,7 @@ export namespace APIAgent {
 
     uuid?: string;
 
-    visibility?: AgentsAPI.APIDeploymentVisibility;
+    visibility?: DoagentsAPI.APIDeploymentVisibility;
   }
 
   export interface Function {
@@ -622,27 +622,27 @@ export type APIRetrievalMethod =
   | 'RETRIEVAL_METHOD_SUB_QUERIES'
   | 'RETRIEVAL_METHOD_NONE';
 
-export interface AgentCreateResponse {
+export interface DoagentCreateResponse {
   agent?: APIAgent;
 }
 
-export interface AgentRetrieveResponse {
+export interface DoagentRetrieveResponse {
   agent?: APIAgent;
 }
 
-export interface AgentUpdateResponse {
+export interface DoagentUpdateResponse {
   agent?: APIAgent;
 }
 
-export interface AgentListResponse {
-  agents?: Array<AgentListResponse.Agent>;
+export interface DoagentListResponse {
+  agents?: Array<DoagentListResponse.Agent>;
 
   links?: VersionsAPI.APILinks;
 
   meta?: VersionsAPI.APIMeta;
 }
 
-export namespace AgentListResponse {
+export namespace DoagentListResponse {
   export interface Agent {
     chatbot?: Agent.Chatbot;
 
@@ -683,7 +683,7 @@ export namespace AgentListResponse {
 
     region?: string;
 
-    retrieval_method?: AgentsAPI.APIRetrievalMethod;
+    retrieval_method?: DoagentsAPI.APIRetrievalMethod;
 
     route_created_at?: string;
 
@@ -761,7 +761,7 @@ export namespace AgentListResponse {
 
       uuid?: string;
 
-      visibility?: AgentsAPI.APIDeploymentVisibility;
+      visibility?: DoagentsAPI.APIDeploymentVisibility;
     }
 
     export interface Model {
@@ -932,15 +932,15 @@ export namespace AgentListResponse {
   }
 }
 
-export interface AgentDeleteResponse {
+export interface DoagentDeleteResponse {
   agent?: APIAgent;
 }
 
-export interface AgentUpdateStatusResponse {
+export interface DoagentUpdateStatusResponse {
   agent?: APIAgent;
 }
 
-export interface AgentCreateParams {
+export interface DoagentCreateParams {
   anthropic_key_uuid?: string;
 
   description?: string;
@@ -971,7 +971,7 @@ export interface AgentCreateParams {
   tags?: Array<string>;
 }
 
-export interface AgentUpdateParams {
+export interface DoagentUpdateParams {
   anthropic_key_uuid?: string;
 
   description?: string;
@@ -1027,7 +1027,7 @@ export interface AgentUpdateParams {
   body_uuid?: string;
 }
 
-export interface AgentListParams {
+export interface DoagentListParams {
   /**
    * only list agents that are deployed.
    */
@@ -1044,19 +1044,19 @@ export interface AgentListParams {
   per_page?: number;
 }
 
-export interface AgentUpdateStatusParams {
+export interface DoagentUpdateStatusParams {
   body_uuid?: string;
 
   visibility?: APIDeploymentVisibility;
 }
 
-Agents.APIKeys = APIKeys;
-Agents.Functions = Functions;
-Agents.Versions = Versions;
-Agents.KnowledgeBases = KnowledgeBases;
-Agents.ChildAgents = ChildAgents;
+Doagents.APIKeys = APIKeys;
+Doagents.Functions = Functions;
+Doagents.Versions = Versions;
+Doagents.KnowledgeBases = KnowledgeBases;
+Doagents.ChildAgents = ChildAgents;
 
-export declare namespace Agents {
+export declare namespace Doagents {
   export {
     type APIAgent as APIAgent,
     type APIAgentAPIKeyInfo as APIAgentAPIKeyInfo,
@@ -1064,16 +1064,16 @@ export declare namespace Agents {
     type APIDeploymentVisibility as APIDeploymentVisibility,
     type APIOpenAIAPIKeyInfo as APIOpenAIAPIKeyInfo,
     type APIRetrievalMethod as APIRetrievalMethod,
-    type AgentCreateResponse as AgentCreateResponse,
-    type AgentRetrieveResponse as AgentRetrieveResponse,
-    type AgentUpdateResponse as AgentUpdateResponse,
-    type AgentListResponse as AgentListResponse,
-    type AgentDeleteResponse as AgentDeleteResponse,
-    type AgentUpdateStatusResponse as AgentUpdateStatusResponse,
-    type AgentCreateParams as AgentCreateParams,
-    type AgentUpdateParams as AgentUpdateParams,
-    type AgentListParams as AgentListParams,
-    type AgentUpdateStatusParams as AgentUpdateStatusParams,
+    type DoagentCreateResponse as DoagentCreateResponse,
+    type DoagentRetrieveResponse as DoagentRetrieveResponse,
+    type DoagentUpdateResponse as DoagentUpdateResponse,
+    type DoagentListResponse as DoagentListResponse,
+    type DoagentDeleteResponse as DoagentDeleteResponse,
+    type DoagentUpdateStatusResponse as DoagentUpdateStatusResponse,
+    type DoagentCreateParams as DoagentCreateParams,
+    type DoagentUpdateParams as DoagentUpdateParams,
+    type DoagentListParams as DoagentListParams,
+    type DoagentUpdateStatusParams as DoagentUpdateStatusParams,
   };
 
   export {

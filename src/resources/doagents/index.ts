@@ -14,25 +14,6 @@ export {
   type APIKeyRegenerateParams,
 } from './api-keys';
 export {
-  Agents,
-  type APIAgent,
-  type APIAgentAPIKeyInfo,
-  type APIAnthropicAPIKeyInfo,
-  type APIDeploymentVisibility,
-  type APIOpenAIAPIKeyInfo,
-  type APIRetrievalMethod,
-  type AgentCreateResponse,
-  type AgentRetrieveResponse,
-  type AgentUpdateResponse,
-  type AgentListResponse,
-  type AgentDeleteResponse,
-  type AgentUpdateStatusResponse,
-  type AgentCreateParams,
-  type AgentUpdateParams,
-  type AgentListParams,
-  type AgentUpdateStatusParams,
-} from './agents';
-export {
   ChildAgents,
   type ChildAgentUpdateResponse,
   type ChildAgentDeleteResponse,
@@ -42,6 +23,25 @@ export {
   type ChildAgentDeleteParams,
   type ChildAgentAddParams,
 } from './child-agents';
+export {
+  Doagents,
+  type APIAgent,
+  type APIAgentAPIKeyInfo,
+  type APIAnthropicAPIKeyInfo,
+  type APIDeploymentVisibility,
+  type APIOpenAIAPIKeyInfo,
+  type APIRetrievalMethod,
+  type DoagentCreateResponse,
+  type DoagentRetrieveResponse,
+  type DoagentUpdateResponse,
+  type DoagentListResponse,
+  type DoagentDeleteResponse,
+  type DoagentUpdateStatusResponse,
+  type DoagentCreateParams,
+  type DoagentUpdateParams,
+  type DoagentListParams,
+  type DoagentUpdateStatusParams,
+} from './doagents';
 export {
   Functions,
   type FunctionCreateResponse,
