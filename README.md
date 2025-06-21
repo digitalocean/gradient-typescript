@@ -26,7 +26,7 @@ The full API of this library can be found in [api.md](api.md).
 import GradientAI from 'gradientai';
 
 const client = new GradientAI({
-  apiKey: process.env['DIGITALOCEAN_GENAI_SDK_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env['DIGITALOCEAN_GRADIENTAI_API_KEY'], // This is the default and can be omitted
 });
 
 const versions = await client.agents.versions.list('REPLACE_ME');
@@ -43,7 +43,7 @@ This library includes TypeScript definitions for all request params and response
 import GradientAI from 'gradientai';
 
 const client = new GradientAI({
-  apiKey: process.env['DIGITALOCEAN_GENAI_SDK_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env['DIGITALOCEAN_GRADIENTAI_API_KEY'], // This is the default and can be omitted
 });
 
 const versions: GradientAI.Agents.VersionListResponse = await client.agents.versions.list('REPLACE_ME');
