@@ -80,7 +80,7 @@ import { isEmptyObj } from './internal/utils/values';
 
 export interface ClientOptions {
   /**
-   * Defaults to process.env['DIGITALOCEAN_GENAI_SDK_API_KEY'].
+   * Defaults to process.env['DIGITALOCEAN_GRADIENTAI_API_KEY'].
    */
   apiKey?: string | undefined;
 
@@ -172,7 +172,7 @@ export class GradientAI {
   /**
    * API Client for interfacing with the Gradient AI API.
    *
-   * @param {string | undefined} [opts.apiKey=process.env['DIGITALOCEAN_GENAI_SDK_API_KEY'] ?? undefined]
+   * @param {string | undefined} [opts.apiKey=process.env['DIGITALOCEAN_GRADIENTAI_API_KEY'] ?? undefined]
    * @param {string} [opts.baseURL=process.env['GRADIENT_AI_BASE_URL'] ?? https://api.digitalocean.com/] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
@@ -183,12 +183,12 @@ export class GradientAI {
    */
   constructor({
     baseURL = readEnv('GRADIENT_AI_BASE_URL'),
-    apiKey = readEnv('DIGITALOCEAN_GENAI_SDK_API_KEY'),
+    apiKey = readEnv('DIGITALOCEAN_GRADIENTAI_API_KEY'),
     ...opts
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
       throw new Errors.GradientAIError(
-        "The DIGITALOCEAN_GENAI_SDK_API_KEY environment variable is missing or empty; either provide it, or instantiate the GradientAI client with an apiKey option, like new GradientAI({ apiKey: 'My API Key' }).",
+        "The DIGITALOCEAN_GRADIENTAI_API_KEY environment variable is missing or empty; either provide it, or instantiate the GradientAI client with an apiKey option, like new GradientAI({ apiKey: 'My API Key' }).",
       );
     }
 
