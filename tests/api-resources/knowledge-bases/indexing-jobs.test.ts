@@ -10,7 +10,7 @@ const client = new GradientAI({
 describe('resource indexingJobs', () => {
   // skipped: tests are disabled for the time being
   test.skip('create', async () => {
-    const responsePromise = client.indexingJobs.create({});
+    const responsePromise = client.knowledgeBases.indexingJobs.create({});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,7 +22,7 @@ describe('resource indexingJobs', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('retrieve', async () => {
-    const responsePromise = client.indexingJobs.retrieve('uuid');
+    const responsePromise = client.knowledgeBases.indexingJobs.retrieve('uuid');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -34,7 +34,7 @@ describe('resource indexingJobs', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('list', async () => {
-    const responsePromise = client.indexingJobs.list();
+    const responsePromise = client.knowledgeBases.indexingJobs.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -48,13 +48,13 @@ describe('resource indexingJobs', () => {
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.indexingJobs.list({ page: 0, per_page: 0 }, { path: '/_stainless_unknown_path' }),
+      client.knowledgeBases.indexingJobs.list({ page: 0, per_page: 0 }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(GradientAI.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
   test.skip('retrieveDataSources', async () => {
-    const responsePromise = client.indexingJobs.retrieveDataSources('indexing_job_uuid');
+    const responsePromise = client.knowledgeBases.indexingJobs.retrieveDataSources('indexing_job_uuid');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -66,7 +66,7 @@ describe('resource indexingJobs', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('updateCancel', async () => {
-    const responsePromise = client.indexingJobs.updateCancel('uuid', {});
+    const responsePromise = client.knowledgeBases.indexingJobs.updateCancel('uuid', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
