@@ -94,8 +94,6 @@ export {
 } from './routes';
 export {
   Versions,
-  type APILinks,
-  type APIMeta,
   type VersionUpdateResponse,
   type VersionListResponse,
   type VersionUpdateParams,

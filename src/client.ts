@@ -828,4 +828,7 @@ export declare namespace GradientAI {
     type ModelListResponse as ModelListResponse,
     type ModelListParams as ModelListParams,
   };
+
+  export type APILinks = API.APILinks;
+  export type APIMeta = API.APIMeta;
 }

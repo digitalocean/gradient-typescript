@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as AgentsAPI from './agents';
 import * as ModelsAPI from '../models';
+import * as Shared from '../shared';
 import * as APIKeysAPI from './api-keys';
 import {
   APIKeyCreateParams,
@@ -84,8 +85,6 @@ import {
 } from './routes';
 import * as VersionsAPI from './versions';
 import {
-  APILinks,
-  APIMeta,
   VersionListParams,
   VersionListResponse,
   VersionUpdateParams,
@@ -563,9 +562,9 @@ export interface AgentUpdateResponse {
 export interface AgentListResponse {
   agents?: Array<AgentListResponse.Agent>;
 
-  links?: VersionsAPI.APILinks;
+  links?: Shared.APILinks;
 
-  meta?: VersionsAPI.APIMeta;
+  meta?: Shared.APIMeta;
 }
 
 export namespace AgentListResponse {
@@ -953,8 +952,6 @@ export declare namespace Agents {
 
   export {
     Versions as Versions,
-    type APILinks as APILinks,
-    type APIMeta as APIMeta,
     type VersionUpdateResponse as VersionUpdateResponse,
     type VersionListResponse as VersionListResponse,
     type VersionUpdateParams as VersionUpdateParams,

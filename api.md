@@ -1,3 +1,10 @@
+# Shared
+
+Types:
+
+- <code><a href="./src/resources/shared.ts">APILinks</a></code>
+- <code><a href="./src/resources/shared.ts">APIMeta</a></code>
+
 # Agents
 
 Types:
@@ -122,8 +129,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/agents/versions.ts">APILinks</a></code>
-- <code><a href="./src/resources/agents/versions.ts">APIMeta</a></code>
 - <code><a href="./src/resources/agents/versions.ts">VersionUpdateResponse</a></code>
 - <code><a href="./src/resources/agents/versions.ts">VersionListResponse</a></code>
 

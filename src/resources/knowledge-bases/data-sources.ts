@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as VersionsAPI from '../agents/versions';
+import * as Shared from '../shared';
 import * as IndexingJobsAPI from './indexing-jobs';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
@@ -155,9 +155,9 @@ export interface DataSourceCreateResponse {
 export interface DataSourceListResponse {
   knowledge_base_data_sources?: Array<APIKnowledgeBaseDataSource>;
 
-  links?: VersionsAPI.APILinks;
+  links?: Shared.APILinks;
 
-  meta?: VersionsAPI.APIMeta;
+  meta?: Shared.APIMeta;
 }
 
 export interface DataSourceDeleteResponse {
