@@ -76,6 +76,42 @@ export class IndexingJobs extends APIResource {
   }
 }
 
+export interface APIIndexedDataSource {
+  completed_at?: string;
+
+  data_source_uuid?: string;
+
+  error_details?: string;
+
+  error_msg?: string;
+
+  failed_item_count?: string;
+
+  indexed_file_count?: string;
+
+  indexed_item_count?: string;
+
+  removed_item_count?: string;
+
+  skipped_item_count?: string;
+
+  started_at?: string;
+
+  status?:
+    | 'DATA_SOURCE_STATUS_UNKNOWN'
+    | 'DATA_SOURCE_STATUS_IN_PROGRESS'
+    | 'DATA_SOURCE_STATUS_UPDATED'
+    | 'DATA_SOURCE_STATUS_PARTIALLY_UPDATED'
+    | 'DATA_SOURCE_STATUS_NOT_UPDATED'
+    | 'DATA_SOURCE_STATUS_FAILED';
+
+  total_bytes?: string;
+
+  total_bytes_indexed?: string;
+
+  total_file_count?: string;
+}
+
 export interface APIIndexingJob {
   completed_datasources?: number;
 
@@ -97,6 +133,15 @@ export interface APIIndexingJob {
     | 'BATCH_JOB_PHASE_CANCELLED';
 
   started_at?: string;
+
+  status?:
+    | 'INDEX_JOB_STATUS_UNKNOWN'
+    | 'INDEX_JOB_STATUS_PARTIAL'
+    | 'INDEX_JOB_STATUS_IN_PROGRESS'
+    | 'INDEX_JOB_STATUS_COMPLETED'
+    | 'INDEX_JOB_STATUS_FAILED'
+    | 'INDEX_JOB_STATUS_NO_CHANGES'
+    | 'INDEX_JOB_STATUS_PENDING';
 
   tokens?: number;
 
@@ -124,45 +169,7 @@ export interface IndexingJobListResponse {
 }
 
 export interface IndexingJobRetrieveDataSourcesResponse {
-  indexed_data_sources?: Array<IndexingJobRetrieveDataSourcesResponse.IndexedDataSource>;
-}
-
-export namespace IndexingJobRetrieveDataSourcesResponse {
-  export interface IndexedDataSource {
-    completed_at?: string;
-
-    data_source_uuid?: string;
-
-    error_details?: string;
-
-    error_msg?: string;
-
-    failed_item_count?: string;
-
-    indexed_file_count?: string;
-
-    indexed_item_count?: string;
-
-    removed_item_count?: string;
-
-    skipped_item_count?: string;
-
-    started_at?: string;
-
-    status?:
-      | 'DATA_SOURCE_STATUS_UNKNOWN'
-      | 'DATA_SOURCE_STATUS_IN_PROGRESS'
-      | 'DATA_SOURCE_STATUS_UPDATED'
-      | 'DATA_SOURCE_STATUS_PARTIALLY_UPDATED'
-      | 'DATA_SOURCE_STATUS_NOT_UPDATED'
-      | 'DATA_SOURCE_STATUS_FAILED';
-
-    total_bytes?: string;
-
-    total_bytes_indexed?: string;
-
-    total_file_count?: string;
-  }
+  indexed_data_sources?: Array<APIIndexedDataSource>;
 }
 
 export interface IndexingJobUpdateCancelResponse {
@@ -196,6 +203,7 @@ export interface IndexingJobUpdateCancelParams {
 
 export declare namespace IndexingJobs {
   export {
+    type APIIndexedDataSource as APIIndexedDataSource,
     type APIIndexingJob as APIIndexingJob,
     type IndexingJobCreateResponse as IndexingJobCreateResponse,
     type IndexingJobRetrieveResponse as IndexingJobRetrieveResponse,

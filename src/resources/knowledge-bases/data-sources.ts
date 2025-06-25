@@ -82,6 +82,8 @@ export interface APIKnowledgeBaseDataSource {
 
   item_path?: string;
 
+  last_datasource_indexing_job?: IndexingJobsAPI.APIIndexedDataSource;
+
   last_indexing_job?: IndexingJobsAPI.APIIndexingJob;
 
   region?: string;

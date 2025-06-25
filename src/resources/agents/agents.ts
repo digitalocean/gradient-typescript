@@ -26,8 +26,6 @@ import {
   EvaluationDatasetCreateResponse,
   EvaluationDatasets,
 } from './evaluation-datasets';
-import * as EvaluationMetricsAPI from './evaluation-metrics';
-import { EvaluationMetricListResponse, EvaluationMetrics } from './evaluation-metrics';
 import * as EvaluationRunsAPI from './evaluation-runs';
 import {
   APIEvaluationMetric,
@@ -38,6 +36,8 @@ import {
   EvaluationRunCreateResponse,
   EvaluationRunListResultsResponse,
   EvaluationRunRetrieveResponse,
+  EvaluationRunRetrieveResultsParams,
+  EvaluationRunRetrieveResultsResponse,
   EvaluationRuns,
 } from './evaluation-runs';
 import * as EvaluationTestCasesAPI from './evaluation-test-cases';
@@ -49,6 +49,7 @@ import {
   EvaluationTestCaseListEvaluationRunsParams,
   EvaluationTestCaseListEvaluationRunsResponse,
   EvaluationTestCaseListResponse,
+  EvaluationTestCaseRetrieveParams,
   EvaluationTestCaseRetrieveResponse,
   EvaluationTestCaseUpdateParams,
   EvaluationTestCaseUpdateResponse,
@@ -92,6 +93,8 @@ import {
   Versions,
 } from './versions';
 import * as KnowledgeBasesKnowledgeBasesAPI from '../knowledge-bases/knowledge-bases';
+import * as EvaluationMetricsAPI from './evaluation-metrics/evaluation-metrics';
+import { EvaluationMetricListResponse, EvaluationMetrics } from './evaluation-metrics/evaluation-metrics';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
@@ -915,7 +918,9 @@ export declare namespace Agents {
     type EvaluationRunCreateResponse as EvaluationRunCreateResponse,
     type EvaluationRunRetrieveResponse as EvaluationRunRetrieveResponse,
     type EvaluationRunListResultsResponse as EvaluationRunListResultsResponse,
+    type EvaluationRunRetrieveResultsResponse as EvaluationRunRetrieveResultsResponse,
     type EvaluationRunCreateParams as EvaluationRunCreateParams,
+    type EvaluationRunRetrieveResultsParams as EvaluationRunRetrieveResultsParams,
   };
 
   export {
@@ -928,6 +933,7 @@ export declare namespace Agents {
     type EvaluationTestCaseListResponse as EvaluationTestCaseListResponse,
     type EvaluationTestCaseListEvaluationRunsResponse as EvaluationTestCaseListEvaluationRunsResponse,
     type EvaluationTestCaseCreateParams as EvaluationTestCaseCreateParams,
+    type EvaluationTestCaseRetrieveParams as EvaluationTestCaseRetrieveParams,
     type EvaluationTestCaseUpdateParams as EvaluationTestCaseUpdateParams,
     type EvaluationTestCaseListEvaluationRunsParams as EvaluationTestCaseListEvaluationRunsParams,
   };

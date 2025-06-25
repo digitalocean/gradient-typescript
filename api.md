@@ -55,11 +55,43 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/agents/evaluation-metrics.ts">EvaluationMetricListResponse</a></code>
+- <code><a href="./src/resources/agents/evaluation-metrics/evaluation-metrics.ts">EvaluationMetricListResponse</a></code>
 
 Methods:
 
-- <code title="get /v2/gen-ai/evaluation_metrics">client.agents.evaluationMetrics.<a href="./src/resources/agents/evaluation-metrics.ts">list</a>() -> EvaluationMetricListResponse</code>
+- <code title="get /v2/gen-ai/evaluation_metrics">client.agents.evaluationMetrics.<a href="./src/resources/agents/evaluation-metrics/evaluation-metrics.ts">list</a>() -> EvaluationMetricListResponse</code>
+
+### Workspaces
+
+Types:
+
+- <code><a href="./src/resources/agents/evaluation-metrics/workspaces/workspaces.ts">WorkspaceCreateResponse</a></code>
+- <code><a href="./src/resources/agents/evaluation-metrics/workspaces/workspaces.ts">WorkspaceRetrieveResponse</a></code>
+- <code><a href="./src/resources/agents/evaluation-metrics/workspaces/workspaces.ts">WorkspaceUpdateResponse</a></code>
+- <code><a href="./src/resources/agents/evaluation-metrics/workspaces/workspaces.ts">WorkspaceListResponse</a></code>
+- <code><a href="./src/resources/agents/evaluation-metrics/workspaces/workspaces.ts">WorkspaceDeleteResponse</a></code>
+- <code><a href="./src/resources/agents/evaluation-metrics/workspaces/workspaces.ts">WorkspaceListEvaluationTestCasesResponse</a></code>
+
+Methods:
+
+- <code title="post /v2/gen-ai/workspaces">client.agents.evaluationMetrics.workspaces.<a href="./src/resources/agents/evaluation-metrics/workspaces/workspaces.ts">create</a>({ ...params }) -> WorkspaceCreateResponse</code>
+- <code title="get /v2/gen-ai/workspaces/{workspace_uuid}">client.agents.evaluationMetrics.workspaces.<a href="./src/resources/agents/evaluation-metrics/workspaces/workspaces.ts">retrieve</a>(workspaceUuid) -> WorkspaceRetrieveResponse</code>
+- <code title="put /v2/gen-ai/workspaces/{workspace_uuid}">client.agents.evaluationMetrics.workspaces.<a href="./src/resources/agents/evaluation-metrics/workspaces/workspaces.ts">update</a>(workspaceUuid, { ...params }) -> WorkspaceUpdateResponse</code>
+- <code title="get /v2/gen-ai/workspaces">client.agents.evaluationMetrics.workspaces.<a href="./src/resources/agents/evaluation-metrics/workspaces/workspaces.ts">list</a>() -> WorkspaceListResponse</code>
+- <code title="delete /v2/gen-ai/workspaces/{workspace_uuid}">client.agents.evaluationMetrics.workspaces.<a href="./src/resources/agents/evaluation-metrics/workspaces/workspaces.ts">delete</a>(workspaceUuid) -> WorkspaceDeleteResponse</code>
+- <code title="get /v2/gen-ai/workspaces/{workspace_uuid}/evaluation_test_cases">client.agents.evaluationMetrics.workspaces.<a href="./src/resources/agents/evaluation-metrics/workspaces/workspaces.ts">listEvaluationTestCases</a>(workspaceUuid) -> WorkspaceListEvaluationTestCasesResponse</code>
+
+#### Agents
+
+Types:
+
+- <code><a href="./src/resources/agents/evaluation-metrics/workspaces/agents.ts">AgentListResponse</a></code>
+- <code><a href="./src/resources/agents/evaluation-metrics/workspaces/agents.ts">AgentMoveResponse</a></code>
+
+Methods:
+
+- <code title="get /v2/gen-ai/workspaces/{workspace_uuid}/agents">client.agents.evaluationMetrics.workspaces.agents.<a href="./src/resources/agents/evaluation-metrics/workspaces/agents.ts">list</a>(workspaceUuid, { ...params }) -> AgentListResponse</code>
+- <code title="put /v2/gen-ai/workspaces/{workspace_uuid}/agents">client.agents.evaluationMetrics.workspaces.agents.<a href="./src/resources/agents/evaluation-metrics/workspaces/agents.ts">move</a>(workspaceUuid, { ...params }) -> AgentMoveResponse</code>
 
 ## EvaluationRuns
 
@@ -72,12 +104,14 @@ Types:
 - <code><a href="./src/resources/agents/evaluation-runs.ts">EvaluationRunCreateResponse</a></code>
 - <code><a href="./src/resources/agents/evaluation-runs.ts">EvaluationRunRetrieveResponse</a></code>
 - <code><a href="./src/resources/agents/evaluation-runs.ts">EvaluationRunListResultsResponse</a></code>
+- <code><a href="./src/resources/agents/evaluation-runs.ts">EvaluationRunRetrieveResultsResponse</a></code>
 
 Methods:
 
 - <code title="post /v2/gen-ai/evaluation_runs">client.agents.evaluationRuns.<a href="./src/resources/agents/evaluation-runs.ts">create</a>({ ...params }) -> EvaluationRunCreateResponse</code>
 - <code title="get /v2/gen-ai/evaluation_runs/{evaluation_run_uuid}">client.agents.evaluationRuns.<a href="./src/resources/agents/evaluation-runs.ts">retrieve</a>(evaluationRunUuid) -> EvaluationRunRetrieveResponse</code>
 - <code title="get /v2/gen-ai/evaluation_runs/{evaluation_run_uuid}/results">client.agents.evaluationRuns.<a href="./src/resources/agents/evaluation-runs.ts">listResults</a>(evaluationRunUuid) -> EvaluationRunListResultsResponse</code>
+- <code title="get /v2/gen-ai/evaluation_runs/{evaluation_run_uuid}/results/{prompt_id}">client.agents.evaluationRuns.<a href="./src/resources/agents/evaluation-runs.ts">retrieveResults</a>(promptID, { ...params }) -> EvaluationRunRetrieveResultsResponse</code>
 
 ## EvaluationTestCases
 
@@ -94,7 +128,7 @@ Types:
 Methods:
 
 - <code title="post /v2/gen-ai/evaluation_test_cases">client.agents.evaluationTestCases.<a href="./src/resources/agents/evaluation-test-cases.ts">create</a>({ ...params }) -> EvaluationTestCaseCreateResponse</code>
-- <code title="get /v2/gen-ai/evaluation_test_cases/{test_case_uuid}">client.agents.evaluationTestCases.<a href="./src/resources/agents/evaluation-test-cases.ts">retrieve</a>(testCaseUuid) -> EvaluationTestCaseRetrieveResponse</code>
+- <code title="get /v2/gen-ai/evaluation_test_cases/{test_case_uuid}">client.agents.evaluationTestCases.<a href="./src/resources/agents/evaluation-test-cases.ts">retrieve</a>(testCaseUuid, { ...params }) -> EvaluationTestCaseRetrieveResponse</code>
 - <code title="post /v2/gen-ai/evaluation_test_cases/{test_case_uuid}">client.agents.evaluationTestCases.<a href="./src/resources/agents/evaluation-test-cases.ts">update</a>(testCaseUuid, { ...params }) -> EvaluationTestCaseUpdateResponse</code>
 - <code title="get /v2/gen-ai/evaluation_test_cases">client.agents.evaluationTestCases.<a href="./src/resources/agents/evaluation-test-cases.ts">list</a>() -> EvaluationTestCaseListResponse</code>
 - <code title="get /v2/gen-ai/evaluation_test_cases/{evaluation_test_case_uuid}/evaluation_runs">client.agents.evaluationTestCases.<a href="./src/resources/agents/evaluation-test-cases.ts">listEvaluationRuns</a>(evaluationTestCaseUuid, { ...params }) -> EvaluationTestCaseListEvaluationRunsResponse</code>
@@ -264,6 +298,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/knowledge-bases/indexing-jobs.ts">APIIndexedDataSource</a></code>
 - <code><a href="./src/resources/knowledge-bases/indexing-jobs.ts">APIIndexingJob</a></code>
 - <code><a href="./src/resources/knowledge-bases/indexing-jobs.ts">IndexingJobCreateResponse</a></code>
 - <code><a href="./src/resources/knowledge-bases/indexing-jobs.ts">IndexingJobRetrieveResponse</a></code>
@@ -320,8 +355,10 @@ Types:
 - <code><a href="./src/resources/models.ts">APIAgreement</a></code>
 - <code><a href="./src/resources/models.ts">APIModel</a></code>
 - <code><a href="./src/resources/models.ts">APIModelVersion</a></code>
+- <code><a href="./src/resources/models.ts">Model</a></code>
 - <code><a href="./src/resources/models.ts">ModelListResponse</a></code>
 
 Methods:
 
-- <code title="get /v2/gen-ai/models">client.models.<a href="./src/resources/models.ts">list</a>({ ...params }) -> ModelListResponse</code>
+- <code title="get /models/{model}">client.models.<a href="./src/resources/models.ts">retrieve</a>(model) -> Model</code>
+- <code title="get /models">client.models.<a href="./src/resources/models.ts">list</a>() -> ModelListResponse</code>

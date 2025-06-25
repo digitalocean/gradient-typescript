@@ -41,7 +41,7 @@ export {
   type EvaluationDatasetCreateParams,
   type EvaluationDatasetCreateFileUploadPresignedURLsParams,
 } from './evaluation-datasets';
-export { EvaluationMetrics, type EvaluationMetricListResponse } from './evaluation-metrics';
+export { EvaluationMetrics, type EvaluationMetricListResponse } from './evaluation-metrics/index';
 export {
   EvaluationRuns,
   type APIEvaluationMetric,
@@ -51,7 +51,9 @@ export {
   type EvaluationRunCreateResponse,
   type EvaluationRunRetrieveResponse,
   type EvaluationRunListResultsResponse,
+  type EvaluationRunRetrieveResultsResponse,
   type EvaluationRunCreateParams,
+  type EvaluationRunRetrieveResultsParams,
 } from './evaluation-runs';
 export {
   EvaluationTestCases,
@@ -63,6 +65,7 @@ export {
   type EvaluationTestCaseListResponse,
   type EvaluationTestCaseListEvaluationRunsResponse,
   type EvaluationTestCaseCreateParams,
+  type EvaluationTestCaseRetrieveParams,
   type EvaluationTestCaseUpdateParams,
   type EvaluationTestCaseListEvaluationRunsParams,
 } from './evaluation-test-cases';

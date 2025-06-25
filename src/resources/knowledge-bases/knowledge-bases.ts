@@ -19,6 +19,7 @@ import {
 } from './data-sources';
 import * as IndexingJobsAPI from './indexing-jobs';
 import {
+  APIIndexedDataSource,
   APIIndexingJob,
   IndexingJobCreateParams,
   IndexingJobCreateResponse,
@@ -301,6 +302,7 @@ export declare namespace KnowledgeBases {
 
   export {
     IndexingJobs as IndexingJobs,
+    type APIIndexedDataSource as APIIndexedDataSource,
     type APIIndexingJob as APIIndexingJob,
     type IndexingJobCreateResponse as IndexingJobCreateResponse,
     type IndexingJobRetrieveResponse as IndexingJobRetrieveResponse,

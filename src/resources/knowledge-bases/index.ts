@@ -16,6 +16,7 @@ export {
 } from './data-sources';
 export {
   IndexingJobs,
+  type APIIndexedDataSource,
   type APIIndexingJob,
   type IndexingJobCreateResponse,
   type IndexingJobRetrieveResponse,

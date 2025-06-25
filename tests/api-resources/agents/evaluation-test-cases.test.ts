@@ -34,6 +34,18 @@ describe('resource evaluationTestCases', () => {
   });
 
   // skipped: tests are disabled for the time being
+  test.skip('retrieve: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.agents.evaluationTestCases.retrieve(
+        'test_case_uuid',
+        { evaluation_test_case_version: 0 },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(GradientAI.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('update', async () => {
     const responsePromise = client.agents.evaluationTestCases.update('test_case_uuid', {});
     const rawResponse = await responsePromise.asResponse();
