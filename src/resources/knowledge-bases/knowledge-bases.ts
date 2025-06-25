@@ -9,6 +9,7 @@ import {
   APIKnowledgeBaseDataSource,
   APISpacesDataSource,
   APIWebCrawlerDataSource,
+  AwsDataSource,
   DataSourceCreateParams,
   DataSourceCreateResponse,
   DataSourceDeleteParams,
@@ -200,7 +201,7 @@ export interface KnowledgeBaseCreateParams {
 
 export namespace KnowledgeBaseCreateParams {
   export interface Datasource {
-    aws_data_source?: Datasource.AwsDataSource;
+    aws_data_source?: DataSourcesAPI.AwsDataSource;
 
     bucket_name?: string;
 
@@ -216,20 +217,6 @@ export namespace KnowledgeBaseCreateParams {
     spaces_data_source?: DataSourcesAPI.APISpacesDataSource;
 
     web_crawler_data_source?: DataSourcesAPI.APIWebCrawlerDataSource;
-  }
-
-  export namespace Datasource {
-    export interface AwsDataSource {
-      bucket_name?: string;
-
-      item_path?: string;
-
-      key_id?: string;
-
-      region?: string;
-
-      secret_key?: string;
-    }
   }
 }
 
@@ -289,6 +276,7 @@ export declare namespace KnowledgeBases {
     type APIKnowledgeBaseDataSource as APIKnowledgeBaseDataSource,
     type APISpacesDataSource as APISpacesDataSource,
     type APIWebCrawlerDataSource as APIWebCrawlerDataSource,
+    type AwsDataSource as AwsDataSource,
     type DataSourceCreateResponse as DataSourceCreateResponse,
     type DataSourceListResponse as DataSourceListResponse,
     type DataSourceDeleteResponse as DataSourceDeleteResponse,

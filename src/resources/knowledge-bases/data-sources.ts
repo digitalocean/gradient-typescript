@@ -136,6 +136,18 @@ export interface APIWebCrawlerDataSource {
   embed_media?: boolean;
 }
 
+export interface AwsDataSource {
+  bucket_name?: string;
+
+  item_path?: string;
+
+  key_id?: string;
+
+  region?: string;
+
+  secret_key?: string;
+}
+
 export interface DataSourceCreateResponse {
   knowledge_base_data_source?: APIKnowledgeBaseDataSource;
 }
@@ -155,27 +167,13 @@ export interface DataSourceDeleteResponse {
 }
 
 export interface DataSourceCreateParams {
-  aws_data_source?: DataSourceCreateParams.AwsDataSource;
+  aws_data_source?: AwsDataSource;
 
   body_knowledge_base_uuid?: string;
 
   spaces_data_source?: APISpacesDataSource;
 
   web_crawler_data_source?: APIWebCrawlerDataSource;
-}
-
-export namespace DataSourceCreateParams {
-  export interface AwsDataSource {
-    bucket_name?: string;
-
-    item_path?: string;
-
-    key_id?: string;
-
-    region?: string;
-
-    secret_key?: string;
-  }
 }
 
 export interface DataSourceListParams {
@@ -203,6 +201,7 @@ export declare namespace DataSources {
     type APIKnowledgeBaseDataSource as APIKnowledgeBaseDataSource,
     type APISpacesDataSource as APISpacesDataSource,
     type APIWebCrawlerDataSource as APIWebCrawlerDataSource,
+    type AwsDataSource as AwsDataSource,
     type DataSourceCreateResponse as DataSourceCreateResponse,
     type DataSourceListResponse as DataSourceListResponse,
     type DataSourceDeleteResponse as DataSourceDeleteResponse,

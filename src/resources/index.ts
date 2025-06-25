@@ -4,10 +4,12 @@ export {
   Agents,
   type APIAgent,
   type APIAgentAPIKeyInfo,
+  type APIAgentModel,
   type APIAnthropicAPIKeyInfo,
   type APIDeploymentVisibility,
   type APIOpenAIAPIKeyInfo,
   type APIRetrievalMethod,
+  type APIWorkspace,
   type AgentCreateResponse,
   type AgentRetrieveResponse,
   type AgentUpdateResponse,
@@ -45,6 +47,18 @@ export {
   type KnowledgeBaseUpdateParams,
   type KnowledgeBaseListParams,
 } from './knowledge-bases/knowledge-bases';
-export { Models, type APIModel, type ModelListResponse, type ModelListParams } from './models';
+export {
+  Models,
+  type APIAgreement,
+  type APIModel,
+  type APIModelVersion,
+  type ModelListResponse,
+  type ModelListParams,
+} from './models';
 export { Providers } from './providers/providers';
-export { Regions, type RegionListResponse, type RegionListParams } from './regions';
+export {
+  Regions,
+  type APIEvaluationMetric,
+  type RegionListResponse,
+  type RegionListParams,
+} from './regions/regions';
