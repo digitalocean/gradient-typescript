@@ -35,16 +35,6 @@ export {
   type AgentUpdateStatusParams,
 } from './agents';
 export {
-  ChildAgents,
-  type ChildAgentUpdateResponse,
-  type ChildAgentDeleteResponse,
-  type ChildAgentAddResponse,
-  type ChildAgentViewResponse,
-  type ChildAgentUpdateParams,
-  type ChildAgentDeleteParams,
-  type ChildAgentAddParams,
-} from './child-agents';
-export {
   EvaluationDatasets,
   type EvaluationDatasetCreateResponse,
   type EvaluationDatasetCreateFileUploadPresignedURLsResponse,
@@ -92,6 +82,16 @@ export {
   type KnowledgeBaseAttachSingleParams,
   type KnowledgeBaseDetachParams,
 } from './knowledge-bases';
+export {
+  Routes,
+  type RouteUpdateResponse,
+  type RouteDeleteResponse,
+  type RouteAddResponse,
+  type RouteViewResponse,
+  type RouteUpdateParams,
+  type RouteDeleteParams,
+  type RouteAddParams,
+} from './routes';
 export {
   Versions,
   type APILinks,

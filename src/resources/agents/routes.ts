@@ -6,16 +6,16 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class ChildAgents extends APIResource {
+export class Routes extends APIResource {
   /**
    * To update an agent route for an agent, send a PUT request to
    * `/v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}`.
    */
   update(
     childAgentUuid: string,
-    params: ChildAgentUpdateParams,
+    params: RouteUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<ChildAgentUpdateResponse> {
+  ): APIPromise<RouteUpdateResponse> {
     const { path_parent_agent_uuid, ...body } = params;
     return this._client.put(
       path`/v2/gen-ai/agents/${path_parent_agent_uuid}/child_agents/${childAgentUuid}`,
@@ -29,9 +29,9 @@ export class ChildAgents extends APIResource {
    */
   delete(
     childAgentUuid: string,
-    params: ChildAgentDeleteParams,
+    params: RouteDeleteParams,
     options?: RequestOptions,
-  ): APIPromise<ChildAgentDeleteResponse> {
+  ): APIPromise<RouteDeleteResponse> {
     const { parent_agent_uuid } = params;
     return this._client.delete(path`/v2/gen-ai/agents/${parent_agent_uuid}/child_agents/${childAgentUuid}`, {
       defaultBaseURL: 'https://api.digitalocean.com',
@@ -45,9 +45,9 @@ export class ChildAgents extends APIResource {
    */
   add(
     childAgentUuid: string,
-    params: ChildAgentAddParams,
+    params: RouteAddParams,
     options?: RequestOptions,
-  ): APIPromise<ChildAgentAddResponse> {
+  ): APIPromise<RouteAddResponse> {
     const { path_parent_agent_uuid, ...body } = params;
     return this._client.post(
       path`/v2/gen-ai/agents/${path_parent_agent_uuid}/child_agents/${childAgentUuid}`,
@@ -59,7 +59,7 @@ export class ChildAgents extends APIResource {
    * To view agent routes for an agent, send a GET requtest to
    * `/v2/gen-ai/agents/{uuid}/child_agents`.
    */
-  view(uuid: string, options?: RequestOptions): APIPromise<ChildAgentViewResponse> {
+  view(uuid: string, options?: RequestOptions): APIPromise<RouteViewResponse> {
     return this._client.get(path`/v2/gen-ai/agents/${uuid}/child_agents`, {
       defaultBaseURL: 'https://api.digitalocean.com',
       ...options,
@@ -67,7 +67,7 @@ export class ChildAgents extends APIResource {
   }
 }
 
-export interface ChildAgentUpdateResponse {
+export interface RouteUpdateResponse {
   child_agent_uuid?: string;
 
   /**
@@ -80,13 +80,13 @@ export interface ChildAgentUpdateResponse {
   uuid?: string;
 }
 
-export interface ChildAgentDeleteResponse {
+export interface RouteDeleteResponse {
   child_agent_uuid?: string;
 
   parent_agent_uuid?: string;
 }
 
-export interface ChildAgentAddResponse {
+export interface RouteAddResponse {
   child_agent_uuid?: string;
 
   /**
@@ -95,11 +95,11 @@ export interface ChildAgentAddResponse {
   parent_agent_uuid?: string;
 }
 
-export interface ChildAgentViewResponse {
+export interface RouteViewResponse {
   children?: Array<AgentsAPI.APIAgent>;
 }
 
-export interface ChildAgentUpdateParams {
+export interface RouteUpdateParams {
   /**
    * Path param: A unique identifier for the parent agent.
    */
@@ -131,14 +131,14 @@ export interface ChildAgentUpdateParams {
   uuid?: string;
 }
 
-export interface ChildAgentDeleteParams {
+export interface RouteDeleteParams {
   /**
    * pagent agent id
    */
   parent_agent_uuid: string;
 }
 
-export interface ChildAgentAddParams {
+export interface RouteAddParams {
   /**
    * Path param: A unique identifier for the parent agent.
    */
@@ -165,14 +165,14 @@ export interface ChildAgentAddParams {
   route_name?: string;
 }
 
-export declare namespace ChildAgents {
+export declare namespace Routes {
   export {
-    type ChildAgentUpdateResponse as ChildAgentUpdateResponse,
-    type ChildAgentDeleteResponse as ChildAgentDeleteResponse,
-    type ChildAgentAddResponse as ChildAgentAddResponse,
-    type ChildAgentViewResponse as ChildAgentViewResponse,
-    type ChildAgentUpdateParams as ChildAgentUpdateParams,
-    type ChildAgentDeleteParams as ChildAgentDeleteParams,
-    type ChildAgentAddParams as ChildAgentAddParams,
+    type RouteUpdateResponse as RouteUpdateResponse,
+    type RouteDeleteResponse as RouteDeleteResponse,
+    type RouteAddResponse as RouteAddResponse,
+    type RouteViewResponse as RouteViewResponse,
+    type RouteUpdateParams as RouteUpdateParams,
+    type RouteDeleteParams as RouteDeleteParams,
+    type RouteAddParams as RouteAddParams,
   };
 }

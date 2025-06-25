@@ -61,7 +61,7 @@ import {
   KnowledgeBaseUpdateResponse,
   KnowledgeBases,
 } from './resources/knowledge-bases/knowledge-bases';
-import { Providers } from './resources/providers/providers';
+import { ModelProviders } from './resources/model-providers/model-providers';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -739,7 +739,7 @@ export class GradientAI {
   static toFile = Uploads.toFile;
 
   agents: API.Agents = new API.Agents(this);
-  providers: API.Providers = new API.Providers(this);
+  modelProviders: API.ModelProviders = new API.ModelProviders(this);
   regions: API.Regions = new API.Regions(this);
   knowledgeBases: API.KnowledgeBases = new API.KnowledgeBases(this);
   chat: API.Chat = new API.Chat(this);
@@ -747,7 +747,7 @@ export class GradientAI {
   models: API.Models = new API.Models(this);
 }
 GradientAI.Agents = Agents;
-GradientAI.Providers = Providers;
+GradientAI.ModelProviders = ModelProviders;
 GradientAI.Regions = Regions;
 GradientAI.KnowledgeBases = KnowledgeBases;
 GradientAI.Chat = Chat;
@@ -778,7 +778,7 @@ export declare namespace GradientAI {
     type AgentUpdateStatusParams as AgentUpdateStatusParams,
   };
 
-  export { Providers as Providers };
+  export { ModelProviders as ModelProviders };
 
   export {
     Regions as Regions,
