@@ -29,14 +29,6 @@ import {
   IndexingJobUpdateCancelResponse,
   IndexingJobs,
 } from './resources/indexing-jobs';
-import {
-  APIAgreement,
-  APIModel,
-  APIModelVersion,
-  ModelListParams,
-  ModelListResponse,
-  Models,
-} from './resources/models';
 import { RegionListParams, RegionListResponse, Regions } from './resources/regions';
 import {
   APIAgent,
@@ -73,7 +65,14 @@ import {
   KnowledgeBaseUpdateResponse,
   KnowledgeBases,
 } from './resources/knowledge-bases/knowledge-bases';
-import { Providers } from './resources/providers/providers';
+import {
+  APIAgreement,
+  APIModel,
+  APIModelVersion,
+  ModelListParams,
+  ModelListResponse,
+  Models,
+} from './resources/models/models';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -751,7 +750,6 @@ export class GradientAI {
   static toFile = Uploads.toFile;
 
   agents: API.Agents = new API.Agents(this);
-  providers: API.Providers = new API.Providers(this);
   regions: API.Regions = new API.Regions(this);
   indexingJobs: API.IndexingJobs = new API.IndexingJobs(this);
   knowledgeBases: API.KnowledgeBases = new API.KnowledgeBases(this);
@@ -760,7 +758,6 @@ export class GradientAI {
   models: API.Models = new API.Models(this);
 }
 GradientAI.Agents = Agents;
-GradientAI.Providers = Providers;
 GradientAI.Regions = Regions;
 GradientAI.IndexingJobs = IndexingJobs;
 GradientAI.KnowledgeBases = KnowledgeBases;
@@ -791,8 +788,6 @@ export declare namespace GradientAI {
     type AgentListParams as AgentListParams,
     type AgentUpdateStatusParams as AgentUpdateStatusParams,
   };
-
-  export { Providers as Providers };
 
   export {
     Regions as Regions,
