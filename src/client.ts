@@ -79,7 +79,12 @@ export interface ClientOptions {
   /**
    * Defaults to process.env['GRADIENTAI_API_KEY'].
    */
-  apiKey?: string | undefined;
+  apiKey?: string | null | undefined;
+
+  /**
+   * Defaults to process.env['GRADIENTAI_API_KEY'].
+   */
+  inferenceKey?: string | null | undefined;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
@@ -152,7 +157,8 @@ export interface ClientOptions {
  * API Client for interfacing with the Gradient AI API.
  */
 export class GradientAI {
-  apiKey: string;
+  apiKey: string | null;
+  inferenceKey: string | null;
 
   baseURL: string;
   maxRetries: number;
@@ -169,7 +175,8 @@ export class GradientAI {
   /**
    * API Client for interfacing with the Gradient AI API.
    *
-   * @param {string | undefined} [opts.apiKey=process.env['GRADIENTAI_API_KEY'] ?? undefined]
+   * @param {string | null | undefined} [opts.apiKey=process.env['GRADIENTAI_API_KEY'] ?? null]
+   * @param {string | null | undefined} [opts.inferenceKey=process.env['GRADIENTAI_API_KEY'] ?? null]
    * @param {string} [opts.baseURL=process.env['GRADIENT_AI_BASE_URL'] ?? https://api.digitalocean.com/] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
@@ -180,17 +187,13 @@ export class GradientAI {
    */
   constructor({
     baseURL = readEnv('GRADIENT_AI_BASE_URL'),
-    apiKey = readEnv('GRADIENTAI_API_KEY'),
+    apiKey = readEnv('GRADIENTAI_API_KEY') ?? null,
+    inferenceKey = readEnv('GRADIENTAI_API_KEY') ?? null,
     ...opts
   }: ClientOptions = {}) {
-    if (apiKey === undefined) {
-      throw new Errors.GradientAIError(
-        "The GRADIENTAI_API_KEY environment variable is missing or empty; either provide it, or instantiate the GradientAI client with an apiKey option, like new GradientAI({ apiKey: 'My API Key' }).",
-      );
-    }
-
     const options: ClientOptions = {
       apiKey,
+      inferenceKey,
       ...opts,
       baseURL: baseURL || `https://api.digitalocean.com/`,
     };
@@ -213,6 +216,7 @@ export class GradientAI {
     this._options = options;
 
     this.apiKey = apiKey;
+    this.inferenceKey = inferenceKey;
   }
 
   /**
@@ -229,6 +233,7 @@ export class GradientAI {
       fetch: this.fetch,
       fetchOptions: this.fetchOptions,
       apiKey: this.apiKey,
+      inferenceKey: this.inferenceKey,
       ...options,
     });
   }
@@ -245,10 +250,22 @@ export class GradientAI {
   }
 
   protected validateHeaders({ values, nulls }: NullableHeaders) {
-    return;
+    if (this.apiKey && values.get('authorization')) {
+      return;
+    }
+    if (nulls.has('authorization')) {
+      return;
+    }
+
+    throw new Error(
+      'Could not resolve authentication method. Expected the apiKey to be set. Or for the "Authorization" headers to be explicitly omitted',
+    );
   }
 
   protected authHeaders(opts: FinalRequestOptions): NullableHeaders | undefined {
+    if (this.apiKey == null) {
+      return undefined;
+    }
     return buildHeaders([{ Authorization: `Bearer ${this.apiKey}` }]);
   }
 
