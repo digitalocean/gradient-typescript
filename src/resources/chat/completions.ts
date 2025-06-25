@@ -232,7 +232,7 @@ export interface CompletionCreateParams {
    * increase likelihood of selection; values like -100 or 100 should result in a ban
    * or exclusive selection of the relevant token.
    */
-  logit_bias?: Record<string, number> | null;
+  logit_bias?: { [key: string]: number } | null;
 
   /**
    * Whether to return log probabilities of the output tokens or not. If true,
@@ -264,7 +264,7 @@ export interface CompletionCreateParams {
    * Keys are strings with a maximum length of 64 characters. Values are strings with
    * a maximum length of 512 characters.
    */
-  metadata?: Record<string, string> | null;
+  metadata?: { [key: string]: string } | null;
 
   /**
    * How many chat completion choices to generate for each input message. Note that
