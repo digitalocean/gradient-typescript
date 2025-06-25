@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../core/resource';
 import * as AgentsAPI from './agents';
+import * as ModelsAPI from '../models';
 import * as APIKeysAPI from './api-keys';
 import {
   APIKeyCreateParams,
@@ -92,7 +93,6 @@ import {
   Versions,
 } from './versions';
 import * as KnowledgeBasesKnowledgeBasesAPI from '../knowledge-bases/knowledge-bases';
-import * as ModelsAPI from '../models/models';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';

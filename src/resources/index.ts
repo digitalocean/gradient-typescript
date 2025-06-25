@@ -54,5 +54,6 @@ export {
   type APIModelVersion,
   type ModelListResponse,
   type ModelListParams,
-} from './models/models';
+} from './models';
+export { Providers } from './providers/providers';
 export { Regions, type RegionListResponse, type RegionListParams } from './regions';
