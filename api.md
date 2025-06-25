@@ -4,10 +4,12 @@ Types:
 
 - <code><a href="./src/resources/agents/agents.ts">APIAgent</a></code>
 - <code><a href="./src/resources/agents/agents.ts">APIAgentAPIKeyInfo</a></code>
+- <code><a href="./src/resources/agents/agents.ts">APIAgentModel</a></code>
 - <code><a href="./src/resources/agents/agents.ts">APIAnthropicAPIKeyInfo</a></code>
 - <code><a href="./src/resources/agents/agents.ts">APIDeploymentVisibility</a></code>
 - <code><a href="./src/resources/agents/agents.ts">APIOpenAIAPIKeyInfo</a></code>
 - <code><a href="./src/resources/agents/agents.ts">APIRetrievalMethod</a></code>
+- <code><a href="./src/resources/agents/agents.ts">APIWorkspace</a></code>
 - <code><a href="./src/resources/agents/agents.ts">AgentCreateResponse</a></code>
 - <code><a href="./src/resources/agents/agents.ts">AgentRetrieveResponse</a></code>
 - <code><a href="./src/resources/agents/agents.ts">AgentUpdateResponse</a></code>
@@ -149,11 +151,29 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/regions.ts">RegionListResponse</a></code>
+- <code><a href="./src/resources/regions/regions.ts">APIEvaluationMetric</a></code>
+- <code><a href="./src/resources/regions/regions.ts">RegionListResponse</a></code>
 
 Methods:
 
-- <code title="get /v2/gen-ai/regions">client.regions.<a href="./src/resources/regions.ts">list</a>({ ...params }) -> RegionListResponse</code>
+- <code title="get /v2/gen-ai/regions">client.regions.<a href="./src/resources/regions/regions.ts">list</a>({ ...params }) -> RegionListResponse</code>
+
+## EvaluationRuns
+
+### Results
+
+Types:
+
+- <code><a href="./src/resources/regions/evaluation-runs/results.ts">APIEvaluationMetricResult</a></code>
+- <code><a href="./src/resources/regions/evaluation-runs/results.ts">APIEvaluationRun</a></code>
+- <code><a href="./src/resources/regions/evaluation-runs/results.ts">APIPrompt</a></code>
+
+## EvaluationTestCases
+
+Types:
+
+- <code><a href="./src/resources/regions/evaluation-test-cases.ts">APIEvaluationTestCase</a></code>
+- <code><a href="./src/resources/regions/evaluation-test-cases.ts">APIStarMetric</a></code>
 
 # IndexingJobs
 
@@ -201,6 +221,7 @@ Types:
 - <code><a href="./src/resources/knowledge-bases/data-sources.ts">APIKnowledgeBaseDataSource</a></code>
 - <code><a href="./src/resources/knowledge-bases/data-sources.ts">APISpacesDataSource</a></code>
 - <code><a href="./src/resources/knowledge-bases/data-sources.ts">APIWebCrawlerDataSource</a></code>
+- <code><a href="./src/resources/knowledge-bases/data-sources.ts">AwsDataSource</a></code>
 - <code><a href="./src/resources/knowledge-bases/data-sources.ts">DataSourceCreateResponse</a></code>
 - <code><a href="./src/resources/knowledge-bases/data-sources.ts">DataSourceListResponse</a></code>
 - <code><a href="./src/resources/knowledge-bases/data-sources.ts">DataSourceDeleteResponse</a></code>
@@ -217,6 +238,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/chat/completions.ts">ChatCompletionTokenLogprob</a></code>
 - <code><a href="./src/resources/chat/completions.ts">CompletionCreateResponse</a></code>
 
 Methods:
@@ -260,7 +282,9 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/models.ts">APIAgreement</a></code>
 - <code><a href="./src/resources/models.ts">APIModel</a></code>
+- <code><a href="./src/resources/models.ts">APIModelVersion</a></code>
 - <code><a href="./src/resources/models.ts">ModelListResponse</a></code>
 
 Methods:

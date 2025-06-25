@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as CompletionsAPI from './completions';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 
@@ -22,6 +23,59 @@ export class Completions extends APIResource {
       defaultBaseURL: 'https://inference.do-ai.run/v1',
       ...options,
     });
+  }
+}
+
+export interface ChatCompletionTokenLogprob {
+  /**
+   * The token.
+   */
+  token: string;
+
+  /**
+   * A list of integers representing the UTF-8 bytes representation of the token.
+   * Useful in instances where characters are represented by multiple tokens and
+   * their byte representations must be combined to generate the correct text
+   * representation. Can be `null` if there is no bytes representation for the token.
+   */
+  bytes: Array<number> | null;
+
+  /**
+   * The log probability of this token, if it is within the top 20 most likely
+   * tokens. Otherwise, the value `-9999.0` is used to signify that the token is very
+   * unlikely.
+   */
+  logprob: number;
+
+  /**
+   * List of the most likely tokens and their log probability, at this token
+   * position. In rare cases, there may be fewer than the number of requested
+   * `top_logprobs` returned.
+   */
+  top_logprobs: Array<ChatCompletionTokenLogprob.TopLogprob>;
+}
+
+export namespace ChatCompletionTokenLogprob {
+  export interface TopLogprob {
+    /**
+     * The token.
+     */
+    token: string;
+
+    /**
+     * A list of integers representing the UTF-8 bytes representation of the token.
+     * Useful in instances where characters are represented by multiple tokens and
+     * their byte representations must be combined to generate the correct text
+     * representation. Can be `null` if there is no bytes representation for the token.
+     */
+    bytes: Array<number> | null;
+
+    /**
+     * The log probability of this token, if it is within the top 20 most likely
+     * tokens. Otherwise, the value `-9999.0` is used to signify that the token is very
+     * unlikely.
+     */
+    logprob: number;
   }
 }
 
@@ -95,120 +149,12 @@ export namespace CompletionCreateResponse {
       /**
        * A list of message content tokens with log probability information.
        */
-      content: Array<Logprobs.Content> | null;
+      content: Array<CompletionsAPI.ChatCompletionTokenLogprob> | null;
 
       /**
        * A list of message refusal tokens with log probability information.
        */
-      refusal: Array<Logprobs.Refusal> | null;
-    }
-
-    export namespace Logprobs {
-      export interface Content {
-        /**
-         * The token.
-         */
-        token: string;
-
-        /**
-         * A list of integers representing the UTF-8 bytes representation of the token.
-         * Useful in instances where characters are represented by multiple tokens and
-         * their byte representations must be combined to generate the correct text
-         * representation. Can be `null` if there is no bytes representation for the token.
-         */
-        bytes: Array<number> | null;
-
-        /**
-         * The log probability of this token, if it is within the top 20 most likely
-         * tokens. Otherwise, the value `-9999.0` is used to signify that the token is very
-         * unlikely.
-         */
-        logprob: number;
-
-        /**
-         * List of the most likely tokens and their log probability, at this token
-         * position. In rare cases, there may be fewer than the number of requested
-         * `top_logprobs` returned.
-         */
-        top_logprobs: Array<Content.TopLogprob>;
-      }
-
-      export namespace Content {
-        export interface TopLogprob {
-          /**
-           * The token.
-           */
-          token: string;
-
-          /**
-           * A list of integers representing the UTF-8 bytes representation of the token.
-           * Useful in instances where characters are represented by multiple tokens and
-           * their byte representations must be combined to generate the correct text
-           * representation. Can be `null` if there is no bytes representation for the token.
-           */
-          bytes: Array<number> | null;
-
-          /**
-           * The log probability of this token, if it is within the top 20 most likely
-           * tokens. Otherwise, the value `-9999.0` is used to signify that the token is very
-           * unlikely.
-           */
-          logprob: number;
-        }
-      }
-
-      export interface Refusal {
-        /**
-         * The token.
-         */
-        token: string;
-
-        /**
-         * A list of integers representing the UTF-8 bytes representation of the token.
-         * Useful in instances where characters are represented by multiple tokens and
-         * their byte representations must be combined to generate the correct text
-         * representation. Can be `null` if there is no bytes representation for the token.
-         */
-        bytes: Array<number> | null;
-
-        /**
-         * The log probability of this token, if it is within the top 20 most likely
-         * tokens. Otherwise, the value `-9999.0` is used to signify that the token is very
-         * unlikely.
-         */
-        logprob: number;
-
-        /**
-         * List of the most likely tokens and their log probability, at this token
-         * position. In rare cases, there may be fewer than the number of requested
-         * `top_logprobs` returned.
-         */
-        top_logprobs: Array<Refusal.TopLogprob>;
-      }
-
-      export namespace Refusal {
-        export interface TopLogprob {
-          /**
-           * The token.
-           */
-          token: string;
-
-          /**
-           * A list of integers representing the UTF-8 bytes representation of the token.
-           * Useful in instances where characters are represented by multiple tokens and
-           * their byte representations must be combined to generate the correct text
-           * representation. Can be `null` if there is no bytes representation for the token.
-           */
-          bytes: Array<number> | null;
-
-          /**
-           * The log probability of this token, if it is within the top 20 most likely
-           * tokens. Otherwise, the value `-9999.0` is used to signify that the token is very
-           * unlikely.
-           */
-          logprob: number;
-        }
-      }
+      refusal: Array<CompletionsAPI.ChatCompletionTokenLogprob> | null;
     }
 
     /**
@@ -465,6 +411,7 @@ export namespace CompletionCreateParams {
 
 export declare namespace Completions {
   export {
+    type ChatCompletionTokenLogprob as ChatCompletionTokenLogprob,
     type CompletionCreateResponse as CompletionCreateResponse,
     type CompletionCreateParams as CompletionCreateParams,
   };

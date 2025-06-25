@@ -6,6 +6,7 @@ export {
   type APIKnowledgeBaseDataSource,
   type APISpacesDataSource,
   type APIWebCrawlerDataSource,
+  type AwsDataSource,
   type DataSourceCreateResponse,
   type DataSourceListResponse,
   type DataSourceDeleteResponse,

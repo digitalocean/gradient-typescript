@@ -29,15 +29,23 @@ import {
   IndexingJobUpdateCancelResponse,
   IndexingJobs,
 } from './resources/indexing-jobs';
-import { APIModel, ModelListParams, ModelListResponse, Models } from './resources/models';
-import { RegionListParams, RegionListResponse, Regions } from './resources/regions';
+import {
+  APIAgreement,
+  APIModel,
+  APIModelVersion,
+  ModelListParams,
+  ModelListResponse,
+  Models,
+} from './resources/models';
 import {
   APIAgent,
   APIAgentAPIKeyInfo,
+  APIAgentModel,
   APIAnthropicAPIKeyInfo,
   APIDeploymentVisibility,
   APIOpenAIAPIKeyInfo,
   APIRetrievalMethod,
+  APIWorkspace,
   AgentCreateParams,
   AgentCreateResponse,
   AgentDeleteResponse,
@@ -65,6 +73,12 @@ import {
   KnowledgeBases,
 } from './resources/knowledge-bases/knowledge-bases';
 import { Providers } from './resources/providers/providers';
+import {
+  APIEvaluationMetric,
+  RegionListParams,
+  RegionListResponse,
+  Regions,
+} from './resources/regions/regions';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -765,10 +779,12 @@ export declare namespace GradientAI {
     Agents as Agents,
     type APIAgent as APIAgent,
     type APIAgentAPIKeyInfo as APIAgentAPIKeyInfo,
+    type APIAgentModel as APIAgentModel,
     type APIAnthropicAPIKeyInfo as APIAnthropicAPIKeyInfo,
     type APIDeploymentVisibility as APIDeploymentVisibility,
     type APIOpenAIAPIKeyInfo as APIOpenAIAPIKeyInfo,
     type APIRetrievalMethod as APIRetrievalMethod,
+    type APIWorkspace as APIWorkspace,
     type AgentCreateResponse as AgentCreateResponse,
     type AgentRetrieveResponse as AgentRetrieveResponse,
     type AgentUpdateResponse as AgentUpdateResponse,
@@ -785,6 +801,7 @@ export declare namespace GradientAI {
 
   export {
     Regions as Regions,
+    type APIEvaluationMetric as APIEvaluationMetric,
     type RegionListResponse as RegionListResponse,
     type RegionListParams as RegionListParams,
   };
@@ -821,7 +838,9 @@ export declare namespace GradientAI {
 
   export {
     Models as Models,
+    type APIAgreement as APIAgreement,
     type APIModel as APIModel,
+    type APIModelVersion as APIModelVersion,
     type ModelListResponse as ModelListResponse,
     type ModelListParams as ModelListParams,
   };
