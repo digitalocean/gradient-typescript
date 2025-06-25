@@ -75,6 +75,7 @@ import {
 import { Providers } from './resources/providers/providers';
 import {
   APIEvaluationMetric,
+  RegionListEvaluationMetricsResponse,
   RegionListParams,
   RegionListResponse,
   Regions,
@@ -803,6 +804,7 @@ export declare namespace GradientAI {
     Regions as Regions,
     type APIEvaluationMetric as APIEvaluationMetric,
     type RegionListResponse as RegionListResponse,
+    type RegionListEvaluationMetricsResponse as RegionListEvaluationMetricsResponse,
     type RegionListParams as RegionListParams,
   };
 
