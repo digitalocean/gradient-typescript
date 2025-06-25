@@ -13,4 +13,3 @@ export {
   type APIKeyListParams,
 } from './api-keys';
 export { Inference } from './inference';
-export { Models, type Model, type ModelListResponse } from './models';

@@ -14,16 +14,12 @@ import {
   APIKeys,
   APIModelAPIKeyInfo,
 } from './api-keys';
-import * as ModelsAPI from './models';
-import { Model, ModelListResponse, Models } from './models';
 
 export class Inference extends APIResource {
   apiKeys: APIKeysAPI.APIKeys = new APIKeysAPI.APIKeys(this._client);
-  models: ModelsAPI.Models = new ModelsAPI.Models(this._client);
 }
 
 Inference.APIKeys = APIKeys;
-Inference.Models = Models;
 
 export declare namespace Inference {
   export {
@@ -38,6 +34,4 @@ export declare namespace Inference {
     type APIKeyUpdateParams as APIKeyUpdateParams,
     type APIKeyListParams as APIKeyListParams,
   };
-
-  export { Models as Models, type Model as Model, type ModelListResponse as ModelListResponse };
 }
