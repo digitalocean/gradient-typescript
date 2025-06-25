@@ -308,18 +308,6 @@ Methods:
 - <code title="delete /v2/gen-ai/models/api_keys/{api_key_uuid}">client.inference.apiKeys.<a href="./src/resources/inference/api-keys.ts">delete</a>(apiKeyUuid) -> APIKeyDeleteResponse</code>
 - <code title="put /v2/gen-ai/models/api_keys/{api_key_uuid}/regenerate">client.inference.apiKeys.<a href="./src/resources/inference/api-keys.ts">updateRegenerate</a>(apiKeyUuid) -> APIKeyUpdateRegenerateResponse</code>
 
-## Models
-
-Types:
-
-- <code><a href="./src/resources/inference/models.ts">Model</a></code>
-- <code><a href="./src/resources/inference/models.ts">ModelListResponse</a></code>
-
-Methods:
-
-- <code title="get /models/{model}">client.inference.models.<a href="./src/resources/inference/models.ts">retrieve</a>(model) -> Model</code>
-- <code title="get /models">client.inference.models.<a href="./src/resources/inference/models.ts">list</a>() -> ModelListResponse</code>
-
 # Models
 
 Types:
