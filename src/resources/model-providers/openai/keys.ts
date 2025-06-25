@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as Shared from '../../shared';
 import * as AgentsAPI from '../../agents/agents';
-import * as VersionsAPI from '../../agents/versions';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -105,9 +105,9 @@ export interface KeyUpdateResponse {
 export interface KeyListResponse {
   api_key_infos?: Array<AgentsAPI.APIOpenAIAPIKeyInfo>;
 
-  links?: VersionsAPI.APILinks;
+  links?: Shared.APILinks;
 
-  meta?: VersionsAPI.APIMeta;
+  meta?: Shared.APIMeta;
 }
 
 /**
@@ -120,9 +120,9 @@ export interface KeyDeleteResponse {
 export interface KeyRetrieveAgentsResponse {
   agents?: Array<AgentsAPI.APIAgent>;
 
-  links?: VersionsAPI.APILinks;
+  links?: Shared.APILinks;
 
-  meta?: VersionsAPI.APIMeta;
+  meta?: Shared.APIMeta;
 }
 
 export interface KeyCreateParams {

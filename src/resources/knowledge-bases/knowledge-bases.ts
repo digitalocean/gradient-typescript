@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as VersionsAPI from '../agents/versions';
+import * as Shared from '../shared';
 import * as DataSourcesAPI from './data-sources';
 import {
   APIFileUploadDataSource,
@@ -159,9 +159,9 @@ export interface KnowledgeBaseUpdateResponse {
 export interface KnowledgeBaseListResponse {
   knowledge_bases?: Array<APIKnowledgeBase>;
 
-  links?: VersionsAPI.APILinks;
+  links?: Shared.APILinks;
 
-  meta?: VersionsAPI.APIMeta;
+  meta?: Shared.APIMeta;
 }
 
 export interface KnowledgeBaseDeleteResponse {

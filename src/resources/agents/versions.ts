@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as Shared from '../shared';
 import * as AgentsAPI from './agents';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
@@ -40,30 +41,6 @@ export class Versions extends APIResource {
   }
 }
 
-export interface APILinks {
-  pages?: APILinks.Pages;
-}
-
-export namespace APILinks {
-  export interface Pages {
-    first?: string;
-
-    last?: string;
-
-    next?: string;
-
-    previous?: string;
-  }
-}
-
-export interface APIMeta {
-  page?: number;
-
-  pages?: number;
-
-  total?: number;
-}
-
 export interface VersionUpdateResponse {
   /**
    * An alternative way to provide auth information. for internal use only.
@@ -97,9 +74,9 @@ export namespace VersionUpdateResponse {
 export interface VersionListResponse {
   agent_versions?: Array<VersionListResponse.AgentVersion>;
 
-  links?: APILinks;
+  links?: Shared.APILinks;
 
-  meta?: APIMeta;
+  meta?: Shared.APIMeta;
 }
 
 export namespace VersionListResponse {
@@ -216,8 +193,6 @@ export interface VersionListParams {
 
 export declare namespace Versions {
   export {
-    type APILinks as APILinks,
-    type APIMeta as APIMeta,
     type VersionUpdateResponse as VersionUpdateResponse,
     type VersionListResponse as VersionListResponse,
     type VersionUpdateParams as VersionUpdateParams,
