@@ -18,18 +18,6 @@ import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
 import {
-  APIIndexingJob,
-  IndexingJobCreateParams,
-  IndexingJobCreateResponse,
-  IndexingJobListParams,
-  IndexingJobListResponse,
-  IndexingJobRetrieveDataSourcesResponse,
-  IndexingJobRetrieveResponse,
-  IndexingJobUpdateCancelParams,
-  IndexingJobUpdateCancelResponse,
-  IndexingJobs,
-} from './resources/indexing-jobs';
-import {
   APIAgreement,
   APIModel,
   APIModelVersion,
@@ -753,7 +741,6 @@ export class GradientAI {
   agents: API.Agents = new API.Agents(this);
   providers: API.Providers = new API.Providers(this);
   regions: API.Regions = new API.Regions(this);
-  indexingJobs: API.IndexingJobs = new API.IndexingJobs(this);
   knowledgeBases: API.KnowledgeBases = new API.KnowledgeBases(this);
   chat: API.Chat = new API.Chat(this);
   inference: API.Inference = new API.Inference(this);
@@ -762,7 +749,6 @@ export class GradientAI {
 GradientAI.Agents = Agents;
 GradientAI.Providers = Providers;
 GradientAI.Regions = Regions;
-GradientAI.IndexingJobs = IndexingJobs;
 GradientAI.KnowledgeBases = KnowledgeBases;
 GradientAI.Chat = Chat;
 GradientAI.Inference = Inference;
@@ -798,19 +784,6 @@ export declare namespace GradientAI {
     Regions as Regions,
     type RegionListResponse as RegionListResponse,
     type RegionListParams as RegionListParams,
-  };
-
-  export {
-    IndexingJobs as IndexingJobs,
-    type APIIndexingJob as APIIndexingJob,
-    type IndexingJobCreateResponse as IndexingJobCreateResponse,
-    type IndexingJobRetrieveResponse as IndexingJobRetrieveResponse,
-    type IndexingJobListResponse as IndexingJobListResponse,
-    type IndexingJobRetrieveDataSourcesResponse as IndexingJobRetrieveDataSourcesResponse,
-    type IndexingJobUpdateCancelResponse as IndexingJobUpdateCancelResponse,
-    type IndexingJobCreateParams as IndexingJobCreateParams,
-    type IndexingJobListParams as IndexingJobListParams,
-    type IndexingJobUpdateCancelParams as IndexingJobUpdateCancelParams,
   };
 
   export {

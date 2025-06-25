@@ -22,18 +22,6 @@ export {
   type AgentUpdateStatusParams,
 } from './agents/agents';
 export { Chat } from './chat/chat';
-export {
-  IndexingJobs,
-  type APIIndexingJob,
-  type IndexingJobCreateResponse,
-  type IndexingJobRetrieveResponse,
-  type IndexingJobListResponse,
-  type IndexingJobRetrieveDataSourcesResponse,
-  type IndexingJobUpdateCancelResponse,
-  type IndexingJobCreateParams,
-  type IndexingJobListParams,
-  type IndexingJobUpdateCancelParams,
-} from './indexing-jobs';
 export { Inference } from './inference/inference';
 export {
   KnowledgeBases,
