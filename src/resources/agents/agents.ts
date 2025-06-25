@@ -17,17 +17,6 @@ import {
   APIKeyUpdateResponse,
   APIKeys,
 } from './api-keys';
-import * as ChildAgentsAPI from './child-agents';
-import {
-  ChildAgentAddParams,
-  ChildAgentAddResponse,
-  ChildAgentDeleteParams,
-  ChildAgentDeleteResponse,
-  ChildAgentUpdateParams,
-  ChildAgentUpdateResponse,
-  ChildAgentViewResponse,
-  ChildAgents,
-} from './child-agents';
 import * as EvaluationDatasetsAPI from './evaluation-datasets';
 import {
   EvaluationDatasetCreateFileUploadPresignedURLsParams,
@@ -82,6 +71,17 @@ import {
   KnowledgeBaseDetachResponse,
   KnowledgeBases,
 } from './knowledge-bases';
+import * as RoutesAPI from './routes';
+import {
+  RouteAddParams,
+  RouteAddResponse,
+  RouteDeleteParams,
+  RouteDeleteResponse,
+  RouteUpdateParams,
+  RouteUpdateResponse,
+  RouteViewResponse,
+  Routes,
+} from './routes';
 import * as VersionsAPI from './versions';
 import {
   APILinks,
@@ -111,7 +111,7 @@ export class Agents extends APIResource {
   functions: FunctionsAPI.Functions = new FunctionsAPI.Functions(this._client);
   versions: VersionsAPI.Versions = new VersionsAPI.Versions(this._client);
   knowledgeBases: KnowledgeBasesAPI.KnowledgeBases = new KnowledgeBasesAPI.KnowledgeBases(this._client);
-  childAgents: ChildAgentsAPI.ChildAgents = new ChildAgentsAPI.ChildAgents(this._client);
+  routes: RoutesAPI.Routes = new RoutesAPI.Routes(this._client);
 
   /**
    * To create a new agent, send a POST request to `/v2/gen-ai/agents`. The response
@@ -864,7 +864,7 @@ Agents.EvaluationDatasets = EvaluationDatasets;
 Agents.Functions = Functions;
 Agents.Versions = Versions;
 Agents.KnowledgeBases = KnowledgeBases;
-Agents.ChildAgents = ChildAgents;
+Agents.Routes = Routes;
 
 export declare namespace Agents {
   export {
@@ -970,13 +970,13 @@ export declare namespace Agents {
   };
 
   export {
-    ChildAgents as ChildAgents,
-    type ChildAgentUpdateResponse as ChildAgentUpdateResponse,
-    type ChildAgentDeleteResponse as ChildAgentDeleteResponse,
-    type ChildAgentAddResponse as ChildAgentAddResponse,
-    type ChildAgentViewResponse as ChildAgentViewResponse,
-    type ChildAgentUpdateParams as ChildAgentUpdateParams,
-    type ChildAgentDeleteParams as ChildAgentDeleteParams,
-    type ChildAgentAddParams as ChildAgentAddParams,
+    Routes as Routes,
+    type RouteUpdateResponse as RouteUpdateResponse,
+    type RouteDeleteResponse as RouteDeleteResponse,
+    type RouteAddResponse as RouteAddResponse,
+    type RouteViewResponse as RouteViewResponse,
+    type RouteUpdateParams as RouteUpdateParams,
+    type RouteDeleteParams as RouteDeleteParams,
+    type RouteAddParams as RouteAddParams,
   };
 }

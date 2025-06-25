@@ -7,10 +7,10 @@ const client = new GradientAI({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource childAgents', () => {
+describe('resource routes', () => {
   // skipped: tests are disabled for the time being
   test.skip('update: only required params', async () => {
-    const responsePromise = client.agents.childAgents.update('child_agent_uuid', {
+    const responsePromise = client.agents.routes.update('child_agent_uuid', {
       path_parent_agent_uuid: 'parent_agent_uuid',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -24,7 +24,7 @@ describe('resource childAgents', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update: required and optional params', async () => {
-    const response = await client.agents.childAgents.update('child_agent_uuid', {
+    const response = await client.agents.routes.update('child_agent_uuid', {
       path_parent_agent_uuid: 'parent_agent_uuid',
       body_child_agent_uuid: 'child_agent_uuid',
       if_case: 'if_case',
@@ -36,7 +36,7 @@ describe('resource childAgents', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('delete: only required params', async () => {
-    const responsePromise = client.agents.childAgents.delete('child_agent_uuid', {
+    const responsePromise = client.agents.routes.delete('child_agent_uuid', {
       parent_agent_uuid: 'parent_agent_uuid',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -50,14 +50,14 @@ describe('resource childAgents', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('delete: required and optional params', async () => {
-    const response = await client.agents.childAgents.delete('child_agent_uuid', {
+    const response = await client.agents.routes.delete('child_agent_uuid', {
       parent_agent_uuid: 'parent_agent_uuid',
     });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('add: only required params', async () => {
-    const responsePromise = client.agents.childAgents.add('child_agent_uuid', {
+    const responsePromise = client.agents.routes.add('child_agent_uuid', {
       path_parent_agent_uuid: 'parent_agent_uuid',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -71,7 +71,7 @@ describe('resource childAgents', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('add: required and optional params', async () => {
-    const response = await client.agents.childAgents.add('child_agent_uuid', {
+    const response = await client.agents.routes.add('child_agent_uuid', {
       path_parent_agent_uuid: 'parent_agent_uuid',
       body_child_agent_uuid: 'child_agent_uuid',
       if_case: 'if_case',
@@ -82,7 +82,7 @@ describe('resource childAgents', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('view', async () => {
-    const responsePromise = client.agents.childAgents.view('uuid');
+    const responsePromise = client.agents.routes.view('uuid');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
