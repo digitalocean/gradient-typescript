@@ -37,6 +37,7 @@ import {
   ModelListResponse,
   Models,
 } from './resources/models';
+import { RegionListParams, RegionListResponse, Regions } from './resources/regions';
 import {
   APIAgent,
   APIAgentAPIKeyInfo,
@@ -73,13 +74,6 @@ import {
   KnowledgeBases,
 } from './resources/knowledge-bases/knowledge-bases';
 import { Providers } from './resources/providers/providers';
-import {
-  APIEvaluationMetric,
-  RegionListEvaluationMetricsResponse,
-  RegionListParams,
-  RegionListResponse,
-  Regions,
-} from './resources/regions/regions';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -802,9 +796,7 @@ export declare namespace GradientAI {
 
   export {
     Regions as Regions,
-    type APIEvaluationMetric as APIEvaluationMetric,
     type RegionListResponse as RegionListResponse,
-    type RegionListEvaluationMetricsResponse as RegionListEvaluationMetricsResponse,
     type RegionListParams as RegionListParams,
   };
 

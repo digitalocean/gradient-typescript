@@ -28,6 +28,42 @@ import {
   ChildAgentViewResponse,
   ChildAgents,
 } from './child-agents';
+import * as EvaluationDatasetsAPI from './evaluation-datasets';
+import {
+  EvaluationDatasetCreateFileUploadPresignedURLsParams,
+  EvaluationDatasetCreateFileUploadPresignedURLsResponse,
+  EvaluationDatasetCreateParams,
+  EvaluationDatasetCreateResponse,
+  EvaluationDatasets,
+} from './evaluation-datasets';
+import * as EvaluationMetricsAPI from './evaluation-metrics';
+import { EvaluationMetricListResponse, EvaluationMetrics } from './evaluation-metrics';
+import * as EvaluationRunsAPI from './evaluation-runs';
+import {
+  APIEvaluationMetric,
+  APIEvaluationMetricResult,
+  APIEvaluationPrompt,
+  APIEvaluationRun,
+  EvaluationRunCreateParams,
+  EvaluationRunCreateResponse,
+  EvaluationRunListResultsResponse,
+  EvaluationRunRetrieveResponse,
+  EvaluationRuns,
+} from './evaluation-runs';
+import * as EvaluationTestCasesAPI from './evaluation-test-cases';
+import {
+  APIEvaluationTestCase,
+  APIStarMetric,
+  EvaluationTestCaseCreateParams,
+  EvaluationTestCaseCreateResponse,
+  EvaluationTestCaseListEvaluationRunsParams,
+  EvaluationTestCaseListEvaluationRunsResponse,
+  EvaluationTestCaseListResponse,
+  EvaluationTestCaseRetrieveResponse,
+  EvaluationTestCaseUpdateParams,
+  EvaluationTestCaseUpdateResponse,
+  EvaluationTestCases,
+} from './evaluation-test-cases';
 import * as FunctionsAPI from './functions';
 import {
   FunctionCreateParams,
@@ -57,13 +93,21 @@ import {
   Versions,
 } from './versions';
 import * as KnowledgeBasesKnowledgeBasesAPI from '../knowledge-bases/knowledge-bases';
-import * as EvaluationTestCasesAPI from '../regions/evaluation-test-cases';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
 export class Agents extends APIResource {
   apiKeys: APIKeysAPI.APIKeys = new APIKeysAPI.APIKeys(this._client);
+  evaluationMetrics: EvaluationMetricsAPI.EvaluationMetrics = new EvaluationMetricsAPI.EvaluationMetrics(
+    this._client,
+  );
+  evaluationRuns: EvaluationRunsAPI.EvaluationRuns = new EvaluationRunsAPI.EvaluationRuns(this._client);
+  evaluationTestCases: EvaluationTestCasesAPI.EvaluationTestCases =
+    new EvaluationTestCasesAPI.EvaluationTestCases(this._client);
+  evaluationDatasets: EvaluationDatasetsAPI.EvaluationDatasets = new EvaluationDatasetsAPI.EvaluationDatasets(
+    this._client,
+  );
   functions: FunctionsAPI.Functions = new FunctionsAPI.Functions(this._client);
   versions: VersionsAPI.Versions = new VersionsAPI.Versions(this._client);
   knowledgeBases: KnowledgeBasesAPI.KnowledgeBases = new KnowledgeBasesAPI.KnowledgeBases(this._client);
@@ -813,6 +857,10 @@ export interface AgentUpdateStatusParams {
 }
 
 Agents.APIKeys = APIKeys;
+Agents.EvaluationMetrics = EvaluationMetrics;
+Agents.EvaluationRuns = EvaluationRuns;
+Agents.EvaluationTestCases = EvaluationTestCases;
+Agents.EvaluationDatasets = EvaluationDatasets;
 Agents.Functions = Functions;
 Agents.Versions = Versions;
 Agents.KnowledgeBases = KnowledgeBases;
@@ -852,6 +900,45 @@ export declare namespace Agents {
     type APIKeyListParams as APIKeyListParams,
     type APIKeyDeleteParams as APIKeyDeleteParams,
     type APIKeyRegenerateParams as APIKeyRegenerateParams,
+  };
+
+  export {
+    EvaluationMetrics as EvaluationMetrics,
+    type EvaluationMetricListResponse as EvaluationMetricListResponse,
+  };
+
+  export {
+    EvaluationRuns as EvaluationRuns,
+    type APIEvaluationMetric as APIEvaluationMetric,
+    type APIEvaluationMetricResult as APIEvaluationMetricResult,
+    type APIEvaluationPrompt as APIEvaluationPrompt,
+    type APIEvaluationRun as APIEvaluationRun,
+    type EvaluationRunCreateResponse as EvaluationRunCreateResponse,
+    type EvaluationRunRetrieveResponse as EvaluationRunRetrieveResponse,
+    type EvaluationRunListResultsResponse as EvaluationRunListResultsResponse,
+    type EvaluationRunCreateParams as EvaluationRunCreateParams,
+  };
+
+  export {
+    EvaluationTestCases as EvaluationTestCases,
+    type APIEvaluationTestCase as APIEvaluationTestCase,
+    type APIStarMetric as APIStarMetric,
+    type EvaluationTestCaseCreateResponse as EvaluationTestCaseCreateResponse,
+    type EvaluationTestCaseRetrieveResponse as EvaluationTestCaseRetrieveResponse,
+    type EvaluationTestCaseUpdateResponse as EvaluationTestCaseUpdateResponse,
+    type EvaluationTestCaseListResponse as EvaluationTestCaseListResponse,
+    type EvaluationTestCaseListEvaluationRunsResponse as EvaluationTestCaseListEvaluationRunsResponse,
+    type EvaluationTestCaseCreateParams as EvaluationTestCaseCreateParams,
+    type EvaluationTestCaseUpdateParams as EvaluationTestCaseUpdateParams,
+    type EvaluationTestCaseListEvaluationRunsParams as EvaluationTestCaseListEvaluationRunsParams,
+  };
+
+  export {
+    EvaluationDatasets as EvaluationDatasets,
+    type EvaluationDatasetCreateResponse as EvaluationDatasetCreateResponse,
+    type EvaluationDatasetCreateFileUploadPresignedURLsResponse as EvaluationDatasetCreateFileUploadPresignedURLsResponse,
+    type EvaluationDatasetCreateParams as EvaluationDatasetCreateParams,
+    type EvaluationDatasetCreateFileUploadPresignedURLsParams as EvaluationDatasetCreateFileUploadPresignedURLsParams,
   };
 
   export {
