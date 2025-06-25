@@ -15,18 +15,6 @@ export {
   type DataSourceDeleteParams,
 } from './data-sources';
 export {
-  IndexingJobs,
-  type APIIndexingJob,
-  type IndexingJobCreateResponse,
-  type IndexingJobRetrieveResponse,
-  type IndexingJobListResponse,
-  type IndexingJobRetrieveDataSourcesResponse,
-  type IndexingJobUpdateCancelResponse,
-  type IndexingJobCreateParams,
-  type IndexingJobListParams,
-  type IndexingJobUpdateCancelParams,
-} from './indexing-jobs';
-export {
   KnowledgeBases,
   type APIKnowledgeBase,
   type KnowledgeBaseCreateResponse,

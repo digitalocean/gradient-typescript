@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as IndexingJobsAPI from '../indexing-jobs';
 import * as VersionsAPI from '../agents/versions';
 import * as DataSourcesAPI from './data-sources';
 import {
@@ -17,26 +18,12 @@ import {
   DataSourceListResponse,
   DataSources,
 } from './data-sources';
-import * as IndexingJobsAPI from './indexing-jobs';
-import {
-  APIIndexingJob,
-  IndexingJobCreateParams,
-  IndexingJobCreateResponse,
-  IndexingJobListParams,
-  IndexingJobListResponse,
-  IndexingJobRetrieveDataSourcesResponse,
-  IndexingJobRetrieveResponse,
-  IndexingJobUpdateCancelParams,
-  IndexingJobUpdateCancelResponse,
-  IndexingJobs,
-} from './indexing-jobs';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
 export class KnowledgeBases extends APIResource {
   dataSources: DataSourcesAPI.DataSources = new DataSourcesAPI.DataSources(this._client);
-  indexingJobs: IndexingJobsAPI.IndexingJobs = new IndexingJobsAPI.IndexingJobs(this._client);
 
   /**
    * To create a knowledge base, send a POST request to `/v2/gen-ai/knowledge_bases`.
@@ -269,7 +256,6 @@ export interface KnowledgeBaseListParams {
 }
 
 KnowledgeBases.DataSources = DataSources;
-KnowledgeBases.IndexingJobs = IndexingJobs;
 
 export declare namespace KnowledgeBases {
   export {
@@ -297,18 +283,5 @@ export declare namespace KnowledgeBases {
     type DataSourceCreateParams as DataSourceCreateParams,
     type DataSourceListParams as DataSourceListParams,
     type DataSourceDeleteParams as DataSourceDeleteParams,
-  };
-
-  export {
-    IndexingJobs as IndexingJobs,
-    type APIIndexingJob as APIIndexingJob,
-    type IndexingJobCreateResponse as IndexingJobCreateResponse,
-    type IndexingJobRetrieveResponse as IndexingJobRetrieveResponse,
-    type IndexingJobListResponse as IndexingJobListResponse,
-    type IndexingJobRetrieveDataSourcesResponse as IndexingJobRetrieveDataSourcesResponse,
-    type IndexingJobUpdateCancelResponse as IndexingJobUpdateCancelResponse,
-    type IndexingJobCreateParams as IndexingJobCreateParams,
-    type IndexingJobListParams as IndexingJobListParams,
-    type IndexingJobUpdateCancelParams as IndexingJobUpdateCancelParams,
   };
 }
