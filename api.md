@@ -153,12 +153,24 @@ Types:
 
 - <code><a href="./src/resources/regions/regions.ts">APIEvaluationMetric</a></code>
 - <code><a href="./src/resources/regions/regions.ts">RegionListResponse</a></code>
+- <code><a href="./src/resources/regions/regions.ts">RegionListEvaluationMetricsResponse</a></code>
 
 Methods:
 
 - <code title="get /v2/gen-ai/regions">client.regions.<a href="./src/resources/regions/regions.ts">list</a>({ ...params }) -> RegionListResponse</code>
+- <code title="get /v2/gen-ai/evaluation_metrics">client.regions.<a href="./src/resources/regions/regions.ts">listEvaluationMetrics</a>() -> RegionListEvaluationMetricsResponse</code>
 
 ## EvaluationRuns
+
+Types:
+
+- <code><a href="./src/resources/regions/evaluation-runs/evaluation-runs.ts">EvaluationRunCreateResponse</a></code>
+- <code><a href="./src/resources/regions/evaluation-runs/evaluation-runs.ts">EvaluationRunRetrieveResponse</a></code>
+
+Methods:
+
+- <code title="post /v2/gen-ai/evaluation_runs">client.regions.evaluationRuns.<a href="./src/resources/regions/evaluation-runs/evaluation-runs.ts">create</a>({ ...params }) -> EvaluationRunCreateResponse</code>
+- <code title="get /v2/gen-ai/evaluation_runs/{evaluation_run_uuid}">client.regions.evaluationRuns.<a href="./src/resources/regions/evaluation-runs/evaluation-runs.ts">retrieve</a>(evaluationRunUuid) -> EvaluationRunRetrieveResponse</code>
 
 ### Results
 
@@ -167,6 +179,13 @@ Types:
 - <code><a href="./src/resources/regions/evaluation-runs/results.ts">APIEvaluationMetricResult</a></code>
 - <code><a href="./src/resources/regions/evaluation-runs/results.ts">APIEvaluationRun</a></code>
 - <code><a href="./src/resources/regions/evaluation-runs/results.ts">APIPrompt</a></code>
+- <code><a href="./src/resources/regions/evaluation-runs/results.ts">ResultRetrieveResponse</a></code>
+- <code><a href="./src/resources/regions/evaluation-runs/results.ts">ResultRetrievePromptResponse</a></code>
+
+Methods:
+
+- <code title="get /v2/gen-ai/evaluation_runs/{evaluation_run_uuid}/results">client.regions.evaluationRuns.results.<a href="./src/resources/regions/evaluation-runs/results.ts">retrieve</a>(evaluationRunUuid) -> ResultRetrieveResponse</code>
+- <code title="get /v2/gen-ai/evaluation_runs/{evaluation_run_uuid}/results/{prompt_id}">client.regions.evaluationRuns.results.<a href="./src/resources/regions/evaluation-runs/results.ts">retrievePrompt</a>(promptID, { ...params }) -> ResultRetrievePromptResponse</code>
 
 ## EvaluationTestCases
 
@@ -174,6 +193,31 @@ Types:
 
 - <code><a href="./src/resources/regions/evaluation-test-cases.ts">APIEvaluationTestCase</a></code>
 - <code><a href="./src/resources/regions/evaluation-test-cases.ts">APIStarMetric</a></code>
+- <code><a href="./src/resources/regions/evaluation-test-cases.ts">EvaluationTestCaseCreateResponse</a></code>
+- <code><a href="./src/resources/regions/evaluation-test-cases.ts">EvaluationTestCaseRetrieveResponse</a></code>
+- <code><a href="./src/resources/regions/evaluation-test-cases.ts">EvaluationTestCaseUpdateResponse</a></code>
+- <code><a href="./src/resources/regions/evaluation-test-cases.ts">EvaluationTestCaseListResponse</a></code>
+- <code><a href="./src/resources/regions/evaluation-test-cases.ts">EvaluationTestCaseListEvaluationRunsResponse</a></code>
+
+Methods:
+
+- <code title="post /v2/gen-ai/evaluation_test_cases">client.regions.evaluationTestCases.<a href="./src/resources/regions/evaluation-test-cases.ts">create</a>({ ...params }) -> EvaluationTestCaseCreateResponse</code>
+- <code title="get /v2/gen-ai/evaluation_test_cases/{test_case_uuid}">client.regions.evaluationTestCases.<a href="./src/resources/regions/evaluation-test-cases.ts">retrieve</a>(testCaseUuid) -> EvaluationTestCaseRetrieveResponse</code>
+- <code title="post /v2/gen-ai/evaluation_test_cases/{test_case_uuid}">client.regions.evaluationTestCases.<a href="./src/resources/regions/evaluation-test-cases.ts">update</a>(testCaseUuid, { ...params }) -> EvaluationTestCaseUpdateResponse</code>
+- <code title="get /v2/gen-ai/evaluation_test_cases">client.regions.evaluationTestCases.<a href="./src/resources/regions/evaluation-test-cases.ts">list</a>() -> EvaluationTestCaseListResponse</code>
+- <code title="get /v2/gen-ai/evaluation_test_cases/{evaluation_test_case_uuid}/evaluation_runs">client.regions.evaluationTestCases.<a href="./src/resources/regions/evaluation-test-cases.ts">listEvaluationRuns</a>(evaluationTestCaseUuid, { ...params }) -> EvaluationTestCaseListEvaluationRunsResponse</code>
+
+## EvaluationDatasets
+
+Types:
+
+- <code><a href="./src/resources/regions/evaluation-datasets.ts">EvaluationDatasetCreateResponse</a></code>
+- <code><a href="./src/resources/regions/evaluation-datasets.ts">EvaluationDatasetCreateFileUploadPresignedURLsResponse</a></code>
+
+Methods:
+
+- <code title="post /v2/gen-ai/evaluation_datasets">client.regions.evaluationDatasets.<a href="./src/resources/regions/evaluation-datasets.ts">create</a>({ ...params }) -> EvaluationDatasetCreateResponse</code>
+- <code title="post /v2/gen-ai/evaluation_datasets/file_upload_presigned_urls">client.regions.evaluationDatasets.<a href="./src/resources/regions/evaluation-datasets.ts">createFileUploadPresignedURLs</a>({ ...params }) -> EvaluationDatasetCreateFileUploadPresignedURLsResponse</code>
 
 # IndexingJobs
 

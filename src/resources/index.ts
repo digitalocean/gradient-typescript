@@ -60,5 +60,6 @@ export {
   Regions,
   type APIEvaluationMetric,
   type RegionListResponse,
+  type RegionListEvaluationMetricsResponse,
   type RegionListParams,
 } from './regions/regions';

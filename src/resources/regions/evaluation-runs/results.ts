@@ -1,8 +1,38 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import { APIPromise } from '../../../core/api-promise';
+import { RequestOptions } from '../../../internal/request-options';
+import { path } from '../../../internal/utils/path';
 
-export class Results extends APIResource {}
+export class Results extends APIResource {
+  /**
+   * To retrieve results of an evaluation run, send a GET request to
+   * `/v2/gen-ai/evaluation_runs/{evaluation_run_uuid}/results`.
+   */
+  retrieve(evaluationRunUuid: string, options?: RequestOptions): APIPromise<ResultRetrieveResponse> {
+    return this._client.get(path`/v2/gen-ai/evaluation_runs/${evaluationRunUuid}/results`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
+  }
+
+  /**
+   * To retrieve results of an evaluation run, send a GET request to
+   * `/v2/genai/evaluation_runs/{evaluation_run_uuid}/results/{prompt_id}`.
+   */
+  retrievePrompt(
+    promptID: number,
+    params: ResultRetrievePromptParams,
+    options?: RequestOptions,
+  ): APIPromise<ResultRetrievePromptResponse> {
+    const { evaluation_run_uuid } = params;
+    return this._client.get(path`/v2/gen-ai/evaluation_runs/${evaluation_run_uuid}/results/${promptID}`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
+  }
+}
 
 export interface APIEvaluationMetricResult {
   metric_name?: string;
@@ -129,10 +159,36 @@ export namespace APIPrompt {
   }
 }
 
+/**
+ * Gets the full results of an evaluation run with all prompts.
+ */
+export interface ResultRetrieveResponse {
+  evaluation_run?: APIEvaluationRun;
+
+  /**
+   * The prompt level results.
+   */
+  prompts?: Array<APIPrompt>;
+}
+
+export interface ResultRetrievePromptResponse {
+  prompt?: APIPrompt;
+}
+
+export interface ResultRetrievePromptParams {
+  /**
+   * Evaluation run UUID.
+   */
+  evaluation_run_uuid: string;
+}
+
 export declare namespace Results {
   export {
     type APIEvaluationMetricResult as APIEvaluationMetricResult,
     type APIEvaluationRun as APIEvaluationRun,
     type APIPrompt as APIPrompt,
+    type ResultRetrieveResponse as ResultRetrieveResponse,
+    type ResultRetrievePromptResponse as ResultRetrievePromptResponse,
+    type ResultRetrievePromptParams as ResultRetrievePromptParams,
   };
 }
