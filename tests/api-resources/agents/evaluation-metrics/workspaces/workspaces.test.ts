@@ -8,10 +8,10 @@ const client = new GradientAI({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource evaluationRuns', () => {
+describe('resource workspaces', () => {
   // skipped: tests are disabled for the time being
   test.skip('create', async () => {
-    const responsePromise = client.agents.evaluationRuns.create({});
+    const responsePromise = client.agents.evaluationMetrics.workspaces.create({});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,7 +23,7 @@ describe('resource evaluationRuns', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('retrieve', async () => {
-    const responsePromise = client.agents.evaluationRuns.retrieve('evaluation_run_uuid');
+    const responsePromise = client.agents.evaluationMetrics.workspaces.retrieve('workspace_uuid');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -34,8 +34,8 @@ describe('resource evaluationRuns', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('listResults', async () => {
-    const responsePromise = client.agents.evaluationRuns.listResults('evaluation_run_uuid');
+  test.skip('update', async () => {
+    const responsePromise = client.agents.evaluationMetrics.workspaces.update('workspace_uuid', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -46,10 +46,8 @@ describe('resource evaluationRuns', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('retrieveResults: only required params', async () => {
-    const responsePromise = client.agents.evaluationRuns.retrieveResults(0, {
-      evaluation_run_uuid: 'evaluation_run_uuid',
-    });
+  test.skip('list', async () => {
+    const responsePromise = client.agents.evaluationMetrics.workspaces.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -60,9 +58,27 @@ describe('resource evaluationRuns', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('retrieveResults: required and optional params', async () => {
-    const response = await client.agents.evaluationRuns.retrieveResults(0, {
-      evaluation_run_uuid: 'evaluation_run_uuid',
-    });
+  test.skip('delete', async () => {
+    const responsePromise = client.agents.evaluationMetrics.workspaces.delete('workspace_uuid');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('listEvaluationTestCases', async () => {
+    const responsePromise =
+      client.agents.evaluationMetrics.workspaces.listEvaluationTestCases('workspace_uuid');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
   });
 });

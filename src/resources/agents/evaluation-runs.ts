@@ -42,6 +42,22 @@ export class EvaluationRuns extends APIResource {
       ...options,
     });
   }
+
+  /**
+   * To retrieve results of an evaluation run, send a GET request to
+   * `/v2/gen-ai/evaluation_runs/{evaluation_run_uuid}/results/{prompt_id}`.
+   */
+  retrieveResults(
+    promptID: number,
+    params: EvaluationRunRetrieveResultsParams,
+    options?: RequestOptions,
+  ): APIPromise<EvaluationRunRetrieveResultsResponse> {
+    const { evaluation_run_uuid } = params;
+    return this._client.get(path`/v2/gen-ai/evaluation_runs/${evaluation_run_uuid}/results/${promptID}`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
+  }
 }
 
 export interface APIEvaluationMetric {
@@ -126,12 +142,24 @@ export namespace APIEvaluationPrompt {
 }
 
 export interface APIEvaluationRun {
+  agent_deleted?: boolean;
+
+  agent_name?: string;
+
   /**
    * Agent UUID.
    */
   agent_uuid?: string;
 
   agent_version_hash?: string;
+
+  agent_workspace_uuid?: string;
+
+  created_by_user_email?: string;
+
+  created_by_user_id?: string;
+
+  error_description?: string;
 
   /**
    * Evaluation run UUID.
@@ -185,7 +213,7 @@ export interface APIEvaluationRun {
 }
 
 export interface EvaluationRunCreateResponse {
-  evaluation_run_uuid?: string;
+  evaluation_run_uuids?: Array<string>;
 }
 
 export interface EvaluationRunRetrieveResponse {
@@ -204,11 +232,15 @@ export interface EvaluationRunListResultsResponse {
   prompts?: Array<APIEvaluationPrompt>;
 }
 
+export interface EvaluationRunRetrieveResultsResponse {
+  prompt?: APIEvaluationPrompt;
+}
+
 export interface EvaluationRunCreateParams {
   /**
-   * Agent UUID to run the test case against.
+   * Agent UUIDs to run the test case against.
    */
-  agent_uuid?: string;
+  agent_uuids?: Array<string>;
 
   /**
    * The name of the run.
@@ -216,6 +248,13 @@ export interface EvaluationRunCreateParams {
   run_name?: string;
 
   test_case_uuid?: string;
+}
+
+export interface EvaluationRunRetrieveResultsParams {
+  /**
+   * Evaluation run UUID.
+   */
+  evaluation_run_uuid: string;
 }
 
 export declare namespace EvaluationRuns {
@@ -227,6 +266,8 @@ export declare namespace EvaluationRuns {
     type EvaluationRunCreateResponse as EvaluationRunCreateResponse,
     type EvaluationRunRetrieveResponse as EvaluationRunRetrieveResponse,
     type EvaluationRunListResultsResponse as EvaluationRunListResultsResponse,
+    type EvaluationRunRetrieveResultsResponse as EvaluationRunRetrieveResultsResponse,
     type EvaluationRunCreateParams as EvaluationRunCreateParams,
+    type EvaluationRunRetrieveResultsParams as EvaluationRunRetrieveResultsParams,
   };
 }

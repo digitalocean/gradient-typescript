@@ -1,23 +1,28 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
+import { path } from '../internal/utils/path';
 
 export class Models extends APIResource {
   /**
-   * To list all models, send a GET request to `/v2/gen-ai/models`.
+   * Retrieves a model instance, providing basic information about the model such as
+   * the owner and permissioning.
    */
-  list(
-    query: ModelListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<ModelListResponse> {
-    return this._client.get('/v2/gen-ai/models', {
-      query,
-      defaultBaseURL: 'https://api.digitalocean.com',
+  retrieve(model: string, options?: RequestOptions): APIPromise<Model> {
+    return this._client.get(path`/models/${model}`, {
+      defaultBaseURL: 'https://inference.do-ai.run/v1',
       ...options,
     });
+  }
+
+  /**
+   * Lists the currently available models, and provides basic information about each
+   * one such as the owner and availability.
+   */
+  list(options?: RequestOptions): APIPromise<ModelListResponse> {
+    return this._client.get('/models', { defaultBaseURL: 'https://inference.do-ai.run/v1', ...options });
   }
 }
 
@@ -61,51 +66,35 @@ export interface APIModelVersion {
   patch?: number;
 }
 
-export interface ModelListResponse {
-  links?: Shared.APILinks;
+/**
+ * Describes a model offering that can be used with the API.
+ */
+export interface Model {
+  /**
+   * The model identifier, which can be referenced in the API endpoints.
+   */
+  id: string;
 
-  meta?: Shared.APIMeta;
+  /**
+   * The Unix timestamp (in seconds) when the model was created.
+   */
+  created: number;
 
-  models?: Array<APIModel>;
+  /**
+   * The object type, which is always "model".
+   */
+  object: 'model';
+
+  /**
+   * The organization that owns the model.
+   */
+  owned_by: string;
 }
 
-export interface ModelListParams {
-  /**
-   * page number.
-   */
-  page?: number;
+export interface ModelListResponse {
+  data: Array<Model>;
 
-  /**
-   * items per page.
-   */
-  per_page?: number;
-
-  /**
-   * only include models that are publicly available.
-   */
-  public_only?: boolean;
-
-  /**
-   * include only models defined for the listed usecases.
-   *
-   * - MODEL_USECASE_UNKNOWN: The use case of the model is unknown
-   * - MODEL_USECASE_AGENT: The model maybe used in an agent
-   * - MODEL_USECASE_FINETUNED: The model maybe used for fine tuning
-   * - MODEL_USECASE_KNOWLEDGEBASE: The model maybe used for knowledge bases
-   *   (embedding models)
-   * - MODEL_USECASE_GUARDRAIL: The model maybe used for guardrails
-   * - MODEL_USECASE_REASONING: The model usecase for reasoning
-   * - MODEL_USECASE_SERVERLESS: The model usecase for serverless inference
-   */
-  usecases?: Array<
-    | 'MODEL_USECASE_UNKNOWN'
-    | 'MODEL_USECASE_AGENT'
-    | 'MODEL_USECASE_FINETUNED'
-    | 'MODEL_USECASE_KNOWLEDGEBASE'
-    | 'MODEL_USECASE_GUARDRAIL'
-    | 'MODEL_USECASE_REASONING'
-    | 'MODEL_USECASE_SERVERLESS'
-  >;
+  object: 'list';
 }
 
 export declare namespace Models {
@@ -113,7 +102,7 @@ export declare namespace Models {
     type APIAgreement as APIAgreement,
     type APIModel as APIModel,
     type APIModelVersion as APIModelVersion,
+    type Model as Model,
     type ModelListResponse as ModelListResponse,
-    type ModelListParams as ModelListParams,
   };
 }

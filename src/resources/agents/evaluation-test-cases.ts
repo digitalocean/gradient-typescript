@@ -26,8 +26,13 @@ export class EvaluationTestCases extends APIResource {
    * To retrive information about an existing evaluation test case, send a GET
    * request to `/v2/gen-ai/evaluation_test_case/{test_case_uuid}`.
    */
-  retrieve(testCaseUuid: string, options?: RequestOptions): APIPromise<EvaluationTestCaseRetrieveResponse> {
+  retrieve(
+    testCaseUuid: string,
+    query: EvaluationTestCaseRetrieveParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<EvaluationTestCaseRetrieveResponse> {
     return this._client.get(path`/v2/gen-ai/evaluation_test_cases/${testCaseUuid}`, {
+      query,
       defaultBaseURL: 'https://api.digitalocean.com',
       ...options,
     });
@@ -184,6 +189,13 @@ export interface EvaluationTestCaseCreateParams {
   workspace_uuid?: string;
 }
 
+export interface EvaluationTestCaseRetrieveParams {
+  /**
+   * Version of the test case.
+   */
+  evaluation_test_case_version?: number;
+}
+
 export interface EvaluationTestCaseUpdateParams {
   /**
    * Dataset against which the test‑case is executed.
@@ -230,6 +242,7 @@ export declare namespace EvaluationTestCases {
     type EvaluationTestCaseListResponse as EvaluationTestCaseListResponse,
     type EvaluationTestCaseListEvaluationRunsResponse as EvaluationTestCaseListEvaluationRunsResponse,
     type EvaluationTestCaseCreateParams as EvaluationTestCaseCreateParams,
+    type EvaluationTestCaseRetrieveParams as EvaluationTestCaseRetrieveParams,
     type EvaluationTestCaseUpdateParams as EvaluationTestCaseUpdateParams,
     type EvaluationTestCaseListEvaluationRunsParams as EvaluationTestCaseListEvaluationRunsParams,
   };
