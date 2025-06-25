@@ -10,7 +10,7 @@ const client = new GradientAI({
 describe('resource evaluationTestCases', () => {
   // skipped: tests are disabled for the time being
   test.skip('create', async () => {
-    const responsePromise = client.regions.evaluationTestCases.create({});
+    const responsePromise = client.agents.evaluationTestCases.create({});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,7 +22,7 @@ describe('resource evaluationTestCases', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('retrieve', async () => {
-    const responsePromise = client.regions.evaluationTestCases.retrieve('test_case_uuid');
+    const responsePromise = client.agents.evaluationTestCases.retrieve('test_case_uuid');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -34,7 +34,7 @@ describe('resource evaluationTestCases', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update', async () => {
-    const responsePromise = client.regions.evaluationTestCases.update('test_case_uuid', {});
+    const responsePromise = client.agents.evaluationTestCases.update('test_case_uuid', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -46,7 +46,7 @@ describe('resource evaluationTestCases', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('list', async () => {
-    const responsePromise = client.regions.evaluationTestCases.list();
+    const responsePromise = client.agents.evaluationTestCases.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -58,8 +58,7 @@ describe('resource evaluationTestCases', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('listEvaluationRuns', async () => {
-    const responsePromise =
-      client.regions.evaluationTestCases.listEvaluationRuns('evaluation_test_case_uuid');
+    const responsePromise = client.agents.evaluationTestCases.listEvaluationRuns('evaluation_test_case_uuid');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -73,7 +72,7 @@ describe('resource evaluationTestCases', () => {
   test.skip('listEvaluationRuns: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.regions.evaluationTestCases.listEvaluationRuns(
+      client.agents.evaluationTestCases.listEvaluationRuns(
         'evaluation_test_case_uuid',
         { evaluation_test_case_version: 0 },
         { path: '/_stainless_unknown_path' },

@@ -45,6 +45,38 @@ export {
   type ChildAgentAddParams,
 } from './child-agents';
 export {
+  EvaluationDatasets,
+  type EvaluationDatasetCreateResponse,
+  type EvaluationDatasetCreateFileUploadPresignedURLsResponse,
+  type EvaluationDatasetCreateParams,
+  type EvaluationDatasetCreateFileUploadPresignedURLsParams,
+} from './evaluation-datasets';
+export { EvaluationMetrics, type EvaluationMetricListResponse } from './evaluation-metrics';
+export {
+  EvaluationRuns,
+  type APIEvaluationMetric,
+  type APIEvaluationMetricResult,
+  type APIEvaluationPrompt,
+  type APIEvaluationRun,
+  type EvaluationRunCreateResponse,
+  type EvaluationRunRetrieveResponse,
+  type EvaluationRunListResultsResponse,
+  type EvaluationRunCreateParams,
+} from './evaluation-runs';
+export {
+  EvaluationTestCases,
+  type APIEvaluationTestCase,
+  type APIStarMetric,
+  type EvaluationTestCaseCreateResponse,
+  type EvaluationTestCaseRetrieveResponse,
+  type EvaluationTestCaseUpdateResponse,
+  type EvaluationTestCaseListResponse,
+  type EvaluationTestCaseListEvaluationRunsResponse,
+  type EvaluationTestCaseCreateParams,
+  type EvaluationTestCaseUpdateParams,
+  type EvaluationTestCaseListEvaluationRunsParams,
+} from './evaluation-test-cases';
+export {
   Functions,
   type FunctionCreateResponse,
   type FunctionUpdateResponse,

@@ -1,8 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as RegionsAPI from './regions';
-import * as ResultsAPI from './evaluation-runs/results';
+import * as EvaluationRunsAPI from './evaluation-runs';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
@@ -94,7 +93,7 @@ export interface APIEvaluationTestCase {
 
   latest_version_number_of_runs?: number;
 
-  metrics?: Array<RegionsAPI.APIEvaluationMetric>;
+  metrics?: Array<EvaluationRunsAPI.APIEvaluationMetric>;
 
   name?: string;
 
@@ -153,7 +152,7 @@ export interface EvaluationTestCaseListEvaluationRunsResponse {
   /**
    * List of evaluation runs.
    */
-  evaluation_runs?: Array<ResultsAPI.APIEvaluationRun>;
+  evaluation_runs?: Array<EvaluationRunsAPI.APIEvaluationRun>;
 }
 
 export interface EvaluationTestCaseCreateParams {

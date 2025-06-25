@@ -56,10 +56,4 @@ export {
   type ModelListParams,
 } from './models';
 export { Providers } from './providers/providers';
-export {
-  Regions,
-  type APIEvaluationMetric,
-  type RegionListResponse,
-  type RegionListEvaluationMetricsResponse,
-  type RegionListParams,
-} from './regions/regions';
+export { Regions, type RegionListResponse, type RegionListParams } from './regions';
