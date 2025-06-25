@@ -82,7 +82,7 @@ export interface ClientOptions {
   apiKey?: string | null | undefined;
 
   /**
-   * Defaults to process.env['GRADIENTAI_API_KEY'].
+   * Defaults to process.env['GRADIENTAI_INFERENCE_KEY'].
    */
   inferenceKey?: string | null | undefined;
 
@@ -176,7 +176,7 @@ export class GradientAI {
    * API Client for interfacing with the Gradient AI API.
    *
    * @param {string | null | undefined} [opts.apiKey=process.env['GRADIENTAI_API_KEY'] ?? null]
-   * @param {string | null | undefined} [opts.inferenceKey=process.env['GRADIENTAI_API_KEY'] ?? null]
+   * @param {string | null | undefined} [opts.inferenceKey=process.env['GRADIENTAI_INFERENCE_KEY'] ?? null]
    * @param {string} [opts.baseURL=process.env['GRADIENT_AI_BASE_URL'] ?? https://api.digitalocean.com/] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
@@ -188,7 +188,7 @@ export class GradientAI {
   constructor({
     baseURL = readEnv('GRADIENT_AI_BASE_URL'),
     apiKey = readEnv('GRADIENTAI_API_KEY') ?? null,
-    inferenceKey = readEnv('GRADIENTAI_API_KEY') ?? null,
+    inferenceKey = readEnv('GRADIENTAI_INFERENCE_KEY') ?? null,
     ...opts
   }: ClientOptions = {}) {
     const options: ClientOptions = {

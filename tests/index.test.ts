@@ -481,7 +481,7 @@ describe('instantiate client', () => {
   test('with environment variable arguments', () => {
     // set options via env var
     process.env['GRADIENTAI_API_KEY'] = 'My API Key';
-    process.env['GRADIENTAI_API_KEY'] = 'My Inference Key';
+    process.env['GRADIENTAI_INFERENCE_KEY'] = 'My Inference Key';
     const client = new GradientAI();
     expect(client.apiKey).toBe('My API Key');
     expect(client.inferenceKey).toBe('My Inference Key');
@@ -490,7 +490,7 @@ describe('instantiate client', () => {
   test('with overridden environment variable arguments', () => {
     // set options via env var
     process.env['GRADIENTAI_API_KEY'] = 'another My API Key';
-    process.env['GRADIENTAI_API_KEY'] = 'another My Inference Key';
+    process.env['GRADIENTAI_INFERENCE_KEY'] = 'another My Inference Key';
     const client = new GradientAI({ apiKey: 'My API Key', inferenceKey: 'My Inference Key' });
     expect(client.apiKey).toBe('My API Key');
     expect(client.inferenceKey).toBe('My Inference Key');
