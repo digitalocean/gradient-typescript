@@ -219,25 +219,6 @@ Methods:
 - <code title="post /v2/gen-ai/evaluation_datasets">client.regions.evaluationDatasets.<a href="./src/resources/regions/evaluation-datasets.ts">create</a>({ ...params }) -> EvaluationDatasetCreateResponse</code>
 - <code title="post /v2/gen-ai/evaluation_datasets/file_upload_presigned_urls">client.regions.evaluationDatasets.<a href="./src/resources/regions/evaluation-datasets.ts">createFileUploadPresignedURLs</a>({ ...params }) -> EvaluationDatasetCreateFileUploadPresignedURLsResponse</code>
 
-# IndexingJobs
-
-Types:
-
-- <code><a href="./src/resources/indexing-jobs.ts">APIIndexingJob</a></code>
-- <code><a href="./src/resources/indexing-jobs.ts">IndexingJobCreateResponse</a></code>
-- <code><a href="./src/resources/indexing-jobs.ts">IndexingJobRetrieveResponse</a></code>
-- <code><a href="./src/resources/indexing-jobs.ts">IndexingJobListResponse</a></code>
-- <code><a href="./src/resources/indexing-jobs.ts">IndexingJobRetrieveDataSourcesResponse</a></code>
-- <code><a href="./src/resources/indexing-jobs.ts">IndexingJobUpdateCancelResponse</a></code>
-
-Methods:
-
-- <code title="post /v2/gen-ai/indexing_jobs">client.indexingJobs.<a href="./src/resources/indexing-jobs.ts">create</a>({ ...params }) -> IndexingJobCreateResponse</code>
-- <code title="get /v2/gen-ai/indexing_jobs/{uuid}">client.indexingJobs.<a href="./src/resources/indexing-jobs.ts">retrieve</a>(uuid) -> IndexingJobRetrieveResponse</code>
-- <code title="get /v2/gen-ai/indexing_jobs">client.indexingJobs.<a href="./src/resources/indexing-jobs.ts">list</a>({ ...params }) -> IndexingJobListResponse</code>
-- <code title="get /v2/gen-ai/indexing_jobs/{indexing_job_uuid}/data_sources">client.indexingJobs.<a href="./src/resources/indexing-jobs.ts">retrieveDataSources</a>(indexingJobUuid) -> IndexingJobRetrieveDataSourcesResponse</code>
-- <code title="put /v2/gen-ai/indexing_jobs/{uuid}/cancel">client.indexingJobs.<a href="./src/resources/indexing-jobs.ts">updateCancel</a>(pathUuid, { ...params }) -> IndexingJobUpdateCancelResponse</code>
-
 # KnowledgeBases
 
 Types:
@@ -275,6 +256,25 @@ Methods:
 - <code title="post /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources">client.knowledgeBases.dataSources.<a href="./src/resources/knowledge-bases/data-sources.ts">create</a>(knowledgeBaseUuid, { ...params }) -> DataSourceCreateResponse</code>
 - <code title="get /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources">client.knowledgeBases.dataSources.<a href="./src/resources/knowledge-bases/data-sources.ts">list</a>(knowledgeBaseUuid, { ...params }) -> DataSourceListResponse</code>
 - <code title="delete /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources/{data_source_uuid}">client.knowledgeBases.dataSources.<a href="./src/resources/knowledge-bases/data-sources.ts">delete</a>(dataSourceUuid, { ...params }) -> DataSourceDeleteResponse</code>
+
+## IndexingJobs
+
+Types:
+
+- <code><a href="./src/resources/knowledge-bases/indexing-jobs.ts">APIIndexingJob</a></code>
+- <code><a href="./src/resources/knowledge-bases/indexing-jobs.ts">IndexingJobCreateResponse</a></code>
+- <code><a href="./src/resources/knowledge-bases/indexing-jobs.ts">IndexingJobRetrieveResponse</a></code>
+- <code><a href="./src/resources/knowledge-bases/indexing-jobs.ts">IndexingJobListResponse</a></code>
+- <code><a href="./src/resources/knowledge-bases/indexing-jobs.ts">IndexingJobRetrieveDataSourcesResponse</a></code>
+- <code><a href="./src/resources/knowledge-bases/indexing-jobs.ts">IndexingJobUpdateCancelResponse</a></code>
+
+Methods:
+
+- <code title="post /v2/gen-ai/indexing_jobs">client.knowledgeBases.indexingJobs.<a href="./src/resources/knowledge-bases/indexing-jobs.ts">create</a>({ ...params }) -> IndexingJobCreateResponse</code>
+- <code title="get /v2/gen-ai/indexing_jobs/{uuid}">client.knowledgeBases.indexingJobs.<a href="./src/resources/knowledge-bases/indexing-jobs.ts">retrieve</a>(uuid) -> IndexingJobRetrieveResponse</code>
+- <code title="get /v2/gen-ai/indexing_jobs">client.knowledgeBases.indexingJobs.<a href="./src/resources/knowledge-bases/indexing-jobs.ts">list</a>({ ...params }) -> IndexingJobListResponse</code>
+- <code title="get /v2/gen-ai/indexing_jobs/{indexing_job_uuid}/data_sources">client.knowledgeBases.indexingJobs.<a href="./src/resources/knowledge-bases/indexing-jobs.ts">retrieveDataSources</a>(indexingJobUuid) -> IndexingJobRetrieveDataSourcesResponse</code>
+- <code title="put /v2/gen-ai/indexing_jobs/{uuid}/cancel">client.knowledgeBases.indexingJobs.<a href="./src/resources/knowledge-bases/indexing-jobs.ts">updateCancel</a>(pathUuid, { ...params }) -> IndexingJobUpdateCancelResponse</code>
 
 # Chat
 
