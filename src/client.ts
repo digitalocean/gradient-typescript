@@ -21,7 +21,7 @@ import {
   APIAgreement,
   APIModel,
   APIModelVersion,
-  Model,
+  ModelListParams,
   ModelListResponse,
   Models,
 } from './resources/models';
@@ -833,8 +833,8 @@ export declare namespace GradientAI {
     type APIAgreement as APIAgreement,
     type APIModel as APIModel,
     type APIModelVersion as APIModelVersion,
-    type Model as Model,
     type ModelListResponse as ModelListResponse,
+    type ModelListParams as ModelListParams,
   };
 
   export type APILinks = API.APILinks;
