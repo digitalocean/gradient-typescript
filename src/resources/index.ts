@@ -42,7 +42,7 @@ export {
   type APIAgreement,
   type APIModel,
   type APIModelVersion,
-  type Model,
   type ModelListResponse,
+  type ModelListParams,
 } from './models';
 export { Regions, type RegionListResponse, type RegionListParams } from './regions';
