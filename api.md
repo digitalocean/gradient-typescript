@@ -51,6 +51,19 @@ Methods:
 - <code title="delete /v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}">client.agents.apiKeys.<a href="./src/resources/agents/api-keys.ts">delete</a>(apiKeyUuid, { ...params }) -> APIKeyDeleteResponse</code>
 - <code title="put /v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}/regenerate">client.agents.apiKeys.<a href="./src/resources/agents/api-keys.ts">regenerate</a>(apiKeyUuid, { ...params }) -> APIKeyRegenerateResponse</code>
 
+## Chat
+
+### Completions
+
+Types:
+
+- <code><a href="./src/resources/agents/chat/completions.ts">ChatCompletionTokenLogprob</a></code>
+- <code><a href="./src/resources/agents/chat/completions.ts">CompletionCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /chat/completions">client.agents.chat.completions.<a href="./src/resources/agents/chat/completions.ts">create</a>({ ...params }) -> CompletionCreateResponse</code>
+
 ## EvaluationMetrics
 
 Types:

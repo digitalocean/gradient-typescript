@@ -11,6 +11,14 @@ export class Agents extends APIResource {
   /**
    * To list all agents by a Workspace, send a GET request to
    * `/v2/gen-ai/workspaces/{workspace_uuid}/agents`.
+   *
+   * @example
+   * ```ts
+   * const agents =
+   *   await client.agents.evaluationMetrics.workspaces.agents.list(
+   *     'workspace_uuid',
+   *   );
+   * ```
    */
   list(
     workspaceUuid: string,
@@ -27,6 +35,14 @@ export class Agents extends APIResource {
   /**
    * To move all listed agetns a given workspace, send a PUT request to
    * `/v2/gen-ai/workspaces/{workspace_uuid}/agents`.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.agents.evaluationMetrics.workspaces.agents.move(
+   *     'workspace_uuid',
+   *   );
+   * ```
    */
   move(
     workspaceUuid: string,

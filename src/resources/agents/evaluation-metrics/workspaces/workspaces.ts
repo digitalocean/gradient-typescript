@@ -15,6 +15,12 @@ export class Workspaces extends APIResource {
   /**
    * To create a new workspace, send a POST request to `/v2/gen-ai/workspaces`. The
    * response body contains a JSON object with the newly created workspace object.
+   *
+   * @example
+   * ```ts
+   * const workspace =
+   *   await client.agents.evaluationMetrics.workspaces.create();
+   * ```
    */
   create(body: WorkspaceCreateParams, options?: RequestOptions): APIPromise<WorkspaceCreateResponse> {
     return this._client.post('/v2/gen-ai/workspaces', {
@@ -28,6 +34,14 @@ export class Workspaces extends APIResource {
    * To retrieve details of a workspace, GET request to
    * `/v2/gen-ai/workspaces/{workspace_uuid}`. The response body is a JSON object
    * containing the workspace.
+   *
+   * @example
+   * ```ts
+   * const workspace =
+   *   await client.agents.evaluationMetrics.workspaces.retrieve(
+   *     'workspace_uuid',
+   *   );
+   * ```
    */
   retrieve(workspaceUuid: string, options?: RequestOptions): APIPromise<WorkspaceRetrieveResponse> {
     return this._client.get(path`/v2/gen-ai/workspaces/${workspaceUuid}`, {
@@ -40,6 +54,14 @@ export class Workspaces extends APIResource {
    * To update a workspace, send a PUT request to
    * `/v2/gen-ai/workspaces/{workspace_uuid}`. The response body is a JSON object
    * containing the workspace.
+   *
+   * @example
+   * ```ts
+   * const workspace =
+   *   await client.agents.evaluationMetrics.workspaces.update(
+   *     'workspace_uuid',
+   *   );
+   * ```
    */
   update(
     workspaceUuid: string,
@@ -55,6 +77,12 @@ export class Workspaces extends APIResource {
 
   /**
    * To list all workspaces, send a GET request to `/v2/gen-ai/workspaces`.
+   *
+   * @example
+   * ```ts
+   * const workspaces =
+   *   await client.agents.evaluationMetrics.workspaces.list();
+   * ```
    */
   list(options?: RequestOptions): APIPromise<WorkspaceListResponse> {
     return this._client.get('/v2/gen-ai/workspaces', {
@@ -66,6 +94,14 @@ export class Workspaces extends APIResource {
   /**
    * To delete a workspace, send a DELETE request to
    * `/v2/gen-ai/workspace/{workspace_uuid}`.
+   *
+   * @example
+   * ```ts
+   * const workspace =
+   *   await client.agents.evaluationMetrics.workspaces.delete(
+   *     'workspace_uuid',
+   *   );
+   * ```
    */
   delete(workspaceUuid: string, options?: RequestOptions): APIPromise<WorkspaceDeleteResponse> {
     return this._client.delete(path`/v2/gen-ai/workspaces/${workspaceUuid}`, {
@@ -77,6 +113,14 @@ export class Workspaces extends APIResource {
   /**
    * To list all evaluation test cases by a workspace, send a GET request to
    * `/v2/gen-ai/workspaces/{workspace_uuid}/evaluation_test_cases`.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.agents.evaluationMetrics.workspaces.listEvaluationTestCases(
+   *     'workspace_uuid',
+   *   );
+   * ```
    */
   listEvaluationTestCases(
     workspaceUuid: string,

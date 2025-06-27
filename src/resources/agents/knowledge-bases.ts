@@ -10,6 +10,12 @@ export class KnowledgeBases extends APIResource {
   /**
    * To attach knowledge bases to an agent, send a POST request to
    * `/v2/gen-ai/agents/{agent_uuid}/knowledge_bases`
+   *
+   * @example
+   * ```ts
+   * const apiLinkKnowledgeBaseOutput =
+   *   await client.agents.knowledgeBases.attach('agent_uuid');
+   * ```
    */
   attach(agentUuid: string, options?: RequestOptions): APIPromise<APILinkKnowledgeBaseOutput> {
     return this._client.post(path`/v2/gen-ai/agents/${agentUuid}/knowledge_bases`, {
@@ -21,6 +27,15 @@ export class KnowledgeBases extends APIResource {
   /**
    * To attach a knowledge base to an agent, send a POST request to
    * `/v2/gen-ai/agents/{agent_uuid}/knowledge_bases/{knowledge_base_uuid}`
+   *
+   * @example
+   * ```ts
+   * const apiLinkKnowledgeBaseOutput =
+   *   await client.agents.knowledgeBases.attachSingle(
+   *     'knowledge_base_uuid',
+   *     { agent_uuid: 'agent_uuid' },
+   *   );
+   * ```
    */
   attachSingle(
     knowledgeBaseUuid: string,
@@ -37,6 +52,14 @@ export class KnowledgeBases extends APIResource {
   /**
    * To detach a knowledge base from an agent, send a DELETE request to
    * `/v2/gen-ai/agents/{agent_uuid}/knowledge_bases/{knowledge_base_uuid}`.
+   *
+   * @example
+   * ```ts
+   * const response = await client.agents.knowledgeBases.detach(
+   *   'knowledge_base_uuid',
+   *   { agent_uuid: 'agent_uuid' },
+   * );
+   * ```
    */
   detach(
     knowledgeBaseUuid: string,

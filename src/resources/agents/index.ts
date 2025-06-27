@@ -34,6 +34,7 @@ export {
   type AgentListParams,
   type AgentUpdateStatusParams,
 } from './agents';
+export { Chat } from './chat/index';
 export {
   EvaluationDatasets,
   type EvaluationDatasetCreateResponse,

@@ -10,6 +10,14 @@ export class Routes extends APIResource {
   /**
    * To update an agent route for an agent, send a PUT request to
    * `/v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}`.
+   *
+   * @example
+   * ```ts
+   * const route = await client.agents.routes.update(
+   *   'child_agent_uuid',
+   *   { path_parent_agent_uuid: 'parent_agent_uuid' },
+   * );
+   * ```
    */
   update(
     childAgentUuid: string,
@@ -26,6 +34,14 @@ export class Routes extends APIResource {
   /**
    * To delete an agent route from a parent agent, send a DELETE request to
    * `/v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}`.
+   *
+   * @example
+   * ```ts
+   * const route = await client.agents.routes.delete(
+   *   'child_agent_uuid',
+   *   { parent_agent_uuid: 'parent_agent_uuid' },
+   * );
+   * ```
    */
   delete(
     childAgentUuid: string,
@@ -42,6 +58,14 @@ export class Routes extends APIResource {
   /**
    * To add an agent route to an agent, send a POST request to
    * `/v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}`.
+   *
+   * @example
+   * ```ts
+   * const response = await client.agents.routes.add(
+   *   'child_agent_uuid',
+   *   { path_parent_agent_uuid: 'parent_agent_uuid' },
+   * );
+   * ```
    */
   add(
     childAgentUuid: string,
@@ -58,6 +82,11 @@ export class Routes extends APIResource {
   /**
    * To view agent routes for an agent, send a GET requtest to
    * `/v2/gen-ai/agents/{uuid}/child_agents`.
+   *
+   * @example
+   * ```ts
+   * const response = await client.agents.routes.view('uuid');
+   * ```
    */
   view(uuid: string, options?: RequestOptions): APIPromise<RouteViewResponse> {
     return this._client.get(path`/v2/gen-ai/agents/${uuid}/child_agents`, {
