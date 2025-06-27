@@ -93,6 +93,8 @@ import {
   Versions,
 } from './versions';
 import * as KnowledgeBasesKnowledgeBasesAPI from '../knowledge-bases/knowledge-bases';
+import * as ChatAPI from './chat/chat';
+import { Chat } from './chat/chat';
 import * as EvaluationMetricsAPI from './evaluation-metrics/evaluation-metrics';
 import { EvaluationMetricListResponse, EvaluationMetrics } from './evaluation-metrics/evaluation-metrics';
 import { APIPromise } from '../../core/api-promise';
@@ -101,6 +103,7 @@ import { path } from '../../internal/utils/path';
 
 export class Agents extends APIResource {
   apiKeys: APIKeysAPI.APIKeys = new APIKeysAPI.APIKeys(this._client);
+  chat: ChatAPI.Chat = new ChatAPI.Chat(this._client);
   evaluationMetrics: EvaluationMetricsAPI.EvaluationMetrics = new EvaluationMetricsAPI.EvaluationMetrics(
     this._client,
   );
@@ -118,6 +121,11 @@ export class Agents extends APIResource {
   /**
    * To create a new agent, send a POST request to `/v2/gen-ai/agents`. The response
    * body contains a JSON object with the newly created agent object.
+   *
+   * @example
+   * ```ts
+   * const agent = await client.agents.create();
+   * ```
    */
   create(body: AgentCreateParams, options?: RequestOptions): APIPromise<AgentCreateResponse> {
     return this._client.post('/v2/gen-ai/agents', {
@@ -130,6 +138,11 @@ export class Agents extends APIResource {
   /**
    * To retrieve details of an agent, GET request to `/v2/gen-ai/agents/{uuid}`. The
    * response body is a JSON object containing the agent.
+   *
+   * @example
+   * ```ts
+   * const agent = await client.agents.retrieve('uuid');
+   * ```
    */
   retrieve(uuid: string, options?: RequestOptions): APIPromise<AgentRetrieveResponse> {
     return this._client.get(path`/v2/gen-ai/agents/${uuid}`, {
@@ -141,6 +154,11 @@ export class Agents extends APIResource {
   /**
    * To update an agent, send a PUT request to `/v2/gen-ai/agents/{uuid}`. The
    * response body is a JSON object containing the agent.
+   *
+   * @example
+   * ```ts
+   * const agent = await client.agents.update('uuid');
+   * ```
    */
   update(
     pathUuid: string,
@@ -156,6 +174,11 @@ export class Agents extends APIResource {
 
   /**
    * To list all agents, send a GET request to `/v2/gen-ai/agents`.
+   *
+   * @example
+   * ```ts
+   * const agents = await client.agents.list();
+   * ```
    */
   list(
     query: AgentListParams | null | undefined = {},
@@ -170,6 +193,11 @@ export class Agents extends APIResource {
 
   /**
    * To delete an agent, send a DELETE request to `/v2/gen-ai/agents/{uuid}`.
+   *
+   * @example
+   * ```ts
+   * const agent = await client.agents.delete('uuid');
+   * ```
    */
   delete(uuid: string, options?: RequestOptions): APIPromise<AgentDeleteResponse> {
     return this._client.delete(path`/v2/gen-ai/agents/${uuid}`, {
@@ -181,6 +209,11 @@ export class Agents extends APIResource {
   /**
    * Check whether an agent is public or private. To update the agent status, send a
    * PUT request to `/v2/gen-ai/agents/{uuid}/deployment_visibility`.
+   *
+   * @example
+   * ```ts
+   * const response = await client.agents.updateStatus('uuid');
+   * ```
    */
   updateStatus(
     pathUuid: string,
@@ -859,6 +892,7 @@ export interface AgentUpdateStatusParams {
 }
 
 Agents.APIKeys = APIKeys;
+Agents.Chat = Chat;
 Agents.EvaluationMetrics = EvaluationMetrics;
 Agents.EvaluationRuns = EvaluationRuns;
 Agents.EvaluationTestCases = EvaluationTestCases;
@@ -903,6 +937,8 @@ export declare namespace Agents {
     type APIKeyDeleteParams as APIKeyDeleteParams,
     type APIKeyRegenerateParams as APIKeyRegenerateParams,
   };
+
+  export { Chat as Chat };
 
   export {
     EvaluationMetrics as EvaluationMetrics,

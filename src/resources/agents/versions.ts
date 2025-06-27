@@ -11,6 +11,11 @@ export class Versions extends APIResource {
   /**
    * To update to a specific agent version, send a PUT request to
    * `/v2/gen-ai/agents/{uuid}/versions`.
+   *
+   * @example
+   * ```ts
+   * const version = await client.agents.versions.update('uuid');
+   * ```
    */
   update(
     pathUuid: string,
@@ -27,6 +32,11 @@ export class Versions extends APIResource {
   /**
    * To list all agent versions, send a GET request to
    * `/v2/gen-ai/agents/{uuid}/versions`.
+   *
+   * @example
+   * ```ts
+   * const versions = await client.agents.versions.list('uuid');
+   * ```
    */
   list(
     uuid: string,

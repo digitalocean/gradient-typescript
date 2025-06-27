@@ -10,6 +10,12 @@ export class EvaluationTestCases extends APIResource {
   /**
    * To create an evaluation test-case send a POST request to
    * `/v2/gen-ai/evaluation_test_cases`.
+   *
+   * @example
+   * ```ts
+   * const evaluationTestCase =
+   *   await client.agents.evaluationTestCases.create();
+   * ```
    */
   create(
     body: EvaluationTestCaseCreateParams,
@@ -25,6 +31,14 @@ export class EvaluationTestCases extends APIResource {
   /**
    * To retrive information about an existing evaluation test case, send a GET
    * request to `/v2/gen-ai/evaluation_test_case/{test_case_uuid}`.
+   *
+   * @example
+   * ```ts
+   * const evaluationTestCase =
+   *   await client.agents.evaluationTestCases.retrieve(
+   *     'test_case_uuid',
+   *   );
+   * ```
    */
   retrieve(
     testCaseUuid: string,
@@ -41,6 +55,14 @@ export class EvaluationTestCases extends APIResource {
   /**
    * To update an evaluation test-case send a POST request to
    * `/v2/gen-ai/evaluation_test_cases/{test_case_uuid}`.
+   *
+   * @example
+   * ```ts
+   * const evaluationTestCase =
+   *   await client.agents.evaluationTestCases.update(
+   *     'test_case_uuid',
+   *   );
+   * ```
    */
   update(
     testCaseUuid: string,
@@ -57,6 +79,12 @@ export class EvaluationTestCases extends APIResource {
   /**
    * To list all evaluation test cases, send a GET request to
    * `/v2/gen-ai/evaluation_test_cases`.
+   *
+   * @example
+   * ```ts
+   * const evaluationTestCases =
+   *   await client.agents.evaluationTestCases.list();
+   * ```
    */
   list(options?: RequestOptions): APIPromise<EvaluationTestCaseListResponse> {
     return this._client.get('/v2/gen-ai/evaluation_test_cases', {
@@ -68,6 +96,14 @@ export class EvaluationTestCases extends APIResource {
   /**
    * To list all evaluation runs by test case, send a GET request to
    * `/v2/gen-ai/evaluation_test_cases/{evaluation_test_case_uuid}/evaluation_runs`.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.agents.evaluationTestCases.listEvaluationRuns(
+   *     'evaluation_test_case_uuid',
+   *   );
+   * ```
    */
   listEvaluationRuns(
     evaluationTestCaseUuid: string,

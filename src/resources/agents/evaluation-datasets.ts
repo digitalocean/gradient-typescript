@@ -9,6 +9,12 @@ export class EvaluationDatasets extends APIResource {
   /**
    * To create an evaluation dataset, send a POST request to
    * `/v2/gen-ai/evaluation_datasets`.
+   *
+   * @example
+   * ```ts
+   * const evaluationDataset =
+   *   await client.agents.evaluationDatasets.create();
+   * ```
    */
   create(
     body: EvaluationDatasetCreateParams,
@@ -24,6 +30,12 @@ export class EvaluationDatasets extends APIResource {
   /**
    * To create presigned URLs for evaluation dataset file upload, send a POST request
    * to `/v2/gen-ai/evaluation_datasets/file_upload_presigned_urls`.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.agents.evaluationDatasets.createFileUploadPresignedURLs();
+   * ```
    */
   createFileUploadPresignedURLs(
     body: EvaluationDatasetCreateFileUploadPresignedURLsParams,

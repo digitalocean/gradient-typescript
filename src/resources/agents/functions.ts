@@ -10,6 +10,13 @@ export class Functions extends APIResource {
   /**
    * To create a function route for an agent, send a POST request to
    * `/v2/gen-ai/agents/{agent_uuid}/functions`.
+   *
+   * @example
+   * ```ts
+   * const _function = await client.agents.functions.create(
+   *   'agent_uuid',
+   * );
+   * ```
    */
   create(
     agentUuid: string,
@@ -26,6 +33,14 @@ export class Functions extends APIResource {
   /**
    * To update the function route, send a PUT request to
    * `/v2/gen-ai/agents/{agent_uuid}/functions/{function_uuid}`.
+   *
+   * @example
+   * ```ts
+   * const _function = await client.agents.functions.update(
+   *   'function_uuid',
+   *   { path_agent_uuid: 'agent_uuid' },
+   * );
+   * ```
    */
   update(
     functionUuid: string,
@@ -43,6 +58,14 @@ export class Functions extends APIResource {
   /**
    * To delete a function route from an agent, send a DELETE request to
    * `/v2/gen-ai/agents/{agent_uuid}/functions/{function_uuid}`.
+   *
+   * @example
+   * ```ts
+   * const _function = await client.agents.functions.delete(
+   *   'function_uuid',
+   *   { agent_uuid: 'agent_uuid' },
+   * );
+   * ```
    */
   delete(
     functionUuid: string,

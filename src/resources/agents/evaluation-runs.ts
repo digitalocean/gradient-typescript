@@ -9,6 +9,12 @@ export class EvaluationRuns extends APIResource {
   /**
    * To run an evaluation test case, send a POST request to
    * `/v2/gen-ai/evaluation_runs`.
+   *
+   * @example
+   * ```ts
+   * const evaluationRun =
+   *   await client.agents.evaluationRuns.create();
+   * ```
    */
   create(body: EvaluationRunCreateParams, options?: RequestOptions): APIPromise<EvaluationRunCreateResponse> {
     return this._client.post('/v2/gen-ai/evaluation_runs', {
@@ -21,6 +27,14 @@ export class EvaluationRuns extends APIResource {
   /**
    * To retrive information about an existing evaluation run, send a GET request to
    * `/v2/gen-ai/evaluation_runs/{evaluation_run_uuid}`.
+   *
+   * @example
+   * ```ts
+   * const evaluationRun =
+   *   await client.agents.evaluationRuns.retrieve(
+   *     'evaluation_run_uuid',
+   *   );
+   * ```
    */
   retrieve(evaluationRunUuid: string, options?: RequestOptions): APIPromise<EvaluationRunRetrieveResponse> {
     return this._client.get(path`/v2/gen-ai/evaluation_runs/${evaluationRunUuid}`, {
@@ -32,6 +46,14 @@ export class EvaluationRuns extends APIResource {
   /**
    * To retrieve results of an evaluation run, send a GET request to
    * `/v2/gen-ai/evaluation_runs/{evaluation_run_uuid}/results`.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.agents.evaluationRuns.listResults(
+   *     'evaluation_run_uuid',
+   *   );
+   * ```
    */
   listResults(
     evaluationRunUuid: string,
@@ -46,6 +68,14 @@ export class EvaluationRuns extends APIResource {
   /**
    * To retrieve results of an evaluation run, send a GET request to
    * `/v2/gen-ai/evaluation_runs/{evaluation_run_uuid}/results/{prompt_id}`.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.agents.evaluationRuns.retrieveResults(0, {
+   *     evaluation_run_uuid: 'evaluation_run_uuid',
+   *   });
+   * ```
    */
   retrieveResults(
     promptID: number,

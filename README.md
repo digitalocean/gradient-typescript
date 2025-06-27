@@ -29,7 +29,7 @@ const client = new GradientAI({
   apiKey: process.env['GRADIENTAI_API_KEY'], // This is the default and can be omitted
 });
 
-const completion = await client.chat.completions.create({
+const completion = await client.agents.chat.completions.create({
   messages: [{ content: 'string', role: 'system' }],
   model: 'llama3-8b-instruct',
 });
@@ -228,7 +228,7 @@ parameter. This library doesn't validate at runtime that the request matches the
 send will be sent as-is.
 
 ```ts
-client.chat.completions.create({
+client.agents.chat.completions.create({
   // ...
   // @ts-expect-error baz is not yet public
   baz: 'undocumented option',

@@ -23,6 +23,12 @@ export class EvaluationMetrics extends APIResource {
   /**
    * To list all evaluation metrics, send a GET request to
    * `/v2/gen-ai/evaluation_metrics`.
+   *
+   * @example
+   * ```ts
+   * const evaluationMetrics =
+   *   await client.agents.evaluationMetrics.list();
+   * ```
    */
   list(options?: RequestOptions): APIPromise<EvaluationMetricListResponse> {
     return this._client.get('/v2/gen-ai/evaluation_metrics', {

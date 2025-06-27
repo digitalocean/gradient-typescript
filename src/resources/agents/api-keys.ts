@@ -11,6 +11,13 @@ export class APIKeys extends APIResource {
   /**
    * To create an agent API key, send a POST request to
    * `/v2/gen-ai/agents/{agent_uuid}/api_keys`.
+   *
+   * @example
+   * ```ts
+   * const apiKey = await client.agents.apiKeys.create(
+   *   'agent_uuid',
+   * );
+   * ```
    */
   create(
     agentUuid: string,
@@ -27,6 +34,14 @@ export class APIKeys extends APIResource {
   /**
    * To update an agent API key, send a PUT request to
    * `/v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}`.
+   *
+   * @example
+   * ```ts
+   * const apiKey = await client.agents.apiKeys.update(
+   *   'api_key_uuid',
+   *   { path_agent_uuid: 'agent_uuid' },
+   * );
+   * ```
    */
   update(
     apiKeyUuid: string,
@@ -44,6 +59,13 @@ export class APIKeys extends APIResource {
   /**
    * To list all agent API keys, send a GET request to
    * `/v2/gen-ai/agents/{agent_uuid}/api_keys`.
+   *
+   * @example
+   * ```ts
+   * const apiKeys = await client.agents.apiKeys.list(
+   *   'agent_uuid',
+   * );
+   * ```
    */
   list(
     agentUuid: string,
@@ -60,6 +82,14 @@ export class APIKeys extends APIResource {
   /**
    * To delete an API key for an agent, send a DELETE request to
    * `/v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}`.
+   *
+   * @example
+   * ```ts
+   * const apiKey = await client.agents.apiKeys.delete(
+   *   'api_key_uuid',
+   *   { agent_uuid: 'agent_uuid' },
+   * );
+   * ```
    */
   delete(
     apiKeyUuid: string,
@@ -76,6 +106,14 @@ export class APIKeys extends APIResource {
   /**
    * To regenerate an agent API key, send a PUT request to
    * `/v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}/regenerate`.
+   *
+   * @example
+   * ```ts
+   * const response = await client.agents.apiKeys.regenerate(
+   *   'api_key_uuid',
+   *   { agent_uuid: 'agent_uuid' },
+   * );
+   * ```
    */
   regenerate(
     apiKeyUuid: string,
