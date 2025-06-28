@@ -37,6 +37,28 @@ const completion = await client.chat.completions.create({
 console.log(completion.choices);
 ```
 
+## Streaming responses
+
+We provide support for streaming responses using Server Sent Events (SSE).
+
+```ts
+import GradientAI from 'gradientai';
+
+const client = new GradientAI();
+
+const stream = await client.chat.completions.create({
+  messages: [{ role: 'user', content: 'What is the capital of France?' }],
+  model: 'llama3.3-70b-instruct',
+  stream: true,
+});
+for await (const chatCompletionChunk of stream) {
+  console.log(chatCompletionChunk.choices);
+}
+```
+
+If you need to cancel a stream, you can `break` from the loop
+or call `stream.controller.abort()`.
+
 ### Request & Response types
 
 This library includes TypeScript definitions for all request params and response fields. You may import and use them like so:
@@ -49,7 +71,11 @@ const client = new GradientAI({
   apiKey: process.env['GRADIENTAI_API_KEY'], // This is the default and can be omitted
 });
 
-const versions: GradientAI.Agents.VersionListResponse = await client.agents.versions.list('REPLACE_ME');
+const params: GradientAI.Chat.CompletionCreateParams = {
+  messages: [{ role: 'user', content: 'What is the capital of France?' }],
+  model: 'llama3.3-70b-instruct',
+};
+const completion: GradientAI.Chat.CompletionCreateResponse = await client.chat.completions.create(params);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -62,15 +88,20 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const versions = await client.agents.versions.list('REPLACE_ME').catch(async (err) => {
-  if (err instanceof GradientAI.APIError) {
-    console.log(err.status); // 400
-    console.log(err.name); // BadRequestError
-    console.log(err.headers); // {server: 'nginx', ...}
-  } else {
-    throw err;
-  }
-});
+const completion = await client.chat.completions
+  .create({
+    messages: [{ role: 'user', content: 'What is the capital of France?' }],
+    model: 'llama3.3-70b-instruct',
+  })
+  .catch(async (err) => {
+    if (err instanceof GradientAI.APIError) {
+      console.log(err.status); // 400
+      console.log(err.name); // BadRequestError
+      console.log(err.headers); // {server: 'nginx', ...}
+    } else {
+      throw err;
+    }
+  });
 ```
 
 Error codes are as follows:
@@ -102,7 +133,7 @@ const client = new GradientAI({
 });
 
 // Or, configure per-request:
-await client.agents.versions.list('REPLACE_ME', {
+await client.chat.completions.create({ messages: [{ role: 'user', content: 'What is the capital of France?' }], model: 'llama3.3-70b-instruct' }, {
   maxRetries: 5,
 });
 ```
@@ -119,7 +150,7 @@ const client = new GradientAI({
 });
 
 // Override per-request:
-await client.agents.versions.list('REPLACE_ME', {
+await client.chat.completions.create({ messages: [{ role: 'user', content: 'What is the capital of France?' }], model: 'llama3.3-70b-instruct' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -142,13 +173,23 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new GradientAI();
 
-const response = await client.agents.versions.list('REPLACE_ME').asResponse();
+const response = await client.chat.completions
+  .create({
+    messages: [{ role: 'user', content: 'What is the capital of France?' }],
+    model: 'llama3.3-70b-instruct',
+  })
+  .asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: versions, response: raw } = await client.agents.versions.list('REPLACE_ME').withResponse();
+const { data: completion, response: raw } = await client.chat.completions
+  .create({
+    messages: [{ role: 'user', content: 'What is the capital of France?' }],
+    model: 'llama3.3-70b-instruct',
+  })
+  .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(versions.agent_versions);
+console.log(completion.choices);
 ```
 
 ### Logging
