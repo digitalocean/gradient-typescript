@@ -6,6 +6,19 @@ Types:
 - <code><a href="./src/resources/shared.ts">APIMeta</a></code>
 - <code><a href="./src/resources/shared.ts">ChatCompletionTokenLogprob</a></code>
 
+# Chat
+
+## Completions
+
+Types:
+
+- <code><a href="./src/resources/chat/completions.ts">ChatCompletionChunk</a></code>
+- <code><a href="./src/resources/chat/completions.ts">CompletionCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /chat/completions">client.chat.completions.<a href="./src/resources/chat/completions.ts">create</a>({ ...params }) -> CompletionCreateResponse</code>
+
 # Agents
 
 Types:
@@ -327,19 +340,6 @@ Methods:
 - <code title="get /v2/gen-ai/indexing_jobs">client.knowledgeBases.indexingJobs.<a href="./src/resources/knowledge-bases/indexing-jobs.ts">list</a>({ ...params }) -> IndexingJobListResponse</code>
 - <code title="get /v2/gen-ai/indexing_jobs/{indexing_job_uuid}/data_sources">client.knowledgeBases.indexingJobs.<a href="./src/resources/knowledge-bases/indexing-jobs.ts">retrieveDataSources</a>(indexingJobUuid) -> IndexingJobRetrieveDataSourcesResponse</code>
 - <code title="put /v2/gen-ai/indexing_jobs/{uuid}/cancel">client.knowledgeBases.indexingJobs.<a href="./src/resources/knowledge-bases/indexing-jobs.ts">updateCancel</a>(pathUuid, { ...params }) -> IndexingJobUpdateCancelResponse</code>
-
-# Chat
-
-## Completions
-
-Types:
-
-- <code><a href="./src/resources/chat/completions.ts">ChatCompletionChunk</a></code>
-- <code><a href="./src/resources/chat/completions.ts">CompletionCreateResponse</a></code>
-
-Methods:
-
-- <code title="post /chat/completions">client.chat.completions.<a href="./src/resources/chat/completions.ts">create</a>({ ...params }) -> CompletionCreateResponse</code>
 
 # Inference
 
