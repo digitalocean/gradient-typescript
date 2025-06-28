@@ -58,7 +58,7 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/agents/chat/completions.ts">ChatCompletionChunk</a></code>
+- <code><a href="./src/resources/agents/chat/completions.ts">AgentChatCompletionChunk</a></code>
 - <code><a href="./src/resources/agents/chat/completions.ts">CompletionCreateResponse</a></code>
 
 Methods:
@@ -334,6 +334,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/chat/completions.ts">ChatCompletionChunk</a></code>
 - <code><a href="./src/resources/chat/completions.ts">CompletionCreateResponse</a></code>
 
 Methods:

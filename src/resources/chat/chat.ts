@@ -2,7 +2,14 @@
 
 import { APIResource } from '../../core/resource';
 import * as CompletionsAPI from './completions';
-import { CompletionCreateParams, CompletionCreateResponse, Completions } from './completions';
+import {
+  ChatCompletionChunk,
+  CompletionCreateParams,
+  CompletionCreateParamsNonStreaming,
+  CompletionCreateParamsStreaming,
+  CompletionCreateResponse,
+  Completions,
+} from './completions';
 
 export class Chat extends APIResource {
   completions: CompletionsAPI.Completions = new CompletionsAPI.Completions(this._client);
@@ -13,7 +20,10 @@ Chat.Completions = Completions;
 export declare namespace Chat {
   export {
     Completions as Completions,
+    type ChatCompletionChunk as ChatCompletionChunk,
     type CompletionCreateResponse as CompletionCreateResponse,
     type CompletionCreateParams as CompletionCreateParams,
+    type CompletionCreateParamsNonStreaming as CompletionCreateParamsNonStreaming,
+    type CompletionCreateParamsStreaming as CompletionCreateParamsStreaming,
   };
 }
