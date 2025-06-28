@@ -38,7 +38,7 @@ describe('resource completions', () => {
       n: 1,
       presence_penalty: -2,
       stop: '\n',
-      stream: false,
+      stream: true,
       stream_options: { include_usage: true },
       temperature: 1,
       top_logprobs: 0,

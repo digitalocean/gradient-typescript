@@ -1,10 +1,30 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as CompletionsAPI from './completions';
 import * as Shared from '../shared';
+import { APIPromise } from '../../core/api-promise';
+import { RequestOptions } from '../../internal/request-options';
 
-export class Completions extends APIResource {}
+export class Completions extends APIResource {
+  /**
+   * Creates a model response for the given chat conversation.
+   *
+   * @example
+   * ```ts
+   * const completion = await client.chat.completions.create({
+   *   messages: [{ content: 'string', role: 'system' }],
+   *   model: 'llama3-8b-instruct',
+   * });
+   * ```
+   */
+  create(body: CompletionCreateParams, options?: RequestOptions): APIPromise<CompletionCreateResponse> {
+    return this._client.post('/chat/completions', {
+      body,
+      defaultBaseURL: 'https://inference.do-ai.run/v1',
+      ...options,
+    });
+  }
+}
 
 /**
  * Represents a chat completion response returned by model, based on the provided
@@ -126,9 +146,7 @@ export namespace CompletionCreateResponse {
   }
 }
 
-export type CompletionCreateParams = CompletionCreateParamsNonStreaming | CompletionCreateParamsStreaming;
-
-export interface CompletionCreateParamsBase {
+export interface CompletionCreateParams {
   /**
    * A list of messages comprising the conversation so far.
    */
@@ -336,32 +354,11 @@ export namespace CompletionCreateParams {
      */
     include_usage?: boolean;
   }
-
-  export type CompletionCreateParamsNonStreaming = CompletionsAPI.CompletionCreateParamsNonStreaming;
-  export type CompletionCreateParamsStreaming = CompletionsAPI.CompletionCreateParamsStreaming;
-}
-
-export interface CompletionCreateParamsNonStreaming extends CompletionCreateParamsBase {
-  /**
-   * If set to true, the model response data will be streamed to the client as it is
-   * generated using server-sent events.
-   */
-  stream?: false | null;
-}
-
-export interface CompletionCreateParamsStreaming extends CompletionCreateParamsBase {
-  /**
-   * If set to true, the model response data will be streamed to the client as it is
-   * generated using server-sent events.
-   */
-  stream: true;
 }
 
 export declare namespace Completions {
   export {
     type CompletionCreateResponse as CompletionCreateResponse,
     type CompletionCreateParams as CompletionCreateParams,
-    type CompletionCreateParamsNonStreaming as CompletionCreateParamsNonStreaming,
-    type CompletionCreateParamsStreaming as CompletionCreateParamsStreaming,
   };
 }
