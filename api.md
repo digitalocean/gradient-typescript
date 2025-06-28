@@ -6,19 +6,6 @@ Types:
 - <code><a href="./src/resources/shared.ts">APIMeta</a></code>
 - <code><a href="./src/resources/shared.ts">ChatCompletionTokenLogprob</a></code>
 
-# Chat
-
-## Completions
-
-Types:
-
-- <code><a href="./src/resources/chat/completions.ts">ChatCompletionChunk</a></code>
-- <code><a href="./src/resources/chat/completions.ts">CompletionCreateResponse</a></code>
-
-Methods:
-
-- <code title="post /chat/completions">client.chat.completions.<a href="./src/resources/chat/completions.ts">create</a>({ ...params }) -> CompletionCreateResponse</code>
-
 # Agents
 
 Types:
@@ -226,6 +213,19 @@ Methods:
 - <code title="delete /v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}">client.agents.routes.<a href="./src/resources/agents/routes.ts">delete</a>(childAgentUuid, { ...params }) -> RouteDeleteResponse</code>
 - <code title="post /v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}">client.agents.routes.<a href="./src/resources/agents/routes.ts">add</a>(childAgentUuid, { ...params }) -> RouteAddResponse</code>
 - <code title="get /v2/gen-ai/agents/{uuid}/child_agents">client.agents.routes.<a href="./src/resources/agents/routes.ts">view</a>(uuid) -> RouteViewResponse</code>
+
+# Chat
+
+## Completions
+
+Types:
+
+- <code><a href="./src/resources/chat/completions.ts">ChatCompletionChunk</a></code>
+- <code><a href="./src/resources/chat/completions.ts">CompletionCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /chat/completions">client.chat.completions.<a href="./src/resources/chat/completions.ts">create</a>({ ...params }) -> CompletionCreateResponse</code>
 
 # ModelProviders
 

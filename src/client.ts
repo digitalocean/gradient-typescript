@@ -763,16 +763,16 @@ export class GradientAI {
 
   static toFile = Uploads.toFile;
 
-  chat: API.Chat = new API.Chat(this);
   agents: API.Agents = new API.Agents(this);
+  chat: API.Chat = new API.Chat(this);
   modelProviders: API.ModelProviders = new API.ModelProviders(this);
   regions: API.Regions = new API.Regions(this);
   knowledgeBases: API.KnowledgeBases = new API.KnowledgeBases(this);
   inference: API.Inference = new API.Inference(this);
   models: API.Models = new API.Models(this);
 }
-GradientAI.Chat = Chat;
 GradientAI.Agents = Agents;
+GradientAI.Chat = Chat;
 GradientAI.ModelProviders = ModelProviders;
 GradientAI.Regions = Regions;
 GradientAI.KnowledgeBases = KnowledgeBases;
@@ -780,8 +780,6 @@ GradientAI.Inference = Inference;
 GradientAI.Models = Models;
 export declare namespace GradientAI {
   export type RequestOptions = Opts.RequestOptions;
-
-  export { Chat as Chat };
 
   export {
     Agents as Agents,
@@ -804,6 +802,8 @@ export declare namespace GradientAI {
     type AgentListParams as AgentListParams,
     type AgentUpdateStatusParams as AgentUpdateStatusParams,
   };
+
+  export { Chat as Chat };
 
   export { ModelProviders as ModelProviders };
 
