@@ -8,10 +8,10 @@ const client = new GradientAI({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource keys', () => {
+describe('resource anthropic', () => {
   // skipped: tests are disabled for the time being
   test.skip('create', async () => {
-    const responsePromise = client.modelProviders.anthropic.keys.create({});
+    const responsePromise = client.models.providers.anthropic.create({});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,7 +23,7 @@ describe('resource keys', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('retrieve', async () => {
-    const responsePromise = client.modelProviders.anthropic.keys.retrieve('api_key_uuid');
+    const responsePromise = client.models.providers.anthropic.retrieve('api_key_uuid');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -35,7 +35,7 @@ describe('resource keys', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update', async () => {
-    const responsePromise = client.modelProviders.anthropic.keys.update('api_key_uuid', {});
+    const responsePromise = client.models.providers.anthropic.update('api_key_uuid', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -47,7 +47,7 @@ describe('resource keys', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('list', async () => {
-    const responsePromise = client.modelProviders.anthropic.keys.list();
+    const responsePromise = client.models.providers.anthropic.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -61,16 +61,13 @@ describe('resource keys', () => {
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.modelProviders.anthropic.keys.list(
-        { page: 0, per_page: 0 },
-        { path: '/_stainless_unknown_path' },
-      ),
+      client.models.providers.anthropic.list({ page: 0, per_page: 0 }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(GradientAI.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
   test.skip('delete', async () => {
-    const responsePromise = client.modelProviders.anthropic.keys.delete('api_key_uuid');
+    const responsePromise = client.models.providers.anthropic.delete('api_key_uuid');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -82,7 +79,7 @@ describe('resource keys', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('listAgents', async () => {
-    const responsePromise = client.modelProviders.anthropic.keys.listAgents('uuid');
+    const responsePromise = client.models.providers.anthropic.listAgents('uuid');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -96,7 +93,7 @@ describe('resource keys', () => {
   test.skip('listAgents: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.modelProviders.anthropic.keys.listAgents(
+      client.models.providers.anthropic.listAgents(
         'uuid',
         { page: 0, per_page: 0 },
         { path: '/_stainless_unknown_path' },

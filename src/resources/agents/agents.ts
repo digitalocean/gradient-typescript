@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../core/resource';
 import * as AgentsAPI from './agents';
-import * as ModelsAPI from '../models';
 import * as Shared from '../shared';
 import * as APIKeysAPI from './api-keys';
 import {
@@ -93,6 +92,7 @@ import {
   Versions,
 } from './versions';
 import * as KnowledgeBasesKnowledgeBasesAPI from '../knowledge-bases/knowledge-bases';
+import * as ModelsAPI from '../models/models';
 import * as ChatAPI from './chat/chat';
 import { Chat } from './chat/chat';
 import * as EvaluationMetricsAPI from './evaluation-metrics/evaluation-metrics';

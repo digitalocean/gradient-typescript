@@ -7,11 +7,11 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Keys extends APIResource {
+export class OpenAI extends APIResource {
   /**
    * To create an OpenAI API key, send a POST request to `/v2/gen-ai/openai/keys`.
    */
-  create(body: KeyCreateParams, options?: RequestOptions): APIPromise<KeyCreateResponse> {
+  create(body: OpenAICreateParams, options?: RequestOptions): APIPromise<OpenAICreateResponse> {
     return this._client.post('/v2/gen-ai/openai/keys', {
       body,
       defaultBaseURL: 'https://api.digitalocean.com',
@@ -23,7 +23,7 @@ export class Keys extends APIResource {
    * To retrieve details of an OpenAI API key, send a GET request to
    * `/v2/gen-ai/openai/keys/{api_key_uuid}`.
    */
-  retrieve(apiKeyUuid: string, options?: RequestOptions): APIPromise<KeyRetrieveResponse> {
+  retrieve(apiKeyUuid: string, options?: RequestOptions): APIPromise<OpenAIRetrieveResponse> {
     return this._client.get(path`/v2/gen-ai/openai/keys/${apiKeyUuid}`, {
       defaultBaseURL: 'https://api.digitalocean.com',
       ...options,
@@ -34,7 +34,11 @@ export class Keys extends APIResource {
    * To update an OpenAI API key, send a PUT request to
    * `/v2/gen-ai/openai/keys/{api_key_uuid}`.
    */
-  update(apiKeyUuid: string, body: KeyUpdateParams, options?: RequestOptions): APIPromise<KeyUpdateResponse> {
+  update(
+    apiKeyUuid: string,
+    body: OpenAIUpdateParams,
+    options?: RequestOptions,
+  ): APIPromise<OpenAIUpdateResponse> {
     return this._client.put(path`/v2/gen-ai/openai/keys/${apiKeyUuid}`, {
       body,
       defaultBaseURL: 'https://api.digitalocean.com',
@@ -45,7 +49,10 @@ export class Keys extends APIResource {
   /**
    * To list all OpenAI API keys, send a GET request to `/v2/gen-ai/openai/keys`.
    */
-  list(query: KeyListParams | null | undefined = {}, options?: RequestOptions): APIPromise<KeyListResponse> {
+  list(
+    query: OpenAIListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<OpenAIListResponse> {
     return this._client.get('/v2/gen-ai/openai/keys', {
       query,
       defaultBaseURL: 'https://api.digitalocean.com',
@@ -57,7 +64,7 @@ export class Keys extends APIResource {
    * To delete an OpenAI API key, send a DELETE request to
    * `/v2/gen-ai/openai/keys/{api_key_uuid}`.
    */
-  delete(apiKeyUuid: string, options?: RequestOptions): APIPromise<KeyDeleteResponse> {
+  delete(apiKeyUuid: string, options?: RequestOptions): APIPromise<OpenAIDeleteResponse> {
     return this._client.delete(path`/v2/gen-ai/openai/keys/${apiKeyUuid}`, {
       defaultBaseURL: 'https://api.digitalocean.com',
       ...options,
@@ -69,9 +76,9 @@ export class Keys extends APIResource {
    */
   retrieveAgents(
     uuid: string,
-    query: KeyRetrieveAgentsParams | null | undefined = {},
+    query: OpenAIRetrieveAgentsParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<KeyRetrieveAgentsResponse> {
+  ): APIPromise<OpenAIRetrieveAgentsResponse> {
     return this._client.get(path`/v2/gen-ai/openai/keys/${uuid}/agents`, {
       query,
       defaultBaseURL: 'https://api.digitalocean.com',
@@ -83,18 +90,18 @@ export class Keys extends APIResource {
 /**
  * CreateOpenAIAPIKeyOutput is used to return the newly created OpenAI API key.
  */
-export interface KeyCreateResponse {
+export interface OpenAICreateResponse {
   api_key_info?: AgentsAPI.APIOpenAIAPIKeyInfo;
 }
 
-export interface KeyRetrieveResponse {
+export interface OpenAIRetrieveResponse {
   api_key_info?: AgentsAPI.APIOpenAIAPIKeyInfo;
 }
 
 /**
  * UpdateOpenAIAPIKeyOutput is used to return the updated OpenAI API key.
  */
-export interface KeyUpdateResponse {
+export interface OpenAIUpdateResponse {
   api_key_info?: AgentsAPI.APIOpenAIAPIKeyInfo;
 }
 
@@ -102,7 +109,7 @@ export interface KeyUpdateResponse {
  * ListOpenAIAPIKeysOutput is used to return the list of OpenAI API keys for a
  * specific agent.
  */
-export interface KeyListResponse {
+export interface OpenAIListResponse {
   api_key_infos?: Array<AgentsAPI.APIOpenAIAPIKeyInfo>;
 
   links?: Shared.APILinks;
@@ -113,11 +120,11 @@ export interface KeyListResponse {
 /**
  * DeleteOpenAIAPIKeyOutput is used to return the deleted OpenAI API key.
  */
-export interface KeyDeleteResponse {
+export interface OpenAIDeleteResponse {
   api_key_info?: AgentsAPI.APIOpenAIAPIKeyInfo;
 }
 
-export interface KeyRetrieveAgentsResponse {
+export interface OpenAIRetrieveAgentsResponse {
   agents?: Array<AgentsAPI.APIAgent>;
 
   links?: Shared.APILinks;
@@ -125,13 +132,13 @@ export interface KeyRetrieveAgentsResponse {
   meta?: Shared.APIMeta;
 }
 
-export interface KeyCreateParams {
+export interface OpenAICreateParams {
   api_key?: string;
 
   name?: string;
 }
 
-export interface KeyUpdateParams {
+export interface OpenAIUpdateParams {
   api_key?: string;
 
   body_api_key_uuid?: string;
@@ -139,7 +146,7 @@ export interface KeyUpdateParams {
   name?: string;
 }
 
-export interface KeyListParams {
+export interface OpenAIListParams {
   /**
    * page number.
    */
@@ -151,7 +158,7 @@ export interface KeyListParams {
   per_page?: number;
 }
 
-export interface KeyRetrieveAgentsParams {
+export interface OpenAIRetrieveAgentsParams {
   /**
    * page number.
    */
@@ -163,17 +170,17 @@ export interface KeyRetrieveAgentsParams {
   per_page?: number;
 }
 
-export declare namespace Keys {
+export declare namespace OpenAI {
   export {
-    type KeyCreateResponse as KeyCreateResponse,
-    type KeyRetrieveResponse as KeyRetrieveResponse,
-    type KeyUpdateResponse as KeyUpdateResponse,
-    type KeyListResponse as KeyListResponse,
-    type KeyDeleteResponse as KeyDeleteResponse,
-    type KeyRetrieveAgentsResponse as KeyRetrieveAgentsResponse,
-    type KeyCreateParams as KeyCreateParams,
-    type KeyUpdateParams as KeyUpdateParams,
-    type KeyListParams as KeyListParams,
-    type KeyRetrieveAgentsParams as KeyRetrieveAgentsParams,
+    type OpenAICreateResponse as OpenAICreateResponse,
+    type OpenAIRetrieveResponse as OpenAIRetrieveResponse,
+    type OpenAIUpdateResponse as OpenAIUpdateResponse,
+    type OpenAIListResponse as OpenAIListResponse,
+    type OpenAIDeleteResponse as OpenAIDeleteResponse,
+    type OpenAIRetrieveAgentsResponse as OpenAIRetrieveAgentsResponse,
+    type OpenAICreateParams as OpenAICreateParams,
+    type OpenAIUpdateParams as OpenAIUpdateParams,
+    type OpenAIListParams as OpenAIListParams,
+    type OpenAIRetrieveAgentsParams as OpenAIRetrieveAgentsParams,
   };
 }

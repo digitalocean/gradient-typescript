@@ -17,14 +17,6 @@ import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
-import {
-  APIAgreement,
-  APIModel,
-  APIModelVersion,
-  ModelListParams,
-  ModelListResponse,
-  Models,
-} from './resources/models';
 import { RegionListParams, RegionListResponse, Regions } from './resources/regions';
 import {
   APIAgent,
@@ -61,7 +53,14 @@ import {
   KnowledgeBaseUpdateResponse,
   KnowledgeBases,
 } from './resources/knowledge-bases/knowledge-bases';
-import { ModelProviders } from './resources/model-providers/model-providers';
+import {
+  APIAgreement,
+  APIModel,
+  APIModelVersion,
+  ModelListParams,
+  ModelListResponse,
+  Models,
+} from './resources/models/models';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -765,7 +764,6 @@ export class GradientAI {
 
   agents: API.Agents = new API.Agents(this);
   chat: API.Chat = new API.Chat(this);
-  modelProviders: API.ModelProviders = new API.ModelProviders(this);
   regions: API.Regions = new API.Regions(this);
   knowledgeBases: API.KnowledgeBases = new API.KnowledgeBases(this);
   inference: API.Inference = new API.Inference(this);
@@ -773,7 +771,6 @@ export class GradientAI {
 }
 GradientAI.Agents = Agents;
 GradientAI.Chat = Chat;
-GradientAI.ModelProviders = ModelProviders;
 GradientAI.Regions = Regions;
 GradientAI.KnowledgeBases = KnowledgeBases;
 GradientAI.Inference = Inference;
@@ -804,8 +801,6 @@ export declare namespace GradientAI {
   };
 
   export { Chat as Chat };
-
-  export { ModelProviders as ModelProviders };
 
   export {
     Regions as Regions,
