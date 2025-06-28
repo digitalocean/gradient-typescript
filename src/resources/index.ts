@@ -36,7 +36,6 @@ export {
   type KnowledgeBaseUpdateParams,
   type KnowledgeBaseListParams,
 } from './knowledge-bases/knowledge-bases';
-export { ModelProviders } from './model-providers/model-providers';
 export {
   Models,
   type APIAgreement,
@@ -44,5 +43,5 @@ export {
   type APIModelVersion,
   type ModelListResponse,
   type ModelListParams,
-} from './models';
+} from './models/models';
 export { Regions, type RegionListResponse, type RegionListParams } from './regions';

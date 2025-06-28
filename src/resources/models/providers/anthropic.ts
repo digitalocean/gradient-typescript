@@ -7,12 +7,12 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Keys extends APIResource {
+export class Anthropic extends APIResource {
   /**
    * To create an Anthropic API key, send a POST request to
    * `/v2/gen-ai/anthropic/keys`.
    */
-  create(body: KeyCreateParams, options?: RequestOptions): APIPromise<KeyCreateResponse> {
+  create(body: AnthropicCreateParams, options?: RequestOptions): APIPromise<AnthropicCreateResponse> {
     return this._client.post('/v2/gen-ai/anthropic/keys', {
       body,
       defaultBaseURL: 'https://api.digitalocean.com',
@@ -24,7 +24,7 @@ export class Keys extends APIResource {
    * To retrieve details of an Anthropic API key, send a GET request to
    * `/v2/gen-ai/anthropic/keys/{api_key_uuid}`.
    */
-  retrieve(apiKeyUuid: string, options?: RequestOptions): APIPromise<KeyRetrieveResponse> {
+  retrieve(apiKeyUuid: string, options?: RequestOptions): APIPromise<AnthropicRetrieveResponse> {
     return this._client.get(path`/v2/gen-ai/anthropic/keys/${apiKeyUuid}`, {
       defaultBaseURL: 'https://api.digitalocean.com',
       ...options,
@@ -35,7 +35,11 @@ export class Keys extends APIResource {
    * To update an Anthropic API key, send a PUT request to
    * `/v2/gen-ai/anthropic/keys/{api_key_uuid}`.
    */
-  update(apiKeyUuid: string, body: KeyUpdateParams, options?: RequestOptions): APIPromise<KeyUpdateResponse> {
+  update(
+    apiKeyUuid: string,
+    body: AnthropicUpdateParams,
+    options?: RequestOptions,
+  ): APIPromise<AnthropicUpdateResponse> {
     return this._client.put(path`/v2/gen-ai/anthropic/keys/${apiKeyUuid}`, {
       body,
       defaultBaseURL: 'https://api.digitalocean.com',
@@ -47,7 +51,10 @@ export class Keys extends APIResource {
    * To list all Anthropic API keys, send a GET request to
    * `/v2/gen-ai/anthropic/keys`.
    */
-  list(query: KeyListParams | null | undefined = {}, options?: RequestOptions): APIPromise<KeyListResponse> {
+  list(
+    query: AnthropicListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AnthropicListResponse> {
     return this._client.get('/v2/gen-ai/anthropic/keys', {
       query,
       defaultBaseURL: 'https://api.digitalocean.com',
@@ -59,7 +66,7 @@ export class Keys extends APIResource {
    * To delete an Anthropic API key, send a DELETE request to
    * `/v2/gen-ai/anthropic/keys/{api_key_uuid}`.
    */
-  delete(apiKeyUuid: string, options?: RequestOptions): APIPromise<KeyDeleteResponse> {
+  delete(apiKeyUuid: string, options?: RequestOptions): APIPromise<AnthropicDeleteResponse> {
     return this._client.delete(path`/v2/gen-ai/anthropic/keys/${apiKeyUuid}`, {
       defaultBaseURL: 'https://api.digitalocean.com',
       ...options,
@@ -71,9 +78,9 @@ export class Keys extends APIResource {
    */
   listAgents(
     uuid: string,
-    query: KeyListAgentsParams | null | undefined = {},
+    query: AnthropicListAgentsParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<KeyListAgentsResponse> {
+  ): APIPromise<AnthropicListAgentsResponse> {
     return this._client.get(path`/v2/gen-ai/anthropic/keys/${uuid}/agents`, {
       query,
       defaultBaseURL: 'https://api.digitalocean.com',
@@ -86,18 +93,18 @@ export class Keys extends APIResource {
  * CreateAnthropicAPIKeyOutput is used to return the newly created Anthropic API
  * key.
  */
-export interface KeyCreateResponse {
+export interface AnthropicCreateResponse {
   api_key_info?: AgentsAPI.APIAnthropicAPIKeyInfo;
 }
 
-export interface KeyRetrieveResponse {
+export interface AnthropicRetrieveResponse {
   api_key_info?: AgentsAPI.APIAnthropicAPIKeyInfo;
 }
 
 /**
  * UpdateAnthropicAPIKeyOutput is used to return the updated Anthropic API key.
  */
-export interface KeyUpdateResponse {
+export interface AnthropicUpdateResponse {
   api_key_info?: AgentsAPI.APIAnthropicAPIKeyInfo;
 }
 
@@ -105,7 +112,7 @@ export interface KeyUpdateResponse {
  * ListAnthropicAPIKeysOutput is used to return the list of Anthropic API keys for
  * a specific agent.
  */
-export interface KeyListResponse {
+export interface AnthropicListResponse {
   api_key_infos?: Array<AgentsAPI.APIAnthropicAPIKeyInfo>;
 
   links?: Shared.APILinks;
@@ -116,11 +123,11 @@ export interface KeyListResponse {
 /**
  * DeleteAnthropicAPIKeyOutput is used to return the deleted Anthropic API key.
  */
-export interface KeyDeleteResponse {
+export interface AnthropicDeleteResponse {
   api_key_info?: AgentsAPI.APIAnthropicAPIKeyInfo;
 }
 
-export interface KeyListAgentsResponse {
+export interface AnthropicListAgentsResponse {
   agents?: Array<AgentsAPI.APIAgent>;
 
   links?: Shared.APILinks;
@@ -128,13 +135,13 @@ export interface KeyListAgentsResponse {
   meta?: Shared.APIMeta;
 }
 
-export interface KeyCreateParams {
+export interface AnthropicCreateParams {
   api_key?: string;
 
   name?: string;
 }
 
-export interface KeyUpdateParams {
+export interface AnthropicUpdateParams {
   api_key?: string;
 
   body_api_key_uuid?: string;
@@ -142,7 +149,7 @@ export interface KeyUpdateParams {
   name?: string;
 }
 
-export interface KeyListParams {
+export interface AnthropicListParams {
   /**
    * page number.
    */
@@ -154,7 +161,7 @@ export interface KeyListParams {
   per_page?: number;
 }
 
-export interface KeyListAgentsParams {
+export interface AnthropicListAgentsParams {
   /**
    * page number.
    */
@@ -166,17 +173,17 @@ export interface KeyListAgentsParams {
   per_page?: number;
 }
 
-export declare namespace Keys {
+export declare namespace Anthropic {
   export {
-    type KeyCreateResponse as KeyCreateResponse,
-    type KeyRetrieveResponse as KeyRetrieveResponse,
-    type KeyUpdateResponse as KeyUpdateResponse,
-    type KeyListResponse as KeyListResponse,
-    type KeyDeleteResponse as KeyDeleteResponse,
-    type KeyListAgentsResponse as KeyListAgentsResponse,
-    type KeyCreateParams as KeyCreateParams,
-    type KeyUpdateParams as KeyUpdateParams,
-    type KeyListParams as KeyListParams,
-    type KeyListAgentsParams as KeyListAgentsParams,
+    type AnthropicCreateResponse as AnthropicCreateResponse,
+    type AnthropicRetrieveResponse as AnthropicRetrieveResponse,
+    type AnthropicUpdateResponse as AnthropicUpdateResponse,
+    type AnthropicListResponse as AnthropicListResponse,
+    type AnthropicDeleteResponse as AnthropicDeleteResponse,
+    type AnthropicListAgentsResponse as AnthropicListAgentsResponse,
+    type AnthropicCreateParams as AnthropicCreateParams,
+    type AnthropicUpdateParams as AnthropicUpdateParams,
+    type AnthropicListParams as AnthropicListParams,
+    type AnthropicListAgentsParams as AnthropicListAgentsParams,
   };
 }

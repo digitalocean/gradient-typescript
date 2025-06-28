@@ -227,52 +227,6 @@ Methods:
 
 - <code title="post /chat/completions">client.chat.completions.<a href="./src/resources/chat/completions.ts">create</a>({ ...params }) -> CompletionCreateResponse</code>
 
-# ModelProviders
-
-## Anthropic
-
-### Keys
-
-Types:
-
-- <code><a href="./src/resources/model-providers/anthropic/keys.ts">KeyCreateResponse</a></code>
-- <code><a href="./src/resources/model-providers/anthropic/keys.ts">KeyRetrieveResponse</a></code>
-- <code><a href="./src/resources/model-providers/anthropic/keys.ts">KeyUpdateResponse</a></code>
-- <code><a href="./src/resources/model-providers/anthropic/keys.ts">KeyListResponse</a></code>
-- <code><a href="./src/resources/model-providers/anthropic/keys.ts">KeyDeleteResponse</a></code>
-- <code><a href="./src/resources/model-providers/anthropic/keys.ts">KeyListAgentsResponse</a></code>
-
-Methods:
-
-- <code title="post /v2/gen-ai/anthropic/keys">client.modelProviders.anthropic.keys.<a href="./src/resources/model-providers/anthropic/keys.ts">create</a>({ ...params }) -> KeyCreateResponse</code>
-- <code title="get /v2/gen-ai/anthropic/keys/{api_key_uuid}">client.modelProviders.anthropic.keys.<a href="./src/resources/model-providers/anthropic/keys.ts">retrieve</a>(apiKeyUuid) -> KeyRetrieveResponse</code>
-- <code title="put /v2/gen-ai/anthropic/keys/{api_key_uuid}">client.modelProviders.anthropic.keys.<a href="./src/resources/model-providers/anthropic/keys.ts">update</a>(apiKeyUuid, { ...params }) -> KeyUpdateResponse</code>
-- <code title="get /v2/gen-ai/anthropic/keys">client.modelProviders.anthropic.keys.<a href="./src/resources/model-providers/anthropic/keys.ts">list</a>({ ...params }) -> KeyListResponse</code>
-- <code title="delete /v2/gen-ai/anthropic/keys/{api_key_uuid}">client.modelProviders.anthropic.keys.<a href="./src/resources/model-providers/anthropic/keys.ts">delete</a>(apiKeyUuid) -> KeyDeleteResponse</code>
-- <code title="get /v2/gen-ai/anthropic/keys/{uuid}/agents">client.modelProviders.anthropic.keys.<a href="./src/resources/model-providers/anthropic/keys.ts">listAgents</a>(uuid, { ...params }) -> KeyListAgentsResponse</code>
-
-## OpenAI
-
-### Keys
-
-Types:
-
-- <code><a href="./src/resources/model-providers/openai/keys.ts">KeyCreateResponse</a></code>
-- <code><a href="./src/resources/model-providers/openai/keys.ts">KeyRetrieveResponse</a></code>
-- <code><a href="./src/resources/model-providers/openai/keys.ts">KeyUpdateResponse</a></code>
-- <code><a href="./src/resources/model-providers/openai/keys.ts">KeyListResponse</a></code>
-- <code><a href="./src/resources/model-providers/openai/keys.ts">KeyDeleteResponse</a></code>
-- <code><a href="./src/resources/model-providers/openai/keys.ts">KeyRetrieveAgentsResponse</a></code>
-
-Methods:
-
-- <code title="post /v2/gen-ai/openai/keys">client.modelProviders.openai.keys.<a href="./src/resources/model-providers/openai/keys.ts">create</a>({ ...params }) -> KeyCreateResponse</code>
-- <code title="get /v2/gen-ai/openai/keys/{api_key_uuid}">client.modelProviders.openai.keys.<a href="./src/resources/model-providers/openai/keys.ts">retrieve</a>(apiKeyUuid) -> KeyRetrieveResponse</code>
-- <code title="put /v2/gen-ai/openai/keys/{api_key_uuid}">client.modelProviders.openai.keys.<a href="./src/resources/model-providers/openai/keys.ts">update</a>(apiKeyUuid, { ...params }) -> KeyUpdateResponse</code>
-- <code title="get /v2/gen-ai/openai/keys">client.modelProviders.openai.keys.<a href="./src/resources/model-providers/openai/keys.ts">list</a>({ ...params }) -> KeyListResponse</code>
-- <code title="delete /v2/gen-ai/openai/keys/{api_key_uuid}">client.modelProviders.openai.keys.<a href="./src/resources/model-providers/openai/keys.ts">delete</a>(apiKeyUuid) -> KeyDeleteResponse</code>
-- <code title="get /v2/gen-ai/openai/keys/{uuid}/agents">client.modelProviders.openai.keys.<a href="./src/resources/model-providers/openai/keys.ts">retrieveAgents</a>(uuid, { ...params }) -> KeyRetrieveAgentsResponse</code>
-
 # Regions
 
 Types:
@@ -366,11 +320,53 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/models.ts">APIAgreement</a></code>
-- <code><a href="./src/resources/models.ts">APIModel</a></code>
-- <code><a href="./src/resources/models.ts">APIModelVersion</a></code>
-- <code><a href="./src/resources/models.ts">ModelListResponse</a></code>
+- <code><a href="./src/resources/models/models.ts">APIAgreement</a></code>
+- <code><a href="./src/resources/models/models.ts">APIModel</a></code>
+- <code><a href="./src/resources/models/models.ts">APIModelVersion</a></code>
+- <code><a href="./src/resources/models/models.ts">ModelListResponse</a></code>
 
 Methods:
 
-- <code title="get /v2/gen-ai/models">client.models.<a href="./src/resources/models.ts">list</a>({ ...params }) -> ModelListResponse</code>
+- <code title="get /v2/gen-ai/models">client.models.<a href="./src/resources/models/models.ts">list</a>({ ...params }) -> ModelListResponse</code>
+
+## Providers
+
+### Anthropic
+
+Types:
+
+- <code><a href="./src/resources/models/providers/anthropic.ts">AnthropicCreateResponse</a></code>
+- <code><a href="./src/resources/models/providers/anthropic.ts">AnthropicRetrieveResponse</a></code>
+- <code><a href="./src/resources/models/providers/anthropic.ts">AnthropicUpdateResponse</a></code>
+- <code><a href="./src/resources/models/providers/anthropic.ts">AnthropicListResponse</a></code>
+- <code><a href="./src/resources/models/providers/anthropic.ts">AnthropicDeleteResponse</a></code>
+- <code><a href="./src/resources/models/providers/anthropic.ts">AnthropicListAgentsResponse</a></code>
+
+Methods:
+
+- <code title="post /v2/gen-ai/anthropic/keys">client.models.providers.anthropic.<a href="./src/resources/models/providers/anthropic.ts">create</a>({ ...params }) -> AnthropicCreateResponse</code>
+- <code title="get /v2/gen-ai/anthropic/keys/{api_key_uuid}">client.models.providers.anthropic.<a href="./src/resources/models/providers/anthropic.ts">retrieve</a>(apiKeyUuid) -> AnthropicRetrieveResponse</code>
+- <code title="put /v2/gen-ai/anthropic/keys/{api_key_uuid}">client.models.providers.anthropic.<a href="./src/resources/models/providers/anthropic.ts">update</a>(apiKeyUuid, { ...params }) -> AnthropicUpdateResponse</code>
+- <code title="get /v2/gen-ai/anthropic/keys">client.models.providers.anthropic.<a href="./src/resources/models/providers/anthropic.ts">list</a>({ ...params }) -> AnthropicListResponse</code>
+- <code title="delete /v2/gen-ai/anthropic/keys/{api_key_uuid}">client.models.providers.anthropic.<a href="./src/resources/models/providers/anthropic.ts">delete</a>(apiKeyUuid) -> AnthropicDeleteResponse</code>
+- <code title="get /v2/gen-ai/anthropic/keys/{uuid}/agents">client.models.providers.anthropic.<a href="./src/resources/models/providers/anthropic.ts">listAgents</a>(uuid, { ...params }) -> AnthropicListAgentsResponse</code>
+
+### OpenAI
+
+Types:
+
+- <code><a href="./src/resources/models/providers/openai.ts">OpenAICreateResponse</a></code>
+- <code><a href="./src/resources/models/providers/openai.ts">OpenAIRetrieveResponse</a></code>
+- <code><a href="./src/resources/models/providers/openai.ts">OpenAIUpdateResponse</a></code>
+- <code><a href="./src/resources/models/providers/openai.ts">OpenAIListResponse</a></code>
+- <code><a href="./src/resources/models/providers/openai.ts">OpenAIDeleteResponse</a></code>
+- <code><a href="./src/resources/models/providers/openai.ts">OpenAIRetrieveAgentsResponse</a></code>
+
+Methods:
+
+- <code title="post /v2/gen-ai/openai/keys">client.models.providers.openai.<a href="./src/resources/models/providers/openai.ts">create</a>({ ...params }) -> OpenAICreateResponse</code>
+- <code title="get /v2/gen-ai/openai/keys/{api_key_uuid}">client.models.providers.openai.<a href="./src/resources/models/providers/openai.ts">retrieve</a>(apiKeyUuid) -> OpenAIRetrieveResponse</code>
+- <code title="put /v2/gen-ai/openai/keys/{api_key_uuid}">client.models.providers.openai.<a href="./src/resources/models/providers/openai.ts">update</a>(apiKeyUuid, { ...params }) -> OpenAIUpdateResponse</code>
+- <code title="get /v2/gen-ai/openai/keys">client.models.providers.openai.<a href="./src/resources/models/providers/openai.ts">list</a>({ ...params }) -> OpenAIListResponse</code>
+- <code title="delete /v2/gen-ai/openai/keys/{api_key_uuid}">client.models.providers.openai.<a href="./src/resources/models/providers/openai.ts">delete</a>(apiKeyUuid) -> OpenAIDeleteResponse</code>
+- <code title="get /v2/gen-ai/openai/keys/{uuid}/agents">client.models.providers.openai.<a href="./src/resources/models/providers/openai.ts">retrieveAgents</a>(uuid, { ...params }) -> OpenAIRetrieveAgentsResponse</code>
