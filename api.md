@@ -4,6 +4,7 @@ Types:
 
 - <code><a href="./src/resources/shared.ts">APILinks</a></code>
 - <code><a href="./src/resources/shared.ts">APIMeta</a></code>
+- <code><a href="./src/resources/shared.ts">ChatCompletionChunk</a></code>
 - <code><a href="./src/resources/shared.ts">ChatCompletionTokenLogprob</a></code>
 
 # Agents
@@ -58,7 +59,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/agents/chat/completions.ts">ChatCompletionChunk</a></code>
 - <code><a href="./src/resources/agents/chat/completions.ts">CompletionCreateResponse</a></code>
 
 Methods:

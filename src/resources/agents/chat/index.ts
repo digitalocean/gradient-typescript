@@ -3,7 +3,6 @@
 export { Chat } from './chat';
 export {
   Completions,
-  type ChatCompletionChunk,
   type CompletionCreateResponse,
   type CompletionCreateParams,
   type CompletionCreateParamsNonStreaming,
