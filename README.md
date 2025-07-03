@@ -29,7 +29,7 @@ const client = new GradientAI({
   apiKey: process.env['GRADIENTAI_API_KEY'], // This is the default and can be omitted
 });
 
-const completion = await client.agents.chat.completions.create({
+const completion = await client.chat.completions.create({
   messages: [{ role: 'user', content: 'What is the capital of France?' }],
   model: 'llama3.3-70b-instruct',
 });
@@ -46,7 +46,7 @@ import GradientAI from 'gradientai';
 
 const client = new GradientAI();
 
-const stream = await client.agents.chat.completions.create({
+const stream = await client.chat.completions.create({
   messages: [{ role: 'user', content: 'What is the capital of France?' }],
   model: 'llama3.3-70b-instruct',
   stream: true,
@@ -71,12 +71,11 @@ const client = new GradientAI({
   apiKey: process.env['GRADIENTAI_API_KEY'], // This is the default and can be omitted
 });
 
-const params: GradientAI.Agents.Chat.CompletionCreateParams = {
+const params: GradientAI.Chat.CompletionCreateParams = {
   messages: [{ role: 'user', content: 'What is the capital of France?' }],
   model: 'llama3.3-70b-instruct',
 };
-const completion: GradientAI.Agents.Chat.CompletionCreateResponse =
-  await client.agents.chat.completions.create(params);
+const completion: GradientAI.Chat.CompletionCreateResponse = await client.chat.completions.create(params);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -89,7 +88,7 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const completion = await client.agents.chat.completions
+const completion = await client.chat.completions
   .create({
     messages: [{ role: 'user', content: 'What is the capital of France?' }],
     model: 'llama3.3-70b-instruct',
@@ -134,7 +133,7 @@ const client = new GradientAI({
 });
 
 // Or, configure per-request:
-await client.agents.chat.completions.create({ messages: [{ role: 'user', content: 'What is the capital of France?' }], model: 'llama3.3-70b-instruct' }, {
+await client.chat.completions.create({ messages: [{ role: 'user', content: 'What is the capital of France?' }], model: 'llama3.3-70b-instruct' }, {
   maxRetries: 5,
 });
 ```
@@ -151,7 +150,7 @@ const client = new GradientAI({
 });
 
 // Override per-request:
-await client.agents.chat.completions.create({ messages: [{ role: 'user', content: 'What is the capital of France?' }], model: 'llama3.3-70b-instruct' }, {
+await client.chat.completions.create({ messages: [{ role: 'user', content: 'What is the capital of France?' }], model: 'llama3.3-70b-instruct' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -174,7 +173,7 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new GradientAI();
 
-const response = await client.agents.chat.completions
+const response = await client.chat.completions
   .create({
     messages: [{ role: 'user', content: 'What is the capital of France?' }],
     model: 'llama3.3-70b-instruct',
@@ -183,7 +182,7 @@ const response = await client.agents.chat.completions
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: completion, response: raw } = await client.agents.chat.completions
+const { data: completion, response: raw } = await client.chat.completions
   .create({
     messages: [{ role: 'user', content: 'What is the capital of France?' }],
     model: 'llama3.3-70b-instruct',
@@ -270,7 +269,7 @@ parameter. This library doesn't validate at runtime that the request matches the
 send will be sent as-is.
 
 ```ts
-client.agents.chat.completions.create({
+client.chat.completions.create({
   // ...
   // @ts-expect-error baz is not yet public
   baz: 'undocumented option',

@@ -36,7 +36,7 @@ export class Completions extends APIResource {
     body: CompletionCreateParams,
     options?: RequestOptions,
   ): APIPromise<CompletionCreateResponse> | APIPromise<Stream<Shared.ChatCompletionChunk>> {
-    return this._client.post('/chat/completions', {
+    return this._client.post('/chat/completions?agent=true', {
       body,
       defaultBaseURL: 'https://inference.do-ai.run/v1',
       ...options,

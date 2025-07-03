@@ -63,7 +63,7 @@ Types:
 
 Methods:
 
-- <code title="post /chat/completions">client.agents.chat.completions.<a href="./src/resources/agents/chat/completions.ts">create</a>({ ...params }) -> CompletionCreateResponse</code>
+- <code title="post /chat/completions?agent=true">client.agents.chat.completions.<a href="./src/resources/agents/chat/completions.ts">create</a>({ ...params }) -> CompletionCreateResponse</code>
 
 ## EvaluationMetrics
 
