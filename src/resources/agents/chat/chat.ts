@@ -3,7 +3,6 @@
 import { APIResource } from '../../../core/resource';
 import * as CompletionsAPI from './completions';
 import {
-  AgentChatCompletionChunk,
   CompletionCreateParams,
   CompletionCreateParamsNonStreaming,
   CompletionCreateParamsStreaming,
@@ -20,7 +19,6 @@ Chat.Completions = Completions;
 export declare namespace Chat {
   export {
     Completions as Completions,
-    type AgentChatCompletionChunk as AgentChatCompletionChunk,
     type CompletionCreateResponse as CompletionCreateResponse,
     type CompletionCreateParams as CompletionCreateParams,
     type CompletionCreateParamsNonStreaming as CompletionCreateParamsNonStreaming,
