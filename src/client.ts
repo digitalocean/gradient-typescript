@@ -85,6 +85,11 @@ export interface ClientOptions {
    */
   inferenceKey?: string | null | undefined;
 
+  /**
+   * Defaults to process.env['GRADIENTAI_AGENT_KEY'].
+   */
+  agentKey?: string | null | undefined;
+
   agentDomain?: string | null | undefined;
 
   /**
@@ -162,6 +167,7 @@ export interface ClientOptions {
 export class GradientAI {
   apiKey: string | null;
   inferenceKey: string | null;
+  agentKey: string | null;
   agentDomain: string | null;
 
   baseURL: string;
@@ -181,6 +187,7 @@ export class GradientAI {
    *
    * @param {string | null | undefined} [opts.apiKey=process.env['GRADIENTAI_API_KEY'] ?? null]
    * @param {string | null | undefined} [opts.inferenceKey=process.env['GRADIENTAI_INFERENCE_KEY'] ?? null]
+   * @param {string | null | undefined} [opts.agentKey=process.env['GRADIENTAI_AGENT_KEY'] ?? null]
    * @param {string | null | undefined} [opts.agentDomain]
    * @param {string} [opts.baseURL=process.env['GRADIENT_AI_BASE_URL'] ?? https://api.digitalocean.com/] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
@@ -194,12 +201,14 @@ export class GradientAI {
     baseURL = readEnv('GRADIENT_AI_BASE_URL'),
     apiKey = readEnv('GRADIENTAI_API_KEY') ?? null,
     inferenceKey = readEnv('GRADIENTAI_INFERENCE_KEY') ?? null,
+    agentKey = readEnv('GRADIENTAI_AGENT_KEY') ?? null,
     agentDomain = null,
     ...opts
   }: ClientOptions = {}) {
     const options: ClientOptions = {
       apiKey,
       inferenceKey,
+      agentKey,
       agentDomain,
       ...opts,
       baseURL: baseURL || `https://api.digitalocean.com/`,
@@ -224,6 +233,7 @@ export class GradientAI {
 
     this.apiKey = apiKey;
     this.inferenceKey = inferenceKey;
+    this.agentKey = agentKey;
     this.agentDomain = agentDomain;
   }
 
@@ -242,6 +252,7 @@ export class GradientAI {
       fetchOptions: this.fetchOptions,
       apiKey: this.apiKey,
       inferenceKey: this.inferenceKey,
+      agentKey: this.agentKey,
       agentDomain: this.agentDomain,
       ...options,
     });
