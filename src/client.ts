@@ -847,5 +847,6 @@ export declare namespace GradientAI {
 
   export type APILinks = API.APILinks;
   export type APIMeta = API.APIMeta;
+  export type ChatCompletionChunk = API.ChatCompletionChunk;
   export type ChatCompletionTokenLogprob = API.ChatCompletionTokenLogprob;
 }

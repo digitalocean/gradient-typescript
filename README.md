@@ -51,8 +51,8 @@ const stream = await client.agents.chat.completions.create({
   model: 'llama3.3-70b-instruct',
   stream: true,
 });
-for await (const agentChatCompletionChunk of stream) {
-  console.log(agentChatCompletionChunk.choices);
+for await (const chatCompletionChunk of stream) {
+  console.log(chatCompletionChunk.choices);
 }
 ```
 
