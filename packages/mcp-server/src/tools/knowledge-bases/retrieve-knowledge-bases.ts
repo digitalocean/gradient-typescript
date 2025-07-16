@@ -1,10 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { maybeFilter } from 'gradientai-mcp/filtering';
-import { asTextContentResult } from 'gradientai-mcp/tools/types';
+import { Metadata, asTextContentResult } from 'gradientai-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
-import type { Metadata } from '../';
 import GradientAI from 'gradientai';
 
 export const metadata: Metadata = {
