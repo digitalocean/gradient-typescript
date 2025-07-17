@@ -28,11 +28,7 @@ export const server = new McpServer(
     name: 'gradientai_api',
     version: '0.0.1-alpha.0',
   },
-  {
-    capabilities: {
-      tools: {},
-    },
-  },
+  { capabilities: { tools: {} } },
 );
 
 /**
