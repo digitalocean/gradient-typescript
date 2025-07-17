@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   tags: [],
   httpMethod: 'get',
   httpPath: '/v2/gen-ai/agents',
-  operationId: 'genai_list_agents',
+  operationId: 'list_agents',
 };
 
 export const tool: Tool = {
@@ -23,15 +23,15 @@ export const tool: Tool = {
     properties: {
       only_deployed: {
         type: 'boolean',
-        description: 'Only list agents that are deployed.',
+        description: 'only list agents that are deployed.',
       },
       page: {
         type: 'integer',
-        description: 'Page number.',
+        description: 'page number.',
       },
       per_page: {
         type: 'integer',
-        description: 'Items per page.',
+        description: 'items per page.',
       },
     },
   },

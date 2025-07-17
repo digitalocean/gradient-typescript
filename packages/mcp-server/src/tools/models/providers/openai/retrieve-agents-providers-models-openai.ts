@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   tags: [],
   httpMethod: 'get',
   httpPath: '/v2/gen-ai/openai/keys/{uuid}/agents',
-  operationId: 'genai_list_agents_by_openai_key',
+  operationId: 'list_agents_by_openai_key',
 };
 
 export const tool: Tool = {
@@ -26,11 +26,11 @@ export const tool: Tool = {
       },
       page: {
         type: 'integer',
-        description: 'Page number.',
+        description: 'page number.',
       },
       per_page: {
         type: 'integer',
-        description: 'Items per page.',
+        description: 'items per page.',
       },
     },
   },

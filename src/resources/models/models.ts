@@ -13,13 +13,6 @@ export class Models extends APIResource {
   /**
    * Retrieves a model instance, providing basic information about the model such as
    * the owner and permissioning.
-   *
-   * @example
-   * ```ts
-   * const model = await client.models.retrieve(
-   *   'llama3-8b-instruct',
-   * );
-   * ```
    */
   retrieve(model: string, options?: RequestOptions): APIPromise<ModelRetrieveResponse> {
     return this._client.get(path`/models/${model}`, {
@@ -31,20 +24,12 @@ export class Models extends APIResource {
   /**
    * Lists the currently available models, and provides basic information about each
    * one such as the owner and availability.
-   *
-   * @example
-   * ```ts
-   * const models = await client.models.list();
-   * ```
    */
   list(options?: RequestOptions): APIPromise<ModelListResponse> {
     return this._client.get('/models', { defaultBaseURL: 'https://inference.do-ai.run/v1', ...options });
   }
 }
 
-/**
- * Agreement Description
- */
 export interface APIAgreement {
   description?: string;
 
@@ -55,78 +40,33 @@ export interface APIAgreement {
   uuid?: string;
 }
 
-/**
- * A machine learning model stored on the GenAI platform
- */
 export interface APIModel {
-  /**
-   * Agreement Description
-   */
   agreement?: APIAgreement;
 
-  /**
-   * Creation date / time
-   */
   created_at?: string;
 
-  /**
-   * True if it is a foundational model provided by do
-   */
   is_foundational?: boolean;
 
-  /**
-   * Name of the model
-   */
   name?: string;
 
-  /**
-   * Unique id of the model, this model is based on
-   */
   parent_uuid?: string;
 
-  /**
-   * Last modified
-   */
   updated_at?: string;
 
-  /**
-   * Model has been fully uploaded
-   */
   upload_complete?: boolean;
 
-  /**
-   * Download url
-   */
   url?: string;
 
-  /**
-   * Unique id
-   */
   uuid?: string;
 
-  /**
-   * Version Information about a Model
-   */
   version?: APIModelVersion;
 }
 
-/**
- * Version Information about a Model
- */
 export interface APIModelVersion {
-  /**
-   * Major version number
-   */
   major?: number;
 
-  /**
-   * Minor version number
-   */
   minor?: number;
 
-  /**
-   * Patch version number
-   */
   patch?: number;
 }
 

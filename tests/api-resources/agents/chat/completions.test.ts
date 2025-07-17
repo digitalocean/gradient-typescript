@@ -42,13 +42,6 @@ describe('resource completions', () => {
       stream: false,
       stream_options: { include_usage: true },
       temperature: 1,
-      tool_choice: 'none',
-      tools: [
-        {
-          function: { name: 'name', description: 'description', parameters: { foo: 'bar' } },
-          type: 'function',
-        },
-      ],
       top_logprobs: 0,
       top_p: 1,
       user: 'user-1234',

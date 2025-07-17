@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   tags: [],
   httpMethod: 'post',
   httpPath: '/v2/gen-ai/agents/{agent_uuid}/functions',
-  operationId: 'genai_attach_agent_function',
+  operationId: 'attach_agent_function',
 };
 
 export const tool: Tool = {
@@ -23,31 +23,31 @@ export const tool: Tool = {
     properties: {
       agent_uuid: {
         type: 'string',
-        description: 'Agent id',
+        title: 'agent id',
       },
       description: {
         type: 'string',
-        description: 'Function description',
+        title: 'function description',
       },
       faas_name: {
         type: 'string',
-        description: 'The name of the function in the DigitalOcean functions platform',
+        title: 'The name of the function in the DigitalOcean functions platform',
       },
       faas_namespace: {
         type: 'string',
-        description: 'The namespace of the function in the DigitalOcean functions platform',
+        title: 'The namespace of the function in the DigitalOcean functions platform',
       },
       function_name: {
         type: 'string',
-        description: 'Function name',
+        title: 'function name',
       },
       input_schema: {
         type: 'object',
-        description: 'Describe the input schema for the function so the agent may call it',
+        title: 'Describe the input schema for the function so the agent may call it',
       },
       output_schema: {
         type: 'object',
-        description: 'Describe the output schema for the function so the agent handle its response',
+        title: 'Describe the output schema for the function so the agent handle its response',
       },
     },
   },

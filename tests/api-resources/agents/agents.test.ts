@@ -12,7 +12,7 @@ const client = new GradientAI({
 describe('resource agents', () => {
   // skipped: tests are disabled for the time being
   test.skip('create', async () => {
-    const responsePromise = client.agents.create();
+    const responsePromise = client.agents.create({});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,30 +23,8 @@ describe('resource agents', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('create: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.agents.create(
-        {
-          anthropic_key_uuid: '"12345678-1234-1234-1234-123456789012"',
-          description: '"My Agent Description"',
-          instruction: '"You are an agent who thinks deeply about the world"',
-          knowledge_base_uuid: ['example string'],
-          model_uuid: '"12345678-1234-1234-1234-123456789012"',
-          name: '"My Agent"',
-          open_ai_key_uuid: '"12345678-1234-1234-1234-123456789012"',
-          project_id: '"12345678-1234-1234-1234-123456789012"',
-          region: '"tor1"',
-          tags: ['example string'],
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(GradientAI.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
   test.skip('retrieve', async () => {
-    const responsePromise = client.agents.retrieve('"123e4567-e89b-12d3-a456-426614174000"');
+    const responsePromise = client.agents.retrieve('uuid');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -58,7 +36,7 @@ describe('resource agents', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update', async () => {
-    const responsePromise = client.agents.update('"123e4567-e89b-12d3-a456-426614174000"');
+    const responsePromise = client.agents.update('uuid', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -66,35 +44,6 @@ describe('resource agents', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('update: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.agents.update(
-        '"123e4567-e89b-12d3-a456-426614174000"',
-        {
-          anthropic_key_uuid: '"12345678-1234-1234-1234-123456789012"',
-          conversation_logs_enabled: true,
-          description: '"My Agent Description"',
-          instruction: '"You are an agent who thinks deeply about the world"',
-          k: 5,
-          max_tokens: 100,
-          model_uuid: '"12345678-1234-1234-1234-123456789012"',
-          name: '"My New Agent Name"',
-          open_ai_key_uuid: '"12345678-1234-1234-1234-123456789012"',
-          project_id: '"12345678-1234-1234-1234-123456789012"',
-          provide_citations: true,
-          retrieval_method: 'RETRIEVAL_METHOD_UNKNOWN',
-          tags: ['example string'],
-          temperature: 0.7,
-          top_p: 0.9,
-          body_uuid: '"12345678-1234-1234-1234-123456789012"',
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(GradientAI.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
@@ -119,7 +68,7 @@ describe('resource agents', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('delete', async () => {
-    const responsePromise = client.agents.delete('"123e4567-e89b-12d3-a456-426614174000"');
+    const responsePromise = client.agents.delete('uuid');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -131,7 +80,7 @@ describe('resource agents', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('updateStatus', async () => {
-    const responsePromise = client.agents.updateStatus('"123e4567-e89b-12d3-a456-426614174000"');
+    const responsePromise = client.agents.updateStatus('uuid', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -139,17 +88,5 @@ describe('resource agents', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('updateStatus: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.agents.updateStatus(
-        '"123e4567-e89b-12d3-a456-426614174000"',
-        { body_uuid: '"12345678-1234-1234-1234-123456789012"', visibility: 'VISIBILITY_UNKNOWN' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(GradientAI.NotFoundError);
   });
 });

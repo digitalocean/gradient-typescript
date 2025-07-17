@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   tags: [],
   httpMethod: 'put',
   httpPath: '/v2/gen-ai/agents/{uuid}',
-  operationId: 'genai_update_agent',
+  operationId: 'update_agent',
 };
 
 export const tool: Tool = {
@@ -23,19 +23,15 @@ export const tool: Tool = {
     properties: {
       uuid: {
         type: 'string',
-        description: 'Unique agent id',
+        title: 'unique agent id',
       },
       anthropic_key_uuid: {
         type: 'string',
-        description: 'Optional anthropic key uuid for use with anthropic models',
-      },
-      conversation_logs_enabled: {
-        type: 'boolean',
-        description: 'Optional update of conversation logs enabled',
+        title: 'optional anthropic key uuid for use with anthropic models',
       },
       description: {
         type: 'string',
-        description: 'Agent description',
+        title: 'agent description',
       },
       instruction: {
         type: 'string',
@@ -44,7 +40,7 @@ export const tool: Tool = {
       },
       k: {
         type: 'integer',
-        description: 'How many results should be considered from an attached knowledge base',
+        title: 'how many results should be considered from an attached knowledge base',
       },
       max_tokens: {
         type: 'integer',
@@ -57,15 +53,15 @@ export const tool: Tool = {
       },
       name: {
         type: 'string',
-        description: 'Agent name',
+        title: 'agent name',
       },
       open_ai_key_uuid: {
         type: 'string',
-        description: 'Optional OpenAI key uuid for use with OpenAI models',
+        title: 'optional OpenAI key uuid for use with OpenAI models',
       },
       project_id: {
         type: 'string',
-        description: 'The id of the DigitalOcean project this agent will belong to',
+        title: 'the id of the DigitalOcean project this agent will belong to',
       },
       provide_citations: {
         type: 'boolean',
@@ -75,7 +71,7 @@ export const tool: Tool = {
       },
       tags: {
         type: 'array',
-        description: 'A set of abitrary tags to organize your agent',
+        title: 'A set of abitrary tags to organize your agent',
         items: {
           type: 'string',
         },
@@ -94,7 +90,7 @@ export const tool: Tool = {
     $defs: {
       api_retrieval_method: {
         type: 'string',
-        description:
+        title:
           '- RETRIEVAL_METHOD_UNKNOWN: The retrieval method is unknown\n - RETRIEVAL_METHOD_REWRITE: The retrieval method is rewrite\n - RETRIEVAL_METHOD_STEP_BACK: The retrieval method is step back\n - RETRIEVAL_METHOD_SUB_QUERIES: The retrieval method is sub queries\n - RETRIEVAL_METHOD_NONE: The retrieval method is none',
         enum: [
           'RETRIEVAL_METHOD_UNKNOWN',

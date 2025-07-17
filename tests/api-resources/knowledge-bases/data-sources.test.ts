@@ -12,9 +12,7 @@ const client = new GradientAI({
 describe('resource dataSources', () => {
   // skipped: tests are disabled for the time being
   test.skip('create', async () => {
-    const responsePromise = client.knowledgeBases.dataSources.create(
-      '"123e4567-e89b-12d3-a456-426614174000"',
-    );
+    const responsePromise = client.knowledgeBases.dataSources.create('knowledge_base_uuid', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -25,39 +23,8 @@ describe('resource dataSources', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('create: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.knowledgeBases.dataSources.create(
-        '"123e4567-e89b-12d3-a456-426614174000"',
-        {
-          aws_data_source: {
-            bucket_name: '"example name"',
-            item_path: '"example string"',
-            key_id: '"123e4567-e89b-12d3-a456-426614174000"',
-            region: '"example string"',
-            secret_key: '"example string"',
-          },
-          body_knowledge_base_uuid: '"12345678-1234-1234-1234-123456789012"',
-          spaces_data_source: {
-            bucket_name: '"example name"',
-            item_path: '"example string"',
-            region: '"example string"',
-          },
-          web_crawler_data_source: {
-            base_url: '"example string"',
-            crawling_option: 'UNKNOWN',
-            embed_media: true,
-          },
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(GradientAI.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
   test.skip('list', async () => {
-    const responsePromise = client.knowledgeBases.dataSources.list('"123e4567-e89b-12d3-a456-426614174000"');
+    const responsePromise = client.knowledgeBases.dataSources.list('knowledge_base_uuid');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -72,7 +39,7 @@ describe('resource dataSources', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.knowledgeBases.dataSources.list(
-        '"123e4567-e89b-12d3-a456-426614174000"',
+        'knowledge_base_uuid',
         { page: 0, per_page: 0 },
         { path: '/_stainless_unknown_path' },
       ),
@@ -81,10 +48,9 @@ describe('resource dataSources', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('delete: only required params', async () => {
-    const responsePromise = client.knowledgeBases.dataSources.delete(
-      '"123e4567-e89b-12d3-a456-426614174000"',
-      { knowledge_base_uuid: '"123e4567-e89b-12d3-a456-426614174000"' },
-    );
+    const responsePromise = client.knowledgeBases.dataSources.delete('data_source_uuid', {
+      knowledge_base_uuid: 'knowledge_base_uuid',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -96,9 +62,8 @@ describe('resource dataSources', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('delete: required and optional params', async () => {
-    const response = await client.knowledgeBases.dataSources.delete(
-      '"123e4567-e89b-12d3-a456-426614174000"',
-      { knowledge_base_uuid: '"123e4567-e89b-12d3-a456-426614174000"' },
-    );
+    const response = await client.knowledgeBases.dataSources.delete('data_source_uuid', {
+      knowledge_base_uuid: 'knowledge_base_uuid',
+    });
   });
 });

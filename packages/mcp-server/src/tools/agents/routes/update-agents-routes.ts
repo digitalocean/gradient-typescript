@@ -12,13 +12,13 @@ export const metadata: Metadata = {
   tags: [],
   httpMethod: 'put',
   httpPath: '/v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}',
-  operationId: 'genai_update_attached_agent',
+  operationId: 'update_attached_agent',
 };
 
 export const tool: Tool = {
   name: 'update_agents_routes',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nTo update an agent route for an agent, send a PUT request to `/v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}`.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  description: 'Information about an updated linkage',\n  properties: {\n    child_agent_uuid: {\n      type: 'string',\n      description: 'Routed agent id'\n    },\n    parent_agent_uuid: {\n      type: 'string',\n      description: 'A unique identifier for the parent agent.'\n    },\n    rollback: {\n      type: 'boolean'\n    },\n    uuid: {\n      type: 'string',\n      description: 'Unique id of linkage'\n    }\n  },\n  required: []\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nTo update an agent route for an agent, send a PUT request to `/v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}`.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  title: 'information about an updated linkage',\n  properties: {\n    child_agent_uuid: {\n      type: 'string',\n      title: 'routed agent id'\n    },\n    parent_agent_uuid: {\n      type: 'string',\n      description: 'A unique identifier for the parent agent.'\n    },\n    rollback: {\n      type: 'boolean'\n    },\n    uuid: {\n      type: 'string',\n      title: 'unique id of linkage'\n    }\n  },\n  required: []\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -28,19 +28,19 @@ export const tool: Tool = {
       },
       child_agent_uuid: {
         type: 'string',
-        description: 'Routed agent id',
+        title: 'routed agent id',
       },
       if_case: {
         type: 'string',
-        description: 'Describes the case in which the child agent should be used',
+        title: 'describes the case in which the child agent should be used',
       },
       route_name: {
         type: 'string',
-        description: 'Route name',
+        title: 'route name',
       },
       uuid: {
         type: 'string',
-        description: 'Unique id of linkage',
+        title: 'unique id of linkage',
       },
       jq_filter: {
         type: 'string',

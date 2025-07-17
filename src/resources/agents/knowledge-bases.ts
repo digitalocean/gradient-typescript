@@ -14,9 +14,7 @@ export class KnowledgeBases extends APIResource {
    * @example
    * ```ts
    * const apiLinkKnowledgeBaseOutput =
-   *   await client.agents.knowledgeBases.attach(
-   *     '"123e4567-e89b-12d3-a456-426614174000"',
-   *   );
+   *   await client.agents.knowledgeBases.attach('agent_uuid');
    * ```
    */
   attach(agentUuid: string, options?: RequestOptions): APIPromise<APILinkKnowledgeBaseOutput> {
@@ -34,10 +32,8 @@ export class KnowledgeBases extends APIResource {
    * ```ts
    * const apiLinkKnowledgeBaseOutput =
    *   await client.agents.knowledgeBases.attachSingle(
-   *     '"123e4567-e89b-12d3-a456-426614174000"',
-   *     {
-   *       agent_uuid: '"123e4567-e89b-12d3-a456-426614174000"',
-   *     },
+   *     'knowledge_base_uuid',
+   *     { agent_uuid: 'agent_uuid' },
    *   );
    * ```
    */
@@ -60,8 +56,8 @@ export class KnowledgeBases extends APIResource {
    * @example
    * ```ts
    * const response = await client.agents.knowledgeBases.detach(
-   *   '"123e4567-e89b-12d3-a456-426614174000"',
-   *   { agent_uuid: '"123e4567-e89b-12d3-a456-426614174000"' },
+   *   'knowledge_base_uuid',
+   *   { agent_uuid: 'agent_uuid' },
    * );
    * ```
    */
@@ -78,23 +74,11 @@ export class KnowledgeBases extends APIResource {
   }
 }
 
-/**
- * Information about a linked knowledge base
- */
 export interface APILinkKnowledgeBaseOutput {
-  /**
-   * An Agent
-   */
   agent?: AgentsAPI.APIAgent;
 }
 
-/**
- * Informatinon about a unlinked knowledge base
- */
 export interface KnowledgeBaseDetachResponse {
-  /**
-   * An Agent
-   */
   agent?: AgentsAPI.APIAgent;
 }
 
@@ -107,7 +91,7 @@ export interface KnowledgeBaseAttachSingleParams {
 
 export interface KnowledgeBaseDetachParams {
   /**
-   * Agent id
+   * agent id
    */
   agent_uuid: string;
 }

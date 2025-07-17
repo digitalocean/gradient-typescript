@@ -12,7 +12,7 @@ const client = new GradientAI({
 describe('resource apiKeys', () => {
   // skipped: tests are disabled for the time being
   test.skip('create', async () => {
-    const responsePromise = client.inference.apiKeys.create();
+    const responsePromise = client.inference.apiKeys.create({});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -20,19 +20,11 @@ describe('resource apiKeys', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('create: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.inference.apiKeys.create({ name: 'Production Key' }, { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(GradientAI.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
   test.skip('update', async () => {
-    const responsePromise = client.inference.apiKeys.update('"123e4567-e89b-12d3-a456-426614174000"');
+    const responsePromise = client.inference.apiKeys.update('api_key_uuid', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -40,18 +32,6 @@ describe('resource apiKeys', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('update: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.inference.apiKeys.update(
-        '"123e4567-e89b-12d3-a456-426614174000"',
-        { body_api_key_uuid: '"12345678-1234-1234-1234-123456789012"', name: '"Production Key"' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(GradientAI.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
@@ -76,7 +56,7 @@ describe('resource apiKeys', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('delete', async () => {
-    const responsePromise = client.inference.apiKeys.delete('"123e4567-e89b-12d3-a456-426614174000"');
+    const responsePromise = client.inference.apiKeys.delete('api_key_uuid');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -88,9 +68,7 @@ describe('resource apiKeys', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('updateRegenerate', async () => {
-    const responsePromise = client.inference.apiKeys.updateRegenerate(
-      '"123e4567-e89b-12d3-a456-426614174000"',
-    );
+    const responsePromise = client.inference.apiKeys.updateRegenerate('api_key_uuid');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
