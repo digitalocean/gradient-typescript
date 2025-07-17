@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   tags: [],
   httpMethod: 'delete',
   httpPath: '/v2/gen-ai/agents/{agent_uuid}/functions/{function_uuid}',
-  operationId: 'detach_agent_function',
+  operationId: 'genai_detach_agent_function',
 };
 
 export const tool: Tool = {

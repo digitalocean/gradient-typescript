@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   tags: [],
   httpMethod: 'get',
   httpPath: '/v2/gen-ai/workspaces/{workspace_uuid}/agents',
-  operationId: 'list_agents_by_workspace',
+  operationId: 'genai_list_agents_by_workspace',
 };
 
 export const tool: Tool = {
@@ -24,30 +24,17 @@ export const tool: Tool = {
       workspace_uuid: {
         type: 'string',
       },
-      field_mask: {
-        type: 'object',
-        properties: {
-          paths: {
-            type: 'array',
-            description: 'The set of field mask paths.',
-            items: {
-              type: 'string',
-            },
-          },
-        },
-        required: [],
-      },
       only_deployed: {
         type: 'boolean',
         description: 'Only list agents that are deployed.',
       },
       page: {
         type: 'integer',
-        description: 'page number.',
+        description: 'Page number.',
       },
       per_page: {
         type: 'integer',
-        description: 'items per page.',
+        description: 'Items per page.',
       },
     },
   },

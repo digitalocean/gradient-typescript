@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   tags: [],
   httpMethod: 'get',
   httpPath: '/v2/gen-ai/workspaces/{workspace_uuid}',
-  operationId: 'get_workspace',
+  operationId: 'genai_get_workspace',
 };
 
 export const tool: Tool = {

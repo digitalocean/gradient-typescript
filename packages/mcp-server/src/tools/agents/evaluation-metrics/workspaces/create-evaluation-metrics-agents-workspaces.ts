@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   tags: [],
   httpMethod: 'post',
   httpPath: '/v2/gen-ai/workspaces',
-  operationId: 'create_workspace',
+  operationId: 'genai_create_workspace',
 };
 
 export const tool: Tool = {
@@ -23,18 +23,18 @@ export const tool: Tool = {
     properties: {
       agent_uuids: {
         type: 'array',
-        title: 'ids of the agents(s) to attach to the workspace',
+        description: 'Ids of the agents(s) to attach to the workspace',
         items: {
           type: 'string',
         },
       },
       description: {
         type: 'string',
-        title: 'description of the workspace',
+        description: 'Description of the workspace',
       },
       name: {
         type: 'string',
-        title: 'name of the workspace',
+        description: 'Name of the workspace',
       },
     },
   },

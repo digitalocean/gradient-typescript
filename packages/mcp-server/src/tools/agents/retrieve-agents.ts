@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   tags: [],
   httpMethod: 'get',
   httpPath: '/v2/gen-ai/agents/{uuid}',
-  operationId: 'get_agent',
+  operationId: 'genai_get_agent',
 };
 
 export const tool: Tool = {

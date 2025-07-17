@@ -18,7 +18,7 @@ export class EvaluationTestCases extends APIResource {
    * ```
    */
   create(
-    body: EvaluationTestCaseCreateParams,
+    body: EvaluationTestCaseCreateParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<EvaluationTestCaseCreateResponse> {
     return this._client.post('/v2/gen-ai/evaluation_test_cases', {
@@ -36,7 +36,7 @@ export class EvaluationTestCases extends APIResource {
    * ```ts
    * const evaluationTestCase =
    *   await client.agents.evaluationTestCases.retrieve(
-   *     'test_case_uuid',
+   *     '"123e4567-e89b-12d3-a456-426614174000"',
    *   );
    * ```
    */
@@ -53,23 +53,23 @@ export class EvaluationTestCases extends APIResource {
   }
 
   /**
-   * To update an evaluation test-case send a POST request to
+   * To update an evaluation test-case send a PUT request to
    * `/v2/gen-ai/evaluation_test_cases/{test_case_uuid}`.
    *
    * @example
    * ```ts
    * const evaluationTestCase =
    *   await client.agents.evaluationTestCases.update(
-   *     'test_case_uuid',
+   *     '"123e4567-e89b-12d3-a456-426614174000"',
    *   );
    * ```
    */
   update(
     testCaseUuid: string,
-    body: EvaluationTestCaseUpdateParams,
+    body: EvaluationTestCaseUpdateParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<EvaluationTestCaseUpdateResponse> {
-    return this._client.post(path`/v2/gen-ai/evaluation_test_cases/${testCaseUuid}`, {
+    return this._client.put(path`/v2/gen-ai/evaluation_test_cases/${testCaseUuid}`, {
       body,
       defaultBaseURL: 'https://api.digitalocean.com',
       ...options,
@@ -101,7 +101,7 @@ export class EvaluationTestCases extends APIResource {
    * ```ts
    * const response =
    *   await client.agents.evaluationTestCases.listEvaluationRuns(
-   *     'evaluation_test_case_uuid',
+   *     '"123e4567-e89b-12d3-a456-426614174000"',
    *   );
    * ```
    */
@@ -125,6 +125,8 @@ export interface APIEvaluationTestCase {
   created_by_user_email?: string;
 
   created_by_user_id?: string;
+
+  dataset?: APIEvaluationTestCase.Dataset;
 
   dataset_name?: string;
 
@@ -153,10 +155,50 @@ export interface APIEvaluationTestCase {
   version?: number;
 }
 
+export namespace APIEvaluationTestCase {
+  export interface Dataset {
+    /**
+     * Time created at.
+     */
+    created_at?: string;
+
+    /**
+     * Name of the dataset.
+     */
+    dataset_name?: string;
+
+    /**
+     * UUID of the dataset.
+     */
+    dataset_uuid?: string;
+
+    /**
+     * The size of the dataset uploaded file in bytes.
+     */
+    file_size?: string;
+
+    /**
+     * Does the dataset have a ground truth column?
+     */
+    has_ground_truth?: boolean;
+
+    /**
+     * Number of rows in the dataset.
+     */
+    row_count?: number;
+  }
+}
+
 export interface APIStarMetric {
   metric_uuid?: string;
 
   name?: string;
+
+  /**
+   * The success threshold for the star metric. This is a value that the metric must
+   * reach to be considered successful.
+   */
+  success_threshold?: number;
 
   /**
    * The success threshold for the star metric. This is a percentage value between 0
@@ -186,6 +228,10 @@ export interface EvaluationTestCaseUpdateResponse {
 }
 
 export interface EvaluationTestCaseListResponse {
+  /**
+   * Alternative way of authentication for internal usage only - should not be
+   * exposed to public api
+   */
   evaluation_test_cases?: Array<APIEvaluationTestCase>;
 }
 
@@ -252,6 +298,9 @@ export interface EvaluationTestCaseUpdateParams {
 
   star_metric?: APIStarMetric;
 
+  /**
+   * Test-case UUID to update
+   */
   body_test_case_uuid?: string;
 }
 

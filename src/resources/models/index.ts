@@ -5,7 +5,7 @@ export {
   type APIAgreement,
   type APIModel,
   type APIModelVersion,
+  type ModelRetrieveResponse,
   type ModelListResponse,
-  type ModelListParams,
 } from './models';
 export { Providers } from './providers/index';

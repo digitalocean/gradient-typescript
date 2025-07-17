@@ -12,13 +12,13 @@ export const metadata: Metadata = {
   tags: [],
   httpMethod: 'delete',
   httpPath: '/v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources/{data_source_uuid}',
-  operationId: 'delete_knowledge_base_data_source',
+  operationId: 'genai_delete_knowledge_base_data_source',
 };
 
 export const tool: Tool = {
   name: 'delete_knowledge_bases_data_sources',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nTo delete a data source from a knowledge base, send a DELETE request to `/v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources/{data_source_uuid}`.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  title: 'information about a newly deleted knowledge base data source',\n  properties: {\n    data_source_uuid: {\n      type: 'string',\n      title: 'data source id'\n    },\n    knowledge_base_uuid: {\n      type: 'string',\n      title: 'knowledge base id'\n    }\n  },\n  required: []\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nTo delete a data source from a knowledge base, send a DELETE request to `/v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources/{data_source_uuid}`.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  description: 'Information about a newly deleted knowledge base data source',\n  properties: {\n    data_source_uuid: {\n      type: 'string',\n      description: 'Data source id'\n    },\n    knowledge_base_uuid: {\n      type: 'string',\n      description: 'Knowledge base id'\n    }\n  },\n  required: []\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {

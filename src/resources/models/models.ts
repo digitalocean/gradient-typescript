@@ -1,30 +1,50 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as Shared from '../shared';
 import * as ProvidersAPI from './providers/providers';
 import { Providers } from './providers/providers';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
+import { path } from '../../internal/utils/path';
 
 export class Models extends APIResource {
   providers: ProvidersAPI.Providers = new ProvidersAPI.Providers(this._client);
 
   /**
-   * To list all models, send a GET request to `/v2/gen-ai/models`.
+   * Retrieves a model instance, providing basic information about the model such as
+   * the owner and permissioning.
+   *
+   * @example
+   * ```ts
+   * const model = await client.models.retrieve(
+   *   'llama3-8b-instruct',
+   * );
+   * ```
    */
-  list(
-    query: ModelListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<ModelListResponse> {
-    return this._client.get('/v2/gen-ai/models', {
-      query,
-      defaultBaseURL: 'https://api.digitalocean.com',
+  retrieve(model: string, options?: RequestOptions): APIPromise<ModelRetrieveResponse> {
+    return this._client.get(path`/models/${model}`, {
+      defaultBaseURL: 'https://inference.do-ai.run/v1',
       ...options,
     });
   }
+
+  /**
+   * Lists the currently available models, and provides basic information about each
+   * one such as the owner and availability.
+   *
+   * @example
+   * ```ts
+   * const models = await client.models.list();
+   * ```
+   */
+  list(options?: RequestOptions): APIPromise<ModelListResponse> {
+    return this._client.get('/models', { defaultBaseURL: 'https://inference.do-ai.run/v1', ...options });
+  }
 }
 
+/**
+ * Agreement Description
+ */
 export interface APIAgreement {
   description?: string;
 
@@ -35,81 +55,137 @@ export interface APIAgreement {
   uuid?: string;
 }
 
+/**
+ * A machine learning model stored on the GenAI platform
+ */
 export interface APIModel {
+  /**
+   * Agreement Description
+   */
   agreement?: APIAgreement;
 
+  /**
+   * Creation date / time
+   */
   created_at?: string;
 
+  /**
+   * True if it is a foundational model provided by do
+   */
   is_foundational?: boolean;
 
+  /**
+   * Name of the model
+   */
   name?: string;
 
+  /**
+   * Unique id of the model, this model is based on
+   */
   parent_uuid?: string;
 
+  /**
+   * Last modified
+   */
   updated_at?: string;
 
+  /**
+   * Model has been fully uploaded
+   */
   upload_complete?: boolean;
 
+  /**
+   * Download url
+   */
   url?: string;
 
+  /**
+   * Unique id
+   */
   uuid?: string;
 
+  /**
+   * Version Information about a Model
+   */
   version?: APIModelVersion;
 }
 
+/**
+ * Version Information about a Model
+ */
 export interface APIModelVersion {
+  /**
+   * Major version number
+   */
   major?: number;
 
+  /**
+   * Minor version number
+   */
   minor?: number;
 
+  /**
+   * Patch version number
+   */
   patch?: number;
 }
 
-export interface ModelListResponse {
-  links?: Shared.APILinks;
+/**
+ * Describes a model offering that can be used with the API.
+ */
+export interface ModelRetrieveResponse {
+  /**
+   * The model identifier, which can be referenced in the API endpoints.
+   */
+  id: string;
 
-  meta?: Shared.APIMeta;
+  /**
+   * The Unix timestamp (in seconds) when the model was created.
+   */
+  created: number;
 
-  models?: Array<APIModel>;
+  /**
+   * The object type, which is always "model".
+   */
+  object: 'model';
+
+  /**
+   * The organization that owns the model.
+   */
+  owned_by: string;
 }
 
-export interface ModelListParams {
-  /**
-   * page number.
-   */
-  page?: number;
+export interface ModelListResponse {
+  data: Array<ModelListResponse.Data>;
 
-  /**
-   * items per page.
-   */
-  per_page?: number;
+  object: 'list';
+}
 
+export namespace ModelListResponse {
   /**
-   * only include models that are publicly available.
+   * Describes a model offering that can be used with the API.
    */
-  public_only?: boolean;
+  export interface Data {
+    /**
+     * The model identifier, which can be referenced in the API endpoints.
+     */
+    id: string;
 
-  /**
-   * include only models defined for the listed usecases.
-   *
-   * - MODEL_USECASE_UNKNOWN: The use case of the model is unknown
-   * - MODEL_USECASE_AGENT: The model maybe used in an agent
-   * - MODEL_USECASE_FINETUNED: The model maybe used for fine tuning
-   * - MODEL_USECASE_KNOWLEDGEBASE: The model maybe used for knowledge bases
-   *   (embedding models)
-   * - MODEL_USECASE_GUARDRAIL: The model maybe used for guardrails
-   * - MODEL_USECASE_REASONING: The model usecase for reasoning
-   * - MODEL_USECASE_SERVERLESS: The model usecase for serverless inference
-   */
-  usecases?: Array<
-    | 'MODEL_USECASE_UNKNOWN'
-    | 'MODEL_USECASE_AGENT'
-    | 'MODEL_USECASE_FINETUNED'
-    | 'MODEL_USECASE_KNOWLEDGEBASE'
-    | 'MODEL_USECASE_GUARDRAIL'
-    | 'MODEL_USECASE_REASONING'
-    | 'MODEL_USECASE_SERVERLESS'
-  >;
+    /**
+     * The Unix timestamp (in seconds) when the model was created.
+     */
+    created: number;
+
+    /**
+     * The object type, which is always "model".
+     */
+    object: 'model';
+
+    /**
+     * The organization that owns the model.
+     */
+    owned_by: string;
+  }
 }
 
 Models.Providers = Providers;
@@ -119,8 +195,8 @@ export declare namespace Models {
     type APIAgreement as APIAgreement,
     type APIModel as APIModel,
     type APIModelVersion as APIModelVersion,
+    type ModelRetrieveResponse as ModelRetrieveResponse,
     type ModelListResponse as ModelListResponse,
-    type ModelListParams as ModelListParams,
   };
 
   export { Providers as Providers };

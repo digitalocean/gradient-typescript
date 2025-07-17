@@ -12,13 +12,13 @@ export const metadata: Metadata = {
   tags: [],
   httpMethod: 'post',
   httpPath: '/v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}',
-  operationId: 'attach_agent',
+  operationId: 'genai_attach_agent',
 };
 
 export const tool: Tool = {
   name: 'add_agents_routes',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nTo add an agent route to an agent, send a POST request to `/v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}`.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  title: 'information about a newly linked agent',\n  properties: {\n    child_agent_uuid: {\n      type: 'string',\n      title: 'routed agent id'\n    },\n    parent_agent_uuid: {\n      type: 'string',\n      description: 'A unique identifier for the parent agent.'\n    }\n  },\n  required: []\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nTo add an agent route to an agent, send a POST request to `/v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}`.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  description: 'Information about a newly linked agent',\n  properties: {\n    child_agent_uuid: {\n      type: 'string',\n      description: 'Routed agent id'\n    },\n    parent_agent_uuid: {\n      type: 'string',\n      description: 'A unique identifier for the parent agent.'\n    }\n  },\n  required: []\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -28,14 +28,14 @@ export const tool: Tool = {
       },
       child_agent_uuid: {
         type: 'string',
-        title: 'routed agent id',
+        description: 'Routed agent id',
       },
       if_case: {
         type: 'string',
       },
       route_name: {
         type: 'string',
-        title: 'name of route',
+        description: 'Name of route',
       },
       jq_filter: {
         type: 'string',

@@ -42,7 +42,12 @@ export {
   type EvaluationDatasetCreateParams,
   type EvaluationDatasetCreateFileUploadPresignedURLsParams,
 } from './evaluation-datasets';
-export { EvaluationMetrics, type EvaluationMetricListResponse } from './evaluation-metrics/index';
+export {
+  EvaluationMetrics,
+  type EvaluationMetricListResponse,
+  type EvaluationMetricListRegionsResponse,
+  type EvaluationMetricListRegionsParams,
+} from './evaluation-metrics/index';
 export {
   EvaluationRuns,
   type APIEvaluationMetric,
@@ -54,6 +59,7 @@ export {
   type EvaluationRunListResultsResponse,
   type EvaluationRunRetrieveResultsResponse,
   type EvaluationRunCreateParams,
+  type EvaluationRunListResultsParams,
   type EvaluationRunRetrieveResultsParams,
 } from './evaluation-runs';
 export {

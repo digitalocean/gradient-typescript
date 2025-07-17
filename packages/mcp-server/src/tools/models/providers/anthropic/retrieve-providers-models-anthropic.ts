@@ -12,13 +12,13 @@ export const metadata: Metadata = {
   tags: [],
   httpMethod: 'get',
   httpPath: '/v2/gen-ai/anthropic/keys/{api_key_uuid}',
-  operationId: 'get_anthropic_api_key',
+  operationId: 'genai_get_anthropic_api_key',
 };
 
 export const tool: Tool = {
   name: 'retrieve_providers_models_anthropic',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nTo retrieve details of an Anthropic API key, send a GET request to `/v2/gen-ai/anthropic/keys/{api_key_uuid}`.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    api_key_info: {\n      $ref: '#/$defs/api_anthropic_api_key_info'\n    }\n  },\n  required: [],\n  $defs: {\n    api_anthropic_api_key_info: {\n      type: 'object',\n      title: 'Anthropic API Key Info',\n      properties: {\n        created_at: {\n          type: 'string',\n          title: 'key creation date',\n          format: 'date-time'\n        },\n        created_by: {\n          type: 'string',\n          title: 'created by user id from DO'\n        },\n        deleted_at: {\n          type: 'string',\n          title: 'key deleted date',\n          format: 'date-time'\n        },\n        name: {\n          type: 'string',\n          title: 'name'\n        },\n        updated_at: {\n          type: 'string',\n          title: 'key last updated date',\n          format: 'date-time'\n        },\n        uuid: {\n          type: 'string',\n          title: 'uuid'\n        }\n      },\n      required: []\n    }\n  }\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nTo retrieve details of an Anthropic API key, send a GET request to `/v2/gen-ai/anthropic/keys/{api_key_uuid}`.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    api_key_info: {\n      $ref: '#/$defs/api_anthropic_api_key_info'\n    }\n  },\n  required: [],\n  $defs: {\n    api_anthropic_api_key_info: {\n      type: 'object',\n      description: 'Anthropic API Key Info',\n      properties: {\n        created_at: {\n          type: 'string',\n          description: 'Key creation date',\n          format: 'date-time'\n        },\n        created_by: {\n          type: 'string',\n          description: 'Created by user id from DO'\n        },\n        deleted_at: {\n          type: 'string',\n          description: 'Key deleted date',\n          format: 'date-time'\n        },\n        name: {\n          type: 'string',\n          description: 'Name'\n        },\n        updated_at: {\n          type: 'string',\n          description: 'Key last updated date',\n          format: 'date-time'\n        },\n        uuid: {\n          type: 'string',\n          description: 'Uuid'\n        }\n      },\n      required: []\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {

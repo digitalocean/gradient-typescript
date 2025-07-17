@@ -12,19 +12,19 @@ export const metadata: Metadata = {
   tags: [],
   httpMethod: 'post',
   httpPath: '/v2/gen-ai/models/api_keys',
-  operationId: 'create_model_api_key',
+  operationId: 'genai_create_model_api_key',
 };
 
 export const tool: Tool = {
   name: 'create_inference_api_keys',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nTo create a model API key, send a POST request to `/v2/gen-ai/models/api_keys`.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    api_key_info: {\n      $ref: '#/$defs/api_model_api_key_info'\n    }\n  },\n  required: [],\n  $defs: {\n    api_model_api_key_info: {\n      type: 'object',\n      title: 'Model API Key Info',\n      properties: {\n        created_at: {\n          type: 'string',\n          title: 'creation date',\n          format: 'date-time'\n        },\n        created_by: {\n          type: 'string',\n          title: 'created by'\n        },\n        deleted_at: {\n          type: 'string',\n          title: 'deleted date',\n          format: 'date-time'\n        },\n        name: {\n          type: 'string',\n          title: 'name'\n        },\n        secret_key: {\n          type: 'string'\n        },\n        uuid: {\n          type: 'string',\n          title: 'uuid'\n        }\n      },\n      required: []\n    }\n  }\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nTo create a model API key, send a POST request to `/v2/gen-ai/models/api_keys`.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    api_key_info: {\n      $ref: '#/$defs/api_model_api_key_info'\n    }\n  },\n  required: [],\n  $defs: {\n    api_model_api_key_info: {\n      type: 'object',\n      description: 'Model API Key Info',\n      properties: {\n        created_at: {\n          type: 'string',\n          description: 'Creation date',\n          format: 'date-time'\n        },\n        created_by: {\n          type: 'string',\n          description: 'Created by'\n        },\n        deleted_at: {\n          type: 'string',\n          description: 'Deleted date',\n          format: 'date-time'\n        },\n        name: {\n          type: 'string',\n          description: 'Name'\n        },\n        secret_key: {\n          type: 'string'\n        },\n        uuid: {\n          type: 'string',\n          description: 'Uuid'\n        }\n      },\n      required: []\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
       name: {
         type: 'string',
-        title: 'a human friendly name to identify the key',
+        description: 'A human friendly name to identify the key',
       },
       jq_filter: {
         type: 'string',

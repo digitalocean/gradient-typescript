@@ -10,21 +10,21 @@ export const metadata: Metadata = {
   resource: 'agents.evaluation_test_cases',
   operation: 'write',
   tags: [],
-  httpMethod: 'post',
+  httpMethod: 'put',
   httpPath: '/v2/gen-ai/evaluation_test_cases/{test_case_uuid}',
-  operationId: 'update_evaluation_test_case',
+  operationId: 'genai_update_evaluation_test_case',
 };
 
 export const tool: Tool = {
   name: 'update_agents_evaluation_test_cases',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nTo update an evaluation test-case send a POST request to `/v2/gen-ai/evaluation_test_cases/{test_case_uuid}`.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    test_case_uuid: {\n      type: 'string'\n    },\n    version: {\n      type: 'integer',\n      description: 'The new verson of the test case.'\n    }\n  },\n  required: []\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nTo update an evaluation test-case send a PUT request to `/v2/gen-ai/evaluation_test_cases/{test_case_uuid}`.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    test_case_uuid: {\n      type: 'string'\n    },\n    version: {\n      type: 'integer',\n      description: 'The new verson of the test case.'\n    }\n  },\n  required: []\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
       test_case_uuid: {
         type: 'string',
-        title: 'Test-case UUID to update',
+        description: 'Test-case UUID to update',
       },
       dataset_uuid: {
         type: 'string',
@@ -69,6 +69,11 @@ export const tool: Tool = {
           },
           name: {
             type: 'string',
+          },
+          success_threshold: {
+            type: 'number',
+            description:
+              'The success threshold for the star metric.\nThis is a value that the metric must reach to be considered successful.',
           },
           success_threshold_pct: {
             type: 'integer',
