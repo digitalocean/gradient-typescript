@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   tags: [],
   httpMethod: 'put',
   httpPath: '/v2/gen-ai/workspaces/{workspace_uuid}',
-  operationId: 'update_workspace',
+  operationId: 'genai_update_workspace',
 };
 
 export const tool: Tool = {
@@ -27,11 +27,11 @@ export const tool: Tool = {
       },
       description: {
         type: 'string',
-        title: 'the new description of the workspace',
+        description: 'The new description of the workspace',
       },
       name: {
         type: 'string',
-        title: 'the new name of the workspace',
+        description: 'The new name of the workspace',
       },
     },
   },

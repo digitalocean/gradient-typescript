@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   tags: [],
   httpMethod: 'post',
   httpPath: '/v2/gen-ai/agents',
-  operationId: 'create_agent',
+  operationId: 'genai_create_agent',
 };
 
 export const tool: Tool = {
@@ -23,11 +23,11 @@ export const tool: Tool = {
     properties: {
       anthropic_key_uuid: {
         type: 'string',
-        title: 'Optional Anthropic API key ID to use with Anthropic models',
+        description: 'Optional Anthropic API key ID to use with Anthropic models',
       },
       description: {
         type: 'string',
-        title: 'a text description of the agent, not used in inference',
+        description: 'A text description of the agent, not used in inference',
       },
       instruction: {
         type: 'string',
@@ -36,7 +36,7 @@ export const tool: Tool = {
       },
       knowledge_base_uuid: {
         type: 'array',
-        title: 'ids of the knowledge base(s) to attach to the agent',
+        description: 'Ids of the knowledge base(s) to attach to the agent',
         items: {
           type: 'string',
         },
@@ -47,23 +47,23 @@ export const tool: Tool = {
       },
       name: {
         type: 'string',
-        title: 'agent name',
+        description: 'Agent name',
       },
       open_ai_key_uuid: {
         type: 'string',
-        title: 'Optional OpenAI API key ID to use with OpenAI models',
+        description: 'Optional OpenAI API key ID to use with OpenAI models',
       },
       project_id: {
         type: 'string',
-        title: 'the id of the DigitalOcean project this agent will belong to',
+        description: 'The id of the DigitalOcean project this agent will belong to',
       },
       region: {
         type: 'string',
-        title: 'The DigitalOcean region to deploy your agent in',
+        description: 'The DigitalOcean region to deploy your agent in',
       },
       tags: {
         type: 'array',
-        title: 'Agent tag to organize related resources',
+        description: 'Agent tag to organize related resources',
         items: {
           type: 'string',
         },

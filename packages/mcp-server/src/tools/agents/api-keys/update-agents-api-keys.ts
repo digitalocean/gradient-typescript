@@ -12,27 +12,27 @@ export const metadata: Metadata = {
   tags: [],
   httpMethod: 'put',
   httpPath: '/v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}',
-  operationId: 'update_agent_api_key',
+  operationId: 'genai_update_agent_api_key',
 };
 
 export const tool: Tool = {
   name: 'update_agents_api_keys',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nTo update an agent API key, send a PUT request to `/v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}`.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    api_key_info: {\n      $ref: '#/$defs/api_agent_api_key_info'\n    }\n  },\n  required: [],\n  $defs: {\n    api_agent_api_key_info: {\n      type: 'object',\n      title: 'Agent API Key Info',\n      properties: {\n        created_at: {\n          type: 'string',\n          title: 'creation date',\n          format: 'date-time'\n        },\n        created_by: {\n          type: 'string',\n          title: 'created by'\n        },\n        deleted_at: {\n          type: 'string',\n          title: 'deleted date',\n          format: 'date-time'\n        },\n        name: {\n          type: 'string',\n          title: 'name'\n        },\n        secret_key: {\n          type: 'string'\n        },\n        uuid: {\n          type: 'string',\n          title: 'uuid'\n        }\n      },\n      required: []\n    }\n  }\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nTo update an agent API key, send a PUT request to `/v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}`.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    api_key_info: {\n      $ref: '#/$defs/api_agent_api_key_info'\n    }\n  },\n  required: [],\n  $defs: {\n    api_agent_api_key_info: {\n      type: 'object',\n      description: 'Agent API Key Info',\n      properties: {\n        created_at: {\n          type: 'string',\n          description: 'Creation date',\n          format: 'date-time'\n        },\n        created_by: {\n          type: 'string',\n          description: 'Created by'\n        },\n        deleted_at: {\n          type: 'string',\n          description: 'Deleted date',\n          format: 'date-time'\n        },\n        name: {\n          type: 'string',\n          description: 'Name'\n        },\n        secret_key: {\n          type: 'string'\n        },\n        uuid: {\n          type: 'string',\n          description: 'Uuid'\n        }\n      },\n      required: []\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
       agent_uuid: {
         type: 'string',
-        title: 'agent id',
+        description: 'Agent id',
       },
       api_key_uuid: {
         type: 'string',
-        title: 'API key ID',
+        description: 'API key ID',
       },
       name: {
         type: 'string',
-        title: 'name',
+        description: 'Name',
       },
       jq_filter: {
         type: 'string',

@@ -12,13 +12,13 @@ export const metadata: Metadata = {
   tags: [],
   httpMethod: 'delete',
   httpPath: '/v2/gen-ai/workspaces/{workspace_uuid}',
-  operationId: 'delete_workspace',
+  operationId: 'genai_delete_workspace',
 };
 
 export const tool: Tool = {
   name: 'delete_evaluation_metrics_agents_workspaces',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nTo delete a workspace, send a DELETE request to `/v2/gen-ai/workspace/{workspace_uuid}`.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    workspace_uuid: {\n      type: 'string',\n      title: 'workspace'\n    }\n  },\n  required: []\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nTo delete a workspace, send a DELETE request to `/v2/gen-ai/workspace/{workspace_uuid}`.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    workspace_uuid: {\n      type: 'string',\n      description: 'Workspace'\n    }\n  },\n  required: []\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {

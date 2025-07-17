@@ -12,23 +12,23 @@ export const metadata: Metadata = {
   tags: [],
   httpMethod: 'put',
   httpPath: '/v2/gen-ai/agents/{uuid}/versions',
-  operationId: 'rollback_to_agent_version',
+  operationId: 'genai_rollback_to_agent_version',
 };
 
 export const tool: Tool = {
   name: 'update_agents_versions',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nTo update to a specific agent version, send a PUT request to `/v2/gen-ai/agents/{uuid}/versions`.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    audit_header: {\n      type: 'object',\n      description: 'An alternative way to provide auth information. for internal use only.',\n      properties: {\n        actor_id: {\n          type: 'string'\n        },\n        actor_ip: {\n          type: 'string'\n        },\n        actor_uuid: {\n          type: 'string'\n        },\n        context_urn: {\n          type: 'string'\n        },\n        origin_application: {\n          type: 'string'\n        },\n        user_id: {\n          type: 'string'\n        },\n        user_uuid: {\n          type: 'string'\n        }\n      },\n      required: []\n    },\n    version_hash: {\n      type: 'string',\n      title: 'unique identifier'\n    }\n  },\n  required: []\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nTo update to a specific agent version, send a PUT request to `/v2/gen-ai/agents/{uuid}/versions`.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    audit_header: {\n      type: 'object',\n      description: 'An alternative way to provide auth information. for internal use only.',\n      properties: {\n        actor_id: {\n          type: 'string'\n        },\n        actor_ip: {\n          type: 'string'\n        },\n        actor_uuid: {\n          type: 'string'\n        },\n        context_urn: {\n          type: 'string'\n        },\n        origin_application: {\n          type: 'string'\n        },\n        user_id: {\n          type: 'string'\n        },\n        user_uuid: {\n          type: 'string'\n        }\n      },\n      required: []\n    },\n    version_hash: {\n      type: 'string',\n      description: 'Unique identifier'\n    }\n  },\n  required: []\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
       uuid: {
         type: 'string',
-        title: 'agent unique identifier',
+        description: 'Agent unique identifier',
       },
       version_hash: {
         type: 'string',
-        title: 'unique identifier',
+        description: 'Unique identifier',
       },
       jq_filter: {
         type: 'string',

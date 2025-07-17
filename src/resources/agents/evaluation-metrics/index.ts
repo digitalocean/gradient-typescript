@@ -1,6 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { EvaluationMetrics, type EvaluationMetricListResponse } from './evaluation-metrics';
+export {
+  EvaluationMetrics,
+  type EvaluationMetricListResponse,
+  type EvaluationMetricListRegionsResponse,
+  type EvaluationMetricListRegionsParams,
+} from './evaluation-metrics';
+export { Models, type ModelListResponse, type ModelListParams } from './models';
 export {
   Workspaces,
   type WorkspaceCreateResponse,

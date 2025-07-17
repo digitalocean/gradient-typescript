@@ -40,6 +40,23 @@ import {
   Agents,
 } from './resources/agents/agents';
 import { Chat } from './resources/chat/chat';
+import {
+  DropletBackupPolicy,
+  GPUDropletCreateParams,
+  GPUDropletCreateResponse,
+  GPUDropletDeleteByTagParams,
+  GPUDropletListFirewallsParams,
+  GPUDropletListFirewallsResponse,
+  GPUDropletListKernelsParams,
+  GPUDropletListKernelsResponse,
+  GPUDropletListNeighborsResponse,
+  GPUDropletListParams,
+  GPUDropletListResponse,
+  GPUDropletListSnapshotsParams,
+  GPUDropletListSnapshotsResponse,
+  GPUDropletRetrieveResponse,
+  GPUDroplets,
+} from './resources/gpu-droplets/gpu-droplets';
 import { Inference } from './resources/inference/inference';
 import {
   APIKnowledgeBase,
@@ -57,8 +74,8 @@ import {
   APIAgreement,
   APIModel,
   APIModelVersion,
-  ModelListParams,
   ModelListResponse,
+  ModelRetrieveResponse,
   Models,
 } from './resources/models/models';
 import { type Fetch } from './internal/builtin-types';
@@ -784,6 +801,7 @@ export class GradientAI {
   knowledgeBases: API.KnowledgeBases = new API.KnowledgeBases(this);
   inference: API.Inference = new API.Inference(this);
   models: API.Models = new API.Models(this);
+  gpuDroplets: API.GPUDroplets = new API.GPUDroplets(this);
 }
 GradientAI.Agents = Agents;
 GradientAI.Chat = Chat;
@@ -791,6 +809,7 @@ GradientAI.Regions = Regions;
 GradientAI.KnowledgeBases = KnowledgeBases;
 GradientAI.Inference = Inference;
 GradientAI.Models = Models;
+GradientAI.GPUDroplets = GPUDroplets;
 export declare namespace GradientAI {
   export type RequestOptions = Opts.RequestOptions;
 
@@ -844,12 +863,53 @@ export declare namespace GradientAI {
     type APIAgreement as APIAgreement,
     type APIModel as APIModel,
     type APIModelVersion as APIModelVersion,
+    type ModelRetrieveResponse as ModelRetrieveResponse,
     type ModelListResponse as ModelListResponse,
-    type ModelListParams as ModelListParams,
   };
 
+  export {
+    GPUDroplets as GPUDroplets,
+    type DropletBackupPolicy as DropletBackupPolicy,
+    type GPUDropletCreateResponse as GPUDropletCreateResponse,
+    type GPUDropletRetrieveResponse as GPUDropletRetrieveResponse,
+    type GPUDropletListResponse as GPUDropletListResponse,
+    type GPUDropletListFirewallsResponse as GPUDropletListFirewallsResponse,
+    type GPUDropletListKernelsResponse as GPUDropletListKernelsResponse,
+    type GPUDropletListNeighborsResponse as GPUDropletListNeighborsResponse,
+    type GPUDropletListSnapshotsResponse as GPUDropletListSnapshotsResponse,
+    type GPUDropletCreateParams as GPUDropletCreateParams,
+    type GPUDropletListParams as GPUDropletListParams,
+    type GPUDropletDeleteByTagParams as GPUDropletDeleteByTagParams,
+    type GPUDropletListFirewallsParams as GPUDropletListFirewallsParams,
+    type GPUDropletListKernelsParams as GPUDropletListKernelsParams,
+    type GPUDropletListSnapshotsParams as GPUDropletListSnapshotsParams,
+  };
+
+  export type Action = API.Action;
+  export type ActionLink = API.ActionLink;
   export type APILinks = API.APILinks;
   export type APIMeta = API.APIMeta;
+  export type BackwardLinks = API.BackwardLinks;
   export type ChatCompletionChunk = API.ChatCompletionChunk;
   export type ChatCompletionTokenLogprob = API.ChatCompletionTokenLogprob;
+  export type CompletionUsage = API.CompletionUsage;
+  export type DiskInfo = API.DiskInfo;
+  export type Droplet = API.Droplet;
+  export type DropletNextBackupWindow = API.DropletNextBackupWindow;
+  export type FirewallRuleTarget = API.FirewallRuleTarget;
+  export type ForwardLinks = API.ForwardLinks;
+  export type GarbageCollection = API.GarbageCollection;
+  export type GPUInfo = API.GPUInfo;
+  export type Image = API.Image;
+  export type Kernel = API.Kernel;
+  export type MetaProperties = API.MetaProperties;
+  export type NetworkV4 = API.NetworkV4;
+  export type NetworkV6 = API.NetworkV6;
+  export type PageLinks = API.PageLinks;
+  export type Region = API.Region;
+  export type Size = API.Size;
+  export type Snapshots = API.Snapshots;
+  export type Subscription = API.Subscription;
+  export type SubscriptionTierBase = API.SubscriptionTierBase;
+  export type VpcPeering = API.VpcPeering;
 }

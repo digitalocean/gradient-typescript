@@ -12,13 +12,13 @@ export const metadata: Metadata = {
   tags: [],
   httpMethod: 'delete',
   httpPath: '/v2/gen-ai/knowledge_bases/{uuid}',
-  operationId: 'delete_knowledge_base',
+  operationId: 'genai_delete_knowledge_base',
 };
 
 export const tool: Tool = {
   name: 'delete_knowledge_bases',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nTo delete a knowledge base, send a DELETE request to `/v2/gen-ai/knowledge_bases/{uuid}`.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  title: 'information about a deleted knowledge base',\n  properties: {\n    uuid: {\n      type: 'string',\n      title: 'the id of the deleted knowledge base'\n    }\n  },\n  required: []\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nTo delete a knowledge base, send a DELETE request to `/v2/gen-ai/knowledge_bases/{uuid}`.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  description: 'Information about a deleted knowledge base',\n  properties: {\n    uuid: {\n      type: 'string',\n      description: 'The id of the deleted knowledge base'\n    }\n  },\n  required: []\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {

@@ -2,6 +2,8 @@
 
 import { APIResource } from '../../../core/resource';
 import * as EvaluationRunsAPI from '../evaluation-runs';
+import * as ModelsAPI from './models';
+import { ModelListParams, ModelListResponse, Models } from './models';
 import * as WorkspacesAPI from './workspaces/workspaces';
 import {
   WorkspaceCreateParams,
@@ -19,6 +21,7 @@ import { RequestOptions } from '../../../internal/request-options';
 
 export class EvaluationMetrics extends APIResource {
   workspaces: WorkspacesAPI.Workspaces = new WorkspacesAPI.Workspaces(this._client);
+  models: ModelsAPI.Models = new ModelsAPI.Models(this._client);
 
   /**
    * To list all evaluation metrics, send a GET request to
@@ -36,16 +39,95 @@ export class EvaluationMetrics extends APIResource {
       ...options,
     });
   }
+
+  /**
+   * To list all datacenter regions, send a GET request to `/v2/gen-ai/regions`.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.agents.evaluationMetrics.listRegions();
+   * ```
+   */
+  listRegions(
+    query: EvaluationMetricListRegionsParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<EvaluationMetricListRegionsResponse> {
+    return this._client.get('/v2/gen-ai/regions', {
+      query,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
+  }
 }
 
 export interface EvaluationMetricListResponse {
   metrics?: Array<EvaluationRunsAPI.APIEvaluationMetric>;
 }
 
+/**
+ * Region Codes
+ */
+export interface EvaluationMetricListRegionsResponse {
+  /**
+   * Region code
+   */
+  regions?: Array<EvaluationMetricListRegionsResponse.Region>;
+}
+
+export namespace EvaluationMetricListRegionsResponse {
+  /**
+   * Description for a specific Region
+   */
+  export interface Region {
+    /**
+     * Url for inference server
+     */
+    inference_url?: string;
+
+    /**
+     * Region code
+     */
+    region?: string;
+
+    /**
+     * This datacenter is capable of running batch jobs
+     */
+    serves_batch?: boolean;
+
+    /**
+     * This datacenter is capable of serving inference
+     */
+    serves_inference?: boolean;
+
+    /**
+     * The url for the inference streaming server
+     */
+    stream_inference_url?: string;
+  }
+}
+
+export interface EvaluationMetricListRegionsParams {
+  /**
+   * Include datacenters that are capable of running batch jobs.
+   */
+  serves_batch?: boolean;
+
+  /**
+   * Include datacenters that serve inference.
+   */
+  serves_inference?: boolean;
+}
+
 EvaluationMetrics.Workspaces = Workspaces;
+EvaluationMetrics.Models = Models;
 
 export declare namespace EvaluationMetrics {
-  export { type EvaluationMetricListResponse as EvaluationMetricListResponse };
+  export {
+    type EvaluationMetricListResponse as EvaluationMetricListResponse,
+    type EvaluationMetricListRegionsResponse as EvaluationMetricListRegionsResponse,
+    type EvaluationMetricListRegionsParams as EvaluationMetricListRegionsParams,
+  };
 
   export {
     Workspaces as Workspaces,
@@ -57,5 +139,11 @@ export declare namespace EvaluationMetrics {
     type WorkspaceListEvaluationTestCasesResponse as WorkspaceListEvaluationTestCasesResponse,
     type WorkspaceCreateParams as WorkspaceCreateParams,
     type WorkspaceUpdateParams as WorkspaceUpdateParams,
+  };
+
+  export {
+    Models as Models,
+    type ModelListResponse as ModelListResponse,
+    type ModelListParams as ModelListParams,
   };
 }
