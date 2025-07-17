@@ -12,9 +12,7 @@ const client = new GradientAI({
 describe('resource agents', () => {
   // skipped: tests are disabled for the time being
   test.skip('list', async () => {
-    const responsePromise = client.agents.evaluationMetrics.workspaces.agents.list(
-      '"123e4567-e89b-12d3-a456-426614174000"',
-    );
+    const responsePromise = client.agents.evaluationMetrics.workspaces.agents.list('workspace_uuid');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -29,8 +27,8 @@ describe('resource agents', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.agents.evaluationMetrics.workspaces.agents.list(
-        '"123e4567-e89b-12d3-a456-426614174000"',
-        { only_deployed: true, page: 0, per_page: 0 },
+        'workspace_uuid',
+        { field_mask: { paths: ['string'] }, only_deployed: true, page: 0, per_page: 0 },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(GradientAI.NotFoundError);
@@ -38,9 +36,7 @@ describe('resource agents', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('move', async () => {
-    const responsePromise = client.agents.evaluationMetrics.workspaces.agents.move(
-      '"123e4567-e89b-12d3-a456-426614174000"',
-    );
+    const responsePromise = client.agents.evaluationMetrics.workspaces.agents.move('workspace_uuid', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -48,17 +44,5 @@ describe('resource agents', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('move: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.agents.evaluationMetrics.workspaces.agents.move(
-        '"123e4567-e89b-12d3-a456-426614174000"',
-        { agent_uuids: ['example string'], body_workspace_uuid: '"123e4567-e89b-12d3-a456-426614174000"' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(GradientAI.NotFoundError);
   });
 });

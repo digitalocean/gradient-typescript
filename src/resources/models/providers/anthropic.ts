@@ -11,17 +11,8 @@ export class Anthropic extends APIResource {
   /**
    * To create an Anthropic API key, send a POST request to
    * `/v2/gen-ai/anthropic/keys`.
-   *
-   * @example
-   * ```ts
-   * const anthropic =
-   *   await client.models.providers.anthropic.create();
-   * ```
    */
-  create(
-    body: AnthropicCreateParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<AnthropicCreateResponse> {
+  create(body: AnthropicCreateParams, options?: RequestOptions): APIPromise<AnthropicCreateResponse> {
     return this._client.post('/v2/gen-ai/anthropic/keys', {
       body,
       defaultBaseURL: 'https://api.digitalocean.com',
@@ -32,14 +23,6 @@ export class Anthropic extends APIResource {
   /**
    * To retrieve details of an Anthropic API key, send a GET request to
    * `/v2/gen-ai/anthropic/keys/{api_key_uuid}`.
-   *
-   * @example
-   * ```ts
-   * const anthropic =
-   *   await client.models.providers.anthropic.retrieve(
-   *     '"123e4567-e89b-12d3-a456-426614174000"',
-   *   );
-   * ```
    */
   retrieve(apiKeyUuid: string, options?: RequestOptions): APIPromise<AnthropicRetrieveResponse> {
     return this._client.get(path`/v2/gen-ai/anthropic/keys/${apiKeyUuid}`, {
@@ -51,18 +34,10 @@ export class Anthropic extends APIResource {
   /**
    * To update an Anthropic API key, send a PUT request to
    * `/v2/gen-ai/anthropic/keys/{api_key_uuid}`.
-   *
-   * @example
-   * ```ts
-   * const anthropic =
-   *   await client.models.providers.anthropic.update(
-   *     '"123e4567-e89b-12d3-a456-426614174000"',
-   *   );
-   * ```
    */
   update(
     apiKeyUuid: string,
-    body: AnthropicUpdateParams | null | undefined = {},
+    body: AnthropicUpdateParams,
     options?: RequestOptions,
   ): APIPromise<AnthropicUpdateResponse> {
     return this._client.put(path`/v2/gen-ai/anthropic/keys/${apiKeyUuid}`, {
@@ -75,12 +50,6 @@ export class Anthropic extends APIResource {
   /**
    * To list all Anthropic API keys, send a GET request to
    * `/v2/gen-ai/anthropic/keys`.
-   *
-   * @example
-   * ```ts
-   * const anthropics =
-   *   await client.models.providers.anthropic.list();
-   * ```
    */
   list(
     query: AnthropicListParams | null | undefined = {},
@@ -96,14 +65,6 @@ export class Anthropic extends APIResource {
   /**
    * To delete an Anthropic API key, send a DELETE request to
    * `/v2/gen-ai/anthropic/keys/{api_key_uuid}`.
-   *
-   * @example
-   * ```ts
-   * const anthropic =
-   *   await client.models.providers.anthropic.delete(
-   *     '"123e4567-e89b-12d3-a456-426614174000"',
-   *   );
-   * ```
    */
   delete(apiKeyUuid: string, options?: RequestOptions): APIPromise<AnthropicDeleteResponse> {
     return this._client.delete(path`/v2/gen-ai/anthropic/keys/${apiKeyUuid}`, {
@@ -114,14 +75,6 @@ export class Anthropic extends APIResource {
 
   /**
    * List Agents by Anthropic Key.
-   *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.models.providers.anthropic.listAgents(
-   *     '"123e4567-e89b-12d3-a456-426614174000"',
-   *   );
-   * ```
    */
   listAgents(
     uuid: string,
@@ -141,16 +94,10 @@ export class Anthropic extends APIResource {
  * key.
  */
 export interface AnthropicCreateResponse {
-  /**
-   * Anthropic API Key Info
-   */
   api_key_info?: AgentsAPI.APIAnthropicAPIKeyInfo;
 }
 
 export interface AnthropicRetrieveResponse {
-  /**
-   * Anthropic API Key Info
-   */
   api_key_info?: AgentsAPI.APIAnthropicAPIKeyInfo;
 }
 
@@ -158,9 +105,6 @@ export interface AnthropicRetrieveResponse {
  * UpdateAnthropicAPIKeyOutput is used to return the updated Anthropic API key.
  */
 export interface AnthropicUpdateResponse {
-  /**
-   * Anthropic API Key Info
-   */
   api_key_info?: AgentsAPI.APIAnthropicAPIKeyInfo;
 }
 
@@ -169,19 +113,10 @@ export interface AnthropicUpdateResponse {
  * a specific agent.
  */
 export interface AnthropicListResponse {
-  /**
-   * Api key infos
-   */
   api_key_infos?: Array<AgentsAPI.APIAnthropicAPIKeyInfo>;
 
-  /**
-   * Links to other pages
-   */
   links?: Shared.APILinks;
 
-  /**
-   * Meta information about the data set
-   */
   meta?: Shared.APIMeta;
 }
 
@@ -189,78 +124,51 @@ export interface AnthropicListResponse {
  * DeleteAnthropicAPIKeyOutput is used to return the deleted Anthropic API key.
  */
 export interface AnthropicDeleteResponse {
-  /**
-   * Anthropic API Key Info
-   */
   api_key_info?: AgentsAPI.APIAnthropicAPIKeyInfo;
 }
 
-/**
- * List of Agents that linked to a specific Anthropic Key
- */
 export interface AnthropicListAgentsResponse {
   agents?: Array<AgentsAPI.APIAgent>;
 
-  /**
-   * Links to other pages
-   */
   links?: Shared.APILinks;
 
-  /**
-   * Meta information about the data set
-   */
   meta?: Shared.APIMeta;
 }
 
 export interface AnthropicCreateParams {
-  /**
-   * Anthropic API key
-   */
   api_key?: string;
 
-  /**
-   * Name of the key
-   */
   name?: string;
 }
 
 export interface AnthropicUpdateParams {
-  /**
-   * Anthropic API key
-   */
   api_key?: string;
 
-  /**
-   * API key ID
-   */
   body_api_key_uuid?: string;
 
-  /**
-   * Name of the key
-   */
   name?: string;
 }
 
 export interface AnthropicListParams {
   /**
-   * Page number.
+   * page number.
    */
   page?: number;
 
   /**
-   * Items per page.
+   * items per page.
    */
   per_page?: number;
 }
 
 export interface AnthropicListAgentsParams {
   /**
-   * Page number.
+   * page number.
    */
   page?: number;
 
   /**
-   * Items per page.
+   * items per page.
    */
   per_page?: number;
 }

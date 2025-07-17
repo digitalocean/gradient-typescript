@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   tags: [],
   httpMethod: 'post',
   httpPath: '/v2/gen-ai/evaluation_runs',
-  operationId: 'genai_run_evaluation_test_case',
+  operationId: 'run_evaluation_test_case',
 };
 
 export const tool: Tool = {
@@ -35,7 +35,7 @@ export const tool: Tool = {
       },
       test_case_uuid: {
         type: 'string',
-        description: 'Test-case UUID to run',
+        title: 'Test-case UUID to run',
       },
       jq_filter: {
         type: 'string',

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   tags: [],
   httpMethod: 'delete',
   httpPath: '/v2/gen-ai/agents/{agent_uuid}/knowledge_bases/{knowledge_base_uuid}',
-  operationId: 'genai_detach_knowledge_base',
+  operationId: 'detach_knowledge_base',
 };
 
 export const tool: Tool = {

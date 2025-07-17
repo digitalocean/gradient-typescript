@@ -12,13 +12,13 @@ export const metadata: Metadata = {
   tags: [],
   httpMethod: 'post',
   httpPath: '/v2/gen-ai/evaluation_datasets',
-  operationId: 'genai_create_evaluation_dataset',
+  operationId: 'create_evaluation_dataset',
 };
 
 export const tool: Tool = {
   name: 'create_agents_evaluation_datasets',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nTo create an evaluation dataset, send a POST request to `/v2/gen-ai/evaluation_datasets`.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  description: 'Output for creating an agent evaluation dataset',\n  properties: {\n    evaluation_dataset_uuid: {\n      type: 'string',\n      description: 'Evaluation dataset uuid.'\n    }\n  },\n  required: []\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nTo create an evaluation dataset, send a POST request to `/v2/gen-ai/evaluation_datasets`.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  title: 'Output for creating an agent evaluation dataset',\n  properties: {\n    evaluation_dataset_uuid: {\n      type: 'string',\n      description: 'Evaluation dataset uuid.'\n    }\n  },\n  required: []\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -43,15 +43,15 @@ export const tool: Tool = {
         properties: {
           original_file_name: {
             type: 'string',
-            description: 'The original file name',
+            title: 'The original file name',
           },
           size_in_bytes: {
             type: 'string',
-            description: 'The size of the file in bytes',
+            title: 'The size of the file in bytes',
           },
           stored_object_key: {
             type: 'string',
-            description: 'The object key the file was stored as',
+            title: 'The object key the file was stored as',
           },
         },
         required: [],

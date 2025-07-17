@@ -23,23 +23,7 @@ export {
   type AgentUpdateStatusParams,
 } from './agents/agents';
 export { Chat } from './chat/chat';
-export {
-  GPUDroplets,
-  type DropletBackupPolicy,
-  type GPUDropletCreateResponse,
-  type GPUDropletRetrieveResponse,
-  type GPUDropletListResponse,
-  type GPUDropletListFirewallsResponse,
-  type GPUDropletListKernelsResponse,
-  type GPUDropletListNeighborsResponse,
-  type GPUDropletListSnapshotsResponse,
-  type GPUDropletCreateParams,
-  type GPUDropletListParams,
-  type GPUDropletDeleteByTagParams,
-  type GPUDropletListFirewallsParams,
-  type GPUDropletListKernelsParams,
-  type GPUDropletListSnapshotsParams,
-} from './gpu-droplets/gpu-droplets';
+export { GPUDroplets } from './gpu-droplets/gpu-droplets';
 export { Inference } from './inference/inference';
 export {
   KnowledgeBases,
@@ -61,4 +45,4 @@ export {
   type ModelRetrieveResponse,
   type ModelListResponse,
 } from './models/models';
-export { Regions, type RegionListResponse, type RegionListParams } from './regions';
+export { Regions } from './regions';

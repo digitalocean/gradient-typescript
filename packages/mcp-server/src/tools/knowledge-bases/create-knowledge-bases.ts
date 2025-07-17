@@ -12,13 +12,13 @@ export const metadata: Metadata = {
   tags: [],
   httpMethod: 'post',
   httpPath: '/v2/gen-ai/knowledge_bases',
-  operationId: 'genai_create_knowledge_base',
+  operationId: 'create_knowledge_base',
 };
 
 export const tool: Tool = {
   name: 'create_knowledge_bases',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nTo create a knowledge base, send a POST request to `/v2/gen-ai/knowledge_bases`.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  description: 'Information about a newly created knowledge base',\n  properties: {\n    knowledge_base: {\n      $ref: '#/$defs/api_knowledge_base'\n    }\n  },\n  required: [],\n  $defs: {\n    api_knowledge_base: {\n      type: 'object',\n      description: 'Knowledgebase Description',\n      properties: {\n        added_to_agent_at: {\n          type: 'string',\n          description: 'Time when the knowledge base was added to the agent',\n          format: 'date-time'\n        },\n        created_at: {\n          type: 'string',\n          description: 'Creation date / time',\n          format: 'date-time'\n        },\n        database_id: {\n          type: 'string'\n        },\n        embedding_model_uuid: {\n          type: 'string'\n        },\n        is_public: {\n          type: 'boolean',\n          description: 'Whether the knowledge base is public or not'\n        },\n        last_indexing_job: {\n          $ref: '#/$defs/api_indexing_job'\n        },\n        name: {\n          type: 'string',\n          description: 'Name of knowledge base'\n        },\n        project_id: {\n          type: 'string'\n        },\n        region: {\n          type: 'string',\n          description: 'Region code'\n        },\n        tags: {\n          type: 'array',\n          description: 'Tags to organize related resources',\n          items: {\n            type: 'string'\n          }\n        },\n        updated_at: {\n          type: 'string',\n          description: 'Last modified',\n          format: 'date-time'\n        },\n        user_id: {\n          type: 'string',\n          description: 'Id of user that created the knowledge base'\n        },\n        uuid: {\n          type: 'string',\n          description: 'Unique id for knowledge base'\n        }\n      },\n      required: []\n    },\n    api_indexing_job: {\n      type: 'object',\n      description: 'IndexingJob description',\n      properties: {\n        completed_datasources: {\n          type: 'integer',\n          description: 'Number of datasources indexed completed'\n        },\n        created_at: {\n          type: 'string',\n          description: 'Creation date / time',\n          format: 'date-time'\n        },\n        data_source_uuids: {\n          type: 'array',\n          items: {\n            type: 'string'\n          }\n        },\n        finished_at: {\n          type: 'string',\n          format: 'date-time'\n        },\n        knowledge_base_uuid: {\n          type: 'string',\n          description: 'Knowledge base id'\n        },\n        phase: {\n          type: 'string',\n          enum: [            'BATCH_JOB_PHASE_UNKNOWN',\n            'BATCH_JOB_PHASE_PENDING',\n            'BATCH_JOB_PHASE_RUNNING',\n            'BATCH_JOB_PHASE_SUCCEEDED',\n            'BATCH_JOB_PHASE_FAILED',\n            'BATCH_JOB_PHASE_ERROR',\n            'BATCH_JOB_PHASE_CANCELLED'\n          ]\n        },\n        started_at: {\n          type: 'string',\n          format: 'date-time'\n        },\n        status: {\n          type: 'string',\n          enum: [            'INDEX_JOB_STATUS_UNKNOWN',\n            'INDEX_JOB_STATUS_PARTIAL',\n            'INDEX_JOB_STATUS_IN_PROGRESS',\n            'INDEX_JOB_STATUS_COMPLETED',\n            'INDEX_JOB_STATUS_FAILED',\n            'INDEX_JOB_STATUS_NO_CHANGES',\n            'INDEX_JOB_STATUS_PENDING'\n          ]\n        },\n        tokens: {\n          type: 'integer',\n          description: 'Number of tokens'\n        },\n        total_datasources: {\n          type: 'integer',\n          description: 'Number of datasources being indexed'\n        },\n        updated_at: {\n          type: 'string',\n          description: 'Last modified',\n          format: 'date-time'\n        },\n        uuid: {\n          type: 'string',\n          description: 'Unique id'\n        }\n      },\n      required: []\n    }\n  }\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nTo create a knowledge base, send a POST request to `/v2/gen-ai/knowledge_bases`.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  title: 'information about a newly created knowledge base',\n  properties: {\n    knowledge_base: {\n      $ref: '#/$defs/api_knowledge_base'\n    }\n  },\n  required: [],\n  $defs: {\n    api_knowledge_base: {\n      type: 'object',\n      title: 'Knowledgebase Description',\n      properties: {\n        added_to_agent_at: {\n          type: 'string',\n          title: 'time when the knowledge base was added to the agent',\n          format: 'date-time'\n        },\n        created_at: {\n          type: 'string',\n          title: 'creation date / time',\n          format: 'date-time'\n        },\n        database_id: {\n          type: 'string'\n        },\n        embedding_model_uuid: {\n          type: 'string'\n        },\n        is_public: {\n          type: 'boolean',\n          title: 'whether the knowledge base is public or not'\n        },\n        last_indexing_job: {\n          $ref: '#/$defs/api_indexing_job'\n        },\n        name: {\n          type: 'string',\n          title: 'name of knowledge base'\n        },\n        project_id: {\n          type: 'string'\n        },\n        region: {\n          type: 'string',\n          title: 'region code'\n        },\n        tags: {\n          type: 'array',\n          title: 'Tags to organize related resources',\n          items: {\n            type: 'string'\n          }\n        },\n        updated_at: {\n          type: 'string',\n          title: 'last modified',\n          format: 'date-time'\n        },\n        user_id: {\n          type: 'string',\n          title: 'id of user that created the knowledge base'\n        },\n        uuid: {\n          type: 'string',\n          title: 'unique id for knowledge base'\n        }\n      },\n      required: []\n    },\n    api_indexing_job: {\n      type: 'object',\n      title: 'IndexingJob description',\n      properties: {\n        completed_datasources: {\n          type: 'integer',\n          title: 'number of datasources indexed completed'\n        },\n        created_at: {\n          type: 'string',\n          title: 'creation date / time',\n          format: 'date-time'\n        },\n        data_source_uuids: {\n          type: 'array',\n          items: {\n            type: 'string'\n          }\n        },\n        finished_at: {\n          type: 'string',\n          format: 'date-time'\n        },\n        knowledge_base_uuid: {\n          type: 'string',\n          title: 'knowledge base id'\n        },\n        phase: {\n          type: 'string',\n          enum: [            'BATCH_JOB_PHASE_UNKNOWN',\n            'BATCH_JOB_PHASE_PENDING',\n            'BATCH_JOB_PHASE_RUNNING',\n            'BATCH_JOB_PHASE_SUCCEEDED',\n            'BATCH_JOB_PHASE_FAILED',\n            'BATCH_JOB_PHASE_ERROR',\n            'BATCH_JOB_PHASE_CANCELLED'\n          ]\n        },\n        started_at: {\n          type: 'string',\n          format: 'date-time'\n        },\n        status: {\n          type: 'string',\n          enum: [            'INDEX_JOB_STATUS_UNKNOWN',\n            'INDEX_JOB_STATUS_PARTIAL',\n            'INDEX_JOB_STATUS_IN_PROGRESS',\n            'INDEX_JOB_STATUS_COMPLETED',\n            'INDEX_JOB_STATUS_FAILED',\n            'INDEX_JOB_STATUS_NO_CHANGES',\n            'INDEX_JOB_STATUS_PENDING'\n          ]\n        },\n        tokens: {\n          type: 'integer',\n          title: 'number of tokens'\n        },\n        total_datasources: {\n          type: 'integer',\n          title: 'number of datasources being indexed'\n        },\n        updated_at: {\n          type: 'string',\n          title: 'last modified',\n          format: 'date-time'\n        },\n        uuid: {\n          type: 'string',\n          title: 'unique id'\n        }\n      },\n      required: []\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -39,11 +39,11 @@ export const tool: Tool = {
             },
             bucket_name: {
               type: 'string',
-              description: 'Deprecated, moved to data_source_details',
+              title: 'Deprecated, moved to data_source_details',
             },
             bucket_region: {
               type: 'string',
-              description: 'Deprecated, moved to data_source_details',
+              title: 'Deprecated, moved to data_source_details',
             },
             file_upload_data_source: {
               $ref: '#/$defs/api_file_upload_data_source',
@@ -87,7 +87,7 @@ export const tool: Tool = {
       },
       vpc_uuid: {
         type: 'string',
-        description: 'The VPC to deploy the knowledge base database in',
+        title: 'The VPC to deploy the knowledge base database in',
       },
       jq_filter: {
         type: 'string',
@@ -99,26 +99,26 @@ export const tool: Tool = {
     $defs: {
       aws_data_source: {
         type: 'object',
-        description: 'AWS S3 Data Source',
+        title: 'AWS S3 Data Source',
         properties: {
           bucket_name: {
             type: 'string',
-            description: 'Spaces bucket name',
+            title: 'Spaces bucket name',
           },
           item_path: {
             type: 'string',
           },
           key_id: {
             type: 'string',
-            description: 'The AWS Key ID',
+            title: 'The AWS Key ID',
           },
           region: {
             type: 'string',
-            description: 'Region of bucket',
+            title: 'Region of bucket',
           },
           secret_key: {
             type: 'string',
-            description: 'The AWS Secret Key',
+            title: 'The AWS Secret Key',
           },
         },
         required: [],
@@ -129,40 +129,40 @@ export const tool: Tool = {
         properties: {
           original_file_name: {
             type: 'string',
-            description: 'The original file name',
+            title: 'The original file name',
           },
           size_in_bytes: {
             type: 'string',
-            description: 'The size of the file in bytes',
+            title: 'The size of the file in bytes',
           },
           stored_object_key: {
             type: 'string',
-            description: 'The object key the file was stored as',
+            title: 'The object key the file was stored as',
           },
         },
         required: [],
       },
       api_spaces_data_source: {
         type: 'object',
-        description: 'Spaces Bucket Data Source',
+        title: 'Spaces Bucket Data Source',
         properties: {
           bucket_name: {
             type: 'string',
-            description: 'Spaces bucket name',
+            title: 'Spaces bucket name',
           },
           item_path: {
             type: 'string',
           },
           region: {
             type: 'string',
-            description: 'Region of bucket',
+            title: 'Region of bucket',
           },
         },
         required: [],
       },
       api_web_crawler_data_source: {
         type: 'object',
-        description: 'WebCrawlerDataSource',
+        title: 'WebCrawlerDataSource',
         properties: {
           base_url: {
             type: 'string',

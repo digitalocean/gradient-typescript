@@ -17,7 +17,7 @@ export class EvaluationDatasets extends APIResource {
    * ```
    */
   create(
-    body: EvaluationDatasetCreateParams | null | undefined = {},
+    body: EvaluationDatasetCreateParams,
     options?: RequestOptions,
   ): APIPromise<EvaluationDatasetCreateResponse> {
     return this._client.post('/v2/gen-ai/evaluation_datasets', {
@@ -38,7 +38,7 @@ export class EvaluationDatasets extends APIResource {
    * ```
    */
   createFileUploadPresignedURLs(
-    body: EvaluationDatasetCreateFileUploadPresignedURLsParams | null | undefined = {},
+    body: EvaluationDatasetCreateFileUploadPresignedURLsParams,
     options?: RequestOptions,
   ): APIPromise<EvaluationDatasetCreateFileUploadPresignedURLsResponse> {
     return this._client.post('/v2/gen-ai/evaluation_datasets/file_upload_presigned_urls', {
@@ -49,9 +49,6 @@ export class EvaluationDatasets extends APIResource {
   }
 }
 
-/**
- * Output for creating an agent evaluation dataset
- */
 export interface EvaluationDatasetCreateResponse {
   /**
    * Evaluation dataset uuid.
@@ -125,9 +122,6 @@ export namespace EvaluationDatasetCreateFileUploadPresignedURLsParams {
    * A single file’s metadata in the request.
    */
   export interface File {
-    /**
-     * Local filename
-     */
     file_name?: string;
 
     /**

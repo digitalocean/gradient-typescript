@@ -14,13 +14,13 @@ export class Functions extends APIResource {
    * @example
    * ```ts
    * const _function = await client.agents.functions.create(
-   *   '"123e4567-e89b-12d3-a456-426614174000"',
+   *   'agent_uuid',
    * );
    * ```
    */
   create(
     agentUuid: string,
-    body: FunctionCreateParams | null | undefined = {},
+    body: FunctionCreateParams,
     options?: RequestOptions,
   ): APIPromise<FunctionCreateResponse> {
     return this._client.post(path`/v2/gen-ai/agents/${agentUuid}/functions`, {
@@ -37,11 +37,8 @@ export class Functions extends APIResource {
    * @example
    * ```ts
    * const _function = await client.agents.functions.update(
-   *   '"123e4567-e89b-12d3-a456-426614174000"',
-   *   {
-   *     path_agent_uuid:
-   *       '"123e4567-e89b-12d3-a456-426614174000"',
-   *   },
+   *   'function_uuid',
+   *   { path_agent_uuid: 'agent_uuid' },
    * );
    * ```
    */
@@ -65,8 +62,8 @@ export class Functions extends APIResource {
    * @example
    * ```ts
    * const _function = await client.agents.functions.delete(
-   *   '"123e4567-e89b-12d3-a456-426614174000"',
-   *   { agent_uuid: '"123e4567-e89b-12d3-a456-426614174000"' },
+   *   'function_uuid',
+   *   { agent_uuid: 'agent_uuid' },
    * );
    * ```
    */
@@ -83,117 +80,77 @@ export class Functions extends APIResource {
   }
 }
 
-/**
- * Information about a newly function linked agent
- */
 export interface FunctionCreateResponse {
-  /**
-   * An Agent
-   */
   agent?: AgentsAPI.APIAgent;
 }
 
-/**
- * The updated agent
- */
 export interface FunctionUpdateResponse {
-  /**
-   * An Agent
-   */
   agent?: AgentsAPI.APIAgent;
 }
 
-/**
- * Information about a newly unlinked agent
- */
 export interface FunctionDeleteResponse {
-  /**
-   * An Agent
-   */
   agent?: AgentsAPI.APIAgent;
 }
 
 export interface FunctionCreateParams {
-  /**
-   * Agent id
-   */
   body_agent_uuid?: string;
 
-  /**
-   * Function description
-   */
   description?: string;
 
-  /**
-   * The name of the function in the DigitalOcean functions platform
-   */
   faas_name?: string;
 
-  /**
-   * The namespace of the function in the DigitalOcean functions platform
-   */
   faas_namespace?: string;
 
-  /**
-   * Function name
-   */
   function_name?: string;
 
-  /**
-   * Describe the input schema for the function so the agent may call it
-   */
   input_schema?: unknown;
 
-  /**
-   * Describe the output schema for the function so the agent handle its response
-   */
   output_schema?: unknown;
 }
 
 export interface FunctionUpdateParams {
   /**
-   * Path param: Agent id
+   * Path param: agent id
    */
   path_agent_uuid: string;
 
   /**
-   * Body param: Agent id
+   * Body param:
    */
   body_agent_uuid?: string;
 
   /**
-   * Body param: Funciton description
+   * Body param:
    */
   description?: string;
 
   /**
-   * Body param: The name of the function in the DigitalOcean functions platform
+   * Body param:
    */
   faas_name?: string;
 
   /**
-   * Body param: The namespace of the function in the DigitalOcean functions platform
+   * Body param:
    */
   faas_namespace?: string;
 
   /**
-   * Body param: Function name
+   * Body param:
    */
   function_name?: string;
 
   /**
-   * Body param: Function id
+   * Body param:
    */
   body_function_uuid?: string;
 
   /**
-   * Body param: Describe the input schema for the function so the agent may call it
+   * Body param:
    */
   input_schema?: unknown;
 
   /**
-   * Body param: Describe the output schema for the function so the agent handle its
-   * response
+   * Body param:
    */
   output_schema?: unknown;
 }

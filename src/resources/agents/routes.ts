@@ -14,11 +14,8 @@ export class Routes extends APIResource {
    * @example
    * ```ts
    * const route = await client.agents.routes.update(
-   *   '"123e4567-e89b-12d3-a456-426614174000"',
-   *   {
-   *     path_parent_agent_uuid:
-   *       '"123e4567-e89b-12d3-a456-426614174000"',
-   *   },
+   *   'child_agent_uuid',
+   *   { path_parent_agent_uuid: 'parent_agent_uuid' },
    * );
    * ```
    */
@@ -41,11 +38,8 @@ export class Routes extends APIResource {
    * @example
    * ```ts
    * const route = await client.agents.routes.delete(
-   *   '"123e4567-e89b-12d3-a456-426614174000"',
-   *   {
-   *     parent_agent_uuid:
-   *       '"123e4567-e89b-12d3-a456-426614174000"',
-   *   },
+   *   'child_agent_uuid',
+   *   { parent_agent_uuid: 'parent_agent_uuid' },
    * );
    * ```
    */
@@ -68,11 +62,8 @@ export class Routes extends APIResource {
    * @example
    * ```ts
    * const response = await client.agents.routes.add(
-   *   '"123e4567-e89b-12d3-a456-426614174000"',
-   *   {
-   *     path_parent_agent_uuid:
-   *       '"123e4567-e89b-12d3-a456-426614174000"',
-   *   },
+   *   'child_agent_uuid',
+   *   { path_parent_agent_uuid: 'parent_agent_uuid' },
    * );
    * ```
    */
@@ -94,9 +85,7 @@ export class Routes extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.agents.routes.view(
-   *   '"123e4567-e89b-12d3-a456-426614174000"',
-   * );
+   * const response = await client.agents.routes.view('uuid');
    * ```
    */
   view(uuid: string, options?: RequestOptions): APIPromise<RouteViewResponse> {
@@ -107,13 +96,7 @@ export class Routes extends APIResource {
   }
 }
 
-/**
- * Information about an updated linkage
- */
 export interface RouteUpdateResponse {
-  /**
-   * Routed agent id
-   */
   child_agent_uuid?: string;
 
   /**
@@ -123,34 +106,16 @@ export interface RouteUpdateResponse {
 
   rollback?: boolean;
 
-  /**
-   * Unique id of linkage
-   */
   uuid?: string;
 }
 
-/**
- * Information about a removed linkage
- */
 export interface RouteDeleteResponse {
-  /**
-   * Routed agent id
-   */
   child_agent_uuid?: string;
 
-  /**
-   * Pagent agent id
-   */
   parent_agent_uuid?: string;
 }
 
-/**
- * Information about a newly linked agent
- */
 export interface RouteAddResponse {
-  /**
-   * Routed agent id
-   */
   child_agent_uuid?: string;
 
   /**
@@ -159,13 +124,7 @@ export interface RouteAddResponse {
   parent_agent_uuid?: string;
 }
 
-/**
- * Child list for an agent
- */
 export interface RouteViewResponse {
-  /**
-   * Child agents
-   */
   children?: Array<AgentsAPI.APIAgent>;
 }
 
@@ -176,46 +135,7 @@ export interface RouteUpdateParams {
   path_parent_agent_uuid: string;
 
   /**
-   * Body param: Routed agent id
-   */
-  body_child_agent_uuid?: string;
-
-  /**
-   * Body param: Describes the case in which the child agent should be used
-   */
-  if_case?: string;
-
-  /**
-   * Body param: A unique identifier for the parent agent.
-   */
-  body_parent_agent_uuid?: string;
-
-  /**
-   * Body param: Route name
-   */
-  route_name?: string;
-
-  /**
-   * Body param: Unique id of linkage
-   */
-  uuid?: string;
-}
-
-export interface RouteDeleteParams {
-  /**
-   * Pagent agent id
-   */
-  parent_agent_uuid: string;
-}
-
-export interface RouteAddParams {
-  /**
-   * Path param: A unique identifier for the parent agent.
-   */
-  path_parent_agent_uuid: string;
-
-  /**
-   * Body param: Routed agent id
+   * Body param:
    */
   body_child_agent_uuid?: string;
 
@@ -230,7 +150,46 @@ export interface RouteAddParams {
   body_parent_agent_uuid?: string;
 
   /**
-   * Body param: Name of route
+   * Body param:
+   */
+  route_name?: string;
+
+  /**
+   * Body param:
+   */
+  uuid?: string;
+}
+
+export interface RouteDeleteParams {
+  /**
+   * pagent agent id
+   */
+  parent_agent_uuid: string;
+}
+
+export interface RouteAddParams {
+  /**
+   * Path param: A unique identifier for the parent agent.
+   */
+  path_parent_agent_uuid: string;
+
+  /**
+   * Body param:
+   */
+  body_child_agent_uuid?: string;
+
+  /**
+   * Body param:
+   */
+  if_case?: string;
+
+  /**
+   * Body param: A unique identifier for the parent agent.
+   */
+  body_parent_agent_uuid?: string;
+
+  /**
+   * Body param:
    */
   route_name?: string;
 }
