@@ -21,9 +21,8 @@ export const tool: Tool = {
   inputSchema: {
     type: 'object',
     properties: {
-      workspace_uuid: {
+      path_workspace_uuid: {
         type: 'string',
-        title: 'Workspace uuid to move agents to',
       },
       agent_uuids: {
         type: 'array',
@@ -32,7 +31,12 @@ export const tool: Tool = {
           type: 'string',
         },
       },
+      body_workspace_uuid: {
+        type: 'string',
+        title: 'Workspace uuid to move agents to',
+      },
     },
+    required: ['path_workspace_uuid'],
   },
 };
 

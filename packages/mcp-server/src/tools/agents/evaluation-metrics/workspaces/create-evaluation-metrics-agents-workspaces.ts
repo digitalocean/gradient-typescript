@@ -37,6 +37,7 @@ export const tool: Tool = {
         title: 'name of the workspace',
       },
     },
+    required: [],
   },
 };
 

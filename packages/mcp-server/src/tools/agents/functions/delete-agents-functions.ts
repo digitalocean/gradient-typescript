@@ -28,6 +28,7 @@ export const tool: Tool = {
         type: 'string',
       },
     },
+    required: ['agent_uuid', 'function_uuid'],
   },
 };
 

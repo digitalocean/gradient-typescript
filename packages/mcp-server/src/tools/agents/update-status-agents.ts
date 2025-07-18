@@ -21,7 +21,10 @@ export const tool: Tool = {
   inputSchema: {
     type: 'object',
     properties: {
-      uuid: {
+      path_uuid: {
+        type: 'string',
+      },
+      body_uuid: {
         type: 'string',
         title: 'unique id',
       },
@@ -29,6 +32,7 @@ export const tool: Tool = {
         $ref: '#/$defs/api_deployment_visibility',
       },
     },
+    required: ['path_uuid'],
     $defs: {
       api_deployment_visibility: {
         type: 'string',

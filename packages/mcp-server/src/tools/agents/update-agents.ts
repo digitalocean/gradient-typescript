@@ -21,9 +21,8 @@ export const tool: Tool = {
   inputSchema: {
     type: 'object',
     properties: {
-      uuid: {
+      path_uuid: {
         type: 'string',
-        title: 'unique agent id',
       },
       anthropic_key_uuid: {
         type: 'string',
@@ -86,7 +85,12 @@ export const tool: Tool = {
         description:
           'Defines the cumulative probability threshold for word selection, specified as a number between 0 and 1. Higher values allow for more diverse outputs, while lower values ensure focused and coherent responses.',
       },
+      body_uuid: {
+        type: 'string',
+        title: 'unique agent id',
+      },
     },
+    required: ['path_uuid'],
     $defs: {
       api_retrieval_method: {
         type: 'string',

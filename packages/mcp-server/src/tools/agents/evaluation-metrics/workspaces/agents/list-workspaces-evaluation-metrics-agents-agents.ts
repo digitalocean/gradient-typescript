@@ -35,7 +35,6 @@ export const tool: Tool = {
             },
           },
         },
-        required: [],
       },
       only_deployed: {
         type: 'boolean',
@@ -50,6 +49,7 @@ export const tool: Tool = {
         description: 'items per page.',
       },
     },
+    required: ['workspace_uuid'],
   },
 };
 
