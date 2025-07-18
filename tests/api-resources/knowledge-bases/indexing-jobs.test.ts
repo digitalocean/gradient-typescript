@@ -12,7 +12,7 @@ const client = new GradientAI({
 describe('resource indexingJobs', () => {
   // skipped: tests are disabled for the time being
   test.skip('create', async () => {
-    const responsePromise = client.knowledgeBases.indexingJobs.create({});
+    const responsePromise = client.knowledgeBases.indexingJobs.create();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,8 +23,24 @@ describe('resource indexingJobs', () => {
   });
 
   // skipped: tests are disabled for the time being
+  test.skip('create: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.knowledgeBases.indexingJobs.create(
+        {
+          data_source_uuids: ['example string'],
+          knowledge_base_uuid: '"12345678-1234-1234-1234-123456789012"',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(GradientAI.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('retrieve', async () => {
-    const responsePromise = client.knowledgeBases.indexingJobs.retrieve('uuid');
+    const responsePromise = client.knowledgeBases.indexingJobs.retrieve(
+      '"123e4567-e89b-12d3-a456-426614174000"',
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -56,7 +72,9 @@ describe('resource indexingJobs', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('retrieveDataSources', async () => {
-    const responsePromise = client.knowledgeBases.indexingJobs.retrieveDataSources('indexing_job_uuid');
+    const responsePromise = client.knowledgeBases.indexingJobs.retrieveDataSources(
+      '"123e4567-e89b-12d3-a456-426614174000"',
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -68,7 +86,9 @@ describe('resource indexingJobs', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('updateCancel', async () => {
-    const responsePromise = client.knowledgeBases.indexingJobs.updateCancel('uuid', {});
+    const responsePromise = client.knowledgeBases.indexingJobs.updateCancel(
+      '"123e4567-e89b-12d3-a456-426614174000"',
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -76,5 +96,17 @@ describe('resource indexingJobs', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('updateCancel: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.knowledgeBases.indexingJobs.updateCancel(
+        '"123e4567-e89b-12d3-a456-426614174000"',
+        { body_uuid: '"12345678-1234-1234-1234-123456789012"' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(GradientAI.NotFoundError);
   });
 });

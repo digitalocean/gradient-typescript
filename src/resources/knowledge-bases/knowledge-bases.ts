@@ -41,8 +41,16 @@ export class KnowledgeBases extends APIResource {
 
   /**
    * To create a knowledge base, send a POST request to `/v2/gen-ai/knowledge_bases`.
+   *
+   * @example
+   * ```ts
+   * const knowledgeBase = await client.knowledgeBases.create();
+   * ```
    */
-  create(body: KnowledgeBaseCreateParams, options?: RequestOptions): APIPromise<KnowledgeBaseCreateResponse> {
+  create(
+    body: KnowledgeBaseCreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<KnowledgeBaseCreateResponse> {
     return this._client.post('/v2/gen-ai/knowledge_bases', {
       body,
       defaultBaseURL: 'https://api.digitalocean.com',
@@ -53,6 +61,13 @@ export class KnowledgeBases extends APIResource {
   /**
    * To retrive information about an existing knowledge base, send a GET request to
    * `/v2/gen-ai/knowledge_bases/{uuid}`.
+   *
+   * @example
+   * ```ts
+   * const knowledgeBase = await client.knowledgeBases.retrieve(
+   *   '"123e4567-e89b-12d3-a456-426614174000"',
+   * );
+   * ```
    */
   retrieve(uuid: string, options?: RequestOptions): APIPromise<KnowledgeBaseRetrieveResponse> {
     return this._client.get(path`/v2/gen-ai/knowledge_bases/${uuid}`, {
@@ -64,10 +79,17 @@ export class KnowledgeBases extends APIResource {
   /**
    * To update a knowledge base, send a PUT request to
    * `/v2/gen-ai/knowledge_bases/{uuid}`.
+   *
+   * @example
+   * ```ts
+   * const knowledgeBase = await client.knowledgeBases.update(
+   *   '"123e4567-e89b-12d3-a456-426614174000"',
+   * );
+   * ```
    */
   update(
     pathUuid: string,
-    body: KnowledgeBaseUpdateParams,
+    body: KnowledgeBaseUpdateParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<KnowledgeBaseUpdateResponse> {
     return this._client.put(path`/v2/gen-ai/knowledge_bases/${pathUuid}`, {
@@ -79,6 +101,11 @@ export class KnowledgeBases extends APIResource {
 
   /**
    * To list all knowledge bases, send a GET request to `/v2/gen-ai/knowledge_bases`.
+   *
+   * @example
+   * ```ts
+   * const knowledgeBases = await client.knowledgeBases.list();
+   * ```
    */
   list(
     query: KnowledgeBaseListParams | null | undefined = {},
@@ -94,6 +121,13 @@ export class KnowledgeBases extends APIResource {
   /**
    * To delete a knowledge base, send a DELETE request to
    * `/v2/gen-ai/knowledge_bases/{uuid}`.
+   *
+   * @example
+   * ```ts
+   * const knowledgeBase = await client.knowledgeBases.delete(
+   *   '"123e4567-e89b-12d3-a456-426614174000"',
+   * );
+   * ```
    */
   delete(uuid: string, options?: RequestOptions): APIPromise<KnowledgeBaseDeleteResponse> {
     return this._client.delete(path`/v2/gen-ai/knowledge_bases/${uuid}`, {
@@ -103,38 +137,80 @@ export class KnowledgeBases extends APIResource {
   }
 }
 
+/**
+ * Knowledgebase Description
+ */
 export interface APIKnowledgeBase {
+  /**
+   * Time when the knowledge base was added to the agent
+   */
   added_to_agent_at?: string;
 
+  /**
+   * Creation date / time
+   */
   created_at?: string;
 
   database_id?: string;
 
   embedding_model_uuid?: string;
 
+  /**
+   * Whether the knowledge base is public or not
+   */
   is_public?: boolean;
 
+  /**
+   * IndexingJob description
+   */
   last_indexing_job?: IndexingJobsAPI.APIIndexingJob;
 
+  /**
+   * Name of knowledge base
+   */
   name?: string;
 
   project_id?: string;
 
+  /**
+   * Region code
+   */
   region?: string;
 
+  /**
+   * Tags to organize related resources
+   */
   tags?: Array<string>;
 
+  /**
+   * Last modified
+   */
   updated_at?: string;
 
+  /**
+   * Id of user that created the knowledge base
+   */
   user_id?: string;
 
+  /**
+   * Unique id for knowledge base
+   */
   uuid?: string;
 }
 
+/**
+ * Information about a newly created knowledge base
+ */
 export interface KnowledgeBaseCreateResponse {
+  /**
+   * Knowledgebase Description
+   */
   knowledge_base?: APIKnowledgeBase;
 }
 
+/**
+ * The knowledge base
+ */
 export interface KnowledgeBaseRetrieveResponse {
   database_status?:
     | 'CREATING'
@@ -150,22 +226,49 @@ export interface KnowledgeBaseRetrieveResponse {
     | 'POWERING_ON'
     | 'UNHEALTHY';
 
+  /**
+   * Knowledgebase Description
+   */
   knowledge_base?: APIKnowledgeBase;
 }
 
+/**
+ * Information about an updated knowledge base
+ */
 export interface KnowledgeBaseUpdateResponse {
+  /**
+   * Knowledgebase Description
+   */
   knowledge_base?: APIKnowledgeBase;
 }
 
+/**
+ * List of knowledge bases
+ */
 export interface KnowledgeBaseListResponse {
+  /**
+   * The knowledge bases
+   */
   knowledge_bases?: Array<APIKnowledgeBase>;
 
+  /**
+   * Links to other pages
+   */
   links?: Shared.APILinks;
 
+  /**
+   * Meta information about the data set
+   */
   meta?: Shared.APIMeta;
 }
 
+/**
+ * Information about a deleted knowledge base
+ */
 export interface KnowledgeBaseDeleteResponse {
+  /**
+   * The id of the deleted knowledge base
+   */
   uuid?: string;
 }
 
@@ -210,15 +313,27 @@ export interface KnowledgeBaseCreateParams {
    */
   tags?: Array<string>;
 
+  /**
+   * The VPC to deploy the knowledge base database in
+   */
   vpc_uuid?: string;
 }
 
 export namespace KnowledgeBaseCreateParams {
   export interface Datasource {
+    /**
+     * AWS S3 Data Source
+     */
     aws_data_source?: DataSourcesAPI.AwsDataSource;
 
+    /**
+     * Deprecated, moved to data_source_details
+     */
     bucket_name?: string;
 
+    /**
+     * Deprecated, moved to data_source_details
+     */
     bucket_region?: string;
 
     /**
@@ -228,15 +343,21 @@ export namespace KnowledgeBaseCreateParams {
 
     item_path?: string;
 
+    /**
+     * Spaces Bucket Data Source
+     */
     spaces_data_source?: DataSourcesAPI.APISpacesDataSource;
 
+    /**
+     * WebCrawlerDataSource
+     */
     web_crawler_data_source?: DataSourcesAPI.APIWebCrawlerDataSource;
   }
 }
 
 export interface KnowledgeBaseUpdateParams {
   /**
-   * the id of the DigitalOcean database this knowledge base will use, optiona.
+   * The id of the DigitalOcean database this knowledge base will use, optiona.
    */
   database_id?: string;
 
@@ -245,8 +366,14 @@ export interface KnowledgeBaseUpdateParams {
    */
   embedding_model_uuid?: string;
 
+  /**
+   * Knowledge base name
+   */
   name?: string;
 
+  /**
+   * The id of the DigitalOcean project this knowledge base will belong to
+   */
   project_id?: string;
 
   /**
@@ -254,17 +381,20 @@ export interface KnowledgeBaseUpdateParams {
    */
   tags?: Array<string>;
 
+  /**
+   * Knowledge base id
+   */
   body_uuid?: string;
 }
 
 export interface KnowledgeBaseListParams {
   /**
-   * page number.
+   * Page number.
    */
   page?: number;
 
   /**
-   * items per page.
+   * Items per page.
    */
   per_page?: number;
 }

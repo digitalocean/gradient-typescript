@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as Shared from '../shared';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
@@ -16,7 +17,10 @@ export class EvaluationRuns extends APIResource {
    *   await client.agents.evaluationRuns.create();
    * ```
    */
-  create(body: EvaluationRunCreateParams, options?: RequestOptions): APIPromise<EvaluationRunCreateResponse> {
+  create(
+    body: EvaluationRunCreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<EvaluationRunCreateResponse> {
     return this._client.post('/v2/gen-ai/evaluation_runs', {
       body,
       defaultBaseURL: 'https://api.digitalocean.com',
@@ -32,7 +36,7 @@ export class EvaluationRuns extends APIResource {
    * ```ts
    * const evaluationRun =
    *   await client.agents.evaluationRuns.retrieve(
-   *     'evaluation_run_uuid',
+   *     '"123e4567-e89b-12d3-a456-426614174000"',
    *   );
    * ```
    */
@@ -51,15 +55,17 @@ export class EvaluationRuns extends APIResource {
    * ```ts
    * const response =
    *   await client.agents.evaluationRuns.listResults(
-   *     'evaluation_run_uuid',
+   *     '"123e4567-e89b-12d3-a456-426614174000"',
    *   );
    * ```
    */
   listResults(
     evaluationRunUuid: string,
+    query: EvaluationRunListResultsParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<EvaluationRunListResultsResponse> {
     return this._client.get(path`/v2/gen-ai/evaluation_runs/${evaluationRunUuid}/results`, {
+      query,
       defaultBaseURL: 'https://api.digitalocean.com',
       ...options,
     });
@@ -72,8 +78,9 @@ export class EvaluationRuns extends APIResource {
    * @example
    * ```ts
    * const response =
-   *   await client.agents.evaluationRuns.retrieveResults(0, {
-   *     evaluation_run_uuid: 'evaluation_run_uuid',
+   *   await client.agents.evaluationRuns.retrieveResults(1, {
+   *     evaluation_run_uuid:
+   *       '"123e4567-e89b-12d3-a456-426614174000"',
    *   });
    * ```
    */
@@ -93,6 +100,11 @@ export class EvaluationRuns extends APIResource {
 export interface APIEvaluationMetric {
   description?: string;
 
+  /**
+   * If true, the metric is inverted, meaning that a lower value is better.
+   */
+  inverted?: boolean;
+
   metric_name?: string;
 
   metric_type?: 'METRIC_TYPE_UNSPECIFIED' | 'METRIC_TYPE_GENERAL_QUALITY' | 'METRIC_TYPE_RAG_AND_TOOL';
@@ -102,16 +114,46 @@ export interface APIEvaluationMetric {
   metric_value_type?:
     | 'METRIC_VALUE_TYPE_UNSPECIFIED'
     | 'METRIC_VALUE_TYPE_NUMBER'
-    | 'METRIC_VALUE_TYPE_STRING';
+    | 'METRIC_VALUE_TYPE_STRING'
+    | 'METRIC_VALUE_TYPE_PERCENTAGE';
+
+  /**
+   * The maximum value for the metric.
+   */
+  range_max?: number;
+
+  /**
+   * The minimum value for the metric.
+   */
+  range_min?: number;
 }
 
 export interface APIEvaluationMetricResult {
+  /**
+   * Error description if the metric could not be calculated.
+   */
+  error_description?: string;
+
+  /**
+   * Metric name
+   */
   metric_name?: string;
+
+  metric_value_type?:
+    | 'METRIC_VALUE_TYPE_UNSPECIFIED'
+    | 'METRIC_VALUE_TYPE_NUMBER'
+    | 'METRIC_VALUE_TYPE_STRING'
+    | 'METRIC_VALUE_TYPE_PERCENTAGE';
 
   /**
    * The value of the metric as a number.
    */
   number_value?: number;
+
+  /**
+   * Reasoning of the metric result.
+   */
+  reasoning?: string;
 
   /**
    * The value of the metric as a string.
@@ -127,13 +169,26 @@ export interface APIEvaluationPrompt {
 
   input?: string;
 
+  /**
+   * The number of input tokens used in the prompt.
+   */
+  input_tokens?: string;
+
   output?: string;
+
+  /**
+   * The number of output tokens used in the prompt.
+   */
+  output_tokens?: string;
 
   /**
    * The list of prompt chunks.
    */
   prompt_chunks?: Array<APIEvaluationPrompt.PromptChunk>;
 
+  /**
+   * Prompt ID
+   */
   prompt_id?: number;
 
   /**
@@ -172,8 +227,14 @@ export namespace APIEvaluationPrompt {
 }
 
 export interface APIEvaluationRun {
+  /**
+   * Whether agent is deleted
+   */
   agent_deleted?: boolean;
 
+  /**
+   * Agent name
+   */
   agent_name?: string;
 
   /**
@@ -181,20 +242,34 @@ export interface APIEvaluationRun {
    */
   agent_uuid?: string;
 
+  /**
+   * Version hash
+   */
   agent_version_hash?: string;
 
+  /**
+   * Agent workspace uuid
+   */
   agent_workspace_uuid?: string;
 
   created_by_user_email?: string;
 
   created_by_user_id?: string;
 
+  /**
+   * The error description
+   */
   error_description?: string;
 
   /**
    * Evaluation run UUID.
    */
   evaluation_run_uuid?: string;
+
+  /**
+   * Evaluation test case workspace uuid
+   */
+  evaluation_test_case_workspace_uuid?: string;
 
   /**
    * Run end time.
@@ -205,6 +280,11 @@ export interface APIEvaluationRun {
    * The pass status of the evaluation run based on the star metric.
    */
   pass_status?: boolean;
+
+  /**
+   * Run queued time.
+   */
+  queued_at?: string;
 
   run_level_metric_results?: Array<APIEvaluationMetricResult>;
 
@@ -220,6 +300,9 @@ export interface APIEvaluationRun {
    */
   started_at?: string;
 
+  /**
+   * Evaluation Run Statuses
+   */
   status?:
     | 'EVALUATION_RUN_STATUS_UNSPECIFIED'
     | 'EVALUATION_RUN_QUEUED'
@@ -230,6 +313,16 @@ export interface APIEvaluationRun {
     | 'EVALUATION_RUN_SUCCESSFUL'
     | 'EVALUATION_RUN_PARTIALLY_SUCCESSFUL'
     | 'EVALUATION_RUN_FAILED';
+
+  /**
+   * Test case description.
+   */
+  test_case_description?: string;
+
+  /**
+   * Test case name.
+   */
+  test_case_name?: string;
 
   /**
    * Test-case UUID.
@@ -257,6 +350,16 @@ export interface EvaluationRunListResultsResponse {
   evaluation_run?: APIEvaluationRun;
 
   /**
+   * Links to other pages
+   */
+  links?: Shared.APILinks;
+
+  /**
+   * Meta information about the data set
+   */
+  meta?: Shared.APIMeta;
+
+  /**
    * The prompt level results.
    */
   prompts?: Array<APIEvaluationPrompt>;
@@ -277,7 +380,22 @@ export interface EvaluationRunCreateParams {
    */
   run_name?: string;
 
+  /**
+   * Test-case UUID to run
+   */
   test_case_uuid?: string;
+}
+
+export interface EvaluationRunListResultsParams {
+  /**
+   * Page number.
+   */
+  page?: number;
+
+  /**
+   * Items per page.
+   */
+  per_page?: number;
 }
 
 export interface EvaluationRunRetrieveResultsParams {
@@ -298,6 +416,7 @@ export declare namespace EvaluationRuns {
     type EvaluationRunListResultsResponse as EvaluationRunListResultsResponse,
     type EvaluationRunRetrieveResultsResponse as EvaluationRunRetrieveResultsResponse,
     type EvaluationRunCreateParams as EvaluationRunCreateParams,
+    type EvaluationRunListResultsParams as EvaluationRunListResultsParams,
     type EvaluationRunRetrieveResultsParams as EvaluationRunRetrieveResultsParams,
   };
 }

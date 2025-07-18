@@ -22,7 +22,10 @@ export class Workspaces extends APIResource {
    *   await client.agents.evaluationMetrics.workspaces.create();
    * ```
    */
-  create(body: WorkspaceCreateParams, options?: RequestOptions): APIPromise<WorkspaceCreateResponse> {
+  create(
+    body: WorkspaceCreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<WorkspaceCreateResponse> {
     return this._client.post('/v2/gen-ai/workspaces', {
       body,
       defaultBaseURL: 'https://api.digitalocean.com',
@@ -39,7 +42,7 @@ export class Workspaces extends APIResource {
    * ```ts
    * const workspace =
    *   await client.agents.evaluationMetrics.workspaces.retrieve(
-   *     'workspace_uuid',
+   *     '"123e4567-e89b-12d3-a456-426614174000"',
    *   );
    * ```
    */
@@ -59,13 +62,13 @@ export class Workspaces extends APIResource {
    * ```ts
    * const workspace =
    *   await client.agents.evaluationMetrics.workspaces.update(
-   *     'workspace_uuid',
+   *     '"123e4567-e89b-12d3-a456-426614174000"',
    *   );
    * ```
    */
   update(
     workspaceUuid: string,
-    body: WorkspaceUpdateParams,
+    body: WorkspaceUpdateParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<WorkspaceUpdateResponse> {
     return this._client.put(path`/v2/gen-ai/workspaces/${workspaceUuid}`, {
@@ -99,7 +102,7 @@ export class Workspaces extends APIResource {
    * ```ts
    * const workspace =
    *   await client.agents.evaluationMetrics.workspaces.delete(
-   *     'workspace_uuid',
+   *     '"123e4567-e89b-12d3-a456-426614174000"',
    *   );
    * ```
    */
@@ -118,7 +121,7 @@ export class Workspaces extends APIResource {
    * ```ts
    * const response =
    *   await client.agents.evaluationMetrics.workspaces.listEvaluationTestCases(
-   *     'workspace_uuid',
+   *     '"123e4567-e89b-12d3-a456-426614174000"',
    *   );
    * ```
    */
@@ -146,10 +149,16 @@ export interface WorkspaceUpdateResponse {
 }
 
 export interface WorkspaceListResponse {
+  /**
+   * Workspaces
+   */
   workspaces?: Array<AgentsAPI.APIWorkspace>;
 }
 
 export interface WorkspaceDeleteResponse {
+  /**
+   * Workspace
+   */
   workspace_uuid?: string;
 }
 
@@ -158,16 +167,31 @@ export interface WorkspaceListEvaluationTestCasesResponse {
 }
 
 export interface WorkspaceCreateParams {
+  /**
+   * Ids of the agents(s) to attach to the workspace
+   */
   agent_uuids?: Array<string>;
 
+  /**
+   * Description of the workspace
+   */
   description?: string;
 
+  /**
+   * Name of the workspace
+   */
   name?: string;
 }
 
 export interface WorkspaceUpdateParams {
+  /**
+   * The new description of the workspace
+   */
   description?: string;
 
+  /**
+   * The new name of the workspace
+   */
   name?: string;
 
   /**

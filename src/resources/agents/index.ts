@@ -59,6 +59,7 @@ export {
   type EvaluationRunListResultsResponse,
   type EvaluationRunRetrieveResultsResponse,
   type EvaluationRunCreateParams,
+  type EvaluationRunListResultsParams,
   type EvaluationRunRetrieveResultsParams,
 } from './evaluation-runs';
 export {
@@ -67,10 +68,12 @@ export {
   type APIStarMetric,
   type EvaluationTestCaseCreateResponse,
   type EvaluationTestCaseRetrieveResponse,
+  type EvaluationTestCaseUpdateResponse,
   type EvaluationTestCaseListResponse,
   type EvaluationTestCaseListEvaluationRunsResponse,
   type EvaluationTestCaseCreateParams,
   type EvaluationTestCaseRetrieveParams,
+  type EvaluationTestCaseUpdateParams,
   type EvaluationTestCaseListEvaluationRunsParams,
 } from './evaluation-test-cases';
 export {

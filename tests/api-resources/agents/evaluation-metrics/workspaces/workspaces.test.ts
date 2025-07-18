@@ -12,7 +12,7 @@ const client = new GradientAI({
 describe('resource workspaces', () => {
   // skipped: tests are disabled for the time being
   test.skip('create', async () => {
-    const responsePromise = client.agents.evaluationMetrics.workspaces.create({});
+    const responsePromise = client.agents.evaluationMetrics.workspaces.create();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,8 +23,21 @@ describe('resource workspaces', () => {
   });
 
   // skipped: tests are disabled for the time being
+  test.skip('create: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.agents.evaluationMetrics.workspaces.create(
+        { agent_uuids: ['example string'], description: '"example string"', name: '"example name"' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(GradientAI.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('retrieve', async () => {
-    const responsePromise = client.agents.evaluationMetrics.workspaces.retrieve('workspace_uuid');
+    const responsePromise = client.agents.evaluationMetrics.workspaces.retrieve(
+      '"123e4567-e89b-12d3-a456-426614174000"',
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -36,7 +49,9 @@ describe('resource workspaces', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update', async () => {
-    const responsePromise = client.agents.evaluationMetrics.workspaces.update('workspace_uuid', {});
+    const responsePromise = client.agents.evaluationMetrics.workspaces.update(
+      '"123e4567-e89b-12d3-a456-426614174000"',
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -44,6 +59,22 @@ describe('resource workspaces', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('update: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.agents.evaluationMetrics.workspaces.update(
+        '"123e4567-e89b-12d3-a456-426614174000"',
+        {
+          description: '"example string"',
+          name: '"example name"',
+          body_workspace_uuid: '"123e4567-e89b-12d3-a456-426614174000"',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(GradientAI.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
@@ -60,7 +91,9 @@ describe('resource workspaces', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('delete', async () => {
-    const responsePromise = client.agents.evaluationMetrics.workspaces.delete('workspace_uuid');
+    const responsePromise = client.agents.evaluationMetrics.workspaces.delete(
+      '"123e4567-e89b-12d3-a456-426614174000"',
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -72,8 +105,9 @@ describe('resource workspaces', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('listEvaluationTestCases', async () => {
-    const responsePromise =
-      client.agents.evaluationMetrics.workspaces.listEvaluationTestCases('workspace_uuid');
+    const responsePromise = client.agents.evaluationMetrics.workspaces.listEvaluationTestCases(
+      '"123e4567-e89b-12d3-a456-426614174000"',
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

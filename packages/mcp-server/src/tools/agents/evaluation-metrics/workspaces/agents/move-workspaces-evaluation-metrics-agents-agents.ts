@@ -11,13 +11,13 @@ export const metadata: Metadata = {
   tags: [],
   httpMethod: 'put',
   httpPath: '/v2/gen-ai/workspaces/{workspace_uuid}/agents',
-  operationId: 'move_agents_to_workspace',
+  operationId: 'genai_update_agents_workspace',
 };
 
 export const tool: Tool = {
   name: 'move_workspaces_evaluation_metrics_agents_agents',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nTo move all listed agetns a given workspace, send a PUT request to `/v2/gen-ai/workspaces/{workspace_uuid}/agents`.",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nTo move all listed agents a given workspace, send a PUT request to `/v2/gen-ai/workspaces/{workspace_uuid}/agents`.",
   inputSchema: {
     type: 'object',
     properties: {
@@ -26,14 +26,14 @@ export const tool: Tool = {
       },
       agent_uuids: {
         type: 'array',
-        title: 'agent uuids',
+        description: 'Agent uuids',
         items: {
           type: 'string',
         },
       },
       body_workspace_uuid: {
         type: 'string',
-        title: 'Workspace uuid to move agents to',
+        description: 'Workspace uuid to move agents to',
       },
     },
     required: ['path_workspace_uuid'],

@@ -28,32 +28,44 @@ export class Models extends APIResource {
   }
 }
 
+/**
+ * A list of models
+ */
 export interface ModelListResponse {
+  /**
+   * Links to other pages
+   */
   links?: Shared.APILinks;
 
+  /**
+   * Meta information about the data set
+   */
   meta?: Shared.APIMeta;
 
+  /**
+   * The models
+   */
   models?: Array<ModelsAPI.APIModel>;
 }
 
 export interface ModelListParams {
   /**
-   * page number.
+   * Page number.
    */
   page?: number;
 
   /**
-   * items per page.
+   * Items per page.
    */
   per_page?: number;
 
   /**
-   * only include models that are publicly available.
+   * Only include models that are publicly available.
    */
   public_only?: boolean;
 
   /**
-   * include only models defined for the listed usecases.
+   * Include only models defined for the listed usecases.
    *
    * - MODEL_USECASE_UNKNOWN: The use case of the model is unknown
    * - MODEL_USECASE_AGENT: The model maybe used in an agent
