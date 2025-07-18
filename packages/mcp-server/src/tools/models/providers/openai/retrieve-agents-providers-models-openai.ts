@@ -33,6 +33,7 @@ export const tool: Tool = {
         description: 'items per page.',
       },
     },
+    required: ['uuid'],
   },
 };
 

@@ -21,12 +21,15 @@ export const tool: Tool = {
   inputSchema: {
     type: 'object',
     properties: {
-      knowledge_base_uuid: {
+      path_knowledge_base_uuid: {
         type: 'string',
-        title: 'knowledge base id',
       },
       aws_data_source: {
         $ref: '#/$defs/aws_data_source',
+      },
+      body_knowledge_base_uuid: {
+        type: 'string',
+        title: 'knowledge base id',
       },
       spaces_data_source: {
         $ref: '#/$defs/api_spaces_data_source',
@@ -35,6 +38,7 @@ export const tool: Tool = {
         $ref: '#/$defs/api_web_crawler_data_source',
       },
     },
+    required: ['path_knowledge_base_uuid'],
     $defs: {
       aws_data_source: {
         type: 'object',
@@ -60,7 +64,6 @@ export const tool: Tool = {
             title: 'The AWS Secret Key',
           },
         },
-        required: [],
       },
       api_spaces_data_source: {
         type: 'object',
@@ -78,7 +81,6 @@ export const tool: Tool = {
             title: 'Region of bucket',
           },
         },
-        required: [],
       },
       api_web_crawler_data_source: {
         type: 'object',
@@ -99,7 +101,6 @@ export const tool: Tool = {
             description: 'Whether to ingest and index media (images, etc.) on web pages.',
           },
         },
-        required: [],
       },
     },
   },

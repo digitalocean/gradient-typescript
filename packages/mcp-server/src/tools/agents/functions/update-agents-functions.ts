@@ -21,13 +21,15 @@ export const tool: Tool = {
   inputSchema: {
     type: 'object',
     properties: {
-      agent_uuid: {
+      path_agent_uuid: {
+        type: 'string',
+      },
+      path_function_uuid: {
+        type: 'string',
+      },
+      body_agent_uuid: {
         type: 'string',
         title: 'agent id',
-      },
-      function_uuid: {
-        type: 'string',
-        title: 'function id',
       },
       description: {
         type: 'string',
@@ -45,6 +47,10 @@ export const tool: Tool = {
         type: 'string',
         title: 'function name',
       },
+      body_function_uuid: {
+        type: 'string',
+        title: 'function id',
+      },
       input_schema: {
         type: 'object',
         title: 'Describe the input schema for the function so the agent may call it',
@@ -54,6 +60,7 @@ export const tool: Tool = {
         title: 'Describe the output schema for the function so the agent handle its response',
       },
     },
+    required: ['path_agent_uuid', 'path_function_uuid'],
   },
 };
 

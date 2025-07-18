@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'create_agents_evaluation_datasets',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nTo create an evaluation dataset, send a POST request to `/v2/gen-ai/evaluation_datasets`.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  title: 'Output for creating an agent evaluation dataset',\n  properties: {\n    evaluation_dataset_uuid: {\n      type: 'string',\n      description: 'Evaluation dataset uuid.'\n    }\n  },\n  required: []\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nTo create an evaluation dataset, send a POST request to `/v2/gen-ai/evaluation_datasets`.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  title: 'Output for creating an agent evaluation dataset',\n  properties: {\n    evaluation_dataset_uuid: {\n      type: 'string',\n      description: 'Evaluation dataset uuid.'\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -36,6 +36,7 @@ export const tool: Tool = {
           'A jq filter to apply to the response to include certain fields. Consult the output schema in the tool description to see the fields that are available.\n\nFor example: to include only the `name` field in every object of a results array, you can provide ".results[].name".\n\nFor more information, see the [jq documentation](https://jqlang.org/manual/).',
       },
     },
+    required: [],
     $defs: {
       api_file_upload_data_source: {
         type: 'object',
@@ -54,7 +55,6 @@ export const tool: Tool = {
             title: 'The object key the file was stored as',
           },
         },
-        required: [],
       },
     },
   },

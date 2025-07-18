@@ -21,9 +21,8 @@ export const tool: Tool = {
   inputSchema: {
     type: 'object',
     properties: {
-      workspace_uuid: {
+      path_workspace_uuid: {
         type: 'string',
-        description: 'Workspace UUID.',
       },
       description: {
         type: 'string',
@@ -33,7 +32,12 @@ export const tool: Tool = {
         type: 'string',
         title: 'the new name of the workspace',
       },
+      body_workspace_uuid: {
+        type: 'string',
+        description: 'Workspace UUID.',
+      },
     },
+    required: ['path_workspace_uuid'],
   },
 };
 

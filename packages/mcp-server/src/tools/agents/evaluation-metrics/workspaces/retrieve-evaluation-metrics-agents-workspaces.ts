@@ -25,6 +25,7 @@ export const tool: Tool = {
         type: 'string',
       },
     },
+    required: ['workspace_uuid'],
   },
 };
 
