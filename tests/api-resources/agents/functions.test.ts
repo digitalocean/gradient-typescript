@@ -12,7 +12,7 @@ const client = new GradientAI({
 describe('resource functions', () => {
   // skipped: tests are disabled for the time being
   test.skip('create', async () => {
-    const responsePromise = client.agents.functions.create('agent_uuid', {});
+    const responsePromise = client.agents.functions.create('"123e4567-e89b-12d3-a456-426614174000"');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,9 +23,29 @@ describe('resource functions', () => {
   });
 
   // skipped: tests are disabled for the time being
+  test.skip('create: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.agents.functions.create(
+        '"123e4567-e89b-12d3-a456-426614174000"',
+        {
+          body_agent_uuid: '"12345678-1234-1234-1234-123456789012"',
+          description: '"My Function Description"',
+          faas_name: '"my-function"',
+          faas_namespace: '"default"',
+          function_name: '"My Function"',
+          input_schema: {},
+          output_schema: {},
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(GradientAI.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('update: only required params', async () => {
-    const responsePromise = client.agents.functions.update('function_uuid', {
-      path_agent_uuid: 'agent_uuid',
+    const responsePromise = client.agents.functions.update('"123e4567-e89b-12d3-a456-426614174000"', {
+      path_agent_uuid: '"123e4567-e89b-12d3-a456-426614174000"',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -38,14 +58,14 @@ describe('resource functions', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update: required and optional params', async () => {
-    const response = await client.agents.functions.update('function_uuid', {
-      path_agent_uuid: 'agent_uuid',
-      body_agent_uuid: 'agent_uuid',
-      description: 'description',
-      faas_name: 'faas_name',
-      faas_namespace: 'faas_namespace',
-      function_name: 'function_name',
-      body_function_uuid: 'function_uuid',
+    const response = await client.agents.functions.update('"123e4567-e89b-12d3-a456-426614174000"', {
+      path_agent_uuid: '"123e4567-e89b-12d3-a456-426614174000"',
+      body_agent_uuid: '"12345678-1234-1234-1234-123456789012"',
+      description: '"My Function Description"',
+      faas_name: '"my-function"',
+      faas_namespace: '"default"',
+      function_name: '"My Function"',
+      body_function_uuid: '"12345678-1234-1234-1234-123456789012"',
       input_schema: {},
       output_schema: {},
     });
@@ -53,7 +73,9 @@ describe('resource functions', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('delete: only required params', async () => {
-    const responsePromise = client.agents.functions.delete('function_uuid', { agent_uuid: 'agent_uuid' });
+    const responsePromise = client.agents.functions.delete('"123e4567-e89b-12d3-a456-426614174000"', {
+      agent_uuid: '"123e4567-e89b-12d3-a456-426614174000"',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -65,6 +87,8 @@ describe('resource functions', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('delete: required and optional params', async () => {
-    const response = await client.agents.functions.delete('function_uuid', { agent_uuid: 'agent_uuid' });
+    const response = await client.agents.functions.delete('"123e4567-e89b-12d3-a456-426614174000"', {
+      agent_uuid: '"123e4567-e89b-12d3-a456-426614174000"',
+    });
   });
 });

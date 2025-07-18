@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   tags: [],
   httpMethod: 'put',
   httpPath: '/v2/gen-ai/agents/{uuid}/deployment_visibility',
-  operationId: 'update_agent_deployment_visibility',
+  operationId: 'genai_update_agent_deployment_visibility',
 };
 
 export const tool: Tool = {
@@ -26,7 +26,7 @@ export const tool: Tool = {
       },
       body_uuid: {
         type: 'string',
-        title: 'unique id',
+        description: 'Unique id',
       },
       visibility: {
         $ref: '#/$defs/api_deployment_visibility',
@@ -36,7 +36,7 @@ export const tool: Tool = {
     $defs: {
       api_deployment_visibility: {
         type: 'string',
-        title:
+        description:
           '- VISIBILITY_UNKNOWN: The status of the deployment is unknown\n - VISIBILITY_DISABLED: The deployment is disabled and will no longer service requests\n - VISIBILITY_PLAYGROUND: Deprecated: No longer a valid state\n - VISIBILITY_PUBLIC: The deployment is public and will service requests from the public internet\n - VISIBILITY_PRIVATE: The deployment is private and will only service requests from other agents, or through API keys',
         enum: [
           'VISIBILITY_UNKNOWN',

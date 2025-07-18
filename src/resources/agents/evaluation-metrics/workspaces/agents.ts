@@ -16,7 +16,7 @@ export class Agents extends APIResource {
    * ```ts
    * const agents =
    *   await client.agents.evaluationMetrics.workspaces.agents.list(
-   *     'workspace_uuid',
+   *     '"123e4567-e89b-12d3-a456-426614174000"',
    *   );
    * ```
    */
@@ -33,20 +33,20 @@ export class Agents extends APIResource {
   }
 
   /**
-   * To move all listed agetns a given workspace, send a PUT request to
+   * To move all listed agents a given workspace, send a PUT request to
    * `/v2/gen-ai/workspaces/{workspace_uuid}/agents`.
    *
    * @example
    * ```ts
    * const response =
    *   await client.agents.evaluationMetrics.workspaces.agents.move(
-   *     'workspace_uuid',
+   *     '"123e4567-e89b-12d3-a456-426614174000"',
    *   );
    * ```
    */
   move(
     workspaceUuid: string,
-    body: AgentMoveParams,
+    body: AgentMoveParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<AgentMoveResponse> {
     return this._client.put(path`/v2/gen-ai/workspaces/${workspaceUuid}/agents`, {
@@ -60,8 +60,14 @@ export class Agents extends APIResource {
 export interface AgentListResponse {
   agents?: Array<AgentsAPI.APIAgent>;
 
+  /**
+   * Links to other pages
+   */
   links?: Shared.APILinks;
 
+  /**
+   * Meta information about the data set
+   */
   meta?: Shared.APIMeta;
 }
 
@@ -70,36 +76,31 @@ export interface AgentMoveResponse {
 }
 
 export interface AgentListParams {
-  field_mask?: AgentListParams.FieldMask;
-
   /**
    * Only list agents that are deployed.
    */
   only_deployed?: boolean;
 
   /**
-   * page number.
+   * Page number.
    */
   page?: number;
 
   /**
-   * items per page.
+   * Items per page.
    */
   per_page?: number;
 }
 
-export namespace AgentListParams {
-  export interface FieldMask {
-    /**
-     * The set of field mask paths.
-     */
-    paths?: Array<string>;
-  }
-}
-
 export interface AgentMoveParams {
+  /**
+   * Agent uuids
+   */
   agent_uuids?: Array<string>;
 
+  /**
+   * Workspace uuid to move agents to
+   */
   body_workspace_uuid?: string;
 }
 

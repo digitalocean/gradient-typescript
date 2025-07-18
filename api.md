@@ -2,11 +2,33 @@
 
 Types:
 
+- <code><a href="./src/resources/shared.ts">Action</a></code>
+- <code><a href="./src/resources/shared.ts">ActionLink</a></code>
 - <code><a href="./src/resources/shared.ts">APILinks</a></code>
 - <code><a href="./src/resources/shared.ts">APIMeta</a></code>
+- <code><a href="./src/resources/shared.ts">BackwardLinks</a></code>
 - <code><a href="./src/resources/shared.ts">ChatCompletionChunk</a></code>
 - <code><a href="./src/resources/shared.ts">ChatCompletionTokenLogprob</a></code>
 - <code><a href="./src/resources/shared.ts">CompletionUsage</a></code>
+- <code><a href="./src/resources/shared.ts">DiskInfo</a></code>
+- <code><a href="./src/resources/shared.ts">Droplet</a></code>
+- <code><a href="./src/resources/shared.ts">DropletNextBackupWindow</a></code>
+- <code><a href="./src/resources/shared.ts">FirewallRuleTarget</a></code>
+- <code><a href="./src/resources/shared.ts">ForwardLinks</a></code>
+- <code><a href="./src/resources/shared.ts">GarbageCollection</a></code>
+- <code><a href="./src/resources/shared.ts">GPUInfo</a></code>
+- <code><a href="./src/resources/shared.ts">Image</a></code>
+- <code><a href="./src/resources/shared.ts">Kernel</a></code>
+- <code><a href="./src/resources/shared.ts">MetaProperties</a></code>
+- <code><a href="./src/resources/shared.ts">NetworkV4</a></code>
+- <code><a href="./src/resources/shared.ts">NetworkV6</a></code>
+- <code><a href="./src/resources/shared.ts">PageLinks</a></code>
+- <code><a href="./src/resources/shared.ts">Region</a></code>
+- <code><a href="./src/resources/shared.ts">Size</a></code>
+- <code><a href="./src/resources/shared.ts">Snapshots</a></code>
+- <code><a href="./src/resources/shared.ts">Subscription</a></code>
+- <code><a href="./src/resources/shared.ts">SubscriptionTierBase</a></code>
+- <code><a href="./src/resources/shared.ts">VpcPeering</a></code>
 
 # Agents
 
@@ -137,7 +159,7 @@ Methods:
 
 - <code title="post /v2/gen-ai/evaluation_runs">client.agents.evaluationRuns.<a href="./src/resources/agents/evaluation-runs.ts">create</a>({ ...params }) -> EvaluationRunCreateResponse</code>
 - <code title="get /v2/gen-ai/evaluation_runs/{evaluation_run_uuid}">client.agents.evaluationRuns.<a href="./src/resources/agents/evaluation-runs.ts">retrieve</a>(evaluationRunUuid) -> EvaluationRunRetrieveResponse</code>
-- <code title="get /v2/gen-ai/evaluation_runs/{evaluation_run_uuid}/results">client.agents.evaluationRuns.<a href="./src/resources/agents/evaluation-runs.ts">listResults</a>(evaluationRunUuid) -> EvaluationRunListResultsResponse</code>
+- <code title="get /v2/gen-ai/evaluation_runs/{evaluation_run_uuid}/results">client.agents.evaluationRuns.<a href="./src/resources/agents/evaluation-runs.ts">listResults</a>(evaluationRunUuid, { ...params }) -> EvaluationRunListResultsResponse</code>
 - <code title="get /v2/gen-ai/evaluation_runs/{evaluation_run_uuid}/results/{prompt_id}">client.agents.evaluationRuns.<a href="./src/resources/agents/evaluation-runs.ts">retrieveResults</a>(promptID, { ...params }) -> EvaluationRunRetrieveResultsResponse</code>
 
 ## EvaluationTestCases
@@ -148,6 +170,7 @@ Types:
 - <code><a href="./src/resources/agents/evaluation-test-cases.ts">APIStarMetric</a></code>
 - <code><a href="./src/resources/agents/evaluation-test-cases.ts">EvaluationTestCaseCreateResponse</a></code>
 - <code><a href="./src/resources/agents/evaluation-test-cases.ts">EvaluationTestCaseRetrieveResponse</a></code>
+- <code><a href="./src/resources/agents/evaluation-test-cases.ts">EvaluationTestCaseUpdateResponse</a></code>
 - <code><a href="./src/resources/agents/evaluation-test-cases.ts">EvaluationTestCaseListResponse</a></code>
 - <code><a href="./src/resources/agents/evaluation-test-cases.ts">EvaluationTestCaseListEvaluationRunsResponse</a></code>
 
@@ -155,6 +178,7 @@ Methods:
 
 - <code title="post /v2/gen-ai/evaluation_test_cases">client.agents.evaluationTestCases.<a href="./src/resources/agents/evaluation-test-cases.ts">create</a>({ ...params }) -> EvaluationTestCaseCreateResponse</code>
 - <code title="get /v2/gen-ai/evaluation_test_cases/{test_case_uuid}">client.agents.evaluationTestCases.<a href="./src/resources/agents/evaluation-test-cases.ts">retrieve</a>(testCaseUuid, { ...params }) -> EvaluationTestCaseRetrieveResponse</code>
+- <code title="put /v2/gen-ai/evaluation_test_cases/{test_case_uuid}">client.agents.evaluationTestCases.<a href="./src/resources/agents/evaluation-test-cases.ts">update</a>(testCaseUuid, { ...params }) -> EvaluationTestCaseUpdateResponse</code>
 - <code title="get /v2/gen-ai/evaluation_test_cases">client.agents.evaluationTestCases.<a href="./src/resources/agents/evaluation-test-cases.ts">list</a>() -> EvaluationTestCaseListResponse</code>
 - <code title="get /v2/gen-ai/evaluation_test_cases/{evaluation_test_case_uuid}/evaluation_runs">client.agents.evaluationTestCases.<a href="./src/resources/agents/evaluation-test-cases.ts">listEvaluationRuns</a>(evaluationTestCaseUuid, { ...params }) -> EvaluationTestCaseListEvaluationRunsResponse</code>
 
@@ -238,6 +262,14 @@ Methods:
 - <code title="post /chat/completions">client.chat.completions.<a href="./src/resources/chat/completions.ts">create</a>({ ...params }) -> CompletionCreateResponse</code>
 
 # Regions
+
+Types:
+
+- <code><a href="./src/resources/regions.ts">RegionListResponse</a></code>
+
+Methods:
+
+- <code title="get /v2/regions">client.regions.<a href="./src/resources/regions.ts">list</a>({ ...params }) -> RegionListResponse</code>
 
 # KnowledgeBases
 
@@ -377,46 +409,328 @@ Methods:
 
 # GPUDroplets
 
+Types:
+
+- <code><a href="./src/resources/gpu-droplets/gpu-droplets.ts">DropletBackupPolicy</a></code>
+- <code><a href="./src/resources/gpu-droplets/gpu-droplets.ts">GPUDropletCreateResponse</a></code>
+- <code><a href="./src/resources/gpu-droplets/gpu-droplets.ts">GPUDropletRetrieveResponse</a></code>
+- <code><a href="./src/resources/gpu-droplets/gpu-droplets.ts">GPUDropletListResponse</a></code>
+- <code><a href="./src/resources/gpu-droplets/gpu-droplets.ts">GPUDropletListFirewallsResponse</a></code>
+- <code><a href="./src/resources/gpu-droplets/gpu-droplets.ts">GPUDropletListKernelsResponse</a></code>
+- <code><a href="./src/resources/gpu-droplets/gpu-droplets.ts">GPUDropletListNeighborsResponse</a></code>
+- <code><a href="./src/resources/gpu-droplets/gpu-droplets.ts">GPUDropletListSnapshotsResponse</a></code>
+
+Methods:
+
+- <code title="post /v2/droplets">client.gpuDroplets.<a href="./src/resources/gpu-droplets/gpu-droplets.ts">create</a>({ ...params }) -> GPUDropletCreateResponse</code>
+- <code title="get /v2/droplets/{droplet_id}">client.gpuDroplets.<a href="./src/resources/gpu-droplets/gpu-droplets.ts">retrieve</a>(dropletID) -> GPUDropletRetrieveResponse</code>
+- <code title="get /v2/droplets">client.gpuDroplets.<a href="./src/resources/gpu-droplets/gpu-droplets.ts">list</a>({ ...params }) -> GPUDropletListResponse</code>
+- <code title="delete /v2/droplets/{droplet_id}">client.gpuDroplets.<a href="./src/resources/gpu-droplets/gpu-droplets.ts">delete</a>(dropletID) -> void</code>
+- <code title="delete /v2/droplets">client.gpuDroplets.<a href="./src/resources/gpu-droplets/gpu-droplets.ts">deleteByTag</a>({ ...params }) -> void</code>
+- <code title="get /v2/droplets/{droplet_id}/firewalls">client.gpuDroplets.<a href="./src/resources/gpu-droplets/gpu-droplets.ts">listFirewalls</a>(dropletID, { ...params }) -> GPUDropletListFirewallsResponse</code>
+- <code title="get /v2/droplets/{droplet_id}/kernels">client.gpuDroplets.<a href="./src/resources/gpu-droplets/gpu-droplets.ts">listKernels</a>(dropletID, { ...params }) -> GPUDropletListKernelsResponse</code>
+- <code title="get /v2/droplets/{droplet_id}/neighbors">client.gpuDroplets.<a href="./src/resources/gpu-droplets/gpu-droplets.ts">listNeighbors</a>(dropletID) -> GPUDropletListNeighborsResponse</code>
+- <code title="get /v2/droplets/{droplet_id}/snapshots">client.gpuDroplets.<a href="./src/resources/gpu-droplets/gpu-droplets.ts">listSnapshots</a>(dropletID, { ...params }) -> GPUDropletListSnapshotsResponse</code>
+
 ## Backups
+
+Types:
+
+- <code><a href="./src/resources/gpu-droplets/backups.ts">BackupListResponse</a></code>
+- <code><a href="./src/resources/gpu-droplets/backups.ts">BackupListPoliciesResponse</a></code>
+- <code><a href="./src/resources/gpu-droplets/backups.ts">BackupListSupportedPoliciesResponse</a></code>
+- <code><a href="./src/resources/gpu-droplets/backups.ts">BackupRetrievePolicyResponse</a></code>
+
+Methods:
+
+- <code title="get /v2/droplets/{droplet_id}/backups">client.gpuDroplets.backups.<a href="./src/resources/gpu-droplets/backups.ts">list</a>(dropletID, { ...params }) -> BackupListResponse</code>
+- <code title="get /v2/droplets/backups/policies">client.gpuDroplets.backups.<a href="./src/resources/gpu-droplets/backups.ts">listPolicies</a>({ ...params }) -> BackupListPoliciesResponse</code>
+- <code title="get /v2/droplets/backups/supported_policies">client.gpuDroplets.backups.<a href="./src/resources/gpu-droplets/backups.ts">listSupportedPolicies</a>() -> BackupListSupportedPoliciesResponse</code>
+- <code title="get /v2/droplets/{droplet_id}/backups/policy">client.gpuDroplets.backups.<a href="./src/resources/gpu-droplets/backups.ts">retrievePolicy</a>(dropletID) -> BackupRetrievePolicyResponse</code>
 
 ## Actions
 
+Types:
+
+- <code><a href="./src/resources/gpu-droplets/actions.ts">ActionRetrieveResponse</a></code>
+- <code><a href="./src/resources/gpu-droplets/actions.ts">ActionListResponse</a></code>
+- <code><a href="./src/resources/gpu-droplets/actions.ts">ActionBulkInitiateResponse</a></code>
+- <code><a href="./src/resources/gpu-droplets/actions.ts">ActionInitiateResponse</a></code>
+
+Methods:
+
+- <code title="get /v2/droplets/{droplet_id}/actions/{action_id}">client.gpuDroplets.actions.<a href="./src/resources/gpu-droplets/actions.ts">retrieve</a>(actionID, { ...params }) -> ActionRetrieveResponse</code>
+- <code title="get /v2/droplets/{droplet_id}/actions">client.gpuDroplets.actions.<a href="./src/resources/gpu-droplets/actions.ts">list</a>(dropletID, { ...params }) -> ActionListResponse</code>
+- <code title="post /v2/droplets/actions">client.gpuDroplets.actions.<a href="./src/resources/gpu-droplets/actions.ts">bulkInitiate</a>({ ...params }) -> ActionBulkInitiateResponse</code>
+- <code title="post /v2/droplets/{droplet_id}/actions">client.gpuDroplets.actions.<a href="./src/resources/gpu-droplets/actions.ts">initiate</a>(dropletID, { ...params }) -> ActionInitiateResponse</code>
+
 ## DestroyWithAssociatedResources
+
+Types:
+
+- <code><a href="./src/resources/gpu-droplets/destroy-with-associated-resources.ts">AssociatedResource</a></code>
+- <code><a href="./src/resources/gpu-droplets/destroy-with-associated-resources.ts">DestroyedAssociatedResource</a></code>
+- <code><a href="./src/resources/gpu-droplets/destroy-with-associated-resources.ts">DestroyWithAssociatedResourceListResponse</a></code>
+- <code><a href="./src/resources/gpu-droplets/destroy-with-associated-resources.ts">DestroyWithAssociatedResourceCheckStatusResponse</a></code>
+
+Methods:
+
+- <code title="get /v2/droplets/{droplet_id}/destroy_with_associated_resources">client.gpuDroplets.destroyWithAssociatedResources.<a href="./src/resources/gpu-droplets/destroy-with-associated-resources.ts">list</a>(dropletID) -> DestroyWithAssociatedResourceListResponse</code>
+- <code title="get /v2/droplets/{droplet_id}/destroy_with_associated_resources/status">client.gpuDroplets.destroyWithAssociatedResources.<a href="./src/resources/gpu-droplets/destroy-with-associated-resources.ts">checkStatus</a>(dropletID) -> DestroyWithAssociatedResourceCheckStatusResponse</code>
+- <code title="delete /v2/droplets/{droplet_id}/destroy_with_associated_resources/dangerous">client.gpuDroplets.destroyWithAssociatedResources.<a href="./src/resources/gpu-droplets/destroy-with-associated-resources.ts">deleteDangerous</a>(dropletID, { ...params }) -> void</code>
+- <code title="delete /v2/droplets/{droplet_id}/destroy_with_associated_resources/selective">client.gpuDroplets.destroyWithAssociatedResources.<a href="./src/resources/gpu-droplets/destroy-with-associated-resources.ts">deleteSelective</a>(dropletID, { ...params }) -> void</code>
+- <code title="post /v2/droplets/{droplet_id}/destroy_with_associated_resources/retry">client.gpuDroplets.destroyWithAssociatedResources.<a href="./src/resources/gpu-droplets/destroy-with-associated-resources.ts">retry</a>(dropletID) -> void</code>
 
 ## Autoscale
 
+Types:
+
+- <code><a href="./src/resources/gpu-droplets/autoscale.ts">AutoscalePool</a></code>
+- <code><a href="./src/resources/gpu-droplets/autoscale.ts">AutoscalePoolDropletTemplate</a></code>
+- <code><a href="./src/resources/gpu-droplets/autoscale.ts">AutoscalePoolDynamicConfig</a></code>
+- <code><a href="./src/resources/gpu-droplets/autoscale.ts">AutoscalePoolStaticConfig</a></code>
+- <code><a href="./src/resources/gpu-droplets/autoscale.ts">CurrentUtilization</a></code>
+- <code><a href="./src/resources/gpu-droplets/autoscale.ts">AutoscaleCreateResponse</a></code>
+- <code><a href="./src/resources/gpu-droplets/autoscale.ts">AutoscaleRetrieveResponse</a></code>
+- <code><a href="./src/resources/gpu-droplets/autoscale.ts">AutoscaleUpdateResponse</a></code>
+- <code><a href="./src/resources/gpu-droplets/autoscale.ts">AutoscaleListResponse</a></code>
+- <code><a href="./src/resources/gpu-droplets/autoscale.ts">AutoscaleListHistoryResponse</a></code>
+- <code><a href="./src/resources/gpu-droplets/autoscale.ts">AutoscaleListMembersResponse</a></code>
+
+Methods:
+
+- <code title="post /v2/droplets/autoscale">client.gpuDroplets.autoscale.<a href="./src/resources/gpu-droplets/autoscale.ts">create</a>({ ...params }) -> AutoscaleCreateResponse</code>
+- <code title="get /v2/droplets/autoscale/{autoscale_pool_id}">client.gpuDroplets.autoscale.<a href="./src/resources/gpu-droplets/autoscale.ts">retrieve</a>(autoscalePoolID) -> AutoscaleRetrieveResponse</code>
+- <code title="put /v2/droplets/autoscale/{autoscale_pool_id}">client.gpuDroplets.autoscale.<a href="./src/resources/gpu-droplets/autoscale.ts">update</a>(autoscalePoolID, { ...params }) -> AutoscaleUpdateResponse</code>
+- <code title="get /v2/droplets/autoscale">client.gpuDroplets.autoscale.<a href="./src/resources/gpu-droplets/autoscale.ts">list</a>({ ...params }) -> AutoscaleListResponse</code>
+- <code title="delete /v2/droplets/autoscale/{autoscale_pool_id}">client.gpuDroplets.autoscale.<a href="./src/resources/gpu-droplets/autoscale.ts">delete</a>(autoscalePoolID) -> void</code>
+- <code title="delete /v2/droplets/autoscale/{autoscale_pool_id}/dangerous">client.gpuDroplets.autoscale.<a href="./src/resources/gpu-droplets/autoscale.ts">deleteDangerous</a>(autoscalePoolID, { ...params }) -> void</code>
+- <code title="get /v2/droplets/autoscale/{autoscale_pool_id}/history">client.gpuDroplets.autoscale.<a href="./src/resources/gpu-droplets/autoscale.ts">listHistory</a>(autoscalePoolID, { ...params }) -> AutoscaleListHistoryResponse</code>
+- <code title="get /v2/droplets/autoscale/{autoscale_pool_id}/members">client.gpuDroplets.autoscale.<a href="./src/resources/gpu-droplets/autoscale.ts">listMembers</a>(autoscalePoolID, { ...params }) -> AutoscaleListMembersResponse</code>
+
 ## Firewalls
 
+Types:
+
+- <code><a href="./src/resources/gpu-droplets/firewalls/firewalls.ts">Firewall</a></code>
+- <code><a href="./src/resources/gpu-droplets/firewalls/firewalls.ts">FirewallCreateResponse</a></code>
+- <code><a href="./src/resources/gpu-droplets/firewalls/firewalls.ts">FirewallRetrieveResponse</a></code>
+- <code><a href="./src/resources/gpu-droplets/firewalls/firewalls.ts">FirewallUpdateResponse</a></code>
+- <code><a href="./src/resources/gpu-droplets/firewalls/firewalls.ts">FirewallListResponse</a></code>
+
+Methods:
+
+- <code title="post /v2/firewalls">client.gpuDroplets.firewalls.<a href="./src/resources/gpu-droplets/firewalls/firewalls.ts">create</a>({ ...params }) -> FirewallCreateResponse</code>
+- <code title="get /v2/firewalls/{firewall_id}">client.gpuDroplets.firewalls.<a href="./src/resources/gpu-droplets/firewalls/firewalls.ts">retrieve</a>(firewallID) -> FirewallRetrieveResponse</code>
+- <code title="put /v2/firewalls/{firewall_id}">client.gpuDroplets.firewalls.<a href="./src/resources/gpu-droplets/firewalls/firewalls.ts">update</a>(firewallID, { ...params }) -> FirewallUpdateResponse</code>
+- <code title="get /v2/firewalls">client.gpuDroplets.firewalls.<a href="./src/resources/gpu-droplets/firewalls/firewalls.ts">list</a>({ ...params }) -> FirewallListResponse</code>
+- <code title="delete /v2/firewalls/{firewall_id}">client.gpuDroplets.firewalls.<a href="./src/resources/gpu-droplets/firewalls/firewalls.ts">delete</a>(firewallID) -> void</code>
+
 ### Droplets
+
+Methods:
+
+- <code title="post /v2/firewalls/{firewall_id}/droplets">client.gpuDroplets.firewalls.droplets.<a href="./src/resources/gpu-droplets/firewalls/droplets.ts">add</a>(firewallID, { ...params }) -> void</code>
+- <code title="delete /v2/firewalls/{firewall_id}/droplets">client.gpuDroplets.firewalls.droplets.<a href="./src/resources/gpu-droplets/firewalls/droplets.ts">remove</a>(firewallID, { ...params }) -> void</code>
 
 ### Tags
 
+Methods:
+
+- <code title="post /v2/firewalls/{firewall_id}/tags">client.gpuDroplets.firewalls.tags.<a href="./src/resources/gpu-droplets/firewalls/tags.ts">add</a>(firewallID, { ...params }) -> void</code>
+- <code title="delete /v2/firewalls/{firewall_id}/tags">client.gpuDroplets.firewalls.tags.<a href="./src/resources/gpu-droplets/firewalls/tags.ts">remove</a>(firewallID, { ...params }) -> void</code>
+
 ### Rules
+
+Methods:
+
+- <code title="post /v2/firewalls/{firewall_id}/rules">client.gpuDroplets.firewalls.rules.<a href="./src/resources/gpu-droplets/firewalls/rules.ts">add</a>(firewallID, { ...params }) -> void</code>
+- <code title="delete /v2/firewalls/{firewall_id}/rules">client.gpuDroplets.firewalls.rules.<a href="./src/resources/gpu-droplets/firewalls/rules.ts">remove</a>(firewallID, { ...params }) -> void</code>
 
 ## FloatingIPs
 
+Types:
+
+- <code><a href="./src/resources/gpu-droplets/floating-ips/floating-ips.ts">FloatingIP</a></code>
+- <code><a href="./src/resources/gpu-droplets/floating-ips/floating-ips.ts">FloatingIPCreateResponse</a></code>
+- <code><a href="./src/resources/gpu-droplets/floating-ips/floating-ips.ts">FloatingIPRetrieveResponse</a></code>
+- <code><a href="./src/resources/gpu-droplets/floating-ips/floating-ips.ts">FloatingIPListResponse</a></code>
+
+Methods:
+
+- <code title="post /v2/floating_ips">client.gpuDroplets.floatingIPs.<a href="./src/resources/gpu-droplets/floating-ips/floating-ips.ts">create</a>({ ...params }) -> FloatingIPCreateResponse</code>
+- <code title="get /v2/floating_ips/{floating_ip}">client.gpuDroplets.floatingIPs.<a href="./src/resources/gpu-droplets/floating-ips/floating-ips.ts">retrieve</a>(floatingIP) -> FloatingIPRetrieveResponse</code>
+- <code title="get /v2/floating_ips">client.gpuDroplets.floatingIPs.<a href="./src/resources/gpu-droplets/floating-ips/floating-ips.ts">list</a>({ ...params }) -> FloatingIPListResponse</code>
+- <code title="delete /v2/floating_ips/{floating_ip}">client.gpuDroplets.floatingIPs.<a href="./src/resources/gpu-droplets/floating-ips/floating-ips.ts">delete</a>(floatingIP) -> void</code>
+
 ### Actions
+
+Types:
+
+- <code><a href="./src/resources/gpu-droplets/floating-ips/actions.ts">ActionCreateResponse</a></code>
+- <code><a href="./src/resources/gpu-droplets/floating-ips/actions.ts">ActionRetrieveResponse</a></code>
+- <code><a href="./src/resources/gpu-droplets/floating-ips/actions.ts">ActionListResponse</a></code>
+
+Methods:
+
+- <code title="post /v2/floating_ips/{floating_ip}/actions">client.gpuDroplets.floatingIPs.actions.<a href="./src/resources/gpu-droplets/floating-ips/actions.ts">create</a>(floatingIP, { ...params }) -> ActionCreateResponse</code>
+- <code title="get /v2/floating_ips/{floating_ip}/actions/{action_id}">client.gpuDroplets.floatingIPs.actions.<a href="./src/resources/gpu-droplets/floating-ips/actions.ts">retrieve</a>(actionID, { ...params }) -> ActionRetrieveResponse</code>
+- <code title="get /v2/floating_ips/{floating_ip}/actions">client.gpuDroplets.floatingIPs.actions.<a href="./src/resources/gpu-droplets/floating-ips/actions.ts">list</a>(floatingIP) -> ActionListResponse</code>
 
 ## Images
 
+Types:
+
+- <code><a href="./src/resources/gpu-droplets/images/images.ts">ImageCreateResponse</a></code>
+- <code><a href="./src/resources/gpu-droplets/images/images.ts">ImageRetrieveResponse</a></code>
+- <code><a href="./src/resources/gpu-droplets/images/images.ts">ImageUpdateResponse</a></code>
+- <code><a href="./src/resources/gpu-droplets/images/images.ts">ImageListResponse</a></code>
+
+Methods:
+
+- <code title="post /v2/images">client.gpuDroplets.images.<a href="./src/resources/gpu-droplets/images/images.ts">create</a>({ ...params }) -> ImageCreateResponse</code>
+- <code title="get /v2/images/{image_id}">client.gpuDroplets.images.<a href="./src/resources/gpu-droplets/images/images.ts">retrieve</a>(imageID) -> ImageRetrieveResponse</code>
+- <code title="put /v2/images/{image_id}">client.gpuDroplets.images.<a href="./src/resources/gpu-droplets/images/images.ts">update</a>(imageID, { ...params }) -> ImageUpdateResponse</code>
+- <code title="get /v2/images">client.gpuDroplets.images.<a href="./src/resources/gpu-droplets/images/images.ts">list</a>({ ...params }) -> ImageListResponse</code>
+- <code title="delete /v2/images/{image_id}">client.gpuDroplets.images.<a href="./src/resources/gpu-droplets/images/images.ts">delete</a>(imageID) -> void</code>
+
 ### Actions
+
+Types:
+
+- <code><a href="./src/resources/gpu-droplets/images/actions.ts">ActionListResponse</a></code>
+
+Methods:
+
+- <code title="post /v2/images/{image_id}/actions">client.gpuDroplets.images.actions.<a href="./src/resources/gpu-droplets/images/actions.ts">create</a>(imageID, { ...params }) -> Action</code>
+- <code title="get /v2/images/{image_id}/actions/{action_id}">client.gpuDroplets.images.actions.<a href="./src/resources/gpu-droplets/images/actions.ts">retrieve</a>(actionID, { ...params }) -> Action</code>
+- <code title="get /v2/images/{image_id}/actions">client.gpuDroplets.images.actions.<a href="./src/resources/gpu-droplets/images/actions.ts">list</a>(imageID) -> ActionListResponse</code>
 
 ## LoadBalancers
 
+Types:
+
+- <code><a href="./src/resources/gpu-droplets/load-balancers/load-balancers.ts">Domains</a></code>
+- <code><a href="./src/resources/gpu-droplets/load-balancers/load-balancers.ts">ForwardingRule</a></code>
+- <code><a href="./src/resources/gpu-droplets/load-balancers/load-balancers.ts">GlbSettings</a></code>
+- <code><a href="./src/resources/gpu-droplets/load-balancers/load-balancers.ts">HealthCheck</a></code>
+- <code><a href="./src/resources/gpu-droplets/load-balancers/load-balancers.ts">LbFirewall</a></code>
+- <code><a href="./src/resources/gpu-droplets/load-balancers/load-balancers.ts">LoadBalancer</a></code>
+- <code><a href="./src/resources/gpu-droplets/load-balancers/load-balancers.ts">StickySessions</a></code>
+- <code><a href="./src/resources/gpu-droplets/load-balancers/load-balancers.ts">LoadBalancerCreateResponse</a></code>
+- <code><a href="./src/resources/gpu-droplets/load-balancers/load-balancers.ts">LoadBalancerRetrieveResponse</a></code>
+- <code><a href="./src/resources/gpu-droplets/load-balancers/load-balancers.ts">LoadBalancerUpdateResponse</a></code>
+- <code><a href="./src/resources/gpu-droplets/load-balancers/load-balancers.ts">LoadBalancerListResponse</a></code>
+
+Methods:
+
+- <code title="post /v2/load_balancers">client.gpuDroplets.loadBalancers.<a href="./src/resources/gpu-droplets/load-balancers/load-balancers.ts">create</a>({ ...params }) -> LoadBalancerCreateResponse</code>
+- <code title="get /v2/load_balancers/{lb_id}">client.gpuDroplets.loadBalancers.<a href="./src/resources/gpu-droplets/load-balancers/load-balancers.ts">retrieve</a>(lbID) -> LoadBalancerRetrieveResponse</code>
+- <code title="put /v2/load_balancers/{lb_id}">client.gpuDroplets.loadBalancers.<a href="./src/resources/gpu-droplets/load-balancers/load-balancers.ts">update</a>(lbID, { ...params }) -> LoadBalancerUpdateResponse</code>
+- <code title="get /v2/load_balancers">client.gpuDroplets.loadBalancers.<a href="./src/resources/gpu-droplets/load-balancers/load-balancers.ts">list</a>({ ...params }) -> LoadBalancerListResponse</code>
+- <code title="delete /v2/load_balancers/{lb_id}">client.gpuDroplets.loadBalancers.<a href="./src/resources/gpu-droplets/load-balancers/load-balancers.ts">delete</a>(lbID) -> void</code>
+- <code title="delete /v2/load_balancers/{lb_id}/cache">client.gpuDroplets.loadBalancers.<a href="./src/resources/gpu-droplets/load-balancers/load-balancers.ts">deleteCache</a>(lbID) -> void</code>
+
 ### Droplets
+
+Methods:
+
+- <code title="post /v2/load_balancers/{lb_id}/droplets">client.gpuDroplets.loadBalancers.droplets.<a href="./src/resources/gpu-droplets/load-balancers/droplets.ts">add</a>(lbID, { ...params }) -> void</code>
+- <code title="delete /v2/load_balancers/{lb_id}/droplets">client.gpuDroplets.loadBalancers.droplets.<a href="./src/resources/gpu-droplets/load-balancers/droplets.ts">remove</a>(lbID, { ...params }) -> void</code>
 
 ### ForwardingRules
 
+Methods:
+
+- <code title="post /v2/load_balancers/{lb_id}/forwarding_rules">client.gpuDroplets.loadBalancers.forwardingRules.<a href="./src/resources/gpu-droplets/load-balancers/forwarding-rules.ts">add</a>(lbID, { ...params }) -> void</code>
+- <code title="delete /v2/load_balancers/{lb_id}/forwarding_rules">client.gpuDroplets.loadBalancers.forwardingRules.<a href="./src/resources/gpu-droplets/load-balancers/forwarding-rules.ts">remove</a>(lbID, { ...params }) -> void</code>
+
 ## Sizes
+
+Types:
+
+- <code><a href="./src/resources/gpu-droplets/sizes.ts">SizeListResponse</a></code>
+
+Methods:
+
+- <code title="get /v2/sizes">client.gpuDroplets.sizes.<a href="./src/resources/gpu-droplets/sizes.ts">list</a>({ ...params }) -> SizeListResponse</code>
 
 ## Snapshots
 
+Types:
+
+- <code><a href="./src/resources/gpu-droplets/snapshots.ts">SnapshotRetrieveResponse</a></code>
+- <code><a href="./src/resources/gpu-droplets/snapshots.ts">SnapshotListResponse</a></code>
+
+Methods:
+
+- <code title="get /v2/snapshots/{snapshot_id}">client.gpuDroplets.snapshots.<a href="./src/resources/gpu-droplets/snapshots.ts">retrieve</a>(snapshotID) -> SnapshotRetrieveResponse</code>
+- <code title="get /v2/snapshots">client.gpuDroplets.snapshots.<a href="./src/resources/gpu-droplets/snapshots.ts">list</a>({ ...params }) -> SnapshotListResponse</code>
+- <code title="delete /v2/snapshots/{snapshot_id}">client.gpuDroplets.snapshots.<a href="./src/resources/gpu-droplets/snapshots.ts">delete</a>(snapshotID) -> void</code>
+
 ## Volumes
+
+Types:
+
+- <code><a href="./src/resources/gpu-droplets/volumes/volumes.ts">VolumeCreateResponse</a></code>
+- <code><a href="./src/resources/gpu-droplets/volumes/volumes.ts">VolumeRetrieveResponse</a></code>
+- <code><a href="./src/resources/gpu-droplets/volumes/volumes.ts">VolumeListResponse</a></code>
+
+Methods:
+
+- <code title="post /v2/volumes">client.gpuDroplets.volumes.<a href="./src/resources/gpu-droplets/volumes/volumes.ts">create</a>({ ...params }) -> VolumeCreateResponse</code>
+- <code title="get /v2/volumes/{volume_id}">client.gpuDroplets.volumes.<a href="./src/resources/gpu-droplets/volumes/volumes.ts">retrieve</a>(volumeID) -> VolumeRetrieveResponse</code>
+- <code title="get /v2/volumes">client.gpuDroplets.volumes.<a href="./src/resources/gpu-droplets/volumes/volumes.ts">list</a>({ ...params }) -> VolumeListResponse</code>
+- <code title="delete /v2/volumes/{volume_id}">client.gpuDroplets.volumes.<a href="./src/resources/gpu-droplets/volumes/volumes.ts">delete</a>(volumeID) -> void</code>
+- <code title="delete /v2/volumes">client.gpuDroplets.volumes.<a href="./src/resources/gpu-droplets/volumes/volumes.ts">deleteByName</a>({ ...params }) -> void</code>
 
 ### Actions
 
+Types:
+
+- <code><a href="./src/resources/gpu-droplets/volumes/actions.ts">VolumeAction</a></code>
+- <code><a href="./src/resources/gpu-droplets/volumes/actions.ts">ActionRetrieveResponse</a></code>
+- <code><a href="./src/resources/gpu-droplets/volumes/actions.ts">ActionListResponse</a></code>
+- <code><a href="./src/resources/gpu-droplets/volumes/actions.ts">ActionInitiateByIDResponse</a></code>
+- <code><a href="./src/resources/gpu-droplets/volumes/actions.ts">ActionInitiateByNameResponse</a></code>
+
+Methods:
+
+- <code title="get /v2/volumes/{volume_id}/actions/{action_id}">client.gpuDroplets.volumes.actions.<a href="./src/resources/gpu-droplets/volumes/actions.ts">retrieve</a>(actionID, { ...params }) -> ActionRetrieveResponse</code>
+- <code title="get /v2/volumes/{volume_id}/actions">client.gpuDroplets.volumes.actions.<a href="./src/resources/gpu-droplets/volumes/actions.ts">list</a>(volumeID, { ...params }) -> ActionListResponse</code>
+- <code title="post /v2/volumes/{volume_id}/actions">client.gpuDroplets.volumes.actions.<a href="./src/resources/gpu-droplets/volumes/actions.ts">initiateByID</a>(volumeID, { ...params }) -> ActionInitiateByIDResponse</code>
+- <code title="post /v2/volumes/actions">client.gpuDroplets.volumes.actions.<a href="./src/resources/gpu-droplets/volumes/actions.ts">initiateByName</a>({ ...params }) -> ActionInitiateByNameResponse</code>
+
 ### Snapshots
+
+Types:
+
+- <code><a href="./src/resources/gpu-droplets/volumes/snapshots.ts">SnapshotCreateResponse</a></code>
+- <code><a href="./src/resources/gpu-droplets/volumes/snapshots.ts">SnapshotRetrieveResponse</a></code>
+- <code><a href="./src/resources/gpu-droplets/volumes/snapshots.ts">SnapshotListResponse</a></code>
+
+Methods:
+
+- <code title="post /v2/volumes/{volume_id}/snapshots">client.gpuDroplets.volumes.snapshots.<a href="./src/resources/gpu-droplets/volumes/snapshots.ts">create</a>(volumeID, { ...params }) -> SnapshotCreateResponse</code>
+- <code title="get /v2/volumes/snapshots/{snapshot_id}">client.gpuDroplets.volumes.snapshots.<a href="./src/resources/gpu-droplets/volumes/snapshots.ts">retrieve</a>(snapshotID) -> SnapshotRetrieveResponse</code>
+- <code title="get /v2/volumes/{volume_id}/snapshots">client.gpuDroplets.volumes.snapshots.<a href="./src/resources/gpu-droplets/volumes/snapshots.ts">list</a>(volumeID, { ...params }) -> SnapshotListResponse</code>
+- <code title="delete /v2/volumes/snapshots/{snapshot_id}">client.gpuDroplets.volumes.snapshots.<a href="./src/resources/gpu-droplets/volumes/snapshots.ts">delete</a>(snapshotID) -> void</code>
 
 ## Account
 
 ### Keys
+
+Types:
+
+- <code><a href="./src/resources/gpu-droplets/account/keys.ts">KeyCreateResponse</a></code>
+- <code><a href="./src/resources/gpu-droplets/account/keys.ts">KeyRetrieveResponse</a></code>
+- <code><a href="./src/resources/gpu-droplets/account/keys.ts">KeyUpdateResponse</a></code>
+- <code><a href="./src/resources/gpu-droplets/account/keys.ts">KeyListResponse</a></code>
+
+Methods:
+
+- <code title="post /v2/account/keys">client.gpuDroplets.account.keys.<a href="./src/resources/gpu-droplets/account/keys.ts">create</a>({ ...params }) -> KeyCreateResponse</code>
+- <code title="get /v2/account/keys/{ssh_key_identifier}">client.gpuDroplets.account.keys.<a href="./src/resources/gpu-droplets/account/keys.ts">retrieve</a>(sshKeyIdentifier) -> KeyRetrieveResponse</code>
+- <code title="put /v2/account/keys/{ssh_key_identifier}">client.gpuDroplets.account.keys.<a href="./src/resources/gpu-droplets/account/keys.ts">update</a>(sshKeyIdentifier, { ...params }) -> KeyUpdateResponse</code>
+- <code title="get /v2/account/keys">client.gpuDroplets.account.keys.<a href="./src/resources/gpu-droplets/account/keys.ts">list</a>({ ...params }) -> KeyListResponse</code>
+- <code title="delete /v2/account/keys/{ssh_key_identifier}">client.gpuDroplets.account.keys.<a href="./src/resources/gpu-droplets/account/keys.ts">delete</a>(sshKeyIdentifier) -> void</code>

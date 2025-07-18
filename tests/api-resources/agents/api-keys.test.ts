@@ -12,7 +12,7 @@ const client = new GradientAI({
 describe('resource apiKeys', () => {
   // skipped: tests are disabled for the time being
   test.skip('create', async () => {
-    const responsePromise = client.agents.apiKeys.create('agent_uuid', {});
+    const responsePromise = client.agents.apiKeys.create('"123e4567-e89b-12d3-a456-426614174000"');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,8 +23,22 @@ describe('resource apiKeys', () => {
   });
 
   // skipped: tests are disabled for the time being
+  test.skip('create: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.agents.apiKeys.create(
+        '"123e4567-e89b-12d3-a456-426614174000"',
+        { body_agent_uuid: '"12345678-1234-1234-1234-123456789012"', name: 'Production Key' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(GradientAI.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('update: only required params', async () => {
-    const responsePromise = client.agents.apiKeys.update('api_key_uuid', { path_agent_uuid: 'agent_uuid' });
+    const responsePromise = client.agents.apiKeys.update('"123e4567-e89b-12d3-a456-426614174000"', {
+      path_agent_uuid: '"123e4567-e89b-12d3-a456-426614174000"',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -36,17 +50,17 @@ describe('resource apiKeys', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update: required and optional params', async () => {
-    const response = await client.agents.apiKeys.update('api_key_uuid', {
-      path_agent_uuid: 'agent_uuid',
-      body_agent_uuid: 'agent_uuid',
-      body_api_key_uuid: 'api_key_uuid',
-      name: 'name',
+    const response = await client.agents.apiKeys.update('"123e4567-e89b-12d3-a456-426614174000"', {
+      path_agent_uuid: '"123e4567-e89b-12d3-a456-426614174000"',
+      body_agent_uuid: '"12345678-1234-1234-1234-123456789012"',
+      body_api_key_uuid: '"12345678-1234-1234-1234-123456789012"',
+      name: '"Production Key"',
     });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('list', async () => {
-    const responsePromise = client.agents.apiKeys.list('agent_uuid');
+    const responsePromise = client.agents.apiKeys.list('"123e4567-e89b-12d3-a456-426614174000"');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -61,7 +75,7 @@ describe('resource apiKeys', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.agents.apiKeys.list(
-        'agent_uuid',
+        '"123e4567-e89b-12d3-a456-426614174000"',
         { page: 0, per_page: 0 },
         { path: '/_stainless_unknown_path' },
       ),
@@ -70,7 +84,9 @@ describe('resource apiKeys', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('delete: only required params', async () => {
-    const responsePromise = client.agents.apiKeys.delete('api_key_uuid', { agent_uuid: 'agent_uuid' });
+    const responsePromise = client.agents.apiKeys.delete('"123e4567-e89b-12d3-a456-426614174000"', {
+      agent_uuid: '"123e4567-e89b-12d3-a456-426614174000"',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -82,12 +98,16 @@ describe('resource apiKeys', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('delete: required and optional params', async () => {
-    const response = await client.agents.apiKeys.delete('api_key_uuid', { agent_uuid: 'agent_uuid' });
+    const response = await client.agents.apiKeys.delete('"123e4567-e89b-12d3-a456-426614174000"', {
+      agent_uuid: '"123e4567-e89b-12d3-a456-426614174000"',
+    });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('regenerate: only required params', async () => {
-    const responsePromise = client.agents.apiKeys.regenerate('api_key_uuid', { agent_uuid: 'agent_uuid' });
+    const responsePromise = client.agents.apiKeys.regenerate('"123e4567-e89b-12d3-a456-426614174000"', {
+      agent_uuid: '"123e4567-e89b-12d3-a456-426614174000"',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -99,6 +119,8 @@ describe('resource apiKeys', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('regenerate: required and optional params', async () => {
-    const response = await client.agents.apiKeys.regenerate('api_key_uuid', { agent_uuid: 'agent_uuid' });
+    const response = await client.agents.apiKeys.regenerate('"123e4567-e89b-12d3-a456-426614174000"', {
+      agent_uuid: '"123e4567-e89b-12d3-a456-426614174000"',
+    });
   });
 });

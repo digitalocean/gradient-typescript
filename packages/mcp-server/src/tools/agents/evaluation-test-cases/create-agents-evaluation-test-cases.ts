@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   tags: [],
   httpMethod: 'post',
   httpPath: '/v2/gen-ai/evaluation_test_cases',
-  operationId: 'create_evaluation_test_case',
+  operationId: 'genai_create_evaluation_test_case',
 };
 
 export const tool: Tool = {
@@ -65,6 +65,11 @@ export const tool: Tool = {
           },
           name: {
             type: 'string',
+          },
+          success_threshold: {
+            type: 'number',
+            description:
+              'The success threshold for the star metric.\nThis is a value that the metric must reach to be considered successful.',
           },
           success_threshold_pct: {
             type: 'integer',

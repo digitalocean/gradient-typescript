@@ -18,7 +18,7 @@ export class EvaluationTestCases extends APIResource {
    * ```
    */
   create(
-    body: EvaluationTestCaseCreateParams,
+    body: EvaluationTestCaseCreateParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<EvaluationTestCaseCreateResponse> {
     return this._client.post('/v2/gen-ai/evaluation_test_cases', {
@@ -36,7 +36,7 @@ export class EvaluationTestCases extends APIResource {
    * ```ts
    * const evaluationTestCase =
    *   await client.agents.evaluationTestCases.retrieve(
-   *     'test_case_uuid',
+   *     '"123e4567-e89b-12d3-a456-426614174000"',
    *   );
    * ```
    */
@@ -47,6 +47,30 @@ export class EvaluationTestCases extends APIResource {
   ): APIPromise<EvaluationTestCaseRetrieveResponse> {
     return this._client.get(path`/v2/gen-ai/evaluation_test_cases/${testCaseUuid}`, {
       query,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
+  }
+
+  /**
+   * To update an evaluation test-case send a PUT request to
+   * `/v2/gen-ai/evaluation_test_cases/{test_case_uuid}`.
+   *
+   * @example
+   * ```ts
+   * const evaluationTestCase =
+   *   await client.agents.evaluationTestCases.update(
+   *     '"123e4567-e89b-12d3-a456-426614174000"',
+   *   );
+   * ```
+   */
+  update(
+    testCaseUuid: string,
+    body: EvaluationTestCaseUpdateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<EvaluationTestCaseUpdateResponse> {
+    return this._client.put(path`/v2/gen-ai/evaluation_test_cases/${testCaseUuid}`, {
+      body,
       defaultBaseURL: 'https://api.digitalocean.com',
       ...options,
     });
@@ -77,7 +101,7 @@ export class EvaluationTestCases extends APIResource {
    * ```ts
    * const response =
    *   await client.agents.evaluationTestCases.listEvaluationRuns(
-   *     'evaluation_test_case_uuid',
+   *     '"123e4567-e89b-12d3-a456-426614174000"',
    *   );
    * ```
    */
@@ -101,6 +125,8 @@ export interface APIEvaluationTestCase {
   created_by_user_email?: string;
 
   created_by_user_id?: string;
+
+  dataset?: APIEvaluationTestCase.Dataset;
 
   dataset_name?: string;
 
@@ -129,10 +155,50 @@ export interface APIEvaluationTestCase {
   version?: number;
 }
 
+export namespace APIEvaluationTestCase {
+  export interface Dataset {
+    /**
+     * Time created at.
+     */
+    created_at?: string;
+
+    /**
+     * Name of the dataset.
+     */
+    dataset_name?: string;
+
+    /**
+     * UUID of the dataset.
+     */
+    dataset_uuid?: string;
+
+    /**
+     * The size of the dataset uploaded file in bytes.
+     */
+    file_size?: string;
+
+    /**
+     * Does the dataset have a ground truth column?
+     */
+    has_ground_truth?: boolean;
+
+    /**
+     * Number of rows in the dataset.
+     */
+    row_count?: number;
+  }
+}
+
 export interface APIStarMetric {
   metric_uuid?: string;
 
   name?: string;
+
+  /**
+   * The success threshold for the star metric. This is a value that the metric must
+   * reach to be considered successful.
+   */
+  success_threshold?: number;
 
   /**
    * The success threshold for the star metric. This is a percentage value between 0
@@ -152,7 +218,20 @@ export interface EvaluationTestCaseRetrieveResponse {
   evaluation_test_case?: APIEvaluationTestCase;
 }
 
+export interface EvaluationTestCaseUpdateResponse {
+  test_case_uuid?: string;
+
+  /**
+   * The new verson of the test case.
+   */
+  version?: number;
+}
+
 export interface EvaluationTestCaseListResponse {
+  /**
+   * Alternative way of authentication for internal usage only - should not be
+   * exposed to public api
+   */
   evaluation_test_cases?: Array<APIEvaluationTestCase>;
 }
 
@@ -199,6 +278,38 @@ export interface EvaluationTestCaseRetrieveParams {
   evaluation_test_case_version?: number;
 }
 
+export interface EvaluationTestCaseUpdateParams {
+  /**
+   * Dataset against which the test‑case is executed.
+   */
+  dataset_uuid?: string;
+
+  /**
+   * Description of the test case.
+   */
+  description?: string;
+
+  metrics?: EvaluationTestCaseUpdateParams.Metrics;
+
+  /**
+   * Name of the test case.
+   */
+  name?: string;
+
+  star_metric?: APIStarMetric;
+
+  /**
+   * Test-case UUID to update
+   */
+  body_test_case_uuid?: string;
+}
+
+export namespace EvaluationTestCaseUpdateParams {
+  export interface Metrics {
+    metric_uuids?: Array<string>;
+  }
+}
+
 export interface EvaluationTestCaseListEvaluationRunsParams {
   /**
    * Version of the test case.
@@ -212,10 +323,12 @@ export declare namespace EvaluationTestCases {
     type APIStarMetric as APIStarMetric,
     type EvaluationTestCaseCreateResponse as EvaluationTestCaseCreateResponse,
     type EvaluationTestCaseRetrieveResponse as EvaluationTestCaseRetrieveResponse,
+    type EvaluationTestCaseUpdateResponse as EvaluationTestCaseUpdateResponse,
     type EvaluationTestCaseListResponse as EvaluationTestCaseListResponse,
     type EvaluationTestCaseListEvaluationRunsResponse as EvaluationTestCaseListEvaluationRunsResponse,
     type EvaluationTestCaseCreateParams as EvaluationTestCaseCreateParams,
     type EvaluationTestCaseRetrieveParams as EvaluationTestCaseRetrieveParams,
+    type EvaluationTestCaseUpdateParams as EvaluationTestCaseUpdateParams,
     type EvaluationTestCaseListEvaluationRunsParams as EvaluationTestCaseListEvaluationRunsParams,
   };
 }

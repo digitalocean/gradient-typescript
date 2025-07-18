@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   tags: [],
   httpMethod: 'post',
   httpPath: '/v2/gen-ai/evaluation_datasets/file_upload_presigned_urls',
-  operationId: 'create_evaluation_dataset_file_upload_presigned_urls',
+  operationId: 'genai_create_evaluation_dataset_file_upload_presigned_urls',
 };
 
 export const tool: Tool = {
@@ -31,7 +31,7 @@ export const tool: Tool = {
           properties: {
             file_name: {
               type: 'string',
-              title: 'local filename',
+              description: 'Local filename',
             },
             file_size: {
               type: 'string',

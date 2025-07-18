@@ -65,32 +65,56 @@ export interface EvaluationMetricListResponse {
   metrics?: Array<EvaluationRunsAPI.APIEvaluationMetric>;
 }
 
+/**
+ * Region Codes
+ */
 export interface EvaluationMetricListRegionsResponse {
+  /**
+   * Region code
+   */
   regions?: Array<EvaluationMetricListRegionsResponse.Region>;
 }
 
 export namespace EvaluationMetricListRegionsResponse {
+  /**
+   * Description for a specific Region
+   */
   export interface Region {
+    /**
+     * Url for inference server
+     */
     inference_url?: string;
 
+    /**
+     * Region code
+     */
     region?: string;
 
+    /**
+     * This datacenter is capable of running batch jobs
+     */
     serves_batch?: boolean;
 
+    /**
+     * This datacenter is capable of serving inference
+     */
     serves_inference?: boolean;
 
+    /**
+     * The url for the inference streaming server
+     */
     stream_inference_url?: string;
   }
 }
 
 export interface EvaluationMetricListRegionsParams {
   /**
-   * include datacenters that are capable of running batch jobs.
+   * Include datacenters that are capable of running batch jobs.
    */
   serves_batch?: boolean;
 
   /**
-   * include datacenters that serve inference.
+   * Include datacenters that serve inference.
    */
   serves_inference?: boolean;
 }

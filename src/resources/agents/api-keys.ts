@@ -15,13 +15,13 @@ export class APIKeys extends APIResource {
    * @example
    * ```ts
    * const apiKey = await client.agents.apiKeys.create(
-   *   'agent_uuid',
+   *   '"123e4567-e89b-12d3-a456-426614174000"',
    * );
    * ```
    */
   create(
     agentUuid: string,
-    body: APIKeyCreateParams,
+    body: APIKeyCreateParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<APIKeyCreateResponse> {
     return this._client.post(path`/v2/gen-ai/agents/${agentUuid}/api_keys`, {
@@ -38,8 +38,11 @@ export class APIKeys extends APIResource {
    * @example
    * ```ts
    * const apiKey = await client.agents.apiKeys.update(
-   *   'api_key_uuid',
-   *   { path_agent_uuid: 'agent_uuid' },
+   *   '"123e4567-e89b-12d3-a456-426614174000"',
+   *   {
+   *     path_agent_uuid:
+   *       '"123e4567-e89b-12d3-a456-426614174000"',
+   *   },
    * );
    * ```
    */
@@ -63,7 +66,7 @@ export class APIKeys extends APIResource {
    * @example
    * ```ts
    * const apiKeys = await client.agents.apiKeys.list(
-   *   'agent_uuid',
+   *   '"123e4567-e89b-12d3-a456-426614174000"',
    * );
    * ```
    */
@@ -86,8 +89,8 @@ export class APIKeys extends APIResource {
    * @example
    * ```ts
    * const apiKey = await client.agents.apiKeys.delete(
-   *   'api_key_uuid',
-   *   { agent_uuid: 'agent_uuid' },
+   *   '"123e4567-e89b-12d3-a456-426614174000"',
+   *   { agent_uuid: '"123e4567-e89b-12d3-a456-426614174000"' },
    * );
    * ```
    */
@@ -110,8 +113,8 @@ export class APIKeys extends APIResource {
    * @example
    * ```ts
    * const response = await client.agents.apiKeys.regenerate(
-   *   'api_key_uuid',
-   *   { agent_uuid: 'agent_uuid' },
+   *   '"123e4567-e89b-12d3-a456-426614174000"',
+   *   { agent_uuid: '"123e4567-e89b-12d3-a456-426614174000"' },
    * );
    * ```
    */
@@ -129,65 +132,92 @@ export class APIKeys extends APIResource {
 }
 
 export interface APIKeyCreateResponse {
+  /**
+   * Agent API Key Info
+   */
   api_key_info?: AgentsAPI.APIAgentAPIKeyInfo;
 }
 
 export interface APIKeyUpdateResponse {
+  /**
+   * Agent API Key Info
+   */
   api_key_info?: AgentsAPI.APIAgentAPIKeyInfo;
 }
 
 export interface APIKeyListResponse {
+  /**
+   * Api key infos
+   */
   api_key_infos?: Array<AgentsAPI.APIAgentAPIKeyInfo>;
 
+  /**
+   * Links to other pages
+   */
   links?: Shared.APILinks;
 
+  /**
+   * Meta information about the data set
+   */
   meta?: Shared.APIMeta;
 }
 
 export interface APIKeyDeleteResponse {
+  /**
+   * Agent API Key Info
+   */
   api_key_info?: AgentsAPI.APIAgentAPIKeyInfo;
 }
 
 export interface APIKeyRegenerateResponse {
+  /**
+   * Agent API Key Info
+   */
   api_key_info?: AgentsAPI.APIAgentAPIKeyInfo;
 }
 
 export interface APIKeyCreateParams {
+  /**
+   * Agent id
+   */
   body_agent_uuid?: string;
 
+  /**
+   * A human friendly name to identify the key
+   */
   name?: string;
 }
 
 export interface APIKeyUpdateParams {
   /**
-   * Path param: agent id
+   * Path param: Agent id
    */
   path_agent_uuid: string;
 
   /**
-   * Body param:
+   * Body param: Agent id
    */
   body_agent_uuid?: string;
 
   /**
-   * Body param:
+   * Body param: API key ID
    */
   body_api_key_uuid?: string;
 
   /**
-   * Body param:
+   * Body param: Name
    */
   name?: string;
 }
 
 export interface APIKeyListParams {
   /**
-   * page number.
+   * Page number.
    */
   page?: number;
 
   /**
-   * items per page.
+   * Items per page.
    */
   per_page?: number;
 }
@@ -201,7 +231,7 @@ export interface APIKeyDeleteParams {
 
 export interface APIKeyRegenerateParams {
   /**
-   * agent id
+   * Agent id
    */
   agent_uuid: string;
 }

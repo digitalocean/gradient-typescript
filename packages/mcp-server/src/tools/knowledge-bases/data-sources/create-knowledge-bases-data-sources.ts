@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   tags: [],
   httpMethod: 'post',
   httpPath: '/v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources',
-  operationId: 'create_knowledge_base_data_source',
+  operationId: 'genai_create_knowledge_base_data_source',
 };
 
 export const tool: Tool = {
@@ -29,7 +29,7 @@ export const tool: Tool = {
       },
       body_knowledge_base_uuid: {
         type: 'string',
-        title: 'knowledge base id',
+        description: 'Knowledge base id',
       },
       spaces_data_source: {
         $ref: '#/$defs/api_spaces_data_source',
@@ -42,49 +42,49 @@ export const tool: Tool = {
     $defs: {
       aws_data_source: {
         type: 'object',
-        title: 'AWS S3 Data Source',
+        description: 'AWS S3 Data Source',
         properties: {
           bucket_name: {
             type: 'string',
-            title: 'Spaces bucket name',
+            description: 'Spaces bucket name',
           },
           item_path: {
             type: 'string',
           },
           key_id: {
             type: 'string',
-            title: 'The AWS Key ID',
+            description: 'The AWS Key ID',
           },
           region: {
             type: 'string',
-            title: 'Region of bucket',
+            description: 'Region of bucket',
           },
           secret_key: {
             type: 'string',
-            title: 'The AWS Secret Key',
+            description: 'The AWS Secret Key',
           },
         },
       },
       api_spaces_data_source: {
         type: 'object',
-        title: 'Spaces Bucket Data Source',
+        description: 'Spaces Bucket Data Source',
         properties: {
           bucket_name: {
             type: 'string',
-            title: 'Spaces bucket name',
+            description: 'Spaces bucket name',
           },
           item_path: {
             type: 'string',
           },
           region: {
             type: 'string',
-            title: 'Region of bucket',
+            description: 'Region of bucket',
           },
         },
       },
       api_web_crawler_data_source: {
         type: 'object',
-        title: 'WebCrawlerDataSource',
+        description: 'WebCrawlerDataSource',
         properties: {
           base_url: {
             type: 'string',

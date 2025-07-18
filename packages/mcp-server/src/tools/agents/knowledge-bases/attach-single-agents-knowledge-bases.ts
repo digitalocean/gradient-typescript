@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   tags: [],
   httpMethod: 'post',
   httpPath: '/v2/gen-ai/agents/{agent_uuid}/knowledge_bases/{knowledge_base_uuid}',
-  operationId: 'attach_knowledge_base',
+  operationId: 'genai_attach_knowledge_base',
 };
 
 export const tool: Tool = {

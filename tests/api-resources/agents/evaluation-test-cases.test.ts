@@ -12,7 +12,7 @@ const client = new GradientAI({
 describe('resource evaluationTestCases', () => {
   // skipped: tests are disabled for the time being
   test.skip('create', async () => {
-    const responsePromise = client.agents.evaluationTestCases.create({});
+    const responsePromise = client.agents.evaluationTestCases.create();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,8 +23,33 @@ describe('resource evaluationTestCases', () => {
   });
 
   // skipped: tests are disabled for the time being
+  test.skip('create: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.agents.evaluationTestCases.create(
+        {
+          dataset_uuid: '"123e4567-e89b-12d3-a456-426614174000"',
+          description: '"example string"',
+          metrics: ['example string'],
+          name: '"example name"',
+          star_metric: {
+            metric_uuid: '"123e4567-e89b-12d3-a456-426614174000"',
+            name: '"example name"',
+            success_threshold: 123,
+            success_threshold_pct: 123,
+          },
+          workspace_uuid: '"123e4567-e89b-12d3-a456-426614174000"',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(GradientAI.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('retrieve', async () => {
-    const responsePromise = client.agents.evaluationTestCases.retrieve('test_case_uuid');
+    const responsePromise = client.agents.evaluationTestCases.retrieve(
+      '"123e4567-e89b-12d3-a456-426614174000"',
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -39,8 +64,46 @@ describe('resource evaluationTestCases', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.agents.evaluationTestCases.retrieve(
-        'test_case_uuid',
+        '"123e4567-e89b-12d3-a456-426614174000"',
         { evaluation_test_case_version: 0 },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(GradientAI.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('update', async () => {
+    const responsePromise = client.agents.evaluationTestCases.update(
+      '"123e4567-e89b-12d3-a456-426614174000"',
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('update: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.agents.evaluationTestCases.update(
+        '"123e4567-e89b-12d3-a456-426614174000"',
+        {
+          dataset_uuid: '"123e4567-e89b-12d3-a456-426614174000"',
+          description: '"example string"',
+          metrics: { metric_uuids: ['example string'] },
+          name: '"example name"',
+          star_metric: {
+            metric_uuid: '"123e4567-e89b-12d3-a456-426614174000"',
+            name: '"example name"',
+            success_threshold: 123,
+            success_threshold_pct: 123,
+          },
+          body_test_case_uuid: '"123e4567-e89b-12d3-a456-426614174000"',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(GradientAI.NotFoundError);
@@ -60,7 +123,9 @@ describe('resource evaluationTestCases', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('listEvaluationRuns', async () => {
-    const responsePromise = client.agents.evaluationTestCases.listEvaluationRuns('evaluation_test_case_uuid');
+    const responsePromise = client.agents.evaluationTestCases.listEvaluationRuns(
+      '"123e4567-e89b-12d3-a456-426614174000"',
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -75,7 +140,7 @@ describe('resource evaluationTestCases', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.agents.evaluationTestCases.listEvaluationRuns(
-        'evaluation_test_case_uuid',
+        '"123e4567-e89b-12d3-a456-426614174000"',
         { evaluation_test_case_version: 0 },
         { path: '/_stainless_unknown_path' },
       ),

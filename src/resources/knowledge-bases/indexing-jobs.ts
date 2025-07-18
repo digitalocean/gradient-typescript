@@ -10,8 +10,17 @@ export class IndexingJobs extends APIResource {
   /**
    * To start an indexing job for a knowledge base, send a POST request to
    * `/v2/gen-ai/indexing_jobs`.
+   *
+   * @example
+   * ```ts
+   * const indexingJob =
+   *   await client.knowledgeBases.indexingJobs.create();
+   * ```
    */
-  create(body: IndexingJobCreateParams, options?: RequestOptions): APIPromise<IndexingJobCreateResponse> {
+  create(
+    body: IndexingJobCreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<IndexingJobCreateResponse> {
     return this._client.post('/v2/gen-ai/indexing_jobs', {
       body,
       defaultBaseURL: 'https://api.digitalocean.com',
@@ -22,6 +31,14 @@ export class IndexingJobs extends APIResource {
   /**
    * To get status of an indexing Job for a knowledge base, send a GET request to
    * `/v2/gen-ai/indexing_jobs/{uuid}`.
+   *
+   * @example
+   * ```ts
+   * const indexingJob =
+   *   await client.knowledgeBases.indexingJobs.retrieve(
+   *     '"123e4567-e89b-12d3-a456-426614174000"',
+   *   );
+   * ```
    */
   retrieve(uuid: string, options?: RequestOptions): APIPromise<IndexingJobRetrieveResponse> {
     return this._client.get(path`/v2/gen-ai/indexing_jobs/${uuid}`, {
@@ -33,6 +50,12 @@ export class IndexingJobs extends APIResource {
   /**
    * To list all indexing jobs for a knowledge base, send a GET request to
    * `/v2/gen-ai/indexing_jobs`.
+   *
+   * @example
+   * ```ts
+   * const indexingJobs =
+   *   await client.knowledgeBases.indexingJobs.list();
+   * ```
    */
   list(
     query: IndexingJobListParams | null | undefined = {},
@@ -48,6 +71,14 @@ export class IndexingJobs extends APIResource {
   /**
    * To list all datasources for an indexing job, send a GET request to
    * `/v2/gen-ai/indexing_jobs/{indexing_job_uuid}/data_sources`.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.knowledgeBases.indexingJobs.retrieveDataSources(
+   *     '"123e4567-e89b-12d3-a456-426614174000"',
+   *   );
+   * ```
    */
   retrieveDataSources(
     indexingJobUuid: string,
@@ -62,10 +93,18 @@ export class IndexingJobs extends APIResource {
   /**
    * To cancel an indexing job for a knowledge base, send a PUT request to
    * `/v2/gen-ai/indexing_jobs/{uuid}/cancel`.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.knowledgeBases.indexingJobs.updateCancel(
+   *     '"123e4567-e89b-12d3-a456-426614174000"',
+   *   );
+   * ```
    */
   updateCancel(
     pathUuid: string,
-    body: IndexingJobUpdateCancelParams,
+    body: IndexingJobUpdateCancelParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<IndexingJobUpdateCancelResponse> {
     return this._client.put(path`/v2/gen-ai/indexing_jobs/${pathUuid}/cancel`, {
@@ -77,24 +116,54 @@ export class IndexingJobs extends APIResource {
 }
 
 export interface APIIndexedDataSource {
+  /**
+   * Timestamp when data source completed indexing
+   */
   completed_at?: string;
 
+  /**
+   * Uuid of the indexed data source
+   */
   data_source_uuid?: string;
 
+  /**
+   * A detailed error description
+   */
   error_details?: string;
 
+  /**
+   * A string code provinding a hint which part of the system experienced an error
+   */
   error_msg?: string;
 
+  /**
+   * Total count of files that have failed
+   */
   failed_item_count?: string;
 
+  /**
+   * Total count of files that have been indexed
+   */
   indexed_file_count?: string;
 
+  /**
+   * Total count of files that have been indexed
+   */
   indexed_item_count?: string;
 
+  /**
+   * Total count of files that have been removed
+   */
   removed_item_count?: string;
 
+  /**
+   * Total count of files that have been skipped
+   */
   skipped_item_count?: string;
 
+  /**
+   * Timestamp when data source started indexing
+   */
   started_at?: string;
 
   status?:
@@ -105,22 +174,43 @@ export interface APIIndexedDataSource {
     | 'DATA_SOURCE_STATUS_NOT_UPDATED'
     | 'DATA_SOURCE_STATUS_FAILED';
 
+  /**
+   * Total size of files in data source in bytes
+   */
   total_bytes?: string;
 
+  /**
+   * Total size of files in data source in bytes that have been indexed
+   */
   total_bytes_indexed?: string;
 
+  /**
+   * Total file count in the data source
+   */
   total_file_count?: string;
 }
 
+/**
+ * IndexingJob description
+ */
 export interface APIIndexingJob {
+  /**
+   * Number of datasources indexed completed
+   */
   completed_datasources?: number;
 
+  /**
+   * Creation date / time
+   */
   created_at?: string;
 
   data_source_uuids?: Array<string>;
 
   finished_at?: string;
 
+  /**
+   * Knowledge base id
+   */
   knowledge_base_uuid?: string;
 
   phase?:
@@ -143,28 +233,64 @@ export interface APIIndexingJob {
     | 'INDEX_JOB_STATUS_NO_CHANGES'
     | 'INDEX_JOB_STATUS_PENDING';
 
+  /**
+   * Number of tokens
+   */
   tokens?: number;
 
+  /**
+   * Number of datasources being indexed
+   */
   total_datasources?: number;
 
+  /**
+   * Last modified
+   */
   updated_at?: string;
 
+  /**
+   * Unique id
+   */
   uuid?: string;
 }
 
+/**
+ * StartKnowledgeBaseIndexingJobOutput description
+ */
 export interface IndexingJobCreateResponse {
+  /**
+   * IndexingJob description
+   */
   job?: APIIndexingJob;
 }
 
+/**
+ * GetKnowledgeBaseIndexingJobOutput description
+ */
 export interface IndexingJobRetrieveResponse {
+  /**
+   * IndexingJob description
+   */
   job?: APIIndexingJob;
 }
 
+/**
+ * Indexing jobs
+ */
 export interface IndexingJobListResponse {
+  /**
+   * The indexing jobs
+   */
   jobs?: Array<APIIndexingJob>;
 
+  /**
+   * Links to other pages
+   */
   links?: Shared.APILinks;
 
+  /**
+   * Meta information about the data set
+   */
   meta?: Shared.APIMeta;
 }
 
@@ -172,24 +298,37 @@ export interface IndexingJobRetrieveDataSourcesResponse {
   indexed_data_sources?: Array<APIIndexedDataSource>;
 }
 
+/**
+ * CancelKnowledgeBaseIndexingJobOutput description
+ */
 export interface IndexingJobUpdateCancelResponse {
+  /**
+   * IndexingJob description
+   */
   job?: APIIndexingJob;
 }
 
 export interface IndexingJobCreateParams {
+  /**
+   * List of data source ids to index, if none are provided, all data sources will be
+   * indexed
+   */
   data_source_uuids?: Array<string>;
 
+  /**
+   * Knowledge base id
+   */
   knowledge_base_uuid?: string;
 }
 
 export interface IndexingJobListParams {
   /**
-   * page number.
+   * Page number.
    */
   page?: number;
 
   /**
-   * items per page.
+   * Items per page.
    */
   per_page?: number;
 }
