@@ -261,64 +261,6 @@ Methods:
 
 - <code title="post /chat/completions">client.chat.completions.<a href="./src/resources/chat/completions.ts">create</a>({ ...params }) -> CompletionCreateResponse</code>
 
-# KnowledgeBases
-
-Types:
-
-- <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">APIKnowledgeBase</a></code>
-- <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">KnowledgeBaseCreateResponse</a></code>
-- <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">KnowledgeBaseRetrieveResponse</a></code>
-- <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">KnowledgeBaseUpdateResponse</a></code>
-- <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">KnowledgeBaseListResponse</a></code>
-- <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">KnowledgeBaseDeleteResponse</a></code>
-
-Methods:
-
-- <code title="post /v2/gen-ai/knowledge_bases">client.knowledgeBases.<a href="./src/resources/knowledge-bases/knowledge-bases.ts">create</a>({ ...params }) -> KnowledgeBaseCreateResponse</code>
-- <code title="get /v2/gen-ai/knowledge_bases/{uuid}">client.knowledgeBases.<a href="./src/resources/knowledge-bases/knowledge-bases.ts">retrieve</a>(uuid) -> KnowledgeBaseRetrieveResponse</code>
-- <code title="put /v2/gen-ai/knowledge_bases/{uuid}">client.knowledgeBases.<a href="./src/resources/knowledge-bases/knowledge-bases.ts">update</a>(pathUuid, { ...params }) -> KnowledgeBaseUpdateResponse</code>
-- <code title="get /v2/gen-ai/knowledge_bases">client.knowledgeBases.<a href="./src/resources/knowledge-bases/knowledge-bases.ts">list</a>({ ...params }) -> KnowledgeBaseListResponse</code>
-- <code title="delete /v2/gen-ai/knowledge_bases/{uuid}">client.knowledgeBases.<a href="./src/resources/knowledge-bases/knowledge-bases.ts">delete</a>(uuid) -> KnowledgeBaseDeleteResponse</code>
-
-## DataSources
-
-Types:
-
-- <code><a href="./src/resources/knowledge-bases/data-sources.ts">APIFileUploadDataSource</a></code>
-- <code><a href="./src/resources/knowledge-bases/data-sources.ts">APIKnowledgeBaseDataSource</a></code>
-- <code><a href="./src/resources/knowledge-bases/data-sources.ts">APISpacesDataSource</a></code>
-- <code><a href="./src/resources/knowledge-bases/data-sources.ts">APIWebCrawlerDataSource</a></code>
-- <code><a href="./src/resources/knowledge-bases/data-sources.ts">AwsDataSource</a></code>
-- <code><a href="./src/resources/knowledge-bases/data-sources.ts">DataSourceCreateResponse</a></code>
-- <code><a href="./src/resources/knowledge-bases/data-sources.ts">DataSourceListResponse</a></code>
-- <code><a href="./src/resources/knowledge-bases/data-sources.ts">DataSourceDeleteResponse</a></code>
-
-Methods:
-
-- <code title="post /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources">client.knowledgeBases.dataSources.<a href="./src/resources/knowledge-bases/data-sources.ts">create</a>(knowledgeBaseUuid, { ...params }) -> DataSourceCreateResponse</code>
-- <code title="get /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources">client.knowledgeBases.dataSources.<a href="./src/resources/knowledge-bases/data-sources.ts">list</a>(knowledgeBaseUuid, { ...params }) -> DataSourceListResponse</code>
-- <code title="delete /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources/{data_source_uuid}">client.knowledgeBases.dataSources.<a href="./src/resources/knowledge-bases/data-sources.ts">delete</a>(dataSourceUuid, { ...params }) -> DataSourceDeleteResponse</code>
-
-## IndexingJobs
-
-Types:
-
-- <code><a href="./src/resources/knowledge-bases/indexing-jobs.ts">APIIndexedDataSource</a></code>
-- <code><a href="./src/resources/knowledge-bases/indexing-jobs.ts">APIIndexingJob</a></code>
-- <code><a href="./src/resources/knowledge-bases/indexing-jobs.ts">IndexingJobCreateResponse</a></code>
-- <code><a href="./src/resources/knowledge-bases/indexing-jobs.ts">IndexingJobRetrieveResponse</a></code>
-- <code><a href="./src/resources/knowledge-bases/indexing-jobs.ts">IndexingJobListResponse</a></code>
-- <code><a href="./src/resources/knowledge-bases/indexing-jobs.ts">IndexingJobRetrieveDataSourcesResponse</a></code>
-- <code><a href="./src/resources/knowledge-bases/indexing-jobs.ts">IndexingJobUpdateCancelResponse</a></code>
-
-Methods:
-
-- <code title="post /v2/gen-ai/indexing_jobs">client.knowledgeBases.indexingJobs.<a href="./src/resources/knowledge-bases/indexing-jobs.ts">create</a>({ ...params }) -> IndexingJobCreateResponse</code>
-- <code title="get /v2/gen-ai/indexing_jobs/{uuid}">client.knowledgeBases.indexingJobs.<a href="./src/resources/knowledge-bases/indexing-jobs.ts">retrieve</a>(uuid) -> IndexingJobRetrieveResponse</code>
-- <code title="get /v2/gen-ai/indexing_jobs">client.knowledgeBases.indexingJobs.<a href="./src/resources/knowledge-bases/indexing-jobs.ts">list</a>({ ...params }) -> IndexingJobListResponse</code>
-- <code title="get /v2/gen-ai/indexing_jobs/{indexing_job_uuid}/data_sources">client.knowledgeBases.indexingJobs.<a href="./src/resources/knowledge-bases/indexing-jobs.ts">retrieveDataSources</a>(indexingJobUuid) -> IndexingJobRetrieveDataSourcesResponse</code>
-- <code title="put /v2/gen-ai/indexing_jobs/{uuid}/cancel">client.knowledgeBases.indexingJobs.<a href="./src/resources/knowledge-bases/indexing-jobs.ts">updateCancel</a>(pathUuid, { ...params }) -> IndexingJobUpdateCancelResponse</code>
-
 # GPUDroplets
 
 Types:
@@ -667,6 +609,64 @@ Methods:
 - <code title="get /v2/gen-ai/models/api_keys">client.inference.apiKeys.<a href="./src/resources/inference/api-keys.ts">list</a>({ ...params }) -> APIKeyListResponse</code>
 - <code title="delete /v2/gen-ai/models/api_keys/{api_key_uuid}">client.inference.apiKeys.<a href="./src/resources/inference/api-keys.ts">delete</a>(apiKeyUuid) -> APIKeyDeleteResponse</code>
 - <code title="put /v2/gen-ai/models/api_keys/{api_key_uuid}/regenerate">client.inference.apiKeys.<a href="./src/resources/inference/api-keys.ts">updateRegenerate</a>(apiKeyUuid) -> APIKeyUpdateRegenerateResponse</code>
+
+# KnowledgeBases
+
+Types:
+
+- <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">APIKnowledgeBase</a></code>
+- <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">KnowledgeBaseCreateResponse</a></code>
+- <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">KnowledgeBaseRetrieveResponse</a></code>
+- <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">KnowledgeBaseUpdateResponse</a></code>
+- <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">KnowledgeBaseListResponse</a></code>
+- <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">KnowledgeBaseDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /v2/gen-ai/knowledge_bases">client.knowledgeBases.<a href="./src/resources/knowledge-bases/knowledge-bases.ts">create</a>({ ...params }) -> KnowledgeBaseCreateResponse</code>
+- <code title="get /v2/gen-ai/knowledge_bases/{uuid}">client.knowledgeBases.<a href="./src/resources/knowledge-bases/knowledge-bases.ts">retrieve</a>(uuid) -> KnowledgeBaseRetrieveResponse</code>
+- <code title="put /v2/gen-ai/knowledge_bases/{uuid}">client.knowledgeBases.<a href="./src/resources/knowledge-bases/knowledge-bases.ts">update</a>(pathUuid, { ...params }) -> KnowledgeBaseUpdateResponse</code>
+- <code title="get /v2/gen-ai/knowledge_bases">client.knowledgeBases.<a href="./src/resources/knowledge-bases/knowledge-bases.ts">list</a>({ ...params }) -> KnowledgeBaseListResponse</code>
+- <code title="delete /v2/gen-ai/knowledge_bases/{uuid}">client.knowledgeBases.<a href="./src/resources/knowledge-bases/knowledge-bases.ts">delete</a>(uuid) -> KnowledgeBaseDeleteResponse</code>
+
+## DataSources
+
+Types:
+
+- <code><a href="./src/resources/knowledge-bases/data-sources.ts">APIFileUploadDataSource</a></code>
+- <code><a href="./src/resources/knowledge-bases/data-sources.ts">APIKnowledgeBaseDataSource</a></code>
+- <code><a href="./src/resources/knowledge-bases/data-sources.ts">APISpacesDataSource</a></code>
+- <code><a href="./src/resources/knowledge-bases/data-sources.ts">APIWebCrawlerDataSource</a></code>
+- <code><a href="./src/resources/knowledge-bases/data-sources.ts">AwsDataSource</a></code>
+- <code><a href="./src/resources/knowledge-bases/data-sources.ts">DataSourceCreateResponse</a></code>
+- <code><a href="./src/resources/knowledge-bases/data-sources.ts">DataSourceListResponse</a></code>
+- <code><a href="./src/resources/knowledge-bases/data-sources.ts">DataSourceDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources">client.knowledgeBases.dataSources.<a href="./src/resources/knowledge-bases/data-sources.ts">create</a>(knowledgeBaseUuid, { ...params }) -> DataSourceCreateResponse</code>
+- <code title="get /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources">client.knowledgeBases.dataSources.<a href="./src/resources/knowledge-bases/data-sources.ts">list</a>(knowledgeBaseUuid, { ...params }) -> DataSourceListResponse</code>
+- <code title="delete /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources/{data_source_uuid}">client.knowledgeBases.dataSources.<a href="./src/resources/knowledge-bases/data-sources.ts">delete</a>(dataSourceUuid, { ...params }) -> DataSourceDeleteResponse</code>
+
+## IndexingJobs
+
+Types:
+
+- <code><a href="./src/resources/knowledge-bases/indexing-jobs.ts">APIIndexedDataSource</a></code>
+- <code><a href="./src/resources/knowledge-bases/indexing-jobs.ts">APIIndexingJob</a></code>
+- <code><a href="./src/resources/knowledge-bases/indexing-jobs.ts">IndexingJobCreateResponse</a></code>
+- <code><a href="./src/resources/knowledge-bases/indexing-jobs.ts">IndexingJobRetrieveResponse</a></code>
+- <code><a href="./src/resources/knowledge-bases/indexing-jobs.ts">IndexingJobListResponse</a></code>
+- <code><a href="./src/resources/knowledge-bases/indexing-jobs.ts">IndexingJobRetrieveDataSourcesResponse</a></code>
+- <code><a href="./src/resources/knowledge-bases/indexing-jobs.ts">IndexingJobUpdateCancelResponse</a></code>
+
+Methods:
+
+- <code title="post /v2/gen-ai/indexing_jobs">client.knowledgeBases.indexingJobs.<a href="./src/resources/knowledge-bases/indexing-jobs.ts">create</a>({ ...params }) -> IndexingJobCreateResponse</code>
+- <code title="get /v2/gen-ai/indexing_jobs/{uuid}">client.knowledgeBases.indexingJobs.<a href="./src/resources/knowledge-bases/indexing-jobs.ts">retrieve</a>(uuid) -> IndexingJobRetrieveResponse</code>
+- <code title="get /v2/gen-ai/indexing_jobs">client.knowledgeBases.indexingJobs.<a href="./src/resources/knowledge-bases/indexing-jobs.ts">list</a>({ ...params }) -> IndexingJobListResponse</code>
+- <code title="get /v2/gen-ai/indexing_jobs/{indexing_job_uuid}/data_sources">client.knowledgeBases.indexingJobs.<a href="./src/resources/knowledge-bases/indexing-jobs.ts">retrieveDataSources</a>(indexingJobUuid) -> IndexingJobRetrieveDataSourcesResponse</code>
+- <code title="put /v2/gen-ai/indexing_jobs/{uuid}/cancel">client.knowledgeBases.indexingJobs.<a href="./src/resources/knowledge-bases/indexing-jobs.ts">updateCancel</a>(pathUuid, { ...params }) -> IndexingJobUpdateCancelResponse</code>
 
 # Models
 
