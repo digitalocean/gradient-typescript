@@ -797,19 +797,19 @@ export class GradientAI {
 
   agents: API.Agents = new API.Agents(this);
   chat: API.Chat = new API.Chat(this);
-  regions: API.Regions = new API.Regions(this);
   knowledgeBases: API.KnowledgeBases = new API.KnowledgeBases(this);
+  gpuDroplets: API.GPUDroplets = new API.GPUDroplets(this);
   inference: API.Inference = new API.Inference(this);
   models: API.Models = new API.Models(this);
-  gpuDroplets: API.GPUDroplets = new API.GPUDroplets(this);
+  regions: API.Regions = new API.Regions(this);
 }
 GradientAI.Agents = Agents;
 GradientAI.Chat = Chat;
-GradientAI.Regions = Regions;
 GradientAI.KnowledgeBases = KnowledgeBases;
+GradientAI.GPUDroplets = GPUDroplets;
 GradientAI.Inference = Inference;
 GradientAI.Models = Models;
-GradientAI.GPUDroplets = GPUDroplets;
+GradientAI.Regions = Regions;
 export declare namespace GradientAI {
   export type RequestOptions = Opts.RequestOptions;
 
@@ -838,12 +838,6 @@ export declare namespace GradientAI {
   export { Chat as Chat };
 
   export {
-    Regions as Regions,
-    type RegionListResponse as RegionListResponse,
-    type RegionListParams as RegionListParams,
-  };
-
-  export {
     KnowledgeBases as KnowledgeBases,
     type APIKnowledgeBase as APIKnowledgeBase,
     type KnowledgeBaseCreateResponse as KnowledgeBaseCreateResponse,
@@ -854,17 +848,6 @@ export declare namespace GradientAI {
     type KnowledgeBaseCreateParams as KnowledgeBaseCreateParams,
     type KnowledgeBaseUpdateParams as KnowledgeBaseUpdateParams,
     type KnowledgeBaseListParams as KnowledgeBaseListParams,
-  };
-
-  export { Inference as Inference };
-
-  export {
-    Models as Models,
-    type APIAgreement as APIAgreement,
-    type APIModel as APIModel,
-    type APIModelVersion as APIModelVersion,
-    type ModelRetrieveResponse as ModelRetrieveResponse,
-    type ModelListResponse as ModelListResponse,
   };
 
   export {
@@ -883,6 +866,23 @@ export declare namespace GradientAI {
     type GPUDropletListFirewallsParams as GPUDropletListFirewallsParams,
     type GPUDropletListKernelsParams as GPUDropletListKernelsParams,
     type GPUDropletListSnapshotsParams as GPUDropletListSnapshotsParams,
+  };
+
+  export { Inference as Inference };
+
+  export {
+    Models as Models,
+    type APIAgreement as APIAgreement,
+    type APIModel as APIModel,
+    type APIModelVersion as APIModelVersion,
+    type ModelRetrieveResponse as ModelRetrieveResponse,
+    type ModelListResponse as ModelListResponse,
+  };
+
+  export {
+    Regions as Regions,
+    type RegionListResponse as RegionListResponse,
+    type RegionListParams as RegionListParams,
   };
 
   export type Action = API.Action;

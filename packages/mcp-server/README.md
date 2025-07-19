@@ -282,11 +282,6 @@ The following tools are available in this MCP server.
 
 - `create_chat_completions` (`write`): Creates a model response for the given chat conversation.
 
-### Resource `regions`:
-
-- `list_regions` (`read`): To list all of the regions that are available, send a GET request to `/v2/regions`.
-  The response will be a JSON object with a key called `regions`. The value of this will be an array of `region` objects, each of which will contain the standard region attributes.
-
 ### Resource `knowledge_bases`:
 
 - `create_knowledge_bases` (`write`): To create a knowledge base, send a POST request to `/v2/gen-ai/knowledge_bases`.
@@ -308,37 +303,6 @@ The following tools are available in this MCP server.
 - `list_knowledge_bases_indexing_jobs` (`read`): To list all indexing jobs for a knowledge base, send a GET request to `/v2/gen-ai/indexing_jobs`.
 - `retrieve_data_sources_knowledge_bases_indexing_jobs` (`read`): To list all datasources for an indexing job, send a GET request to `/v2/gen-ai/indexing_jobs/{indexing_job_uuid}/data_sources`.
 - `update_cancel_knowledge_bases_indexing_jobs` (`write`): To cancel an indexing job for a knowledge base, send a PUT request to `/v2/gen-ai/indexing_jobs/{uuid}/cancel`.
-
-### Resource `inference.api_keys`:
-
-- `create_inference_api_keys` (`write`): To create a model API key, send a POST request to `/v2/gen-ai/models/api_keys`.
-- `update_inference_api_keys` (`write`): To update a model API key, send a PUT request to `/v2/gen-ai/models/api_keys/{api_key_uuid}`.
-- `list_inference_api_keys` (`read`): To list all model API keys, send a GET request to `/v2/gen-ai/models/api_keys`.
-- `delete_inference_api_keys` (`write`): To delete an API key for a model, send a DELETE request to `/v2/gen-ai/models/api_keys/{api_key_uuid}`.
-- `update_regenerate_inference_api_keys` (`write`): To regenerate a model API key, send a PUT request to `/v2/gen-ai/models/api_keys/{api_key_uuid}/regenerate`.
-
-### Resource `models`:
-
-- `retrieve_models` (`read`): Retrieves a model instance, providing basic information about the model such as the owner and permissioning.
-- `list_models` (`read`): Lists the currently available models, and provides basic information about each one such as the owner and availability.
-
-### Resource `models.providers.anthropic`:
-
-- `create_providers_models_anthropic` (`write`): To create an Anthropic API key, send a POST request to `/v2/gen-ai/anthropic/keys`.
-- `retrieve_providers_models_anthropic` (`read`): To retrieve details of an Anthropic API key, send a GET request to `/v2/gen-ai/anthropic/keys/{api_key_uuid}`.
-- `update_providers_models_anthropic` (`write`): To update an Anthropic API key, send a PUT request to `/v2/gen-ai/anthropic/keys/{api_key_uuid}`.
-- `list_providers_models_anthropic` (`read`): To list all Anthropic API keys, send a GET request to `/v2/gen-ai/anthropic/keys`.
-- `delete_providers_models_anthropic` (`write`): To delete an Anthropic API key, send a DELETE request to `/v2/gen-ai/anthropic/keys/{api_key_uuid}`.
-- `list_agents_providers_models_anthropic` (`read`): List Agents by Anthropic Key.
-
-### Resource `models.providers.openai`:
-
-- `create_providers_models_openai` (`write`): To create an OpenAI API key, send a POST request to `/v2/gen-ai/openai/keys`.
-- `retrieve_providers_models_openai` (`read`): To retrieve details of an OpenAI API key, send a GET request to `/v2/gen-ai/openai/keys/{api_key_uuid}`.
-- `update_providers_models_openai` (`write`): To update an OpenAI API key, send a PUT request to `/v2/gen-ai/openai/keys/{api_key_uuid}`.
-- `list_providers_models_openai` (`read`): To list all OpenAI API keys, send a GET request to `/v2/gen-ai/openai/keys`.
-- `delete_providers_models_openai` (`write`): To delete an OpenAI API key, send a DELETE request to `/v2/gen-ai/openai/keys/{api_key_uuid}`.
-- `retrieve_agents_providers_models_openai` (`read`): List Agents by OpenAI Key.
 
 ### Resource `gpu_droplets`:
 
@@ -975,3 +939,39 @@ The following tools are available in this MCP server.
 - `list_account_gpu_droplets_keys` (`read`): To list all of the keys in your account, send a GET request to `/v2/account/keys`. The response will be a JSON object with a key set to `ssh_keys`. The value of this will be an array of ssh_key objects, each of which contains the standard ssh_key attributes.
 - `delete_account_gpu_droplets_keys` (`write`): To destroy a public SSH key that you have in your account, send a DELETE request to `/v2/account/keys/$KEY_ID` or `/v2/account/keys/$KEY_FINGERPRINT`.
   A 204 status will be returned, indicating that the action was successful and that the response body is empty.
+
+### Resource `inference.api_keys`:
+
+- `create_inference_api_keys` (`write`): To create a model API key, send a POST request to `/v2/gen-ai/models/api_keys`.
+- `update_inference_api_keys` (`write`): To update a model API key, send a PUT request to `/v2/gen-ai/models/api_keys/{api_key_uuid}`.
+- `list_inference_api_keys` (`read`): To list all model API keys, send a GET request to `/v2/gen-ai/models/api_keys`.
+- `delete_inference_api_keys` (`write`): To delete an API key for a model, send a DELETE request to `/v2/gen-ai/models/api_keys/{api_key_uuid}`.
+- `update_regenerate_inference_api_keys` (`write`): To regenerate a model API key, send a PUT request to `/v2/gen-ai/models/api_keys/{api_key_uuid}/regenerate`.
+
+### Resource `models`:
+
+- `retrieve_models` (`read`): Retrieves a model instance, providing basic information about the model such as the owner and permissioning.
+- `list_models` (`read`): Lists the currently available models, and provides basic information about each one such as the owner and availability.
+
+### Resource `models.providers.anthropic`:
+
+- `create_providers_models_anthropic` (`write`): To create an Anthropic API key, send a POST request to `/v2/gen-ai/anthropic/keys`.
+- `retrieve_providers_models_anthropic` (`read`): To retrieve details of an Anthropic API key, send a GET request to `/v2/gen-ai/anthropic/keys/{api_key_uuid}`.
+- `update_providers_models_anthropic` (`write`): To update an Anthropic API key, send a PUT request to `/v2/gen-ai/anthropic/keys/{api_key_uuid}`.
+- `list_providers_models_anthropic` (`read`): To list all Anthropic API keys, send a GET request to `/v2/gen-ai/anthropic/keys`.
+- `delete_providers_models_anthropic` (`write`): To delete an Anthropic API key, send a DELETE request to `/v2/gen-ai/anthropic/keys/{api_key_uuid}`.
+- `list_agents_providers_models_anthropic` (`read`): List Agents by Anthropic Key.
+
+### Resource `models.providers.openai`:
+
+- `create_providers_models_openai` (`write`): To create an OpenAI API key, send a POST request to `/v2/gen-ai/openai/keys`.
+- `retrieve_providers_models_openai` (`read`): To retrieve details of an OpenAI API key, send a GET request to `/v2/gen-ai/openai/keys/{api_key_uuid}`.
+- `update_providers_models_openai` (`write`): To update an OpenAI API key, send a PUT request to `/v2/gen-ai/openai/keys/{api_key_uuid}`.
+- `list_providers_models_openai` (`read`): To list all OpenAI API keys, send a GET request to `/v2/gen-ai/openai/keys`.
+- `delete_providers_models_openai` (`write`): To delete an OpenAI API key, send a DELETE request to `/v2/gen-ai/openai/keys/{api_key_uuid}`.
+- `retrieve_agents_providers_models_openai` (`read`): List Agents by OpenAI Key.
+
+### Resource `regions`:
+
+- `list_regions` (`read`): To list all of the regions that are available, send a GET request to `/v2/regions`.
+  The response will be a JSON object with a key called `regions`. The value of this will be an array of `region` objects, each of which will contain the standard region attributes.
