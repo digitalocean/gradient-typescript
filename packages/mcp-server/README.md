@@ -282,28 +282,6 @@ The following tools are available in this MCP server.
 
 - `create_chat_completions` (`write`): Creates a model response for the given chat conversation.
 
-### Resource `knowledge_bases`:
-
-- `create_knowledge_bases` (`write`): To create a knowledge base, send a POST request to `/v2/gen-ai/knowledge_bases`.
-- `retrieve_knowledge_bases` (`read`): To retrive information about an existing knowledge base, send a GET request to `/v2/gen-ai/knowledge_bases/{uuid}`.
-- `update_knowledge_bases` (`write`): To update a knowledge base, send a PUT request to `/v2/gen-ai/knowledge_bases/{uuid}`.
-- `list_knowledge_bases` (`read`): To list all knowledge bases, send a GET request to `/v2/gen-ai/knowledge_bases`.
-- `delete_knowledge_bases` (`write`): To delete a knowledge base, send a DELETE request to `/v2/gen-ai/knowledge_bases/{uuid}`.
-
-### Resource `knowledge_bases.data_sources`:
-
-- `create_knowledge_bases_data_sources` (`write`): To add a data source to a knowledge base, send a POST request to `/v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources`.
-- `list_knowledge_bases_data_sources` (`read`): To list all data sources for a knowledge base, send a GET request to `/v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources`.
-- `delete_knowledge_bases_data_sources` (`write`): To delete a data source from a knowledge base, send a DELETE request to `/v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources/{data_source_uuid}`.
-
-### Resource `knowledge_bases.indexing_jobs`:
-
-- `create_knowledge_bases_indexing_jobs` (`write`): To start an indexing job for a knowledge base, send a POST request to `/v2/gen-ai/indexing_jobs`.
-- `retrieve_knowledge_bases_indexing_jobs` (`read`): To get status of an indexing Job for a knowledge base, send a GET request to `/v2/gen-ai/indexing_jobs/{uuid}`.
-- `list_knowledge_bases_indexing_jobs` (`read`): To list all indexing jobs for a knowledge base, send a GET request to `/v2/gen-ai/indexing_jobs`.
-- `retrieve_data_sources_knowledge_bases_indexing_jobs` (`read`): To list all datasources for an indexing job, send a GET request to `/v2/gen-ai/indexing_jobs/{indexing_job_uuid}/data_sources`.
-- `update_cancel_knowledge_bases_indexing_jobs` (`write`): To cancel an indexing job for a knowledge base, send a PUT request to `/v2/gen-ai/indexing_jobs/{uuid}/cancel`.
-
 ### Resource `gpu_droplets`:
 
 - `create_gpu_droplets` (`write`): To create a new Droplet, send a POST request to `/v2/droplets` setting the
@@ -947,6 +925,28 @@ The following tools are available in this MCP server.
 - `list_inference_api_keys` (`read`): To list all model API keys, send a GET request to `/v2/gen-ai/models/api_keys`.
 - `delete_inference_api_keys` (`write`): To delete an API key for a model, send a DELETE request to `/v2/gen-ai/models/api_keys/{api_key_uuid}`.
 - `update_regenerate_inference_api_keys` (`write`): To regenerate a model API key, send a PUT request to `/v2/gen-ai/models/api_keys/{api_key_uuid}/regenerate`.
+
+### Resource `knowledge_bases`:
+
+- `create_knowledge_bases` (`write`): To create a knowledge base, send a POST request to `/v2/gen-ai/knowledge_bases`.
+- `retrieve_knowledge_bases` (`read`): To retrive information about an existing knowledge base, send a GET request to `/v2/gen-ai/knowledge_bases/{uuid}`.
+- `update_knowledge_bases` (`write`): To update a knowledge base, send a PUT request to `/v2/gen-ai/knowledge_bases/{uuid}`.
+- `list_knowledge_bases` (`read`): To list all knowledge bases, send a GET request to `/v2/gen-ai/knowledge_bases`.
+- `delete_knowledge_bases` (`write`): To delete a knowledge base, send a DELETE request to `/v2/gen-ai/knowledge_bases/{uuid}`.
+
+### Resource `knowledge_bases.data_sources`:
+
+- `create_knowledge_bases_data_sources` (`write`): To add a data source to a knowledge base, send a POST request to `/v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources`.
+- `list_knowledge_bases_data_sources` (`read`): To list all data sources for a knowledge base, send a GET request to `/v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources`.
+- `delete_knowledge_bases_data_sources` (`write`): To delete a data source from a knowledge base, send a DELETE request to `/v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources/{data_source_uuid}`.
+
+### Resource `knowledge_bases.indexing_jobs`:
+
+- `create_knowledge_bases_indexing_jobs` (`write`): To start an indexing job for a knowledge base, send a POST request to `/v2/gen-ai/indexing_jobs`.
+- `retrieve_knowledge_bases_indexing_jobs` (`read`): To get status of an indexing Job for a knowledge base, send a GET request to `/v2/gen-ai/indexing_jobs/{uuid}`.
+- `list_knowledge_bases_indexing_jobs` (`read`): To list all indexing jobs for a knowledge base, send a GET request to `/v2/gen-ai/indexing_jobs`.
+- `retrieve_data_sources_knowledge_bases_indexing_jobs` (`read`): To list all datasources for an indexing job, send a GET request to `/v2/gen-ai/indexing_jobs/{indexing_job_uuid}/data_sources`.
+- `update_cancel_knowledge_bases_indexing_jobs` (`write`): To cancel an indexing job for a knowledge base, send a PUT request to `/v2/gen-ai/indexing_jobs/{uuid}/cancel`.
 
 ### Resource `models`:
 

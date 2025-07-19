@@ -797,17 +797,17 @@ export class GradientAI {
 
   agents: API.Agents = new API.Agents(this);
   chat: API.Chat = new API.Chat(this);
-  knowledgeBases: API.KnowledgeBases = new API.KnowledgeBases(this);
   gpuDroplets: API.GPUDroplets = new API.GPUDroplets(this);
   inference: API.Inference = new API.Inference(this);
+  knowledgeBases: API.KnowledgeBases = new API.KnowledgeBases(this);
   models: API.Models = new API.Models(this);
   regions: API.Regions = new API.Regions(this);
 }
 GradientAI.Agents = Agents;
 GradientAI.Chat = Chat;
-GradientAI.KnowledgeBases = KnowledgeBases;
 GradientAI.GPUDroplets = GPUDroplets;
 GradientAI.Inference = Inference;
+GradientAI.KnowledgeBases = KnowledgeBases;
 GradientAI.Models = Models;
 GradientAI.Regions = Regions;
 export declare namespace GradientAI {
@@ -838,19 +838,6 @@ export declare namespace GradientAI {
   export { Chat as Chat };
 
   export {
-    KnowledgeBases as KnowledgeBases,
-    type APIKnowledgeBase as APIKnowledgeBase,
-    type KnowledgeBaseCreateResponse as KnowledgeBaseCreateResponse,
-    type KnowledgeBaseRetrieveResponse as KnowledgeBaseRetrieveResponse,
-    type KnowledgeBaseUpdateResponse as KnowledgeBaseUpdateResponse,
-    type KnowledgeBaseListResponse as KnowledgeBaseListResponse,
-    type KnowledgeBaseDeleteResponse as KnowledgeBaseDeleteResponse,
-    type KnowledgeBaseCreateParams as KnowledgeBaseCreateParams,
-    type KnowledgeBaseUpdateParams as KnowledgeBaseUpdateParams,
-    type KnowledgeBaseListParams as KnowledgeBaseListParams,
-  };
-
-  export {
     GPUDroplets as GPUDroplets,
     type DropletBackupPolicy as DropletBackupPolicy,
     type GPUDropletCreateResponse as GPUDropletCreateResponse,
@@ -869,6 +856,19 @@ export declare namespace GradientAI {
   };
 
   export { Inference as Inference };
+
+  export {
+    KnowledgeBases as KnowledgeBases,
+    type APIKnowledgeBase as APIKnowledgeBase,
+    type KnowledgeBaseCreateResponse as KnowledgeBaseCreateResponse,
+    type KnowledgeBaseRetrieveResponse as KnowledgeBaseRetrieveResponse,
+    type KnowledgeBaseUpdateResponse as KnowledgeBaseUpdateResponse,
+    type KnowledgeBaseListResponse as KnowledgeBaseListResponse,
+    type KnowledgeBaseDeleteResponse as KnowledgeBaseDeleteResponse,
+    type KnowledgeBaseCreateParams as KnowledgeBaseCreateParams,
+    type KnowledgeBaseUpdateParams as KnowledgeBaseUpdateParams,
+    type KnowledgeBaseListParams as KnowledgeBaseListParams,
+  };
 
   export {
     Models as Models,
