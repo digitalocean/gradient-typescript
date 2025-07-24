@@ -41,6 +41,7 @@ export const tool: Tool = {
     },
     required: ['name', 'public_key'],
   },
+  annotations: {},
 };
 
 export const handler = async (client: GradientAI, args: Record<string, unknown> | undefined) => {

@@ -185,6 +185,7 @@ export const tool: Tool = {
       },
     },
   },
+  annotations: {},
 };
 
 export const handler = async (client: GradientAI, args: Record<string, unknown> | undefined) => {

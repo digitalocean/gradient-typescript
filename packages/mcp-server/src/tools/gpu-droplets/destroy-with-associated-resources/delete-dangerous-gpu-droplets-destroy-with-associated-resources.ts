@@ -36,6 +36,9 @@ export const tool: Tool = {
     },
     required: ['droplet_id', 'X-Dangerous'],
   },
+  annotations: {
+    idempotentHint: true,
+  },
 };
 
 export const handler = async (client: GradientAI, args: Record<string, unknown> | undefined) => {

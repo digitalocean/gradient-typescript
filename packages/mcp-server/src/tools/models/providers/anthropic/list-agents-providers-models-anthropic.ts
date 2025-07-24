@@ -35,6 +35,9 @@ export const tool: Tool = {
     },
     required: ['uuid'],
   },
+  annotations: {
+    readOnlyHint: true,
+  },
 };
 
 export const handler = async (client: GradientAI, args: Record<string, unknown> | undefined) => {

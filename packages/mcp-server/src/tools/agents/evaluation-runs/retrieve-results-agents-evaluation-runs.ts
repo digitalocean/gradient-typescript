@@ -37,6 +37,9 @@ export const tool: Tool = {
     },
     required: ['evaluation_run_uuid', 'prompt_id'],
   },
+  annotations: {
+    readOnlyHint: true,
+  },
 };
 
 export const handler = async (client: GradientAI, args: Record<string, unknown> | undefined) => {

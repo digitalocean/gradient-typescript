@@ -41,6 +41,9 @@ export const tool: Tool = {
     },
     required: ['firewall_id', 'tags'],
   },
+  annotations: {
+    idempotentHint: true,
+  },
 };
 
 export const handler = async (client: GradientAI, args: Record<string, unknown> | undefined) => {

@@ -39,6 +39,9 @@ export const tool: Tool = {
     },
     required: ['path_workspace_uuid'],
   },
+  annotations: {
+    idempotentHint: true,
+  },
 };
 
 export const handler = async (client: GradientAI, args: Record<string, unknown> | undefined) => {

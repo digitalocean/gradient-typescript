@@ -33,6 +33,9 @@ export const tool: Tool = {
     },
     required: ['autoscale_pool_id'],
   },
+  annotations: {
+    idempotentHint: true,
+  },
 };
 
 export const handler = async (client: GradientAI, args: Record<string, unknown> | undefined) => {

@@ -34,6 +34,9 @@ export const tool: Tool = {
     },
     required: ['indexing_job_uuid'],
   },
+  annotations: {
+    readOnlyHint: true,
+  },
 };
 
 export const handler = async (client: GradientAI, args: Record<string, unknown> | undefined) => {

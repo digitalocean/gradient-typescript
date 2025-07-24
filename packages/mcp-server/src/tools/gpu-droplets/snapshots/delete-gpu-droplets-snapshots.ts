@@ -43,6 +43,9 @@ export const tool: Tool = {
     },
     required: ['snapshot_id'],
   },
+  annotations: {
+    idempotentHint: true,
+  },
 };
 
 export const handler = async (client: GradientAI, args: Record<string, unknown> | undefined) => {

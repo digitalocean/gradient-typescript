@@ -33,6 +33,7 @@ export const tool: Tool = {
     },
     required: ['droplet_id'],
   },
+  annotations: {},
 };
 
 export const handler = async (client: GradientAI, args: Record<string, unknown> | undefined) => {

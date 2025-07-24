@@ -52,6 +52,7 @@ export const tool: Tool = {
     },
     required: ['path_parent_agent_uuid', 'path_child_agent_uuid'],
   },
+  annotations: {},
 };
 
 export const handler = async (client: GradientAI, args: Record<string, unknown> | undefined) => {

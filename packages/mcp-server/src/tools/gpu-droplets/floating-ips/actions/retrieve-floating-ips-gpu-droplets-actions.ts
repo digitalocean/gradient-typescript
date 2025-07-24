@@ -37,6 +37,9 @@ export const tool: Tool = {
     },
     required: ['floating_ip', 'action_id'],
   },
+  annotations: {
+    readOnlyHint: true,
+  },
 };
 
 export const handler = async (client: GradientAI, args: Record<string, unknown> | undefined) => {

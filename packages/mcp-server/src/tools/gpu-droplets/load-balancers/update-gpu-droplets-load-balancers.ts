@@ -502,6 +502,9 @@ export const tool: Tool = {
       },
     },
   },
+  annotations: {
+    idempotentHint: true,
+  },
 };
 
 export const handler = async (client: GradientAI, args: Record<string, unknown> | undefined) => {
