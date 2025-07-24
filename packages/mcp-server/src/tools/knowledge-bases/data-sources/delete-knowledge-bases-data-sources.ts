@@ -37,6 +37,9 @@ export const tool: Tool = {
     },
     required: ['knowledge_base_uuid', 'data_source_uuid'],
   },
+  annotations: {
+    idempotentHint: true,
+  },
 };
 
 export const handler = async (client: GradientAI, args: Record<string, unknown> | undefined) => {

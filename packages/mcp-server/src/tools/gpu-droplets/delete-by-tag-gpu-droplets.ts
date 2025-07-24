@@ -34,6 +34,9 @@ export const tool: Tool = {
     },
     required: ['tag_name'],
   },
+  annotations: {
+    idempotentHint: true,
+  },
 };
 
 export const handler = async (client: GradientAI, args: Record<string, unknown> | undefined) => {

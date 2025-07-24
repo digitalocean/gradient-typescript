@@ -47,6 +47,9 @@ export const tool: Tool = {
     },
     required: ['ssh_key_identifier'],
   },
+  annotations: {
+    readOnlyHint: true,
+  },
 };
 
 export const handler = async (client: GradientAI, args: Record<string, unknown> | undefined) => {

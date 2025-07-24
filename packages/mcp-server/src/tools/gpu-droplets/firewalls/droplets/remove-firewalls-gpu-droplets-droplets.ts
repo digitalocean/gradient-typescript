@@ -40,6 +40,9 @@ export const tool: Tool = {
     },
     required: ['firewall_id', 'droplet_ids'],
   },
+  annotations: {
+    idempotentHint: true,
+  },
 };
 
 export const handler = async (client: GradientAI, args: Record<string, unknown> | undefined) => {

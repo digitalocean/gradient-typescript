@@ -27,6 +27,7 @@ export const tool: Tool = {
     },
     required: ['agent_uuid'],
   },
+  annotations: {},
 };
 
 export const handler = async (client: GradientAI, args: Record<string, unknown> | undefined) => {
