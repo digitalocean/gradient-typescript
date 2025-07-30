@@ -9,8 +9,8 @@ It is generated with [Stainless](https://www.stainless.com/).
 Because it's not published yet, clone the repo and build it:
 
 ```sh
-git clone git@github.com:stainless-sdks/gradientai-typescript.git
-cd gradientai-typescript
+git clone git@github.com:stainless-sdks/gradient-typescript.git
+cd gradient-typescript
 ./scripts/bootstrap
 ./scripts/build
 ```
@@ -19,9 +19,9 @@ cd gradientai-typescript
 
 ```sh
 # set env vars as needed
-export GRADIENTAI_API_KEY="My API Key"
-export GRADIENTAI_INFERENCE_KEY="My Inference Key"
-export GRADIENTAI_AGENT_KEY="My Agent Key"
+export GRADIENT_API_KEY="My API Key"
+export GRADIENT_INFERENCE_KEY="My Inference Key"
+export GRADIENT_AGENT_KEY="My Agent Key"
 export GRADIENT_AGENT_DOMAIN="My Agent Domain"
 node ./packages/mcp-server/dist/index.js
 ```
@@ -44,14 +44,14 @@ For clients with a configuration JSON, it might look something like this:
     "digitalocean_gradient_api": {
       "command": "node",
       "args": [
-        "/path/to/local/gradientai-typescript/packages/mcp-server",
+        "/path/to/local/gradient-typescript/packages/mcp-server",
         "--client=claude",
         "--tools=dynamic"
       ],
       "env": {
-        "GRADIENTAI_API_KEY": "My API Key",
-        "GRADIENTAI_INFERENCE_KEY": "My Inference Key",
-        "GRADIENTAI_AGENT_KEY": "My Agent Key",
+        "GRADIENT_API_KEY": "My API Key",
+        "GRADIENT_INFERENCE_KEY": "My Inference Key",
+        "GRADIENT_AGENT_KEY": "My Agent Key",
         "GRADIENT_AGENT_DOMAIN": "My Agent Domain"
       }
     }

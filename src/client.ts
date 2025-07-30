@@ -94,17 +94,17 @@ import { isEmptyObj } from './internal/utils/values';
 
 export interface ClientOptions {
   /**
-   * Defaults to process.env['GRADIENTAI_API_KEY'].
+   * Defaults to process.env['GRADIENT_API_KEY'].
    */
   apiKey?: string | null | undefined;
 
   /**
-   * Defaults to process.env['GRADIENTAI_INFERENCE_KEY'].
+   * Defaults to process.env['GRADIENT_INFERENCE_KEY'].
    */
   inferenceKey?: string | null | undefined;
 
   /**
-   * Defaults to process.env['GRADIENTAI_AGENT_KEY'].
+   * Defaults to process.env['GRADIENT_AGENT_KEY'].
    */
   agentKey?: string | null | undefined;
 
@@ -203,9 +203,9 @@ export class Gradient {
   /**
    * API Client for interfacing with the Gradient API.
    *
-   * @param {string | null | undefined} [opts.apiKey=process.env['GRADIENTAI_API_KEY'] ?? null]
-   * @param {string | null | undefined} [opts.inferenceKey=process.env['GRADIENTAI_INFERENCE_KEY'] ?? null]
-   * @param {string | null | undefined} [opts.agentKey=process.env['GRADIENTAI_AGENT_KEY'] ?? null]
+   * @param {string | null | undefined} [opts.apiKey=process.env['GRADIENT_API_KEY'] ?? null]
+   * @param {string | null | undefined} [opts.inferenceKey=process.env['GRADIENT_INFERENCE_KEY'] ?? null]
+   * @param {string | null | undefined} [opts.agentKey=process.env['GRADIENT_AGENT_KEY'] ?? null]
    * @param {string | null | undefined} [opts.agentDomain]
    * @param {string} [opts.baseURL=process.env['GRADIENT_BASE_URL'] ?? https://api.digitalocean.com/] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
@@ -217,9 +217,9 @@ export class Gradient {
    */
   constructor({
     baseURL = readEnv('GRADIENT_BASE_URL'),
-    apiKey = readEnv('GRADIENTAI_API_KEY') ?? null,
-    inferenceKey = readEnv('GRADIENTAI_INFERENCE_KEY') ?? null,
-    agentKey = readEnv('GRADIENTAI_AGENT_KEY') ?? null,
+    apiKey = readEnv('GRADIENT_API_KEY') ?? null,
+    inferenceKey = readEnv('GRADIENT_INFERENCE_KEY') ?? null,
+    agentKey = readEnv('GRADIENT_AGENT_KEY') ?? null,
     agentDomain = null,
     ...opts
   }: ClientOptions = {}) {
