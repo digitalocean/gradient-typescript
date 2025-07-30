@@ -11,7 +11,7 @@ It is generated with [Stainless](https://www.stainless.com/).
 ## Installation
 
 ```sh
-npm install git+ssh://git@github.com:stainless-sdks/gradientai-typescript.git
+npm install git+ssh://git@github.com:stainless-sdks/gradient-typescript.git
 ```
 
 > [!NOTE]
@@ -26,7 +26,7 @@ The full API of this library can be found in [api.md](api.md).
 import Gradient from '@digitalocean/gradient';
 
 const client = new Gradient({
-  apiKey: process.env['GRADIENTAI_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env['GRADIENT_API_KEY'], // This is the default and can be omitted
 });
 
 const completion = await client.chat.completions.create({
@@ -68,7 +68,7 @@ This library includes TypeScript definitions for all request params and response
 import Gradient from '@digitalocean/gradient';
 
 const client = new Gradient({
-  apiKey: process.env['GRADIENTAI_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env['GRADIENT_API_KEY'], // This is the default and can be omitted
 });
 
 const params: Gradient.Chat.CompletionCreateParams = {
@@ -379,7 +379,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/stainless-sdks/gradientai-typescript/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/stainless-sdks/gradient-typescript/issues) with questions, bugs, or suggestions.
 
 ## Requirements
 
