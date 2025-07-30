@@ -1,5 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+export { Anthropic } from './anthropic/index';
 export {
   EvaluationMetrics,
   type EvaluationMetricListResponse,
@@ -7,6 +8,7 @@ export {
   type EvaluationMetricListRegionsParams,
 } from './evaluation-metrics';
 export { Models, type ModelListResponse, type ModelListParams } from './models';
+export { OpenAI } from './openai/index';
 export {
   Workspaces,
   type WorkspaceCreateResponse,

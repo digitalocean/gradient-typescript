@@ -27,6 +27,18 @@ import list_evaluation_test_cases_evaluation_metrics_agents_workspaces from './a
 import list_workspaces_evaluation_metrics_agents_agents from './agents/evaluation-metrics/workspaces/agents/list-workspaces-evaluation-metrics-agents-agents';
 import move_workspaces_evaluation_metrics_agents_agents from './agents/evaluation-metrics/workspaces/agents/move-workspaces-evaluation-metrics-agents-agents';
 import list_evaluation_metrics_agents_models from './agents/evaluation-metrics/models/list-evaluation-metrics-agents-models';
+import create_anthropic_evaluation_metrics_agents_keys from './agents/evaluation-metrics/anthropic/keys/create-anthropic-evaluation-metrics-agents-keys';
+import retrieve_anthropic_evaluation_metrics_agents_keys from './agents/evaluation-metrics/anthropic/keys/retrieve-anthropic-evaluation-metrics-agents-keys';
+import update_anthropic_evaluation_metrics_agents_keys from './agents/evaluation-metrics/anthropic/keys/update-anthropic-evaluation-metrics-agents-keys';
+import list_anthropic_evaluation_metrics_agents_keys from './agents/evaluation-metrics/anthropic/keys/list-anthropic-evaluation-metrics-agents-keys';
+import delete_anthropic_evaluation_metrics_agents_keys from './agents/evaluation-metrics/anthropic/keys/delete-anthropic-evaluation-metrics-agents-keys';
+import list_agents_anthropic_evaluation_metrics_agents_keys from './agents/evaluation-metrics/anthropic/keys/list-agents-anthropic-evaluation-metrics-agents-keys';
+import create_openai_evaluation_metrics_agents_keys from './agents/evaluation-metrics/openai/keys/create-openai-evaluation-metrics-agents-keys';
+import retrieve_openai_evaluation_metrics_agents_keys from './agents/evaluation-metrics/openai/keys/retrieve-openai-evaluation-metrics-agents-keys';
+import update_openai_evaluation_metrics_agents_keys from './agents/evaluation-metrics/openai/keys/update-openai-evaluation-metrics-agents-keys';
+import list_openai_evaluation_metrics_agents_keys from './agents/evaluation-metrics/openai/keys/list-openai-evaluation-metrics-agents-keys';
+import delete_openai_evaluation_metrics_agents_keys from './agents/evaluation-metrics/openai/keys/delete-openai-evaluation-metrics-agents-keys';
+import list_agents_openai_evaluation_metrics_agents_keys from './agents/evaluation-metrics/openai/keys/list-agents-openai-evaluation-metrics-agents-keys';
 import create_agents_evaluation_runs from './agents/evaluation-runs/create-agents-evaluation-runs';
 import retrieve_agents_evaluation_runs from './agents/evaluation-runs/retrieve-agents-evaluation-runs';
 import list_results_agents_evaluation_runs from './agents/evaluation-runs/list-results-agents-evaluation-runs';
@@ -157,7 +169,6 @@ import retrieve_knowledge_bases_indexing_jobs from './knowledge-bases/indexing-j
 import list_knowledge_bases_indexing_jobs from './knowledge-bases/indexing-jobs/list-knowledge-bases-indexing-jobs';
 import retrieve_data_sources_knowledge_bases_indexing_jobs from './knowledge-bases/indexing-jobs/retrieve-data-sources-knowledge-bases-indexing-jobs';
 import update_cancel_knowledge_bases_indexing_jobs from './knowledge-bases/indexing-jobs/update-cancel-knowledge-bases-indexing-jobs';
-import retrieve_models from './models/retrieve-models';
 import list_models from './models/list-models';
 import create_providers_models_anthropic from './models/providers/anthropic/create-providers-models-anthropic';
 import retrieve_providers_models_anthropic from './models/providers/anthropic/retrieve-providers-models-anthropic';
@@ -172,6 +183,10 @@ import list_providers_models_openai from './models/providers/openai/list-provide
 import delete_providers_models_openai from './models/providers/openai/delete-providers-models-openai';
 import retrieve_agents_providers_models_openai from './models/providers/openai/retrieve-agents-providers-models-openai';
 import list_regions from './regions/list-regions';
+import retrieve_schema_registry_databases_config from './databases/schema-registry/config/retrieve-schema-registry-databases-config';
+import update_schema_registry_databases_config from './databases/schema-registry/config/update-schema-registry-databases-config';
+import retrieve_subject_schema_registry_databases_config from './databases/schema-registry/config/retrieve-subject-schema-registry-databases-config';
+import update_subject_schema_registry_databases_config from './databases/schema-registry/config/update-subject-schema-registry-databases-config';
 
 export const endpoints: Endpoint[] = [];
 
@@ -202,6 +217,18 @@ addEndpoint(list_evaluation_test_cases_evaluation_metrics_agents_workspaces);
 addEndpoint(list_workspaces_evaluation_metrics_agents_agents);
 addEndpoint(move_workspaces_evaluation_metrics_agents_agents);
 addEndpoint(list_evaluation_metrics_agents_models);
+addEndpoint(create_anthropic_evaluation_metrics_agents_keys);
+addEndpoint(retrieve_anthropic_evaluation_metrics_agents_keys);
+addEndpoint(update_anthropic_evaluation_metrics_agents_keys);
+addEndpoint(list_anthropic_evaluation_metrics_agents_keys);
+addEndpoint(delete_anthropic_evaluation_metrics_agents_keys);
+addEndpoint(list_agents_anthropic_evaluation_metrics_agents_keys);
+addEndpoint(create_openai_evaluation_metrics_agents_keys);
+addEndpoint(retrieve_openai_evaluation_metrics_agents_keys);
+addEndpoint(update_openai_evaluation_metrics_agents_keys);
+addEndpoint(list_openai_evaluation_metrics_agents_keys);
+addEndpoint(delete_openai_evaluation_metrics_agents_keys);
+addEndpoint(list_agents_openai_evaluation_metrics_agents_keys);
 addEndpoint(create_agents_evaluation_runs);
 addEndpoint(retrieve_agents_evaluation_runs);
 addEndpoint(list_results_agents_evaluation_runs);
@@ -332,7 +359,6 @@ addEndpoint(retrieve_knowledge_bases_indexing_jobs);
 addEndpoint(list_knowledge_bases_indexing_jobs);
 addEndpoint(retrieve_data_sources_knowledge_bases_indexing_jobs);
 addEndpoint(update_cancel_knowledge_bases_indexing_jobs);
-addEndpoint(retrieve_models);
 addEndpoint(list_models);
 addEndpoint(create_providers_models_anthropic);
 addEndpoint(retrieve_providers_models_anthropic);
@@ -347,6 +373,10 @@ addEndpoint(list_providers_models_openai);
 addEndpoint(delete_providers_models_openai);
 addEndpoint(retrieve_agents_providers_models_openai);
 addEndpoint(list_regions);
+addEndpoint(retrieve_schema_registry_databases_config);
+addEndpoint(update_schema_registry_databases_config);
+addEndpoint(retrieve_subject_schema_registry_databases_config);
+addEndpoint(update_subject_schema_registry_databases_config);
 
 export type Filter = {
   type: 'resource' | 'operation' | 'tag' | 'tool';

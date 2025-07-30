@@ -40,6 +40,7 @@ import {
   Agents,
 } from './resources/agents/agents';
 import { Chat } from './resources/chat/chat';
+import { Databases } from './resources/databases/databases';
 import {
   DropletBackupPolicy,
   GPUDropletCreateParams,
@@ -74,8 +75,8 @@ import {
   APIAgreement,
   APIModel,
   APIModelVersion,
+  ModelListParams,
   ModelListResponse,
-  ModelRetrieveResponse,
   Models,
 } from './resources/models/models';
 import { type Fetch } from './internal/builtin-types';
@@ -802,6 +803,7 @@ export class GradientAI {
   knowledgeBases: API.KnowledgeBases = new API.KnowledgeBases(this);
   models: API.Models = new API.Models(this);
   regions: API.Regions = new API.Regions(this);
+  databases: API.Databases = new API.Databases(this);
 }
 GradientAI.Agents = Agents;
 GradientAI.Chat = Chat;
@@ -810,6 +812,7 @@ GradientAI.Inference = Inference;
 GradientAI.KnowledgeBases = KnowledgeBases;
 GradientAI.Models = Models;
 GradientAI.Regions = Regions;
+GradientAI.Databases = Databases;
 export declare namespace GradientAI {
   export type RequestOptions = Opts.RequestOptions;
 
@@ -875,8 +878,8 @@ export declare namespace GradientAI {
     type APIAgreement as APIAgreement,
     type APIModel as APIModel,
     type APIModelVersion as APIModelVersion,
-    type ModelRetrieveResponse as ModelRetrieveResponse,
     type ModelListResponse as ModelListResponse,
+    type ModelListParams as ModelListParams,
   };
 
   export {
@@ -884,6 +887,8 @@ export declare namespace GradientAI {
     type RegionListResponse as RegionListResponse,
     type RegionListParams as RegionListParams,
   };
+
+  export { Databases as Databases };
 
   export type Action = API.Action;
   export type ActionLink = API.ActionLink;
