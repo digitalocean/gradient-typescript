@@ -1,4 +1,4 @@
-import { createPathTagFunction, encodeURIPath } from 'gradientai/internal/utils/path';
+import { createPathTagFunction, encodeURIPath } from '@digitalocean/gradient/internal/utils/path';
 import { inspect } from 'node:util';
 import { runInNewContext } from 'node:vm';
 

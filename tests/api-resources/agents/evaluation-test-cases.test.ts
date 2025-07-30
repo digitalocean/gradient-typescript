@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import GradientAI from 'gradientai';
+import Gradient from '@digitalocean/gradient';
 
-const client = new GradientAI({
+const client = new Gradient({
   apiKey: 'My API Key',
   inferenceKey: 'My Inference Key',
   agentKey: 'My Agent Key',
@@ -42,7 +42,7 @@ describe('resource evaluationTestCases', () => {
         },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(GradientAI.NotFoundError);
+    ).rejects.toThrow(Gradient.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
@@ -68,7 +68,7 @@ describe('resource evaluationTestCases', () => {
         { evaluation_test_case_version: 0 },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(GradientAI.NotFoundError);
+    ).rejects.toThrow(Gradient.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
@@ -106,7 +106,7 @@ describe('resource evaluationTestCases', () => {
         },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(GradientAI.NotFoundError);
+    ).rejects.toThrow(Gradient.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
@@ -144,6 +144,6 @@ describe('resource evaluationTestCases', () => {
         { evaluation_test_case_version: 0 },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(GradientAI.NotFoundError);
+    ).rejects.toThrow(Gradient.NotFoundError);
   });
 });

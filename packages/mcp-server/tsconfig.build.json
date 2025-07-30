@@ -5,8 +5,8 @@
   "compilerOptions": {
     "rootDir": "./dist/src",
     "paths": {
-      "gradientai-mcp/*": ["dist/src/*"],
-      "gradientai-mcp": ["dist/src/index.ts"]
+      "gradient-mcp/*": ["dist/src/*"],
+      "gradient-mcp": ["dist/src/index.ts"]
     },
     "noEmit": false,
     "declaration": true,

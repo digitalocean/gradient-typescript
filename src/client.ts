@@ -113,7 +113,7 @@ export interface ClientOptions {
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
    *
-   * Defaults to process.env['GRADIENT_AI_BASE_URL'].
+   * Defaults to process.env['GRADIENT_BASE_URL'].
    */
   baseURL?: string | null | undefined;
 
@@ -167,7 +167,7 @@ export interface ClientOptions {
   /**
    * Set the log level.
    *
-   * Defaults to process.env['GRADIENT_AI_LOG'] or 'warn' if it isn't set.
+   * Defaults to process.env['GRADIENT_LOG'] or 'warn' if it isn't set.
    */
   logLevel?: LogLevel | undefined;
 
@@ -180,9 +180,9 @@ export interface ClientOptions {
 }
 
 /**
- * API Client for interfacing with the Gradient AI API.
+ * API Client for interfacing with the Gradient API.
  */
-export class GradientAI {
+export class Gradient {
   apiKey: string | null;
   inferenceKey: string | null;
   agentKey: string | null;
@@ -201,13 +201,13 @@ export class GradientAI {
   private _options: ClientOptions;
 
   /**
-   * API Client for interfacing with the Gradient AI API.
+   * API Client for interfacing with the Gradient API.
    *
    * @param {string | null | undefined} [opts.apiKey=process.env['GRADIENTAI_API_KEY'] ?? null]
    * @param {string | null | undefined} [opts.inferenceKey=process.env['GRADIENTAI_INFERENCE_KEY'] ?? null]
    * @param {string | null | undefined} [opts.agentKey=process.env['GRADIENTAI_AGENT_KEY'] ?? null]
    * @param {string | null | undefined} [opts.agentDomain]
-   * @param {string} [opts.baseURL=process.env['GRADIENT_AI_BASE_URL'] ?? https://api.digitalocean.com/] - Override the default base URL for the API.
+   * @param {string} [opts.baseURL=process.env['GRADIENT_BASE_URL'] ?? https://api.digitalocean.com/] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
    * @param {Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
@@ -216,7 +216,7 @@ export class GradientAI {
    * @param {Record<string, string | undefined>} opts.defaultQuery - Default query parameters to include with every request to the API.
    */
   constructor({
-    baseURL = readEnv('GRADIENT_AI_BASE_URL'),
+    baseURL = readEnv('GRADIENT_BASE_URL'),
     apiKey = readEnv('GRADIENTAI_API_KEY') ?? null,
     inferenceKey = readEnv('GRADIENTAI_INFERENCE_KEY') ?? null,
     agentKey = readEnv('GRADIENTAI_AGENT_KEY') ?? null,
@@ -233,14 +233,14 @@ export class GradientAI {
     };
 
     this.baseURL = options.baseURL!;
-    this.timeout = options.timeout ?? GradientAI.DEFAULT_TIMEOUT /* 1 minute */;
+    this.timeout = options.timeout ?? Gradient.DEFAULT_TIMEOUT /* 1 minute */;
     this.logger = options.logger ?? console;
     const defaultLogLevel = 'warn';
     // Set default logLevel early so that we can log a warning in parseLogLevel.
     this.logLevel = defaultLogLevel;
     this.logLevel =
       parseLogLevel(options.logLevel, 'ClientOptions.logLevel', this) ??
-      parseLogLevel(readEnv('GRADIENT_AI_LOG'), "process.env['GRADIENT_AI_LOG']", this) ??
+      parseLogLevel(readEnv('GRADIENT_LOG'), "process.env['GRADIENT_LOG']", this) ??
       defaultLogLevel;
     this.fetchOptions = options.fetchOptions;
     this.maxRetries = options.maxRetries ?? 2;
@@ -777,10 +777,10 @@ export class GradientAI {
     }
   }
 
-  static GradientAI = this;
+  static Gradient = this;
   static DEFAULT_TIMEOUT = 60000; // 1 minute
 
-  static GradientAIError = Errors.GradientAIError;
+  static GradientError = Errors.GradientError;
   static APIError = Errors.APIError;
   static APIConnectionError = Errors.APIConnectionError;
   static APIConnectionTimeoutError = Errors.APIConnectionTimeoutError;
@@ -805,15 +805,15 @@ export class GradientAI {
   regions: API.Regions = new API.Regions(this);
   databases: API.Databases = new API.Databases(this);
 }
-GradientAI.Agents = Agents;
-GradientAI.Chat = Chat;
-GradientAI.GPUDroplets = GPUDroplets;
-GradientAI.Inference = Inference;
-GradientAI.KnowledgeBases = KnowledgeBases;
-GradientAI.Models = Models;
-GradientAI.Regions = Regions;
-GradientAI.Databases = Databases;
-export declare namespace GradientAI {
+Gradient.Agents = Agents;
+Gradient.Chat = Chat;
+Gradient.GPUDroplets = GPUDroplets;
+Gradient.Inference = Inference;
+Gradient.KnowledgeBases = KnowledgeBases;
+Gradient.Models = Models;
+Gradient.Regions = Regions;
+Gradient.Databases = Databases;
+export declare namespace Gradient {
   export type RequestOptions = Opts.RequestOptions;
 
   export {

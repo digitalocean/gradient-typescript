@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import GradientAI from 'gradientai';
+import Gradient from '@digitalocean/gradient';
 
-const client = new GradientAI({
+const client = new Gradient({
   apiKey: 'My API Key',
   inferenceKey: 'My Inference Key',
   agentKey: 'My Agent Key',
@@ -27,6 +27,6 @@ describe('resource regions', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.regions.list({ page: 1, per_page: 1 }, { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(GradientAI.NotFoundError);
+    ).rejects.toThrow(Gradient.NotFoundError);
   });
 });

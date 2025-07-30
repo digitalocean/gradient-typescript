@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import GradientAI from 'gradientai';
+import Gradient from '@digitalocean/gradient';
 
-const client = new GradientAI({
+const client = new Gradient({
   apiKey: 'My API Key',
   inferenceKey: 'My Inference Key',
   agentKey: 'My Agent Key',
@@ -34,7 +34,7 @@ describe('resource evaluationRuns', () => {
         },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(GradientAI.NotFoundError);
+    ).rejects.toThrow(Gradient.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
@@ -72,7 +72,7 @@ describe('resource evaluationRuns', () => {
         { page: 0, per_page: 0 },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(GradientAI.NotFoundError);
+    ).rejects.toThrow(Gradient.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being

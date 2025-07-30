@@ -55,12 +55,12 @@ $ cd gradientai-typescript
 # With yarn
 $ yarn link
 $ cd ../my-package
-$ yarn link gradientai
+$ yarn link @digitalocean/gradient
 
 # With pnpm
 $ pnpm link --global
 $ cd ../my-package
-$ pnpm link -—global gradientai
+$ pnpm link -—global @digitalocean/gradient
 ```
 
 ## Running tests
