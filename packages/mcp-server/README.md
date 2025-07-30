@@ -234,6 +234,24 @@ The following tools are available in this MCP server.
 
 - `list_evaluation_metrics_agents_models` (`read`): To list all models, send a GET request to `/v2/gen-ai/models`.
 
+### Resource `agents.evaluation_metrics.anthropic.keys`:
+
+- `create_anthropic_evaluation_metrics_agents_keys` (`write`): To create an Anthropic API key, send a POST request to `/v2/gen-ai/anthropic/keys`.
+- `retrieve_anthropic_evaluation_metrics_agents_keys` (`read`): To retrieve details of an Anthropic API key, send a GET request to `/v2/gen-ai/anthropic/keys/{api_key_uuid}`.
+- `update_anthropic_evaluation_metrics_agents_keys` (`write`): To update an Anthropic API key, send a PUT request to `/v2/gen-ai/anthropic/keys/{api_key_uuid}`.
+- `list_anthropic_evaluation_metrics_agents_keys` (`read`): To list all Anthropic API keys, send a GET request to `/v2/gen-ai/anthropic/keys`.
+- `delete_anthropic_evaluation_metrics_agents_keys` (`write`): To delete an Anthropic API key, send a DELETE request to `/v2/gen-ai/anthropic/keys/{api_key_uuid}`.
+- `list_agents_anthropic_evaluation_metrics_agents_keys` (`read`): List Agents by Anthropic Key.
+
+### Resource `agents.evaluation_metrics.openai.keys`:
+
+- `create_openai_evaluation_metrics_agents_keys` (`write`): To create an OpenAI API key, send a POST request to `/v2/gen-ai/openai/keys`.
+- `retrieve_openai_evaluation_metrics_agents_keys` (`read`): To retrieve details of an OpenAI API key, send a GET request to `/v2/gen-ai/openai/keys/{api_key_uuid}`.
+- `update_openai_evaluation_metrics_agents_keys` (`write`): To update an OpenAI API key, send a PUT request to `/v2/gen-ai/openai/keys/{api_key_uuid}`.
+- `list_openai_evaluation_metrics_agents_keys` (`read`): To list all OpenAI API keys, send a GET request to `/v2/gen-ai/openai/keys`.
+- `delete_openai_evaluation_metrics_agents_keys` (`write`): To delete an OpenAI API key, send a DELETE request to `/v2/gen-ai/openai/keys/{api_key_uuid}`.
+- `list_agents_openai_evaluation_metrics_agents_keys` (`read`): List Agents by OpenAI Key.
+
 ### Resource `agents.evaluation_runs`:
 
 - `create_agents_evaluation_runs` (`write`): To run an evaluation test case, send a POST request to `/v2/gen-ai/evaluation_runs`.
@@ -950,8 +968,7 @@ The following tools are available in this MCP server.
 
 ### Resource `models`:
 
-- `retrieve_models` (`read`): Retrieves a model instance, providing basic information about the model such as the owner and permissioning.
-- `list_models` (`read`): Lists the currently available models, and provides basic information about each one such as the owner and availability.
+- `list_models` (`read`): To list all models, send a GET request to `/v2/gen-ai/models`.
 
 ### Resource `models.providers.anthropic`:
 
@@ -975,3 +992,22 @@ The following tools are available in this MCP server.
 
 - `list_regions` (`read`): To list all of the regions that are available, send a GET request to `/v2/regions`.
   The response will be a JSON object with a key called `regions`. The value of this will be an array of `region` objects, each of which will contain the standard region attributes.
+
+### Resource `databases.schema_registry.config`:
+
+- `retrieve_schema_registry_databases_config` (`read`): To retrieve the Schema Registry configuration for a Kafka cluster, send a GET request to
+  `/v2/databases/$DATABASE_ID/schema-registry/config`.
+  The response is a JSON object with a `compatibility_level` key, which is set to an object
+  containing any database configuration parameters.
+- `update_schema_registry_databases_config` (`write`): To update the Schema Registry configuration for a Kafka cluster, send a PUT request to
+  `/v2/databases/$DATABASE_ID/schema-registry/config`.
+  The response is a JSON object with a `compatibility_level` key, which is set to an object
+  containing any database configuration parameters.
+- `retrieve_subject_schema_registry_databases_config` (`read`): To retrieve the Schema Registry configuration for a Subject of a Kafka cluster, send a GET request to
+  `/v2/databases/$DATABASE_ID/schema-registry/config/$SUBJECT_NAME`.
+  The response is a JSON object with a `compatibility_level` key, which is set to an object
+  containing any database configuration parameters.
+- `update_subject_schema_registry_databases_config` (`write`): To update the Schema Registry configuration for a Subject of a Kafka cluster, send a PUT request to
+  `/v2/databases/$DATABASE_ID/schema-registry/config/$SUBJECT_NAME`.
+  The response is a JSON object with a `compatibility_level` key, which is set to an object
+  containing any database configuration parameters.

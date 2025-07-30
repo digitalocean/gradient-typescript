@@ -142,6 +142,50 @@ Methods:
 
 - <code title="get /v2/gen-ai/models">client.agents.evaluationMetrics.models.<a href="./src/resources/agents/evaluation-metrics/models.ts">list</a>({ ...params }) -> ModelListResponse</code>
 
+### Anthropic
+
+#### Keys
+
+Types:
+
+- <code><a href="./src/resources/agents/evaluation-metrics/anthropic/keys.ts">KeyCreateResponse</a></code>
+- <code><a href="./src/resources/agents/evaluation-metrics/anthropic/keys.ts">KeyRetrieveResponse</a></code>
+- <code><a href="./src/resources/agents/evaluation-metrics/anthropic/keys.ts">KeyUpdateResponse</a></code>
+- <code><a href="./src/resources/agents/evaluation-metrics/anthropic/keys.ts">KeyListResponse</a></code>
+- <code><a href="./src/resources/agents/evaluation-metrics/anthropic/keys.ts">KeyDeleteResponse</a></code>
+- <code><a href="./src/resources/agents/evaluation-metrics/anthropic/keys.ts">KeyListAgentsResponse</a></code>
+
+Methods:
+
+- <code title="post /v2/gen-ai/anthropic/keys">client.agents.evaluationMetrics.anthropic.keys.<a href="./src/resources/agents/evaluation-metrics/anthropic/keys.ts">create</a>({ ...params }) -> KeyCreateResponse</code>
+- <code title="get /v2/gen-ai/anthropic/keys/{api_key_uuid}">client.agents.evaluationMetrics.anthropic.keys.<a href="./src/resources/agents/evaluation-metrics/anthropic/keys.ts">retrieve</a>(apiKeyUuid) -> KeyRetrieveResponse</code>
+- <code title="put /v2/gen-ai/anthropic/keys/{api_key_uuid}">client.agents.evaluationMetrics.anthropic.keys.<a href="./src/resources/agents/evaluation-metrics/anthropic/keys.ts">update</a>(apiKeyUuid, { ...params }) -> KeyUpdateResponse</code>
+- <code title="get /v2/gen-ai/anthropic/keys">client.agents.evaluationMetrics.anthropic.keys.<a href="./src/resources/agents/evaluation-metrics/anthropic/keys.ts">list</a>({ ...params }) -> KeyListResponse</code>
+- <code title="delete /v2/gen-ai/anthropic/keys/{api_key_uuid}">client.agents.evaluationMetrics.anthropic.keys.<a href="./src/resources/agents/evaluation-metrics/anthropic/keys.ts">delete</a>(apiKeyUuid) -> KeyDeleteResponse</code>
+- <code title="get /v2/gen-ai/anthropic/keys/{uuid}/agents">client.agents.evaluationMetrics.anthropic.keys.<a href="./src/resources/agents/evaluation-metrics/anthropic/keys.ts">listAgents</a>(uuid, { ...params }) -> KeyListAgentsResponse</code>
+
+### OpenAI
+
+#### Keys
+
+Types:
+
+- <code><a href="./src/resources/agents/evaluation-metrics/openai/keys.ts">KeyCreateResponse</a></code>
+- <code><a href="./src/resources/agents/evaluation-metrics/openai/keys.ts">KeyRetrieveResponse</a></code>
+- <code><a href="./src/resources/agents/evaluation-metrics/openai/keys.ts">KeyUpdateResponse</a></code>
+- <code><a href="./src/resources/agents/evaluation-metrics/openai/keys.ts">KeyListResponse</a></code>
+- <code><a href="./src/resources/agents/evaluation-metrics/openai/keys.ts">KeyDeleteResponse</a></code>
+- <code><a href="./src/resources/agents/evaluation-metrics/openai/keys.ts">KeyListAgentsResponse</a></code>
+
+Methods:
+
+- <code title="post /v2/gen-ai/openai/keys">client.agents.evaluationMetrics.openai.keys.<a href="./src/resources/agents/evaluation-metrics/openai/keys.ts">create</a>({ ...params }) -> KeyCreateResponse</code>
+- <code title="get /v2/gen-ai/openai/keys/{api_key_uuid}">client.agents.evaluationMetrics.openai.keys.<a href="./src/resources/agents/evaluation-metrics/openai/keys.ts">retrieve</a>(apiKeyUuid) -> KeyRetrieveResponse</code>
+- <code title="put /v2/gen-ai/openai/keys/{api_key_uuid}">client.agents.evaluationMetrics.openai.keys.<a href="./src/resources/agents/evaluation-metrics/openai/keys.ts">update</a>(apiKeyUuid, { ...params }) -> KeyUpdateResponse</code>
+- <code title="get /v2/gen-ai/openai/keys">client.agents.evaluationMetrics.openai.keys.<a href="./src/resources/agents/evaluation-metrics/openai/keys.ts">list</a>({ ...params }) -> KeyListResponse</code>
+- <code title="delete /v2/gen-ai/openai/keys/{api_key_uuid}">client.agents.evaluationMetrics.openai.keys.<a href="./src/resources/agents/evaluation-metrics/openai/keys.ts">delete</a>(apiKeyUuid) -> KeyDeleteResponse</code>
+- <code title="get /v2/gen-ai/openai/keys/{uuid}/agents">client.agents.evaluationMetrics.openai.keys.<a href="./src/resources/agents/evaluation-metrics/openai/keys.ts">listAgents</a>(uuid, { ...params }) -> KeyListAgentsResponse</code>
+
 ## EvaluationRuns
 
 Types:
@@ -675,13 +719,11 @@ Types:
 - <code><a href="./src/resources/models/models.ts">APIAgreement</a></code>
 - <code><a href="./src/resources/models/models.ts">APIModel</a></code>
 - <code><a href="./src/resources/models/models.ts">APIModelVersion</a></code>
-- <code><a href="./src/resources/models/models.ts">ModelRetrieveResponse</a></code>
 - <code><a href="./src/resources/models/models.ts">ModelListResponse</a></code>
 
 Methods:
 
-- <code title="get /models/{model}">client.models.<a href="./src/resources/models/models.ts">retrieve</a>(model) -> ModelRetrieveResponse</code>
-- <code title="get /models">client.models.<a href="./src/resources/models/models.ts">list</a>() -> ModelListResponse</code>
+- <code title="get /v2/gen-ai/models">client.models.<a href="./src/resources/models/models.ts">list</a>({ ...params }) -> ModelListResponse</code>
 
 ## Providers
 
@@ -734,3 +776,23 @@ Types:
 Methods:
 
 - <code title="get /v2/regions">client.regions.<a href="./src/resources/regions.ts">list</a>({ ...params }) -> RegionListResponse</code>
+
+# Databases
+
+## SchemaRegistry
+
+### Config
+
+Types:
+
+- <code><a href="./src/resources/databases/schema-registry/config.ts">ConfigRetrieveResponse</a></code>
+- <code><a href="./src/resources/databases/schema-registry/config.ts">ConfigUpdateResponse</a></code>
+- <code><a href="./src/resources/databases/schema-registry/config.ts">ConfigRetrieveSubjectResponse</a></code>
+- <code><a href="./src/resources/databases/schema-registry/config.ts">ConfigUpdateSubjectResponse</a></code>
+
+Methods:
+
+- <code title="get /v2/databases/{database_cluster_uuid}/schema-registry/config">client.databases.schemaRegistry.config.<a href="./src/resources/databases/schema-registry/config.ts">retrieve</a>(databaseClusterUuid) -> ConfigRetrieveResponse</code>
+- <code title="put /v2/databases/{database_cluster_uuid}/schema-registry/config">client.databases.schemaRegistry.config.<a href="./src/resources/databases/schema-registry/config.ts">update</a>(databaseClusterUuid, { ...params }) -> ConfigUpdateResponse</code>
+- <code title="get /v2/databases/{database_cluster_uuid}/schema-registry/config/{subject_name}">client.databases.schemaRegistry.config.<a href="./src/resources/databases/schema-registry/config.ts">retrieveSubject</a>(subjectName, { ...params }) -> ConfigRetrieveSubjectResponse</code>
+- <code title="put /v2/databases/{database_cluster_uuid}/schema-registry/config/{subject_name}">client.databases.schemaRegistry.config.<a href="./src/resources/databases/schema-registry/config.ts">updateSubject</a>(subjectName, { ...params }) -> ConfigUpdateSubjectResponse</code>

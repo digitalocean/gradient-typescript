@@ -4,6 +4,10 @@ import { APIResource } from '../../../core/resource';
 import * as EvaluationRunsAPI from '../evaluation-runs';
 import * as ModelsAPI from './models';
 import { ModelListParams, ModelListResponse, Models } from './models';
+import * as AnthropicAPI from './anthropic/anthropic';
+import { Anthropic } from './anthropic/anthropic';
+import * as OpenAIAPI from './openai/openai';
+import { OpenAI } from './openai/openai';
 import * as WorkspacesAPI from './workspaces/workspaces';
 import {
   WorkspaceCreateParams,
@@ -22,6 +26,8 @@ import { RequestOptions } from '../../../internal/request-options';
 export class EvaluationMetrics extends APIResource {
   workspaces: WorkspacesAPI.Workspaces = new WorkspacesAPI.Workspaces(this._client);
   models: ModelsAPI.Models = new ModelsAPI.Models(this._client);
+  anthropic: AnthropicAPI.Anthropic = new AnthropicAPI.Anthropic(this._client);
+  openai: OpenAIAPI.OpenAI = new OpenAIAPI.OpenAI(this._client);
 
   /**
    * To list all evaluation metrics, send a GET request to
@@ -121,6 +127,8 @@ export interface EvaluationMetricListRegionsParams {
 
 EvaluationMetrics.Workspaces = Workspaces;
 EvaluationMetrics.Models = Models;
+EvaluationMetrics.Anthropic = Anthropic;
+EvaluationMetrics.OpenAI = OpenAI;
 
 export declare namespace EvaluationMetrics {
   export {
@@ -146,4 +154,8 @@ export declare namespace EvaluationMetrics {
     type ModelListResponse as ModelListResponse,
     type ModelListParams as ModelListParams,
   };
+
+  export { Anthropic as Anthropic };
+
+  export { OpenAI as OpenAI };
 }

@@ -23,6 +23,7 @@ export {
   type AgentUpdateStatusParams,
 } from './agents/agents';
 export { Chat } from './chat/chat';
+export { Databases } from './databases/databases';
 export {
   GPUDroplets,
   type DropletBackupPolicy,
@@ -58,7 +59,7 @@ export {
   type APIAgreement,
   type APIModel,
   type APIModelVersion,
-  type ModelRetrieveResponse,
   type ModelListResponse,
+  type ModelListParams,
 } from './models/models';
 export { Regions, type RegionListResponse, type RegionListParams } from './regions';
