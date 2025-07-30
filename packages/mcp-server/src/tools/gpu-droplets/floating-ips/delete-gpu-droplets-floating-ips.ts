@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { Metadata, asTextContentResult } from 'gradientai-mcp/tools/types';
+import { Metadata, asTextContentResult } from 'gradient-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
-import GradientAI from 'gradientai';
+import Gradient from '@digitalocean/gradient';
 
 export const metadata: Metadata = {
   resource: 'gpu_droplets.floating_ips',
@@ -38,7 +38,7 @@ export const tool: Tool = {
   },
 };
 
-export const handler = async (client: GradientAI, args: Record<string, unknown> | undefined) => {
+export const handler = async (client: Gradient, args: Record<string, unknown> | undefined) => {
   const { floating_ip, ...body } = args as any;
   const response = await client.gpuDroplets.floatingIPs.delete(floating_ip).asResponse();
   return asTextContentResult(await response.text());

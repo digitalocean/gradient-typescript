@@ -7,8 +7,8 @@ const config: JestConfigWithTsJest = {
     '^.+\\.(t|j)sx?$': ['@swc/jest', { sourceMaps: 'inline' }],
   },
   moduleNameMapper: {
-    '^gradientai-mcp$': '<rootDir>/src/index.ts',
-    '^gradientai-mcp/(.*)$': '<rootDir>/src/$1',
+    '^gradient-mcp$': '<rootDir>/src/index.ts',
+    '^gradient-mcp/(.*)$': '<rootDir>/src/$1',
   },
   modulePathIgnorePatterns: ['<rootDir>/dist/'],
   testPathIgnorePatterns: ['scripts'],

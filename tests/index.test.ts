@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIPromise } from 'gradientai/core/api-promise';
+import { APIPromise } from '@digitalocean/gradient/core/api-promise';
 
 import util from 'node:util';
-import GradientAI from 'gradientai';
-import { APIUserAbortError } from 'gradientai';
+import Gradient from '@digitalocean/gradient';
+import { APIUserAbortError } from '@digitalocean/gradient';
 const defaultFetch = fetch;
 
 describe('instantiate client', () => {
@@ -20,7 +20,7 @@ describe('instantiate client', () => {
   });
 
   describe('defaultHeaders', () => {
-    const client = new GradientAI({
+    const client = new Gradient({
       baseURL: 'http://localhost:5000/',
       defaultHeaders: { 'X-My-Default-Header': '2' },
       apiKey: 'My API Key',
@@ -56,14 +56,14 @@ describe('instantiate client', () => {
 
     beforeEach(() => {
       process.env = { ...env };
-      process.env['GRADIENT_AI_LOG'] = undefined;
+      process.env['GRADIENT_LOG'] = undefined;
     });
 
     afterEach(() => {
       process.env = env;
     });
 
-    const forceAPIResponseForClient = async (client: GradientAI) => {
+    const forceAPIResponseForClient = async (client: Gradient) => {
       await new APIPromise(
         client,
         Promise.resolve({
@@ -89,7 +89,7 @@ describe('instantiate client', () => {
         error: jest.fn(),
       };
 
-      const client = new GradientAI({
+      const client = new Gradient({
         logger: logger,
         logLevel: 'debug',
         apiKey: 'My API Key',
@@ -102,7 +102,7 @@ describe('instantiate client', () => {
     });
 
     test('default logLevel is warn', async () => {
-      const client = new GradientAI({
+      const client = new Gradient({
         apiKey: 'My API Key',
         inferenceKey: 'My Inference Key',
         agentKey: 'My Agent Key',
@@ -119,7 +119,7 @@ describe('instantiate client', () => {
         error: jest.fn(),
       };
 
-      const client = new GradientAI({
+      const client = new Gradient({
         logger: logger,
         logLevel: 'info',
         apiKey: 'My API Key',
@@ -140,8 +140,8 @@ describe('instantiate client', () => {
         error: jest.fn(),
       };
 
-      process.env['GRADIENT_AI_LOG'] = 'debug';
-      const client = new GradientAI({
+      process.env['GRADIENT_LOG'] = 'debug';
+      const client = new Gradient({
         logger: logger,
         apiKey: 'My API Key',
         inferenceKey: 'My Inference Key',
@@ -162,8 +162,8 @@ describe('instantiate client', () => {
         error: jest.fn(),
       };
 
-      process.env['GRADIENT_AI_LOG'] = 'not a log level';
-      const client = new GradientAI({
+      process.env['GRADIENT_LOG'] = 'not a log level';
+      const client = new Gradient({
         logger: logger,
         apiKey: 'My API Key',
         inferenceKey: 'My Inference Key',
@@ -171,7 +171,7 @@ describe('instantiate client', () => {
       });
       expect(client.logLevel).toBe('warn');
       expect(warnMock).toHaveBeenCalledWith(
-        'process.env[\'GRADIENT_AI_LOG\'] was set to "not a log level", expected one of ["off","error","warn","info","debug"]',
+        'process.env[\'GRADIENT_LOG\'] was set to "not a log level", expected one of ["off","error","warn","info","debug"]',
       );
     });
 
@@ -184,8 +184,8 @@ describe('instantiate client', () => {
         error: jest.fn(),
       };
 
-      process.env['GRADIENT_AI_LOG'] = 'debug';
-      const client = new GradientAI({
+      process.env['GRADIENT_LOG'] = 'debug';
+      const client = new Gradient({
         logger: logger,
         logLevel: 'off',
         apiKey: 'My API Key',
@@ -206,8 +206,8 @@ describe('instantiate client', () => {
         error: jest.fn(),
       };
 
-      process.env['GRADIENT_AI_LOG'] = 'not a log level';
-      const client = new GradientAI({
+      process.env['GRADIENT_LOG'] = 'not a log level';
+      const client = new Gradient({
         logger: logger,
         logLevel: 'debug',
         apiKey: 'My API Key',
@@ -221,7 +221,7 @@ describe('instantiate client', () => {
 
   describe('defaultQuery', () => {
     test('with null query params given', () => {
-      const client = new GradientAI({
+      const client = new Gradient({
         baseURL: 'http://localhost:5000/',
         defaultQuery: { apiVersion: 'foo' },
         apiKey: 'My API Key',
@@ -232,7 +232,7 @@ describe('instantiate client', () => {
     });
 
     test('multiple default query params', () => {
-      const client = new GradientAI({
+      const client = new Gradient({
         baseURL: 'http://localhost:5000/',
         defaultQuery: { apiVersion: 'foo', hello: 'world' },
         apiKey: 'My API Key',
@@ -243,7 +243,7 @@ describe('instantiate client', () => {
     });
 
     test('overriding with `undefined`', () => {
-      const client = new GradientAI({
+      const client = new Gradient({
         baseURL: 'http://localhost:5000/',
         defaultQuery: { hello: 'world' },
         apiKey: 'My API Key',
@@ -255,7 +255,7 @@ describe('instantiate client', () => {
   });
 
   test('custom fetch', async () => {
-    const client = new GradientAI({
+    const client = new Gradient({
       baseURL: 'http://localhost:5000/',
       apiKey: 'My API Key',
       inferenceKey: 'My Inference Key',
@@ -275,7 +275,7 @@ describe('instantiate client', () => {
 
   test('explicit global fetch', async () => {
     // make sure the global fetch type is assignable to our Fetch type
-    const client = new GradientAI({
+    const client = new Gradient({
       baseURL: 'http://localhost:5000/',
       apiKey: 'My API Key',
       inferenceKey: 'My Inference Key',
@@ -285,7 +285,7 @@ describe('instantiate client', () => {
   });
 
   test('custom signal', async () => {
-    const client = new GradientAI({
+    const client = new Gradient({
       baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
       apiKey: 'My API Key',
       inferenceKey: 'My Inference Key',
@@ -319,7 +319,7 @@ describe('instantiate client', () => {
       return new Response(JSON.stringify({}), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new GradientAI({
+    const client = new Gradient({
       baseURL: 'http://localhost:5000/',
       apiKey: 'My API Key',
       inferenceKey: 'My Inference Key',
@@ -333,7 +333,7 @@ describe('instantiate client', () => {
 
   describe('baseUrl', () => {
     test('trailing slash', () => {
-      const client = new GradientAI({
+      const client = new Gradient({
         baseURL: 'http://localhost:5000/custom/path/',
         apiKey: 'My API Key',
         inferenceKey: 'My Inference Key',
@@ -343,7 +343,7 @@ describe('instantiate client', () => {
     });
 
     test('no trailing slash', () => {
-      const client = new GradientAI({
+      const client = new Gradient({
         baseURL: 'http://localhost:5000/custom/path',
         apiKey: 'My API Key',
         inferenceKey: 'My Inference Key',
@@ -353,11 +353,11 @@ describe('instantiate client', () => {
     });
 
     afterEach(() => {
-      process.env['GRADIENT_AI_BASE_URL'] = undefined;
+      process.env['GRADIENT_BASE_URL'] = undefined;
     });
 
     test('explicit option', () => {
-      const client = new GradientAI({
+      const client = new Gradient({
         baseURL: 'https://example.com',
         apiKey: 'My API Key',
         inferenceKey: 'My Inference Key',
@@ -367,8 +367,8 @@ describe('instantiate client', () => {
     });
 
     test('env variable', () => {
-      process.env['GRADIENT_AI_BASE_URL'] = 'https://example.com/from_env';
-      const client = new GradientAI({
+      process.env['GRADIENT_BASE_URL'] = 'https://example.com/from_env';
+      const client = new Gradient({
         apiKey: 'My API Key',
         inferenceKey: 'My Inference Key',
         agentKey: 'My Agent Key',
@@ -377,8 +377,8 @@ describe('instantiate client', () => {
     });
 
     test('empty env variable', () => {
-      process.env['GRADIENT_AI_BASE_URL'] = ''; // empty
-      const client = new GradientAI({
+      process.env['GRADIENT_BASE_URL'] = ''; // empty
+      const client = new Gradient({
         apiKey: 'My API Key',
         inferenceKey: 'My Inference Key',
         agentKey: 'My Agent Key',
@@ -387,8 +387,8 @@ describe('instantiate client', () => {
     });
 
     test('blank env variable', () => {
-      process.env['GRADIENT_AI_BASE_URL'] = '  '; // blank
-      const client = new GradientAI({
+      process.env['GRADIENT_BASE_URL'] = '  '; // blank
+      const client = new Gradient({
         apiKey: 'My API Key',
         inferenceKey: 'My Inference Key',
         agentKey: 'My Agent Key',
@@ -397,7 +397,7 @@ describe('instantiate client', () => {
     });
 
     test('in request options', () => {
-      const client = new GradientAI({
+      const client = new Gradient({
         apiKey: 'My API Key',
         inferenceKey: 'My Inference Key',
         agentKey: 'My Agent Key',
@@ -408,7 +408,7 @@ describe('instantiate client', () => {
     });
 
     test('in request options overridden by client options', () => {
-      const client = new GradientAI({
+      const client = new Gradient({
         apiKey: 'My API Key',
         inferenceKey: 'My Inference Key',
         agentKey: 'My Agent Key',
@@ -420,8 +420,8 @@ describe('instantiate client', () => {
     });
 
     test('in request options overridden by env variable', () => {
-      process.env['GRADIENT_AI_BASE_URL'] = 'http://localhost:5000/env';
-      const client = new GradientAI({
+      process.env['GRADIENT_BASE_URL'] = 'http://localhost:5000/env';
+      const client = new Gradient({
         apiKey: 'My API Key',
         inferenceKey: 'My Inference Key',
         agentKey: 'My Agent Key',
@@ -433,7 +433,7 @@ describe('instantiate client', () => {
   });
 
   test('maxRetries option is correctly set', () => {
-    const client = new GradientAI({
+    const client = new Gradient({
       maxRetries: 4,
       apiKey: 'My API Key',
       inferenceKey: 'My Inference Key',
@@ -442,7 +442,7 @@ describe('instantiate client', () => {
     expect(client.maxRetries).toEqual(4);
 
     // default
-    const client2 = new GradientAI({
+    const client2 = new Gradient({
       apiKey: 'My API Key',
       inferenceKey: 'My Inference Key',
       agentKey: 'My Agent Key',
@@ -452,7 +452,7 @@ describe('instantiate client', () => {
 
   describe('withOptions', () => {
     test('creates a new client with overridden options', async () => {
-      const client = new GradientAI({
+      const client = new Gradient({
         baseURL: 'http://localhost:5000/',
         maxRetries: 3,
         apiKey: 'My API Key',
@@ -479,7 +479,7 @@ describe('instantiate client', () => {
     });
 
     test('inherits options from the parent client', async () => {
-      const client = new GradientAI({
+      const client = new Gradient({
         baseURL: 'http://localhost:5000/',
         defaultHeaders: { 'X-Test-Header': 'test-value' },
         defaultQuery: { 'test-param': 'test-value' },
@@ -500,7 +500,7 @@ describe('instantiate client', () => {
     });
 
     test('respects runtime property changes when creating new client', () => {
-      const client = new GradientAI({
+      const client = new Gradient({
         baseURL: 'http://localhost:5000/',
         timeout: 1000,
         apiKey: 'My API Key',
@@ -537,7 +537,7 @@ describe('instantiate client', () => {
     process.env['GRADIENTAI_API_KEY'] = 'My API Key';
     process.env['GRADIENTAI_INFERENCE_KEY'] = 'My Inference Key';
     process.env['GRADIENTAI_AGENT_KEY'] = 'My Agent Key';
-    const client = new GradientAI();
+    const client = new Gradient();
     expect(client.apiKey).toBe('My API Key');
     expect(client.inferenceKey).toBe('My Inference Key');
     expect(client.agentKey).toBe('My Agent Key');
@@ -548,7 +548,7 @@ describe('instantiate client', () => {
     process.env['GRADIENTAI_API_KEY'] = 'another My API Key';
     process.env['GRADIENTAI_INFERENCE_KEY'] = 'another My Inference Key';
     process.env['GRADIENTAI_AGENT_KEY'] = 'another My Agent Key';
-    const client = new GradientAI({
+    const client = new Gradient({
       apiKey: 'My API Key',
       inferenceKey: 'My Inference Key',
       agentKey: 'My Agent Key',
@@ -560,7 +560,7 @@ describe('instantiate client', () => {
 });
 
 describe('request building', () => {
-  const client = new GradientAI({
+  const client = new Gradient({
     apiKey: 'My API Key',
     inferenceKey: 'My Inference Key',
     agentKey: 'My Agent Key',
@@ -583,7 +583,7 @@ describe('request building', () => {
 });
 
 describe('default encoder', () => {
-  const client = new GradientAI({
+  const client = new Gradient({
     apiKey: 'My API Key',
     inferenceKey: 'My Inference Key',
     agentKey: 'My Agent Key',
@@ -672,7 +672,7 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new GradientAI({
+    const client = new Gradient({
       apiKey: 'My API Key',
       inferenceKey: 'My Inference Key',
       agentKey: 'My Agent Key',
@@ -708,7 +708,7 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new GradientAI({
+    const client = new Gradient({
       apiKey: 'My API Key',
       inferenceKey: 'My Inference Key',
       agentKey: 'My Agent Key',
@@ -738,7 +738,7 @@ describe('retries', () => {
       capturedRequest = init;
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
-    const client = new GradientAI({
+    const client = new Gradient({
       apiKey: 'My API Key',
       inferenceKey: 'My Inference Key',
       agentKey: 'My Agent Key',
@@ -773,7 +773,7 @@ describe('retries', () => {
       capturedRequest = init;
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
-    const client = new GradientAI({
+    const client = new Gradient({
       apiKey: 'My API Key',
       inferenceKey: 'My Inference Key',
       agentKey: 'My Agent Key',
@@ -808,7 +808,7 @@ describe('retries', () => {
       capturedRequest = init;
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
-    const client = new GradientAI({
+    const client = new Gradient({
       apiKey: 'My API Key',
       inferenceKey: 'My Inference Key',
       agentKey: 'My Agent Key',
@@ -844,7 +844,7 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new GradientAI({
+    const client = new Gradient({
       apiKey: 'My API Key',
       inferenceKey: 'My Inference Key',
       agentKey: 'My Agent Key',
@@ -879,7 +879,7 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new GradientAI({
+    const client = new Gradient({
       apiKey: 'My API Key',
       inferenceKey: 'My Inference Key',
       agentKey: 'My Agent Key',

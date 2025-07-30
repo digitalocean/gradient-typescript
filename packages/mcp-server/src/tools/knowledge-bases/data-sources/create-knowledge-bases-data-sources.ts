@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { Metadata, asTextContentResult } from 'gradientai-mcp/tools/types';
+import { Metadata, asTextContentResult } from 'gradient-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
-import GradientAI from 'gradientai';
+import Gradient from '@digitalocean/gradient';
 
 export const metadata: Metadata = {
   resource: 'knowledge_bases.data_sources',
@@ -107,7 +107,7 @@ export const tool: Tool = {
   annotations: {},
 };
 
-export const handler = async (client: GradientAI, args: Record<string, unknown> | undefined) => {
+export const handler = async (client: Gradient, args: Record<string, unknown> | undefined) => {
   const { knowledge_base_uuid, ...body } = args as any;
   return asTextContentResult(await client.knowledgeBases.dataSources.create(knowledge_base_uuid, body));
 };

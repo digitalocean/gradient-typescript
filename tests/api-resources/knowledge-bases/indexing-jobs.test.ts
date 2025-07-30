@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import GradientAI from 'gradientai';
+import Gradient from '@digitalocean/gradient';
 
-const client = new GradientAI({
+const client = new Gradient({
   apiKey: 'My API Key',
   inferenceKey: 'My Inference Key',
   agentKey: 'My Agent Key',
@@ -33,7 +33,7 @@ describe('resource indexingJobs', () => {
         },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(GradientAI.NotFoundError);
+    ).rejects.toThrow(Gradient.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
@@ -67,7 +67,7 @@ describe('resource indexingJobs', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.knowledgeBases.indexingJobs.list({ page: 0, per_page: 0 }, { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(GradientAI.NotFoundError);
+    ).rejects.toThrow(Gradient.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
@@ -107,6 +107,6 @@ describe('resource indexingJobs', () => {
         { body_uuid: '"12345678-1234-1234-1234-123456789012"' },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(GradientAI.NotFoundError);
+    ).rejects.toThrow(Gradient.NotFoundError);
   });
 });

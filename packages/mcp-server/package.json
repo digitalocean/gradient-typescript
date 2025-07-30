@@ -1,8 +1,8 @@
 {
-  "name": "gradientai-mcp",
+  "name": "gradient-mcp",
   "version": "0.0.1-alpha.0",
-  "description": "The official MCP Server for the Gradient AI API",
-  "author": "Gradient AI <>",
+  "description": "The official MCP Server for the Gradient API",
+  "author": "Gradient <>",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "type": "commonjs",
@@ -27,7 +27,7 @@
     "fix": "eslint --fix --ext ts,js ."
   },
   "dependencies": {
-    "gradientai": "file:../../dist/",
+    "@digitalocean/gradient": "file:../../dist/",
     "@modelcontextprotocol/sdk": "^1.11.5",
     "jq-web": "https://github.com/stainless-api/jq-web/releases/download/v0.8.2/jq-web.tar.gz",
     "yargs": "^17.7.2",
@@ -55,8 +55,8 @@
     "typescript": "5.8.3"
   },
   "imports": {
-    "gradientai-mcp": ".",
-    "gradientai-mcp/*": "./src/*"
+    "gradient-mcp": ".",
+    "gradient-mcp/*": "./src/*"
   },
   "exports": {
     ".": {

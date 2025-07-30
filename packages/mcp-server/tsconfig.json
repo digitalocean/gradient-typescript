@@ -9,8 +9,8 @@
     "esModuleInterop": true,
     "baseUrl": "./",
     "paths": {
-      "gradientai-mcp/*": ["src/*"],
-      "gradientai-mcp": ["src/index.ts"]
+      "gradient-mcp/*": ["src/*"],
+      "gradient-mcp": ["src/index.ts"]
     },
     "noEmit": true,
 

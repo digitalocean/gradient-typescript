@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { GradientAI } from 'gradientai';
+import { Gradient } from '@digitalocean/gradient';
 
-const { stringifyQuery } = GradientAI.prototype as any;
+const { stringifyQuery } = Gradient.prototype as any;
 
 describe(stringifyQuery, () => {
   for (const [input, expected] of [

@@ -4,8 +4,8 @@ import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { Endpoint, endpoints, HandlerFunction, query } from './tools';
 import { CallToolRequestSchema, ListToolsRequestSchema, Tool } from '@modelcontextprotocol/sdk/types.js';
-import { ClientOptions } from 'gradientai';
-import GradientAI from 'gradientai';
+import { ClientOptions } from '@digitalocean/gradient';
+import Gradient from '@digitalocean/gradient';
 import {
   applyCompatibilityTransformations,
   ClientCapabilities,
@@ -19,13 +19,13 @@ import { McpOptions } from './options';
 export { McpOptions } from './options';
 export { ClientType } from './compat';
 export { Filter } from './tools';
-export { ClientOptions } from 'gradientai';
+export { ClientOptions } from '@digitalocean/gradient';
 export { endpoints } from './tools';
 
 // Create server instance
 export const server = new McpServer(
   {
-    name: 'gradientai_api',
+    name: 'digitalocean_gradient_api',
     version: '0.0.1-alpha.0',
   },
   { capabilities: { tools: {} } },
@@ -42,7 +42,7 @@ export function initMcpServer(params: {
   endpoints?: { tool: Tool; handler: HandlerFunction }[];
 }) {
   const transformedEndpoints = selectTools(endpoints, params.mcpOptions);
-  const client = new GradientAI(params.clientOptions);
+  const client = new Gradient(params.clientOptions);
   const capabilities = {
     ...defaultClientCapabilities,
     ...(params.mcpOptions.client ? knownClients[params.mcpOptions.client] : params.mcpOptions.capabilities),
@@ -52,7 +52,7 @@ export function initMcpServer(params: {
 
 export function init(params: {
   server: Server | McpServer;
-  client?: GradientAI;
+  client?: Gradient;
   endpoints?: { tool: Tool; handler: HandlerFunction }[];
   capabilities?: Partial<ClientCapabilities>;
 }) {
@@ -63,8 +63,8 @@ export function init(params: {
 
   const client =
     params.client ||
-    new GradientAI({
-      agentDomain: readEnv('GRADIENT_AI_AGENT_DOMAIN'),
+    new Gradient({
+      agentDomain: readEnv('GRADIENT_AGENT_DOMAIN'),
       defaultHeaders: { 'X-Stainless-MCP': 'true' },
     });
 
@@ -117,7 +117,7 @@ export function selectTools(endpoints: Endpoint[], options: McpOptions) {
 export async function executeHandler(
   tool: Tool,
   handler: HandlerFunction,
-  client: GradientAI,
+  client: Gradient,
   args: Record<string, unknown> | undefined,
   compatibilityOptions?: Partial<ClientCapabilities>,
 ) {

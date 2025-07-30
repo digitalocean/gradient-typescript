@@ -7,8 +7,8 @@ const config: JestConfigWithTsJest = {
     '^.+\\.(t|j)sx?$': ['@swc/jest', { sourceMaps: 'inline' }],
   },
   moduleNameMapper: {
-    '^gradientai$': '<rootDir>/src/index.ts',
-    '^gradientai/(.*)$': '<rootDir>/src/$1',
+    '^@digitalocean/gradient$': '<rootDir>/src/index.ts',
+    '^@digitalocean/gradient/(.*)$': '<rootDir>/src/$1',
   },
   modulePathIgnorePatterns: [
     '<rootDir>/ecosystem-tests/',

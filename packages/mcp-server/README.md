@@ -1,4 +1,4 @@
-# Gradient AI TypeScript MCP Server
+# Gradient TypeScript MCP Server
 
 It is generated with [Stainless](https://www.stainless.com/).
 
@@ -22,12 +22,12 @@ cd gradientai-typescript
 export GRADIENTAI_API_KEY="My API Key"
 export GRADIENTAI_INFERENCE_KEY="My Inference Key"
 export GRADIENTAI_AGENT_KEY="My Agent Key"
-export GRADIENT_AI_AGENT_DOMAIN="My Agent Domain"
+export GRADIENT_AGENT_DOMAIN="My Agent Domain"
 node ./packages/mcp-server/dist/index.js
 ```
 
 > [!NOTE]
-> Once this package is [published to npm](https://www.stainless.com/docs/guides/publish), this will become: `npx -y gradientai-mcp`
+> Once this package is [published to npm](https://www.stainless.com/docs/guides/publish), this will become: `npx -y gradient-mcp`
 
 ### Via MCP Client
 
@@ -41,7 +41,7 @@ For clients with a configuration JSON, it might look something like this:
 ```json
 {
   "mcpServers": {
-    "gradientai_api": {
+    "digitalocean_gradient_api": {
       "command": "node",
       "args": [
         "/path/to/local/gradientai-typescript/packages/mcp-server",
@@ -52,7 +52,7 @@ For clients with a configuration JSON, it might look something like this:
         "GRADIENTAI_API_KEY": "My API Key",
         "GRADIENTAI_INFERENCE_KEY": "My Inference Key",
         "GRADIENTAI_AGENT_KEY": "My Agent Key",
-        "GRADIENT_AI_AGENT_DOMAIN": "My Agent Domain"
+        "GRADIENT_AGENT_DOMAIN": "My Agent Domain"
       }
     }
   }
@@ -155,10 +155,10 @@ over time, you can manually enable or disable certain capabilities:
 
 ```js
 // Import the server, generated endpoints, or the init function
-import { server, endpoints, init } from "gradientai-mcp/server";
+import { server, endpoints, init } from "gradient-mcp/server";
 
 // import a specific tool
-import createAgents from "gradientai-mcp/tools/agents/create-agents";
+import createAgents from "gradient-mcp/tools/agents/create-agents";
 
 // initialize the server and all endpoints
 init({ server, endpoints });

@@ -1,4 +1,4 @@
-import { GradientAIError } from './error';
+import { GradientError } from './error';
 import { type ReadableStream } from '../internal/shim-types';
 import { makeReadableStream } from '../internal/shims';
 import { findDoubleNewlineIndex, LineDecoder } from '../internal/decoders/line';
@@ -6,7 +6,7 @@ import { ReadableStreamToAsyncIterable } from '../internal/shims';
 import { isAbortError } from '../internal/errors';
 import { encodeUTF8 } from '../internal/utils/bytes';
 import { loggerFor } from '../internal/utils/log';
-import type { GradientAI } from '../client';
+import type { Gradient } from '../client';
 
 import { APIError } from './error';
 
@@ -20,12 +20,12 @@ export type ServerSentEvent = {
 
 export class Stream<Item> implements AsyncIterable<Item> {
   controller: AbortController;
-  #client: GradientAI | undefined;
+  #client: Gradient | undefined;
 
   constructor(
     private iterator: () => AsyncIterator<Item>,
     controller: AbortController,
-    client?: GradientAI,
+    client?: Gradient,
   ) {
     this.controller = controller;
     this.#client = client;
@@ -34,14 +34,14 @@ export class Stream<Item> implements AsyncIterable<Item> {
   static fromSSEResponse<Item>(
     response: Response,
     controller: AbortController,
-    client?: GradientAI,
+    client?: Gradient,
   ): Stream<Item> {
     let consumed = false;
     const logger = client ? loggerFor(client) : console;
 
     async function* iterator(): AsyncIterator<Item, any, undefined> {
       if (consumed) {
-        throw new GradientAIError('Cannot iterate over a consumed stream, use `.tee()` to split the stream.');
+        throw new GradientError('Cannot iterate over a consumed stream, use `.tee()` to split the stream.');
       }
       consumed = true;
       let done = false;
@@ -91,7 +91,7 @@ export class Stream<Item> implements AsyncIterable<Item> {
   static fromReadableStream<Item>(
     readableStream: ReadableStream,
     controller: AbortController,
-    client?: GradientAI,
+    client?: Gradient,
   ): Stream<Item> {
     let consumed = false;
 
@@ -112,7 +112,7 @@ export class Stream<Item> implements AsyncIterable<Item> {
 
     async function* iterator(): AsyncIterator<Item, any, undefined> {
       if (consumed) {
-        throw new GradientAIError('Cannot iterate over a consumed stream, use `.tee()` to split the stream.');
+        throw new GradientError('Cannot iterate over a consumed stream, use `.tee()` to split the stream.');
       }
       consumed = true;
       let done = false;
@@ -209,11 +209,11 @@ export async function* _iterSSEMessages(
       typeof (globalThis as any).navigator !== 'undefined' &&
       (globalThis as any).navigator.product === 'ReactNative'
     ) {
-      throw new GradientAIError(
+      throw new GradientError(
         `The default react-native fetch implementation does not support streaming. Please use expo/fetch: https://docs.expo.dev/versions/latest/sdk/expo/#expofetch-api`,
       );
     }
-    throw new GradientAIError(`Attempted to iterate over a response with no body`);
+    throw new GradientError(`Attempted to iterate over a response with no body`);
   }
 
   const sseDecoder = new SSEDecoder();

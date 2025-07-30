@@ -1,7 +1,7 @@
 import iconv from 'iconv-lite';
-import { stringify } from 'gradientai/internal/qs';
-import { encode } from 'gradientai/internal/qs/utils';
-import { StringifyOptions } from 'gradientai/internal/qs/types';
+import { stringify } from '@digitalocean/gradient/internal/qs';
+import { encode } from '@digitalocean/gradient/internal/qs/utils';
+import { StringifyOptions } from '@digitalocean/gradient/internal/qs/types';
 import { empty_test_cases } from './empty-keys-cases';
 import assert from 'assert';
 

@@ -1,6 +1,6 @@
 import assert from 'assert';
-import { _iterSSEMessages } from 'gradientai/core/streaming';
-import { ReadableStreamFrom } from 'gradientai/internal/shims';
+import { _iterSSEMessages } from '@digitalocean/gradient/core/streaming';
+import { ReadableStreamFrom } from '@digitalocean/gradient/internal/shims';
 
 describe('streaming decoding', () => {
   test('basic', async () => {
