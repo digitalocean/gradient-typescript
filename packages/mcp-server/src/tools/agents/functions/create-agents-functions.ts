@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'create_agents_functions',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nTo create a function route for an agent, send a POST request to `/v2/gen-ai/agents/{agent_uuid}/functions`.",
+    'To create a function route for an agent, send a POST request to `/v2/gen-ai/agents/{agent_uuid}/functions`.',
   inputSchema: {
     type: 'object',
     properties: {

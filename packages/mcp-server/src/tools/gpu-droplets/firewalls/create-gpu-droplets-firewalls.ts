@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'create_gpu_droplets_firewalls',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nTo create a new firewall, send a POST request to `/v2/firewalls`. The request\nmust contain at least one inbound or outbound access rule.\n",
+    'To create a new firewall, send a POST request to `/v2/firewalls`. The request\nmust contain at least one inbound or outbound access rule.\n',
   inputSchema: {
     type: 'object',
     properties: {

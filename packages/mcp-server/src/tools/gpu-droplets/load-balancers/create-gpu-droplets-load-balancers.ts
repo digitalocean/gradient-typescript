@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'create_gpu_droplets_load_balancers',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nTo create a new load balancer instance, send a POST request to\n`/v2/load_balancers`.\n\nYou can specify the Droplets that will sit behind the load balancer using one\nof two methods:\n\n* Set `droplet_ids` to a list of specific Droplet IDs.\n* Set `tag` to the name of a tag. All Droplets with this tag applied will be\n  assigned to the load balancer. Additional Droplets will be automatically\n  assigned as they are tagged.\n\nThese methods are mutually exclusive.\n",
+    'To create a new load balancer instance, send a POST request to\n`/v2/load_balancers`.\n\nYou can specify the Droplets that will sit behind the load balancer using one\nof two methods:\n\n* Set `droplet_ids` to a list of specific Droplet IDs.\n* Set `tag` to the name of a tag. All Droplets with this tag applied will be\n  assigned to the load balancer. Additional Droplets will be automatically\n  assigned as they are tagged.\n\nThese methods are mutually exclusive.\n',
   inputSchema: {
     type: 'object',
     anyOf: [

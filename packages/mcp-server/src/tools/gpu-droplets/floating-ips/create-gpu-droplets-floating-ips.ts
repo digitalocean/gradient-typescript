@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'create_gpu_droplets_floating_ips',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nOn creation, a floating IP must be either assigned to a Droplet or reserved to a region.\n* To create a new floating IP assigned to a Droplet, send a POST\n  request to `/v2/floating_ips` with the `droplet_id` attribute.\n\n* To create a new floating IP reserved to a region, send a POST request to\n  `/v2/floating_ips` with the `region` attribute.\n\n**Note**:  In addition to the standard rate limiting, only 12 floating IPs may be created per 60 seconds.",
+    'On creation, a floating IP must be either assigned to a Droplet or reserved to a region.\n* To create a new floating IP assigned to a Droplet, send a POST\n  request to `/v2/floating_ips` with the `droplet_id` attribute.\n\n* To create a new floating IP reserved to a region, send a POST request to\n  `/v2/floating_ips` with the `region` attribute.\n\n**Note**:  In addition to the standard rate limiting, only 12 floating IPs may be created per 60 seconds.',
   inputSchema: {
     type: 'object',
     anyOf: [

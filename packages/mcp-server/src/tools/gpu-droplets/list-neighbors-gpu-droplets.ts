@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'list_neighbors_gpu_droplets',
   description:
-    'When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you\'re sure you don\'t need the data.\n\nTo retrieve a list of any "neighbors" (i.e. Droplets that are co-located on\nthe same physical hardware) for a specific Droplet, send a GET request to\n`/v2/droplets/$DROPLET_ID/neighbors`.\n\nThe results will be returned as a JSON object with a key of `droplets`. This\nwill be set to an array containing objects representing any other Droplets\nthat share the same physical hardware. An empty array indicates that the\nDroplet is not co-located any other Droplets associated with your account.\n',
+    'To retrieve a list of any "neighbors" (i.e. Droplets that are co-located on\nthe same physical hardware) for a specific Droplet, send a GET request to\n`/v2/droplets/$DROPLET_ID/neighbors`.\n\nThe results will be returned as a JSON object with a key of `droplets`. This\nwill be set to an array containing objects representing any other Droplets\nthat share the same physical hardware. An empty array indicates that the\nDroplet is not co-located any other Droplets associated with your account.\n',
   inputSchema: {
     type: 'object',
     properties: {
