@@ -16,8 +16,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'create_chat_completions',
-  description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nCreates a model response for the given chat conversation.",
+  description: 'Creates a model response for the given chat conversation.',
   inputSchema: {
     type: 'object',
     anyOf: [

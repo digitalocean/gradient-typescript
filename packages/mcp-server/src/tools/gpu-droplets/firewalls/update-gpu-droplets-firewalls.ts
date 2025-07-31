@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'update_gpu_droplets_firewalls',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nTo update the configuration of an existing firewall, send a PUT request to\n`/v2/firewalls/$FIREWALL_ID`. The request should contain a full representation\nof the firewall including existing attributes. **Note that any attributes that\nare not provided will be reset to their default values.**\n<br><br>You must have read access (e.g. `droplet:read`) to all resources attached\nto the firewall to successfully update the firewall.\n",
+    'To update the configuration of an existing firewall, send a PUT request to\n`/v2/firewalls/$FIREWALL_ID`. The request should contain a full representation\nof the firewall including existing attributes. **Note that any attributes that\nare not provided will be reset to their default values.**\n<br><br>You must have read access (e.g. `droplet:read`) to all resources attached\nto the firewall to successfully update the firewall.\n',
   inputSchema: {
     type: 'object',
     properties: {

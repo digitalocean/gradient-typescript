@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'update_gpu_droplets_autoscale',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nTo update the configuration of an existing autoscale pool, send a PUT request to\n`/v2/droplets/autoscale/$AUTOSCALE_POOL_ID`. The request must contain a full representation\nof the autoscale pool including existing attributes. \n",
+    'To update the configuration of an existing autoscale pool, send a PUT request to\n`/v2/droplets/autoscale/$AUTOSCALE_POOL_ID`. The request must contain a full representation\nof the autoscale pool including existing attributes. \n',
   inputSchema: {
     type: 'object',
     properties: {

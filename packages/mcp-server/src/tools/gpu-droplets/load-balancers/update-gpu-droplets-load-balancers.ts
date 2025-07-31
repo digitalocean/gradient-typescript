@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'update_gpu_droplets_load_balancers',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nTo update a load balancer's settings, send a PUT request to\n`/v2/load_balancers/$LOAD_BALANCER_ID`. The request should contain a full\nrepresentation of the load balancer including existing attributes. It may\ncontain _one of_ the `droplets_ids` or `tag` attributes as they are mutually\nexclusive. **Note that any attribute that is not provided will be reset to its\ndefault value.**\n",
+    "To update a load balancer's settings, send a PUT request to\n`/v2/load_balancers/$LOAD_BALANCER_ID`. The request should contain a full\nrepresentation of the load balancer including existing attributes. It may\ncontain _one of_ the `droplets_ids` or `tag` attributes as they are mutually\nexclusive. **Note that any attribute that is not provided will be reset to its\ndefault value.**\n",
   inputSchema: {
     type: 'object',
     anyOf: [
