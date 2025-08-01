@@ -53,9 +53,12 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Gradient, args: Record<string, unknown> | undefined) => {
-  const { database_cluster_uuid, ...body } = args as any;
+  const { database_cluster_uuid, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.databases.schemaRegistry.config.update(database_cluster_uuid, body)),
+    await maybeFilter(
+      jq_filter,
+      await client.databases.schemaRegistry.config.update(database_cluster_uuid, body),
+    ),
   );
 };
 

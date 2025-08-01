@@ -40,9 +40,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Gradient, args: Record<string, unknown> | undefined) => {
-  const { snapshot_id, ...body } = args as any;
+  const { snapshot_id, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.gpuDroplets.volumes.snapshots.retrieve(snapshot_id)),
+    await maybeFilter(jq_filter, await client.gpuDroplets.volumes.snapshots.retrieve(snapshot_id)),
   );
 };
 

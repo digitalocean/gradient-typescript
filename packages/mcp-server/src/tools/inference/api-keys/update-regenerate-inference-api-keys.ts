@@ -40,9 +40,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Gradient, args: Record<string, unknown> | undefined) => {
-  const { api_key_uuid, ...body } = args as any;
+  const { api_key_uuid, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.inference.apiKeys.updateRegenerate(api_key_uuid)),
+    await maybeFilter(jq_filter, await client.inference.apiKeys.updateRegenerate(api_key_uuid)),
   );
 };
 

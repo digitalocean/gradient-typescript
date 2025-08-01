@@ -56,8 +56,10 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Gradient, args: Record<string, unknown> | undefined) => {
-  const { child_agent_uuid, ...body } = args as any;
-  return asTextContentResult(await maybeFilter(args, await client.agents.routes.add(child_agent_uuid, body)));
+  const { child_agent_uuid, jq_filter, ...body } = args as any;
+  return asTextContentResult(
+    await maybeFilter(jq_filter, await client.agents.routes.add(child_agent_uuid, body)),
+  );
 };
 
 export default { metadata, tool, handler };

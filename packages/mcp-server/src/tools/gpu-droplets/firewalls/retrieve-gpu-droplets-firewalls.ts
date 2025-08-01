@@ -40,9 +40,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Gradient, args: Record<string, unknown> | undefined) => {
-  const { firewall_id, ...body } = args as any;
+  const { firewall_id, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.gpuDroplets.firewalls.retrieve(firewall_id)),
+    await maybeFilter(jq_filter, await client.gpuDroplets.firewalls.retrieve(firewall_id)),
   );
 };
 
