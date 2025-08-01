@@ -44,9 +44,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Gradient, args: Record<string, unknown> | undefined) => {
-  const { uuid, ...body } = args as any;
+  const { uuid, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.knowledgeBases.indexingJobs.updateCancel(uuid, body)),
+    await maybeFilter(jq_filter, await client.knowledgeBases.indexingJobs.updateCancel(uuid, body)),
   );
 };
 

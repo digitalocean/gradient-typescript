@@ -53,9 +53,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Gradient, args: Record<string, unknown> | undefined) => {
-  const { ssh_key_identifier, ...body } = args as any;
+  const { ssh_key_identifier, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.gpuDroplets.account.keys.retrieve(ssh_key_identifier)),
+    await maybeFilter(jq_filter, await client.gpuDroplets.account.keys.retrieve(ssh_key_identifier)),
   );
 };
 

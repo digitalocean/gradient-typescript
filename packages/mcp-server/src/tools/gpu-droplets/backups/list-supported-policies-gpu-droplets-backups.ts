@@ -37,8 +37,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Gradient, args: Record<string, unknown> | undefined) => {
+  const { jq_filter } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.gpuDroplets.backups.listSupportedPolicies()),
+    await maybeFilter(jq_filter, await client.gpuDroplets.backups.listSupportedPolicies()),
   );
 };
 

@@ -44,10 +44,10 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Gradient, args: Record<string, unknown> | undefined) => {
-  const { evaluation_test_case_uuid, ...body } = args as any;
+  const { evaluation_test_case_uuid, jq_filter, ...body } = args as any;
   return asTextContentResult(
     await maybeFilter(
-      args,
+      jq_filter,
       await client.agents.evaluationTestCases.listEvaluationRuns(evaluation_test_case_uuid, body),
     ),
   );

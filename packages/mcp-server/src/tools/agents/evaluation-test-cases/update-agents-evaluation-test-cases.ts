@@ -93,9 +93,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Gradient, args: Record<string, unknown> | undefined) => {
-  const { test_case_uuid, ...body } = args as any;
+  const { test_case_uuid, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.agents.evaluationTestCases.update(test_case_uuid, body)),
+    await maybeFilter(jq_filter, await client.agents.evaluationTestCases.update(test_case_uuid, body)),
   );
 };
 

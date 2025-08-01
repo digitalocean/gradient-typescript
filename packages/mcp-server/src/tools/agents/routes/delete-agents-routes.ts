@@ -43,9 +43,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Gradient, args: Record<string, unknown> | undefined) => {
-  const { child_agent_uuid, ...body } = args as any;
+  const { child_agent_uuid, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.agents.routes.delete(child_agent_uuid, body)),
+    await maybeFilter(jq_filter, await client.agents.routes.delete(child_agent_uuid, body)),
   );
 };
 

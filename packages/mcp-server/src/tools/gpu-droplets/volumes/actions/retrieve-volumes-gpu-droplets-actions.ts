@@ -51,9 +51,9 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Gradient, args: Record<string, unknown> | undefined) => {
-  const { action_id, ...body } = args as any;
+  const { action_id, jq_filter, ...body } = args as any;
   return asTextContentResult(
-    await maybeFilter(args, await client.gpuDroplets.volumes.actions.retrieve(action_id, body)),
+    await maybeFilter(jq_filter, await client.gpuDroplets.volumes.actions.retrieve(action_id, body)),
   );
 };
 
