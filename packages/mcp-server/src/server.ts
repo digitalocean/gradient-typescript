@@ -28,7 +28,7 @@ export const server = new McpServer(
     name: 'digitalocean_gradient_api',
     version: '0.0.1-alpha.0',
   },
-  { capabilities: { tools: {} } },
+  { capabilities: { tools: {}, logging: {} } },
 );
 
 /**
@@ -61,11 +61,28 @@ export function init(params: {
 
   const endpointMap = Object.fromEntries(providedEndpoints.map((endpoint) => [endpoint.tool.name, endpoint]));
 
+  const logAtLevel =
+    (level: 'debug' | 'info' | 'warning' | 'error') =>
+    (message: string, ...rest: unknown[]) => {
+      console.error(message, ...rest);
+      void server.sendLoggingMessage({
+        level,
+        data: { message, rest },
+      });
+    };
+  const logger = {
+    debug: logAtLevel('debug'),
+    info: logAtLevel('info'),
+    warn: logAtLevel('warning'),
+    error: logAtLevel('error'),
+  };
+
   const client =
     params.client ||
     new Gradient({
       agentDomain: readEnv('GRADIENT_AGENT_DOMAIN'),
       defaultHeaders: { 'X-Stainless-MCP': 'true' },
+      logger: logger,
     });
 
   server.setRequestHandler(ListToolsRequestSchema, async () => {
