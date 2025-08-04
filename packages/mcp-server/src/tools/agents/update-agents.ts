@@ -24,6 +24,9 @@ export const tool: Tool = {
       path_uuid: {
         type: 'string',
       },
+      agent_log_insights_enabled: {
+        type: 'boolean',
+      },
       anthropic_key_uuid: {
         type: 'string',
         description: 'Optional anthropic key uuid for use with anthropic models',

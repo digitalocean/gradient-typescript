@@ -29,11 +29,11 @@ describe('resource evaluationDatasets', () => {
       client.agents.evaluationDatasets.create(
         {
           file_upload_dataset: {
-            original_file_name: '"example name"',
-            size_in_bytes: '"12345"',
-            stored_object_key: '"example string"',
+            original_file_name: 'example name',
+            size_in_bytes: '12345',
+            stored_object_key: 'example string',
           },
-          name: '"example name"',
+          name: 'example name',
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -57,7 +57,7 @@ describe('resource evaluationDatasets', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.agents.evaluationDatasets.createFileUploadPresignedURLs(
-        { files: [{ file_name: '"example name"', file_size: 'file_size' }] },
+        { files: [{ file_name: 'example name', file_size: 'file_size' }] },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Gradient.NotFoundError);

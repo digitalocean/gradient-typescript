@@ -125,6 +125,11 @@ export interface APIKnowledgeBaseDataSource {
   created_at?: string;
 
   /**
+   * Dropbox Data Source for Display
+   */
+  dropbox_data_source?: APIKnowledgeBaseDataSource.DropboxDataSource;
+
+  /**
    * File to upload as data source for knowledge base.
    */
   file_upload_data_source?: APIFileUploadDataSource;
@@ -183,6 +188,13 @@ export namespace APIKnowledgeBaseDataSource {
      * Region of bucket
      */
     region?: string;
+  }
+
+  /**
+   * Dropbox Data Source for Display
+   */
+  export interface DropboxDataSource {
+    folder?: string;
   }
 }
 

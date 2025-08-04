@@ -618,6 +618,16 @@ export namespace APIAgent {
     galileo_project_name?: string;
 
     /**
+     * Whether insights are enabled
+     */
+    insights_enabled?: boolean;
+
+    /**
+     * Timestamp when insights were enabled
+     */
+    insights_enabled_at?: string;
+
+    /**
      * Identifier for the log stream
      */
     log_stream_id?: string;
@@ -1495,6 +1505,8 @@ export interface AgentCreateParams {
 }
 
 export interface AgentUpdateParams {
+  agent_log_insights_enabled?: boolean;
+
   /**
    * Optional anthropic key uuid for use with anthropic models
    */

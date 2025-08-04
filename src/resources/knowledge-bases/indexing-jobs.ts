@@ -244,6 +244,21 @@ export interface APIIndexingJob {
   total_datasources?: number;
 
   /**
+   * Total Items Failed
+   */
+  total_items_failed?: string;
+
+  /**
+   * Total Items Indexed
+   */
+  total_items_indexed?: string;
+
+  /**
+   * Total Items Skipped
+   */
+  total_items_skipped?: string;
+
+  /**
    * Last modified
    */
   updated_at?: string;
