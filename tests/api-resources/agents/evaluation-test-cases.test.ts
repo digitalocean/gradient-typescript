@@ -28,17 +28,17 @@ describe('resource evaluationTestCases', () => {
     await expect(
       client.agents.evaluationTestCases.create(
         {
-          dataset_uuid: '"123e4567-e89b-12d3-a456-426614174000"',
-          description: '"example string"',
+          dataset_uuid: '123e4567-e89b-12d3-a456-426614174000',
+          description: 'example string',
           metrics: ['example string'],
-          name: '"example name"',
+          name: 'example name',
           star_metric: {
-            metric_uuid: '"123e4567-e89b-12d3-a456-426614174000"',
-            name: '"example name"',
+            metric_uuid: '123e4567-e89b-12d3-a456-426614174000',
+            name: 'example name',
             success_threshold: 123,
             success_threshold_pct: 123,
           },
-          workspace_uuid: '"123e4567-e89b-12d3-a456-426614174000"',
+          workspace_uuid: '123e4567-e89b-12d3-a456-426614174000',
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -92,17 +92,17 @@ describe('resource evaluationTestCases', () => {
       client.agents.evaluationTestCases.update(
         '"123e4567-e89b-12d3-a456-426614174000"',
         {
-          dataset_uuid: '"123e4567-e89b-12d3-a456-426614174000"',
-          description: '"example string"',
+          dataset_uuid: '123e4567-e89b-12d3-a456-426614174000',
+          description: 'example string',
           metrics: { metric_uuids: ['example string'] },
-          name: '"example name"',
+          name: 'example name',
           star_metric: {
-            metric_uuid: '"123e4567-e89b-12d3-a456-426614174000"',
-            name: '"example name"',
+            metric_uuid: '123e4567-e89b-12d3-a456-426614174000',
+            name: 'example name',
             success_threshold: 123,
             success_threshold_pct: 123,
           },
-          body_test_case_uuid: '"123e4567-e89b-12d3-a456-426614174000"',
+          body_test_case_uuid: '123e4567-e89b-12d3-a456-426614174000',
         },
         { path: '/_stainless_unknown_path' },
       ),

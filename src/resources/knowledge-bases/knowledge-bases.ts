@@ -337,6 +337,11 @@ export namespace KnowledgeBaseCreateParams {
     bucket_region?: string;
 
     /**
+     * Dropbox Data Source
+     */
+    dropbox_data_source?: Datasource.DropboxDataSource;
+
+    /**
      * File to upload as data source for knowledge base.
      */
     file_upload_data_source?: DataSourcesAPI.APIFileUploadDataSource;
@@ -352,6 +357,21 @@ export namespace KnowledgeBaseCreateParams {
      * WebCrawlerDataSource
      */
     web_crawler_data_source?: DataSourcesAPI.APIWebCrawlerDataSource;
+  }
+
+  export namespace Datasource {
+    /**
+     * Dropbox Data Source
+     */
+    export interface DropboxDataSource {
+      folder?: string;
+
+      /**
+       * Refresh token. you can obrain a refresh token by following the oauth2 flow. see
+       * /v2/gen-ai/oauth2/dropbox/tokens for reference.
+       */
+      refresh_token?: string;
+    }
   }
 }
 

@@ -75,6 +75,7 @@ describe('resource agents', () => {
       client.agents.update(
         '"123e4567-e89b-12d3-a456-426614174000"',
         {
+          agent_log_insights_enabled: true,
           anthropic_key_uuid: '"12345678-1234-1234-1234-123456789012"',
           conversation_logs_enabled: true,
           description: '"My Agent Description"',

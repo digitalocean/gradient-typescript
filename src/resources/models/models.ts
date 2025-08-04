@@ -48,6 +48,11 @@ export interface APIAgreement {
  */
 export interface APIModel {
   /**
+   * Human-readable model identifier
+   */
+  id?: string;
+
+  /**
    * Agreement Description
    */
   agreement?: APIAgreement;
@@ -63,7 +68,7 @@ export interface APIModel {
   is_foundational?: boolean;
 
   /**
-   * Name of the model
+   * Display name of the model
    */
   name?: string;
 

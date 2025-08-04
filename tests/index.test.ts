@@ -383,7 +383,7 @@ describe('instantiate client', () => {
         inferenceKey: 'My Inference Key',
         agentKey: 'My Agent Key',
       });
-      expect(client.baseURL).toEqual('https://api.digitalocean.com/');
+      expect(client.baseURL).toEqual('https://api.digitalocean.com');
     });
 
     test('blank env variable', () => {
@@ -393,7 +393,7 @@ describe('instantiate client', () => {
         inferenceKey: 'My Inference Key',
         agentKey: 'My Agent Key',
       });
-      expect(client.baseURL).toEqual('https://api.digitalocean.com/');
+      expect(client.baseURL).toEqual('https://api.digitalocean.com');
     });
 
     test('in request options', () => {

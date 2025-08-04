@@ -27,7 +27,7 @@ describe('resource workspaces', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.agents.evaluationMetrics.workspaces.create(
-        { agent_uuids: ['example string'], description: '"example string"', name: '"example name"' },
+        { agent_uuids: ['example string'], description: 'example string', name: 'example name' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Gradient.NotFoundError);
@@ -68,9 +68,9 @@ describe('resource workspaces', () => {
       client.agents.evaluationMetrics.workspaces.update(
         '"123e4567-e89b-12d3-a456-426614174000"',
         {
-          description: '"example string"',
-          name: '"example name"',
-          body_workspace_uuid: '"123e4567-e89b-12d3-a456-426614174000"',
+          description: 'example string',
+          name: 'example name',
+          body_workspace_uuid: '123e4567-e89b-12d3-a456-426614174000',
         },
         { path: '/_stainless_unknown_path' },
       ),
