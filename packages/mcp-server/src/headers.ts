@@ -17,8 +17,8 @@ export const parseAuthHeaders = (req: IncomingMessage): Partial<ClientOptions> =
   }
 
   const apiKey =
-    req.headers['x-gradient-api-key'] instanceof Array ?
-      req.headers['x-gradient-api-key'][0]
-    : req.headers['x-gradient-api-key'];
+    req.headers['x-digitalocean-access-token'] instanceof Array ?
+      req.headers['x-digitalocean-access-token'][0]
+    : req.headers['x-digitalocean-access-token'];
   return { apiKey };
 };
