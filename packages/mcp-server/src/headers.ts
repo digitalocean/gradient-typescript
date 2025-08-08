@@ -10,15 +10,15 @@ export const parseAuthHeaders = (req: IncomingMessage): Partial<ClientOptions> =
     const value = req.headers.authorization.slice(scheme.length + 1);
     switch (scheme) {
       case 'Bearer':
-        return { apiKey: req.headers.authorization.slice('Bearer '.length) };
+        return { accessToken: req.headers.authorization.slice('Bearer '.length) };
       default:
         throw new Error(`Unsupported authorization scheme`);
     }
   }
 
-  const apiKey =
+  const accessToken =
     req.headers['x-digitalocean-access-token'] instanceof Array ?
       req.headers['x-digitalocean-access-token'][0]
     : req.headers['x-digitalocean-access-token'];
-  return { apiKey };
+  return { accessToken };
 };
