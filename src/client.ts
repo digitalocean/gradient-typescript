@@ -96,19 +96,21 @@ export interface ClientOptions {
   /**
    * Defaults to process.env['DIGITALOCEAN_ACCESS_TOKEN'].
    */
-  apiKey?: string | null | undefined;
+  accessToken?: string | null | undefined;
 
   /**
    * Defaults to process.env['GRADIENT_MODEL_ACCESS_KEY'].
    */
-  inferenceKey?: string | null | undefined;
+  modelAccessKey?: string | null | undefined;
 
   /**
    * Defaults to process.env['GRADIENT_AGENT_ACCESS_KEY'].
    */
-  agentKey?: string | null | undefined;
+  agentAccessKey?: string | null | undefined;
 
-  agentDomain?: string | null | undefined;
+  agentEndpoint?: string | null | undefined;
+
+  inferenceEndpoint?: string | null | undefined;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
@@ -183,10 +185,11 @@ export interface ClientOptions {
  * API Client for interfacing with the Gradient API.
  */
 export class Gradient {
-  apiKey: string | null;
-  inferenceKey: string | null;
-  agentKey: string | null;
-  agentDomain: string | null;
+  accessToken: string | null;
+  modelAccessKey: string | null;
+  agentAccessKey: string | null;
+  agentEndpoint: string | null;
+  inferenceEndpoint: string | null;
 
   baseURL: string;
   maxRetries: number;
@@ -203,10 +206,11 @@ export class Gradient {
   /**
    * API Client for interfacing with the Gradient API.
    *
-   * @param {string | null | undefined} [opts.apiKey=process.env['DIGITALOCEAN_ACCESS_TOKEN'] ?? null]
-   * @param {string | null | undefined} [opts.inferenceKey=process.env['GRADIENT_MODEL_ACCESS_KEY'] ?? null]
-   * @param {string | null | undefined} [opts.agentKey=process.env['GRADIENT_AGENT_ACCESS_KEY'] ?? null]
-   * @param {string | null | undefined} [opts.agentDomain]
+   * @param {string | null | undefined} [opts.accessToken=process.env['DIGITALOCEAN_ACCESS_TOKEN'] ?? null]
+   * @param {string | null | undefined} [opts.modelAccessKey=process.env['GRADIENT_MODEL_ACCESS_KEY'] ?? null]
+   * @param {string | null | undefined} [opts.agentAccessKey=process.env['GRADIENT_AGENT_ACCESS_KEY'] ?? null]
+   * @param {string | null | undefined} [opts.agentEndpoint]
+   * @param {string | null | undefined} [opts.inferenceEndpoint]
    * @param {string} [opts.baseURL=process.env['GRADIENT_BASE_URL'] ?? https://api.digitalocean.com] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
@@ -217,17 +221,19 @@ export class Gradient {
    */
   constructor({
     baseURL = readEnv('GRADIENT_BASE_URL'),
-    apiKey = readEnv('DIGITALOCEAN_ACCESS_TOKEN') ?? null,
-    inferenceKey = readEnv('GRADIENT_MODEL_ACCESS_KEY') ?? null,
-    agentKey = readEnv('GRADIENT_AGENT_ACCESS_KEY') ?? null,
-    agentDomain = null,
+    accessToken = readEnv('DIGITALOCEAN_ACCESS_TOKEN') ?? null,
+    modelAccessKey = readEnv('GRADIENT_MODEL_ACCESS_KEY') ?? null,
+    agentAccessKey = readEnv('GRADIENT_AGENT_ACCESS_KEY') ?? null,
+    agentEndpoint = null,
+    inferenceEndpoint = null,
     ...opts
   }: ClientOptions = {}) {
     const options: ClientOptions = {
-      apiKey,
-      inferenceKey,
-      agentKey,
-      agentDomain,
+      accessToken,
+      modelAccessKey,
+      agentAccessKey,
+      agentEndpoint,
+      inferenceEndpoint,
       ...opts,
       baseURL: baseURL || `https://api.digitalocean.com`,
     };
@@ -249,10 +255,11 @@ export class Gradient {
 
     this._options = options;
 
-    this.apiKey = apiKey;
-    this.inferenceKey = inferenceKey;
-    this.agentKey = agentKey;
-    this.agentDomain = agentDomain;
+    this.accessToken = accessToken;
+    this.modelAccessKey = modelAccessKey;
+    this.agentAccessKey = agentAccessKey;
+    this.agentEndpoint = agentEndpoint;
+    this.inferenceEndpoint = inferenceEndpoint;
   }
 
   /**
@@ -268,10 +275,11 @@ export class Gradient {
       logLevel: this.logLevel,
       fetch: this.fetch,
       fetchOptions: this.fetchOptions,
-      apiKey: this.apiKey,
-      inferenceKey: this.inferenceKey,
-      agentKey: this.agentKey,
-      agentDomain: this.agentDomain,
+      accessToken: this.accessToken,
+      modelAccessKey: this.modelAccessKey,
+      agentAccessKey: this.agentAccessKey,
+      agentEndpoint: this.agentEndpoint,
+      inferenceEndpoint: this.inferenceEndpoint,
       ...options,
     });
     return client;
@@ -289,7 +297,7 @@ export class Gradient {
   }
 
   protected validateHeaders({ values, nulls }: NullableHeaders) {
-    if (this.apiKey && values.get('authorization')) {
+    if (this.accessToken && values.get('authorization')) {
       return;
     }
     if (nulls.has('authorization')) {
@@ -297,15 +305,15 @@ export class Gradient {
     }
 
     throw new Error(
-      'Could not resolve authentication method. Expected the apiKey to be set. Or for the "Authorization" headers to be explicitly omitted',
+      'Could not resolve authentication method. Expected the accessToken to be set. Or for the "Authorization" headers to be explicitly omitted',
     );
   }
 
   protected async authHeaders(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
-    if (this.apiKey == null) {
+    if (this.accessToken == null) {
       return undefined;
     }
-    return buildHeaders([{ Authorization: `Bearer ${this.apiKey}` }]);
+    return buildHeaders([{ Authorization: `Bearer ${this.accessToken}` }]);
   }
 
   protected stringifyQuery(query: Record<string, unknown>): string {

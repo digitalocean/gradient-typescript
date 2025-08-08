@@ -19,10 +19,11 @@ cd gradient-typescript
 
 ```sh
 # set env vars as needed
-export DIGITALOCEAN_ACCESS_TOKEN="My API Key"
-export GRADIENT_MODEL_ACCESS_KEY="My Inference Key"
-export GRADIENT_AGENT_ACCESS_KEY="My Agent Key"
-export GRADIENT_AGENT_DOMAIN="My Agent Domain"
+export DIGITALOCEAN_ACCESS_TOKEN="My Access Token"
+export GRADIENT_MODEL_ACCESS_KEY="My Model Access Key"
+export GRADIENT_AGENT_ACCESS_KEY="My Agent Access Key"
+export GRADIENT_AGENT_ENDPOINT="My Agent Endpoint"
+export GRADIENT_INFERENCE_ENDPOINT="My Inference Endpoint"
 node ./packages/mcp-server/dist/index.js
 ```
 
@@ -49,10 +50,11 @@ For clients with a configuration JSON, it might look something like this:
         "--tools=dynamic"
       ],
       "env": {
-        "DIGITALOCEAN_ACCESS_TOKEN": "My API Key",
-        "GRADIENT_MODEL_ACCESS_KEY": "My Inference Key",
-        "GRADIENT_AGENT_ACCESS_KEY": "My Agent Key",
-        "GRADIENT_AGENT_DOMAIN": "My Agent Domain"
+        "DIGITALOCEAN_ACCESS_TOKEN": "My Access Token",
+        "GRADIENT_MODEL_ACCESS_KEY": "My Model Access Key",
+        "GRADIENT_AGENT_ACCESS_KEY": "My Agent Access Key",
+        "GRADIENT_AGENT_ENDPOINT": "My Agent Endpoint",
+        "GRADIENT_INFERENCE_ENDPOINT": "My Inference Endpoint"
       }
     }
   }

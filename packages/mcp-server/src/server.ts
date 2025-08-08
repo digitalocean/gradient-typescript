@@ -82,7 +82,8 @@ export function init(params: {
   const client =
     params.client ||
     new Gradient({
-      agentDomain: readEnv('GRADIENT_AGENT_DOMAIN'),
+      agentEndpoint: readEnv('GRADIENT_AGENT_ENDPOINT'),
+      inferenceEndpoint: readEnv('GRADIENT_INFERENCE_ENDPOINT'),
       defaultHeaders: { 'X-Stainless-MCP': 'true' },
       logger: logger,
     });
