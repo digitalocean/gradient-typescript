@@ -10,7 +10,7 @@ const client = new Gradient({
 });
 
 describe('resource backups', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.gpuDroplets.backups.list(3164444);
     const rawResponse = await responsePromise.asResponse();
@@ -22,7 +22,7 @@ describe('resource backups', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -34,7 +34,7 @@ describe('resource backups', () => {
     ).rejects.toThrow(Gradient.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('listPolicies', async () => {
     const responsePromise = client.gpuDroplets.backups.listPolicies();
     const rawResponse = await responsePromise.asResponse();
@@ -46,7 +46,7 @@ describe('resource backups', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('listPolicies: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -54,7 +54,7 @@ describe('resource backups', () => {
     ).rejects.toThrow(Gradient.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('listSupportedPolicies', async () => {
     const responsePromise = client.gpuDroplets.backups.listSupportedPolicies();
     const rawResponse = await responsePromise.asResponse();
@@ -66,7 +66,7 @@ describe('resource backups', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retrievePolicy', async () => {
     const responsePromise = client.gpuDroplets.backups.retrievePolicy(3164444);
     const rawResponse = await responsePromise.asResponse();

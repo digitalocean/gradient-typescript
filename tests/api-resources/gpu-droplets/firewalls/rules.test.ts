@@ -10,7 +10,7 @@ const client = new Gradient({
 });
 
 describe('resource rules', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('add', async () => {
     const responsePromise = client.gpuDroplets.firewalls.rules.add('bb4b2611-3d72-467b-8602-280330ecd65c');
     const rawResponse = await responsePromise.asResponse();
@@ -22,7 +22,7 @@ describe('resource rules', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('add: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -61,7 +61,7 @@ describe('resource rules', () => {
     ).rejects.toThrow(Gradient.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('remove', async () => {
     const responsePromise = client.gpuDroplets.firewalls.rules.remove('bb4b2611-3d72-467b-8602-280330ecd65c');
     const rawResponse = await responsePromise.asResponse();
@@ -73,7 +73,7 @@ describe('resource rules', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('remove: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(

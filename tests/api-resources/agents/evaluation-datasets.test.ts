@@ -10,7 +10,7 @@ const client = new Gradient({
 });
 
 describe('resource evaluationDatasets', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('create', async () => {
     const responsePromise = client.agents.evaluationDatasets.create();
     const rawResponse = await responsePromise.asResponse();
@@ -22,7 +22,7 @@ describe('resource evaluationDatasets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('create: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -40,7 +40,7 @@ describe('resource evaluationDatasets', () => {
     ).rejects.toThrow(Gradient.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('createFileUploadPresignedURLs', async () => {
     const responsePromise = client.agents.evaluationDatasets.createFileUploadPresignedURLs();
     const rawResponse = await responsePromise.asResponse();
@@ -52,7 +52,7 @@ describe('resource evaluationDatasets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('createFileUploadPresignedURLs: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(

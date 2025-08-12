@@ -10,7 +10,7 @@ const client = new Gradient({
 });
 
 describe('resource regions', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.regions.list();
     const rawResponse = await responsePromise.asResponse();
@@ -22,7 +22,7 @@ describe('resource regions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(

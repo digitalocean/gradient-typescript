@@ -10,7 +10,7 @@ const client = new Gradient({
 });
 
 describe('resource snapshots', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.gpuDroplets.snapshots.retrieve(6372321);
     const rawResponse = await responsePromise.asResponse();
@@ -22,7 +22,7 @@ describe('resource snapshots', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.gpuDroplets.snapshots.list();
     const rawResponse = await responsePromise.asResponse();
@@ -34,7 +34,7 @@ describe('resource snapshots', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -45,7 +45,7 @@ describe('resource snapshots', () => {
     ).rejects.toThrow(Gradient.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('delete', async () => {
     const responsePromise = client.gpuDroplets.snapshots.delete(6372321);
     const rawResponse = await responsePromise.asResponse();

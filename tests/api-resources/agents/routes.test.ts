@@ -10,7 +10,7 @@ const client = new Gradient({
 });
 
 describe('resource routes', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('update: only required params', async () => {
     const responsePromise = client.agents.routes.update('"123e4567-e89b-12d3-a456-426614174000"', {
       path_parent_agent_uuid: '"123e4567-e89b-12d3-a456-426614174000"',
@@ -24,7 +24,7 @@ describe('resource routes', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('update: required and optional params', async () => {
     const response = await client.agents.routes.update('"123e4567-e89b-12d3-a456-426614174000"', {
       path_parent_agent_uuid: '"123e4567-e89b-12d3-a456-426614174000"',
@@ -36,7 +36,7 @@ describe('resource routes', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('delete: only required params', async () => {
     const responsePromise = client.agents.routes.delete('"123e4567-e89b-12d3-a456-426614174000"', {
       parent_agent_uuid: '"123e4567-e89b-12d3-a456-426614174000"',
@@ -50,14 +50,14 @@ describe('resource routes', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('delete: required and optional params', async () => {
     const response = await client.agents.routes.delete('"123e4567-e89b-12d3-a456-426614174000"', {
       parent_agent_uuid: '"123e4567-e89b-12d3-a456-426614174000"',
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('add: only required params', async () => {
     const responsePromise = client.agents.routes.add('"123e4567-e89b-12d3-a456-426614174000"', {
       path_parent_agent_uuid: '"123e4567-e89b-12d3-a456-426614174000"',
@@ -71,7 +71,7 @@ describe('resource routes', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('add: required and optional params', async () => {
     const response = await client.agents.routes.add('"123e4567-e89b-12d3-a456-426614174000"', {
       path_parent_agent_uuid: '"123e4567-e89b-12d3-a456-426614174000"',
@@ -82,7 +82,7 @@ describe('resource routes', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('view', async () => {
     const responsePromise = client.agents.routes.view('"123e4567-e89b-12d3-a456-426614174000"');
     const rawResponse = await responsePromise.asResponse();

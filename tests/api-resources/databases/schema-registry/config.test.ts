@@ -10,7 +10,7 @@ const client = new Gradient({
 });
 
 describe('resource config', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.databases.schemaRegistry.config.retrieve(
       '9cc10173-e9ea-4176-9dbc-a4cee4c4ff30',
@@ -24,7 +24,7 @@ describe('resource config', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('update: only required params', async () => {
     const responsePromise = client.databases.schemaRegistry.config.update(
       '9cc10173-e9ea-4176-9dbc-a4cee4c4ff30',
@@ -39,7 +39,7 @@ describe('resource config', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('update: required and optional params', async () => {
     const response = await client.databases.schemaRegistry.config.update(
       '9cc10173-e9ea-4176-9dbc-a4cee4c4ff30',
@@ -47,7 +47,7 @@ describe('resource config', () => {
     );
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retrieveSubject: only required params', async () => {
     const responsePromise = client.databases.schemaRegistry.config.retrieveSubject('customer-schema', {
       database_cluster_uuid: '9cc10173-e9ea-4176-9dbc-a4cee4c4ff30',
@@ -61,14 +61,14 @@ describe('resource config', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retrieveSubject: required and optional params', async () => {
     const response = await client.databases.schemaRegistry.config.retrieveSubject('customer-schema', {
       database_cluster_uuid: '9cc10173-e9ea-4176-9dbc-a4cee4c4ff30',
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('updateSubject: only required params', async () => {
     const responsePromise = client.databases.schemaRegistry.config.updateSubject('customer-schema', {
       database_cluster_uuid: '9cc10173-e9ea-4176-9dbc-a4cee4c4ff30',
@@ -83,7 +83,7 @@ describe('resource config', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('updateSubject: required and optional params', async () => {
     const response = await client.databases.schemaRegistry.config.updateSubject('customer-schema', {
       database_cluster_uuid: '9cc10173-e9ea-4176-9dbc-a4cee4c4ff30',

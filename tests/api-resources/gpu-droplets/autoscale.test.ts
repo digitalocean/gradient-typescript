@@ -10,7 +10,7 @@ const client = new Gradient({
 });
 
 describe('resource autoscale', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.gpuDroplets.autoscale.create({
       config: { max_instances: 5, min_instances: 1 },
@@ -31,7 +31,7 @@ describe('resource autoscale', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.gpuDroplets.autoscale.create({
       config: {
@@ -58,7 +58,7 @@ describe('resource autoscale', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.gpuDroplets.autoscale.retrieve('0d3db13e-a604-4944-9827-7ec2642d32ac');
     const rawResponse = await responsePromise.asResponse();
@@ -70,7 +70,7 @@ describe('resource autoscale', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('update: only required params', async () => {
     const responsePromise = client.gpuDroplets.autoscale.update('0d3db13e-a604-4944-9827-7ec2642d32ac', {
       config: { target_number_instances: 2 },
@@ -91,7 +91,7 @@ describe('resource autoscale', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('update: required and optional params', async () => {
     const response = await client.gpuDroplets.autoscale.update('0d3db13e-a604-4944-9827-7ec2642d32ac', {
       config: { target_number_instances: 2 },
@@ -112,7 +112,7 @@ describe('resource autoscale', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.gpuDroplets.autoscale.list();
     const rawResponse = await responsePromise.asResponse();
@@ -124,7 +124,7 @@ describe('resource autoscale', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -135,7 +135,7 @@ describe('resource autoscale', () => {
     ).rejects.toThrow(Gradient.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('delete', async () => {
     const responsePromise = client.gpuDroplets.autoscale.delete('0d3db13e-a604-4944-9827-7ec2642d32ac');
     const rawResponse = await responsePromise.asResponse();
@@ -147,7 +147,7 @@ describe('resource autoscale', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('deleteDangerous: only required params', async () => {
     const responsePromise = client.gpuDroplets.autoscale.deleteDangerous(
       '0d3db13e-a604-4944-9827-7ec2642d32ac',
@@ -162,7 +162,7 @@ describe('resource autoscale', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('deleteDangerous: required and optional params', async () => {
     const response = await client.gpuDroplets.autoscale.deleteDangerous(
       '0d3db13e-a604-4944-9827-7ec2642d32ac',
@@ -170,7 +170,7 @@ describe('resource autoscale', () => {
     );
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('listHistory', async () => {
     const responsePromise = client.gpuDroplets.autoscale.listHistory('0d3db13e-a604-4944-9827-7ec2642d32ac');
     const rawResponse = await responsePromise.asResponse();
@@ -182,7 +182,7 @@ describe('resource autoscale', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('listHistory: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -194,7 +194,7 @@ describe('resource autoscale', () => {
     ).rejects.toThrow(Gradient.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('listMembers', async () => {
     const responsePromise = client.gpuDroplets.autoscale.listMembers('0d3db13e-a604-4944-9827-7ec2642d32ac');
     const rawResponse = await responsePromise.asResponse();
@@ -206,7 +206,7 @@ describe('resource autoscale', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('listMembers: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
