@@ -10,7 +10,7 @@ const client = new Gradient({
 });
 
 describe('resource destroyWithAssociatedResources', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.gpuDroplets.destroyWithAssociatedResources.list(3164444);
     const rawResponse = await responsePromise.asResponse();
@@ -22,7 +22,7 @@ describe('resource destroyWithAssociatedResources', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('checkStatus', async () => {
     const responsePromise = client.gpuDroplets.destroyWithAssociatedResources.checkStatus(3164444);
     const rawResponse = await responsePromise.asResponse();
@@ -34,7 +34,7 @@ describe('resource destroyWithAssociatedResources', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('deleteDangerous: only required params', async () => {
     const responsePromise = client.gpuDroplets.destroyWithAssociatedResources.deleteDangerous(3164444, {
       'X-Dangerous': true,
@@ -48,14 +48,14 @@ describe('resource destroyWithAssociatedResources', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('deleteDangerous: required and optional params', async () => {
     const response = await client.gpuDroplets.destroyWithAssociatedResources.deleteDangerous(3164444, {
       'X-Dangerous': true,
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('deleteSelective', async () => {
     const responsePromise = client.gpuDroplets.destroyWithAssociatedResources.deleteSelective(3164444);
     const rawResponse = await responsePromise.asResponse();
@@ -67,7 +67,7 @@ describe('resource destroyWithAssociatedResources', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('deleteSelective: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -85,7 +85,7 @@ describe('resource destroyWithAssociatedResources', () => {
     ).rejects.toThrow(Gradient.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retry', async () => {
     const responsePromise = client.gpuDroplets.destroyWithAssociatedResources.retry(3164444);
     const rawResponse = await responsePromise.asResponse();

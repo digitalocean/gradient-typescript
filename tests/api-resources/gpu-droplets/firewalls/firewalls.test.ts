@@ -10,7 +10,7 @@ const client = new Gradient({
 });
 
 describe('resource firewalls', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('create', async () => {
     const responsePromise = client.gpuDroplets.firewalls.create();
     const rawResponse = await responsePromise.asResponse();
@@ -22,7 +22,7 @@ describe('resource firewalls', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('create: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -76,7 +76,7 @@ describe('resource firewalls', () => {
     ).rejects.toThrow(Gradient.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.gpuDroplets.firewalls.retrieve('bb4b2611-3d72-467b-8602-280330ecd65c');
     const rawResponse = await responsePromise.asResponse();
@@ -88,7 +88,7 @@ describe('resource firewalls', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('update: only required params', async () => {
     const responsePromise = client.gpuDroplets.firewalls.update('bb4b2611-3d72-467b-8602-280330ecd65c', {
       firewall: { name: 'frontend-firewall' },
@@ -102,7 +102,7 @@ describe('resource firewalls', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('update: required and optional params', async () => {
     const response = await client.gpuDroplets.firewalls.update('bb4b2611-3d72-467b-8602-280330ecd65c', {
       firewall: {
@@ -150,7 +150,7 @@ describe('resource firewalls', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.gpuDroplets.firewalls.list();
     const rawResponse = await responsePromise.asResponse();
@@ -162,7 +162,7 @@ describe('resource firewalls', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -170,7 +170,7 @@ describe('resource firewalls', () => {
     ).rejects.toThrow(Gradient.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('delete', async () => {
     const responsePromise = client.gpuDroplets.firewalls.delete('bb4b2611-3d72-467b-8602-280330ecd65c');
     const rawResponse = await responsePromise.asResponse();

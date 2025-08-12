@@ -10,7 +10,7 @@ const client = new Gradient({
 });
 
 describe('resource tags', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('add: only required params', async () => {
     const responsePromise = client.gpuDroplets.firewalls.tags.add('bb4b2611-3d72-467b-8602-280330ecd65c', {
       tags: ['frontend'],
@@ -24,14 +24,14 @@ describe('resource tags', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('add: required and optional params', async () => {
     const response = await client.gpuDroplets.firewalls.tags.add('bb4b2611-3d72-467b-8602-280330ecd65c', {
       tags: ['frontend'],
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('remove: only required params', async () => {
     const responsePromise = client.gpuDroplets.firewalls.tags.remove('bb4b2611-3d72-467b-8602-280330ecd65c', {
       tags: ['frontend'],
@@ -45,7 +45,7 @@ describe('resource tags', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('remove: required and optional params', async () => {
     const response = await client.gpuDroplets.firewalls.tags.remove('bb4b2611-3d72-467b-8602-280330ecd65c', {
       tags: ['frontend'],

@@ -10,7 +10,7 @@ const client = new Gradient({
 });
 
 describe('resource gpuDroplets', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.gpuDroplets.create({
       image: 'ubuntu-20-04-x64',
@@ -26,7 +26,7 @@ describe('resource gpuDroplets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.gpuDroplets.create({
       image: 'ubuntu-20-04-x64',
@@ -47,7 +47,7 @@ describe('resource gpuDroplets', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.gpuDroplets.retrieve(3164444);
     const rawResponse = await responsePromise.asResponse();
@@ -59,7 +59,7 @@ describe('resource gpuDroplets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.gpuDroplets.list();
     const rawResponse = await responsePromise.asResponse();
@@ -71,7 +71,7 @@ describe('resource gpuDroplets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -82,7 +82,7 @@ describe('resource gpuDroplets', () => {
     ).rejects.toThrow(Gradient.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('delete', async () => {
     const responsePromise = client.gpuDroplets.delete(3164444);
     const rawResponse = await responsePromise.asResponse();
@@ -94,7 +94,7 @@ describe('resource gpuDroplets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('deleteByTag: only required params', async () => {
     const responsePromise = client.gpuDroplets.deleteByTag({ tag_name: 'tag_name' });
     const rawResponse = await responsePromise.asResponse();
@@ -106,12 +106,12 @@ describe('resource gpuDroplets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('deleteByTag: required and optional params', async () => {
     const response = await client.gpuDroplets.deleteByTag({ tag_name: 'tag_name' });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('listFirewalls', async () => {
     const responsePromise = client.gpuDroplets.listFirewalls(3164444);
     const rawResponse = await responsePromise.asResponse();
@@ -123,7 +123,7 @@ describe('resource gpuDroplets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('listFirewalls: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -135,7 +135,7 @@ describe('resource gpuDroplets', () => {
     ).rejects.toThrow(Gradient.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('listKernels', async () => {
     const responsePromise = client.gpuDroplets.listKernels(3164444);
     const rawResponse = await responsePromise.asResponse();
@@ -147,7 +147,7 @@ describe('resource gpuDroplets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('listKernels: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -155,7 +155,7 @@ describe('resource gpuDroplets', () => {
     ).rejects.toThrow(Gradient.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('listNeighbors', async () => {
     const responsePromise = client.gpuDroplets.listNeighbors(3164444);
     const rawResponse = await responsePromise.asResponse();
@@ -167,7 +167,7 @@ describe('resource gpuDroplets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('listSnapshots', async () => {
     const responsePromise = client.gpuDroplets.listSnapshots(3164444);
     const rawResponse = await responsePromise.asResponse();
@@ -179,7 +179,7 @@ describe('resource gpuDroplets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('listSnapshots: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(

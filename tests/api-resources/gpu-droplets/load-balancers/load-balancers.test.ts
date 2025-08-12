@@ -10,7 +10,7 @@ const client = new Gradient({
 });
 
 describe('resource loadBalancers', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.gpuDroplets.loadBalancers.create({
       forwarding_rules: [
@@ -26,7 +26,7 @@ describe('resource loadBalancers', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.gpuDroplets.loadBalancers.create({
       forwarding_rules: [
@@ -84,7 +84,7 @@ describe('resource loadBalancers', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.gpuDroplets.loadBalancers.retrieve('4de7ac8b-495b-4884-9a69-1050c6793cd6');
     const rawResponse = await responsePromise.asResponse();
@@ -96,7 +96,7 @@ describe('resource loadBalancers', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('update: only required params', async () => {
     const responsePromise = client.gpuDroplets.loadBalancers.update('4de7ac8b-495b-4884-9a69-1050c6793cd6', {
       forwarding_rules: [
@@ -112,7 +112,7 @@ describe('resource loadBalancers', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('update: required and optional params', async () => {
     const response = await client.gpuDroplets.loadBalancers.update('4de7ac8b-495b-4884-9a69-1050c6793cd6', {
       forwarding_rules: [
@@ -170,7 +170,7 @@ describe('resource loadBalancers', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.gpuDroplets.loadBalancers.list();
     const rawResponse = await responsePromise.asResponse();
@@ -182,7 +182,7 @@ describe('resource loadBalancers', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -190,7 +190,7 @@ describe('resource loadBalancers', () => {
     ).rejects.toThrow(Gradient.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('delete', async () => {
     const responsePromise = client.gpuDroplets.loadBalancers.delete('4de7ac8b-495b-4884-9a69-1050c6793cd6');
     const rawResponse = await responsePromise.asResponse();
@@ -202,7 +202,7 @@ describe('resource loadBalancers', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('deleteCache', async () => {
     const responsePromise = client.gpuDroplets.loadBalancers.deleteCache(
       '4de7ac8b-495b-4884-9a69-1050c6793cd6',
