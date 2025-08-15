@@ -417,6 +417,7 @@ export const tool: Tool = {
             type: 'object',
             description:
               'A map of region string to an integer priority value indicating preference for which regional target a Global load balancer will forward traffic to. A lower value indicates a higher priority.',
+            additionalProperties: true,
           },
           target_port: {
             type: 'integer',
