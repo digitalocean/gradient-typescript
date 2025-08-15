@@ -54,10 +54,12 @@ export const tool: Tool = {
       input_schema: {
         type: 'object',
         description: 'Describe the input schema for the function so the agent may call it',
+        additionalProperties: true,
       },
       output_schema: {
         type: 'object',
         description: 'Describe the output schema for the function so the agent handle its response',
+        additionalProperties: true,
       },
     },
     required: ['path_agent_uuid', 'path_function_uuid'],
