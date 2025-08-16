@@ -813,6 +813,7 @@ export class Gradient {
   regions: API.Regions = new API.Regions(this);
   databases: API.Databases = new API.Databases(this);
 }
+
 Gradient.Agents = Agents;
 Gradient.Chat = Chat;
 Gradient.GPUDroplets = GPUDroplets;
@@ -821,6 +822,7 @@ Gradient.KnowledgeBases = KnowledgeBases;
 Gradient.Models = Models;
 Gradient.Regions = Regions;
 Gradient.Databases = Databases;
+
 export declare namespace Gradient {
   export type RequestOptions = Opts.RequestOptions;
 
