@@ -17,7 +17,7 @@ export const parseAuthHeaders = (req: IncomingMessage): Partial<ClientOptions> =
   }
 
   const accessToken =
-    req.headers['x-digitalocean-access-token'] instanceof Array ?
+    Array.isArray(req.headers['x-digitalocean-access-token']) ?
       req.headers['x-digitalocean-access-token'][0]
     : req.headers['x-digitalocean-access-token'];
   return { accessToken };
