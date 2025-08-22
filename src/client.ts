@@ -108,6 +108,9 @@ export interface ClientOptions {
    */
   agentAccessKey?: string | null | undefined;
 
+  /**
+   * Defaults to process.env['GRADIENT_AGENT_ENDPOINT'].
+   */
   agentEndpoint?: string | null | undefined;
 
   inferenceEndpoint?: string | null | undefined;
@@ -209,7 +212,7 @@ export class Gradient {
    * @param {string | null | undefined} [opts.accessToken=process.env['DIGITALOCEAN_ACCESS_TOKEN'] ?? null]
    * @param {string | null | undefined} [opts.modelAccessKey=process.env['GRADIENT_MODEL_ACCESS_KEY'] ?? null]
    * @param {string | null | undefined} [opts.agentAccessKey=process.env['GRADIENT_AGENT_ACCESS_KEY'] ?? null]
-   * @param {string | null | undefined} [opts.agentEndpoint]
+   * @param {string | null | undefined} [opts.agentEndpoint=process.env['GRADIENT_AGENT_ENDPOINT'] ?? null]
    * @param {string | null | undefined} [opts.inferenceEndpoint]
    * @param {string} [opts.baseURL=process.env['GRADIENT_BASE_URL'] ?? https://api.digitalocean.com] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
@@ -224,7 +227,7 @@ export class Gradient {
     accessToken = readEnv('DIGITALOCEAN_ACCESS_TOKEN') ?? null,
     modelAccessKey = readEnv('GRADIENT_MODEL_ACCESS_KEY') ?? null,
     agentAccessKey = readEnv('GRADIENT_AGENT_ACCESS_KEY') ?? null,
-    agentEndpoint = null,
+    agentEndpoint = readEnv('GRADIENT_AGENT_ENDPOINT') ?? null,
     inferenceEndpoint = null,
     ...opts
   }: ClientOptions = {}) {

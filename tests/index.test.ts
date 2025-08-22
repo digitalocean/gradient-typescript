@@ -395,41 +395,6 @@ describe('instantiate client', () => {
       });
       expect(client.baseURL).toEqual('https://api.digitalocean.com');
     });
-
-    test('in request options', () => {
-      const client = new Gradient({
-        accessToken: 'My Access Token',
-        modelAccessKey: 'My Model Access Key',
-        agentAccessKey: 'My Agent Access Key',
-      });
-      expect(client.buildURL('/foo', null, 'http://localhost:5000/option')).toEqual(
-        'http://localhost:5000/option/foo',
-      );
-    });
-
-    test('in request options overridden by client options', () => {
-      const client = new Gradient({
-        accessToken: 'My Access Token',
-        modelAccessKey: 'My Model Access Key',
-        agentAccessKey: 'My Agent Access Key',
-        baseURL: 'http://localhost:5000/client',
-      });
-      expect(client.buildURL('/foo', null, 'http://localhost:5000/option')).toEqual(
-        'http://localhost:5000/client/foo',
-      );
-    });
-
-    test('in request options overridden by env variable', () => {
-      process.env['GRADIENT_BASE_URL'] = 'http://localhost:5000/env';
-      const client = new Gradient({
-        accessToken: 'My Access Token',
-        modelAccessKey: 'My Model Access Key',
-        agentAccessKey: 'My Agent Access Key',
-      });
-      expect(client.buildURL('/foo', null, 'http://localhost:5000/option')).toEqual(
-        'http://localhost:5000/env/foo',
-      );
-    });
   });
 
   test('maxRetries option is correctly set', () => {
