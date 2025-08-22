@@ -23,7 +23,7 @@ export DIGITALOCEAN_ACCESS_TOKEN="My Access Token"
 export GRADIENT_MODEL_ACCESS_KEY="My Model Access Key"
 export GRADIENT_AGENT_ACCESS_KEY="My Agent Access Key"
 export GRADIENT_AGENT_ENDPOINT="My-Agent-Endpoint"
-export GRADIENT_INFERENCE_ENDPOINT="My Inference Endpoint"
+export GRADIENT_INFERENCE_ENDPOINT="My-Inference-Endpoint"
 node ./packages/mcp-server/dist/index.js
 ```
 
@@ -54,7 +54,7 @@ For clients with a configuration JSON, it might look something like this:
         "GRADIENT_MODEL_ACCESS_KEY": "My Model Access Key",
         "GRADIENT_AGENT_ACCESS_KEY": "My Agent Access Key",
         "GRADIENT_AGENT_ENDPOINT": "My-Agent-Endpoint",
-        "GRADIENT_INFERENCE_ENDPOINT": "My Inference Endpoint"
+        "GRADIENT_INFERENCE_ENDPOINT": "My-Inference-Endpoint"
       }
     }
   }

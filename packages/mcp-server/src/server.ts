@@ -86,7 +86,6 @@ export function initMcpServer(params: {
   };
 
   const client = new Gradient({
-    ...{ inferenceEndpoint: readEnv('GRADIENT_INFERENCE_ENDPOINT') },
     logger,
     ...params.clientOptions,
     defaultHeaders: {
