@@ -1,0 +1,70 @@
+{
+  "dxt_version": "0.1",
+  "name": "gradient-mcp",
+  "version": "0.0.1-alpha.0",
+  "description": "The official MCP Server for the Gradient API",
+  "author": {
+    "name": "Gradient",
+    "email": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stainless-sdks/gradient-typescript.git"
+  },
+  "homepage": "https://github.com/stainless-sdks/gradient-typescript/tree/main/packages/mcp-server#readme",
+  "documentation": "https://developers.digitalocean.com/documentation/v2/",
+  "server": {
+    "type": "node",
+    "entry_point": "${__dirname}/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/index.js"],
+      "env": {
+        "DIGITALOCEAN_ACCESS_TOKEN": "${user_config.DIGITALOCEAN_ACCESS_TOKEN}",
+        "GRADIENT_MODEL_ACCESS_KEY": "${user_config.GRADIENT_MODEL_ACCESS_KEY}",
+        "GRADIENT_AGENT_ACCESS_KEY": "${user_config.GRADIENT_AGENT_ACCESS_KEY}",
+        "GRADIENT_AGENT_ENDPOINT": "${user_config.GRADIENT_AGENT_ENDPOINT}",
+        "GRADIENT_INFERENCE_ENDPOINT": "${user_config.GRADIENT_INFERENCE_ENDPOINT}"
+      }
+    }
+  },
+  "user_config": {
+    "DIGITALOCEAN_ACCESS_TOKEN": {
+      "title": "access_token",
+      "description": "",
+      "required": false,
+      "type": "string"
+    },
+    "GRADIENT_MODEL_ACCESS_KEY": {
+      "title": "model_access_key",
+      "description": "",
+      "required": false,
+      "type": "string"
+    },
+    "GRADIENT_AGENT_ACCESS_KEY": {
+      "title": "agent_access_key",
+      "description": "",
+      "required": false,
+      "type": "string"
+    },
+    "GRADIENT_AGENT_ENDPOINT": {
+      "title": "agent_endpoint",
+      "description": "",
+      "required": false,
+      "type": "string"
+    },
+    "GRADIENT_INFERENCE_ENDPOINT": {
+      "title": "inference_endpoint",
+      "description": "",
+      "required": false,
+      "type": "string"
+    }
+  },
+  "tools_generated": true,
+  "compatibility": {
+    "runtimes": {
+      "node": ">=18.0.0"
+    }
+  },
+  "keywords": ["api"]
+}
