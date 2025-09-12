@@ -42,14 +42,14 @@ If you’d like to use the repository from source, you can either install from g
 To install via git:
 
 ```sh
-$ npm install git+ssh://git@github.com:stainless-sdks/gradient-typescript.git
+$ npm install git+ssh://git@github.com:digitalocean/gradient-typescript.git
 ```
 
 Alternatively, to link a local copy of the repo:
 
 ```sh
 # Clone
-$ git clone https://www.github.com/stainless-sdks/gradient-typescript
+$ git clone https://www.github.com/digitalocean/gradient-typescript
 $ cd gradient-typescript
 
 # With yarn

@@ -9,7 +9,7 @@ It is generated with [Stainless](https://www.stainless.com/).
 Because it's not published yet, clone the repo and build it:
 
 ```sh
-git clone git@github.com:stainless-sdks/gradient-typescript.git
+git clone git@github.com:digitalocean/gradient-typescript.git
 cd gradient-typescript
 ./scripts/bootstrap
 ./scripts/build

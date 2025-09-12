@@ -8,9 +8,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stainless-sdks/gradient-typescript.git"
+    "url": "git+https://github.com/digitalocean/gradient-typescript.git"
   },
-  "homepage": "https://github.com/stainless-sdks/gradient-typescript/tree/main/packages/mcp-server#readme",
+  "homepage": "https://github.com/digitalocean/gradient-typescript/tree/main/packages/mcp-server#readme",
   "documentation": "https://developers.digitalocean.com/documentation/v2/",
   "server": {
     "type": "node",
