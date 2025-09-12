@@ -33,6 +33,8 @@ import {
   AgentListParams,
   AgentListResponse,
   AgentRetrieveResponse,
+  AgentRetrieveUsageParams,
+  AgentRetrieveUsageResponse,
   AgentUpdateParams,
   AgentUpdateResponse,
   AgentUpdateStatusParams,
@@ -847,10 +849,12 @@ export declare namespace Gradient {
     type AgentUpdateResponse as AgentUpdateResponse,
     type AgentListResponse as AgentListResponse,
     type AgentDeleteResponse as AgentDeleteResponse,
+    type AgentRetrieveUsageResponse as AgentRetrieveUsageResponse,
     type AgentUpdateStatusResponse as AgentUpdateStatusResponse,
     type AgentCreateParams as AgentCreateParams,
     type AgentUpdateParams as AgentUpdateParams,
     type AgentListParams as AgentListParams,
+    type AgentRetrieveUsageParams as AgentRetrieveUsageParams,
     type AgentUpdateStatusParams as AgentUpdateStatusParams,
   };
 

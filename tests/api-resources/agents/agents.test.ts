@@ -131,6 +131,30 @@ describe('resource agents', () => {
   });
 
   // Prism tests are disabled
+  test.skip('retrieveUsage', async () => {
+    const responsePromise = client.agents.retrieveUsage('"123e4567-e89b-12d3-a456-426614174000"');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('retrieveUsage: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.agents.retrieveUsage(
+        '"123e4567-e89b-12d3-a456-426614174000"',
+        { start: 'start', stop: 'stop' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Gradient.NotFoundError);
+  });
+
+  // Prism tests are disabled
   test.skip('updateStatus', async () => {
     const responsePromise = client.agents.updateStatus('"123e4567-e89b-12d3-a456-426614174000"');
     const rawResponse = await responsePromise.asResponse();

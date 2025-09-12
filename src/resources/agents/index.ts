@@ -28,10 +28,12 @@ export {
   type AgentUpdateResponse,
   type AgentListResponse,
   type AgentDeleteResponse,
+  type AgentRetrieveUsageResponse,
   type AgentUpdateStatusResponse,
   type AgentCreateParams,
   type AgentUpdateParams,
   type AgentListParams,
+  type AgentRetrieveUsageParams,
   type AgentUpdateStatusParams,
 } from './agents';
 export { Chat } from './chat/index';

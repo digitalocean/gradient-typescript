@@ -222,6 +222,29 @@ export class Agents extends APIResource {
   }
 
   /**
+   * To get agent usage, send a GET request to `/v2/gen-ai/agents/{uuid}/usage`.
+   * Returns usage metrics for the specified agent within the provided time range.
+   *
+   * @example
+   * ```ts
+   * const response = await client.agents.retrieveUsage(
+   *   '"123e4567-e89b-12d3-a456-426614174000"',
+   * );
+   * ```
+   */
+  retrieveUsage(
+    uuid: string,
+    query: AgentRetrieveUsageParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AgentRetrieveUsageResponse> {
+    return this._client.get(path`/v2/gen-ai/agents/${uuid}/usage`, {
+      query,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
+  }
+
+  /**
    * Check whether an agent is public or private. To update the agent status, send a
    * PUT request to `/v2/gen-ai/agents/{uuid}/deployment_visibility`.
    *
@@ -1440,6 +1463,71 @@ export interface AgentDeleteResponse {
 }
 
 /**
+ * Agent usage
+ */
+export interface AgentRetrieveUsageResponse {
+  /**
+   * Resource Usage Description
+   */
+  log_insights_usage?: AgentRetrieveUsageResponse.LogInsightsUsage;
+
+  /**
+   * Resource Usage Description
+   */
+  usage?: AgentRetrieveUsageResponse.Usage;
+}
+
+export namespace AgentRetrieveUsageResponse {
+  /**
+   * Resource Usage Description
+   */
+  export interface LogInsightsUsage {
+    measurements?: Array<LogInsightsUsage.Measurement>;
+
+    resource_uuid?: string;
+
+    start?: string;
+
+    stop?: string;
+  }
+
+  export namespace LogInsightsUsage {
+    /**
+     * Usage Measurement Description
+     */
+    export interface Measurement {
+      tokens?: number;
+
+      usage_type?: string;
+    }
+  }
+
+  /**
+   * Resource Usage Description
+   */
+  export interface Usage {
+    measurements?: Array<Usage.Measurement>;
+
+    resource_uuid?: string;
+
+    start?: string;
+
+    stop?: string;
+  }
+
+  export namespace Usage {
+    /**
+     * Usage Measurement Description
+     */
+    export interface Measurement {
+      tokens?: number;
+
+      usage_type?: string;
+    }
+  }
+}
+
+/**
  * UpdateAgentDeploymentVisbilityOutput description
  */
 export interface AgentUpdateStatusResponse {
@@ -1615,6 +1703,19 @@ export interface AgentListParams {
   per_page?: number;
 }
 
+export interface AgentRetrieveUsageParams {
+  /**
+   * Return all usage data from this date.
+   */
+  start?: string;
+
+  /**
+   * Return all usage data up to this date, if omitted, will return up to the current
+   * date.
+   */
+  stop?: string;
+}
+
 export interface AgentUpdateStatusParams {
   /**
    * Unique id
@@ -1660,10 +1761,12 @@ export declare namespace Agents {
     type AgentUpdateResponse as AgentUpdateResponse,
     type AgentListResponse as AgentListResponse,
     type AgentDeleteResponse as AgentDeleteResponse,
+    type AgentRetrieveUsageResponse as AgentRetrieveUsageResponse,
     type AgentUpdateStatusResponse as AgentUpdateStatusResponse,
     type AgentCreateParams as AgentCreateParams,
     type AgentUpdateParams as AgentUpdateParams,
     type AgentListParams as AgentListParams,
+    type AgentRetrieveUsageParams as AgentRetrieveUsageParams,
     type AgentUpdateStatusParams as AgentUpdateStatusParams,
   };
 
