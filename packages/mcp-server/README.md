@@ -4,35 +4,20 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 ## Installation
 
-### Building
+### Direct invocation
 
-Because it's not published yet, clone the repo and build it:
-
-```sh
-git clone git@github.com:digitalocean/gradient-typescript.git
-cd gradient-typescript
-./scripts/bootstrap
-./scripts/build
-```
-
-### Running
+You can run the MCP Server directly via `npx`:
 
 ```sh
-# set env vars as needed
 export DIGITALOCEAN_ACCESS_TOKEN="My Access Token"
 export GRADIENT_MODEL_ACCESS_KEY="My Model Access Key"
 export GRADIENT_AGENT_ACCESS_KEY="My Agent Access Key"
 export GRADIENT_AGENT_ENDPOINT="My-Agent-Endpoint"
 export GRADIENT_INFERENCE_ENDPOINT="My-Inference-Endpoint"
-node ./packages/mcp-server/dist/index.js
+npx -y gradient-mcp@latest
 ```
 
-> [!NOTE]
-> Once this package is [published to npm](https://www.stainless.com/docs/guides/publish), this will become: `npx -y gradient-mcp`
-
 ### Via MCP Client
-
-[Build the project](#building) as mentioned above.
 
 There is a partial list of existing clients at [modelcontextprotocol.io](https://modelcontextprotocol.io/clients). If you already
 have a client, consult their documentation to install the MCP server.
@@ -43,12 +28,8 @@ For clients with a configuration JSON, it might look something like this:
 {
   "mcpServers": {
     "digitalocean_gradient_api": {
-      "command": "node",
-      "args": [
-        "/path/to/local/gradient-typescript/packages/mcp-server",
-        "--client=claude",
-        "--tools=dynamic"
-      ],
+      "command": "npx",
+      "args": ["-y", "gradient-mcp", "--client=claude", "--tools=dynamic"],
       "env": {
         "DIGITALOCEAN_ACCESS_TOKEN": "My Access Token",
         "GRADIENT_MODEL_ACCESS_KEY": "My Model Access Key",
