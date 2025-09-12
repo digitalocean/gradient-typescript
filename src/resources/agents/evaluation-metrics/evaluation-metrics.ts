@@ -6,6 +6,8 @@ import * as ModelsAPI from './models';
 import { ModelListParams, ModelListResponse, Models } from './models';
 import * as AnthropicAPI from './anthropic/anthropic';
 import { Anthropic } from './anthropic/anthropic';
+import * as Oauth2API from './oauth2/oauth2';
+import { Oauth2, Oauth2GenerateURLParams, Oauth2GenerateURLResponse } from './oauth2/oauth2';
 import * as OpenAIAPI from './openai/openai';
 import { OpenAI } from './openai/openai';
 import * as WorkspacesAPI from './workspaces/workspaces';
@@ -28,6 +30,7 @@ export class EvaluationMetrics extends APIResource {
   models: ModelsAPI.Models = new ModelsAPI.Models(this._client);
   anthropic: AnthropicAPI.Anthropic = new AnthropicAPI.Anthropic(this._client);
   openai: OpenAIAPI.OpenAI = new OpenAIAPI.OpenAI(this._client);
+  oauth2: Oauth2API.Oauth2 = new Oauth2API.Oauth2(this._client);
 
   /**
    * To list all evaluation metrics, send a GET request to
@@ -129,6 +132,7 @@ EvaluationMetrics.Workspaces = Workspaces;
 EvaluationMetrics.Models = Models;
 EvaluationMetrics.Anthropic = Anthropic;
 EvaluationMetrics.OpenAI = OpenAI;
+EvaluationMetrics.Oauth2 = Oauth2;
 
 export declare namespace EvaluationMetrics {
   export {
@@ -158,4 +162,10 @@ export declare namespace EvaluationMetrics {
   export { Anthropic as Anthropic };
 
   export { OpenAI as OpenAI };
+
+  export {
+    Oauth2 as Oauth2,
+    type Oauth2GenerateURLResponse as Oauth2GenerateURLResponse,
+    type Oauth2GenerateURLParams as Oauth2GenerateURLParams,
+  };
 }

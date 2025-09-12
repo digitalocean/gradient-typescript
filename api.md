@@ -47,6 +47,7 @@ Types:
 - <code><a href="./src/resources/agents/agents.ts">AgentUpdateResponse</a></code>
 - <code><a href="./src/resources/agents/agents.ts">AgentListResponse</a></code>
 - <code><a href="./src/resources/agents/agents.ts">AgentDeleteResponse</a></code>
+- <code><a href="./src/resources/agents/agents.ts">AgentRetrieveUsageResponse</a></code>
 - <code><a href="./src/resources/agents/agents.ts">AgentUpdateStatusResponse</a></code>
 
 Methods:
@@ -56,6 +57,7 @@ Methods:
 - <code title="put /v2/gen-ai/agents/{uuid}">client.agents.<a href="./src/resources/agents/agents.ts">update</a>(pathUuid, { ...params }) -> AgentUpdateResponse</code>
 - <code title="get /v2/gen-ai/agents">client.agents.<a href="./src/resources/agents/agents.ts">list</a>({ ...params }) -> AgentListResponse</code>
 - <code title="delete /v2/gen-ai/agents/{uuid}">client.agents.<a href="./src/resources/agents/agents.ts">delete</a>(uuid) -> AgentDeleteResponse</code>
+- <code title="get /v2/gen-ai/agents/{uuid}/usage">client.agents.<a href="./src/resources/agents/agents.ts">retrieveUsage</a>(uuid, { ...params }) -> AgentRetrieveUsageResponse</code>
 - <code title="put /v2/gen-ai/agents/{uuid}/deployment_visibility">client.agents.<a href="./src/resources/agents/agents.ts">updateStatus</a>(pathUuid, { ...params }) -> AgentUpdateStatusResponse</code>
 
 ## APIKeys
@@ -185,6 +187,26 @@ Methods:
 - <code title="get /v2/gen-ai/openai/keys">client.agents.evaluationMetrics.openai.keys.<a href="./src/resources/agents/evaluation-metrics/openai/keys.ts">list</a>({ ...params }) -> KeyListResponse</code>
 - <code title="delete /v2/gen-ai/openai/keys/{api_key_uuid}">client.agents.evaluationMetrics.openai.keys.<a href="./src/resources/agents/evaluation-metrics/openai/keys.ts">delete</a>(apiKeyUuid) -> KeyDeleteResponse</code>
 - <code title="get /v2/gen-ai/openai/keys/{uuid}/agents">client.agents.evaluationMetrics.openai.keys.<a href="./src/resources/agents/evaluation-metrics/openai/keys.ts">listAgents</a>(uuid, { ...params }) -> KeyListAgentsResponse</code>
+
+### Oauth2
+
+Types:
+
+- <code><a href="./src/resources/agents/evaluation-metrics/oauth2/oauth2.ts">Oauth2GenerateURLResponse</a></code>
+
+Methods:
+
+- <code title="get /v2/gen-ai/oauth2/url">client.agents.evaluationMetrics.oauth2.<a href="./src/resources/agents/evaluation-metrics/oauth2/oauth2.ts">generateURL</a>({ ...params }) -> Oauth2GenerateURLResponse</code>
+
+#### Dropbox
+
+Types:
+
+- <code><a href="./src/resources/agents/evaluation-metrics/oauth2/dropbox.ts">DropboxCreateTokensResponse</a></code>
+
+Methods:
+
+- <code title="post /v2/gen-ai/oauth2/dropbox/tokens">client.agents.evaluationMetrics.oauth2.dropbox.<a href="./src/resources/agents/evaluation-metrics/oauth2/dropbox.ts">createTokens</a>({ ...params }) -> DropboxCreateTokensResponse</code>
 
 ## EvaluationRuns
 
