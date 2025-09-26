@@ -7,10 +7,9 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "baseUrl": "./",
     "paths": {
-      "@digitalocean/gradient/*": ["src/*"],
-      "@digitalocean/gradient": ["src/index.ts"]
+      "@digitalocean/gradient/*": ["./src/*"],
+      "@digitalocean/gradient": ["./src/index.ts"]
     },
     "noEmit": true,
 
