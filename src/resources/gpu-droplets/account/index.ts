@@ -3,6 +3,7 @@
 export { Account } from './account';
 export {
   Keys,
+  type SSHKeys,
   type KeyCreateResponse,
   type KeyRetrieveResponse,
   type KeyUpdateResponse,

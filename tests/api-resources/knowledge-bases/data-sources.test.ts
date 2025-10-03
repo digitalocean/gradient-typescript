@@ -101,4 +101,27 @@ describe('resource dataSources', () => {
       { knowledge_base_uuid: '"123e4567-e89b-12d3-a456-426614174000"' },
     );
   });
+
+  // Prism tests are disabled
+  test.skip('createPresignedURLs', async () => {
+    const responsePromise = client.knowledgeBases.dataSources.createPresignedURLs();
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('createPresignedURLs: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.knowledgeBases.dataSources.createPresignedURLs(
+        { files: [{ file_name: 'example name', file_size: 'file_size' }] },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Gradient.NotFoundError);
+  });
 });
