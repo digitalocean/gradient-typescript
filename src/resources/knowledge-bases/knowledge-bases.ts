@@ -10,6 +10,8 @@ import {
   APIWebCrawlerDataSource,
   AwsDataSource,
   DataSourceCreateParams,
+  DataSourceCreatePresignedURLsParams,
+  DataSourceCreatePresignedURLsResponse,
   DataSourceCreateResponse,
   DataSourceDeleteParams,
   DataSourceDeleteResponse,
@@ -445,9 +447,11 @@ export declare namespace KnowledgeBases {
     type DataSourceCreateResponse as DataSourceCreateResponse,
     type DataSourceListResponse as DataSourceListResponse,
     type DataSourceDeleteResponse as DataSourceDeleteResponse,
+    type DataSourceCreatePresignedURLsResponse as DataSourceCreatePresignedURLsResponse,
     type DataSourceCreateParams as DataSourceCreateParams,
     type DataSourceListParams as DataSourceListParams,
     type DataSourceDeleteParams as DataSourceDeleteParams,
+    type DataSourceCreatePresignedURLsParams as DataSourceCreatePresignedURLsParams,
   };
 
   export {

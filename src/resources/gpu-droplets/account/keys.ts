@@ -113,103 +113,43 @@ export class Keys extends APIResource {
   }
 }
 
-export interface KeyCreateResponse {
-  ssh_key?: KeyCreateResponse.SSHKey;
+export interface SSHKeys {
+  /**
+   * A human-readable display name for this key, used to easily identify the SSH keys
+   * when they are displayed.
+   */
+  name: string;
+
+  /**
+   * The entire public key string that was uploaded. Embedded into the root user's
+   * `authorized_keys` file if you include this key during Droplet creation.
+   */
+  public_key: string;
+
+  /**
+   * A unique identification number for this key. Can be used to embed a specific SSH
+   * key into a Droplet.
+   */
+  id?: number;
+
+  /**
+   * A unique identifier that differentiates this key from other keys using a format
+   * that SSH recognizes. The fingerprint is created when the key is added to your
+   * account.
+   */
+  fingerprint?: string;
 }
 
-export namespace KeyCreateResponse {
-  export interface SSHKey {
-    /**
-     * A human-readable display name for this key, used to easily identify the SSH keys
-     * when they are displayed.
-     */
-    name: string;
-
-    /**
-     * The entire public key string that was uploaded. Embedded into the root user's
-     * `authorized_keys` file if you include this key during Droplet creation.
-     */
-    public_key: string;
-
-    /**
-     * A unique identification number for this key. Can be used to embed a specific SSH
-     * key into a Droplet.
-     */
-    id?: number;
-
-    /**
-     * A unique identifier that differentiates this key from other keys using a format
-     * that SSH recognizes. The fingerprint is created when the key is added to your
-     * account.
-     */
-    fingerprint?: string;
-  }
+export interface KeyCreateResponse {
+  ssh_key?: SSHKeys;
 }
 
 export interface KeyRetrieveResponse {
-  ssh_key?: KeyRetrieveResponse.SSHKey;
-}
-
-export namespace KeyRetrieveResponse {
-  export interface SSHKey {
-    /**
-     * A human-readable display name for this key, used to easily identify the SSH keys
-     * when they are displayed.
-     */
-    name: string;
-
-    /**
-     * The entire public key string that was uploaded. Embedded into the root user's
-     * `authorized_keys` file if you include this key during Droplet creation.
-     */
-    public_key: string;
-
-    /**
-     * A unique identification number for this key. Can be used to embed a specific SSH
-     * key into a Droplet.
-     */
-    id?: number;
-
-    /**
-     * A unique identifier that differentiates this key from other keys using a format
-     * that SSH recognizes. The fingerprint is created when the key is added to your
-     * account.
-     */
-    fingerprint?: string;
-  }
+  ssh_key?: SSHKeys;
 }
 
 export interface KeyUpdateResponse {
-  ssh_key?: KeyUpdateResponse.SSHKey;
-}
-
-export namespace KeyUpdateResponse {
-  export interface SSHKey {
-    /**
-     * A human-readable display name for this key, used to easily identify the SSH keys
-     * when they are displayed.
-     */
-    name: string;
-
-    /**
-     * The entire public key string that was uploaded. Embedded into the root user's
-     * `authorized_keys` file if you include this key during Droplet creation.
-     */
-    public_key: string;
-
-    /**
-     * A unique identification number for this key. Can be used to embed a specific SSH
-     * key into a Droplet.
-     */
-    id?: number;
-
-    /**
-     * A unique identifier that differentiates this key from other keys using a format
-     * that SSH recognizes. The fingerprint is created when the key is added to your
-     * account.
-     */
-    fingerprint?: string;
-  }
+  ssh_key?: SSHKeys;
 }
 
 export interface KeyListResponse {
@@ -220,36 +160,7 @@ export interface KeyListResponse {
 
   links?: Shared.PageLinks;
 
-  ssh_keys?: Array<KeyListResponse.SSHKey>;
-}
-
-export namespace KeyListResponse {
-  export interface SSHKey {
-    /**
-     * A human-readable display name for this key, used to easily identify the SSH keys
-     * when they are displayed.
-     */
-    name: string;
-
-    /**
-     * The entire public key string that was uploaded. Embedded into the root user's
-     * `authorized_keys` file if you include this key during Droplet creation.
-     */
-    public_key: string;
-
-    /**
-     * A unique identification number for this key. Can be used to embed a specific SSH
-     * key into a Droplet.
-     */
-    id?: number;
-
-    /**
-     * A unique identifier that differentiates this key from other keys using a format
-     * that SSH recognizes. The fingerprint is created when the key is added to your
-     * account.
-     */
-    fingerprint?: string;
-  }
+  ssh_keys?: Array<SSHKeys>;
 }
 
 export interface KeyCreateParams {
@@ -288,6 +199,7 @@ export interface KeyListParams {
 
 export declare namespace Keys {
   export {
+    type SSHKeys as SSHKeys,
     type KeyCreateResponse as KeyCreateResponse,
     type KeyRetrieveResponse as KeyRetrieveResponse,
     type KeyUpdateResponse as KeyUpdateResponse,

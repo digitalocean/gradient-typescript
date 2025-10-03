@@ -10,9 +10,11 @@ export {
   type DataSourceCreateResponse,
   type DataSourceListResponse,
   type DataSourceDeleteResponse,
+  type DataSourceCreatePresignedURLsResponse,
   type DataSourceCreateParams,
   type DataSourceListParams,
   type DataSourceDeleteParams,
+  type DataSourceCreatePresignedURLsParams,
 } from './data-sources';
 export {
   IndexingJobs,

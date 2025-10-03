@@ -11,6 +11,7 @@ import {
   KeyUpdateParams,
   KeyUpdateResponse,
   Keys,
+  SSHKeys,
 } from './keys';
 
 export class Account extends APIResource {
@@ -22,6 +23,7 @@ Account.Keys = Keys;
 export declare namespace Account {
   export {
     Keys as Keys,
+    type SSHKeys as SSHKeys,
     type KeyCreateResponse as KeyCreateResponse,
     type KeyRetrieveResponse as KeyRetrieveResponse,
     type KeyUpdateResponse as KeyUpdateResponse,

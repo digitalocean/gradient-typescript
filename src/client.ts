@@ -60,6 +60,7 @@ import {
   GPUDropletRetrieveResponse,
   GPUDroplets,
 } from './resources/gpu-droplets/gpu-droplets';
+import { Images } from './resources/images/images';
 import { Inference } from './resources/inference/inference';
 import {
   APIKnowledgeBase,
@@ -814,6 +815,7 @@ export class Gradient {
 
   agents: API.Agents = new API.Agents(this);
   chat: API.Chat = new API.Chat(this);
+  images: API.Images = new API.Images(this);
   gpuDroplets: API.GPUDroplets = new API.GPUDroplets(this);
   inference: API.Inference = new API.Inference(this);
   knowledgeBases: API.KnowledgeBases = new API.KnowledgeBases(this);
@@ -824,6 +826,7 @@ export class Gradient {
 
 Gradient.Agents = Agents;
 Gradient.Chat = Chat;
+Gradient.Images = Images;
 Gradient.GPUDroplets = GPUDroplets;
 Gradient.Inference = Inference;
 Gradient.KnowledgeBases = KnowledgeBases;
@@ -859,6 +862,8 @@ export declare namespace Gradient {
   };
 
   export { Chat as Chat };
+
+  export { Images as Images };
 
   export {
     GPUDroplets as GPUDroplets,
@@ -926,6 +931,9 @@ export declare namespace Gradient {
   export type GarbageCollection = API.GarbageCollection;
   export type GPUInfo = API.GPUInfo;
   export type Image = API.Image;
+  export type ImageGenCompletedEvent = API.ImageGenCompletedEvent;
+  export type ImageGenPartialImageEvent = API.ImageGenPartialImageEvent;
+  export type ImageGenStreamEvent = API.ImageGenStreamEvent;
   export type Kernel = API.Kernel;
   export type MetaProperties = API.MetaProperties;
   export type NetworkV4 = API.NetworkV4;
