@@ -1,13 +1,47 @@
-# Shared
+# Gradient TypeScript API Reference
 
-Types:
+This document provides comprehensive documentation for the Gradient TypeScript library, which allows you to interact with the Gradient API using TypeScript.
 
-- <code><a href="./src/resources/shared.ts">Action</a></code>
-- <code><a href="./src/resources/shared.ts">ActionLink</a></code>
-- <code><a href="./src/resources/shared.ts">APILinks</a></code>
-- <code><a href="./src/resources/shared.ts">APIMeta</a></code>
-- <code><a href="./src/resources/shared.ts">BackwardLinks</a></code>
-- <code><a href="./src/resources/shared.ts">ChatCompletionChunk</a></code>
+## Table of Contents
+- [Installation](#installation)
+- [Quick Start](#quick-start)
+- [Authentication](#authentication)
+- [Core Concepts](#core-concepts)
+- [API Resources](#api-resources)
+- [Error Handling](#error-handling)
+- [Advanced Usage](#advanced-usage)
+
+## Installation
+
+```bash
+npm install @digitalocean/gradient
+# or
+yarn add @digitalocean/gradient
+```
+
+## Quick Start
+
+```typescript
+import { Gradient } from '@digitalocean/gradient';
+
+const gradient = new Gradient({
+  apiKey: 'your-api-key'
+});
+
+// Example usage
+const response = await gradient.models.list();
+```
+
+## Core Concepts
+
+### Shared Types
+
+- <code><a href="./src/resources/shared.ts">Action</a></code> - Represents an API action
+- <code><a href="./src/resources/shared.ts">ActionLink</a></code> - Links to related actions
+- <code><a href="./src/resources/shared.ts">APILinks</a></code> - API navigation links
+- <code><a href="./src/resources/shared.ts">APIMeta</a></code> - API metadata information
+- <code><a href="./src/resources/shared.ts">BackwardLinks</a></code> - Pagination links
+- <code><a href="./src/resources/shared.ts">ChatCompletionChunk</a></code> - Chat completion response chunk
 - <code><a href="./src/resources/shared.ts">ChatCompletionTokenLogprob</a></code>
 - <code><a href="./src/resources/shared.ts">CompletionUsage</a></code>
 - <code><a href="./src/resources/shared.ts">DiskInfo</a></code>
