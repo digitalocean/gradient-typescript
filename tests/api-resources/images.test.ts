@@ -9,10 +9,10 @@ const client = new Gradient({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource generations', () => {
+describe('resource images', () => {
   // Prism tests are disabled
-  test.skip('create: only required params', async () => {
-    const responsePromise = client.images.generations.create({
+  test.skip('generate: only required params', async () => {
+    const responsePromise = client.images.generate({
       prompt: 'A cute baby sea otter floating on its back in calm blue water',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -25,8 +25,8 @@ describe('resource generations', () => {
   });
 
   // Prism tests are disabled
-  test.skip('create: required and optional params', async () => {
-    const response = await client.images.generations.create({
+  test.skip('generate: required and optional params', async () => {
+    const response = await client.images.generate({
       prompt: 'A cute baby sea otter floating on its back in calm blue water',
       background: 'auto',
       model: 'openai-gpt-image-1',

@@ -17,6 +17,13 @@ import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
+import {
+  ImageGenerateParams,
+  ImageGenerateParamsNonStreaming,
+  ImageGenerateParamsStreaming,
+  ImageGenerateResponse,
+  Images,
+} from './resources/images';
 import { RegionListParams, RegionListResponse, Regions } from './resources/regions';
 import {
   APIAgent,
@@ -60,7 +67,6 @@ import {
   GPUDropletRetrieveResponse,
   GPUDroplets,
 } from './resources/gpu-droplets/gpu-droplets';
-import { Images } from './resources/images/images';
 import { Inference } from './resources/inference/inference';
 import {
   APIKnowledgeBase,
@@ -863,7 +869,13 @@ export declare namespace Gradient {
 
   export { Chat as Chat };
 
-  export { Images as Images };
+  export {
+    Images as Images,
+    type ImageGenerateResponse as ImageGenerateResponse,
+    type ImageGenerateParams as ImageGenerateParams,
+    type ImageGenerateParamsNonStreaming as ImageGenerateParamsNonStreaming,
+    type ImageGenerateParamsStreaming as ImageGenerateParamsStreaming,
+  };
 
   export {
     GPUDroplets as GPUDroplets,
