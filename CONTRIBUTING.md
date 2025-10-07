@@ -1,7 +1,34 @@
-## Setting up the environment
+# Contributing to Gradient TypeScript
+
+We love your input! We want to make contributing to Gradient TypeScript as easy and transparent as possible, whether it's:
+
+- Reporting a bug
+- Discussing the current state of the code
+- Submitting a fix
+- Proposing new features
+- Becoming a maintainer
+
+## Development Process
+
+We use GitHub to host code, to track issues and feature requests, as well as accept pull requests.
+
+1. Fork the repo and create your branch from `main`
+2. Make your changes and ensure tests pass
+3. Update documentation for any API changes
+4. Issue a pull request!
+
+## Setting up the Development Environment
 
 This repository uses [`yarn@v1`](https://classic.yarnpkg.com/lang/en/docs/install).
 Other package managers may work but are not officially supported for development.
+
+### Prerequisites
+
+- Node.js (LTS version recommended)
+- Yarn v1.x
+- Git
+
+### Initial Setup
 
 To set up the repository, run:
 
