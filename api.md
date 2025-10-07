@@ -332,15 +332,13 @@ Methods:
 
 # Images
 
-## Generations
-
 Types:
 
-- <code><a href="./src/resources/images/generations.ts">GenerationCreateResponse</a></code>
+- <code><a href="./src/resources/images.ts">ImageGenerateResponse</a></code>
 
 Methods:
 
-- <code title="post /images/generations">client.images.generations.<a href="./src/resources/images/generations.ts">create</a>({ ...params }) -> GenerationCreateResponse</code>
+- <code title="post /images/generations">client.images.<a href="./src/resources/images.ts">generate</a>({ ...params }) -> ImageGenerateResponse</code>
 
 # GPUDroplets
 
