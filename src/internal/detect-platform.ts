@@ -13,18 +13,33 @@ export const isRunningInBrowser = () => {
   );
 };
 
-type DetectedPlatform = 'deno' | 'node' | 'edge' | 'unknown';
+type DetectedPlatform = 'deno' | 'bun' | 'workerd' | 'edge' | 'node' | 'unknown';
 
 /**
  * Note this does not detect 'browser'; for that, use getBrowserInfo().
  */
 function getDetectedPlatform(): DetectedPlatform {
+  // Deno
   if (typeof Deno !== 'undefined' && Deno.build != null) {
     return 'deno';
   }
+  // Bun (must be checked before Node since Bun provides a Node-compatible process)
+  if (typeof Bun !== 'undefined') {
+    return 'bun';
+  }
+  // Cloudflare Workers / workerd
+  // Heuristics: WebSocketPair global and/or navigator.userAgent === 'Cloudflare-Workers'
+  if (
+    typeof WebSocketPair !== 'undefined' ||
+    (typeof navigator !== 'undefined' && navigator && (navigator as any).userAgent === 'Cloudflare-Workers')
+  ) {
+    return 'workerd';
+  }
+  // Vercel Edge Runtime
   if (typeof EdgeRuntime !== 'undefined') {
     return 'edge';
   }
+  // Node.js
   if (
     Object.prototype.toString.call(
       typeof (globalThis as any).process !== 'undefined' ? (globalThis as any).process : 0,
@@ -32,11 +47,20 @@ function getDetectedPlatform(): DetectedPlatform {
   ) {
     return 'node';
   }
+  // Fallback Node.js heuristic for environments where toString check fails (e.g., some test runners)
+  if (typeof (globalThis as any).process !== 'undefined') {
+    const p = (globalThis as any).process;
+    if ((p?.versions && typeof p.versions.node === 'string') || p?.release?.name === 'node') {
+      return 'node';
+    }
+  }
   return 'unknown';
 }
 
 declare const Deno: any;
 declare const EdgeRuntime: any;
+declare const Bun: any;
+declare const WebSocketPair: any;
 type Arch = 'x32' | 'x64' | 'arm' | 'arm64' | `other:${string}` | 'unknown';
 type PlatformName =
   | 'MacOS'
@@ -54,7 +78,7 @@ type PlatformProperties = {
   'X-Stainless-Package-Version': string;
   'X-Stainless-OS': PlatformName;
   'X-Stainless-Arch': Arch;
-  'X-Stainless-Runtime': 'node' | 'deno' | 'edge' | `browser:${Browser}` | 'unknown';
+  'X-Stainless-Runtime': 'node' | 'deno' | 'bun' | 'workerd' | 'edge' | `browser:${Browser}` | 'unknown';
   'X-Stainless-Runtime-Version': string;
 };
 const getPlatformProperties = (): PlatformProperties => {
@@ -68,6 +92,27 @@ const getPlatformProperties = (): PlatformProperties => {
       'X-Stainless-Runtime': 'deno',
       'X-Stainless-Runtime-Version':
         typeof Deno.version === 'string' ? Deno.version : Deno.version?.deno ?? 'unknown',
+    };
+  }
+  if (detectedPlatform === 'bun') {
+    return {
+      'X-Stainless-Lang': 'js',
+      'X-Stainless-Package-Version': VERSION,
+      'X-Stainless-OS': normalizePlatform((globalThis as any).process?.platform ?? 'unknown'),
+      'X-Stainless-Arch': normalizeArch((globalThis as any).process?.arch ?? 'unknown'),
+      'X-Stainless-Runtime': 'bun',
+      'X-Stainless-Runtime-Version': (globalThis as any).Bun?.version ?? (globalThis as any).process?.versions?.bun ?? 'unknown',
+    };
+  }
+  if (detectedPlatform === 'workerd') {
+    return {
+      'X-Stainless-Lang': 'js',
+      'X-Stainless-Package-Version': VERSION,
+      'X-Stainless-OS': 'Unknown',
+      'X-Stainless-Arch': 'unknown',
+      'X-Stainless-Runtime': 'workerd',
+      'X-Stainless-Runtime-Version':
+        (typeof navigator !== 'undefined' && (navigator as any)?.userAgent) || 'unknown',
     };
   }
   if (typeof EdgeRuntime !== 'undefined') {
