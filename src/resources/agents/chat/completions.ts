@@ -90,7 +90,7 @@ export namespace CompletionCreateResponse {
      * number of tokens specified in the request was reached, `tool_calls` if the model
      * called a tool.
      */
-    finish_reason: 'stop' | 'length' | 'tool_calls';
+    finish_reason: 'stop' | 'length' | 'tool_calls' | 'content_filter';
 
     /**
      * The index of the choice in the list of choices.

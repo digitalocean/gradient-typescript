@@ -29,9 +29,6 @@ export class FloatingIPs extends APIResource {
    * - To create a new floating IP reserved to a region, send a POST request to
    *   `/v2/floating_ips` with the `region` attribute.
    *
-   * **Note**: In addition to the standard rate limiting, only 12 floating IPs may be
-   * created per 60 seconds.
-   *
    * @example
    * ```ts
    * const floatingIP =
