@@ -197,7 +197,7 @@ export namespace ChatCompletionChunk {
      * number of tokens specified in the request was reached, `tool_calls` if the model
      * called a tool.
      */
-    finish_reason: 'stop' | 'length' | 'tool_calls' | null;
+    finish_reason: 'stop' | 'length' | 'tool_calls' | 'content_filter' | null;
 
     /**
      * The index of the choice in the list of choices.
