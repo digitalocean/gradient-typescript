@@ -106,6 +106,7 @@ import {
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
+import { sleep } from '../../internal/utils/sleep';
 
 export class Agents extends APIResource {
   apiKeys: APIKeysAPI.APIKeys = new APIKeysAPI.APIKeys(this._client);
@@ -265,6 +266,78 @@ export class Agents extends APIResource {
       defaultBaseURL: 'https://api.digitalocean.com',
       ...options,
     });
+  }
+
+  /**
+   * Polls the agent until its deployment reaches STATUS_RUNNING (or fails/timeout).
+   *
+   * This is useful after creating or updating an agent which triggers a deployment.
+   *
+   * @example
+   * ```ts
+   * const agent = await client.agents.waitForDeployment('123e4567-e89b-12d3-a456-426614174000');
+   * ```
+   */
+  async waitForDeployment(
+    uuid: string,
+    waitOptions: Agents.WaitForDeploymentOptions = {},
+    options?: RequestOptions,
+  ): Promise<AgentRetrieveResponse> {
+    const intervalMs = waitOptions.intervalMs ?? 2000;
+    const timeoutMs = waitOptions.timeoutMs ?? 5 * 60 * 1000; // 5 minutes default
+    const throwOnFailure = waitOptions.throwOnFailure ?? true;
+    const start = Date.now();
+
+    // loop until running, failed, or timeout
+    for (;;) {
+      const resp = await this.retrieve(uuid, options);
+      const status = resp.agent?.deployment?.status;
+
+      if (status === 'STATUS_RUNNING') return resp;
+
+      if (
+        status === 'STATUS_FAILED' ||
+        status === 'STATUS_UNDEPLOYMENT_FAILED' ||
+        status === 'STATUS_DELETED'
+      ) {
+        if (throwOnFailure) {
+          const details = JSON.stringify(resp.agent?.deployment ?? {}, null, 2);
+          throw new Error(
+            `Agent deployment ended in a failure state: ${status}. Deployment details: ${details}`,
+          );
+        }
+        return resp;
+      }
+
+      if (Date.now() - start >= timeoutMs) {
+        throw new Error(
+          `Timed out waiting for agent deployment to reach STATUS_RUNNING after ${Math.round(timeoutMs / 1000)}s (last status: ${status ?? 'unknown'}).`,
+        );
+      }
+
+      await sleep(intervalMs);
+    }
+  }
+
+  /**
+   * Convenience helper to create an agent and wait until its deployment is running.
+   *
+   * @example
+   * ```ts
+   * const agent = await client.agents.createAndWait({ name: 'My Agent', model_uuid: '...' });
+   * ```
+   */
+  async createAndWait(
+    body: AgentCreateParams | null | undefined = {},
+    waitOptions: Agents.WaitForDeploymentOptions = {},
+    options?: RequestOptions,
+  ): Promise<AgentRetrieveResponse> {
+    const created = await this.create(body, options);
+    const newUUID = created.agent?.uuid;
+    if (!newUUID) {
+      throw new Error('Agent creation response did not include a uuid.');
+    }
+    return this.waitForDeployment(newUUID, waitOptions, options);
   }
 }
 
@@ -1867,4 +1940,25 @@ export declare namespace Agents {
     type RouteDeleteParams as RouteDeleteParams,
     type RouteAddParams as RouteAddParams,
   };
+}
+
+// Additional helper types for the Agents class
+export declare namespace Agents {
+  export interface WaitForDeploymentOptions {
+    /**
+     * Polling interval in milliseconds. Default: 2000 (2 seconds)
+     */
+    intervalMs?: number;
+
+    /**
+     * Maximum time to wait in milliseconds before timing out. Default: 300000 (5 minutes)
+     */
+    timeoutMs?: number;
+
+    /**
+     * If true (default), throw an error when the deployment reaches a failure state.
+     * If false, return the last retrieved agent response instead.
+     */
+    throwOnFailure?: boolean;
+  }
 }
