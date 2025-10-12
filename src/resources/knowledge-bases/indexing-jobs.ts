@@ -5,6 +5,7 @@ import * as Shared from '../shared';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
+import { sleep } from '../../internal/utils/sleep';
 
 export class IndexingJobs extends APIResource {
   /**
@@ -112,6 +113,74 @@ export class IndexingJobs extends APIResource {
       defaultBaseURL: 'https://api.digitalocean.com',
       ...options,
     });
+  }
+
+  /**
+   * Polls for indexing job completion with configurable interval and timeout.
+   * Returns the final job state when completed, failed, or cancelled.
+   *
+   * @param uuid - The indexing job UUID to poll
+   * @param options - Polling configuration options
+   * @returns Promise that resolves with the final job state
+   *
+   * @example
+   * ```ts
+   * const job = await client.knowledgeBases.indexingJobs.waitForCompletion(
+   *   '123e4567-e89b-12d3-a456-426614174000',
+   *   { interval: 5000, timeout: 300000 }
+   * );
+   * console.log('Job completed with phase:', job.job?.phase);
+   * ```
+   */
+  async waitForCompletion(
+    uuid: string,
+    options: {
+      /**
+       * Polling interval in milliseconds (default: 5000ms)
+       */
+      interval?: number;
+      /**
+       * Maximum time to wait in milliseconds (default: 600000ms = 10 minutes)
+       */
+      timeout?: number;
+      /**
+       * Request options to pass to each poll request
+       */
+      requestOptions?: RequestOptions;
+    } = {},
+  ): Promise<IndexingJobRetrieveResponse> {
+    const { interval = 5000, timeout = 600000, requestOptions } = options;
+    const startTime = Date.now();
+
+    while (true) {
+      const response = await this.retrieve(uuid, requestOptions);
+      const job = response.job;
+
+      if (!job) {
+        throw new Error('Job not found');
+      }
+
+      // Check if job is in a terminal state
+      if (job.phase === 'BATCH_JOB_PHASE_SUCCEEDED') {
+        return response;
+      }
+
+      if (job.phase === 'BATCH_JOB_PHASE_FAILED' || job.phase === 'BATCH_JOB_PHASE_ERROR') {
+        throw new Error(`Indexing job failed with phase: ${job.phase}`);
+      }
+
+      if (job.phase === 'BATCH_JOB_PHASE_CANCELLED') {
+        throw new Error('Indexing job was cancelled');
+      }
+
+      // Check timeout
+      if (Date.now() - startTime > timeout) {
+        throw new Error(`Indexing job polling timed out after ${timeout}ms`);
+      }
+
+      // Wait before next poll
+      await sleep(interval);
+    }
   }
 }
 

@@ -109,4 +109,62 @@ describe('resource indexingJobs', () => {
       ),
     ).rejects.toThrow(Gradient.NotFoundError);
   });
+
+  describe('waitForCompletion', () => {
+    // Prism tests are disabled
+    test.skip('waits for job completion successfully', async () => {
+      const jobUuid = '123e4567-e89b-12d3-a456-426614174000';
+      const responsePromise = client.knowledgeBases.indexingJobs.waitForCompletion(jobUuid, {
+        interval: 100,
+        timeout: 1000,
+      });
+      const response = await responsePromise;
+      expect(response).toBeDefined();
+      expect(response.job).toBeDefined();
+    });
+
+    // Prism tests are disabled
+    test.skip('throws error when job fails', async () => {
+      const jobUuid = '123e4567-e89b-12d3-a456-426614174000';
+      await expect(
+        client.knowledgeBases.indexingJobs.waitForCompletion(jobUuid, {
+          interval: 100,
+          timeout: 1000,
+        }),
+      ).rejects.toThrow();
+    });
+
+    // Prism tests are disabled
+    test.skip('throws error when job is cancelled', async () => {
+      const jobUuid = '123e4567-e89b-12d3-a456-426614174000';
+      await expect(
+        client.knowledgeBases.indexingJobs.waitForCompletion(jobUuid, {
+          interval: 100,
+          timeout: 1000,
+        }),
+      ).rejects.toThrow('Indexing job was cancelled');
+    });
+
+    // Prism tests are disabled
+    test.skip('throws error when timeout is reached', async () => {
+      const jobUuid = '123e4567-e89b-12d3-a456-426614174000';
+      await expect(
+        client.knowledgeBases.indexingJobs.waitForCompletion(jobUuid, {
+          interval: 100,
+          timeout: 50, // Very short timeout
+        }),
+      ).rejects.toThrow('Indexing job polling timed out');
+    });
+
+    // Prism tests are disabled
+    test.skip('throws error when job is not found', async () => {
+      const jobUuid = 'nonexistent-job-uuid';
+      await expect(
+        client.knowledgeBases.indexingJobs.waitForCompletion(jobUuid, {
+          interval: 100,
+          timeout: 1000,
+        }),
+      ).rejects.toThrow('Job not found');
+    });
+  });
 });
