@@ -261,9 +261,7 @@ await client.post('/some/path', {
 
 #### Undocumented request params
 
-To make requests using undocumented parameters, you may use `// @ts-expect-error` on the undocumented
-parameter. This library doesn't validate at runtime that the request matches the type, so any extra values you
-send will be sent as-is.
+To make requests using undocumented parameters, you may use `// @ts-expect-error` on the undocumented parameter. This library doesn't validate at runtime that the request matches the type, so any extra values you send will be sent as-is.
 
 ```ts
 client.chat.completions.create({
@@ -272,6 +270,8 @@ client.chat.completions.create({
   baz: 'undocumented option',
 });
 ```
+
+> ⚠️ When using undocumented parameters like `baz`, we recommend wrapping them with `@ts-expect-error` and a clear comment. These fields are not part of the public API and may change without notice.
 
 For requests with the `GET` verb, any extra params will be in the query, all other requests will send the
 extra param in the body.
