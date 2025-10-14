@@ -215,3 +215,37 @@ export declare namespace Functions {
     type FunctionDeleteParams as FunctionDeleteParams,
   };
 }
+
+
+
+import Gradient from "@digitalocean/gradient";
+
+/**
+ * Waits for an agent deployment to become ready (STATUS_RUNNING).
+ * Polls in a loop, throws on timeout or error status.
+ * 
+ * @param client Gradient SDK client instance.
+ * @param agentUuid Agent UUID string.
+ * @param pollIntervalMs Time (ms) between status checks (default 2000).
+ * @param maxWaitMs Max time (ms) to wait before giving up (default 60000).
+ * @returns The agent object when ready.
+ * @throws Error if deployment failed, deleted, or timed out.
+ */
+export async function waitForAgentDeploymentReady(
+  client: Gradient,
+  agentUuid: string,
+  pollIntervalMs = 2000,
+  maxWaitMs = 60000
+): Promise<any> {
+  const start = Date.now();
+  while (Date.now() - start < maxWaitMs) {
+    const result = await client.agents.retrieve(agentUuid);
+    const status = result?.agent?.deployment?.status;
+    if (status === "STATUS_RUNNING") return result.agent;
+    if (status === "STATUS_FAILED" || status === "STATUS_DELETED") {
+      throw new Error(`Agent deployment failed or was deleted (status: ${status})`);
+    }
+    await new Promise(res => setTimeout(res, pollIntervalMs));
+  }
+  throw new Error("Timeout waiting for agent deployment readiness.");
+}
