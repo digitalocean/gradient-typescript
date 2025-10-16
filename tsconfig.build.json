@@ -5,8 +5,8 @@
   "compilerOptions": {
     "rootDir": "./dist/src",
     "paths": {
-      "@digitalocean/gradient/*": ["dist/src/*"],
-      "@digitalocean/gradient": ["dist/src/index.ts"]
+      "@digitalocean/gradient/*": ["./dist/src/*"],
+      "@digitalocean/gradient": ["./dist/src/index.ts"]
     },
     "noEmit": false,
     "declaration": true,

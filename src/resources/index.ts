@@ -43,6 +43,13 @@ export {
   type GPUDropletListKernelsParams,
   type GPUDropletListSnapshotsParams,
 } from './gpu-droplets/gpu-droplets';
+export {
+  Images,
+  type ImageGenerateResponse,
+  type ImageGenerateParams,
+  type ImageGenerateParamsNonStreaming,
+  type ImageGenerateParamsStreaming,
+} from './images';
 export { Inference } from './inference/inference';
 export {
   KnowledgeBases,

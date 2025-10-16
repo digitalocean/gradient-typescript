@@ -18,6 +18,9 @@ Types:
 - <code><a href="./src/resources/shared.ts">GarbageCollection</a></code>
 - <code><a href="./src/resources/shared.ts">GPUInfo</a></code>
 - <code><a href="./src/resources/shared.ts">Image</a></code>
+- <code><a href="./src/resources/shared.ts">ImageGenCompletedEvent</a></code>
+- <code><a href="./src/resources/shared.ts">ImageGenPartialImageEvent</a></code>
+- <code><a href="./src/resources/shared.ts">ImageGenStreamEvent</a></code>
 - <code><a href="./src/resources/shared.ts">Kernel</a></code>
 - <code><a href="./src/resources/shared.ts">MetaProperties</a></code>
 - <code><a href="./src/resources/shared.ts">NetworkV4</a></code>
@@ -326,6 +329,16 @@ Types:
 Methods:
 
 - <code title="post /chat/completions">client.chat.completions.<a href="./src/resources/chat/completions.ts">create</a>({ ...params }) -> CompletionCreateResponse</code>
+
+# Images
+
+Types:
+
+- <code><a href="./src/resources/images.ts">ImageGenerateResponse</a></code>
+
+Methods:
+
+- <code title="post /images/generations">client.images.<a href="./src/resources/images.ts">generate</a>({ ...params }) -> ImageGenerateResponse</code>
 
 # GPUDroplets
 
@@ -642,6 +655,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/gpu-droplets/account/keys.ts">SSHKeys</a></code>
 - <code><a href="./src/resources/gpu-droplets/account/keys.ts">KeyCreateResponse</a></code>
 - <code><a href="./src/resources/gpu-droplets/account/keys.ts">KeyRetrieveResponse</a></code>
 - <code><a href="./src/resources/gpu-droplets/account/keys.ts">KeyUpdateResponse</a></code>
@@ -707,12 +721,14 @@ Types:
 - <code><a href="./src/resources/knowledge-bases/data-sources.ts">DataSourceCreateResponse</a></code>
 - <code><a href="./src/resources/knowledge-bases/data-sources.ts">DataSourceListResponse</a></code>
 - <code><a href="./src/resources/knowledge-bases/data-sources.ts">DataSourceDeleteResponse</a></code>
+- <code><a href="./src/resources/knowledge-bases/data-sources.ts">DataSourceCreatePresignedURLsResponse</a></code>
 
 Methods:
 
 - <code title="post /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources">client.knowledgeBases.dataSources.<a href="./src/resources/knowledge-bases/data-sources.ts">create</a>(knowledgeBaseUuid, { ...params }) -> DataSourceCreateResponse</code>
 - <code title="get /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources">client.knowledgeBases.dataSources.<a href="./src/resources/knowledge-bases/data-sources.ts">list</a>(knowledgeBaseUuid, { ...params }) -> DataSourceListResponse</code>
 - <code title="delete /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources/{data_source_uuid}">client.knowledgeBases.dataSources.<a href="./src/resources/knowledge-bases/data-sources.ts">delete</a>(dataSourceUuid, { ...params }) -> DataSourceDeleteResponse</code>
+- <code title="post /v2/gen-ai/knowledge_bases/data_sources/file_upload_presigned_urls">client.knowledgeBases.dataSources.<a href="./src/resources/knowledge-bases/data-sources.ts">createPresignedURLs</a>({ ...params }) -> DataSourceCreatePresignedURLsResponse</code>
 
 ## IndexingJobs
 
