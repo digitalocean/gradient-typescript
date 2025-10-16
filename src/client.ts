@@ -319,16 +319,52 @@ export class Gradient {
       return;
     }
 
+    if (this.modelAccessKey && values.get('authorization')) {
+      return;
+    }
+    if (nulls.has('authorization')) {
+      return;
+    }
+
+    if (this.agentAccessKey && values.get('authorization')) {
+      return;
+    }
+    if (nulls.has('authorization')) {
+      return;
+    }
+
     throw new Error(
-      'Could not resolve authentication method. Expected the accessToken to be set. Or for the "Authorization" headers to be explicitly omitted',
+      'Could not resolve authentication method. Expected one of accessToken, modelAccessKey or agentAccessKey to be set. Or for one of the "Authorization", "Authorization" or "Authorization" headers to be explicitly omitted',
     );
   }
 
   protected async authHeaders(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
+    return buildHeaders([
+      await this.bearerAuth(opts),
+      await this.modelAccessKeyAuth(opts),
+      await this.agentAccessKeyAuth(opts),
+    ]);
+  }
+
+  protected async bearerAuth(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
     if (this.accessToken == null) {
       return undefined;
     }
     return buildHeaders([{ Authorization: `Bearer ${this.accessToken}` }]);
+  }
+
+  protected async modelAccessKeyAuth(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
+    if (this.modelAccessKey == null) {
+      return undefined;
+    }
+    return buildHeaders([{ Authorization: `Bearer ${this.modelAccessKey}` }]);
+  }
+
+  protected async agentAccessKeyAuth(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
+    if (this.agentAccessKey == null) {
+      return undefined;
+    }
+    return buildHeaders([{ Authorization: `Bearer ${this.agentAccessKey}` }]);
   }
 
   protected stringifyQuery(query: Record<string, unknown>): string {
