@@ -1,11 +1,5 @@
 # Changelog
 
-## Unreleased
-
-### Features
-
-- internal: detect Bun and Cloudflare Workers (workerd) runtimes for platform headers
-
 ## 0.1.0-alpha.1 (2025-09-12)
 
 Full Changelog: [v0.0.1-alpha.0...v0.1.0-alpha.1](https://github.com/digitalocean/gradient-typescript/compare/v0.0.1-alpha.0...v0.1.0-alpha.1)
