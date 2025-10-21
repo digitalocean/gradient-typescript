@@ -7,6 +7,56 @@ import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 import { sleep } from '../../internal/utils/sleep';
 
+/**
+ * Error thrown when an indexing job polling operation is aborted
+ */
+export class IndexingJobAbortedError extends Error {
+  constructor() {
+    super('Indexing job polling was aborted');
+    this.name = 'IndexingJobAbortedError';
+  }
+}
+
+/**
+ * Error thrown when an indexing job is not found
+ */
+export class IndexingJobNotFoundError extends Error {
+  constructor() {
+    super('Indexing job not found');
+    this.name = 'IndexingJobNotFoundError';
+  }
+}
+
+/**
+ * Error thrown when an indexing job fails
+ */
+export class IndexingJobFailedError extends Error {
+  constructor(public readonly phase: string) {
+    super(`Indexing job failed with phase: ${phase}`);
+    this.name = 'IndexingJobFailedError';
+  }
+}
+
+/**
+ * Error thrown when an indexing job is cancelled
+ */
+export class IndexingJobCancelledError extends Error {
+  constructor() {
+    super('Indexing job was cancelled');
+    this.name = 'IndexingJobCancelledError';
+  }
+}
+
+/**
+ * Error thrown when an indexing job polling times out
+ */
+export class IndexingJobTimeoutError extends Error {
+  constructor(public readonly timeoutMs: number) {
+    super(`Indexing job polling timed out after ${timeoutMs}ms`);
+    this.name = 'IndexingJobTimeoutError';
+  }
+}
+
 export class IndexingJobs extends APIResource {
   /**
    * To start an indexing job for a knowledge base, send a POST request to
@@ -122,6 +172,11 @@ export class IndexingJobs extends APIResource {
    * @param uuid - The indexing job UUID to poll
    * @param options - Polling configuration options
    * @returns Promise that resolves with the final job state
+   * @throws {IndexingJobAbortedError} When the operation is aborted via AbortSignal
+   * @throws {IndexingJobNotFoundError} When the job is not found
+   * @throws {IndexingJobFailedError} When the job fails with phase FAILED or ERROR
+   * @throws {IndexingJobCancelledError} When the job is cancelled
+   * @throws {IndexingJobTimeoutError} When polling times out
    *
    * @example
    * ```ts
@@ -141,6 +196,22 @@ export class IndexingJobs extends APIResource {
    * );
    * // Cancel polling after 30 seconds
    * setTimeout(() => controller.abort(), 30000);
+   * ```
+   *
+   * @example
+   * ```ts
+   * try {
+   *   const job = await client.knowledgeBases.indexingJobs.waitForCompletion(uuid);
+   *   console.log('Job completed successfully');
+   * } catch (error) {
+   *   if (error instanceof IndexingJobFailedError) {
+   *     console.log('Job failed with phase:', error.phase);
+   *   } else if (error instanceof IndexingJobTimeoutError) {
+   *     console.log('Job timed out after:', error.timeoutMs, 'ms');
+   *   } else if (error instanceof IndexingJobAbortedError) {
+   *     console.log('Job polling was aborted');
+   *   }
+   * }
    * ```
    */
   async waitForCompletion(
@@ -166,14 +237,14 @@ export class IndexingJobs extends APIResource {
     while (true) {
       // Check if operation was aborted
       if (requestOptions?.signal?.aborted) {
-        throw new Error('Indexing job polling was aborted');
+        throw new IndexingJobAbortedError();
       }
 
       const response = await this.retrieve(uuid, requestOptions);
       const job = response.job;
 
       if (!job) {
-        throw new Error('Job not found');
+        throw new IndexingJobNotFoundError();
       }
 
       // Check if job is in a terminal state
@@ -182,16 +253,16 @@ export class IndexingJobs extends APIResource {
       }
 
       if (job.phase === 'BATCH_JOB_PHASE_FAILED' || job.phase === 'BATCH_JOB_PHASE_ERROR') {
-        throw new Error(`Indexing job failed with phase: ${job.phase}`);
+        throw new IndexingJobFailedError(job.phase);
       }
 
       if (job.phase === 'BATCH_JOB_PHASE_CANCELLED') {
-        throw new Error('Indexing job was cancelled');
+        throw new IndexingJobCancelledError();
       }
 
       // Check timeout
       if (Date.now() - startTime > timeout) {
-        throw new Error(`Indexing job polling timed out after ${timeout}ms`);
+        throw new IndexingJobTimeoutError(timeout);
       }
 
       // Wait before next poll
@@ -452,5 +523,10 @@ export declare namespace IndexingJobs {
     type IndexingJobCreateParams as IndexingJobCreateParams,
     type IndexingJobListParams as IndexingJobListParams,
     type IndexingJobUpdateCancelParams as IndexingJobUpdateCancelParams,
+    IndexingJobAbortedError,
+    IndexingJobNotFoundError,
+    IndexingJobFailedError,
+    IndexingJobCancelledError,
+    IndexingJobTimeoutError,
   };
 }
