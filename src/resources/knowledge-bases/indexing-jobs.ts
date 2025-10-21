@@ -167,7 +167,20 @@ export class IndexingJobs extends APIResource {
 
   /**
    * Polls for indexing job completion with configurable interval and timeout.
+   * Uses exponential backoff to gradually increase polling intervals, reducing API load for long-running jobs.
    * Returns the final job state when completed, failed, or cancelled.
+   *
+   * **Exponential Backoff Behavior:**
+   * - First 2 polls use the initial interval
+   * - Starting from the 3rd poll, the interval doubles after each poll
+   * - The interval is capped at the `maxInterval` value
+   * - Example with default values (interval: 5000ms, maxInterval: 30000ms):
+   *   - Poll 1: 5000ms wait
+   *   - Poll 2: 5000ms wait
+   *   - Poll 3: 10000ms wait (5000 * 2)
+   *   - Poll 4: 20000ms wait (10000 * 2)
+   *   - Poll 5: 30000ms wait (20000 * 1.5, capped at maxInterval)
+   *   - Poll 6+: 30000ms wait (continues at maxInterval)
    *
    * @param uuid - The indexing job UUID to poll
    * @param options - Polling configuration options
@@ -200,6 +213,16 @@ export class IndexingJobs extends APIResource {
    *
    * @example
    * ```ts
+   * // Custom exponential backoff configuration
+   * const job = await client.knowledgeBases.indexingJobs.waitForCompletion(uuid, {
+   *   interval: 2000,      // Start with 2 second intervals
+   *   maxInterval: 60000, // Cap at 1 minute intervals
+   *   timeout: 1800000    // 30 minute timeout
+   * });
+   * ```
+   *
+   * @example
+   * ```ts
    * try {
    *   const job = await client.knowledgeBases.indexingJobs.waitForCompletion(uuid);
    *   console.log('Job completed successfully');
@@ -218,7 +241,8 @@ export class IndexingJobs extends APIResource {
     uuid: string,
     options: {
       /**
-       * Polling interval in milliseconds (default: 5000ms)
+       * Initial polling interval in milliseconds (default: 5000ms).
+       * This interval will be used for the first few polls, then exponential backoff applies.
        */
       interval?: number;
       /**
@@ -226,13 +250,25 @@ export class IndexingJobs extends APIResource {
        */
       timeout?: number;
       /**
+       * Maximum polling interval in milliseconds (default: 30000ms = 30 seconds).
+       * Exponential backoff will not exceed this value.
+       */
+      maxInterval?: number;
+      /**
        * Request options to pass to each poll request
        */
       requestOptions?: RequestOptions;
     } = {},
   ): Promise<IndexingJobRetrieveResponse> {
-    const { interval = 5000, timeout = 600000, requestOptions } = options;
+    const { 
+      interval = 5000, 
+      timeout = 600000, 
+      maxInterval = 30000,
+      requestOptions 
+    } = options;
     const startTime = Date.now();
+    let currentInterval = interval;
+    let pollCount = 0;
 
     while (true) {
       // Check if operation was aborted
@@ -265,8 +301,14 @@ export class IndexingJobs extends APIResource {
         throw new IndexingJobTimeoutError(timeout);
       }
 
-      // Wait before next poll
-      await sleep(interval);
+      // Wait before next poll with exponential backoff
+      await sleep(currentInterval);
+      
+      // Apply exponential backoff: double the interval after each poll, up to maxInterval
+      pollCount++;
+      if (pollCount > 2) { // Start exponential backoff after 2 polls
+        currentInterval = Math.min(currentInterval * 2, maxInterval);
+      }
     }
   }
 }
