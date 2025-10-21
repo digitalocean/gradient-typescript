@@ -131,6 +131,17 @@ export class IndexingJobs extends APIResource {
    * );
    * console.log('Job completed with phase:', job.job?.phase);
    * ```
+   *
+   * @example
+   * ```ts
+   * const controller = new AbortController();
+   * const job = await client.knowledgeBases.indexingJobs.waitForCompletion(
+   *   '123e4567-e89b-12d3-a456-426614174000',
+   *   { requestOptions: { signal: controller.signal } }
+   * );
+   * // Cancel polling after 30 seconds
+   * setTimeout(() => controller.abort(), 30000);
+   * ```
    */
   async waitForCompletion(
     uuid: string,
@@ -153,6 +164,11 @@ export class IndexingJobs extends APIResource {
     const startTime = Date.now();
 
     while (true) {
+      // Check if operation was aborted
+      if (requestOptions?.signal?.aborted) {
+        throw new Error('Indexing job polling was aborted');
+      }
+
       const response = await this.retrieve(uuid, requestOptions);
       const job = response.job;
 
