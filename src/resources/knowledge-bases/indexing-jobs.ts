@@ -113,6 +113,54 @@ export class IndexingJobs extends APIResource {
       ...options,
     });
   }
+
+  /**
+   * Poll the indexing job until it reaches a terminal state.
+   *
+   * By default this polls every 2000ms and times out after 10 minutes.
+   * It will resolve with the final retrieve response when the job succeeds,
+   * and reject if the job fails, is cancelled, or an error phase is reached.
+   *
+   * @example
+   * ```ts
+   * await client.knowledgeBases.indexingJobs.waitForCompletion('uuid');
+   * ```
+   */
+  async waitForCompletion(
+    uuid: string,
+    opts: { interval?: number; timeout?: number } | undefined = {},
+  ): Promise<IndexingJobRetrieveResponse> {
+    const interval = opts?.interval ?? 2000;
+    const timeout = opts?.timeout ?? 1000 * 60 * 10; // 10 minutes
+
+    const start = Date.now();
+
+    const check = async (): Promise<IndexingJobRetrieveResponse> => {
+      const res = await this.retrieve(uuid);
+      const phase = res.job?.phase;
+
+      if (phase === 'BATCH_JOB_PHASE_SUCCEEDED') {
+        return res;
+      }
+
+      if (
+        phase === 'BATCH_JOB_PHASE_FAILED' ||
+        phase === 'BATCH_JOB_PHASE_ERROR' ||
+        phase === 'BATCH_JOB_PHASE_CANCELLED'
+      ) {
+        throw new Error(`indexing job entered terminal failure phase: ${phase}`);
+      }
+
+      if (Date.now() - start > timeout) {
+        throw new Error('timeout waiting for indexing job to complete');
+      }
+
+      await new Promise((r) => setTimeout(r, interval));
+      return check();
+    };
+
+    return check();
+  }
 }
 
 export interface APIIndexedDataSource {
