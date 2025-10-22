@@ -5,6 +5,57 @@ import * as Shared from '../shared';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
+import { sleep } from '../../internal/utils/sleep';
+
+/**
+ * Error thrown when an indexing job polling operation is aborted
+ */
+export class IndexingJobAbortedError extends Error {
+  constructor() {
+    super('Indexing job polling was aborted');
+    this.name = 'IndexingJobAbortedError';
+  }
+}
+
+/**
+ * Error thrown when an indexing job is not found
+ */
+export class IndexingJobNotFoundError extends Error {
+  constructor() {
+    super('Indexing job not found');
+    this.name = 'IndexingJobNotFoundError';
+  }
+}
+
+/**
+ * Error thrown when an indexing job fails
+ */
+export class IndexingJobFailedError extends Error {
+  constructor(public readonly phase: string) {
+    super(`Indexing job failed with phase: ${phase}`);
+    this.name = 'IndexingJobFailedError';
+  }
+}
+
+/**
+ * Error thrown when an indexing job is cancelled
+ */
+export class IndexingJobCancelledError extends Error {
+  constructor() {
+    super('Indexing job was cancelled');
+    this.name = 'IndexingJobCancelledError';
+  }
+}
+
+/**
+ * Error thrown when an indexing job polling times out
+ */
+export class IndexingJobTimeoutError extends Error {
+  constructor(public readonly timeoutMs: number) {
+    super(`Indexing job polling timed out after ${timeoutMs}ms`);
+    this.name = 'IndexingJobTimeoutError';
+  }
+}
 
 export class IndexingJobs extends APIResource {
   /**
@@ -112,6 +163,149 @@ export class IndexingJobs extends APIResource {
       defaultBaseURL: 'https://api.digitalocean.com',
       ...options,
     });
+  }
+
+  /**
+   * Polls for indexing job completion with configurable interval and timeout.
+   * Uses exponential backoff to gradually increase polling intervals, reducing API load for long-running jobs.
+   * Returns the final job state when completed, failed, or cancelled.
+   *
+   * **Exponential Backoff Behavior:**
+   * - First 2 polls use the initial interval
+   * - Starting from the 3rd poll, the interval doubles after each poll
+   * - The interval is capped at the `maxInterval` value
+   * - Example with default values (interval: 5000ms, maxInterval: 30000ms):
+   *   - Poll 1: 5000ms wait
+   *   - Poll 2: 5000ms wait
+   *   - Poll 3: 10000ms wait (5000 * 2)
+   *   - Poll 4: 20000ms wait (10000 * 2)
+   *   - Poll 5: 30000ms wait (20000 * 1.5, capped at maxInterval)
+   *   - Poll 6+: 30000ms wait (continues at maxInterval)
+   *
+   * @param uuid - The indexing job UUID to poll
+   * @param options - Polling configuration options
+   * @returns Promise that resolves with the final job state
+   * @throws {IndexingJobAbortedError} When the operation is aborted via AbortSignal
+   * @throws {IndexingJobNotFoundError} When the job is not found
+   * @throws {IndexingJobFailedError} When the job fails with phase FAILED or ERROR
+   * @throws {IndexingJobCancelledError} When the job is cancelled
+   * @throws {IndexingJobTimeoutError} When polling times out
+   *
+   * @example
+   * ```ts
+   * const job = await client.knowledgeBases.indexingJobs.waitForCompletion(
+   *   '123e4567-e89b-12d3-a456-426614174000',
+   *   { interval: 5000, timeout: 300000 }
+   * );
+   * console.log('Job completed with phase:', job.job?.phase);
+   * ```
+   *
+   * @example
+   * ```ts
+   * const controller = new AbortController();
+   * const job = await client.knowledgeBases.indexingJobs.waitForCompletion(
+   *   '123e4567-e89b-12d3-a456-426614174000',
+   *   { requestOptions: { signal: controller.signal } }
+   * );
+   * // Cancel polling after 30 seconds
+   * setTimeout(() => controller.abort(), 30000);
+   * ```
+   *
+   * @example
+   * ```ts
+   * // Custom exponential backoff configuration
+   * const job = await client.knowledgeBases.indexingJobs.waitForCompletion(uuid, {
+   *   interval: 2000,      // Start with 2 second intervals
+   *   maxInterval: 60000, // Cap at 1 minute intervals
+   *   timeout: 1800000    // 30 minute timeout
+   * });
+   * ```
+   *
+   * @example
+   * ```ts
+   * try {
+   *   const job = await client.knowledgeBases.indexingJobs.waitForCompletion(uuid);
+   *   console.log('Job completed successfully');
+   * } catch (error) {
+   *   if (error instanceof IndexingJobFailedError) {
+   *     console.log('Job failed with phase:', error.phase);
+   *   } else if (error instanceof IndexingJobTimeoutError) {
+   *     console.log('Job timed out after:', error.timeoutMs, 'ms');
+   *   } else if (error instanceof IndexingJobAbortedError) {
+   *     console.log('Job polling was aborted');
+   *   }
+   * }
+   * ```
+   */
+  async waitForCompletion(
+    uuid: string,
+    options: {
+      /**
+       * Initial polling interval in milliseconds (default: 5000ms).
+       * This interval will be used for the first few polls, then exponential backoff applies.
+       */
+      interval?: number;
+      /**
+       * Maximum time to wait in milliseconds (default: 600000ms = 10 minutes)
+       */
+      timeout?: number;
+      /**
+       * Maximum polling interval in milliseconds (default: 30000ms = 30 seconds).
+       * Exponential backoff will not exceed this value.
+       */
+      maxInterval?: number;
+      /**
+       * Request options to pass to each poll request
+       */
+      requestOptions?: RequestOptions;
+    } = {},
+  ): Promise<IndexingJobRetrieveResponse> {
+    const { interval = 5000, timeout = 600000, maxInterval = 30000, requestOptions } = options;
+    const startTime = Date.now();
+    let currentInterval = interval;
+    let pollCount = 0;
+
+    while (true) {
+      // Check if operation was aborted
+      if (requestOptions?.signal?.aborted) {
+        throw new IndexingJobAbortedError();
+      }
+
+      const response = await this.retrieve(uuid, requestOptions);
+      const job = response.job;
+
+      if (!job) {
+        throw new IndexingJobNotFoundError();
+      }
+
+      // Check if job is in a terminal state
+      if (job.phase === 'BATCH_JOB_PHASE_SUCCEEDED') {
+        return response;
+      }
+
+      if (job.phase === 'BATCH_JOB_PHASE_FAILED' || job.phase === 'BATCH_JOB_PHASE_ERROR') {
+        throw new IndexingJobFailedError(job.phase);
+      }
+
+      if (job.phase === 'BATCH_JOB_PHASE_CANCELLED') {
+        throw new IndexingJobCancelledError();
+      }
+
+      // Check timeout
+      if (Date.now() - startTime > timeout) {
+        throw new IndexingJobTimeoutError(timeout);
+      }
+
+      // Wait before next poll with exponential backoff
+      await sleep(currentInterval);
+
+      // Apply exponential backoff: double the interval after each poll, up to maxInterval
+      pollCount++;
+      if (pollCount > 2) {
+        // Start exponential backoff after 2 polls
+        currentInterval = Math.min(currentInterval * 2, maxInterval);
+      }
+    }
   }
 }
 
@@ -367,5 +561,10 @@ export declare namespace IndexingJobs {
     type IndexingJobCreateParams as IndexingJobCreateParams,
     type IndexingJobListParams as IndexingJobListParams,
     type IndexingJobUpdateCancelParams as IndexingJobUpdateCancelParams,
+    IndexingJobAbortedError,
+    IndexingJobNotFoundError,
+    IndexingJobFailedError,
+    IndexingJobCancelledError,
+    IndexingJobTimeoutError,
   };
 }

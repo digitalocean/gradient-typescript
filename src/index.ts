@@ -20,3 +20,10 @@ export {
   PermissionDeniedError,
   UnprocessableEntityError,
 } from './core/error';
+export {
+  IndexingJobAbortedError,
+  IndexingJobNotFoundError,
+  IndexingJobFailedError,
+  IndexingJobCancelledError,
+  IndexingJobTimeoutError,
+} from './resources/knowledge-bases/indexing-jobs';
