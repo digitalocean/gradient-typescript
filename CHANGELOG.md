@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.0-alpha.3 (2025-10-22)
+
+Full Changelog: [v0.1.0-alpha.2...v0.1.0-alpha.3](https://github.com/digitalocean/gradient-typescript/compare/v0.1.0-alpha.2...v0.1.0-alpha.3)
+
+### Features
+
+* add waitForAgentReady helper for agent deployment polling ([#9](https://github.com/digitalocean/gradient-typescript/issues/9)) ([48a9366](https://github.com/digitalocean/gradient-typescript/commit/48a9366dbb8879bb6a4be7b59a6bba26840d50d9))
+* knowledge base indexing poller ([#14](https://github.com/digitalocean/gradient-typescript/issues/14)) ([04e35f0](https://github.com/digitalocean/gradient-typescript/commit/04e35f0553c622fe33b422f611bb7f1592346510))
+
+
+### Chores
+
+* formatting fixes ([ebceb08](https://github.com/digitalocean/gradient-typescript/commit/ebceb08788d2b9a5590b5b54f74ed61999f7f5a2))
+
 ## 0.1.0-alpha.2 (2025-10-16)
 
 Full Changelog: [v0.1.0-alpha.1...v0.1.0-alpha.2](https://github.com/digitalocean/gradient-typescript/compare/v0.1.0-alpha.1...v0.1.0-alpha.2)
