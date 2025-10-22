@@ -809,7 +809,7 @@ export class Gradient {
   static InternalServerError = Errors.InternalServerError;
   static PermissionDeniedError = Errors.PermissionDeniedError;
   static UnprocessableEntityError = Errors.UnprocessableEntityError;
-  
+
   // Indexing Job Error Types
   static IndexingJobAbortedError = API.KnowledgeBases.IndexingJobs.IndexingJobAbortedError;
   static IndexingJobNotFoundError = API.KnowledgeBases.IndexingJobs.IndexingJobNotFoundError;

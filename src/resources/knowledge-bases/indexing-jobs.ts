@@ -260,12 +260,7 @@ export class IndexingJobs extends APIResource {
       requestOptions?: RequestOptions;
     } = {},
   ): Promise<IndexingJobRetrieveResponse> {
-    const { 
-      interval = 5000, 
-      timeout = 600000, 
-      maxInterval = 30000,
-      requestOptions 
-    } = options;
+    const { interval = 5000, timeout = 600000, maxInterval = 30000, requestOptions } = options;
     const startTime = Date.now();
     let currentInterval = interval;
     let pollCount = 0;
@@ -303,10 +298,11 @@ export class IndexingJobs extends APIResource {
 
       // Wait before next poll with exponential backoff
       await sleep(currentInterval);
-      
+
       // Apply exponential backoff: double the interval after each poll, up to maxInterval
       pollCount++;
-      if (pollCount > 2) { // Start exponential backoff after 2 polls
+      if (pollCount > 2) {
+        // Start exponential backoff after 2 polls
         currentInterval = Math.min(currentInterval * 2, maxInterval);
       }
     }
