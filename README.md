@@ -23,7 +23,7 @@ The full API of this library can be found in [api.md](api.md).
 import Gradient from '@digitalocean/gradient';
 
 const client = new Gradient({
-  accessToken: process.env['DIGITALOCEAN_ACCESS_TOKEN'], // This is the default and can be omitted
+  modelAccessKey: process.env['GRADIENT_MODEL_ACCESS_KEY'], // This is the default and can be omitted
 });
 
 const completion = await client.chat.completions.create({
@@ -65,7 +65,7 @@ This library includes TypeScript definitions for all request params and response
 import Gradient from '@digitalocean/gradient';
 
 const client = new Gradient({
-  accessToken: process.env['DIGITALOCEAN_ACCESS_TOKEN'], // This is the default and can be omitted
+  modelAccessKey: process.env['GRADIENT_MODEL_ACCESS_KEY'], // This is the default and can be omitted
 });
 
 const params: Gradient.Chat.CompletionCreateParams = {
@@ -400,7 +400,6 @@ If you are interested in other runtime environments, please open or upvote an is
 ## Contributing
 
 See [the contributing documentation](./CONTRIBUTING.md).
-
 
 ## License
 

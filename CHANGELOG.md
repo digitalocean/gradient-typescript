@@ -1,5 +1,36 @@
 # Changelog
 
+## 0.1.0-alpha.2 (2025-10-16)
+
+Full Changelog: [v0.1.0-alpha.1...v0.1.0-alpha.2](https://github.com/digitalocean/gradient-typescript/compare/v0.1.0-alpha.1...v0.1.0-alpha.2)
+
+### Features
+
+* **api:** Images generations ([2b2dc1a](https://github.com/digitalocean/gradient-typescript/commit/2b2dc1ab761524a9a4e80d92f627e0777bc72828))
+* **api:** Images generations - openai ([6c3d87c](https://github.com/digitalocean/gradient-typescript/commit/6c3d87c4587799d95634709e10d05398a5b5efea))
+* **api:** manual updates ([e428407](https://github.com/digitalocean/gradient-typescript/commit/e428407732f68c3958a7a4aefebb16d6fc993ffe))
+* **api:** manual updates ([54e9764](https://github.com/digitalocean/gradient-typescript/commit/54e97647408b0713f2788163c8e62950d0978779))
+
+
+### Performance Improvements
+
+* faster formatting ([8368269](https://github.com/digitalocean/gradient-typescript/commit/83682693c05b0923eda90f309323e79be81f0959))
+
+
+### Chores
+
+* clean up LICENSING after legal review ([#3](https://github.com/digitalocean/gradient-typescript/issues/3)) ([da51ba0](https://github.com/digitalocean/gradient-typescript/commit/da51ba0ea90a8a938747e1f5500fe78e388046c6))
+* do not install brew dependencies in ./scripts/bootstrap by default ([58a58de](https://github.com/digitalocean/gradient-typescript/commit/58a58dee9cef281da36da118e2ac979cd0d755b7))
+* **internal:** codegen related update ([caea2ff](https://github.com/digitalocean/gradient-typescript/commit/caea2ff2b2b44b543ede7b06829fbb5a8d0b2694))
+* **internal:** fix incremental formatting in some cases ([353630a](https://github.com/digitalocean/gradient-typescript/commit/353630aa9fe2b61a4d4fb04b581e628fe9e5fd3f))
+* **internal:** ignore .eslintcache ([49808e2](https://github.com/digitalocean/gradient-typescript/commit/49808e27fd3936c7aaa21c194fc005f7944380b4))
+* **internal:** remove .eslintcache ([b318cc0](https://github.com/digitalocean/gradient-typescript/commit/b318cc0a5b59b443357621de22714cf9e893d4a6))
+* **internal:** remove deprecated `compilerOptions.baseUrl` from tsconfig.json ([3c74bff](https://github.com/digitalocean/gradient-typescript/commit/3c74bff79b6e18426e0bc6cb4e586a5996f4640f))
+* **internal:** use npm pack for build uploads ([2b378fc](https://github.com/digitalocean/gradient-typescript/commit/2b378fc6255fb2753373564871d0e8442b54497b))
+* **jsdoc:** fix [@link](https://github.com/link) annotations to refer only to parts of the package‘s public interface ([ffed53e](https://github.com/digitalocean/gradient-typescript/commit/ffed53e3f10f4cf70ce61c65623fc13298200aa8))
+* update author ([3dd3c2d](https://github.com/digitalocean/gradient-typescript/commit/3dd3c2d23f3896305077104a7793d7702371843b))
+* update github actions ([d678611](https://github.com/digitalocean/gradient-typescript/commit/d6786115dfe34fde95a8317d7f79a8d6aa579a01))
+
 ## 0.1.0-alpha.1 (2025-09-12)
 
 Full Changelog: [v0.0.1-alpha.0...v0.1.0-alpha.1](https://github.com/digitalocean/gradient-typescript/compare/v0.0.1-alpha.0...v0.1.0-alpha.1)

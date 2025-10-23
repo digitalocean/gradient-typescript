@@ -17,6 +17,13 @@ import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
+import {
+  ImageGenerateParams,
+  ImageGenerateParamsNonStreaming,
+  ImageGenerateParamsStreaming,
+  ImageGenerateResponse,
+  Images,
+} from './resources/images';
 import { RegionListParams, RegionListResponse, Regions } from './resources/regions';
 import {
   APIAgent,
@@ -312,16 +319,52 @@ export class Gradient {
       return;
     }
 
+    if (this.modelAccessKey && values.get('authorization')) {
+      return;
+    }
+    if (nulls.has('authorization')) {
+      return;
+    }
+
+    if (this.agentAccessKey && values.get('authorization')) {
+      return;
+    }
+    if (nulls.has('authorization')) {
+      return;
+    }
+
     throw new Error(
-      'Could not resolve authentication method. Expected the accessToken to be set. Or for the "Authorization" headers to be explicitly omitted',
+      'Could not resolve authentication method. Expected one of accessToken, modelAccessKey or agentAccessKey to be set. Or for one of the "Authorization", "Authorization" or "Authorization" headers to be explicitly omitted',
     );
   }
 
   protected async authHeaders(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
+    return buildHeaders([
+      await this.bearerAuth(opts),
+      await this.modelAccessKeyAuth(opts),
+      await this.agentAccessKeyAuth(opts),
+    ]);
+  }
+
+  protected async bearerAuth(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
     if (this.accessToken == null) {
       return undefined;
     }
     return buildHeaders([{ Authorization: `Bearer ${this.accessToken}` }]);
+  }
+
+  protected async modelAccessKeyAuth(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
+    if (this.modelAccessKey == null) {
+      return undefined;
+    }
+    return buildHeaders([{ Authorization: `Bearer ${this.modelAccessKey}` }]);
+  }
+
+  protected async agentAccessKeyAuth(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
+    if (this.agentAccessKey == null) {
+      return undefined;
+    }
+    return buildHeaders([{ Authorization: `Bearer ${this.agentAccessKey}` }]);
   }
 
   protected stringifyQuery(query: Record<string, unknown>): string {
@@ -810,10 +853,18 @@ export class Gradient {
   static PermissionDeniedError = Errors.PermissionDeniedError;
   static UnprocessableEntityError = Errors.UnprocessableEntityError;
 
+  // Indexing Job Error Types
+  static IndexingJobAbortedError = API.KnowledgeBases.IndexingJobs.IndexingJobAbortedError;
+  static IndexingJobNotFoundError = API.KnowledgeBases.IndexingJobs.IndexingJobNotFoundError;
+  static IndexingJobFailedError = API.KnowledgeBases.IndexingJobs.IndexingJobFailedError;
+  static IndexingJobCancelledError = API.KnowledgeBases.IndexingJobs.IndexingJobCancelledError;
+  static IndexingJobTimeoutError = API.KnowledgeBases.IndexingJobs.IndexingJobTimeoutError;
+
   static toFile = Uploads.toFile;
 
   agents: API.Agents = new API.Agents(this);
   chat: API.Chat = new API.Chat(this);
+  images: API.Images = new API.Images(this);
   gpuDroplets: API.GPUDroplets = new API.GPUDroplets(this);
   inference: API.Inference = new API.Inference(this);
   knowledgeBases: API.KnowledgeBases = new API.KnowledgeBases(this);
@@ -824,6 +875,7 @@ export class Gradient {
 
 Gradient.Agents = Agents;
 Gradient.Chat = Chat;
+Gradient.Images = Images;
 Gradient.GPUDroplets = GPUDroplets;
 Gradient.Inference = Inference;
 Gradient.KnowledgeBases = KnowledgeBases;
@@ -859,6 +911,14 @@ export declare namespace Gradient {
   };
 
   export { Chat as Chat };
+
+  export {
+    Images as Images,
+    type ImageGenerateResponse as ImageGenerateResponse,
+    type ImageGenerateParams as ImageGenerateParams,
+    type ImageGenerateParamsNonStreaming as ImageGenerateParamsNonStreaming,
+    type ImageGenerateParamsStreaming as ImageGenerateParamsStreaming,
+  };
 
   export {
     GPUDroplets as GPUDroplets,
@@ -926,6 +986,9 @@ export declare namespace Gradient {
   export type GarbageCollection = API.GarbageCollection;
   export type GPUInfo = API.GPUInfo;
   export type Image = API.Image;
+  export type ImageGenCompletedEvent = API.ImageGenCompletedEvent;
+  export type ImageGenPartialImageEvent = API.ImageGenPartialImageEvent;
+  export type ImageGenStreamEvent = API.ImageGenStreamEvent;
   export type Kernel = API.Kernel;
   export type MetaProperties = API.MetaProperties;
   export type NetworkV4 = API.NetworkV4;

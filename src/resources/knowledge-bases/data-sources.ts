@@ -83,6 +83,27 @@ export class DataSources extends APIResource {
       { defaultBaseURL: 'https://api.digitalocean.com', ...options },
     );
   }
+
+  /**
+   * To create presigned URLs for knowledge base data source file upload, send a POST
+   * request to `/v2/gen-ai/knowledge_bases/data_sources/file_upload_presigned_urls`.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.knowledgeBases.dataSources.createPresignedURLs();
+   * ```
+   */
+  createPresignedURLs(
+    body: DataSourceCreatePresignedURLsParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<DataSourceCreatePresignedURLsResponse> {
+    return this._client.post('/v2/gen-ai/knowledge_bases/data_sources/file_upload_presigned_urls', {
+      body,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
+  }
 }
 
 /**
@@ -313,6 +334,48 @@ export interface DataSourceDeleteResponse {
   knowledge_base_uuid?: string;
 }
 
+/**
+ * Response with pre-signed urls to upload files.
+ */
+export interface DataSourceCreatePresignedURLsResponse {
+  /**
+   * The ID generated for the request for Presigned URLs.
+   */
+  request_id?: string;
+
+  /**
+   * A list of generated presigned URLs and object keys, one per file.
+   */
+  uploads?: Array<DataSourceCreatePresignedURLsResponse.Upload>;
+}
+
+export namespace DataSourceCreatePresignedURLsResponse {
+  /**
+   * Detailed info about each presigned URL returned to the client.
+   */
+  export interface Upload {
+    /**
+     * The time the url expires at.
+     */
+    expires_at?: string;
+
+    /**
+     * The unique object key to store the file as.
+     */
+    object_key?: string;
+
+    /**
+     * The original file name.
+     */
+    original_file_name?: string;
+
+    /**
+     * The actual presigned URL the client can use to upload the file directly.
+     */
+    presigned_url?: string;
+  }
+}
+
 export interface DataSourceCreateParams {
   /**
    * AWS S3 Data Source
@@ -354,6 +417,30 @@ export interface DataSourceDeleteParams {
   knowledge_base_uuid: string;
 }
 
+export interface DataSourceCreatePresignedURLsParams {
+  /**
+   * A list of files to generate presigned URLs for.
+   */
+  files?: Array<DataSourceCreatePresignedURLsParams.File>;
+}
+
+export namespace DataSourceCreatePresignedURLsParams {
+  /**
+   * A single file’s metadata in the request.
+   */
+  export interface File {
+    /**
+     * Local filename
+     */
+    file_name?: string;
+
+    /**
+     * The size of the file in bytes.
+     */
+    file_size?: string;
+  }
+}
+
 export declare namespace DataSources {
   export {
     type APIFileUploadDataSource as APIFileUploadDataSource,
@@ -364,8 +451,10 @@ export declare namespace DataSources {
     type DataSourceCreateResponse as DataSourceCreateResponse,
     type DataSourceListResponse as DataSourceListResponse,
     type DataSourceDeleteResponse as DataSourceDeleteResponse,
+    type DataSourceCreatePresignedURLsResponse as DataSourceCreatePresignedURLsResponse,
     type DataSourceCreateParams as DataSourceCreateParams,
     type DataSourceListParams as DataSourceListParams,
     type DataSourceDeleteParams as DataSourceDeleteParams,
+    type DataSourceCreatePresignedURLsParams as DataSourceCreatePresignedURLsParams,
   };
 }

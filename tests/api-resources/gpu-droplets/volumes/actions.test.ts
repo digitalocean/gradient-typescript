@@ -4,8 +4,6 @@ import Gradient from '@digitalocean/gradient';
 
 const client = new Gradient({
   accessToken: 'My Access Token',
-  modelAccessKey: 'My Model Access Key',
-  agentAccessKey: 'My Agent Access Key',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 

@@ -28,3 +28,10 @@ export {
   WaitForDatabaseTimeoutError,
   WaitForDatabaseFailedError,
 } from './resources/knowledge-bases/wait-for-database';
+export {
+  IndexingJobAbortedError,
+  IndexingJobNotFoundError,
+  IndexingJobFailedError,
+  IndexingJobCancelledError,
+  IndexingJobTimeoutError,
+} from './resources/knowledge-bases/indexing-jobs';

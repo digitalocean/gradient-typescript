@@ -106,6 +106,7 @@ import {
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
+import { waitForAgentReady } from './wait-for-agent';
 
 export class Agents extends APIResource {
   apiKeys: APIKeysAPI.APIKeys = new APIKeysAPI.APIKeys(this._client);
@@ -265,6 +266,23 @@ export class Agents extends APIResource {
       defaultBaseURL: 'https://api.digitalocean.com',
       ...options,
     });
+  }
+
+  /**
+   * Polls for agent readiness.
+   *
+   * @example
+   * ```typescript
+   * const agent = await waitForAgentReady(client, 'agent-123', {
+   *   timeout: 60000, // 1 minute
+   * });
+   * ```
+   */
+  waitForReady(
+    uuid: string,
+    options: import('./wait-for-agent').WaitForAgentOptions,
+  ): Promise<AgentReadinessResponse> {
+    return waitForAgentReady(this._client, uuid, options);
   }
 }
 
@@ -1068,6 +1086,16 @@ export interface AgentRetrieveResponse {
 }
 
 /**
+ * One Agent
+ */
+export interface AgentReadinessResponse {
+  /**
+   * An Agent
+   */
+  agent?: APIAgent;
+}
+
+/**
  * Information about an updated agent
  */
 export interface AgentUpdateResponse {
@@ -1758,6 +1786,7 @@ export declare namespace Agents {
     type APIWorkspace as APIWorkspace,
     type AgentCreateResponse as AgentCreateResponse,
     type AgentRetrieveResponse as AgentRetrieveResponse,
+    type AgentReadinessResponse as AgentReadinessResponse,
     type AgentUpdateResponse as AgentUpdateResponse,
     type AgentListResponse as AgentListResponse,
     type AgentDeleteResponse as AgentDeleteResponse,
