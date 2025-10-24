@@ -159,9 +159,9 @@ export class KnowledgeBases extends APIResource {
    */
   async waitForDatabase(
     uuid: string,
-    options?: import('./wait-for-database').WaitForDatabaseOptions
+    options?: import('./wait-for-database').WaitForDatabaseOptions,
   ): Promise<KnowledgeBaseRetrieveResponse> {
-    return waitForDatabase(this._client, uuid, options);
+    return waitForDatabase(this._client, uuid, options || {});
   }
 }
 

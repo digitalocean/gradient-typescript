@@ -24,7 +24,7 @@ describe('waitForDatabase', () => {
   describe('error classes', () => {
     it('should create WaitForDatabaseTimeoutError with correct properties', () => {
       const error = new WaitForDatabaseTimeoutError('Test timeout', kbUuid, 1000);
-      
+
       expect(error.name).toBe('WaitForDatabaseTimeoutError');
       expect(error.message).toBe('Test timeout');
       expect(error).toBeInstanceOf(Error);
@@ -32,7 +32,7 @@ describe('waitForDatabase', () => {
 
     it('should create WaitForDatabaseFailedError with correct properties', () => {
       const error = new WaitForDatabaseFailedError('Test failure', kbUuid, 'DECOMMISSIONED');
-      
+
       expect(error.name).toBe('WaitForDatabaseFailedError');
       expect(error.message).toBe('Test failure');
       expect(error).toBeInstanceOf(Error);
@@ -58,14 +58,14 @@ describe('waitForDatabase', () => {
       const statuses = [
         'ONLINE',
         'CREATING',
-        'REBUILDING', 
+        'REBUILDING',
         'RESIZING',
         'POWERING_ON',
         'DECOMMISSIONED',
-        'UNHEALTHY'
+        'UNHEALTHY',
       ];
 
-      statuses.forEach(status => {
+      statuses.forEach((status) => {
         expect(typeof status).toBe('string');
       });
     });
