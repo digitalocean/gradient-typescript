@@ -85,7 +85,7 @@ export class WaitForDatabaseFailedError extends GradientError {
  * import Gradient from '@digitalocean/gradient';
  *
  * const client = new Gradient();
- * 
+ *
  * // Basic usage
  * try {
  *   const kb = await client.knowledgeBases.waitForDatabase('123e4567-e89b-12d3-a456-426614174000');
@@ -101,7 +101,7 @@ export class WaitForDatabaseFailedError extends GradientError {
  * // With AbortSignal
  * const controller = new AbortController();
  * setTimeout(() => controller.abort(), 30000); // Cancel after 30 seconds
- * 
+ *
  * try {
  *   const kb = await client.knowledgeBases.waitForDatabase('123e4567-e89b-12d3-a456-426614174000', {
  *     signal: controller.signal
