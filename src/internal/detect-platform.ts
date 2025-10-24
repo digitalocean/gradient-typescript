@@ -101,8 +101,8 @@ const getPlatformProperties = (): PlatformProperties => {
       'X-Stainless-OS': normalizePlatform((globalThis as any).process?.platform ?? 'unknown'),
       'X-Stainless-Arch': normalizeArch((globalThis as any).process?.arch ?? 'unknown'),
       'X-Stainless-Runtime': 'bun',
-      'X-Stainless-Runtime-Version': (globalThis as any).Bun?.version ??
-        (globalThis as any).process?.versions?.bun ?? 'unknown',
+      'X-Stainless-Runtime-Version':
+        (globalThis as any).Bun?.version ?? (globalThis as any).process?.versions?.bun ?? 'unknown',
     };
   }
   if (detectedPlatform === 'workerd') {
