@@ -4,6 +4,7 @@ import { Gradient } from '../../client';
 import { GradientError } from '../../core/error';
 import { sleep } from '../../internal/utils/sleep';
 import { KnowledgeBaseRetrieveResponse } from './knowledge-bases';
+import { RequestOptions } from '../../internal/request-options';
 
 export interface WaitForDatabaseOptions {
   /**
@@ -24,7 +25,7 @@ export interface WaitForDatabaseOptions {
   /**
    * Additional request options to pass through to the knowledge base retrieval request.
    */
-  requestOptions?: import('../../internal/request-options').RequestOptions;
+  requestOptions?: RequestOptions;
 }
 
 /**
