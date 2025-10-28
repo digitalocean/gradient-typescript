@@ -1,9 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { sleep } from '../../internal/utils';
 import { APIResource } from '../../core/resource';
 import * as AgentsAPI from './agents';
 import * as Shared from '../shared';
 import * as APIKeysAPI from './api-keys';
+import { GradientError } from '../../core/error';
 import {
   APIKeyCreateParams,
   APIKeyCreateResponse,
@@ -106,7 +108,33 @@ import {
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
-import { waitForAgentReady } from './wait-for-agent';
+
+type AgentStatus = NonNullable<APIAgent.Deployment['status']>;
+
+export interface WaitForAgentOptions extends RequestOptions {
+  /** Check interval in ms (default: 3000) */
+  interval?: number;
+}
+
+export class AgentTimeoutError extends GradientError {
+  constructor(
+    public agentId: string,
+    public timeoutMs: number,
+  ) {
+    super(`Agent ${agentId} did not become ready within ${timeoutMs}ms`);
+    this.name = 'AgentTimeoutError';
+  }
+}
+
+export class AgentDeploymentError extends GradientError {
+  constructor(
+    public agentId: string,
+    public status: AgentStatus,
+  ) {
+    super(`Agent ${agentId} deployment failed with status: ${status}`);
+    this.name = 'AgentDeploymentError';
+  }
+}
 
 export class Agents extends APIResource {
   apiKeys: APIKeysAPI.APIKeys = new APIKeysAPI.APIKeys(this._client);
@@ -278,11 +306,33 @@ export class Agents extends APIResource {
    * });
    * ```
    */
-  waitForReady(
-    uuid: string,
-    options: import('./wait-for-agent').WaitForAgentOptions,
-  ): Promise<AgentReadinessResponse> {
-    return waitForAgentReady(this._client, uuid, options);
+  async waitForReady(uuid: string, options: WaitForAgentOptions): Promise<AgentReadinessResponse> {
+    const { interval = 3000, timeout = 180000, signal } = options;
+    const start = Date.now();
+
+    while (true) {
+      signal?.throwIfAborted();
+
+      const elapsed = Date.now() - start;
+
+      // ⏰ Check timeout BEFORE making the API call
+      if (elapsed > timeout) {
+        throw new AgentTimeoutError(uuid, timeout);
+      }
+
+      const agent = await this.retrieve(uuid, options);
+      const status = (agent.agent?.deployment?.status as AgentStatus) || 'STATUS_UNKNOWN';
+
+      if (status === 'STATUS_RUNNING') {
+        return agent;
+      }
+
+      if (status === 'STATUS_FAILED' || status === 'STATUS_UNDEPLOYMENT_FAILED') {
+        throw new AgentDeploymentError(uuid, status);
+      }
+
+      await sleep(interval);
+    }
   }
 }
 

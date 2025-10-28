@@ -9,3 +9,5 @@ dist-deno
 .idea/
 .eslintcache
 
+
+.tool-versions
