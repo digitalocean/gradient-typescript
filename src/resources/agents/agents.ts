@@ -306,9 +306,11 @@ export class Agents extends APIResource {
    * });
    * ```
    */
-  async waitForReady(uuid: string, options: WaitForAgentOptions): Promise<AgentReadinessResponse> {
+  async waitForReady(uuid: string, options: WaitForAgentOptions = {}): Promise<AgentReadinessResponse> {
     const { interval = 3000, timeout = 180000, signal } = options;
     const start = Date.now();
+    let pollCount = 0;
+    let currentInterval = interval;
 
     while (true) {
       signal?.throwIfAborted();
@@ -331,7 +333,14 @@ export class Agents extends APIResource {
         throw new AgentDeploymentError(uuid, status);
       }
 
-      await sleep(interval);
+      await sleep(currentInterval);
+
+      // Apply exponential backoff: double the interval after each poll, up to maxInterval
+      pollCount++;
+      if (pollCount > 2) {
+        // Start exponential backoff after 2 polls
+        currentInterval = Math.min(currentInterval * 2, 30000);
+      }
     }
   }
 }

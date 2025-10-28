@@ -7,6 +7,14 @@ import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 import { sleep } from '../../internal/utils/sleep';
 
+export interface IndexingJobWaitForCompletionOptions extends RequestOptions {
+  /**
+   * Initial polling interval in milliseconds (default: 5000ms).
+   * This interval will be used for the first few polls, then exponential backoff applies.
+   */
+  interval?: number;
+}
+
 /**
  * Error thrown when an indexing job polling operation is aborted
  */
@@ -239,39 +247,20 @@ export class IndexingJobs extends APIResource {
    */
   async waitForCompletion(
     uuid: string,
-    options: {
-      /**
-       * Initial polling interval in milliseconds (default: 5000ms).
-       * This interval will be used for the first few polls, then exponential backoff applies.
-       */
-      interval?: number;
-      /**
-       * Maximum time to wait in milliseconds (default: 600000ms = 10 minutes)
-       */
-      timeout?: number;
-      /**
-       * Maximum polling interval in milliseconds (default: 30000ms = 30 seconds).
-       * Exponential backoff will not exceed this value.
-       */
-      maxInterval?: number;
-      /**
-       * Request options to pass to each poll request
-       */
-      requestOptions?: RequestOptions;
-    } = {},
+    options: IndexingJobWaitForCompletionOptions = {},
   ): Promise<IndexingJobRetrieveResponse> {
-    const { interval = 5000, timeout = 600000, maxInterval = 30000, requestOptions } = options;
+    const { interval = 5000, timeout = 600000, signal } = options;
     const startTime = Date.now();
     let currentInterval = interval;
     let pollCount = 0;
 
     while (true) {
       // Check if operation was aborted
-      if (requestOptions?.signal?.aborted) {
+      if (signal?.aborted) {
         throw new IndexingJobAbortedError();
       }
 
-      const response = await this.retrieve(uuid, requestOptions);
+      const response = await this.retrieve(uuid, options);
       const job = response.job;
 
       if (!job) {
@@ -303,7 +292,7 @@ export class IndexingJobs extends APIResource {
       pollCount++;
       if (pollCount > 2) {
         // Start exponential backoff after 2 polls
-        currentInterval = Math.min(currentInterval * 2, maxInterval);
+        currentInterval = Math.min(currentInterval * 2, 30000);
       }
     }
   }

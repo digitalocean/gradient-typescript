@@ -23,12 +23,6 @@ export {
 
 // Export knowledge base helpers
 export {
-  waitForDatabase,
-  type WaitForDatabaseOptions,
-  WaitForDatabaseTimeoutError,
-  WaitForDatabaseFailedError,
-} from './resources/knowledge-bases/wait-for-database';
-export {
   IndexingJobAbortedError,
   IndexingJobNotFoundError,
   IndexingJobFailedError,
