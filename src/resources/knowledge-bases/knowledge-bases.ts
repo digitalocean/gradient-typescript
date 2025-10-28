@@ -36,6 +36,7 @@ import {
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
+import { waitForDatabase } from './wait-for-database';
 
 export class KnowledgeBases extends APIResource {
   dataSources: DataSourcesAPI.DataSources = new DataSourcesAPI.DataSources(this._client);
@@ -136,6 +137,31 @@ export class KnowledgeBases extends APIResource {
       defaultBaseURL: 'https://api.digitalocean.com',
       ...options,
     });
+  }
+
+  /**
+   * Polls for knowledge base database creation to complete.
+   *
+   * This helper method polls the knowledge base status until the database is ONLINE,
+   * handling various error states and providing configurable timeout and polling intervals.
+   *
+   * @example
+   * ```ts
+   * const kb = await client.knowledgeBases.waitForDatabase('123e4567-e89b-12d3-a456-426614174000');
+   * console.log('Database is ready:', kb.database_status); // 'ONLINE'
+   * ```
+   *
+   * @param uuid - The knowledge base UUID to poll for
+   * @param options - Configuration options for polling behavior
+   * @returns Promise<KnowledgeBaseRetrieveResponse> - The knowledge base with ONLINE database status
+   * @throws WaitForDatabaseTimeoutError - If polling times out
+   * @throws WaitForDatabaseFailedError - If the database enters a failed state
+   */
+  async waitForDatabase(
+    uuid: string,
+    options?: import('./wait-for-database').WaitForDatabaseOptions,
+  ): Promise<KnowledgeBaseRetrieveResponse> {
+    return waitForDatabase(this._client, uuid, options || {});
   }
 }
 
@@ -423,6 +449,13 @@ export interface KnowledgeBaseListParams {
 
 KnowledgeBases.DataSources = DataSources;
 KnowledgeBases.IndexingJobs = IndexingJobs;
+
+export {
+  waitForDatabase,
+  WaitForDatabaseOptions,
+  WaitForDatabaseTimeoutError,
+  WaitForDatabaseFailedError,
+} from './wait-for-database';
 
 export declare namespace KnowledgeBases {
   export {
