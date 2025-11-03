@@ -59,6 +59,7 @@ export {
   type KnowledgeBaseUpdateResponse,
   type KnowledgeBaseListResponse,
   type KnowledgeBaseDeleteResponse,
+  type KnowledgeBaseListIndexingJobsResponse,
   type KnowledgeBaseCreateParams,
   type KnowledgeBaseUpdateParams,
   type KnowledgeBaseListParams,
@@ -71,4 +72,16 @@ export {
   type ModelListResponse,
   type ModelListParams,
 } from './models/models';
+export {
+  Nfs,
+  type NfCreateResponse,
+  type NfRetrieveResponse,
+  type NfListResponse,
+  type NfInitiateActionResponse,
+  type NfCreateParams,
+  type NfRetrieveParams,
+  type NfListParams,
+  type NfDeleteParams,
+  type NfInitiateActionParams,
+} from './nfs/nfs';
 export { Regions, type RegionListResponse, type RegionListParams } from './regions';

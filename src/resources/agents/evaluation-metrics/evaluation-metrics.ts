@@ -4,6 +4,14 @@ import { APIResource } from '../../../core/resource';
 import * as EvaluationRunsAPI from '../evaluation-runs';
 import * as ModelsAPI from './models';
 import { ModelListParams, ModelListResponse, Models } from './models';
+import * as ScheduledIndexingAPI from './scheduled-indexing';
+import {
+  ScheduledIndexing,
+  ScheduledIndexingCreateParams,
+  ScheduledIndexingCreateResponse,
+  ScheduledIndexingDeleteResponse,
+  ScheduledIndexingRetrieveResponse,
+} from './scheduled-indexing';
 import * as AnthropicAPI from './anthropic/anthropic';
 import { Anthropic } from './anthropic/anthropic';
 import * as Oauth2API from './oauth2/oauth2';
@@ -31,6 +39,9 @@ export class EvaluationMetrics extends APIResource {
   anthropic: AnthropicAPI.Anthropic = new AnthropicAPI.Anthropic(this._client);
   openai: OpenAIAPI.OpenAI = new OpenAIAPI.OpenAI(this._client);
   oauth2: Oauth2API.Oauth2 = new Oauth2API.Oauth2(this._client);
+  scheduledIndexing: ScheduledIndexingAPI.ScheduledIndexing = new ScheduledIndexingAPI.ScheduledIndexing(
+    this._client,
+  );
 
   /**
    * To list all evaluation metrics, send a GET request to
@@ -133,6 +144,7 @@ EvaluationMetrics.Models = Models;
 EvaluationMetrics.Anthropic = Anthropic;
 EvaluationMetrics.OpenAI = OpenAI;
 EvaluationMetrics.Oauth2 = Oauth2;
+EvaluationMetrics.ScheduledIndexing = ScheduledIndexing;
 
 export declare namespace EvaluationMetrics {
   export {
@@ -167,5 +179,13 @@ export declare namespace EvaluationMetrics {
     Oauth2 as Oauth2,
     type Oauth2GenerateURLResponse as Oauth2GenerateURLResponse,
     type Oauth2GenerateURLParams as Oauth2GenerateURLParams,
+  };
+
+  export {
+    ScheduledIndexing as ScheduledIndexing,
+    type ScheduledIndexingCreateResponse as ScheduledIndexingCreateResponse,
+    type ScheduledIndexingRetrieveResponse as ScheduledIndexingRetrieveResponse,
+    type ScheduledIndexingDeleteResponse as ScheduledIndexingDeleteResponse,
+    type ScheduledIndexingCreateParams as ScheduledIndexingCreateParams,
   };
 }

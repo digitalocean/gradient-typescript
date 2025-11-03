@@ -355,6 +355,8 @@ export interface APIAgent {
    */
   model?: APIAgentModel;
 
+  model_provider_key?: APIAgent.ModelProviderKey;
+
   /**
    * Agent name
    */
@@ -444,6 +446,13 @@ export interface APIAgent {
    */
   version_hash?: string;
 
+  /**
+   * VPC Egress IPs
+   */
+  vpc_egress_ips?: Array<string>;
+
+  vpc_uuid?: string;
+
   workspace?: APIWorkspace;
 }
 
@@ -462,6 +471,8 @@ export namespace APIAgent {
    * A Chatbot
    */
   export interface Chatbot {
+    allowed_domains?: Array<string>;
+
     button_background_color?: string;
 
     logo?: string;
@@ -511,7 +522,8 @@ export namespace APIAgent {
       | 'STATUS_WAITING_FOR_UNDEPLOYMENT'
       | 'STATUS_UNDEPLOYING'
       | 'STATUS_UNDEPLOYMENT_FAILED'
-      | 'STATUS_DELETED';
+      | 'STATUS_DELETED'
+      | 'STATUS_BUILDING';
 
     /**
      * Last modified
@@ -659,6 +671,45 @@ export namespace APIAgent {
      * Name of the log stream
      */
     log_stream_name?: string;
+  }
+
+  export interface ModelProviderKey {
+    /**
+     * API key ID
+     */
+    api_key_uuid?: string;
+
+    /**
+     * Key creation date
+     */
+    created_at?: string;
+
+    /**
+     * Created by user id from DO
+     */
+    created_by?: string;
+
+    /**
+     * Key deleted date
+     */
+    deleted_at?: string;
+
+    /**
+     * Models supported by the openAI api key
+     */
+    models?: Array<AgentsAPI.APIAgentModel>;
+
+    /**
+     * Name of the key
+     */
+    name?: string;
+
+    provider?: 'MODEL_PROVIDER_DIGITALOCEAN' | 'MODEL_PROVIDER_ANTHROPIC' | 'MODEL_PROVIDER_OPENAI';
+
+    /**
+     * Key last updated date
+     */
+    updated_at?: string;
   }
 
   /**
@@ -1261,6 +1312,8 @@ export namespace AgentListResponse {
      * A Chatbot
      */
     export interface Chatbot {
+      allowed_domains?: Array<string>;
+
       button_background_color?: string;
 
       logo?: string;
@@ -1310,7 +1363,8 @@ export namespace AgentListResponse {
         | 'STATUS_WAITING_FOR_UNDEPLOYMENT'
         | 'STATUS_UNDEPLOYING'
         | 'STATUS_UNDEPLOYMENT_FAILED'
-        | 'STATUS_DELETED';
+        | 'STATUS_DELETED'
+        | 'STATUS_BUILDING';
 
       /**
        * Last modified
@@ -1561,6 +1615,8 @@ export interface AgentCreateParams {
    */
   knowledge_base_uuid?: Array<string>;
 
+  model_provider_key_uuid?: string;
+
   /**
    * Identifier for the foundation model.
    */
@@ -1590,10 +1646,21 @@ export interface AgentCreateParams {
    * Agent tag to organize related resources
    */
   tags?: Array<string>;
+
+  /**
+   * Identifier for the workspace
+   */
+  workspace_uuid?: string;
 }
 
 export interface AgentUpdateParams {
   agent_log_insights_enabled?: boolean;
+
+  /**
+   * Optional list of allowed domains for the chatbot - Must use fully qualified
+   * domain name (FQDN) such as https://example.com
+   */
+  allowed_domains?: Array<string>;
 
   /**
    * Optional anthropic key uuid for use with anthropic models
@@ -1629,6 +1696,11 @@ export interface AgentUpdateParams {
    * response.
    */
   max_tokens?: number;
+
+  /**
+   * Optional Model Provider uuid for use with provider models
+   */
+  model_provider_key_uuid?: string;
 
   /**
    * Identifier for the foundation model.

@@ -29,6 +29,7 @@ import {
   IndexingJobListResponse,
   IndexingJobRetrieveDataSourcesResponse,
   IndexingJobRetrieveResponse,
+  IndexingJobRetrieveSignedURLResponse,
   IndexingJobUpdateCancelParams,
   IndexingJobUpdateCancelResponse,
   IndexingJobs,
@@ -133,6 +134,28 @@ export class KnowledgeBases extends APIResource {
    */
   delete(uuid: string, options?: RequestOptions): APIPromise<KnowledgeBaseDeleteResponse> {
     return this._client.delete(path`/v2/gen-ai/knowledge_bases/${uuid}`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
+  }
+
+  /**
+   * To list latest 15 indexing jobs for a knowledge base, send a GET request to
+   * `/v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/indexing_jobs`.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.knowledgeBases.listIndexingJobs(
+   *     '"123e4567-e89b-12d3-a456-426614174000"',
+   *   );
+   * ```
+   */
+  listIndexingJobs(
+    knowledgeBaseUuid: string,
+    options?: RequestOptions,
+  ): APIPromise<KnowledgeBaseListIndexingJobsResponse> {
+    return this._client.get(path`/v2/gen-ai/knowledge_bases/${knowledgeBaseUuid}/indexing_jobs`, {
       defaultBaseURL: 'https://api.digitalocean.com',
       ...options,
     });
@@ -274,6 +297,26 @@ export interface KnowledgeBaseDeleteResponse {
   uuid?: string;
 }
 
+/**
+ * Indexing jobs
+ */
+export interface KnowledgeBaseListIndexingJobsResponse {
+  /**
+   * The indexing jobs
+   */
+  jobs?: Array<IndexingJobsAPI.APIIndexingJob>;
+
+  /**
+   * Links to other pages
+   */
+  links?: Shared.APILinks;
+
+  /**
+   * Meta information about the data set
+   */
+  meta?: Shared.APIMeta;
+}
+
 export interface KnowledgeBaseCreateParams {
   /**
    * Identifier of the DigitalOcean OpenSearch database this knowledge base will use,
@@ -348,6 +391,11 @@ export namespace KnowledgeBaseCreateParams {
      */
     file_upload_data_source?: DataSourcesAPI.APIFileUploadDataSource;
 
+    /**
+     * Google Drive Data Source
+     */
+    google_drive_data_source?: Datasource.GoogleDriveDataSource;
+
     item_path?: string;
 
     /**
@@ -371,6 +419,19 @@ export namespace KnowledgeBaseCreateParams {
       /**
        * Refresh token. you can obrain a refresh token by following the oauth2 flow. see
        * /v2/gen-ai/oauth2/dropbox/tokens for reference.
+       */
+      refresh_token?: string;
+    }
+
+    /**
+     * Google Drive Data Source
+     */
+    export interface GoogleDriveDataSource {
+      folder_id?: string;
+
+      /**
+       * Refresh token. you can obrain a refresh token by following the oauth2 flow. see
+       * /v2/gen-ai/oauth2/google/tokens for reference.
        */
       refresh_token?: string;
     }
@@ -432,6 +493,7 @@ export declare namespace KnowledgeBases {
     type KnowledgeBaseUpdateResponse as KnowledgeBaseUpdateResponse,
     type KnowledgeBaseListResponse as KnowledgeBaseListResponse,
     type KnowledgeBaseDeleteResponse as KnowledgeBaseDeleteResponse,
+    type KnowledgeBaseListIndexingJobsResponse as KnowledgeBaseListIndexingJobsResponse,
     type KnowledgeBaseCreateParams as KnowledgeBaseCreateParams,
     type KnowledgeBaseUpdateParams as KnowledgeBaseUpdateParams,
     type KnowledgeBaseListParams as KnowledgeBaseListParams,
@@ -462,6 +524,7 @@ export declare namespace KnowledgeBases {
     type IndexingJobRetrieveResponse as IndexingJobRetrieveResponse,
     type IndexingJobListResponse as IndexingJobListResponse,
     type IndexingJobRetrieveDataSourcesResponse as IndexingJobRetrieveDataSourcesResponse,
+    type IndexingJobRetrieveSignedURLResponse as IndexingJobRetrieveSignedURLResponse,
     type IndexingJobUpdateCancelResponse as IndexingJobUpdateCancelResponse,
     type IndexingJobCreateParams as IndexingJobCreateParams,
     type IndexingJobListParams as IndexingJobListParams,

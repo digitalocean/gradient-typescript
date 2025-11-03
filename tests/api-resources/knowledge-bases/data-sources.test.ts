@@ -46,6 +46,7 @@ describe('resource dataSources', () => {
             base_url: 'example string',
             crawling_option: 'UNKNOWN',
             embed_media: true,
+            exclude_tags: ['example string'],
           },
         },
         { path: '/_stainless_unknown_path' },
