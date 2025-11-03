@@ -156,6 +156,11 @@ export interface APIKnowledgeBaseDataSource {
   file_upload_data_source?: APIFileUploadDataSource;
 
   /**
+   * Google Drive Data Source for Display
+   */
+  google_drive_data_source?: APIKnowledgeBaseDataSource.GoogleDriveDataSource;
+
+  /**
    * Path of folder or object in bucket - Deprecated, moved to data_source_details
    */
   item_path?: string;
@@ -217,6 +222,18 @@ export namespace APIKnowledgeBaseDataSource {
   export interface DropboxDataSource {
     folder?: string;
   }
+
+  /**
+   * Google Drive Data Source for Display
+   */
+  export interface GoogleDriveDataSource {
+    folder_id?: string;
+
+    /**
+     * Name of the selected folder if available
+     */
+    folder_name?: string;
+  }
 }
 
 /**
@@ -260,6 +277,11 @@ export interface APIWebCrawlerDataSource {
    * Whether to ingest and index media (images, etc.) on web pages.
    */
   embed_media?: boolean;
+
+  /**
+   * Declaring which tags to exclude in web pages while webcrawling
+   */
+  exclude_tags?: Array<string>;
 }
 
 /**

@@ -44,6 +44,10 @@ describe('resource knowledgeBases', () => {
                 size_in_bytes: '12345',
                 stored_object_key: 'example string',
               },
+              google_drive_data_source: {
+                folder_id: '123e4567-e89b-12d3-a456-426614174000',
+                refresh_token: 'example string',
+              },
               item_path: 'example string',
               spaces_data_source: {
                 bucket_name: 'example name',
@@ -54,6 +58,7 @@ describe('resource knowledgeBases', () => {
                 base_url: 'example string',
                 crawling_option: 'UNKNOWN',
                 embed_media: true,
+                exclude_tags: ['example string'],
               },
             },
           ],
@@ -135,6 +140,18 @@ describe('resource knowledgeBases', () => {
   // Prism tests are disabled
   test.skip('delete', async () => {
     const responsePromise = client.knowledgeBases.delete('"123e4567-e89b-12d3-a456-426614174000"');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('listIndexingJobs', async () => {
+    const responsePromise = client.knowledgeBases.listIndexingJobs('"123e4567-e89b-12d3-a456-426614174000"');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

@@ -83,6 +83,20 @@ describe('resource indexingJobs', () => {
   });
 
   // Prism tests are disabled
+  test.skip('retrieveSignedURL', async () => {
+    const responsePromise = client.knowledgeBases.indexingJobs.retrieveSignedURL(
+      '"123e4567-e89b-12d3-a456-426614174000"',
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
   test.skip('updateCancel', async () => {
     const responsePromise = client.knowledgeBases.indexingJobs.updateCancel(
       '"123e4567-e89b-12d3-a456-426614174000"',

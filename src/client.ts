@@ -73,6 +73,7 @@ import {
   KnowledgeBaseCreateParams,
   KnowledgeBaseCreateResponse,
   KnowledgeBaseDeleteResponse,
+  KnowledgeBaseListIndexingJobsResponse,
   KnowledgeBaseListParams,
   KnowledgeBaseListResponse,
   KnowledgeBaseRetrieveResponse,
@@ -88,6 +89,18 @@ import {
   ModelListResponse,
   Models,
 } from './resources/models/models';
+import {
+  NfCreateParams,
+  NfCreateResponse,
+  NfDeleteParams,
+  NfInitiateActionParams,
+  NfInitiateActionResponse,
+  NfListParams,
+  NfListResponse,
+  NfRetrieveParams,
+  NfRetrieveResponse,
+  Nfs,
+} from './resources/nfs/nfs';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -871,6 +884,7 @@ export class Gradient {
   models: API.Models = new API.Models(this);
   regions: API.Regions = new API.Regions(this);
   databases: API.Databases = new API.Databases(this);
+  nfs: API.Nfs = new API.Nfs(this);
 }
 
 Gradient.Agents = Agents;
@@ -882,6 +896,7 @@ Gradient.KnowledgeBases = KnowledgeBases;
 Gradient.Models = Models;
 Gradient.Regions = Regions;
 Gradient.Databases = Databases;
+Gradient.Nfs = Nfs;
 
 export declare namespace Gradient {
   export type RequestOptions = Opts.RequestOptions;
@@ -948,6 +963,7 @@ export declare namespace Gradient {
     type KnowledgeBaseUpdateResponse as KnowledgeBaseUpdateResponse,
     type KnowledgeBaseListResponse as KnowledgeBaseListResponse,
     type KnowledgeBaseDeleteResponse as KnowledgeBaseDeleteResponse,
+    type KnowledgeBaseListIndexingJobsResponse as KnowledgeBaseListIndexingJobsResponse,
     type KnowledgeBaseCreateParams as KnowledgeBaseCreateParams,
     type KnowledgeBaseUpdateParams as KnowledgeBaseUpdateParams,
     type KnowledgeBaseListParams as KnowledgeBaseListParams,
@@ -969,6 +985,19 @@ export declare namespace Gradient {
   };
 
   export { Databases as Databases };
+
+  export {
+    Nfs as Nfs,
+    type NfCreateResponse as NfCreateResponse,
+    type NfRetrieveResponse as NfRetrieveResponse,
+    type NfListResponse as NfListResponse,
+    type NfInitiateActionResponse as NfInitiateActionResponse,
+    type NfCreateParams as NfCreateParams,
+    type NfRetrieveParams as NfRetrieveParams,
+    type NfListParams as NfListParams,
+    type NfDeleteParams as NfDeleteParams,
+    type NfInitiateActionParams as NfInitiateActionParams,
+  };
 
   export type Action = API.Action;
   export type ActionLink = API.ActionLink;

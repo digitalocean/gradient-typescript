@@ -11,6 +11,13 @@ export { Models, type ModelListResponse, type ModelListParams } from './models';
 export { Oauth2, type Oauth2GenerateURLResponse, type Oauth2GenerateURLParams } from './oauth2/index';
 export { OpenAI } from './openai/index';
 export {
+  ScheduledIndexing,
+  type ScheduledIndexingCreateResponse,
+  type ScheduledIndexingRetrieveResponse,
+  type ScheduledIndexingDeleteResponse,
+  type ScheduledIndexingCreateParams,
+} from './scheduled-indexing';
+export {
   Workspaces,
   type WorkspaceCreateResponse,
   type WorkspaceRetrieveResponse,

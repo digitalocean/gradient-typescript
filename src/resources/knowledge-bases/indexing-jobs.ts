@@ -150,6 +150,28 @@ export class IndexingJobs extends APIResource {
   }
 
   /**
+   * To get a signed URL for indexing job details, send a GET request to
+   * `/v2/gen-ai/indexing_jobs/{uuid}/details_signed_url`.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.knowledgeBases.indexingJobs.retrieveSignedURL(
+   *     '"123e4567-e89b-12d3-a456-426614174000"',
+   *   );
+   * ```
+   */
+  retrieveSignedURL(
+    indexingJobUuid: string,
+    options?: RequestOptions,
+  ): APIPromise<IndexingJobRetrieveSignedURLResponse> {
+    return this._client.get(path`/v2/gen-ai/indexing_jobs/${indexingJobUuid}/details_signed_url`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
+  }
+
+  /**
    * To cancel an indexing job for a knowledge base, send a PUT request to
    * `/v2/gen-ai/indexing_jobs/{uuid}/cancel`.
    *
@@ -355,7 +377,8 @@ export interface APIIndexedDataSource {
     | 'DATA_SOURCE_STATUS_UPDATED'
     | 'DATA_SOURCE_STATUS_PARTIALLY_UPDATED'
     | 'DATA_SOURCE_STATUS_NOT_UPDATED'
-    | 'DATA_SOURCE_STATUS_FAILED';
+    | 'DATA_SOURCE_STATUS_FAILED'
+    | 'DATA_SOURCE_STATUS_CANCELLED';
 
   /**
    * Total size of files in data source in bytes
@@ -387,9 +410,19 @@ export interface APIIndexingJob {
    */
   created_at?: string;
 
+  /**
+   * Details on Data Sources included in the Indexing Job
+   */
+  data_source_jobs?: Array<APIIndexedDataSource>;
+
   data_source_uuids?: Array<string>;
 
   finished_at?: string;
+
+  /**
+   * Boolean value to determine if the indexing job details are available
+   */
+  is_report_available?: boolean;
 
   /**
    * Knowledge base id
@@ -417,7 +450,7 @@ export interface APIIndexingJob {
     | 'INDEX_JOB_STATUS_PENDING';
 
   /**
-   * Number of tokens
+   * Number of tokens [This field is deprecated]
    */
   tokens?: number;
 
@@ -437,9 +470,19 @@ export interface APIIndexingJob {
   total_items_indexed?: string;
 
   /**
+   * Total Items Removed
+   */
+  total_items_removed?: string;
+
+  /**
    * Total Items Skipped
    */
   total_items_skipped?: string;
+
+  /**
+   * Total Tokens Consumed By the Indexing Job
+   */
+  total_tokens?: string;
 
   /**
    * Last modified
@@ -496,6 +539,13 @@ export interface IndexingJobRetrieveDataSourcesResponse {
   indexed_data_sources?: Array<APIIndexedDataSource>;
 }
 
+export interface IndexingJobRetrieveSignedURLResponse {
+  /**
+   * The signed url for downloading the indexing job details
+   */
+  signed_url?: string;
+}
+
 /**
  * CancelKnowledgeBaseIndexingJobOutput description
  */
@@ -546,6 +596,7 @@ export declare namespace IndexingJobs {
     type IndexingJobRetrieveResponse as IndexingJobRetrieveResponse,
     type IndexingJobListResponse as IndexingJobListResponse,
     type IndexingJobRetrieveDataSourcesResponse as IndexingJobRetrieveDataSourcesResponse,
+    type IndexingJobRetrieveSignedURLResponse as IndexingJobRetrieveSignedURLResponse,
     type IndexingJobUpdateCancelResponse as IndexingJobUpdateCancelResponse,
     type IndexingJobCreateParams as IndexingJobCreateParams,
     type IndexingJobListParams as IndexingJobListParams,
