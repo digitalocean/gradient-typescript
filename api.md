@@ -137,16 +137,6 @@ Methods:
 - <code title="get /v2/gen-ai/workspaces/{workspace_uuid}/agents">client.agents.evaluationMetrics.workspaces.agents.<a href="./src/resources/agents/evaluation-metrics/workspaces/agents.ts">list</a>(workspaceUuid, { ...params }) -> AgentListResponse</code>
 - <code title="put /v2/gen-ai/workspaces/{workspace_uuid}/agents">client.agents.evaluationMetrics.workspaces.agents.<a href="./src/resources/agents/evaluation-metrics/workspaces/agents.ts">move</a>(workspaceUuid, { ...params }) -> AgentMoveResponse</code>
 
-### Models
-
-Types:
-
-- <code><a href="./src/resources/agents/evaluation-metrics/models.ts">ModelListResponse</a></code>
-
-Methods:
-
-- <code title="get /v2/gen-ai/models">client.agents.evaluationMetrics.models.<a href="./src/resources/agents/evaluation-metrics/models.ts">list</a>({ ...params }) -> ModelListResponse</code>
-
 ### Anthropic
 
 #### Keys

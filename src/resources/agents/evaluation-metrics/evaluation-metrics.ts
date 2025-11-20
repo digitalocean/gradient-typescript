@@ -2,8 +2,6 @@
 
 import { APIResource } from '../../../core/resource';
 import * as EvaluationRunsAPI from '../evaluation-runs';
-import * as ModelsAPI from './models';
-import { ModelListParams, ModelListResponse, Models } from './models';
 import * as ScheduledIndexingAPI from './scheduled-indexing';
 import {
   ScheduledIndexing,
@@ -35,7 +33,6 @@ import { RequestOptions } from '../../../internal/request-options';
 
 export class EvaluationMetrics extends APIResource {
   workspaces: WorkspacesAPI.Workspaces = new WorkspacesAPI.Workspaces(this._client);
-  models: ModelsAPI.Models = new ModelsAPI.Models(this._client);
   anthropic: AnthropicAPI.Anthropic = new AnthropicAPI.Anthropic(this._client);
   openai: OpenAIAPI.OpenAI = new OpenAIAPI.OpenAI(this._client);
   oauth2: Oauth2API.Oauth2 = new Oauth2API.Oauth2(this._client);
@@ -140,7 +137,6 @@ export interface EvaluationMetricListRegionsParams {
 }
 
 EvaluationMetrics.Workspaces = Workspaces;
-EvaluationMetrics.Models = Models;
 EvaluationMetrics.Anthropic = Anthropic;
 EvaluationMetrics.OpenAI = OpenAI;
 EvaluationMetrics.Oauth2 = Oauth2;
@@ -163,12 +159,6 @@ export declare namespace EvaluationMetrics {
     type WorkspaceListEvaluationTestCasesResponse as WorkspaceListEvaluationTestCasesResponse,
     type WorkspaceCreateParams as WorkspaceCreateParams,
     type WorkspaceUpdateParams as WorkspaceUpdateParams,
-  };
-
-  export {
-    Models as Models,
-    type ModelListResponse as ModelListResponse,
-    type ModelListParams as ModelListParams,
   };
 
   export { Anthropic as Anthropic };
