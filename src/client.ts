@@ -25,6 +25,7 @@ import {
   Images,
 } from './resources/images';
 import { RegionListParams, RegionListResponse, Regions } from './resources/regions';
+import { Retrieve, RetrieveDocumentsParams, RetrieveDocumentsResponse } from './resources/retrieve';
 import {
   APIAgent,
   APIAgentAPIKeyInfo,
@@ -141,6 +142,11 @@ export interface ClientOptions {
   inferenceEndpoint?: string | null | undefined;
 
   /**
+   * Defaults to process.env['GRADIENT_KBASS_ENDPOINT'].
+   */
+  kbassEndpoint?: string | null | undefined;
+
+  /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
    *
    * Defaults to process.env['GRADIENT_BASE_URL'].
@@ -218,6 +224,7 @@ export class Gradient {
   agentAccessKey: string | null;
   agentEndpoint: string | null;
   inferenceEndpoint: string | null;
+  kbassEndpoint: string | null;
 
   baseURL: string;
   maxRetries: number;
@@ -239,6 +246,7 @@ export class Gradient {
    * @param {string | null | undefined} [opts.agentAccessKey=process.env['GRADIENT_AGENT_ACCESS_KEY'] ?? null]
    * @param {string | null | undefined} [opts.agentEndpoint=process.env['GRADIENT_AGENT_ENDPOINT'] ?? null]
    * @param {string | null | undefined} [opts.inferenceEndpoint=process.env['GRADIENT_INFERENCE_ENDPOINT'] ?? inference.do-ai.run]
+   * @param {string | null | undefined} [opts.kbassEndpoint=process.env['GRADIENT_KBASS_ENDPOINT'] ?? kbaas.do-ai.run]
    * @param {string} [opts.baseURL=process.env['GRADIENT_BASE_URL'] ?? https://api.digitalocean.com] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
@@ -254,6 +262,7 @@ export class Gradient {
     agentAccessKey = readEnv('GRADIENT_AGENT_ACCESS_KEY') ?? null,
     agentEndpoint = readEnv('GRADIENT_AGENT_ENDPOINT') ?? null,
     inferenceEndpoint = readEnv('GRADIENT_INFERENCE_ENDPOINT') ?? 'inference.do-ai.run',
+    kbassEndpoint = readEnv('GRADIENT_KBASS_ENDPOINT') ?? 'kbaas.do-ai.run',
     ...opts
   }: ClientOptions = {}) {
     const options: ClientOptions = {
@@ -262,6 +271,7 @@ export class Gradient {
       agentAccessKey,
       agentEndpoint,
       inferenceEndpoint,
+      kbassEndpoint,
       ...opts,
       baseURL: baseURL || `https://api.digitalocean.com`,
     };
@@ -288,6 +298,7 @@ export class Gradient {
     this.agentAccessKey = agentAccessKey;
     this.agentEndpoint = agentEndpoint;
     this.inferenceEndpoint = inferenceEndpoint;
+    this.kbassEndpoint = kbassEndpoint;
   }
 
   /**
@@ -308,6 +319,7 @@ export class Gradient {
       agentAccessKey: this.agentAccessKey,
       agentEndpoint: this.agentEndpoint,
       inferenceEndpoint: this.inferenceEndpoint,
+      kbassEndpoint: this.kbassEndpoint,
       ...options,
     });
     return client;
@@ -885,6 +897,7 @@ export class Gradient {
   regions: API.Regions = new API.Regions(this);
   databases: API.Databases = new API.Databases(this);
   nfs: API.Nfs = new API.Nfs(this);
+  retrieve: API.Retrieve = new API.Retrieve(this);
 }
 
 Gradient.Agents = Agents;
@@ -897,6 +910,7 @@ Gradient.Models = Models;
 Gradient.Regions = Regions;
 Gradient.Databases = Databases;
 Gradient.Nfs = Nfs;
+Gradient.Retrieve = Retrieve;
 
 export declare namespace Gradient {
   export type RequestOptions = Opts.RequestOptions;
@@ -997,6 +1011,12 @@ export declare namespace Gradient {
     type NfListParams as NfListParams,
     type NfDeleteParams as NfDeleteParams,
     type NfInitiateActionParams as NfInitiateActionParams,
+  };
+
+  export {
+    Retrieve as Retrieve,
+    type RetrieveDocumentsResponse as RetrieveDocumentsResponse,
+    type RetrieveDocumentsParams as RetrieveDocumentsParams,
   };
 
   export type Action = API.Action;

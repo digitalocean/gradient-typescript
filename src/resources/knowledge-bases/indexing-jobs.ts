@@ -447,7 +447,8 @@ export interface APIIndexingJob {
     | 'INDEX_JOB_STATUS_COMPLETED'
     | 'INDEX_JOB_STATUS_FAILED'
     | 'INDEX_JOB_STATUS_NO_CHANGES'
-    | 'INDEX_JOB_STATUS_PENDING';
+    | 'INDEX_JOB_STATUS_PENDING'
+    | 'INDEX_JOB_STATUS_CANCELLED';
 
   /**
    * Number of tokens [This field is deprecated]
@@ -458,26 +459,6 @@ export interface APIIndexingJob {
    * Number of datasources being indexed
    */
   total_datasources?: number;
-
-  /**
-   * Total Items Failed
-   */
-  total_items_failed?: string;
-
-  /**
-   * Total Items Indexed
-   */
-  total_items_indexed?: string;
-
-  /**
-   * Total Items Removed
-   */
-  total_items_removed?: string;
-
-  /**
-   * Total Items Skipped
-   */
-  total_items_skipped?: string;
 
   /**
    * Total Tokens Consumed By the Indexing Job

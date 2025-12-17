@@ -168,11 +168,6 @@ export interface APIKnowledgeBaseDataSource {
   last_datasource_indexing_job?: IndexingJobsAPI.APIIndexedDataSource;
 
   /**
-   * IndexingJob description
-   */
-  last_indexing_job?: IndexingJobsAPI.APIIndexingJob;
-
-  /**
    * Region code - Deprecated, moved to data_source_details
    */
   region?: string;
@@ -270,8 +265,9 @@ export interface APIWebCrawlerDataSource {
    * - PATH: Crawl the base URL and linked pages within the URL path.
    * - DOMAIN: Crawl the base URL and linked pages within the same domain.
    * - SUBDOMAINS: Crawl the base URL and linked pages for any subdomain.
+   * - SITEMAP: Crawl URLs discovered in the sitemap.
    */
-  crawling_option?: 'UNKNOWN' | 'SCOPED' | 'PATH' | 'DOMAIN' | 'SUBDOMAINS';
+  crawling_option?: 'UNKNOWN' | 'SCOPED' | 'PATH' | 'DOMAIN' | 'SUBDOMAINS' | 'SITEMAP';
 
   /**
    * Whether to ingest and index media (images, etc.) on web pages.

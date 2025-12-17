@@ -873,3 +873,13 @@ Methods:
 - <code title="get /v2/nfs/snapshots/{nfs_snapshot_id}">client.nfs.snapshots.<a href="./src/resources/nfs/snapshots.ts">retrieve</a>(nfsSnapshotID, { ...params }) -> SnapshotRetrieveResponse</code>
 - <code title="get /v2/nfs/snapshots">client.nfs.snapshots.<a href="./src/resources/nfs/snapshots.ts">list</a>({ ...params }) -> SnapshotListResponse</code>
 - <code title="delete /v2/nfs/snapshots/{nfs_snapshot_id}">client.nfs.snapshots.<a href="./src/resources/nfs/snapshots.ts">delete</a>(nfsSnapshotID, { ...params }) -> void</code>
+
+# Retrieve
+
+Types:
+
+- <code><a href="./src/resources/retrieve.ts">RetrieveDocumentsResponse</a></code>
+
+Methods:
+
+- <code title="post /{knowledgeBaseId}/retrieve">client.retrieve.<a href="./src/resources/retrieve.ts">documents</a>(knowledgeBaseID, { ...params }) -> RetrieveDocumentsResponse</code>

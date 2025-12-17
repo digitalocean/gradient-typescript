@@ -98,6 +98,14 @@ export class EvaluationRuns extends APIResource {
 }
 
 export interface APIEvaluationMetric {
+  category?:
+    | 'METRIC_CATEGORY_UNSPECIFIED'
+    | 'METRIC_CATEGORY_CORRECTNESS'
+    | 'METRIC_CATEGORY_USER_OUTCOMES'
+    | 'METRIC_CATEGORY_SAFETY_AND_SECURITY'
+    | 'METRIC_CATEGORY_CONTEXT_QUALITY'
+    | 'METRIC_CATEGORY_MODEL_FIT';
+
   description?: string;
 
   /**
@@ -105,7 +113,11 @@ export interface APIEvaluationMetric {
    */
   inverted?: boolean;
 
+  is_metric_goal?: boolean;
+
   metric_name?: string;
+
+  metric_rank?: number;
 
   metric_type?: 'METRIC_TYPE_UNSPECIFIED' | 'METRIC_TYPE_GENERAL_QUALITY' | 'METRIC_TYPE_RAG_AND_TOOL';
 
