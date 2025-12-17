@@ -100,10 +100,12 @@ export class Nfs extends APIResource {
    * request to `/v2/nfs/{nfs_id}/actions`. In the JSON body to the request, set the
    * `type` attribute to on of the supported action types:
    *
-   * | Action                  | Details                                                                    |
-   * | ----------------------- | -------------------------------------------------------------------------- |
-   * | <nobr>`resize`</nobr>   | Resizes an NFS share. Set the size_gib attribute to a desired value in GiB |
-   * | <nobr>`snapshot`</nobr> | Takes a snapshot of an NFS share                                           |
+   * | Action                  | Details                                                                          |
+   * | ----------------------- | -------------------------------------------------------------------------------- |
+   * | <nobr>`resize`</nobr>   | Resizes an NFS share. Set the size_gib attribute to a desired value in GiB       |
+   * | <nobr>`snapshot`</nobr> | Takes a snapshot of an NFS share                                                 |
+   * | <nobr>`attach`</nobr>   | Attaches an NFS share to a VPC. Set the vpc_id attribute to the desired VPC ID   |
+   * | <nobr>`detach`</nobr>   | Detaches an NFS share from a VPC. Set the vpc_id attribute to the desired VPC ID |
    *
    * @example
    * ```ts
@@ -380,7 +382,9 @@ export interface NfDeleteParams {
 
 export type NfInitiateActionParams =
   | NfInitiateActionParams.NfsActionResize
-  | NfInitiateActionParams.NfsActionSnapshot;
+  | NfInitiateActionParams.NfsActionSnapshot
+  | NfInitiateActionParams.NfsActionAttach
+  | NfInitiateActionParams.NfsActionDetach;
 
 export declare namespace NfInitiateActionParams {
   export interface NfsActionResize {
@@ -426,6 +430,52 @@ export declare namespace NfInitiateActionParams {
        * Snapshot name of the NFS share
        */
       name: string;
+    }
+  }
+
+  export interface NfsActionAttach {
+    /**
+     * The DigitalOcean region slug (e.g. atl1, nyc2) where the NFS snapshot resides.
+     */
+    region: string;
+
+    /**
+     * The type of action to initiate for the NFS share (such as resize or snapshot).
+     */
+    type: 'resize' | 'snapshot';
+
+    params?: NfsActionAttach.Params;
+  }
+
+  export namespace NfsActionAttach {
+    export interface Params {
+      /**
+       * The ID of the VPC to which the NFS share will be attached
+       */
+      vpc_id: string;
+    }
+  }
+
+  export interface NfsActionDetach {
+    /**
+     * The DigitalOcean region slug (e.g. atl1, nyc2) where the NFS snapshot resides.
+     */
+    region: string;
+
+    /**
+     * The type of action to initiate for the NFS share (such as resize or snapshot).
+     */
+    type: 'resize' | 'snapshot';
+
+    params?: NfsActionDetach.Params;
+  }
+
+  export namespace NfsActionDetach {
+    export interface Params {
+      /**
+       * The ID of the VPC from which the NFS share will be detached
+       */
+      vpc_id: string;
     }
   }
 }

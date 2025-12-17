@@ -37,12 +37,9 @@ export class Images extends APIResource {
     body: ImageGenerateParams,
     options?: RequestOptions,
   ): APIPromise<ImageGenerateResponse> | APIPromise<Stream<Shared.ImageGenStreamEvent>> {
-    return this._client.post('/images/generations', {
-      body,
-      defaultBaseURL: '{inferenceEndpoint}/v1',
-      ...options,
-      stream: body.stream ?? false,
-    }) as APIPromise<ImageGenerateResponse> | APIPromise<Stream<Shared.ImageGenStreamEvent>>;
+    return this._client.post('/images/generations', { body, ...options, stream: body.stream ?? false }) as
+      | APIPromise<ImageGenerateResponse>
+      | APIPromise<Stream<Shared.ImageGenStreamEvent>>;
   }
 }
 

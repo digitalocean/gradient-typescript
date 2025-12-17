@@ -35,12 +35,9 @@ export class Completions extends APIResource {
     body: CompletionCreateParams,
     options?: RequestOptions,
   ): APIPromise<CompletionCreateResponse> | APIPromise<Stream<Shared.ChatCompletionChunk>> {
-    return this._client.post('/chat/completions', {
-      body,
-      defaultBaseURL: '{inferenceEndpoint}/v1',
-      ...options,
-      stream: body.stream ?? false,
-    }) as APIPromise<CompletionCreateResponse> | APIPromise<Stream<Shared.ChatCompletionChunk>>;
+    return this._client.post('/chat/completions', { body, ...options, stream: body.stream ?? false }) as
+      | APIPromise<CompletionCreateResponse>
+      | APIPromise<Stream<Shared.ChatCompletionChunk>>;
   }
 }
 

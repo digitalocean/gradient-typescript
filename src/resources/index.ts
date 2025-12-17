@@ -85,3 +85,4 @@ export {
   type NfInitiateActionParams,
 } from './nfs/nfs';
 export { Regions, type RegionListResponse, type RegionListParams } from './regions';
+export { Retrieve, type RetrieveDocumentsResponse, type RetrieveDocumentsParams } from './retrieve';
