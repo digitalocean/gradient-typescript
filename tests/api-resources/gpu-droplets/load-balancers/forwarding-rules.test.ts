@@ -14,7 +14,12 @@ describe('resource forwardingRules', () => {
       '4de7ac8b-495b-4884-9a69-1050c6793cd6',
       {
         forwarding_rules: [
-          { entry_port: 443, entry_protocol: 'https', target_port: 80, target_protocol: 'http' },
+          {
+            entry_port: 443,
+            entry_protocol: 'https',
+            target_port: 80,
+            target_protocol: 'http',
+          },
         ],
       },
     );
@@ -52,7 +57,12 @@ describe('resource forwardingRules', () => {
       '4de7ac8b-495b-4884-9a69-1050c6793cd6',
       {
         forwarding_rules: [
-          { entry_port: 443, entry_protocol: 'https', target_port: 80, target_protocol: 'http' },
+          {
+            entry_port: 443,
+            entry_protocol: 'https',
+            target_port: 80,
+            target_protocol: 'http',
+          },
         ],
       },
     );

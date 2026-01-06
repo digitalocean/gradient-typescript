@@ -116,7 +116,14 @@ describe('resource agents', () => {
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.agents.list({ only_deployed: true, page: 0, per_page: 0 }, { path: '/_stainless_unknown_path' }),
+      client.agents.list(
+        {
+          only_deployed: true,
+          page: 0,
+          per_page: 0,
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
     ).rejects.toThrow(Gradient.NotFoundError);
   });
 

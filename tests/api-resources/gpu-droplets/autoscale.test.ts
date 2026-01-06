@@ -127,7 +127,11 @@ describe('resource autoscale', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.gpuDroplets.autoscale.list(
-        { name: 'name', page: 1, per_page: 1 },
+        {
+          name: 'name',
+          page: 1,
+          per_page: 1,
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Gradient.NotFoundError);

@@ -67,7 +67,12 @@ describe('resource volumes', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.gpuDroplets.volumes.list(
-        { name: 'name', page: 1, per_page: 1, region: 'nyc3' },
+        {
+          name: 'name',
+          page: 1,
+          per_page: 1,
+          region: 'nyc3',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Gradient.NotFoundError);

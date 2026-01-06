@@ -12,7 +12,12 @@ describe('resource loadBalancers', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.gpuDroplets.loadBalancers.create({
       forwarding_rules: [
-        { entry_port: 443, entry_protocol: 'https', target_port: 80, target_protocol: 'http' },
+        {
+          entry_port: 443,
+          entry_protocol: 'https',
+          target_port: 80,
+          target_protocol: 'http',
+        },
       ],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -40,7 +45,11 @@ describe('resource loadBalancers', () => {
       algorithm: 'round_robin',
       disable_lets_encrypt_dns_records: true,
       domains: [
-        { certificate_id: '892071a0-bb95-49bc-8021-3afd67a210bf', is_managed: true, name: 'example.com' },
+        {
+          certificate_id: '892071a0-bb95-49bc-8021-3afd67a210bf',
+          is_managed: true,
+          name: 'example.com',
+        },
       ],
       droplet_ids: [3164444, 3164445],
       enable_backend_keepalive: true,
@@ -49,7 +58,11 @@ describe('resource loadBalancers', () => {
       glb_settings: {
         cdn: { is_enabled: true },
         failover_threshold: 50,
-        region_priorities: { nyc1: 1, fra1: 2, sgp1: 3 },
+        region_priorities: {
+          nyc1: 1,
+          fra1: 2,
+          sgp1: 3,
+        },
         target_port: 80,
         target_protocol: 'http',
       },
@@ -71,7 +84,11 @@ describe('resource loadBalancers', () => {
       region: 'nyc3',
       size: 'lb-small',
       size_unit: 3,
-      sticky_sessions: { cookie_name: 'DO-LB', cookie_ttl_seconds: 300, type: 'cookies' },
+      sticky_sessions: {
+        cookie_name: 'DO-LB',
+        cookie_ttl_seconds: 300,
+        type: 'cookies',
+      },
       target_load_balancer_ids: [
         '7dbf91fe-cbdb-48dc-8290-c3a181554905',
         '996fa239-fac3-42a2-b9a1-9fa822268b7a',
@@ -98,7 +115,12 @@ describe('resource loadBalancers', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = client.gpuDroplets.loadBalancers.update('4de7ac8b-495b-4884-9a69-1050c6793cd6', {
       forwarding_rules: [
-        { entry_port: 443, entry_protocol: 'https', target_port: 80, target_protocol: 'http' },
+        {
+          entry_port: 443,
+          entry_protocol: 'https',
+          target_port: 80,
+          target_protocol: 'http',
+        },
       ],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -126,7 +148,11 @@ describe('resource loadBalancers', () => {
       algorithm: 'round_robin',
       disable_lets_encrypt_dns_records: true,
       domains: [
-        { certificate_id: '892071a0-bb95-49bc-8021-3afd67a210bf', is_managed: true, name: 'example.com' },
+        {
+          certificate_id: '892071a0-bb95-49bc-8021-3afd67a210bf',
+          is_managed: true,
+          name: 'example.com',
+        },
       ],
       droplet_ids: [3164444, 3164445],
       enable_backend_keepalive: true,
@@ -135,7 +161,11 @@ describe('resource loadBalancers', () => {
       glb_settings: {
         cdn: { is_enabled: true },
         failover_threshold: 50,
-        region_priorities: { nyc1: 1, fra1: 2, sgp1: 3 },
+        region_priorities: {
+          nyc1: 1,
+          fra1: 2,
+          sgp1: 3,
+        },
         target_port: 80,
         target_protocol: 'http',
       },
@@ -157,7 +187,11 @@ describe('resource loadBalancers', () => {
       region: 'nyc3',
       size: 'lb-small',
       size_unit: 3,
-      sticky_sessions: { cookie_name: 'DO-LB', cookie_ttl_seconds: 300, type: 'cookies' },
+      sticky_sessions: {
+        cookie_name: 'DO-LB',
+        cookie_ttl_seconds: 300,
+        type: 'cookies',
+      },
       target_load_balancer_ids: [
         '7dbf91fe-cbdb-48dc-8290-c3a181554905',
         '996fa239-fac3-42a2-b9a1-9fa822268b7a',

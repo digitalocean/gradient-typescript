@@ -61,7 +61,13 @@ describe('resource images', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.gpuDroplets.images.list(
-        { page: 1, per_page: 1, private: true, tag_name: 'tag_name', type: 'application' },
+        {
+          page: 1,
+          per_page: 1,
+          private: true,
+          tag_name: 'tag_name',
+          type: 'application',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Gradient.NotFoundError);
