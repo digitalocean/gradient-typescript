@@ -72,7 +72,9 @@ const params: Gradient.Chat.CompletionCreateParams = {
   messages: [{ role: 'user', content: 'What is the capital of France?' }],
   model: 'llama3.3-70b-instruct',
 };
-const completion: Gradient.Chat.CompletionCreateResponse = await client.chat.completions.create(params);
+const completion: Gradient.Chat.CompletionCreateResponse = await client.chat.completions.create(
+  params,
+);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.

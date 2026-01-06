@@ -30,9 +30,27 @@ describe('resource retrieve', () => {
       query: 'What are the best practices for deploying machine learning models?',
       alpha: 0.75,
       filters: {
-        must: [{ field: 'category', operator: 'eq', value: 'documentation' }],
-        must_not: [{ field: 'category', operator: 'eq', value: 'documentation' }],
-        should: [{ field: 'category', operator: 'eq', value: 'documentation' }],
+        must: [
+          {
+            field: 'category',
+            operator: 'eq',
+            value: 'documentation',
+          },
+        ],
+        must_not: [
+          {
+            field: 'category',
+            operator: 'eq',
+            value: 'documentation',
+          },
+        ],
+        should: [
+          {
+            field: 'category',
+            operator: 'eq',
+            value: 'documentation',
+          },
+        ],
       },
     });
   });

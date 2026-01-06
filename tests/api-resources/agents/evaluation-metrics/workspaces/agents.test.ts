@@ -28,7 +28,11 @@ describe('resource agents', () => {
     await expect(
       client.agents.evaluationMetrics.workspaces.agents.list(
         '"123e4567-e89b-12d3-a456-426614174000"',
-        { only_deployed: true, page: 0, per_page: 0 },
+        {
+          only_deployed: true,
+          page: 0,
+          per_page: 0,
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Gradient.NotFoundError);

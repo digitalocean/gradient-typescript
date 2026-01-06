@@ -37,7 +37,11 @@ describe('resource snapshots', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.gpuDroplets.snapshots.list(
-        { page: 1, per_page: 1, resource_type: 'droplet' },
+        {
+          page: 1,
+          per_page: 1,
+          resource_type: 'droplet',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Gradient.NotFoundError);

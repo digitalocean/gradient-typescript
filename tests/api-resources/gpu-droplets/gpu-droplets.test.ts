@@ -30,7 +30,11 @@ describe('resource gpuDroplets', () => {
       image: 'ubuntu-20-04-x64',
       name: 'example.com',
       size: 's-1vcpu-1gb',
-      backup_policy: { hour: 0, plan: 'daily', weekday: 'SUN' },
+      backup_policy: {
+        hour: 0,
+        plan: 'daily',
+        weekday: 'SUN',
+      },
       backups: true,
       ipv6: true,
       monitoring: true,
@@ -74,7 +78,13 @@ describe('resource gpuDroplets', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.gpuDroplets.list(
-        { name: 'name', page: 1, per_page: 1, tag_name: 'tag_name', type: 'droplets' },
+        {
+          name: 'name',
+          page: 1,
+          per_page: 1,
+          tag_name: 'tag_name',
+          type: 'droplets',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Gradient.NotFoundError);

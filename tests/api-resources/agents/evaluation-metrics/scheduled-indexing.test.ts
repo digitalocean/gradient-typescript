@@ -25,7 +25,11 @@ describe('resource scheduledIndexing', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.agents.evaluationMetrics.scheduledIndexing.create(
-        { days: [123], knowledge_base_uuid: '123e4567-e89b-12d3-a456-426614174000', time: 'example string' },
+        {
+          days: [123],
+          knowledge_base_uuid: '123e4567-e89b-12d3-a456-426614174000',
+          time: 'example string',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Gradient.NotFoundError);
