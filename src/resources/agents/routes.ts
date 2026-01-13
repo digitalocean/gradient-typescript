@@ -220,7 +220,7 @@ export interface RouteAddParams {
   body_child_agent_uuid?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   if_case?: string;
 
