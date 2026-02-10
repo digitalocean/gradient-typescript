@@ -17,6 +17,7 @@ import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
+import { Billing, BillingListInsightsParams, BillingListInsightsResponse } from './resources/billing';
 import {
   ImageGenerateParams,
   ImageGenerateParamsNonStreaming,
@@ -25,6 +26,7 @@ import {
   Images,
 } from './resources/images';
 import { RegionListParams, RegionListResponse, Regions } from './resources/regions';
+import { ResponseCreateParams, ResponseCreateResponse, Responses } from './resources/responses';
 import { Retrieve, RetrieveDocumentsParams, RetrieveDocumentsResponse } from './resources/retrieve';
 import {
   APIAgent,
@@ -49,6 +51,7 @@ import {
   AgentUpdateStatusResponse,
   Agents,
 } from './resources/agents/agents';
+import { Apps } from './resources/apps/apps';
 import { Chat } from './resources/chat/chat';
 import { Databases } from './resources/databases/databases';
 import {
@@ -905,6 +908,9 @@ export class Gradient {
   databases: API.Databases = new API.Databases(this);
   nfs: API.Nfs = new API.Nfs(this);
   retrieve: API.Retrieve = new API.Retrieve(this);
+  apps: API.Apps = new API.Apps(this);
+  billing: API.Billing = new API.Billing(this);
+  responses: API.Responses = new API.Responses(this);
 }
 
 Gradient.Agents = Agents;
@@ -918,6 +924,9 @@ Gradient.Regions = Regions;
 Gradient.Databases = Databases;
 Gradient.Nfs = Nfs;
 Gradient.Retrieve = Retrieve;
+Gradient.Apps = Apps;
+Gradient.Billing = Billing;
+Gradient.Responses = Responses;
 
 export declare namespace Gradient {
   export type RequestOptions = Opts.RequestOptions;
@@ -1024,6 +1033,20 @@ export declare namespace Gradient {
     Retrieve as Retrieve,
     type RetrieveDocumentsResponse as RetrieveDocumentsResponse,
     type RetrieveDocumentsParams as RetrieveDocumentsParams,
+  };
+
+  export { Apps as Apps };
+
+  export {
+    Billing as Billing,
+    type BillingListInsightsResponse as BillingListInsightsResponse,
+    type BillingListInsightsParams as BillingListInsightsParams,
+  };
+
+  export {
+    Responses as Responses,
+    type ResponseCreateResponse as ResponseCreateResponse,
+    type ResponseCreateParams as ResponseCreateParams,
   };
 
   export type Action = API.Action;

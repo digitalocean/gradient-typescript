@@ -38,6 +38,13 @@ describe('resource knowledgeBases', () => {
               },
               bucket_name: 'example name',
               bucket_region: 'example string',
+              chunking_algorithm: 'CHUNKING_ALGORITHM_SECTION_BASED',
+              chunking_options: {
+                child_chunk_size: 350,
+                max_chunk_size: 750,
+                parent_chunk_size: 1000,
+                semantic_threshold: 0.5,
+              },
               dropbox_data_source: { folder: 'example string', refresh_token: 'example string' },
               file_upload_data_source: {
                 original_file_name: 'example name',

@@ -17,6 +17,8 @@ import {
   DataSourceDeleteResponse,
   DataSourceListParams,
   DataSourceListResponse,
+  DataSourceUpdateParams,
+  DataSourceUpdateResponse,
   DataSources,
 } from './data-sources';
 import * as IndexingJobsAPI from './indexing-jobs';
@@ -579,6 +581,27 @@ export namespace KnowledgeBaseCreateParams {
     bucket_region?: string;
 
     /**
+     * The chunking algorithm to use for processing data sources.
+     *
+     * **Note: This feature requires enabling the knowledgebase enhancements feature
+     * preview flag.**
+     */
+    chunking_algorithm?:
+      | 'CHUNKING_ALGORITHM_UNKNOWN'
+      | 'CHUNKING_ALGORITHM_SECTION_BASED'
+      | 'CHUNKING_ALGORITHM_HIERARCHICAL'
+      | 'CHUNKING_ALGORITHM_SEMANTIC'
+      | 'CHUNKING_ALGORITHM_FIXED_LENGTH';
+
+    /**
+     * Configuration options for the chunking algorithm.
+     *
+     * **Note: This feature requires enabling the knowledgebase enhancements feature
+     * preview flag.**
+     */
+    chunking_options?: Datasource.ChunkingOptions;
+
+    /**
      * Dropbox Data Source
      */
     dropbox_data_source?: Datasource.DropboxDataSource;
@@ -607,6 +630,34 @@ export namespace KnowledgeBaseCreateParams {
   }
 
   export namespace Datasource {
+    /**
+     * Configuration options for the chunking algorithm.
+     *
+     * **Note: This feature requires enabling the knowledgebase enhancements feature
+     * preview flag.**
+     */
+    export interface ChunkingOptions {
+      /**
+       * Hierarchical options
+       */
+      child_chunk_size?: number;
+
+      /**
+       * Section_Based and Fixed_Length options
+       */
+      max_chunk_size?: number;
+
+      /**
+       * Hierarchical options
+       */
+      parent_chunk_size?: number;
+
+      /**
+       * Semantic options
+       */
+      semantic_threshold?: number;
+    }
+
     /**
      * Dropbox Data Source
      */
@@ -704,10 +755,12 @@ export declare namespace KnowledgeBases {
     type APIWebCrawlerDataSource as APIWebCrawlerDataSource,
     type AwsDataSource as AwsDataSource,
     type DataSourceCreateResponse as DataSourceCreateResponse,
+    type DataSourceUpdateResponse as DataSourceUpdateResponse,
     type DataSourceListResponse as DataSourceListResponse,
     type DataSourceDeleteResponse as DataSourceDeleteResponse,
     type DataSourceCreatePresignedURLsResponse as DataSourceCreatePresignedURLsResponse,
     type DataSourceCreateParams as DataSourceCreateParams,
+    type DataSourceUpdateParams as DataSourceUpdateParams,
     type DataSourceListParams as DataSourceListParams,
     type DataSourceDeleteParams as DataSourceDeleteParams,
     type DataSourceCreatePresignedURLsParams as DataSourceCreatePresignedURLsParams,

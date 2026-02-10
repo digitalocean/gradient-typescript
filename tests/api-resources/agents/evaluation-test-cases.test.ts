@@ -26,6 +26,7 @@ describe('resource evaluationTestCases', () => {
     await expect(
       client.agents.evaluationTestCases.create(
         {
+          agent_workspace_name: 'example name',
           dataset_uuid: '123e4567-e89b-12d3-a456-426614174000',
           description: 'example string',
           metrics: ['example string'],

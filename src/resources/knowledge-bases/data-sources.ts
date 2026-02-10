@@ -33,6 +33,34 @@ export class DataSources extends APIResource {
   }
 
   /**
+   * To update a data source (e.g. chunking options), send a PUT request to
+   * `/v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources/{data_source_uuid}`.
+   *
+   * @example
+   * ```ts
+   * const dataSource =
+   *   await client.knowledgeBases.dataSources.update(
+   *     '123e4567-e89b-12d3-a456-426614174000',
+   *     {
+   *       path_knowledge_base_uuid:
+   *         '123e4567-e89b-12d3-a456-426614174000',
+   *     },
+   *   );
+   * ```
+   */
+  update(
+    dataSourceUuid: string,
+    params: DataSourceUpdateParams,
+    options?: RequestOptions,
+  ): APIPromise<DataSourceUpdateResponse> {
+    const { path_knowledge_base_uuid, ...body } = params;
+    return this._client.put(
+      path`/v2/gen-ai/knowledge_bases/${path_knowledge_base_uuid}/data_sources/${dataSourceUuid}`,
+      { body, defaultBaseURL: 'https://api.digitalocean.com', ...options },
+    );
+  }
+
+  /**
    * To list all data sources for a knowledge base, send a GET request to
    * `/v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources`.
    *
@@ -141,6 +169,27 @@ export interface APIKnowledgeBaseDataSource {
   bucket_name?: string;
 
   /**
+   * The chunking algorithm to use for processing data sources.
+   *
+   * **Note: This feature requires enabling the knowledgebase enhancements feature
+   * preview flag.**
+   */
+  chunking_algorithm?:
+    | 'CHUNKING_ALGORITHM_UNKNOWN'
+    | 'CHUNKING_ALGORITHM_SECTION_BASED'
+    | 'CHUNKING_ALGORITHM_HIERARCHICAL'
+    | 'CHUNKING_ALGORITHM_SEMANTIC'
+    | 'CHUNKING_ALGORITHM_FIXED_LENGTH';
+
+  /**
+   * Configuration options for the chunking algorithm.
+   *
+   * **Note: This feature requires enabling the knowledgebase enhancements feature
+   * preview flag.**
+   */
+  chunking_options?: APIKnowledgeBaseDataSource.ChunkingOptions;
+
+  /**
    * Creation date / time
    */
   created_at?: string;
@@ -209,6 +258,34 @@ export namespace APIKnowledgeBaseDataSource {
      * Region of bucket
      */
     region?: string;
+  }
+
+  /**
+   * Configuration options for the chunking algorithm.
+   *
+   * **Note: This feature requires enabling the knowledgebase enhancements feature
+   * preview flag.**
+   */
+  export interface ChunkingOptions {
+    /**
+     * Hierarchical options
+     */
+    child_chunk_size?: number;
+
+    /**
+     * Section_Based and Fixed_Length options
+     */
+    max_chunk_size?: number;
+
+    /**
+     * Hierarchical options
+     */
+    parent_chunk_size?: number;
+
+    /**
+     * Semantic options
+     */
+    semantic_threshold?: number;
   }
 
   /**
@@ -318,6 +395,17 @@ export interface DataSourceCreateResponse {
 }
 
 /**
+ * Update a data source of a knowledge base with change in chunking
+ * algorithm/options
+ */
+export interface DataSourceUpdateResponse {
+  /**
+   * Data Source configuration for Knowledge Bases
+   */
+  knowledge_base_data_source?: APIKnowledgeBaseDataSource;
+}
+
+/**
  * A list of knowledge base data sources
  */
 export interface DataSourceListResponse {
@@ -401,6 +489,27 @@ export interface DataSourceCreateParams {
   aws_data_source?: AwsDataSource;
 
   /**
+   * The chunking algorithm to use for processing data sources.
+   *
+   * **Note: This feature requires enabling the knowledgebase enhancements feature
+   * preview flag.**
+   */
+  chunking_algorithm?:
+    | 'CHUNKING_ALGORITHM_UNKNOWN'
+    | 'CHUNKING_ALGORITHM_SECTION_BASED'
+    | 'CHUNKING_ALGORITHM_HIERARCHICAL'
+    | 'CHUNKING_ALGORITHM_SEMANTIC'
+    | 'CHUNKING_ALGORITHM_FIXED_LENGTH';
+
+  /**
+   * Configuration options for the chunking algorithm.
+   *
+   * **Note: This feature requires enabling the knowledgebase enhancements feature
+   * preview flag.**
+   */
+  chunking_options?: DataSourceCreateParams.ChunkingOptions;
+
+  /**
    * Knowledge base id
    */
   body_knowledge_base_uuid?: string;
@@ -414,6 +523,104 @@ export interface DataSourceCreateParams {
    * WebCrawlerDataSource
    */
   web_crawler_data_source?: APIWebCrawlerDataSource;
+}
+
+export namespace DataSourceCreateParams {
+  /**
+   * Configuration options for the chunking algorithm.
+   *
+   * **Note: This feature requires enabling the knowledgebase enhancements feature
+   * preview flag.**
+   */
+  export interface ChunkingOptions {
+    /**
+     * Hierarchical options
+     */
+    child_chunk_size?: number;
+
+    /**
+     * Section_Based and Fixed_Length options
+     */
+    max_chunk_size?: number;
+
+    /**
+     * Hierarchical options
+     */
+    parent_chunk_size?: number;
+
+    /**
+     * Semantic options
+     */
+    semantic_threshold?: number;
+  }
+}
+
+export interface DataSourceUpdateParams {
+  /**
+   * Path param: Knowledge Base ID (Path Parameter)
+   */
+  path_knowledge_base_uuid: string;
+
+  /**
+   * Body param: The chunking algorithm to use for processing data sources.
+   *
+   * **Note: This feature requires enabling the knowledgebase enhancements feature
+   * preview flag.**
+   */
+  chunking_algorithm?:
+    | 'CHUNKING_ALGORITHM_UNKNOWN'
+    | 'CHUNKING_ALGORITHM_SECTION_BASED'
+    | 'CHUNKING_ALGORITHM_HIERARCHICAL'
+    | 'CHUNKING_ALGORITHM_SEMANTIC'
+    | 'CHUNKING_ALGORITHM_FIXED_LENGTH';
+
+  /**
+   * Body param: Configuration options for the chunking algorithm.
+   *
+   * **Note: This feature requires enabling the knowledgebase enhancements feature
+   * preview flag.**
+   */
+  chunking_options?: DataSourceUpdateParams.ChunkingOptions;
+
+  /**
+   * Body param: Data Source ID (Path Parameter)
+   */
+  body_data_source_uuid?: string;
+
+  /**
+   * Body param: Knowledge Base ID (Path Parameter)
+   */
+  body_knowledge_base_uuid?: string;
+}
+
+export namespace DataSourceUpdateParams {
+  /**
+   * Configuration options for the chunking algorithm.
+   *
+   * **Note: This feature requires enabling the knowledgebase enhancements feature
+   * preview flag.**
+   */
+  export interface ChunkingOptions {
+    /**
+     * Hierarchical options
+     */
+    child_chunk_size?: number;
+
+    /**
+     * Section_Based and Fixed_Length options
+     */
+    max_chunk_size?: number;
+
+    /**
+     * Hierarchical options
+     */
+    parent_chunk_size?: number;
+
+    /**
+     * Semantic options
+     */
+    semantic_threshold?: number;
+  }
 }
 
 export interface DataSourceListParams {
@@ -467,10 +674,12 @@ export declare namespace DataSources {
     type APIWebCrawlerDataSource as APIWebCrawlerDataSource,
     type AwsDataSource as AwsDataSource,
     type DataSourceCreateResponse as DataSourceCreateResponse,
+    type DataSourceUpdateResponse as DataSourceUpdateResponse,
     type DataSourceListResponse as DataSourceListResponse,
     type DataSourceDeleteResponse as DataSourceDeleteResponse,
     type DataSourceCreatePresignedURLsResponse as DataSourceCreatePresignedURLsResponse,
     type DataSourceCreateParams as DataSourceCreateParams,
+    type DataSourceUpdateParams as DataSourceUpdateParams,
     type DataSourceListParams as DataSourceListParams,
     type DataSourceDeleteParams as DataSourceDeleteParams,
     type DataSourceCreatePresignedURLsParams as DataSourceCreatePresignedURLsParams,

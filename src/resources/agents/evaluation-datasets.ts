@@ -102,6 +102,11 @@ export namespace EvaluationDatasetCreateFileUploadPresignedURLsResponse {
 }
 
 export interface EvaluationDatasetCreateParams {
+  dataset_type?:
+    | 'EVALUATION_DATASET_TYPE_UNKNOWN'
+    | 'EVALUATION_DATASET_TYPE_ADK'
+    | 'EVALUATION_DATASET_TYPE_NON_ADK';
+
   /**
    * File to upload as data source for knowledge base.
    */
