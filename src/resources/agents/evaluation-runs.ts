@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as EvaluationRunsAPI from './evaluation-runs';
 import * as Shared from '../shared';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
@@ -175,6 +176,11 @@ export interface APIEvaluationMetricResult {
 
 export interface APIEvaluationPrompt {
   /**
+   * The evaluated trace spans.
+   */
+  evaluation_trace_spans?: Array<APIEvaluationPrompt.EvaluationTraceSpan>;
+
+  /**
    * The ground truth for the prompt.
    */
   ground_truth?: string;
@@ -207,9 +213,88 @@ export interface APIEvaluationPrompt {
    * The metric results for the prompt.
    */
   prompt_level_metric_results?: Array<APIEvaluationMetricResult>;
+
+  /**
+   * The trace id for the prompt.
+   */
+  trace_id?: string;
 }
 
 export namespace APIEvaluationPrompt {
+  /**
+   * Represents a span within an evaluatioin trace (e.g., LLM call, tool call, etc.)
+   */
+  export interface EvaluationTraceSpan {
+    /**
+     * When the span was created
+     */
+    created_at?: string;
+
+    /**
+     * Input data for the span (flexible structure - can be messages array, string,
+     * etc.)
+     */
+    input?: unknown;
+
+    /**
+     * Name/identifier for the span
+     */
+    name?: string;
+
+    /**
+     * Output data from the span (flexible structure - can be message, string, etc.)
+     */
+    output?: unknown;
+
+    /**
+     * Any retriever span chunks that were included as part of the span.
+     */
+    retriever_chunks?: Array<EvaluationTraceSpan.RetrieverChunk>;
+
+    /**
+     * The span-level metric results.
+     */
+    span_level_metric_results?: Array<EvaluationRunsAPI.APIEvaluationMetricResult>;
+
+    /**
+     * Types of spans in a trace
+     */
+    type?:
+      | 'TRACE_SPAN_TYPE_UNKNOWN'
+      | 'TRACE_SPAN_TYPE_LLM'
+      | 'TRACE_SPAN_TYPE_RETRIEVER'
+      | 'TRACE_SPAN_TYPE_TOOL';
+  }
+
+  export namespace EvaluationTraceSpan {
+    export interface RetrieverChunk {
+      /**
+       * The usage percentage of the chunk.
+       */
+      chunk_usage_pct?: number;
+
+      /**
+       * Indicates if the chunk was used in the prompt.
+       */
+      chunk_used?: boolean;
+
+      /**
+       * The index uuid (Knowledge Base) of the chunk.
+       */
+      index_uuid?: string;
+
+      /**
+       * The source name for the chunk, e.g., the file name or document title.
+       */
+      source_name?: string;
+
+      /**
+       * Text content of the chunk.
+       */
+      text?: string;
+    }
+  }
+
   export interface PromptChunk {
     /**
      * The usage percentage of the chunk.
@@ -243,6 +328,11 @@ export interface APIEvaluationRun {
    * Whether agent is deleted
    */
   agent_deleted?: boolean;
+
+  /**
+   * The agent deployment name
+   */
+  agent_deployment_name?: string;
 
   /**
    * Agent name
@@ -383,7 +473,12 @@ export interface EvaluationRunRetrieveResultsResponse {
 
 export interface EvaluationRunCreateParams {
   /**
-   * Agent UUIDs to run the test case against.
+   * Agent deployment names to run the test case against (ADK agent workspaces).
+   */
+  agent_deployment_names?: Array<string>;
+
+  /**
+   * Agent UUIDs to run the test case against (legacy agents).
    */
   agent_uuids?: Array<string>;
 

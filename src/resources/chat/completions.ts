@@ -353,7 +353,10 @@ export namespace CompletionCreateParams {
     /**
      * The contents of the system message.
      */
-    content: string | Array<string | ChatCompletionRequestSystemMessage.UnionMember1>;
+    content:
+      | string
+      | ChatCompletionRequestSystemMessage.ChatCompletionRequestContentPartText
+      | Array<string | ChatCompletionRequestSystemMessage.ChatCompletionRequestContentPartText>;
 
     /**
      * The role of the messages author, in this case `system`.
@@ -365,7 +368,7 @@ export namespace CompletionCreateParams {
     /**
      * Content part with type and text
      */
-    export interface UnionMember1 {
+    export interface ChatCompletionRequestContentPartText {
       /**
        * The text content
        */
@@ -375,6 +378,65 @@ export namespace CompletionCreateParams {
        * The type of content part
        */
       type: 'text';
+
+      /**
+       * Cache control settings for the content part.
+       */
+      cache_control?: ChatCompletionRequestContentPartText.CacheControl;
+    }
+
+    export namespace ChatCompletionRequestContentPartText {
+      /**
+       * Cache control settings for the content part.
+       */
+      export interface CacheControl {
+        /**
+         * The cache control type.
+         */
+        type: 'ephemeral';
+
+        /**
+         * The cache TTL.
+         */
+        ttl?: '5m' | '1h';
+      }
+    }
+
+    /**
+     * Content part with type and text
+     */
+    export interface ChatCompletionRequestContentPartText {
+      /**
+       * The text content
+       */
+      text: string;
+
+      /**
+       * The type of content part
+       */
+      type: 'text';
+
+      /**
+       * Cache control settings for the content part.
+       */
+      cache_control?: ChatCompletionRequestContentPartText.CacheControl;
+    }
+
+    export namespace ChatCompletionRequestContentPartText {
+      /**
+       * Cache control settings for the content part.
+       */
+      export interface CacheControl {
+        /**
+         * The cache control type.
+         */
+        type: 'ephemeral';
+
+        /**
+         * The cache TTL.
+         */
+        ttl?: '5m' | '1h';
+      }
     }
   }
 
@@ -386,7 +448,10 @@ export namespace CompletionCreateParams {
     /**
      * The contents of the developer message.
      */
-    content: string | Array<string | ChatCompletionRequestDeveloperMessage.UnionMember1>;
+    content:
+      | string
+      | ChatCompletionRequestDeveloperMessage.ChatCompletionRequestContentPartText
+      | Array<string | ChatCompletionRequestDeveloperMessage.ChatCompletionRequestContentPartText>;
 
     /**
      * The role of the messages author, in this case `developer`.
@@ -398,7 +463,7 @@ export namespace CompletionCreateParams {
     /**
      * Content part with type and text
      */
-    export interface UnionMember1 {
+    export interface ChatCompletionRequestContentPartText {
       /**
        * The text content
        */
@@ -408,6 +473,65 @@ export namespace CompletionCreateParams {
        * The type of content part
        */
       type: 'text';
+
+      /**
+       * Cache control settings for the content part.
+       */
+      cache_control?: ChatCompletionRequestContentPartText.CacheControl;
+    }
+
+    export namespace ChatCompletionRequestContentPartText {
+      /**
+       * Cache control settings for the content part.
+       */
+      export interface CacheControl {
+        /**
+         * The cache control type.
+         */
+        type: 'ephemeral';
+
+        /**
+         * The cache TTL.
+         */
+        ttl?: '5m' | '1h';
+      }
+    }
+
+    /**
+     * Content part with type and text
+     */
+    export interface ChatCompletionRequestContentPartText {
+      /**
+       * The text content
+       */
+      text: string;
+
+      /**
+       * The type of content part
+       */
+      type: 'text';
+
+      /**
+       * Cache control settings for the content part.
+       */
+      cache_control?: ChatCompletionRequestContentPartText.CacheControl;
+    }
+
+    export namespace ChatCompletionRequestContentPartText {
+      /**
+       * Cache control settings for the content part.
+       */
+      export interface CacheControl {
+        /**
+         * The cache control type.
+         */
+        type: 'ephemeral';
+
+        /**
+         * The cache TTL.
+         */
+        ttl?: '5m' | '1h';
+      }
     }
   }
 
@@ -419,7 +543,10 @@ export namespace CompletionCreateParams {
     /**
      * The contents of the user message.
      */
-    content: string | Array<string | ChatCompletionRequestUserMessage.UnionMember1>;
+    content:
+      | string
+      | ChatCompletionRequestUserMessage.ChatCompletionRequestContentPartText
+      | Array<string | ChatCompletionRequestUserMessage.ChatCompletionRequestContentPartText>;
 
     /**
      * The role of the messages author, in this case `user`.
@@ -431,7 +558,7 @@ export namespace CompletionCreateParams {
     /**
      * Content part with type and text
      */
-    export interface UnionMember1 {
+    export interface ChatCompletionRequestContentPartText {
       /**
        * The text content
        */
@@ -441,6 +568,65 @@ export namespace CompletionCreateParams {
        * The type of content part
        */
       type: 'text';
+
+      /**
+       * Cache control settings for the content part.
+       */
+      cache_control?: ChatCompletionRequestContentPartText.CacheControl;
+    }
+
+    export namespace ChatCompletionRequestContentPartText {
+      /**
+       * Cache control settings for the content part.
+       */
+      export interface CacheControl {
+        /**
+         * The cache control type.
+         */
+        type: 'ephemeral';
+
+        /**
+         * The cache TTL.
+         */
+        ttl?: '5m' | '1h';
+      }
+    }
+
+    /**
+     * Content part with type and text
+     */
+    export interface ChatCompletionRequestContentPartText {
+      /**
+       * The text content
+       */
+      text: string;
+
+      /**
+       * The type of content part
+       */
+      type: 'text';
+
+      /**
+       * Cache control settings for the content part.
+       */
+      cache_control?: ChatCompletionRequestContentPartText.CacheControl;
+    }
+
+    export namespace ChatCompletionRequestContentPartText {
+      /**
+       * Cache control settings for the content part.
+       */
+      export interface CacheControl {
+        /**
+         * The cache control type.
+         */
+        type: 'ephemeral';
+
+        /**
+         * The cache TTL.
+         */
+        ttl?: '5m' | '1h';
+      }
     }
   }
 
@@ -456,7 +642,11 @@ export namespace CompletionCreateParams {
     /**
      * The contents of the assistant message.
      */
-    content?: string | Array<string | ChatCompletionRequestAssistantMessage.UnionMember1> | null;
+    content?:
+      | string
+      | ChatCompletionRequestAssistantMessage.ChatCompletionRequestContentPartText
+      | Array<string | ChatCompletionRequestAssistantMessage.ChatCompletionRequestContentPartText>
+      | null;
 
     /**
      * The tool calls generated by the model, such as function calls.
@@ -468,7 +658,7 @@ export namespace CompletionCreateParams {
     /**
      * Content part with type and text
      */
-    export interface UnionMember1 {
+    export interface ChatCompletionRequestContentPartText {
       /**
        * The text content
        */
@@ -478,6 +668,65 @@ export namespace CompletionCreateParams {
        * The type of content part
        */
       type: 'text';
+
+      /**
+       * Cache control settings for the content part.
+       */
+      cache_control?: ChatCompletionRequestContentPartText.CacheControl;
+    }
+
+    export namespace ChatCompletionRequestContentPartText {
+      /**
+       * Cache control settings for the content part.
+       */
+      export interface CacheControl {
+        /**
+         * The cache control type.
+         */
+        type: 'ephemeral';
+
+        /**
+         * The cache TTL.
+         */
+        ttl?: '5m' | '1h';
+      }
+    }
+
+    /**
+     * Content part with type and text
+     */
+    export interface ChatCompletionRequestContentPartText {
+      /**
+       * The text content
+       */
+      text: string;
+
+      /**
+       * The type of content part
+       */
+      type: 'text';
+
+      /**
+       * Cache control settings for the content part.
+       */
+      cache_control?: ChatCompletionRequestContentPartText.CacheControl;
+    }
+
+    export namespace ChatCompletionRequestContentPartText {
+      /**
+       * Cache control settings for the content part.
+       */
+      export interface CacheControl {
+        /**
+         * The cache control type.
+         */
+        type: 'ephemeral';
+
+        /**
+         * The cache TTL.
+         */
+        ttl?: '5m' | '1h';
+      }
     }
 
     export interface ToolCall {
@@ -522,7 +771,10 @@ export namespace CompletionCreateParams {
     /**
      * The contents of the tool message.
      */
-    content: string;
+    content:
+      | string
+      | ChatCompletionRequestToolMessage.ChatCompletionRequestContentPartText
+      | Array<string | ChatCompletionRequestToolMessage.ChatCompletionRequestContentPartText>;
 
     /**
      * The role of the messages author, in this case `tool`.
@@ -533,6 +785,82 @@ export namespace CompletionCreateParams {
      * Tool call that this message is responding to.
      */
     tool_call_id: string;
+  }
+
+  export namespace ChatCompletionRequestToolMessage {
+    /**
+     * Content part with type and text
+     */
+    export interface ChatCompletionRequestContentPartText {
+      /**
+       * The text content
+       */
+      text: string;
+
+      /**
+       * The type of content part
+       */
+      type: 'text';
+
+      /**
+       * Cache control settings for the content part.
+       */
+      cache_control?: ChatCompletionRequestContentPartText.CacheControl;
+    }
+
+    export namespace ChatCompletionRequestContentPartText {
+      /**
+       * Cache control settings for the content part.
+       */
+      export interface CacheControl {
+        /**
+         * The cache control type.
+         */
+        type: 'ephemeral';
+
+        /**
+         * The cache TTL.
+         */
+        ttl?: '5m' | '1h';
+      }
+    }
+
+    /**
+     * Content part with type and text
+     */
+    export interface ChatCompletionRequestContentPartText {
+      /**
+       * The text content
+       */
+      text: string;
+
+      /**
+       * The type of content part
+       */
+      type: 'text';
+
+      /**
+       * Cache control settings for the content part.
+       */
+      cache_control?: ChatCompletionRequestContentPartText.CacheControl;
+    }
+
+    export namespace ChatCompletionRequestContentPartText {
+      /**
+       * Cache control settings for the content part.
+       */
+      export interface CacheControl {
+        /**
+         * The cache control type.
+         */
+        type: 'ephemeral';
+
+        /**
+         * The cache TTL.
+         */
+        ttl?: '5m' | '1h';
+      }
+    }
   }
 
   /**

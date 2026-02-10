@@ -725,6 +725,7 @@ Types:
 - <code><a href="./src/resources/knowledge-bases/data-sources.ts">APIWebCrawlerDataSource</a></code>
 - <code><a href="./src/resources/knowledge-bases/data-sources.ts">AwsDataSource</a></code>
 - <code><a href="./src/resources/knowledge-bases/data-sources.ts">DataSourceCreateResponse</a></code>
+- <code><a href="./src/resources/knowledge-bases/data-sources.ts">DataSourceUpdateResponse</a></code>
 - <code><a href="./src/resources/knowledge-bases/data-sources.ts">DataSourceListResponse</a></code>
 - <code><a href="./src/resources/knowledge-bases/data-sources.ts">DataSourceDeleteResponse</a></code>
 - <code><a href="./src/resources/knowledge-bases/data-sources.ts">DataSourceCreatePresignedURLsResponse</a></code>
@@ -732,6 +733,7 @@ Types:
 Methods:
 
 - <code title="post /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources">client.knowledgeBases.dataSources.<a href="./src/resources/knowledge-bases/data-sources.ts">create</a>(knowledgeBaseUuid, { ...params }) -> DataSourceCreateResponse</code>
+- <code title="put /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources/{data_source_uuid}">client.knowledgeBases.dataSources.<a href="./src/resources/knowledge-bases/data-sources.ts">update</a>(dataSourceUuid, { ...params }) -> DataSourceUpdateResponse</code>
 - <code title="get /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources">client.knowledgeBases.dataSources.<a href="./src/resources/knowledge-bases/data-sources.ts">list</a>(knowledgeBaseUuid, { ...params }) -> DataSourceListResponse</code>
 - <code title="delete /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources/{data_source_uuid}">client.knowledgeBases.dataSources.<a href="./src/resources/knowledge-bases/data-sources.ts">delete</a>(dataSourceUuid, { ...params }) -> DataSourceDeleteResponse</code>
 - <code title="post /v2/gen-ai/knowledge_bases/data_sources/file_upload_presigned_urls">client.knowledgeBases.dataSources.<a href="./src/resources/knowledge-bases/data-sources.ts">createPresignedURLs</a>({ ...params }) -> DataSourceCreatePresignedURLsResponse</code>
@@ -882,3 +884,35 @@ Types:
 Methods:
 
 - <code title="post /{knowledgeBaseId}/retrieve">client.retrieve.<a href="./src/resources/retrieve.ts">documents</a>(knowledgeBaseID, { ...params }) -> RetrieveDocumentsResponse</code>
+
+# Apps
+
+## JobInvocations
+
+Types:
+
+- <code><a href="./src/resources/apps/job-invocations.ts">JobInvocationCancelResponse</a></code>
+
+Methods:
+
+- <code title="post /v2/apps/{app_id}/job-invocations/{job_invocation_id}/cancel">client.apps.jobInvocations.<a href="./src/resources/apps/job-invocations.ts">cancel</a>(jobInvocationID, { ...params }) -> JobInvocationCancelResponse</code>
+
+# Billing
+
+Types:
+
+- <code><a href="./src/resources/billing.ts">BillingListInsightsResponse</a></code>
+
+Methods:
+
+- <code title="get /v2/billing/{account_urn}/insights/{start_date}/{end_date}">client.billing.<a href="./src/resources/billing.ts">listInsights</a>(endDate, { ...params }) -> BillingListInsightsResponse</code>
+
+# Responses
+
+Types:
+
+- <code><a href="./src/resources/responses.ts">ResponseCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /responses">client.responses.<a href="./src/resources/responses.ts">create</a>({ ...params }) -> ResponseCreateResponse</code>

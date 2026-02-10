@@ -26,6 +26,7 @@ describe('resource evaluationRuns', () => {
     await expect(
       client.agents.evaluationRuns.create(
         {
+          agent_deployment_names: ['example string'],
           agent_uuids: ['example string'],
           run_name: 'Evaluation Run Name',
           test_case_uuid: '"12345678-1234-1234-1234-123456789012"',

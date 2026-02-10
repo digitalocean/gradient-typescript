@@ -26,6 +26,7 @@ describe('resource evaluationDatasets', () => {
     await expect(
       client.agents.evaluationDatasets.create(
         {
+          dataset_type: 'EVALUATION_DATASET_TYPE_UNKNOWN',
           file_upload_dataset: {
             original_file_name: 'example name',
             size_in_bytes: '12345',

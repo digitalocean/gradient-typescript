@@ -354,6 +354,21 @@ export namespace ChatCompletionTokenLogprob {
  */
 export interface CompletionUsage {
   /**
+   * Number of prompt tokens written to cache.
+   */
+  cache_created_input_tokens: number;
+
+  /**
+   * Breakdown of prompt tokens written to cache.
+   */
+  cache_creation: CompletionUsage.CacheCreation;
+
+  /**
+   * Number of prompt tokens read from cache.
+   */
+  cache_read_input_tokens: number;
+
+  /**
    * Number of tokens in the generated completion.
    */
   completion_tokens: number;
@@ -367,6 +382,23 @@ export interface CompletionUsage {
    * Total number of tokens used in the request (prompt + completion).
    */
   total_tokens: number;
+}
+
+export namespace CompletionUsage {
+  /**
+   * Breakdown of prompt tokens written to cache.
+   */
+  export interface CacheCreation {
+    /**
+     * Number of prompt tokens written to 1h cache.
+     */
+    ephemeral_1h_input_tokens: number;
+
+    /**
+     * Number of prompt tokens written to 5m cache.
+     */
+    ephemeral_5m_input_tokens: number;
+  }
 }
 
 export interface DiskInfo {

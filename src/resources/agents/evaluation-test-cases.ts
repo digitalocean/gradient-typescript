@@ -243,6 +243,8 @@ export interface EvaluationTestCaseListEvaluationRunsResponse {
 }
 
 export interface EvaluationTestCaseCreateParams {
+  agent_workspace_name?: string;
+
   /**
    * Dataset against which the test‑case is executed.
    */

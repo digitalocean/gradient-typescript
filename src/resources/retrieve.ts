@@ -17,6 +17,12 @@ export class Retrieve extends APIResource {
    * 3. Performs vector similarity search in the knowledge base
    * 4. Returns the most relevant document chunks
    *
+   * The search supports hybrid search combining:
+   *
+   * - Vector similarity (semantic search)
+   * - Keyword matching (BM25)
+   * - Custom metadata filters
+   *
    * @example
    * ```ts
    * const response = await client.retrieve.documents(

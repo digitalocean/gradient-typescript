@@ -24,6 +24,8 @@ export {
   type AgentRetrieveUsageParams,
   type AgentUpdateStatusParams,
 } from './agents/agents';
+export { Apps } from './apps/apps';
+export { Billing, type BillingListInsightsResponse, type BillingListInsightsParams } from './billing';
 export { Chat } from './chat/chat';
 export { Databases } from './databases/databases';
 export {
@@ -85,4 +87,5 @@ export {
   type NfInitiateActionParams,
 } from './nfs/nfs';
 export { Regions, type RegionListResponse, type RegionListParams } from './regions';
+export { Responses, type ResponseCreateResponse, type ResponseCreateParams } from './responses';
 export { Retrieve, type RetrieveDocumentsResponse, type RetrieveDocumentsParams } from './retrieve';

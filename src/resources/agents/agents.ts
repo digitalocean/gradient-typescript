@@ -885,6 +885,21 @@ export interface APIAgentModel {
   is_foundational?: boolean;
 
   /**
+   * Default chunking size limit to show in UI
+   */
+  kb_default_chunk_size?: number;
+
+  /**
+   * Maximum chunk size limit of model
+   */
+  kb_max_chunk_size?: number;
+
+  /**
+   * Minimum chunking size token limits if model supports KNOWLEDGEBASE usecase
+   */
+  kb_min_chunk_size?: number;
+
+  /**
    * Additional meta data
    */
   metadata?: unknown;
