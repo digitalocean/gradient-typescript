@@ -35,7 +35,7 @@ describe('resource responses', () => {
       modalities: ['text'],
       parallel_tool_calls: true,
       stop: '\n',
-      stream: true,
+      stream: false,
       stream_options: { include_usage: true },
       temperature: 1,
       tool_choice: 'none',

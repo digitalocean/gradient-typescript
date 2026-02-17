@@ -26,7 +26,12 @@ import {
   Images,
 } from './resources/images';
 import { RegionListParams, RegionListResponse, Regions } from './resources/regions';
-import { ResponseCreateParams, ResponseCreateResponse, Responses } from './resources/responses';
+import {
+  ResponseCreateParams,
+  ResponseCreateParamsNonStreaming,
+  ResponseCreateParamsStreaming,
+  Responses,
+} from './resources/responses';
 import { Retrieve, RetrieveDocumentsParams, RetrieveDocumentsResponse } from './resources/retrieve';
 import {
   APIAgent,
@@ -908,6 +913,7 @@ export class Gradient {
   agents: API.Agents = new API.Agents(this);
   chat: API.Chat = new API.Chat(this);
   images: API.Images = new API.Images(this);
+  responses: API.Responses = new API.Responses(this);
   gpuDroplets: API.GPUDroplets = new API.GPUDroplets(this);
   inference: API.Inference = new API.Inference(this);
   knowledgeBases: API.KnowledgeBases = new API.KnowledgeBases(this);
@@ -918,12 +924,12 @@ export class Gradient {
   retrieve: API.Retrieve = new API.Retrieve(this);
   apps: API.Apps = new API.Apps(this);
   billing: API.Billing = new API.Billing(this);
-  responses: API.Responses = new API.Responses(this);
 }
 
 Gradient.Agents = Agents;
 Gradient.Chat = Chat;
 Gradient.Images = Images;
+Gradient.Responses = Responses;
 Gradient.GPUDroplets = GPUDroplets;
 Gradient.Inference = Inference;
 Gradient.KnowledgeBases = KnowledgeBases;
@@ -934,7 +940,6 @@ Gradient.Nfs = Nfs;
 Gradient.Retrieve = Retrieve;
 Gradient.Apps = Apps;
 Gradient.Billing = Billing;
-Gradient.Responses = Responses;
 
 export declare namespace Gradient {
   export type RequestOptions = Opts.RequestOptions;
@@ -971,6 +976,13 @@ export declare namespace Gradient {
     type ImageGenerateParams as ImageGenerateParams,
     type ImageGenerateParamsNonStreaming as ImageGenerateParamsNonStreaming,
     type ImageGenerateParamsStreaming as ImageGenerateParamsStreaming,
+  };
+
+  export {
+    Responses as Responses,
+    type ResponseCreateParams as ResponseCreateParams,
+    type ResponseCreateParamsNonStreaming as ResponseCreateParamsNonStreaming,
+    type ResponseCreateParamsStreaming as ResponseCreateParamsStreaming,
   };
 
   export {
@@ -1051,12 +1063,6 @@ export declare namespace Gradient {
     type BillingListInsightsParams as BillingListInsightsParams,
   };
 
-  export {
-    Responses as Responses,
-    type ResponseCreateResponse as ResponseCreateResponse,
-    type ResponseCreateParams as ResponseCreateParams,
-  };
-
   export type Action = API.Action;
   export type ActionLink = API.ActionLink;
   export type APILinks = API.APILinks;
@@ -1065,6 +1071,8 @@ export declare namespace Gradient {
   export type ChatCompletionChunk = API.ChatCompletionChunk;
   export type ChatCompletionTokenLogprob = API.ChatCompletionTokenLogprob;
   export type CompletionUsage = API.CompletionUsage;
+  export type CreateResponseResponse = API.CreateResponseResponse;
+  export type CreateResponseStreamResponse = API.CreateResponseStreamResponse;
   export type DiskInfo = API.DiskInfo;
   export type Droplet = API.Droplet;
   export type DropletNextBackupWindow = API.DropletNextBackupWindow;

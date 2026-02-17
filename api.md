@@ -10,6 +10,8 @@ Types:
 - <code><a href="./src/resources/shared.ts">ChatCompletionChunk</a></code>
 - <code><a href="./src/resources/shared.ts">ChatCompletionTokenLogprob</a></code>
 - <code><a href="./src/resources/shared.ts">CompletionUsage</a></code>
+- <code><a href="./src/resources/shared.ts">CreateResponseResponse</a></code>
+- <code><a href="./src/resources/shared.ts">CreateResponseStreamResponse</a></code>
 - <code><a href="./src/resources/shared.ts">DiskInfo</a></code>
 - <code><a href="./src/resources/shared.ts">Droplet</a></code>
 - <code><a href="./src/resources/shared.ts">DropletNextBackupWindow</a></code>
@@ -343,6 +345,12 @@ Types:
 Methods:
 
 - <code title="post /images/generations">client.images.<a href="./src/resources/images.ts">generate</a>({ ...params }) -> ImageGenerateResponse</code>
+
+# Responses
+
+Methods:
+
+- <code title="post /responses">client.responses.<a href="./src/resources/responses.ts">create</a>({ ...params }) -> CreateResponseResponse</code>
 
 # GPUDroplets
 
@@ -907,13 +915,3 @@ Types:
 Methods:
 
 - <code title="get /v2/billing/{account_urn}/insights/{start_date}/{end_date}">client.billing.<a href="./src/resources/billing.ts">listInsights</a>(endDate, { ...params }) -> BillingListInsightsResponse</code>
-
-# Responses
-
-Types:
-
-- <code><a href="./src/resources/responses.ts">ResponseCreateResponse</a></code>
-
-Methods:
-
-- <code title="post /responses">client.responses.<a href="./src/resources/responses.ts">create</a>({ ...params }) -> ResponseCreateResponse</code>
