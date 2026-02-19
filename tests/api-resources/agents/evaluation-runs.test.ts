@@ -8,7 +8,7 @@ const client = new Gradient({
 });
 
 describe('resource evaluationRuns', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create', async () => {
     const responsePromise = client.agents.evaluationRuns.create();
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource evaluationRuns', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -36,7 +36,7 @@ describe('resource evaluationRuns', () => {
     ).rejects.toThrow(Gradient.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.agents.evaluationRuns.retrieve('"123e4567-e89b-12d3-a456-426614174000"');
     const rawResponse = await responsePromise.asResponse();
@@ -48,7 +48,7 @@ describe('resource evaluationRuns', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('listResults', async () => {
     const responsePromise = client.agents.evaluationRuns.listResults(
       '"123e4567-e89b-12d3-a456-426614174000"',
@@ -62,7 +62,7 @@ describe('resource evaluationRuns', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('listResults: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -74,7 +74,7 @@ describe('resource evaluationRuns', () => {
     ).rejects.toThrow(Gradient.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieveResults: only required params', async () => {
     const responsePromise = client.agents.evaluationRuns.retrieveResults(1, {
       evaluation_run_uuid: '"123e4567-e89b-12d3-a456-426614174000"',
@@ -88,7 +88,7 @@ describe('resource evaluationRuns', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieveResults: required and optional params', async () => {
     const response = await client.agents.evaluationRuns.retrieveResults(1, {
       evaluation_run_uuid: '"123e4567-e89b-12d3-a456-426614174000"',

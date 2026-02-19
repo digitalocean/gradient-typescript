@@ -8,7 +8,7 @@ const client = new Gradient({
 });
 
 describe('resource keys', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create', async () => {
     const responsePromise = client.agents.evaluationMetrics.openai.keys.create();
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource keys', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -31,7 +31,7 @@ describe('resource keys', () => {
     ).rejects.toThrow(Gradient.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.agents.evaluationMetrics.openai.keys.retrieve(
       '"123e4567-e89b-12d3-a456-426614174000"',
@@ -45,7 +45,7 @@ describe('resource keys', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('update', async () => {
     const responsePromise = client.agents.evaluationMetrics.openai.keys.update(
       '"123e4567-e89b-12d3-a456-426614174000"',
@@ -59,7 +59,7 @@ describe('resource keys', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('update: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -75,7 +75,7 @@ describe('resource keys', () => {
     ).rejects.toThrow(Gradient.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.agents.evaluationMetrics.openai.keys.list();
     const rawResponse = await responsePromise.asResponse();
@@ -87,7 +87,7 @@ describe('resource keys', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -98,7 +98,7 @@ describe('resource keys', () => {
     ).rejects.toThrow(Gradient.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('delete', async () => {
     const responsePromise = client.agents.evaluationMetrics.openai.keys.delete(
       '"123e4567-e89b-12d3-a456-426614174000"',
@@ -112,7 +112,7 @@ describe('resource keys', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('listAgents', async () => {
     const responsePromise = client.agents.evaluationMetrics.openai.keys.listAgents(
       '"123e4567-e89b-12d3-a456-426614174000"',
@@ -126,7 +126,7 @@ describe('resource keys', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('listAgents: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(

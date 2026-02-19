@@ -8,7 +8,7 @@ const client = new Gradient({
 });
 
 describe('resource actions', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve: only required params', async () => {
     const responsePromise = client.gpuDroplets.volumes.actions.retrieve(36804636, {
       volume_id: '7724db7c-e098-11e5-b522-000f53304e51',
@@ -22,7 +22,7 @@ describe('resource actions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve: required and optional params', async () => {
     const response = await client.gpuDroplets.volumes.actions.retrieve(36804636, {
       volume_id: '7724db7c-e098-11e5-b522-000f53304e51',
@@ -31,7 +31,7 @@ describe('resource actions', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.gpuDroplets.volumes.actions.list('7724db7c-e098-11e5-b522-000f53304e51');
     const rawResponse = await responsePromise.asResponse();
@@ -43,7 +43,7 @@ describe('resource actions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -55,7 +55,7 @@ describe('resource actions', () => {
     ).rejects.toThrow(Gradient.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('initiateByID: only required params', async () => {
     const responsePromise = client.gpuDroplets.volumes.actions.initiateByID(
       '7724db7c-e098-11e5-b522-000f53304e51',
@@ -70,7 +70,7 @@ describe('resource actions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('initiateByID: required and optional params', async () => {
     const response = await client.gpuDroplets.volumes.actions.initiateByID(
       '7724db7c-e098-11e5-b522-000f53304e51',
@@ -85,7 +85,7 @@ describe('resource actions', () => {
     );
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('initiateByName: only required params', async () => {
     const responsePromise = client.gpuDroplets.volumes.actions.initiateByName({
       droplet_id: 11612190,
@@ -100,7 +100,7 @@ describe('resource actions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('initiateByName: required and optional params', async () => {
     const response = await client.gpuDroplets.volumes.actions.initiateByName({
       droplet_id: 11612190,

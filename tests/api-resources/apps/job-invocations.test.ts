@@ -8,7 +8,7 @@ const client = new Gradient({
 });
 
 describe('resource jobInvocations', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('cancel: only required params', async () => {
     const responsePromise = client.apps.jobInvocations.cancel('123e4567-e89b-12d3-a456-426', {
       app_id: '4f6c71e2-1e90-4762-9fee-6cc4a0a9f2cf',
@@ -22,7 +22,7 @@ describe('resource jobInvocations', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('cancel: required and optional params', async () => {
     const response = await client.apps.jobInvocations.cancel('123e4567-e89b-12d3-a456-426', {
       app_id: '4f6c71e2-1e90-4762-9fee-6cc4a0a9f2cf',

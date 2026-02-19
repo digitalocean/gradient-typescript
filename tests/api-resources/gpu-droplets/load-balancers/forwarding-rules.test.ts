@@ -8,7 +8,7 @@ const client = new Gradient({
 });
 
 describe('resource forwardingRules', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('add: only required params', async () => {
     const responsePromise = client.gpuDroplets.loadBalancers.forwardingRules.add(
       '4de7ac8b-495b-4884-9a69-1050c6793cd6',
@@ -32,7 +32,7 @@ describe('resource forwardingRules', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('add: required and optional params', async () => {
     const response = await client.gpuDroplets.loadBalancers.forwardingRules.add(
       '4de7ac8b-495b-4884-9a69-1050c6793cd6',
@@ -51,7 +51,7 @@ describe('resource forwardingRules', () => {
     );
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('remove: only required params', async () => {
     const responsePromise = client.gpuDroplets.loadBalancers.forwardingRules.remove(
       '4de7ac8b-495b-4884-9a69-1050c6793cd6',
@@ -75,7 +75,7 @@ describe('resource forwardingRules', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('remove: required and optional params', async () => {
     const response = await client.gpuDroplets.loadBalancers.forwardingRules.remove(
       '4de7ac8b-495b-4884-9a69-1050c6793cd6',

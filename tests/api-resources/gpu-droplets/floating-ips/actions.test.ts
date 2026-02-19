@@ -8,7 +8,7 @@ const client = new Gradient({
 });
 
 describe('resource actions', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.gpuDroplets.floatingIPs.actions.create('45.55.96.47', { type: 'assign' });
     const rawResponse = await responsePromise.asResponse();
@@ -20,12 +20,12 @@ describe('resource actions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.gpuDroplets.floatingIPs.actions.create('45.55.96.47', { type: 'assign' });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve: only required params', async () => {
     const responsePromise = client.gpuDroplets.floatingIPs.actions.retrieve(36804636, {
       floating_ip: '45.55.96.47',
@@ -39,14 +39,14 @@ describe('resource actions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve: required and optional params', async () => {
     const response = await client.gpuDroplets.floatingIPs.actions.retrieve(36804636, {
       floating_ip: '45.55.96.47',
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.gpuDroplets.floatingIPs.actions.list('45.55.96.47');
     const rawResponse = await responsePromise.asResponse();

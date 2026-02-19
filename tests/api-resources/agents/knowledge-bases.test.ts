@@ -8,7 +8,7 @@ const client = new Gradient({
 });
 
 describe('resource knowledgeBases', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('attach', async () => {
     const responsePromise = client.agents.knowledgeBases.attach('"123e4567-e89b-12d3-a456-426614174000"');
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource knowledgeBases', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('attachSingle: only required params', async () => {
     const responsePromise = client.agents.knowledgeBases.attachSingle(
       '"123e4567-e89b-12d3-a456-426614174000"',
@@ -35,7 +35,7 @@ describe('resource knowledgeBases', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('attachSingle: required and optional params', async () => {
     const response = await client.agents.knowledgeBases.attachSingle(
       '"123e4567-e89b-12d3-a456-426614174000"',
@@ -43,7 +43,7 @@ describe('resource knowledgeBases', () => {
     );
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('detach: only required params', async () => {
     const responsePromise = client.agents.knowledgeBases.detach('"123e4567-e89b-12d3-a456-426614174000"', {
       agent_uuid: '"123e4567-e89b-12d3-a456-426614174000"',
@@ -57,7 +57,7 @@ describe('resource knowledgeBases', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('detach: required and optional params', async () => {
     const response = await client.agents.knowledgeBases.detach('"123e4567-e89b-12d3-a456-426614174000"', {
       agent_uuid: '"123e4567-e89b-12d3-a456-426614174000"',

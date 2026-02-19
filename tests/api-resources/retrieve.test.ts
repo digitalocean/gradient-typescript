@@ -8,7 +8,7 @@ const client = new Gradient({
 });
 
 describe('resource retrieve', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('documents: only required params', async () => {
     const responsePromise = client.retrieve.documents('550e8400-e29b-41d4-a716-446655440000', {
       num_results: 5,
@@ -23,7 +23,7 @@ describe('resource retrieve', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('documents: required and optional params', async () => {
     const response = await client.retrieve.documents('550e8400-e29b-41d4-a716-446655440000', {
       num_results: 5,

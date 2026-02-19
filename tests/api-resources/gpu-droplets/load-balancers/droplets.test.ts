@@ -8,7 +8,7 @@ const client = new Gradient({
 });
 
 describe('resource droplets', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('add: only required params', async () => {
     const responsePromise = client.gpuDroplets.loadBalancers.droplets.add(
       '4de7ac8b-495b-4884-9a69-1050c6793cd6',
@@ -23,7 +23,7 @@ describe('resource droplets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('add: required and optional params', async () => {
     const response = await client.gpuDroplets.loadBalancers.droplets.add(
       '4de7ac8b-495b-4884-9a69-1050c6793cd6',
@@ -31,7 +31,7 @@ describe('resource droplets', () => {
     );
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('remove: only required params', async () => {
     const responsePromise = client.gpuDroplets.loadBalancers.droplets.remove(
       '4de7ac8b-495b-4884-9a69-1050c6793cd6',
@@ -46,7 +46,7 @@ describe('resource droplets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('remove: required and optional params', async () => {
     const response = await client.gpuDroplets.loadBalancers.droplets.remove(
       '4de7ac8b-495b-4884-9a69-1050c6793cd6',

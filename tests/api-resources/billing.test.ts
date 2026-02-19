@@ -8,7 +8,7 @@ const client = new Gradient({
 });
 
 describe('resource billing', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('listInsights: only required params', async () => {
     const responsePromise = client.billing.listInsights('2025-01-31', {
       account_urn: 'do:team:12345678-1234-1234-1234-123456789012',
@@ -23,7 +23,7 @@ describe('resource billing', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('listInsights: required and optional params', async () => {
     const response = await client.billing.listInsights('2025-01-31', {
       account_urn: 'do:team:12345678-1234-1234-1234-123456789012',

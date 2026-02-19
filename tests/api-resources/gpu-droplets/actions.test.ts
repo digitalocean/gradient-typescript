@@ -8,7 +8,7 @@ const client = new Gradient({
 });
 
 describe('resource actions', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve: only required params', async () => {
     const responsePromise = client.gpuDroplets.actions.retrieve(36804636, { droplet_id: 3164444 });
     const rawResponse = await responsePromise.asResponse();
@@ -20,12 +20,12 @@ describe('resource actions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve: required and optional params', async () => {
     const response = await client.gpuDroplets.actions.retrieve(36804636, { droplet_id: 3164444 });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.gpuDroplets.actions.list(3164444);
     const rawResponse = await responsePromise.asResponse();
@@ -37,7 +37,7 @@ describe('resource actions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -49,7 +49,7 @@ describe('resource actions', () => {
     ).rejects.toThrow(Gradient.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('bulkInitiate: only required params', async () => {
     const responsePromise = client.gpuDroplets.actions.bulkInitiate({ type: 'reboot' });
     const rawResponse = await responsePromise.asResponse();
@@ -61,12 +61,12 @@ describe('resource actions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('bulkInitiate: required and optional params', async () => {
     const response = await client.gpuDroplets.actions.bulkInitiate({ type: 'reboot', tag_name: 'tag_name' });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('initiate: only required params', async () => {
     const responsePromise = client.gpuDroplets.actions.initiate(3164444, { type: 'reboot' });
     const rawResponse = await responsePromise.asResponse();
@@ -78,7 +78,7 @@ describe('resource actions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('initiate: required and optional params', async () => {
     const response = await client.gpuDroplets.actions.initiate(3164444, { type: 'reboot' });
   });

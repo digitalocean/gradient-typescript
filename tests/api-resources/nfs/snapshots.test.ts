@@ -8,7 +8,7 @@ const client = new Gradient({
 });
 
 describe('resource snapshots', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve: only required params', async () => {
     const responsePromise = client.nfs.snapshots.retrieve('0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d', {
       region: 'region',
@@ -22,14 +22,14 @@ describe('resource snapshots', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve: required and optional params', async () => {
     const response = await client.nfs.snapshots.retrieve('0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d', {
       region: 'region',
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: only required params', async () => {
     const responsePromise = client.nfs.snapshots.list({ region: 'region' });
     const rawResponse = await responsePromise.asResponse();
@@ -41,12 +41,12 @@ describe('resource snapshots', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.nfs.snapshots.list({ region: 'region', share_id: 'share_id' });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('delete: only required params', async () => {
     const responsePromise = client.nfs.snapshots.delete('0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d', {
       region: 'region',
@@ -60,7 +60,7 @@ describe('resource snapshots', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('delete: required and optional params', async () => {
     const response = await client.nfs.snapshots.delete('0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d', {
       region: 'region',

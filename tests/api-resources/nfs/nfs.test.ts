@@ -8,7 +8,7 @@ const client = new Gradient({
 });
 
 describe('resource nfs', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.nfs.create({
       name: 'sammy-share-drive',
@@ -25,7 +25,7 @@ describe('resource nfs', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.nfs.create({
       name: 'sammy-share-drive',
@@ -35,7 +35,7 @@ describe('resource nfs', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve: only required params', async () => {
     const responsePromise = client.nfs.retrieve('0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d', { region: 'region' });
     const rawResponse = await responsePromise.asResponse();
@@ -47,12 +47,12 @@ describe('resource nfs', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve: required and optional params', async () => {
     const response = await client.nfs.retrieve('0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d', { region: 'region' });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: only required params', async () => {
     const responsePromise = client.nfs.list({ region: 'region' });
     const rawResponse = await responsePromise.asResponse();
@@ -64,12 +64,12 @@ describe('resource nfs', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.nfs.list({ region: 'region' });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('delete: only required params', async () => {
     const responsePromise = client.nfs.delete('0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d', { region: 'region' });
     const rawResponse = await responsePromise.asResponse();
@@ -81,12 +81,12 @@ describe('resource nfs', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('delete: required and optional params', async () => {
     const response = await client.nfs.delete('0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d', { region: 'region' });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('initiateAction: only required params', async () => {
     const responsePromise = client.nfs.initiateAction('0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d', {
       region: 'atl1',
@@ -101,7 +101,7 @@ describe('resource nfs', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('initiateAction: required and optional params', async () => {
     const response = await client.nfs.initiateAction('0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d', {
       region: 'atl1',
