@@ -8,7 +8,7 @@ const client = new Gradient({
 });
 
 describe('resource functions', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create', async () => {
     const responsePromise = client.agents.functions.create('"123e4567-e89b-12d3-a456-426614174000"');
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource functions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -40,7 +40,7 @@ describe('resource functions', () => {
     ).rejects.toThrow(Gradient.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('update: only required params', async () => {
     const responsePromise = client.agents.functions.update('"123e4567-e89b-12d3-a456-426614174000"', {
       path_agent_uuid: '"123e4567-e89b-12d3-a456-426614174000"',
@@ -54,7 +54,7 @@ describe('resource functions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('update: required and optional params', async () => {
     const response = await client.agents.functions.update('"123e4567-e89b-12d3-a456-426614174000"', {
       path_agent_uuid: '"123e4567-e89b-12d3-a456-426614174000"',
@@ -69,7 +69,7 @@ describe('resource functions', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('delete: only required params', async () => {
     const responsePromise = client.agents.functions.delete('"123e4567-e89b-12d3-a456-426614174000"', {
       agent_uuid: '"123e4567-e89b-12d3-a456-426614174000"',
@@ -83,7 +83,7 @@ describe('resource functions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('delete: required and optional params', async () => {
     const response = await client.agents.functions.delete('"123e4567-e89b-12d3-a456-426614174000"', {
       agent_uuid: '"123e4567-e89b-12d3-a456-426614174000"',

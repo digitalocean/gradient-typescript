@@ -8,7 +8,7 @@ const client = new Gradient({
 });
 
 describe('resource completions', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.agents.chat.completions.create({
       messages: [{ content: 'string', role: 'system' }],
@@ -23,7 +23,7 @@ describe('resource completions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.agents.chat.completions.create({
       messages: [{ content: 'string', role: 'system' }],

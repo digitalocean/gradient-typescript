@@ -8,7 +8,7 @@ const client = new Gradient({
 });
 
 describe('resource images', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('generate: only required params', async () => {
     const responsePromise = client.images.generate({
       prompt: 'A cute baby sea otter floating on its back in calm blue water',
@@ -22,7 +22,7 @@ describe('resource images', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('generate: required and optional params', async () => {
     const response = await client.images.generate({
       prompt: 'A cute baby sea otter floating on its back in calm blue water',

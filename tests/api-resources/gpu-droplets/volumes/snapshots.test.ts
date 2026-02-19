@@ -8,7 +8,7 @@ const client = new Gradient({
 });
 
 describe('resource snapshots', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.gpuDroplets.volumes.snapshots.create(
       '7724db7c-e098-11e5-b522-000f53304e51',
@@ -23,7 +23,7 @@ describe('resource snapshots', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.gpuDroplets.volumes.snapshots.create(
       '7724db7c-e098-11e5-b522-000f53304e51',
@@ -31,7 +31,7 @@ describe('resource snapshots', () => {
     );
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.gpuDroplets.volumes.snapshots.retrieve(
       'fbe805e8-866b-11e6-96bf-000f53315a41',
@@ -45,7 +45,7 @@ describe('resource snapshots', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.gpuDroplets.volumes.snapshots.list('7724db7c-e098-11e5-b522-000f53304e51');
     const rawResponse = await responsePromise.asResponse();
@@ -57,7 +57,7 @@ describe('resource snapshots', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -69,7 +69,7 @@ describe('resource snapshots', () => {
     ).rejects.toThrow(Gradient.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('delete', async () => {
     const responsePromise = client.gpuDroplets.volumes.snapshots.delete(
       'fbe805e8-866b-11e6-96bf-000f53315a41',

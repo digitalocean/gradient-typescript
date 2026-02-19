@@ -8,7 +8,7 @@ const client = new Gradient({
 });
 
 describe('resource scheduledIndexing', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create', async () => {
     const responsePromise = client.agents.evaluationMetrics.scheduledIndexing.create();
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource scheduledIndexing', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -35,7 +35,7 @@ describe('resource scheduledIndexing', () => {
     ).rejects.toThrow(Gradient.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.agents.evaluationMetrics.scheduledIndexing.retrieve(
       '"123e4567-e89b-12d3-a456-426614174000"',
@@ -49,7 +49,7 @@ describe('resource scheduledIndexing', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('delete', async () => {
     const responsePromise = client.agents.evaluationMetrics.scheduledIndexing.delete(
       '"123e4567-e89b-12d3-a456-426614174000"',

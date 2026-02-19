@@ -8,7 +8,7 @@ const client = new Gradient({
 });
 
 describe('resource responses', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.responses.create({
       input: 'Tell me a three-sentence bedtime story about a unicorn.',
@@ -23,7 +23,7 @@ describe('resource responses', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.responses.create({
       input: 'Tell me a three-sentence bedtime story about a unicorn.',
