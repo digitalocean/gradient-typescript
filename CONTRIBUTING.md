@@ -60,7 +60,7 @@ $ yarn link @digitalocean/gradient
 # With pnpm
 $ pnpm link --global
 $ cd ../my-package
-$ pnpm link -—global @digitalocean/gradient
+$ pnpm link --global @digitalocean/gradient
 ```
 
 ## Running tests
