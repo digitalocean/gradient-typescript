@@ -910,19 +910,75 @@ export class Gradient {
 
   static toFile = Uploads.toFile;
 
+  /**
+   * The API lets you build GPU-powered AI agents with pre-built or custom foundation models, function and agent routes, and RAG pipelines with knowledge bases.
+   */
   agents: API.Agents = new API.Agents(this);
   chat: API.Chat = new API.Chat(this);
+  /**
+   * Generate images from text prompts using various AI models.
+   */
   images: API.Images = new API.Images(this);
+  /**
+   * Generate text-to-text responses from text prompts.
+   */
   responses: API.Responses = new API.Responses(this);
+  /**
+   * A [Droplet](https://docs.digitalocean.com/products/droplets/) is a DigitalOcean
+   * virtual machine. By sending requests to the Droplet endpoint, you can
+   * list, create, or delete Droplets.
+   *
+   * Some of the attributes will have an object value. The `region` and `image`
+   * objects will all contain the standard attributes of their associated
+   * types. Find more information about each of these objects in their
+   * respective sections.
+   */
   gpuDroplets: API.GPUDroplets = new API.GPUDroplets(this);
   inference: API.Inference = new API.Inference(this);
+  /**
+   * The API lets you build GPU-powered AI agents with pre-built or custom foundation models, function and agent routes, and RAG pipelines with knowledge bases.
+   */
   knowledgeBases: API.KnowledgeBases = new API.KnowledgeBases(this);
+  /**
+   * The API lets you build GPU-powered AI agents with pre-built or custom foundation models, function and agent routes, and RAG pipelines with knowledge bases.
+   */
   models: API.Models = new API.Models(this);
+  /**
+   * Provides information about DigitalOcean data center regions.
+   */
   regions: API.Regions = new API.Regions(this);
   databases: API.Databases = new API.Databases(this);
   nfs: API.Nfs = new API.Nfs(this);
   retrieve: API.Retrieve = new API.Retrieve(this);
   apps: API.Apps = new API.Apps(this);
+  /**
+   * The billing endpoints allow you to retrieve your account balance, invoices,
+   * billing history, and insights.
+   *
+   * **Balance:** By sending requests to the `/v2/customers/my/balance` endpoint, you can
+   * retrieve the balance information for the requested customer account.
+   *
+   * **Invoices:** [Invoices](https://docs.digitalocean.com/platform/billing/invoices/)
+   * are generated on the first of each month for every DigitalOcean
+   * customer. An invoice preview is generated daily, which can be accessed
+   * with the `preview` keyword in place of `$INVOICE_UUID`. To interact with
+   * invoices, you will generally send requests to the invoices endpoint at
+   * `/v2/customers/my/invoices`.
+   *
+   * **Billing History:** Billing history is a record of billing events for your account.
+   * For example, entries may include events like payments made, invoices
+   * issued, or credits granted. To interact with invoices, you
+   * will generally send requests to the invoices endpoint at
+   * `/v2/customers/my/billing_history`.
+   *
+   * **Billing Insights:** Day-over-day changes in billing resource usage based on nightly invoice items,
+   * including total amount, region, SKU, and description for a specified date range.
+   * It is important to note that the daily resource usage may not reflect month-end billing totals when totaled for
+   * a given month as nightly invoice items do not necessarily encompass all invoicing factors for the entire month.
+   *   `v2/billing/{account_urn}/insights/{start_date}/{end_date}` where account_urn is the URN of the customer
+   * account, can be a team (do:team:uuid) or an organization (do:teamgroup:uuid). The date range specified by
+   * start_date and end_date must be in YYYY-MM-DD format.
+   */
   billing: API.Billing = new API.Billing(this);
 }
 

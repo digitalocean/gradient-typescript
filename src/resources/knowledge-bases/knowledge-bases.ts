@@ -146,6 +146,9 @@ export class WaitForDatabaseFailedError extends GradientError {
  * @throws Error - If the operation is aborted via AbortSignal
  */
 
+/**
+ * The API lets you build GPU-powered AI agents with pre-built or custom foundation models, function and agent routes, and RAG pipelines with knowledge bases.
+ */
 export class KnowledgeBases extends APIResource {
   dataSources: DataSourcesAPI.DataSources = new DataSourcesAPI.DataSources(this._client);
   indexingJobs: IndexingJobsAPI.IndexingJobs = new IndexingJobsAPI.IndexingJobs(this._client);

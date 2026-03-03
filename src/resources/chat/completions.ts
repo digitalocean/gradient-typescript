@@ -7,6 +7,9 @@ import { APIPromise } from '../../core/api-promise';
 import { Stream } from '../../core/streaming';
 import { RequestOptions } from '../../internal/request-options';
 
+/**
+ * Given a list of messages comprising a conversation, the model will return a response.
+ */
 export class Completions extends APIResource {
   /**
    * Creates a model response for the given chat conversation.

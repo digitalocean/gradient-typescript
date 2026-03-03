@@ -6,6 +6,14 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
+/**
+ * Image actions are commands that can be given to a DigitalOcean image. In
+ * general, these requests are made on the actions endpoint of a specific
+ * image.
+ *
+ * An image action object is returned. These objects hold the current status
+ * of the requested action.
+ */
 export class Actions extends APIResource {
   /**
    * The following actions are available on an Image.

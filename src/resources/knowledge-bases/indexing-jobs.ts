@@ -65,6 +65,9 @@ export class IndexingJobTimeoutError extends Error {
   }
 }
 
+/**
+ * The API lets you build GPU-powered AI agents with pre-built or custom foundation models, function and agent routes, and RAG pipelines with knowledge bases.
+ */
 export class IndexingJobs extends APIResource {
   /**
    * To start an indexing job for a knowledge base, send a POST request to

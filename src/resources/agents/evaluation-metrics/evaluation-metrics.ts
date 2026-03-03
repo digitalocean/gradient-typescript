@@ -31,6 +31,9 @@ import {
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
+/**
+ * The API lets you build GPU-powered AI agents with pre-built or custom foundation models, function and agent routes, and RAG pipelines with knowledge bases.
+ */
 export class EvaluationMetrics extends APIResource {
   workspaces: WorkspacesAPI.Workspaces = new WorkspacesAPI.Workspaces(this._client);
   anthropic: AnthropicAPI.Anthropic = new AnthropicAPI.Anthropic(this._client);

@@ -9,6 +9,32 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
+/**
+ * A DigitalOcean [image](https://docs.digitalocean.com/products/images/) can be
+ * used to create a Droplet and may come in a number of flavors. Currently,
+ * there are five types of images: snapshots, backups, applications,
+ * distributions, and custom images.
+ *
+ * * [Snapshots](https://docs.digitalocean.com/products/snapshots/) provide
+ * a full copy of an existing Droplet instance taken on demand.
+ *
+ * * [Backups](https://docs.digitalocean.com/products/backups/) are similar
+ * to snapshots but are created automatically at regular intervals when
+ * enabled for a Droplet.
+ *
+ * * [Custom images](https://docs.digitalocean.com/products/custom-images/)
+ * are Linux-based virtual machine images (raw, qcow2, vhdx, vdi, and vmdk
+ * formats are supported) that you may upload for use on DigitalOcean.
+ *
+ * * Distributions are the public Linux distributions that are available to
+ * be used as a base to create Droplets.
+ *
+ * * Applications, or [1-Click Apps](https://docs.digitalocean.com/products/marketplace/),
+ * are distributions pre-configured with additional software.
+ *
+ * To interact with images, you will generally send requests to the images
+ * endpoint at /v2/images.
+ */
 export class Images extends APIResource {
   actions: ActionsAPI.Actions = new ActionsAPI.Actions(this._client);
 

@@ -6,6 +6,13 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
+/**
+ * [DigitalOcean Load Balancers](https://docs.digitalocean.com/products/networking/load-balancers/)
+ * provide a way to distribute traffic across multiple Droplets. By sending
+ * requests to the `/v2/load_balancers` endpoint, you can list, create, or
+ * delete load balancers as well as add or remove Droplets, forwarding rules,
+ * and other configuration details.
+ */
 export class Droplets extends APIResource {
   /**
    * To assign a Droplet to a load balancer instance, send a POST request to

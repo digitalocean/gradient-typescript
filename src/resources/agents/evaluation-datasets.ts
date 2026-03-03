@@ -5,6 +5,9 @@ import * as DataSourcesAPI from '../knowledge-bases/data-sources';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 
+/**
+ * The API lets you build GPU-powered AI agents with pre-built or custom foundation models, function and agent routes, and RAG pipelines with knowledge bases.
+ */
 export class EvaluationDatasets extends APIResource {
   /**
    * To create an evaluation dataset, send a POST request to

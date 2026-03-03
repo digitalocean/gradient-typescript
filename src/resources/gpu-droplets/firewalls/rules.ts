@@ -7,6 +7,13 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
+/**
+ * [DigitalOcean Cloud Firewalls](https://docs.digitalocean.com/products/networking/firewalls/)
+ * provide the ability to restrict network access to and from a Droplet
+ * allowing you to define which ports will accept inbound or outbound
+ * connections. By sending requests to the `/v2/firewalls` endpoint, you can
+ * list, create, or delete firewalls as well as modify access rules.
+ */
 export class Rules extends APIResource {
   /**
    * To add additional access rules to a firewall, send a POST request to

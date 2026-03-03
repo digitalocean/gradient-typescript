@@ -6,6 +6,15 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
+/**
+ * Block storage actions are commands that can be given to a DigitalOcean
+ * Block Storage Volume. An example would be detaching or attaching a volume
+ * from a Droplet. These requests are made on the
+ * `/v2/volumes/$VOLUME_ID/actions` endpoint.
+ *
+ * An action object is returned. These objects hold the current status of the
+ * requested action.
+ */
 export class Actions extends APIResource {
   /**
    * To retrieve the status of a volume action, send a GET request to

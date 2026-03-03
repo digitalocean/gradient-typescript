@@ -5,6 +5,9 @@ import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 
+/**
+ * Provides information about DigitalOcean data center regions.
+ */
 export class Regions extends APIResource {
   /**
    * To list all of the regions that are available, send a GET request to

@@ -7,6 +7,9 @@ import { APIPromise } from '../core/api-promise';
 import { Stream } from '../core/streaming';
 import { RequestOptions } from '../internal/request-options';
 
+/**
+ * Generate text-to-text responses from text prompts.
+ */
 export class Responses extends APIResource {
   /**
    * Generate text responses from text prompts. This endpoint supports both streaming

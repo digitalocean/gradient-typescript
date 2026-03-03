@@ -6,6 +6,10 @@ import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
+/**
+ * NFS lets you create fully managed, POSIX-compliant network file storage that delivers secure,
+ * high-performance shared storage right inside your VPC. This enables seamless data sharing across Droplets in a VPC.
+ */
 export class Snapshots extends APIResource {
   /**
    * To get an NFS snapshot, send a GET request to

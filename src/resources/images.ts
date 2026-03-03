@@ -7,6 +7,9 @@ import { APIPromise } from '../core/api-promise';
 import { Stream } from '../core/streaming';
 import { RequestOptions } from '../internal/request-options';
 
+/**
+ * Generate images from text prompts using various AI models.
+ */
 export class Images extends APIResource {
   /**
    * Creates a high-quality image from a text prompt using GPT-IMAGE-1, the latest

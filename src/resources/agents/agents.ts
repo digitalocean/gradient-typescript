@@ -136,6 +136,9 @@ export class AgentDeploymentError extends GradientError {
   }
 }
 
+/**
+ * The API lets you build GPU-powered AI agents with pre-built or custom foundation models, function and agent routes, and RAG pipelines with knowledge bases.
+ */
 export class Agents extends APIResource {
   apiKeys: APIKeysAPI.APIKeys = new APIKeysAPI.APIKeys(this._client);
   chat: ChatAPI.Chat = new ChatAPI.Chat(this._client);
