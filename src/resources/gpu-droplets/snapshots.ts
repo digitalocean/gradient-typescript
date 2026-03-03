@@ -7,6 +7,17 @@ import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
+/**
+ * [Snapshots](https://docs.digitalocean.com/products/snapshots/) are saved
+ * instances of a Droplet or a block storage volume, which is reflected in
+ * the `resource_type` attribute. In order to avoid problems with compressing
+ * filesystems, each defines a `min_disk_size` attribute which is the minimum
+ * size of the Droplet or volume disk when creating a new resource from the
+ * saved snapshot.
+ *
+ * To interact with snapshots, you will generally send requests to the
+ * snapshots endpoint at `/v2/snapshots`.
+ */
 export class Snapshots extends APIResource {
   /**
    * To retrieve information about a snapshot, send a GET request to

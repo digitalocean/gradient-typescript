@@ -7,6 +7,9 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
+/**
+ * Manage SSH keys available on your account.
+ */
 export class Keys extends APIResource {
   /**
    * To add a new SSH public key to your DigitalOcean account, send a POST request to

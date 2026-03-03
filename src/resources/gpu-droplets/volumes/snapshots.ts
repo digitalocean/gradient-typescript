@@ -7,6 +7,19 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
+/**
+ * [DigitalOcean Block Storage Volumes](https://docs.digitalocean.com/products/volumes/)
+ * provide expanded storage capacity for your Droplets and can be moved
+ * between Droplets within a specific region.
+ *
+ * Volumes function as raw block devices, meaning they appear to the
+ * operating system as locally attached storage which can be formatted using
+ * any file system supported by the OS. They may be created in sizes from
+ * 1GiB to 16TiB.
+ *
+ * By sending requests to the `/v2/volumes` endpoint, you can list, create, or
+ * delete volumes as well as attach and detach them from Droplets
+ */
 export class Snapshots extends APIResource {
   /**
    * To create a snapshot from a volume, sent a POST request to

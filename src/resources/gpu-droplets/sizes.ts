@@ -5,6 +5,16 @@ import * as Shared from '../shared';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 
+/**
+ * The sizes objects represent different packages of hardware resources that
+ * can be used for Droplets. When a Droplet is created, a size must be
+ * selected so that the correct resources can be allocated.
+ *
+ * Each size represents a plan that bundles together specific sets of
+ * resources. This includes the amount of RAM, the number of virtual CPUs,
+ * disk space, and transfer. The size object also includes the pricing
+ * details and the regions that the size is available in.
+ */
 export class Sizes extends APIResource {
   /**
    * To list all of available Droplet sizes, send a GET request to `/v2/sizes`. The

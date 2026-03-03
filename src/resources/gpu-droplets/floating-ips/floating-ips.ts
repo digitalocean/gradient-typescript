@@ -16,6 +16,27 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
+/**
+ * As of 16 June 2022, we have renamed the Floating IP product to [Reserved IPs](https://docs.digitalocean.com/reference/api/api-reference/#tag/Reserved-IPs).
+ * The Reserved IP product's endpoints function the exact same way as Floating IPs.
+ * The only difference is the name change throughout the URLs and fields.
+ * For example, the `floating_ips` field is now the `reserved_ips` field.
+ * The Floating IP endpoints will remain active until fall 2023 before being
+ * permanently deprecated.
+ *
+ * With the exception of the [Projects API](https://docs.digitalocean.com/reference/api/api-reference/#tag/Projects),
+ * we will reflect this change as an additional field in the responses across the API
+ * where the `floating_ip` field is used. For example, the Droplet metadata response
+ * will contain the field `reserved_ips` in addition to the `floating_ips` field.
+ * Floating IPs retrieved using the Projects API will retain the original name.
+ *
+ * [DigitalOcean Floating IPs](https://docs.digitalocean.com/products/networking/reserved-ips/)
+ * are publicly-accessible static IP addresses that can be mapped to one of
+ * your Droplets. They can be used to create highly available setups or other
+ * configurations requiring movable addresses.
+ *
+ * Floating IPs are bound to a specific region.
+ */
 export class FloatingIPs extends APIResource {
   actions: ActionsAPI.Actions = new ActionsAPI.Actions(this._client);
 
