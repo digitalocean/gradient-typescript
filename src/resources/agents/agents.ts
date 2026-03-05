@@ -94,7 +94,7 @@ import {
   VersionUpdateResponse,
   Versions,
 } from './versions';
-import * as KnowledgeBasesKnowledgeBasesAPI from '../knowledge-bases/knowledge-bases';
+import * as ResourcesKnowledgeBasesAPI from '../knowledge-bases/knowledge-bases';
 import * as ModelsAPI from '../models/models';
 import * as ChatAPI from './chat/chat';
 import { Chat } from './chat/chat';
@@ -424,7 +424,7 @@ export interface APIAgent {
   /**
    * Knowledge bases
    */
-  knowledge_bases?: Array<KnowledgeBasesKnowledgeBasesAPI.APIKnowledgeBase>;
+  knowledge_bases?: Array<ResourcesKnowledgeBasesAPI.APIKnowledgeBase>;
 
   logging_config?: APIAgent.LoggingConfig;
 
@@ -824,7 +824,7 @@ export namespace APIAgent {
     /**
      * List of knowledge bases associated with the agent template
      */
-    knowledge_bases?: Array<KnowledgeBasesKnowledgeBasesAPI.APIKnowledgeBase>;
+    knowledge_bases?: Array<ResourcesKnowledgeBasesAPI.APIKnowledgeBase>;
 
     /**
      * The long description of the agent template
@@ -1531,7 +1531,7 @@ export namespace AgentListResponse {
       /**
        * List of knowledge bases associated with the agent template
        */
-      knowledge_bases?: Array<KnowledgeBasesKnowledgeBasesAPI.APIKnowledgeBase>;
+      knowledge_bases?: Array<ResourcesKnowledgeBasesAPI.APIKnowledgeBase>;
 
       /**
        * The long description of the agent template
