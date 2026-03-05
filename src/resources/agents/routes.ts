@@ -181,7 +181,7 @@ export interface RouteUpdateParams {
   /**
    * Body param: Routed agent id
    */
-  body_child_agent_uuid?: string;
+  child_agent_uuid?: string;
 
   /**
    * Body param: Describes the case in which the child agent should be used
@@ -220,7 +220,7 @@ export interface RouteAddParams {
   /**
    * Body param: Routed agent id
    */
-  body_child_agent_uuid?: string;
+  child_agent_uuid?: string;
 
   /**
    * Body param

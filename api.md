@@ -59,11 +59,11 @@ Methods:
 
 - <code title="post /v2/gen-ai/agents">client.agents.<a href="./src/resources/agents/agents.ts">create</a>({ ...params }) -> AgentCreateResponse</code>
 - <code title="get /v2/gen-ai/agents/{uuid}">client.agents.<a href="./src/resources/agents/agents.ts">retrieve</a>(uuid) -> AgentRetrieveResponse</code>
-- <code title="put /v2/gen-ai/agents/{uuid}">client.agents.<a href="./src/resources/agents/agents.ts">update</a>(pathUuid, { ...params }) -> AgentUpdateResponse</code>
+- <code title="put /v2/gen-ai/agents/{uuid}">client.agents.<a href="./src/resources/agents/agents.ts">update</a>(uuid, { ...params }) -> AgentUpdateResponse</code>
 - <code title="get /v2/gen-ai/agents">client.agents.<a href="./src/resources/agents/agents.ts">list</a>({ ...params }) -> AgentListResponse</code>
 - <code title="delete /v2/gen-ai/agents/{uuid}">client.agents.<a href="./src/resources/agents/agents.ts">delete</a>(uuid) -> AgentDeleteResponse</code>
 - <code title="get /v2/gen-ai/agents/{uuid}/usage">client.agents.<a href="./src/resources/agents/agents.ts">retrieveUsage</a>(uuid, { ...params }) -> AgentRetrieveUsageResponse</code>
-- <code title="put /v2/gen-ai/agents/{uuid}/deployment_visibility">client.agents.<a href="./src/resources/agents/agents.ts">updateStatus</a>(pathUuid, { ...params }) -> AgentUpdateStatusResponse</code>
+- <code title="put /v2/gen-ai/agents/{uuid}/deployment_visibility">client.agents.<a href="./src/resources/agents/agents.ts">updateStatus</a>(uuid, { ...params }) -> AgentUpdateStatusResponse</code>
 
 ## APIKeys
 
@@ -292,7 +292,7 @@ Types:
 
 Methods:
 
-- <code title="put /v2/gen-ai/agents/{uuid}/versions">client.agents.versions.<a href="./src/resources/agents/versions.ts">update</a>(pathUuid, { ...params }) -> VersionUpdateResponse</code>
+- <code title="put /v2/gen-ai/agents/{uuid}/versions">client.agents.versions.<a href="./src/resources/agents/versions.ts">update</a>(uuid, { ...params }) -> VersionUpdateResponse</code>
 - <code title="get /v2/gen-ai/agents/{uuid}/versions">client.agents.versions.<a href="./src/resources/agents/versions.ts">list</a>(uuid, { ...params }) -> VersionListResponse</code>
 
 ## KnowledgeBases
@@ -718,7 +718,7 @@ Methods:
 
 - <code title="post /v2/gen-ai/knowledge_bases">client.knowledgeBases.<a href="./src/resources/knowledge-bases/knowledge-bases.ts">create</a>({ ...params }) -> KnowledgeBaseCreateResponse</code>
 - <code title="get /v2/gen-ai/knowledge_bases/{uuid}">client.knowledgeBases.<a href="./src/resources/knowledge-bases/knowledge-bases.ts">retrieve</a>(uuid) -> KnowledgeBaseRetrieveResponse</code>
-- <code title="put /v2/gen-ai/knowledge_bases/{uuid}">client.knowledgeBases.<a href="./src/resources/knowledge-bases/knowledge-bases.ts">update</a>(pathUuid, { ...params }) -> KnowledgeBaseUpdateResponse</code>
+- <code title="put /v2/gen-ai/knowledge_bases/{uuid}">client.knowledgeBases.<a href="./src/resources/knowledge-bases/knowledge-bases.ts">update</a>(uuid, { ...params }) -> KnowledgeBaseUpdateResponse</code>
 - <code title="get /v2/gen-ai/knowledge_bases">client.knowledgeBases.<a href="./src/resources/knowledge-bases/knowledge-bases.ts">list</a>({ ...params }) -> KnowledgeBaseListResponse</code>
 - <code title="delete /v2/gen-ai/knowledge_bases/{uuid}">client.knowledgeBases.<a href="./src/resources/knowledge-bases/knowledge-bases.ts">delete</a>(uuid) -> KnowledgeBaseDeleteResponse</code>
 - <code title="get /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/indexing_jobs">client.knowledgeBases.<a href="./src/resources/knowledge-bases/knowledge-bases.ts">listIndexingJobs</a>(knowledgeBaseUuid) -> KnowledgeBaseListIndexingJobsResponse</code>
@@ -766,7 +766,7 @@ Methods:
 - <code title="get /v2/gen-ai/indexing_jobs">client.knowledgeBases.indexingJobs.<a href="./src/resources/knowledge-bases/indexing-jobs.ts">list</a>({ ...params }) -> IndexingJobListResponse</code>
 - <code title="get /v2/gen-ai/indexing_jobs/{indexing_job_uuid}/data_sources">client.knowledgeBases.indexingJobs.<a href="./src/resources/knowledge-bases/indexing-jobs.ts">retrieveDataSources</a>(indexingJobUuid) -> IndexingJobRetrieveDataSourcesResponse</code>
 - <code title="get /v2/gen-ai/indexing_jobs/{indexing_job_uuid}/details_signed_url">client.knowledgeBases.indexingJobs.<a href="./src/resources/knowledge-bases/indexing-jobs.ts">retrieveSignedURL</a>(indexingJobUuid) -> IndexingJobRetrieveSignedURLResponse</code>
-- <code title="put /v2/gen-ai/indexing_jobs/{uuid}/cancel">client.knowledgeBases.indexingJobs.<a href="./src/resources/knowledge-bases/indexing-jobs.ts">updateCancel</a>(pathUuid, { ...params }) -> IndexingJobUpdateCancelResponse</code>
+- <code title="put /v2/gen-ai/indexing_jobs/{uuid}/cancel">client.knowledgeBases.indexingJobs.<a href="./src/resources/knowledge-bases/indexing-jobs.ts">updateCancel</a>(uuid, { ...params }) -> IndexingJobUpdateCancelResponse</code>
 
 # Models
 

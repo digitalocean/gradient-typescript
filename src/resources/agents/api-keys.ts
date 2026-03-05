@@ -183,7 +183,7 @@ export interface APIKeyCreateParams {
   /**
    * Agent id
    */
-  body_agent_uuid?: string;
+  agent_uuid?: string;
 
   /**
    * A human friendly name to identify the key
@@ -205,7 +205,7 @@ export interface APIKeyUpdateParams {
   /**
    * Body param: API key ID
    */
-  body_api_key_uuid?: string;
+  api_key_uuid?: string;
 
   /**
    * Body param: Name

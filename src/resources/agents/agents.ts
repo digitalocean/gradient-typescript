@@ -177,11 +177,11 @@ export class Agents extends APIResource {
    * ```
    */
   update(
-    pathUuid: string,
+    uuid: string,
     body: AgentUpdateParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<AgentUpdateResponse> {
-    return this._client.put(path`/v2/gen-ai/agents/${pathUuid}`, {
+    return this._client.put(path`/v2/gen-ai/agents/${uuid}`, {
       body,
       defaultBaseURL: 'https://api.digitalocean.com',
       ...options,
@@ -259,11 +259,11 @@ export class Agents extends APIResource {
    * ```
    */
   updateStatus(
-    pathUuid: string,
+    uuid: string,
     body: AgentUpdateStatusParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<AgentUpdateStatusResponse> {
-    return this._client.put(path`/v2/gen-ai/agents/${pathUuid}/deployment_visibility`, {
+    return this._client.put(path`/v2/gen-ai/agents/${uuid}/deployment_visibility`, {
       body,
       defaultBaseURL: 'https://api.digitalocean.com',
       ...options,
@@ -1773,7 +1773,7 @@ export interface AgentUpdateParams {
   /**
    * Unique agent id
    */
-  body_uuid?: string;
+  uuid?: string;
 }
 
 export interface AgentListParams {
@@ -1810,7 +1810,7 @@ export interface AgentUpdateStatusParams {
   /**
    * Unique id
    */
-  body_uuid?: string;
+  uuid?: string;
 
   /**
    * - VISIBILITY_UNKNOWN: The status of the deployment is unknown

@@ -104,7 +104,7 @@ export interface AgentMoveParams {
   /**
    * Workspace uuid to move agents to
    */
-  body_workspace_uuid?: string;
+  workspace_uuid?: string;
 }
 
 export declare namespace Agents {

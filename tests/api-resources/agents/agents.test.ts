@@ -93,7 +93,7 @@ describe('resource agents', () => {
           tags: ['example string'],
           temperature: 0.7,
           top_p: 0.9,
-          body_uuid: '"12345678-1234-1234-1234-123456789012"',
+          uuid: '"12345678-1234-1234-1234-123456789012"',
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -181,7 +181,7 @@ describe('resource agents', () => {
     await expect(
       client.agents.updateStatus(
         '"123e4567-e89b-12d3-a456-426614174000"',
-        { body_uuid: '"12345678-1234-1234-1234-123456789012"', visibility: 'VISIBILITY_UNKNOWN' },
+        { uuid: '"12345678-1234-1234-1234-123456789012"', visibility: 'VISIBILITY_UNKNOWN' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Gradient.NotFoundError);

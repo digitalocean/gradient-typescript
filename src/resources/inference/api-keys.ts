@@ -197,7 +197,7 @@ export interface APIKeyUpdateParams {
   /**
    * API key ID
    */
-  body_api_key_uuid?: string;
+  api_key_uuid?: string;
 
   /**
    * Name

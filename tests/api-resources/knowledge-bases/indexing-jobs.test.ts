@@ -116,7 +116,7 @@ describe('resource indexingJobs', () => {
     await expect(
       client.knowledgeBases.indexingJobs.updateCancel(
         '"123e4567-e89b-12d3-a456-426614174000"',
-        { body_uuid: '"12345678-1234-1234-1234-123456789012"' },
+        { uuid: '"12345678-1234-1234-1234-123456789012"' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Gradient.NotFoundError);

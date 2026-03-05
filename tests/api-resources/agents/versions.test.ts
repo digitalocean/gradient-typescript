@@ -27,7 +27,7 @@ describe('resource versions', () => {
       client.agents.versions.update(
         '"123e4567-e89b-12d3-a456-426614174000"',
         {
-          body_uuid: '"12345678-1234-1234-1234-123456789012"',
+          uuid: '"12345678-1234-1234-1234-123456789012"',
           version_hash: 'c3658d8b5c05494cd03ce042926ef08157889ed54b1b74b5ee0b3d66dcee4b73',
         },
         { path: '/_stainless_unknown_path' },
