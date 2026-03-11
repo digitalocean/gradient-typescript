@@ -202,11 +202,11 @@ export class KnowledgeBases extends APIResource {
    * ```
    */
   update(
-    pathUuid: string,
+    uuid: string,
     body: KnowledgeBaseUpdateParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<KnowledgeBaseUpdateResponse> {
-    return this._client.put(path`/v2/gen-ai/knowledge_bases/${pathUuid}`, {
+    return this._client.put(path`/v2/gen-ai/knowledge_bases/${uuid}`, {
       body,
       defaultBaseURL: 'https://api.digitalocean.com',
       ...options,
@@ -718,7 +718,7 @@ export interface KnowledgeBaseUpdateParams {
   /**
    * Knowledge base id
    */
-  body_uuid?: string;
+  uuid?: string;
 }
 
 export interface KnowledgeBaseListParams {

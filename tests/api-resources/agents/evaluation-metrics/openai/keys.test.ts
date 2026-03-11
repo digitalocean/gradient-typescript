@@ -67,7 +67,7 @@ describe('resource keys', () => {
         '"123e4567-e89b-12d3-a456-426614174000"',
         {
           api_key: '"sk-ant-12345678901234567890123456789012"',
-          body_api_key_uuid: '"12345678-1234-1234-1234-123456789012"',
+          api_key_uuid: '"12345678-1234-1234-1234-123456789012"',
           name: '"Production Key"',
         },
         { path: '/_stainless_unknown_path' },

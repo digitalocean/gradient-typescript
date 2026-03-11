@@ -43,7 +43,7 @@ describe('resource dataSources', () => {
             parent_chunk_size: 1000,
             semantic_threshold: 0.5,
           },
-          body_knowledge_base_uuid: '"12345678-1234-1234-1234-123456789012"',
+          knowledge_base_uuid: '"12345678-1234-1234-1234-123456789012"',
           spaces_data_source: {
             bucket_name: 'example name',
             item_path: 'example string',
@@ -86,7 +86,7 @@ describe('resource dataSources', () => {
         parent_chunk_size: 1000,
         semantic_threshold: 0.5,
       },
-      body_data_source_uuid: '98765432-1234-1234-1234-123456789012',
+      data_source_uuid: '98765432-1234-1234-1234-123456789012',
       body_knowledge_base_uuid: '12345678-1234-1234-1234-123456789012',
     });
   });

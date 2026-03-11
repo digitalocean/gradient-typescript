@@ -515,7 +515,7 @@ export interface DataSourceCreateParams {
   /**
    * Knowledge base id
    */
-  body_knowledge_base_uuid?: string;
+  knowledge_base_uuid?: string;
 
   /**
    * Spaces Bucket Data Source
@@ -588,7 +588,7 @@ export interface DataSourceUpdateParams {
   /**
    * Body param: Data Source ID (Path Parameter)
    */
-  body_data_source_uuid?: string;
+  data_source_uuid?: string;
 
   /**
    * Body param: Knowledge Base ID (Path Parameter)

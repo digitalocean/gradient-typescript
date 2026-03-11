@@ -27,7 +27,7 @@ describe('resource functions', () => {
       client.agents.functions.create(
         '"123e4567-e89b-12d3-a456-426614174000"',
         {
-          body_agent_uuid: '"12345678-1234-1234-1234-123456789012"',
+          agent_uuid: '"12345678-1234-1234-1234-123456789012"',
           description: '"My Function Description"',
           faas_name: '"my-function"',
           faas_namespace: '"default"',
@@ -63,7 +63,7 @@ describe('resource functions', () => {
       faas_name: '"my-function"',
       faas_namespace: '"default"',
       function_name: '"My Function"',
-      body_function_uuid: '"12345678-1234-1234-1234-123456789012"',
+      function_uuid: '"12345678-1234-1234-1234-123456789012"',
       input_schema: {},
       output_schema: {},
     });

@@ -120,7 +120,7 @@ export interface FunctionCreateParams {
   /**
    * Agent id
    */
-  body_agent_uuid?: string;
+  agent_uuid?: string;
 
   /**
    * Function description
@@ -187,7 +187,7 @@ export interface FunctionUpdateParams {
   /**
    * Body param: Function id
    */
-  body_function_uuid?: string;
+  function_uuid?: string;
 
   /**
    * Body param: Describe the input schema for the function so the agent may call it

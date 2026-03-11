@@ -187,11 +187,11 @@ export class IndexingJobs extends APIResource {
    * ```
    */
   updateCancel(
-    pathUuid: string,
+    uuid: string,
     body: IndexingJobUpdateCancelParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<IndexingJobUpdateCancelResponse> {
-    return this._client.put(path`/v2/gen-ai/indexing_jobs/${pathUuid}/cancel`, {
+    return this._client.put(path`/v2/gen-ai/indexing_jobs/${uuid}/cancel`, {
       body,
       defaultBaseURL: 'https://api.digitalocean.com',
       ...options,
@@ -569,7 +569,7 @@ export interface IndexingJobUpdateCancelParams {
   /**
    * A unique identifier for an indexing job.
    */
-  body_uuid?: string;
+  uuid?: string;
 }
 
 export declare namespace IndexingJobs {

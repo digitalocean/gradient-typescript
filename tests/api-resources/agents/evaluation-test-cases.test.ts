@@ -101,7 +101,7 @@ describe('resource evaluationTestCases', () => {
             success_threshold: 123,
             success_threshold_pct: 123,
           },
-          body_test_case_uuid: '123e4567-e89b-12d3-a456-426614174000',
+          test_case_uuid: '123e4567-e89b-12d3-a456-426614174000',
         },
         { path: '/_stainless_unknown_path' },
       ),

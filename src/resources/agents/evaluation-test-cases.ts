@@ -306,7 +306,7 @@ export interface EvaluationTestCaseUpdateParams {
   /**
    * Test-case UUID to update
    */
-  body_test_case_uuid?: string;
+  test_case_uuid?: string;
 }
 
 export namespace EvaluationTestCaseUpdateParams {

@@ -46,7 +46,7 @@ describe('resource apiKeys', () => {
     await expect(
       client.inference.apiKeys.update(
         '"123e4567-e89b-12d3-a456-426614174000"',
-        { body_api_key_uuid: '"12345678-1234-1234-1234-123456789012"', name: '"Production Key"' },
+        { api_key_uuid: '"12345678-1234-1234-1234-123456789012"', name: '"Production Key"' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Gradient.NotFoundError);

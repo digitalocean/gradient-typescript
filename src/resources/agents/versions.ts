@@ -23,11 +23,11 @@ export class Versions extends APIResource {
    * ```
    */
   update(
-    pathUuid: string,
+    uuid: string,
     body: VersionUpdateParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<VersionUpdateResponse> {
-    return this._client.put(path`/v2/gen-ai/agents/${pathUuid}/versions`, {
+    return this._client.put(path`/v2/gen-ai/agents/${uuid}/versions`, {
       body,
       defaultBaseURL: 'https://api.digitalocean.com',
       ...options,
@@ -342,7 +342,7 @@ export interface VersionUpdateParams {
   /**
    * Agent unique identifier
    */
-  body_uuid?: string;
+  uuid?: string;
 
   /**
    * Unique identifier

@@ -72,7 +72,7 @@ describe('resource workspaces', () => {
         {
           description: 'example string',
           name: 'example name',
-          body_workspace_uuid: '123e4567-e89b-12d3-a456-426614174000',
+          workspace_uuid: '123e4567-e89b-12d3-a456-426614174000',
         },
         { path: '/_stainless_unknown_path' },
       ),

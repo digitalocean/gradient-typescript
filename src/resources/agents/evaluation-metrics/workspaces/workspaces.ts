@@ -200,7 +200,7 @@ export interface WorkspaceUpdateParams {
   /**
    * Workspace UUID.
    */
-  body_workspace_uuid?: string;
+  workspace_uuid?: string;
 }
 
 Workspaces.Agents = Agents;

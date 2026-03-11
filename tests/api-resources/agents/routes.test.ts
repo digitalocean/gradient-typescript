@@ -26,7 +26,7 @@ describe('resource routes', () => {
   test.skip('update: required and optional params', async () => {
     const response = await client.agents.routes.update('"123e4567-e89b-12d3-a456-426614174000"', {
       path_parent_agent_uuid: '"123e4567-e89b-12d3-a456-426614174000"',
-      body_child_agent_uuid: '"12345678-1234-1234-1234-123456789012"',
+      child_agent_uuid: '"12345678-1234-1234-1234-123456789012"',
       if_case: '"use this to get weather information"',
       body_parent_agent_uuid: '"12345678-1234-1234-1234-123456789012"',
       route_name: '"weather_route"',
@@ -73,7 +73,7 @@ describe('resource routes', () => {
   test.skip('add: required and optional params', async () => {
     const response = await client.agents.routes.add('"123e4567-e89b-12d3-a456-426614174000"', {
       path_parent_agent_uuid: '"123e4567-e89b-12d3-a456-426614174000"',
-      body_child_agent_uuid: '"12345678-1234-1234-1234-123456789012"',
+      child_agent_uuid: '"12345678-1234-1234-1234-123456789012"',
       if_case: '"use this to get weather information"',
       body_parent_agent_uuid: '"12345678-1234-1234-1234-123456789012"',
       route_name: '"weather_route"',
