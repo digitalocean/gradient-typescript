@@ -41,9 +41,12 @@ export class Responses extends APIResource {
     body: ResponseCreateParams,
     options?: RequestOptions,
   ): APIPromise<Shared.CreateResponseResponse> | APIPromise<Stream<Shared.CreateResponseStreamResponse>> {
-    return this._client.post('/responses', { body, ...options, stream: body.stream ?? false }) as
-      | APIPromise<Shared.CreateResponseResponse>
-      | APIPromise<Stream<Shared.CreateResponseStreamResponse>>;
+    return this._client.post('/responses', {
+      body,
+      defaultBaseURL: '{inferenceEndpoint}/v1',
+      ...options,
+      stream: body.stream ?? false,
+    }) as APIPromise<Shared.CreateResponseResponse> | APIPromise<Stream<Shared.CreateResponseStreamResponse>>;
   }
 }
 
