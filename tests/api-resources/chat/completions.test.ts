@@ -36,6 +36,7 @@ describe('resource completions', () => {
       metadata: { foo: 'string' },
       n: 1,
       presence_penalty: -2,
+      reasoning_effort: 'none',
       stop: '\n',
       stream: false,
       stream_options: { include_usage: true },

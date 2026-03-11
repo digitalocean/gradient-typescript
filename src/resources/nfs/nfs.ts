@@ -28,6 +28,7 @@ export class Nfs extends APIResource {
    *   region: 'atl1',
    *   size_gib: 1024,
    *   vpc_ids: ['796c6fe3-2a1d-4da2-9f3e-38239827dc91'],
+   *   performance_tier: 'standard',
    * });
    * ```
    */
@@ -44,11 +45,14 @@ export class Nfs extends APIResource {
    * ```ts
    * const nf = await client.nfs.retrieve(
    *   '0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d',
-   *   { region: 'region' },
    * );
    * ```
    */
-  retrieve(nfsID: string, query: NfRetrieveParams, options?: RequestOptions): APIPromise<NfRetrieveResponse> {
+  retrieve(
+    nfsID: string,
+    query: NfRetrieveParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<NfRetrieveResponse> {
     return this._client.get(path`/v2/nfs/${nfsID}`, {
       query,
       defaultBaseURL: 'https://api.digitalocean.com',
@@ -64,10 +68,10 @@ export class Nfs extends APIResource {
    *
    * @example
    * ```ts
-   * const nfs = await client.nfs.list({ region: 'region' });
+   * const nfs = await client.nfs.list();
    * ```
    */
-  list(query: NfListParams, options?: RequestOptions): APIPromise<NfListResponse> {
+  list(query: NfListParams | null | undefined = {}, options?: RequestOptions): APIPromise<NfListResponse> {
     return this._client.get('/v2/nfs', { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
@@ -81,12 +85,15 @@ export class Nfs extends APIResource {
    * ```ts
    * await client.nfs.delete(
    *   '0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d',
-   *   { region: 'region' },
    * );
    * ```
    */
-  delete(nfsID: string, params: NfDeleteParams, options?: RequestOptions): APIPromise<void> {
-    const { region } = params;
+  delete(
+    nfsID: string,
+    params: NfDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<void> {
+    const { region } = params ?? {};
     return this._client.delete(path`/v2/nfs/${nfsID}`, {
       query: { region },
       defaultBaseURL: 'https://api.digitalocean.com',
@@ -100,18 +107,19 @@ export class Nfs extends APIResource {
    * request to `/v2/nfs/{nfs_id}/actions`. In the JSON body to the request, set the
    * `type` attribute to on of the supported action types:
    *
-   * | Action                  | Details                                                                          |
-   * | ----------------------- | -------------------------------------------------------------------------------- |
-   * | <nobr>`resize`</nobr>   | Resizes an NFS share. Set the size_gib attribute to a desired value in GiB       |
-   * | <nobr>`snapshot`</nobr> | Takes a snapshot of an NFS share                                                 |
-   * | <nobr>`attach`</nobr>   | Attaches an NFS share to a VPC. Set the vpc_id attribute to the desired VPC ID   |
-   * | <nobr>`detach`</nobr>   | Detaches an NFS share from a VPC. Set the vpc_id attribute to the desired VPC ID |
+   * | Action                                 | Details                                                                                                                      |
+   * | -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+   * | <nobr>`resize`</nobr>                  | Resizes an NFS share. Set the size_gib attribute to a desired value in GiB                                                   |
+   * | <nobr>`snapshot`</nobr>                | Takes a snapshot of an NFS share                                                                                             |
+   * | <nobr>`attach`</nobr>                  | Attaches an NFS share to a VPC. Set the vpc_id attribute to the desired VPC ID                                               |
+   * | <nobr>`detach`</nobr>                  | Detaches an NFS share from a VPC. Set the vpc_id attribute to the desired VPC ID                                             |
+   * | <nobr>`switch_performance_tier`</nobr> | Switches the performance tier of an NFS share. Set the performance_tier attribute to the desired tier (e.g., standard, high) |
    *
    * @example
    * ```ts
    * const response = await client.nfs.initiateAction(
    *   '0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d',
-   *   { region: 'atl1', type: 'resize' },
+   *   { type: 'resize' },
    * );
    * ```
    */
@@ -357,48 +365,54 @@ export interface NfCreateParams {
    * List of VPC IDs that should be able to access the share.
    */
   vpc_ids: Array<string>;
+
+  /**
+   * The performance tier of the share.
+   */
+  performance_tier?: string;
 }
 
 export interface NfRetrieveParams {
   /**
    * The DigitalOcean region slug (e.g., nyc2, atl1) where the NFS share resides.
    */
-  region: string;
+  region?: string;
 }
 
 export interface NfListParams {
   /**
    * The DigitalOcean region slug (e.g., nyc2, atl1) where the NFS share resides.
    */
-  region: string;
+  region?: string;
 }
 
 export interface NfDeleteParams {
   /**
    * The DigitalOcean region slug (e.g., nyc2, atl1) where the NFS share resides.
    */
-  region: string;
+  region?: string;
 }
 
 export type NfInitiateActionParams =
   | NfInitiateActionParams.NfsActionResize
   | NfInitiateActionParams.NfsActionSnapshot
   | NfInitiateActionParams.NfsActionAttach
-  | NfInitiateActionParams.NfsActionDetach;
+  | NfInitiateActionParams.NfsActionDetach
+  | NfInitiateActionParams.NfsActionSwitchPerformanceTier;
 
 export declare namespace NfInitiateActionParams {
   export interface NfsActionResize {
-    /**
-     * The DigitalOcean region slug (e.g. atl1, nyc2) where the NFS snapshot resides.
-     */
-    region: string;
-
     /**
      * The type of action to initiate for the NFS share (such as resize or snapshot).
      */
     type: 'resize' | 'snapshot';
 
     params?: NfsActionResize.Params;
+
+    /**
+     * The DigitalOcean region slug (e.g. atl1, nyc2) where the NFS snapshot resides.
+     */
+    region?: string;
   }
 
   export namespace NfsActionResize {
@@ -412,16 +426,16 @@ export declare namespace NfInitiateActionParams {
 
   export interface NfsActionSnapshot {
     /**
-     * The DigitalOcean region slug (e.g. atl1, nyc2) where the NFS snapshot resides.
-     */
-    region: string;
-
-    /**
      * The type of action to initiate for the NFS share (such as resize or snapshot).
      */
     type: 'resize' | 'snapshot';
 
     params?: NfsActionSnapshot.Params;
+
+    /**
+     * The DigitalOcean region slug (e.g. atl1, nyc2) where the NFS snapshot resides.
+     */
+    region?: string;
   }
 
   export namespace NfsActionSnapshot {
@@ -435,16 +449,16 @@ export declare namespace NfInitiateActionParams {
 
   export interface NfsActionAttach {
     /**
-     * The DigitalOcean region slug (e.g. atl1, nyc2) where the NFS snapshot resides.
-     */
-    region: string;
-
-    /**
      * The type of action to initiate for the NFS share (such as resize or snapshot).
      */
     type: 'resize' | 'snapshot';
 
     params?: NfsActionAttach.Params;
+
+    /**
+     * The DigitalOcean region slug (e.g. atl1, nyc2) where the NFS snapshot resides.
+     */
+    region?: string;
   }
 
   export namespace NfsActionAttach {
@@ -458,16 +472,16 @@ export declare namespace NfInitiateActionParams {
 
   export interface NfsActionDetach {
     /**
-     * The DigitalOcean region slug (e.g. atl1, nyc2) where the NFS snapshot resides.
-     */
-    region: string;
-
-    /**
      * The type of action to initiate for the NFS share (such as resize or snapshot).
      */
     type: 'resize' | 'snapshot';
 
     params?: NfsActionDetach.Params;
+
+    /**
+     * The DigitalOcean region slug (e.g. atl1, nyc2) where the NFS snapshot resides.
+     */
+    region?: string;
   }
 
   export namespace NfsActionDetach {
@@ -476,6 +490,30 @@ export declare namespace NfInitiateActionParams {
        * The ID of the VPC from which the NFS share will be detached
        */
       vpc_id: string;
+    }
+  }
+
+  export interface NfsActionSwitchPerformanceTier {
+    /**
+     * The type of action to initiate for the NFS share (such as resize or snapshot).
+     */
+    type: 'resize' | 'snapshot';
+
+    params?: NfsActionSwitchPerformanceTier.Params;
+
+    /**
+     * The DigitalOcean region slug (e.g. atl1, nyc2) where the NFS snapshot resides.
+     */
+    region?: string;
+  }
+
+  export namespace NfsActionSwitchPerformanceTier {
+    export interface Params {
+      /**
+       * The performance tier to which the NFS share will be switched (e.g., standard,
+       * high).
+       */
+      performance_tier: string;
     }
   }
 }

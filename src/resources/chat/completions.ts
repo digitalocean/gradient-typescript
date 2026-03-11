@@ -38,9 +38,12 @@ export class Completions extends APIResource {
     body: CompletionCreateParams,
     options?: RequestOptions,
   ): APIPromise<CompletionCreateResponse> | APIPromise<Stream<Shared.ChatCompletionChunk>> {
-    return this._client.post('/chat/completions', { body, ...options, stream: body.stream ?? false }) as
-      | APIPromise<CompletionCreateResponse>
-      | APIPromise<Stream<Shared.ChatCompletionChunk>>;
+    return this._client.post('/chat/completions', {
+      body,
+      defaultBaseURL: '{inferenceEndpoint}/v1',
+      ...options,
+      stream: body.stream ?? false,
+    }) as APIPromise<CompletionCreateResponse> | APIPromise<Stream<Shared.ChatCompletionChunk>>;
   }
 }
 
@@ -277,6 +280,12 @@ export interface CompletionCreateParamsBase {
    * talk about new topics.
    */
   presence_penalty?: number | null;
+
+  /**
+   * Constrains effort on reasoning for reasoning models. Reducing reasoning effort
+   * can result in faster responses and fewer tokens used on reasoning in a response.
+   */
+  reasoning_effort?: 'none' | 'minimal' | 'low' | 'medium' | 'high' | 'xhigh' | null;
 
   /**
    * Up to 4 sequences where the API will stop generating further tokens. The
@@ -549,7 +558,14 @@ export namespace CompletionCreateParams {
     content:
       | string
       | ChatCompletionRequestUserMessage.ChatCompletionRequestContentPartText
-      | Array<string | ChatCompletionRequestUserMessage.ChatCompletionRequestContentPartText>;
+      | ChatCompletionRequestUserMessage.ChatCompletionRequestContentPartImageURL
+      | ChatCompletionRequestUserMessage.ChatCompletionRequestContentPartVideoURL
+      | Array<
+          | string
+          | ChatCompletionRequestUserMessage.ChatCompletionRequestContentPartText
+          | ChatCompletionRequestUserMessage.ChatCompletionRequestContentPartImageURL
+          | ChatCompletionRequestUserMessage.ChatCompletionRequestContentPartVideoURL
+        >;
 
     /**
      * The role of the messages author, in this case `user`.
@@ -596,6 +612,65 @@ export namespace CompletionCreateParams {
     }
 
     /**
+     * Content part with type and image URL.
+     */
+    export interface ChatCompletionRequestContentPartImageURL {
+      /**
+       * Image URL settings.
+       */
+      image_url: ChatCompletionRequestContentPartImageURL.ImageURL;
+
+      /**
+       * The type of content part
+       */
+      type: 'image_url';
+    }
+
+    export namespace ChatCompletionRequestContentPartImageURL {
+      /**
+       * Image URL settings.
+       */
+      export interface ImageURL {
+        /**
+         * A URL or data URL containing image content.
+         */
+        url: string;
+
+        /**
+         * Optional detail level for image understanding.
+         */
+        detail?: 'auto' | 'low' | 'high';
+      }
+    }
+
+    /**
+     * Content part with type and video URL.
+     */
+    export interface ChatCompletionRequestContentPartVideoURL {
+      /**
+       * The type of content part
+       */
+      type: 'video_url';
+
+      /**
+       * Video URL settings.
+       */
+      video_url: ChatCompletionRequestContentPartVideoURL.VideoURL;
+    }
+
+    export namespace ChatCompletionRequestContentPartVideoURL {
+      /**
+       * Video URL settings.
+       */
+      export interface VideoURL {
+        /**
+         * A URL or data URL containing video content.
+         */
+        url: string;
+      }
+    }
+
+    /**
      * Content part with type and text
      */
     export interface ChatCompletionRequestContentPartText {
@@ -629,6 +704,65 @@ export namespace CompletionCreateParams {
          * The cache TTL.
          */
         ttl?: '5m' | '1h';
+      }
+    }
+
+    /**
+     * Content part with type and image URL.
+     */
+    export interface ChatCompletionRequestContentPartImageURL {
+      /**
+       * Image URL settings.
+       */
+      image_url: ChatCompletionRequestContentPartImageURL.ImageURL;
+
+      /**
+       * The type of content part
+       */
+      type: 'image_url';
+    }
+
+    export namespace ChatCompletionRequestContentPartImageURL {
+      /**
+       * Image URL settings.
+       */
+      export interface ImageURL {
+        /**
+         * A URL or data URL containing image content.
+         */
+        url: string;
+
+        /**
+         * Optional detail level for image understanding.
+         */
+        detail?: 'auto' | 'low' | 'high';
+      }
+    }
+
+    /**
+     * Content part with type and video URL.
+     */
+    export interface ChatCompletionRequestContentPartVideoURL {
+      /**
+       * The type of content part
+       */
+      type: 'video_url';
+
+      /**
+       * Video URL settings.
+       */
+      video_url: ChatCompletionRequestContentPartVideoURL.VideoURL;
+    }
+
+    export namespace ChatCompletionRequestContentPartVideoURL {
+      /**
+       * Video URL settings.
+       */
+      export interface VideoURL {
+        /**
+         * A URL or data URL containing video content.
+         */
+        url: string;
       }
     }
   }

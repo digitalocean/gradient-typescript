@@ -32,12 +32,13 @@ describe('resource nfs', () => {
       region: 'atl1',
       size_gib: 1024,
       vpc_ids: ['796c6fe3-2a1d-4da2-9f3e-38239827dc91'],
+      performance_tier: 'standard',
     });
   });
 
   // Mock server tests are disabled
-  test.skip('retrieve: only required params', async () => {
-    const responsePromise = client.nfs.retrieve('0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d', { region: 'region' });
+  test.skip('retrieve', async () => {
+    const responsePromise = client.nfs.retrieve('0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -48,13 +49,20 @@ describe('resource nfs', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('retrieve: required and optional params', async () => {
-    const response = await client.nfs.retrieve('0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d', { region: 'region' });
+  test.skip('retrieve: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.nfs.retrieve(
+        '0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d',
+        { region: 'region' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Gradient.NotFoundError);
   });
 
   // Mock server tests are disabled
-  test.skip('list: only required params', async () => {
-    const responsePromise = client.nfs.list({ region: 'region' });
+  test.skip('list', async () => {
+    const responsePromise = client.nfs.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -65,13 +73,16 @@ describe('resource nfs', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('list: required and optional params', async () => {
-    const response = await client.nfs.list({ region: 'region' });
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(client.nfs.list({ region: 'region' }, { path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Gradient.NotFoundError,
+    );
   });
 
   // Mock server tests are disabled
-  test.skip('delete: only required params', async () => {
-    const responsePromise = client.nfs.delete('0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d', { region: 'region' });
+  test.skip('delete', async () => {
+    const responsePromise = client.nfs.delete('0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -82,14 +93,20 @@ describe('resource nfs', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('delete: required and optional params', async () => {
-    const response = await client.nfs.delete('0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d', { region: 'region' });
+  test.skip('delete: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.nfs.delete(
+        '0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d',
+        { region: 'region' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Gradient.NotFoundError);
   });
 
   // Mock server tests are disabled
   test.skip('initiateAction: only required params', async () => {
     const responsePromise = client.nfs.initiateAction('0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d', {
-      region: 'atl1',
       type: 'resize',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -104,9 +121,9 @@ describe('resource nfs', () => {
   // Mock server tests are disabled
   test.skip('initiateAction: required and optional params', async () => {
     const response = await client.nfs.initiateAction('0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d', {
-      region: 'atl1',
       type: 'resize',
       params: { size_gib: 2048 },
+      region: 'atl1',
     });
   });
 });

@@ -21,13 +21,12 @@ export class Snapshots extends APIResource {
    * ```ts
    * const snapshot = await client.nfs.snapshots.retrieve(
    *   '0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d',
-   *   { region: 'region' },
    * );
    * ```
    */
   retrieve(
     nfsSnapshotID: string,
-    query: SnapshotRetrieveParams,
+    query: SnapshotRetrieveParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<SnapshotRetrieveResponse> {
     return this._client.get(path`/v2/nfs/snapshots/${nfsSnapshotID}`, {
@@ -49,12 +48,13 @@ export class Snapshots extends APIResource {
    *
    * @example
    * ```ts
-   * const snapshots = await client.nfs.snapshots.list({
-   *   region: 'region',
-   * });
+   * const snapshots = await client.nfs.snapshots.list();
    * ```
    */
-  list(query: SnapshotListParams, options?: RequestOptions): APIPromise<SnapshotListResponse> {
+  list(
+    query: SnapshotListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SnapshotListResponse> {
     return this._client.get('/v2/nfs/snapshots', {
       query,
       defaultBaseURL: 'https://api.digitalocean.com',
@@ -72,12 +72,15 @@ export class Snapshots extends APIResource {
    * ```ts
    * await client.nfs.snapshots.delete(
    *   '0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d',
-   *   { region: 'region' },
    * );
    * ```
    */
-  delete(nfsSnapshotID: string, params: SnapshotDeleteParams, options?: RequestOptions): APIPromise<void> {
-    const { region } = params;
+  delete(
+    nfsSnapshotID: string,
+    params: SnapshotDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<void> {
+    const { region } = params ?? {};
     return this._client.delete(path`/v2/nfs/snapshots/${nfsSnapshotID}`, {
       query: { region },
       defaultBaseURL: 'https://api.digitalocean.com',
@@ -186,14 +189,14 @@ export interface SnapshotRetrieveParams {
   /**
    * The DigitalOcean region slug (e.g., nyc2, atl1) where the NFS share resides.
    */
-  region: string;
+  region?: string;
 }
 
 export interface SnapshotListParams {
   /**
    * The DigitalOcean region slug (e.g., nyc2, atl1) where the NFS share resides.
    */
-  region: string;
+  region?: string;
 
   /**
    * The unique ID of an NFS share. If provided, only snapshots of this specific
@@ -206,7 +209,7 @@ export interface SnapshotDeleteParams {
   /**
    * The DigitalOcean region slug (e.g., nyc2, atl1) where the NFS share resides.
    */
-  region: string;
+  region?: string;
 }
 
 export declare namespace Snapshots {
