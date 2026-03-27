@@ -42,7 +42,7 @@ export class Images extends APIResource {
   ): APIPromise<ImageGenerateResponse> | APIPromise<Stream<Shared.ImageGenStreamEvent>> {
     return this._client.post('/images/generations', {
       body,
-      defaultBaseURL: '{inferenceEndpoint}/v1',
+      defaultBaseURL: 'https://inference.do-ai.run/v1',
       ...options,
       stream: body.stream ?? false,
     }) as APIPromise<ImageGenerateResponse> | APIPromise<Stream<Shared.ImageGenStreamEvent>>;

@@ -43,7 +43,7 @@ export class Responses extends APIResource {
   ): APIPromise<Shared.CreateResponseResponse> | APIPromise<Stream<Shared.CreateResponseStreamResponse>> {
     return this._client.post('/responses', {
       body,
-      defaultBaseURL: '{inferenceEndpoint}/v1',
+      defaultBaseURL: 'https://inference.do-ai.run/v1',
       ...options,
       stream: body.stream ?? false,
     }) as APIPromise<Shared.CreateResponseResponse> | APIPromise<Stream<Shared.CreateResponseStreamResponse>>;
