@@ -250,7 +250,7 @@ export class Gradient {
    * @param {string | null | undefined} [opts.modelAccessKey=process.env['GRADIENT_MODEL_ACCESS_KEY'] ?? null]
    * @param {string | null | undefined} [opts.agentAccessKey=process.env['GRADIENT_AGENT_ACCESS_KEY'] ?? null]
    * @param {string | null | undefined} [opts.agentEndpoint=process.env['GRADIENT_AGENT_ENDPOINT'] ?? null]
-   * @param {string | null | undefined} [opts.inferenceEndpoint=inference.do-ai.run]
+   * @param {string | null | undefined} [opts.inferenceEndpoint=https://inference.do-ai.run]
    * @param {string | null | undefined} [opts.kbassEndpoint=process.env['GRADIENT_KBASS_ENDPOINT'] ?? kbaas.do-ai.run]
    * @param {string} [opts.baseURL=process.env['GRADIENT_BASE_URL'] ?? https://api.digitalocean.com] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
@@ -266,7 +266,7 @@ export class Gradient {
     modelAccessKey = readEnv('GRADIENT_MODEL_ACCESS_KEY') ?? null,
     agentAccessKey = readEnv('GRADIENT_AGENT_ACCESS_KEY') ?? null,
     agentEndpoint = readEnv('GRADIENT_AGENT_ENDPOINT') ?? null,
-    inferenceEndpoint = 'inference.do-ai.run',
+    inferenceEndpoint = 'https://inference.do-ai.run',
     kbassEndpoint = readEnv('GRADIENT_KBASS_ENDPOINT') ?? 'kbaas.do-ai.run',
     ...opts
   }: ClientOptions = {}) {
