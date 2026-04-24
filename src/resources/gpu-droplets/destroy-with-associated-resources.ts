@@ -39,10 +39,7 @@ export class DestroyWithAssociatedResources extends APIResource {
    * ```
    */
   list(dropletID: number, options?: RequestOptions): APIPromise<DestroyWithAssociatedResourceListResponse> {
-    return this._client.get(path`/v2/droplets/${dropletID}/destroy_with_associated_resources`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+    return this._client.get(path`/v2/droplets/${dropletID}/destroy_with_associated_resources`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -58,14 +55,8 @@ export class DestroyWithAssociatedResources extends APIResource {
    *   );
    * ```
    */
-  checkStatus(
-    dropletID: number,
-    options?: RequestOptions,
-  ): APIPromise<DestroyWithAssociatedResourceCheckStatusResponse> {
-    return this._client.get(path`/v2/droplets/${dropletID}/destroy_with_associated_resources/status`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  checkStatus(dropletID: number, options?: RequestOptions): APIPromise<DestroyWithAssociatedResourceCheckStatusResponse> {
+    return this._client.get(path`/v2/droplets/${dropletID}/destroy_with_associated_resources/status`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -88,17 +79,9 @@ export class DestroyWithAssociatedResources extends APIResource {
    * );
    * ```
    */
-  deleteDangerous(
-    dropletID: number,
-    params: DestroyWithAssociatedResourceDeleteDangerousParams,
-    options?: RequestOptions,
-  ): APIPromise<void> {
-    const { 'X-Dangerous': xDangerous } = params;
-    return this._client.delete(path`/v2/droplets/${dropletID}/destroy_with_associated_resources/dangerous`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*', 'X-Dangerous': xDangerous.toString() }, options?.headers]),
-    });
+  deleteDangerous(dropletID: number, params: DestroyWithAssociatedResourceDeleteDangerousParams, options?: RequestOptions): APIPromise<void> {
+    const { 'X-Dangerous': xDangerous } = params
+    return this._client.delete(path`/v2/droplets/${dropletID}/destroy_with_associated_resources/dangerous`, { defaultBaseURL: 'https://api.digitalocean.com', ...options, headers: buildHeaders([{Accept: '*/*', 'X-Dangerous': xDangerous.toString()}, options?.headers]) });
   }
 
   /**
@@ -122,17 +105,8 @@ export class DestroyWithAssociatedResources extends APIResource {
    * );
    * ```
    */
-  deleteSelective(
-    dropletID: number,
-    body: DestroyWithAssociatedResourceDeleteSelectiveParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<void> {
-    return this._client.delete(path`/v2/droplets/${dropletID}/destroy_with_associated_resources/selective`, {
-      body,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+  deleteSelective(dropletID: number, body: DestroyWithAssociatedResourceDeleteSelectiveParams | null | undefined = {}, options?: RequestOptions): APIPromise<void> {
+    return this._client.delete(path`/v2/droplets/${dropletID}/destroy_with_associated_resources/selective`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
   }
 
   /**
@@ -152,11 +126,7 @@ export class DestroyWithAssociatedResources extends APIResource {
    * ```
    */
   retry(dropletID: number, options?: RequestOptions): APIPromise<void> {
-    return this._client.post(path`/v2/droplets/${dropletID}/destroy_with_associated_resources/retry`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+    return this._client.post(path`/v2/droplets/${dropletID}/destroy_with_associated_resources/retry`, { defaultBaseURL: 'https://api.digitalocean.com', ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
   }
 }
 
@@ -329,6 +299,6 @@ export declare namespace DestroyWithAssociatedResources {
     type DestroyWithAssociatedResourceListResponse as DestroyWithAssociatedResourceListResponse,
     type DestroyWithAssociatedResourceCheckStatusResponse as DestroyWithAssociatedResourceCheckStatusResponse,
     type DestroyWithAssociatedResourceDeleteDangerousParams as DestroyWithAssociatedResourceDeleteDangerousParams,
-    type DestroyWithAssociatedResourceDeleteSelectiveParams as DestroyWithAssociatedResourceDeleteSelectiveParams,
+    type DestroyWithAssociatedResourceDeleteSelectiveParams as DestroyWithAssociatedResourceDeleteSelectiveParams
   };
 }

@@ -2,10 +2,7 @@
 
 import Gradient from '@digitalocean/gradient';
 
-const client = new Gradient({
-  accessToken: 'My Access Token',
-  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-});
+const client = new Gradient({ accessToken: 'My Access Token', baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010' });
 
 describe('resource knowledgeBases', () => {
   // Mock server tests are disabled
@@ -23,62 +20,54 @@ describe('resource knowledgeBases', () => {
   // Mock server tests are disabled
   test.skip('create: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.knowledgeBases.create(
-        {
-          database_id: '"12345678-1234-1234-1234-123456789012"',
-          datasources: [
-            {
-              aws_data_source: {
-                bucket_name: 'example name',
-                item_path: 'example string',
-                key_id: '123e4567-e89b-12d3-a456-426614174000',
-                region: 'example string',
-                secret_key: 'example string',
-              },
-              bucket_name: 'example name',
-              bucket_region: 'example string',
-              chunking_algorithm: 'CHUNKING_ALGORITHM_SECTION_BASED',
-              chunking_options: {
-                child_chunk_size: 350,
-                max_chunk_size: 750,
-                parent_chunk_size: 1000,
-                semantic_threshold: 0.5,
-              },
-              dropbox_data_source: { folder: 'example string', refresh_token: 'example string' },
-              file_upload_data_source: {
-                original_file_name: 'example name',
-                size_in_bytes: '12345',
-                stored_object_key: 'example string',
-              },
-              google_drive_data_source: {
-                folder_id: '123e4567-e89b-12d3-a456-426614174000',
-                refresh_token: 'example string',
-              },
-              item_path: 'example string',
-              spaces_data_source: {
-                bucket_name: 'example name',
-                item_path: 'example string',
-                region: 'example string',
-              },
-              web_crawler_data_source: {
-                base_url: 'example string',
-                crawling_option: 'UNKNOWN',
-                embed_media: true,
-                exclude_tags: ['example string'],
-              },
-            },
-          ],
-          embedding_model_uuid: '"12345678-1234-1234-1234-123456789012"',
-          name: '"My Knowledge Base"',
-          project_id: '"12345678-1234-1234-1234-123456789012"',
-          region: '"tor1"',
-          tags: ['example string'],
-          vpc_uuid: '"12345678-1234-1234-1234-123456789012"',
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Gradient.NotFoundError);
+    await expect(client.knowledgeBases.create({
+    database_id: '"12345678-1234-1234-1234-123456789012"',
+    datasources: [{
+    aws_data_source: {
+    bucket_name: 'example name',
+    item_path: 'example string',
+    key_id: '123e4567-e89b-12d3-a456-426614174000',
+    region: 'example string',
+    secret_key: 'example string',
+  },
+    bucket_name: 'example name',
+    bucket_region: 'example string',
+    chunking_algorithm: 'CHUNKING_ALGORITHM_SECTION_BASED',
+    chunking_options: {
+    child_chunk_size: 350,
+    max_chunk_size: 750,
+    parent_chunk_size: 1000,
+    semantic_threshold: 0.5,
+  },
+    dropbox_data_source: { folder: 'example string', refresh_token: 'example string' },
+    file_upload_data_source: {
+    original_file_name: 'example name',
+    size_in_bytes: '12345',
+    stored_object_key: 'example string',
+  },
+    google_drive_data_source: { folder_id: '123e4567-e89b-12d3-a456-426614174000', refresh_token: 'example string' },
+    item_path: 'example string',
+    spaces_data_source: {
+    bucket_name: 'example name',
+    item_path: 'example string',
+    region: 'example string',
+  },
+    web_crawler_data_source: {
+    base_url: 'example string',
+    crawling_option: 'UNKNOWN',
+    embed_media: true,
+    exclude_tags: ['example string'],
+  },
+  }],
+    embedding_model_uuid: '"12345678-1234-1234-1234-123456789012"',
+    name: '"My Knowledge Base"',
+    project_id: '"12345678-1234-1234-1234-123456789012"',
+    region: '"tor1"',
+    tags: ['example string'],
+    vpc_uuid: '"12345678-1234-1234-1234-123456789012"',
+  }, { path: '/_stainless_unknown_path' }))
+      .rejects
+      .toThrow(Gradient.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -108,20 +97,16 @@ describe('resource knowledgeBases', () => {
   // Mock server tests are disabled
   test.skip('update: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.knowledgeBases.update(
-        '"123e4567-e89b-12d3-a456-426614174000"',
-        {
-          database_id: '"12345678-1234-1234-1234-123456789012"',
-          embedding_model_uuid: '"12345678-1234-1234-1234-123456789012"',
-          name: '"My Knowledge Base"',
-          project_id: '"12345678-1234-1234-1234-123456789012"',
-          tags: ['example string'],
-          uuid: '"12345678-1234-1234-1234-123456789012"',
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Gradient.NotFoundError);
+    await expect(client.knowledgeBases.update('"123e4567-e89b-12d3-a456-426614174000"', {
+    database_id: '"12345678-1234-1234-1234-123456789012"',
+    embedding_model_uuid: '"12345678-1234-1234-1234-123456789012"',
+    name: '"My Knowledge Base"',
+    project_id: '"12345678-1234-1234-1234-123456789012"',
+    tags: ['example string'],
+    uuid: '"12345678-1234-1234-1234-123456789012"',
+  }, { path: '/_stainless_unknown_path' }))
+      .rejects
+      .toThrow(Gradient.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -139,9 +124,9 @@ describe('resource knowledgeBases', () => {
   // Mock server tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.knowledgeBases.list({ page: 0, per_page: 0 }, { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Gradient.NotFoundError);
+    await expect(client.knowledgeBases.list({ page: 0, per_page: 0 }, { path: '/_stainless_unknown_path' }))
+      .rejects
+      .toThrow(Gradient.NotFoundError);
   });
 
   // Mock server tests are disabled

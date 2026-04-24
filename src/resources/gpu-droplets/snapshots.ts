@@ -33,10 +33,7 @@ export class Snapshots extends APIResource {
    * ```
    */
   retrieve(snapshotID: number | string, options?: RequestOptions): APIPromise<SnapshotRetrieveResponse> {
-    return this._client.get(path`/v2/snapshots/${snapshotID}`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+    return this._client.get(path`/v2/snapshots/${snapshotID}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -66,15 +63,8 @@ export class Snapshots extends APIResource {
    * const snapshots = await client.gpuDroplets.snapshots.list();
    * ```
    */
-  list(
-    query: SnapshotListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<SnapshotListResponse> {
-    return this._client.get('/v2/snapshots', {
-      query,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  list(query: SnapshotListParams | null | undefined = {}, options?: RequestOptions): APIPromise<SnapshotListResponse> {
+    return this._client.get('/v2/snapshots', { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -91,11 +81,7 @@ export class Snapshots extends APIResource {
    * ```
    */
   delete(snapshotID: number | string, options?: RequestOptions): APIPromise<void> {
-    return this._client.delete(path`/v2/snapshots/${snapshotID}`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+    return this._client.delete(path`/v2/snapshots/${snapshotID}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
   }
 }
 
@@ -135,6 +121,6 @@ export declare namespace Snapshots {
   export {
     type SnapshotRetrieveResponse as SnapshotRetrieveResponse,
     type SnapshotListResponse as SnapshotListResponse,
-    type SnapshotListParams as SnapshotListParams,
+    type SnapshotListParams as SnapshotListParams
   };
 }

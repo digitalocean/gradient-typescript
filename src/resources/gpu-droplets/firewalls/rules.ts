@@ -48,17 +48,8 @@ export class Rules extends APIResource {
    * );
    * ```
    */
-  add(
-    firewallID: string,
-    body: RuleAddParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<void> {
-    return this._client.post(path`/v2/firewalls/${firewallID}/rules`, {
-      body,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+  add(firewallID: string, body: RuleAddParams | null | undefined = {}, options?: RequestOptions): APIPromise<void> {
+    return this._client.post(path`/v2/firewalls/${firewallID}/rules`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
   }
 
   /**
@@ -94,17 +85,8 @@ export class Rules extends APIResource {
    * );
    * ```
    */
-  remove(
-    firewallID: string,
-    body: RuleRemoveParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<void> {
-    return this._client.delete(path`/v2/firewalls/${firewallID}/rules`, {
-      body,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+  remove(firewallID: string, body: RuleRemoveParams | null | undefined = {}, options?: RequestOptions): APIPromise<void> {
+    return this._client.delete(path`/v2/firewalls/${firewallID}/rules`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
   }
 }
 
@@ -201,5 +183,8 @@ export namespace RuleRemoveParams {
 }
 
 export declare namespace Rules {
-  export { type RuleAddParams as RuleAddParams, type RuleRemoveParams as RuleRemoveParams };
+  export {
+    type RuleAddParams as RuleAddParams,
+    type RuleRemoveParams as RuleRemoveParams
+  };
 }

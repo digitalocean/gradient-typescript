@@ -2,33 +2,9 @@
 
 import { APIResource } from '../../../core/resource';
 import * as AnthropicAPI from './anthropic';
-import {
-  Anthropic,
-  AnthropicCreateParams,
-  AnthropicCreateResponse,
-  AnthropicDeleteResponse,
-  AnthropicListAgentsParams,
-  AnthropicListAgentsResponse,
-  AnthropicListParams,
-  AnthropicListResponse,
-  AnthropicRetrieveResponse,
-  AnthropicUpdateParams,
-  AnthropicUpdateResponse,
-} from './anthropic';
+import { Anthropic, AnthropicCreateParams, AnthropicCreateResponse, AnthropicDeleteResponse, AnthropicListAgentsParams, AnthropicListAgentsResponse, AnthropicListParams, AnthropicListResponse, AnthropicRetrieveResponse, AnthropicUpdateParams, AnthropicUpdateResponse } from './anthropic';
 import * as OpenAIAPI from './openai';
-import {
-  OpenAI,
-  OpenAICreateParams,
-  OpenAICreateResponse,
-  OpenAIDeleteResponse,
-  OpenAIListParams,
-  OpenAIListResponse,
-  OpenAIRetrieveAgentsParams,
-  OpenAIRetrieveAgentsResponse,
-  OpenAIRetrieveResponse,
-  OpenAIUpdateParams,
-  OpenAIUpdateResponse,
-} from './openai';
+import { OpenAI, OpenAICreateParams, OpenAICreateResponse, OpenAIDeleteResponse, OpenAIListParams, OpenAIListResponse, OpenAIRetrieveAgentsParams, OpenAIRetrieveAgentsResponse, OpenAIRetrieveResponse, OpenAIUpdateParams, OpenAIUpdateResponse } from './openai';
 
 export class Providers extends APIResource {
   anthropic: AnthropicAPI.Anthropic = new AnthropicAPI.Anthropic(this._client);
@@ -50,7 +26,7 @@ export declare namespace Providers {
     type AnthropicCreateParams as AnthropicCreateParams,
     type AnthropicUpdateParams as AnthropicUpdateParams,
     type AnthropicListParams as AnthropicListParams,
-    type AnthropicListAgentsParams as AnthropicListAgentsParams,
+    type AnthropicListAgentsParams as AnthropicListAgentsParams
   };
 
   export {
@@ -64,6 +40,6 @@ export declare namespace Providers {
     type OpenAICreateParams as OpenAICreateParams,
     type OpenAIUpdateParams as OpenAIUpdateParams,
     type OpenAIListParams as OpenAIListParams,
-    type OpenAIRetrieveAgentsParams as OpenAIRetrieveAgentsParams,
+    type OpenAIRetrieveAgentsParams as OpenAIRetrieveAgentsParams
   };
 }

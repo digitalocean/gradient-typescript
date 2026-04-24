@@ -19,15 +19,8 @@ export class EvaluationDatasets extends APIResource {
    *   await client.agents.evaluationDatasets.create();
    * ```
    */
-  create(
-    body: EvaluationDatasetCreateParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<EvaluationDatasetCreateResponse> {
-    return this._client.post('/v2/gen-ai/evaluation_datasets', {
-      body,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  create(body: EvaluationDatasetCreateParams | null | undefined = {}, options?: RequestOptions): APIPromise<EvaluationDatasetCreateResponse> {
+    return this._client.post('/v2/gen-ai/evaluation_datasets', { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -40,15 +33,8 @@ export class EvaluationDatasets extends APIResource {
    *   await client.agents.evaluationDatasets.createFileUploadPresignedURLs();
    * ```
    */
-  createFileUploadPresignedURLs(
-    body: EvaluationDatasetCreateFileUploadPresignedURLsParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<EvaluationDatasetCreateFileUploadPresignedURLsResponse> {
-    return this._client.post('/v2/gen-ai/evaluation_datasets/file_upload_presigned_urls', {
-      body,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  createFileUploadPresignedURLs(body: EvaluationDatasetCreateFileUploadPresignedURLsParams | null | undefined = {}, options?: RequestOptions): APIPromise<EvaluationDatasetCreateFileUploadPresignedURLsResponse> {
+    return this._client.post('/v2/gen-ai/evaluation_datasets/file_upload_presigned_urls', { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 }
 
@@ -105,10 +91,7 @@ export namespace EvaluationDatasetCreateFileUploadPresignedURLsResponse {
 }
 
 export interface EvaluationDatasetCreateParams {
-  dataset_type?:
-    | 'EVALUATION_DATASET_TYPE_UNKNOWN'
-    | 'EVALUATION_DATASET_TYPE_ADK'
-    | 'EVALUATION_DATASET_TYPE_NON_ADK';
+  dataset_type?: 'EVALUATION_DATASET_TYPE_UNKNOWN' | 'EVALUATION_DATASET_TYPE_ADK' | 'EVALUATION_DATASET_TYPE_NON_ADK';
 
   /**
    * File to upload as data source for knowledge base.
@@ -150,6 +133,6 @@ export declare namespace EvaluationDatasets {
     type EvaluationDatasetCreateResponse as EvaluationDatasetCreateResponse,
     type EvaluationDatasetCreateFileUploadPresignedURLsResponse as EvaluationDatasetCreateFileUploadPresignedURLsResponse,
     type EvaluationDatasetCreateParams as EvaluationDatasetCreateParams,
-    type EvaluationDatasetCreateFileUploadPresignedURLsParams as EvaluationDatasetCreateFileUploadPresignedURLsParams,
+    type EvaluationDatasetCreateFileUploadPresignedURLsParams as EvaluationDatasetCreateFileUploadPresignedURLsParams
   };
 }

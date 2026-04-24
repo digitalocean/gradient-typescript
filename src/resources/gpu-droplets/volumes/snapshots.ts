@@ -34,16 +34,8 @@ export class Snapshots extends APIResource {
    *   );
    * ```
    */
-  create(
-    volumeID: string,
-    body: SnapshotCreateParams,
-    options?: RequestOptions,
-  ): APIPromise<SnapshotCreateResponse> {
-    return this._client.post(path`/v2/volumes/${volumeID}/snapshots`, {
-      body,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  create(volumeID: string, body: SnapshotCreateParams, options?: RequestOptions): APIPromise<SnapshotCreateResponse> {
+    return this._client.post(path`/v2/volumes/${volumeID}/snapshots`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -59,10 +51,7 @@ export class Snapshots extends APIResource {
    * ```
    */
   retrieve(snapshotID: string, options?: RequestOptions): APIPromise<SnapshotRetrieveResponse> {
-    return this._client.get(path`/v2/volumes/snapshots/${snapshotID}`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+    return this._client.get(path`/v2/volumes/snapshots/${snapshotID}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -77,16 +66,8 @@ export class Snapshots extends APIResource {
    *   );
    * ```
    */
-  list(
-    volumeID: string,
-    query: SnapshotListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<SnapshotListResponse> {
-    return this._client.get(path`/v2/volumes/${volumeID}/snapshots`, {
-      query,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  list(volumeID: string, query: SnapshotListParams | null | undefined = {}, options?: RequestOptions): APIPromise<SnapshotListResponse> {
+    return this._client.get(path`/v2/volumes/${volumeID}/snapshots`, { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -104,11 +85,7 @@ export class Snapshots extends APIResource {
    * ```
    */
   delete(snapshotID: string, options?: RequestOptions): APIPromise<void> {
-    return this._client.delete(path`/v2/volumes/snapshots/${snapshotID}`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+    return this._client.delete(path`/v2/volumes/snapshots/${snapshotID}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
   }
 }
 
@@ -164,6 +141,6 @@ export declare namespace Snapshots {
     type SnapshotRetrieveResponse as SnapshotRetrieveResponse,
     type SnapshotListResponse as SnapshotListResponse,
     type SnapshotCreateParams as SnapshotCreateParams,
-    type SnapshotListParams as SnapshotListParams,
+    type SnapshotListParams as SnapshotListParams
   };
 }

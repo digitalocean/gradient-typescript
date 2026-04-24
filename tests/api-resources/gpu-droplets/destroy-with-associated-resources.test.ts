@@ -2,10 +2,7 @@
 
 import Gradient from '@digitalocean/gradient';
 
-const client = new Gradient({
-  accessToken: 'My Access Token',
-  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-});
+const client = new Gradient({ accessToken: 'My Access Token', baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010' });
 
 describe('resource destroyWithAssociatedResources', () => {
   // Mock server tests are disabled
@@ -34,9 +31,7 @@ describe('resource destroyWithAssociatedResources', () => {
 
   // Mock server tests are disabled
   test.skip('deleteDangerous: only required params', async () => {
-    const responsePromise = client.gpuDroplets.destroyWithAssociatedResources.deleteDangerous(3164444, {
-      'X-Dangerous': true,
-    });
+    const responsePromise = client.gpuDroplets.destroyWithAssociatedResources.deleteDangerous(3164444, { 'X-Dangerous': true });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -48,9 +43,7 @@ describe('resource destroyWithAssociatedResources', () => {
 
   // Mock server tests are disabled
   test.skip('deleteDangerous: required and optional params', async () => {
-    const response = await client.gpuDroplets.destroyWithAssociatedResources.deleteDangerous(3164444, {
-      'X-Dangerous': true,
-    });
+    const response = await client.gpuDroplets.destroyWithAssociatedResources.deleteDangerous(3164444, { 'X-Dangerous': true });
   });
 
   // Mock server tests are disabled
@@ -68,19 +61,15 @@ describe('resource destroyWithAssociatedResources', () => {
   // Mock server tests are disabled
   test.skip('deleteSelective: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.gpuDroplets.destroyWithAssociatedResources.deleteSelective(
-        3164444,
-        {
-          floating_ips: ['6186916'],
-          reserved_ips: ['6186916'],
-          snapshots: ['61486916'],
-          volume_snapshots: ['edb0478d-7436-11ea-86e6-0a58ac144b91'],
-          volumes: ['ba49449a-7435-11ea-b89e-0a58ac14480f'],
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Gradient.NotFoundError);
+    await expect(client.gpuDroplets.destroyWithAssociatedResources.deleteSelective(3164444, {
+    floating_ips: ['6186916'],
+    reserved_ips: ['6186916'],
+    snapshots: ['61486916'],
+    volume_snapshots: ['edb0478d-7436-11ea-86e6-0a58ac144b91'],
+    volumes: ['ba49449a-7435-11ea-b89e-0a58ac14480f'],
+  }, { path: '/_stainless_unknown_path' }))
+      .rejects
+      .toThrow(Gradient.NotFoundError);
   });
 
   // Mock server tests are disabled

@@ -32,12 +32,7 @@ export class Tags extends APIResource {
    * ```
    */
   add(firewallID: string, body: TagAddParams, options?: RequestOptions): APIPromise<void> {
-    return this._client.post(path`/v2/firewalls/${firewallID}/tags`, {
-      body,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+    return this._client.post(path`/v2/firewalls/${firewallID}/tags`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
   }
 
   /**
@@ -58,12 +53,7 @@ export class Tags extends APIResource {
    * ```
    */
   remove(firewallID: string, body: TagRemoveParams, options?: RequestOptions): APIPromise<void> {
-    return this._client.delete(path`/v2/firewalls/${firewallID}/tags`, {
-      body,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+    return this._client.delete(path`/v2/firewalls/${firewallID}/tags`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
   }
 }
 
@@ -88,5 +78,8 @@ export interface TagRemoveParams {
 }
 
 export declare namespace Tags {
-  export { type TagAddParams as TagAddParams, type TagRemoveParams as TagRemoveParams };
+  export {
+    type TagAddParams as TagAddParams,
+    type TagRemoveParams as TagRemoveParams
+  };
 }

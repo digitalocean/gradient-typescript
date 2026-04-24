@@ -21,15 +21,8 @@ export class Models extends APIResource {
    * const models = await client.models.list();
    * ```
    */
-  list(
-    query: ModelListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<ModelListResponse> {
-    return this._client.get('/v2/gen-ai/models', {
-      query,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  list(query: ModelListParams | null | undefined = {}, options?: RequestOptions): APIPromise<ModelListResponse> {
+    return this._client.get('/v2/gen-ai/models', { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 }
 
@@ -189,15 +182,7 @@ export interface ModelListParams {
    * - MODEL_USECASE_REASONING: The model usecase for reasoning
    * - MODEL_USECASE_SERVERLESS: The model usecase for serverless inference
    */
-  usecases?: Array<
-    | 'MODEL_USECASE_UNKNOWN'
-    | 'MODEL_USECASE_AGENT'
-    | 'MODEL_USECASE_FINETUNED'
-    | 'MODEL_USECASE_KNOWLEDGEBASE'
-    | 'MODEL_USECASE_GUARDRAIL'
-    | 'MODEL_USECASE_REASONING'
-    | 'MODEL_USECASE_SERVERLESS'
-  >;
+  usecases?: Array<'MODEL_USECASE_UNKNOWN' | 'MODEL_USECASE_AGENT' | 'MODEL_USECASE_FINETUNED' | 'MODEL_USECASE_KNOWLEDGEBASE' | 'MODEL_USECASE_GUARDRAIL' | 'MODEL_USECASE_REASONING' | 'MODEL_USECASE_SERVERLESS'>;
 }
 
 Models.Providers = Providers;
@@ -208,8 +193,10 @@ export declare namespace Models {
     type APIModel as APIModel,
     type APIModelVersion as APIModelVersion,
     type ModelListResponse as ModelListResponse,
-    type ModelListParams as ModelListParams,
+    type ModelListParams as ModelListParams
   };
 
-  export { Providers as Providers };
+  export {
+    Providers as Providers
+  };
 }

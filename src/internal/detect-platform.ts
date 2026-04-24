@@ -40,11 +40,7 @@ function getDetectedPlatform(): DetectedPlatform {
     return 'edge';
   }
   // Node.js
-  if (
-    Object.prototype.toString.call(
-      typeof (globalThis as any).process !== 'undefined' ? (globalThis as any).process : 0,
-    ) === '[object process]'
-  ) {
+  if (Object.prototype.toString.call(typeof (globalThis as any).process !== 'undefined' ? (globalThis as any).process : 0) === '[object process]') {
     return 'node';
   }
   // Fallback Node.js heuristic for environments where toString check fails (e.g., some test runners)

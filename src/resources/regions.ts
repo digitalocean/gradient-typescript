@@ -20,15 +20,8 @@ export class Regions extends APIResource {
    * const regions = await client.regions.list();
    * ```
    */
-  list(
-    query: RegionListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<RegionListResponse> {
-    return this._client.get('/v2/regions', {
-      query,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  list(query: RegionListParams | null | undefined = {}, options?: RequestOptions): APIPromise<RegionListResponse> {
+    return this._client.get('/v2/regions', { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 }
 
@@ -56,5 +49,8 @@ export interface RegionListParams {
 }
 
 export declare namespace Regions {
-  export { type RegionListResponse as RegionListResponse, type RegionListParams as RegionListParams };
+  export {
+    type RegionListResponse as RegionListResponse,
+    type RegionListParams as RegionListParams
+  };
 }

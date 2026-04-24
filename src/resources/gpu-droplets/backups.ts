@@ -33,16 +33,8 @@ export class Backups extends APIResource {
    * );
    * ```
    */
-  list(
-    dropletID: number,
-    query: BackupListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<BackupListResponse> {
-    return this._client.get(path`/v2/droplets/${dropletID}/backups`, {
-      query,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  list(dropletID: number, query: BackupListParams | null | undefined = {}, options?: RequestOptions): APIPromise<BackupListResponse> {
+    return this._client.get(path`/v2/droplets/${dropletID}/backups`, { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -55,15 +47,8 @@ export class Backups extends APIResource {
    *   await client.gpuDroplets.backups.listPolicies();
    * ```
    */
-  listPolicies(
-    query: BackupListPoliciesParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<BackupListPoliciesResponse> {
-    return this._client.get('/v2/droplets/backups/policies', {
-      query,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  listPolicies(query: BackupListPoliciesParams | null | undefined = {}, options?: RequestOptions): APIPromise<BackupListPoliciesResponse> {
+    return this._client.get('/v2/droplets/backups/policies', { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -77,10 +62,7 @@ export class Backups extends APIResource {
    * ```
    */
   listSupportedPolicies(options?: RequestOptions): APIPromise<BackupListSupportedPoliciesResponse> {
-    return this._client.get('/v2/droplets/backups/supported_policies', {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+    return this._client.get('/v2/droplets/backups/supported_policies', { defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -94,10 +76,7 @@ export class Backups extends APIResource {
    * ```
    */
   retrievePolicy(dropletID: number, options?: RequestOptions): APIPromise<BackupRetrievePolicyResponse> {
-    return this._client.get(path`/v2/droplets/${dropletID}/backups/policy`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+    return this._client.get(path`/v2/droplets/${dropletID}/backups/policy`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 }
 
@@ -288,6 +267,6 @@ export declare namespace Backups {
     type BackupListSupportedPoliciesResponse as BackupListSupportedPoliciesResponse,
     type BackupRetrievePolicyResponse as BackupRetrievePolicyResponse,
     type BackupListParams as BackupListParams,
-    type BackupListPoliciesParams as BackupListPoliciesParams,
+    type BackupListPoliciesParams as BackupListPoliciesParams
   };
 }
