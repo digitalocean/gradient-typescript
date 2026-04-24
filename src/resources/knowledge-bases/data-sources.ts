@@ -23,16 +23,8 @@ export class DataSources extends APIResource {
    *   );
    * ```
    */
-  create(
-    knowledgeBaseUuid: string,
-    body: DataSourceCreateParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<DataSourceCreateResponse> {
-    return this._client.post(path`/v2/gen-ai/knowledge_bases/${knowledgeBaseUuid}/data_sources`, {
-      body,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  create(knowledgeBaseUuid: string, body: DataSourceCreateParams | null | undefined = {}, options?: RequestOptions): APIPromise<DataSourceCreateResponse> {
+    return this._client.post(path`/v2/gen-ai/knowledge_bases/${knowledgeBaseUuid}/data_sources`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -51,16 +43,9 @@ export class DataSources extends APIResource {
    *   );
    * ```
    */
-  update(
-    dataSourceUuid: string,
-    params: DataSourceUpdateParams,
-    options?: RequestOptions,
-  ): APIPromise<DataSourceUpdateResponse> {
-    const { path_knowledge_base_uuid, ...body } = params;
-    return this._client.put(
-      path`/v2/gen-ai/knowledge_bases/${path_knowledge_base_uuid}/data_sources/${dataSourceUuid}`,
-      { body, defaultBaseURL: 'https://api.digitalocean.com', ...options },
-    );
+  update(dataSourceUuid: string, params: DataSourceUpdateParams, options?: RequestOptions): APIPromise<DataSourceUpdateResponse> {
+    const { path_knowledge_base_uuid, ...body } = params
+    return this._client.put(path`/v2/gen-ai/knowledge_bases/${path_knowledge_base_uuid}/data_sources/${dataSourceUuid}`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -75,16 +60,8 @@ export class DataSources extends APIResource {
    *   );
    * ```
    */
-  list(
-    knowledgeBaseUuid: string,
-    query: DataSourceListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<DataSourceListResponse> {
-    return this._client.get(path`/v2/gen-ai/knowledge_bases/${knowledgeBaseUuid}/data_sources`, {
-      query,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  list(knowledgeBaseUuid: string, query: DataSourceListParams | null | undefined = {}, options?: RequestOptions): APIPromise<DataSourceListResponse> {
+    return this._client.get(path`/v2/gen-ai/knowledge_bases/${knowledgeBaseUuid}/data_sources`, { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -103,16 +80,9 @@ export class DataSources extends APIResource {
    *   );
    * ```
    */
-  delete(
-    dataSourceUuid: string,
-    params: DataSourceDeleteParams,
-    options?: RequestOptions,
-  ): APIPromise<DataSourceDeleteResponse> {
-    const { knowledge_base_uuid } = params;
-    return this._client.delete(
-      path`/v2/gen-ai/knowledge_bases/${knowledge_base_uuid}/data_sources/${dataSourceUuid}`,
-      { defaultBaseURL: 'https://api.digitalocean.com', ...options },
-    );
+  delete(dataSourceUuid: string, params: DataSourceDeleteParams, options?: RequestOptions): APIPromise<DataSourceDeleteResponse> {
+    const { knowledge_base_uuid } = params
+    return this._client.delete(path`/v2/gen-ai/knowledge_bases/${knowledge_base_uuid}/data_sources/${dataSourceUuid}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -125,15 +95,8 @@ export class DataSources extends APIResource {
    *   await client.knowledgeBases.dataSources.createPresignedURLs();
    * ```
    */
-  createPresignedURLs(
-    body: DataSourceCreatePresignedURLsParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<DataSourceCreatePresignedURLsResponse> {
-    return this._client.post('/v2/gen-ai/knowledge_bases/data_sources/file_upload_presigned_urls', {
-      body,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  createPresignedURLs(body: DataSourceCreatePresignedURLsParams | null | undefined = {}, options?: RequestOptions): APIPromise<DataSourceCreatePresignedURLsResponse> {
+    return this._client.post('/v2/gen-ai/knowledge_bases/data_sources/file_upload_presigned_urls', { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 }
 
@@ -177,12 +140,7 @@ export interface APIKnowledgeBaseDataSource {
    * **Note: This feature requires enabling the knowledgebase enhancements feature
    * preview flag.**
    */
-  chunking_algorithm?:
-    | 'CHUNKING_ALGORITHM_UNKNOWN'
-    | 'CHUNKING_ALGORITHM_SECTION_BASED'
-    | 'CHUNKING_ALGORITHM_HIERARCHICAL'
-    | 'CHUNKING_ALGORITHM_SEMANTIC'
-    | 'CHUNKING_ALGORITHM_FIXED_LENGTH';
+  chunking_algorithm?: 'CHUNKING_ALGORITHM_UNKNOWN' | 'CHUNKING_ALGORITHM_SECTION_BASED' | 'CHUNKING_ALGORITHM_HIERARCHICAL' | 'CHUNKING_ALGORITHM_SEMANTIC' | 'CHUNKING_ALGORITHM_FIXED_LENGTH';
 
   /**
    * Configuration options for the chunking algorithm.
@@ -497,12 +455,7 @@ export interface DataSourceCreateParams {
    * **Note: This feature requires enabling the knowledgebase enhancements feature
    * preview flag.**
    */
-  chunking_algorithm?:
-    | 'CHUNKING_ALGORITHM_UNKNOWN'
-    | 'CHUNKING_ALGORITHM_SECTION_BASED'
-    | 'CHUNKING_ALGORITHM_HIERARCHICAL'
-    | 'CHUNKING_ALGORITHM_SEMANTIC'
-    | 'CHUNKING_ALGORITHM_FIXED_LENGTH';
+  chunking_algorithm?: 'CHUNKING_ALGORITHM_UNKNOWN' | 'CHUNKING_ALGORITHM_SECTION_BASED' | 'CHUNKING_ALGORITHM_HIERARCHICAL' | 'CHUNKING_ALGORITHM_SEMANTIC' | 'CHUNKING_ALGORITHM_FIXED_LENGTH';
 
   /**
    * Configuration options for the chunking algorithm.
@@ -570,12 +523,7 @@ export interface DataSourceUpdateParams {
    * **Note: This feature requires enabling the knowledgebase enhancements feature
    * preview flag.**
    */
-  chunking_algorithm?:
-    | 'CHUNKING_ALGORITHM_UNKNOWN'
-    | 'CHUNKING_ALGORITHM_SECTION_BASED'
-    | 'CHUNKING_ALGORITHM_HIERARCHICAL'
-    | 'CHUNKING_ALGORITHM_SEMANTIC'
-    | 'CHUNKING_ALGORITHM_FIXED_LENGTH';
+  chunking_algorithm?: 'CHUNKING_ALGORITHM_UNKNOWN' | 'CHUNKING_ALGORITHM_SECTION_BASED' | 'CHUNKING_ALGORITHM_HIERARCHICAL' | 'CHUNKING_ALGORITHM_SEMANTIC' | 'CHUNKING_ALGORITHM_FIXED_LENGTH';
 
   /**
    * Body param: Configuration options for the chunking algorithm.
@@ -685,6 +633,6 @@ export declare namespace DataSources {
     type DataSourceUpdateParams as DataSourceUpdateParams,
     type DataSourceListParams as DataSourceListParams,
     type DataSourceDeleteParams as DataSourceDeleteParams,
-    type DataSourceCreatePresignedURLsParams as DataSourceCreatePresignedURLsParams,
+    type DataSourceCreatePresignedURLsParams as DataSourceCreatePresignedURLsParams
   };
 }

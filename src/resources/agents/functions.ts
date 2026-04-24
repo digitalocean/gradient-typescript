@@ -21,16 +21,8 @@ export class Functions extends APIResource {
    * );
    * ```
    */
-  create(
-    agentUuid: string,
-    body: FunctionCreateParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<FunctionCreateResponse> {
-    return this._client.post(path`/v2/gen-ai/agents/${agentUuid}/functions`, {
-      body,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  create(agentUuid: string, body: FunctionCreateParams | null | undefined = {}, options?: RequestOptions): APIPromise<FunctionCreateResponse> {
+    return this._client.post(path`/v2/gen-ai/agents/${agentUuid}/functions`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -48,17 +40,9 @@ export class Functions extends APIResource {
    * );
    * ```
    */
-  update(
-    functionUuid: string,
-    params: FunctionUpdateParams,
-    options?: RequestOptions,
-  ): APIPromise<FunctionUpdateResponse> {
-    const { path_agent_uuid, ...body } = params;
-    return this._client.put(path`/v2/gen-ai/agents/${path_agent_uuid}/functions/${functionUuid}`, {
-      body,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  update(functionUuid: string, params: FunctionUpdateParams, options?: RequestOptions): APIPromise<FunctionUpdateResponse> {
+    const { path_agent_uuid, ...body } = params
+    return this._client.put(path`/v2/gen-ai/agents/${path_agent_uuid}/functions/${functionUuid}`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -73,16 +57,9 @@ export class Functions extends APIResource {
    * );
    * ```
    */
-  delete(
-    functionUuid: string,
-    params: FunctionDeleteParams,
-    options?: RequestOptions,
-  ): APIPromise<FunctionDeleteResponse> {
-    const { agent_uuid } = params;
-    return this._client.delete(path`/v2/gen-ai/agents/${agent_uuid}/functions/${functionUuid}`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  delete(functionUuid: string, params: FunctionDeleteParams, options?: RequestOptions): APIPromise<FunctionDeleteResponse> {
+    const { agent_uuid } = params
+    return this._client.delete(path`/v2/gen-ai/agents/${agent_uuid}/functions/${functionUuid}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 }
 
@@ -215,6 +192,6 @@ export declare namespace Functions {
     type FunctionDeleteResponse as FunctionDeleteResponse,
     type FunctionCreateParams as FunctionCreateParams,
     type FunctionUpdateParams as FunctionUpdateParams,
-    type FunctionDeleteParams as FunctionDeleteParams,
+    type FunctionDeleteParams as FunctionDeleteParams
   };
 }

@@ -32,12 +32,7 @@ export class Droplets extends APIResource {
    * ```
    */
   add(firewallID: string, body: DropletAddParams, options?: RequestOptions): APIPromise<void> {
-    return this._client.post(path`/v2/firewalls/${firewallID}/droplets`, {
-      body,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+    return this._client.post(path`/v2/firewalls/${firewallID}/droplets`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
   }
 
   /**
@@ -58,12 +53,7 @@ export class Droplets extends APIResource {
    * ```
    */
   remove(firewallID: string, body: DropletRemoveParams, options?: RequestOptions): APIPromise<void> {
-    return this._client.delete(path`/v2/firewalls/${firewallID}/droplets`, {
-      body,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+    return this._client.delete(path`/v2/firewalls/${firewallID}/droplets`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
   }
 }
 
@@ -82,5 +72,8 @@ export interface DropletRemoveParams {
 }
 
 export declare namespace Droplets {
-  export { type DropletAddParams as DropletAddParams, type DropletRemoveParams as DropletRemoveParams };
+  export {
+    type DropletAddParams as DropletAddParams,
+    type DropletRemoveParams as DropletRemoveParams
+  };
 }

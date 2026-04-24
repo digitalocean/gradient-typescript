@@ -51,11 +51,7 @@ export class Images extends APIResource {
    * ```
    */
   create(body: ImageCreateParams, options?: RequestOptions): APIPromise<ImageCreateResponse> {
-    return this._client.post('/v2/images', {
-      body,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+    return this._client.post('/v2/images', { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -68,10 +64,7 @@ export class Images extends APIResource {
    * ```
    */
   retrieve(imageID: number | string, options?: RequestOptions): APIPromise<ImageRetrieveResponse> {
-    return this._client.get(path`/v2/images/${imageID}`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+    return this._client.get(path`/v2/images/${imageID}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -86,16 +79,8 @@ export class Images extends APIResource {
    * );
    * ```
    */
-  update(
-    imageID: number,
-    body: ImageUpdateParams,
-    options?: RequestOptions,
-  ): APIPromise<ImageUpdateResponse> {
-    return this._client.put(path`/v2/images/${imageID}`, {
-      body,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  update(imageID: number, body: ImageUpdateParams, options?: RequestOptions): APIPromise<ImageUpdateResponse> {
+    return this._client.put(path`/v2/images/${imageID}`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -138,15 +123,8 @@ export class Images extends APIResource {
    * const images = await client.gpuDroplets.images.list();
    * ```
    */
-  list(
-    query: ImageListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<ImageListResponse> {
-    return this._client.get('/v2/images', {
-      query,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  list(query: ImageListParams | null | undefined = {}, options?: RequestOptions): APIPromise<ImageListResponse> {
+    return this._client.get('/v2/images', { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -159,11 +137,7 @@ export class Images extends APIResource {
    * ```
    */
   delete(imageID: number, options?: RequestOptions): APIPromise<void> {
-    return this._client.delete(path`/v2/images/${imageID}`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+    return this._client.delete(path`/v2/images/${imageID}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
   }
 }
 
@@ -203,20 +177,7 @@ export interface ImageCreateParams {
    * `Unknown`. Any other value will be accepted but ignored, and `Unknown` will be
    * used in its place.
    */
-  distribution?:
-    | 'Arch Linux'
-    | 'CentOS'
-    | 'CoreOS'
-    | 'Debian'
-    | 'Fedora'
-    | 'Fedora Atomic'
-    | 'FreeBSD'
-    | 'Gentoo'
-    | 'openSUSE'
-    | 'RancherOS'
-    | 'Rocky Linux'
-    | 'Ubuntu'
-    | 'Unknown';
+  distribution?: 'Arch Linux' | 'CentOS' | 'CoreOS' | 'Debian' | 'Fedora' | 'Fedora Atomic' | 'FreeBSD' | 'Gentoo' | 'openSUSE' | 'RancherOS' | 'Rocky Linux' | 'Ubuntu' | 'Unknown';
 
   /**
    * The display name that has been given to an image. This is what is shown in the
@@ -228,22 +189,7 @@ export interface ImageCreateParams {
    * The slug identifier for the region where the resource will initially be
    * available.
    */
-  region?:
-    | 'ams1'
-    | 'ams2'
-    | 'ams3'
-    | 'blr1'
-    | 'fra1'
-    | 'lon1'
-    | 'nyc1'
-    | 'nyc2'
-    | 'nyc3'
-    | 'sfo1'
-    | 'sfo2'
-    | 'sfo3'
-    | 'sgp1'
-    | 'tor1'
-    | 'syd1';
+  region?: 'ams1' | 'ams2' | 'ams3' | 'blr1' | 'fra1' | 'lon1' | 'nyc1' | 'nyc2' | 'nyc3' | 'sfo1' | 'sfo2' | 'sfo3' | 'sgp1' | 'tor1' | 'syd1';
 
   /**
    * A flat array of tag names as strings to be applied to the resource. Tag names
@@ -275,20 +221,7 @@ export interface ImageUpdateParams {
    * `Unknown`. Any other value will be accepted but ignored, and `Unknown` will be
    * used in its place.
    */
-  distribution?:
-    | 'Arch Linux'
-    | 'CentOS'
-    | 'CoreOS'
-    | 'Debian'
-    | 'Fedora'
-    | 'Fedora Atomic'
-    | 'FreeBSD'
-    | 'Gentoo'
-    | 'openSUSE'
-    | 'RancherOS'
-    | 'Rocky Linux'
-    | 'Ubuntu'
-    | 'Unknown';
+  distribution?: 'Arch Linux' | 'CentOS' | 'CoreOS' | 'Debian' | 'Fedora' | 'Fedora Atomic' | 'FreeBSD' | 'Gentoo' | 'openSUSE' | 'RancherOS' | 'Rocky Linux' | 'Ubuntu' | 'Unknown';
 
   /**
    * The display name that has been given to an image. This is what is shown in the
@@ -335,13 +268,13 @@ export declare namespace Images {
     type ImageListResponse as ImageListResponse,
     type ImageCreateParams as ImageCreateParams,
     type ImageUpdateParams as ImageUpdateParams,
-    type ImageListParams as ImageListParams,
+    type ImageListParams as ImageListParams
   };
 
   export {
     Actions as Actions,
     type ActionListResponse as ActionListResponse,
     type ActionCreateParams as ActionCreateParams,
-    type ActionRetrieveParams as ActionRetrieveParams,
+    type ActionRetrieveParams as ActionRetrieveParams
   };
 }

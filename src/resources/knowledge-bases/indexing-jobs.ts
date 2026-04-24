@@ -20,15 +20,8 @@ export class IndexingJobs extends APIResource {
    *   await client.knowledgeBases.indexingJobs.create();
    * ```
    */
-  create(
-    body: IndexingJobCreateParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<IndexingJobCreateResponse> {
-    return this._client.post('/v2/gen-ai/indexing_jobs', {
-      body,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  create(body: IndexingJobCreateParams | null | undefined = {}, options?: RequestOptions): APIPromise<IndexingJobCreateResponse> {
+    return this._client.post('/v2/gen-ai/indexing_jobs', { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -44,10 +37,7 @@ export class IndexingJobs extends APIResource {
    * ```
    */
   retrieve(uuid: string, options?: RequestOptions): APIPromise<IndexingJobRetrieveResponse> {
-    return this._client.get(path`/v2/gen-ai/indexing_jobs/${uuid}`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+    return this._client.get(path`/v2/gen-ai/indexing_jobs/${uuid}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -60,15 +50,8 @@ export class IndexingJobs extends APIResource {
    *   await client.knowledgeBases.indexingJobs.list();
    * ```
    */
-  list(
-    query: IndexingJobListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<IndexingJobListResponse> {
-    return this._client.get('/v2/gen-ai/indexing_jobs', {
-      query,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  list(query: IndexingJobListParams | null | undefined = {}, options?: RequestOptions): APIPromise<IndexingJobListResponse> {
+    return this._client.get('/v2/gen-ai/indexing_jobs', { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -83,14 +66,8 @@ export class IndexingJobs extends APIResource {
    *   );
    * ```
    */
-  retrieveDataSources(
-    indexingJobUuid: string,
-    options?: RequestOptions,
-  ): APIPromise<IndexingJobRetrieveDataSourcesResponse> {
-    return this._client.get(path`/v2/gen-ai/indexing_jobs/${indexingJobUuid}/data_sources`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  retrieveDataSources(indexingJobUuid: string, options?: RequestOptions): APIPromise<IndexingJobRetrieveDataSourcesResponse> {
+    return this._client.get(path`/v2/gen-ai/indexing_jobs/${indexingJobUuid}/data_sources`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -105,14 +82,8 @@ export class IndexingJobs extends APIResource {
    *   );
    * ```
    */
-  retrieveSignedURL(
-    indexingJobUuid: string,
-    options?: RequestOptions,
-  ): APIPromise<IndexingJobRetrieveSignedURLResponse> {
-    return this._client.get(path`/v2/gen-ai/indexing_jobs/${indexingJobUuid}/details_signed_url`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  retrieveSignedURL(indexingJobUuid: string, options?: RequestOptions): APIPromise<IndexingJobRetrieveSignedURLResponse> {
+    return this._client.get(path`/v2/gen-ai/indexing_jobs/${indexingJobUuid}/details_signed_url`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -127,16 +98,8 @@ export class IndexingJobs extends APIResource {
    *   );
    * ```
    */
-  updateCancel(
-    uuid: string,
-    body: IndexingJobUpdateCancelParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<IndexingJobUpdateCancelResponse> {
-    return this._client.put(path`/v2/gen-ai/indexing_jobs/${uuid}/cancel`, {
-      body,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  updateCancel(uuid: string, body: IndexingJobUpdateCancelParams | null | undefined = {}, options?: RequestOptions): APIPromise<IndexingJobUpdateCancelResponse> {
+    return this._client.put(path`/v2/gen-ai/indexing_jobs/${uuid}/cancel`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 }
 
@@ -191,14 +154,7 @@ export interface APIIndexedDataSource {
    */
   started_at?: string;
 
-  status?:
-    | 'DATA_SOURCE_STATUS_UNKNOWN'
-    | 'DATA_SOURCE_STATUS_IN_PROGRESS'
-    | 'DATA_SOURCE_STATUS_UPDATED'
-    | 'DATA_SOURCE_STATUS_PARTIALLY_UPDATED'
-    | 'DATA_SOURCE_STATUS_NOT_UPDATED'
-    | 'DATA_SOURCE_STATUS_FAILED'
-    | 'DATA_SOURCE_STATUS_CANCELLED';
+  status?: 'DATA_SOURCE_STATUS_UNKNOWN' | 'DATA_SOURCE_STATUS_IN_PROGRESS' | 'DATA_SOURCE_STATUS_UPDATED' | 'DATA_SOURCE_STATUS_PARTIALLY_UPDATED' | 'DATA_SOURCE_STATUS_NOT_UPDATED' | 'DATA_SOURCE_STATUS_FAILED' | 'DATA_SOURCE_STATUS_CANCELLED';
 
   /**
    * Total size of files in data source in bytes
@@ -249,26 +205,11 @@ export interface APIIndexingJob {
    */
   knowledge_base_uuid?: string;
 
-  phase?:
-    | 'BATCH_JOB_PHASE_UNKNOWN'
-    | 'BATCH_JOB_PHASE_PENDING'
-    | 'BATCH_JOB_PHASE_RUNNING'
-    | 'BATCH_JOB_PHASE_SUCCEEDED'
-    | 'BATCH_JOB_PHASE_FAILED'
-    | 'BATCH_JOB_PHASE_ERROR'
-    | 'BATCH_JOB_PHASE_CANCELLED';
+  phase?: 'BATCH_JOB_PHASE_UNKNOWN' | 'BATCH_JOB_PHASE_PENDING' | 'BATCH_JOB_PHASE_RUNNING' | 'BATCH_JOB_PHASE_SUCCEEDED' | 'BATCH_JOB_PHASE_FAILED' | 'BATCH_JOB_PHASE_ERROR' | 'BATCH_JOB_PHASE_CANCELLED';
 
   started_at?: string;
 
-  status?:
-    | 'INDEX_JOB_STATUS_UNKNOWN'
-    | 'INDEX_JOB_STATUS_PARTIAL'
-    | 'INDEX_JOB_STATUS_IN_PROGRESS'
-    | 'INDEX_JOB_STATUS_COMPLETED'
-    | 'INDEX_JOB_STATUS_FAILED'
-    | 'INDEX_JOB_STATUS_NO_CHANGES'
-    | 'INDEX_JOB_STATUS_PENDING'
-    | 'INDEX_JOB_STATUS_CANCELLED';
+  status?: 'INDEX_JOB_STATUS_UNKNOWN' | 'INDEX_JOB_STATUS_PARTIAL' | 'INDEX_JOB_STATUS_IN_PROGRESS' | 'INDEX_JOB_STATUS_COMPLETED' | 'INDEX_JOB_STATUS_FAILED' | 'INDEX_JOB_STATUS_NO_CHANGES' | 'INDEX_JOB_STATUS_PENDING' | 'INDEX_JOB_STATUS_CANCELLED';
 
   /**
    * Number of tokens [This field is deprecated]
@@ -401,6 +342,6 @@ export declare namespace IndexingJobs {
     type IndexingJobUpdateCancelResponse as IndexingJobUpdateCancelResponse,
     type IndexingJobCreateParams as IndexingJobCreateParams,
     type IndexingJobListParams as IndexingJobListParams,
-    type IndexingJobUpdateCancelParams as IndexingJobUpdateCancelParams,
+    type IndexingJobUpdateCancelParams as IndexingJobUpdateCancelParams
   };
 }

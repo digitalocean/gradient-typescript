@@ -22,15 +22,8 @@ export class Oauth2 extends APIResource {
    *   await client.agents.evaluationMetrics.oauth2.generateURL();
    * ```
    */
-  generateURL(
-    query: Oauth2GenerateURLParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<Oauth2GenerateURLResponse> {
-    return this._client.get('/v2/gen-ai/oauth2/url', {
-      query,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  generateURL(query: Oauth2GenerateURLParams | null | undefined = {}, options?: RequestOptions): APIPromise<Oauth2GenerateURLResponse> {
+    return this._client.get('/v2/gen-ai/oauth2/url', { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 }
 
@@ -61,12 +54,12 @@ Oauth2.Dropbox = Dropbox;
 export declare namespace Oauth2 {
   export {
     type Oauth2GenerateURLResponse as Oauth2GenerateURLResponse,
-    type Oauth2GenerateURLParams as Oauth2GenerateURLParams,
+    type Oauth2GenerateURLParams as Oauth2GenerateURLParams
   };
 
   export {
     Dropbox as Dropbox,
     type DropboxCreateTokensResponse as DropboxCreateTokensResponse,
-    type DropboxCreateTokensParams as DropboxCreateTokensParams,
+    type DropboxCreateTokensParams as DropboxCreateTokensParams
   };
 }

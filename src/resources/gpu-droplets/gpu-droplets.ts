@@ -3,58 +3,13 @@
 import { APIResource } from '../../core/resource';
 import * as Shared from '../shared';
 import * as ActionsAPI from './actions';
-import {
-  ActionBulkInitiateParams,
-  ActionBulkInitiateResponse,
-  ActionInitiateParams,
-  ActionInitiateResponse,
-  ActionListParams,
-  ActionListResponse,
-  ActionRetrieveParams,
-  ActionRetrieveResponse,
-  Actions,
-} from './actions';
+import { ActionBulkInitiateParams, ActionBulkInitiateResponse, ActionInitiateParams, ActionInitiateResponse, ActionListParams, ActionListResponse, ActionRetrieveParams, ActionRetrieveResponse, Actions } from './actions';
 import * as AutoscaleAPI from './autoscale';
-import {
-  Autoscale,
-  AutoscaleCreateParams,
-  AutoscaleCreateResponse,
-  AutoscaleDeleteDangerousParams,
-  AutoscaleListHistoryParams,
-  AutoscaleListHistoryResponse,
-  AutoscaleListMembersParams,
-  AutoscaleListMembersResponse,
-  AutoscaleListParams,
-  AutoscaleListResponse,
-  AutoscalePool,
-  AutoscalePoolDropletTemplate,
-  AutoscalePoolDynamicConfig,
-  AutoscalePoolStaticConfig,
-  AutoscaleRetrieveResponse,
-  AutoscaleUpdateParams,
-  AutoscaleUpdateResponse,
-  CurrentUtilization,
-} from './autoscale';
+import { Autoscale, AutoscaleCreateParams, AutoscaleCreateResponse, AutoscaleDeleteDangerousParams, AutoscaleListHistoryParams, AutoscaleListHistoryResponse, AutoscaleListMembersParams, AutoscaleListMembersResponse, AutoscaleListParams, AutoscaleListResponse, AutoscalePool, AutoscalePoolDropletTemplate, AutoscalePoolDynamicConfig, AutoscalePoolStaticConfig, AutoscaleRetrieveResponse, AutoscaleUpdateParams, AutoscaleUpdateResponse, CurrentUtilization } from './autoscale';
 import * as BackupsAPI from './backups';
-import {
-  BackupListParams,
-  BackupListPoliciesParams,
-  BackupListPoliciesResponse,
-  BackupListResponse,
-  BackupListSupportedPoliciesResponse,
-  BackupRetrievePolicyResponse,
-  Backups,
-} from './backups';
+import { BackupListParams, BackupListPoliciesParams, BackupListPoliciesResponse, BackupListResponse, BackupListSupportedPoliciesResponse, BackupRetrievePolicyResponse, Backups } from './backups';
 import * as DestroyWithAssociatedResourcesAPI from './destroy-with-associated-resources';
-import {
-  AssociatedResource,
-  DestroyWithAssociatedResourceCheckStatusResponse,
-  DestroyWithAssociatedResourceDeleteDangerousParams,
-  DestroyWithAssociatedResourceDeleteSelectiveParams,
-  DestroyWithAssociatedResourceListResponse,
-  DestroyWithAssociatedResources,
-  DestroyedAssociatedResource,
-} from './destroy-with-associated-resources';
+import { AssociatedResource, DestroyWithAssociatedResourceCheckStatusResponse, DestroyWithAssociatedResourceDeleteDangerousParams, DestroyWithAssociatedResourceDeleteSelectiveParams, DestroyWithAssociatedResourceListResponse, DestroyWithAssociatedResources, DestroyedAssociatedResource } from './destroy-with-associated-resources';
 import * as SizesAPI from './sizes';
 import { SizeListParams, SizeListResponse, Sizes } from './sizes';
 import * as SnapshotsAPI from './snapshots';
@@ -62,66 +17,15 @@ import { SnapshotListParams, SnapshotListResponse, SnapshotRetrieveResponse, Sna
 import * as AccountAPI from './account/account';
 import { Account } from './account/account';
 import * as FirewallsAPI from './firewalls/firewalls';
-import {
-  Firewall,
-  FirewallCreateParams,
-  FirewallCreateResponse,
-  FirewallListParams,
-  FirewallListResponse,
-  FirewallRetrieveResponse,
-  FirewallUpdateParams,
-  FirewallUpdateResponse,
-  Firewalls,
-} from './firewalls/firewalls';
+import { Firewall, FirewallCreateParams, FirewallCreateResponse, FirewallListParams, FirewallListResponse, FirewallRetrieveResponse, FirewallUpdateParams, FirewallUpdateResponse, Firewalls } from './firewalls/firewalls';
 import * as FloatingIPsAPI from './floating-ips/floating-ips';
-import {
-  FloatingIP,
-  FloatingIPCreateParams,
-  FloatingIPCreateResponse,
-  FloatingIPListParams,
-  FloatingIPListResponse,
-  FloatingIPRetrieveResponse,
-  FloatingIPs,
-} from './floating-ips/floating-ips';
+import { FloatingIP, FloatingIPCreateParams, FloatingIPCreateResponse, FloatingIPListParams, FloatingIPListResponse, FloatingIPRetrieveResponse, FloatingIPs } from './floating-ips/floating-ips';
 import * as ImagesAPI from './images/images';
-import {
-  ImageCreateParams,
-  ImageCreateResponse,
-  ImageListParams,
-  ImageListResponse,
-  ImageRetrieveResponse,
-  ImageUpdateParams,
-  ImageUpdateResponse,
-  Images,
-} from './images/images';
+import { ImageCreateParams, ImageCreateResponse, ImageListParams, ImageListResponse, ImageRetrieveResponse, ImageUpdateParams, ImageUpdateResponse, Images } from './images/images';
 import * as LoadBalancersAPI from './load-balancers/load-balancers';
-import {
-  Domains,
-  ForwardingRule,
-  GlbSettings,
-  HealthCheck,
-  LbFirewall,
-  LoadBalancer,
-  LoadBalancerCreateParams,
-  LoadBalancerCreateResponse,
-  LoadBalancerListParams,
-  LoadBalancerListResponse,
-  LoadBalancerRetrieveResponse,
-  LoadBalancerUpdateParams,
-  LoadBalancerUpdateResponse,
-  LoadBalancers,
-  StickySessions,
-} from './load-balancers/load-balancers';
+import { Domains, ForwardingRule, GlbSettings, HealthCheck, LbFirewall, LoadBalancer, LoadBalancerCreateParams, LoadBalancerCreateResponse, LoadBalancerListParams, LoadBalancerListResponse, LoadBalancerRetrieveResponse, LoadBalancerUpdateParams, LoadBalancerUpdateResponse, LoadBalancers, StickySessions } from './load-balancers/load-balancers';
 import * as VolumesAPI from './volumes/volumes';
-import {
-  VolumeCreateParams,
-  VolumeCreateResponse,
-  VolumeDeleteByNameParams,
-  VolumeListParams,
-  VolumeListResponse,
-  VolumeRetrieveResponse,
-  Volumes,
-} from './volumes/volumes';
+import { VolumeCreateParams, VolumeCreateResponse, VolumeDeleteByNameParams, VolumeListParams, VolumeListResponse, VolumeRetrieveResponse, Volumes } from './volumes/volumes';
 import { APIPromise } from '../../core/api-promise';
 import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
@@ -140,8 +44,7 @@ import { path } from '../../internal/utils/path';
 export class GPUDroplets extends APIResource {
   backups: BackupsAPI.Backups = new BackupsAPI.Backups(this._client);
   actions: ActionsAPI.Actions = new ActionsAPI.Actions(this._client);
-  destroyWithAssociatedResources: DestroyWithAssociatedResourcesAPI.DestroyWithAssociatedResources =
-    new DestroyWithAssociatedResourcesAPI.DestroyWithAssociatedResources(this._client);
+  destroyWithAssociatedResources: DestroyWithAssociatedResourcesAPI.DestroyWithAssociatedResources = new DestroyWithAssociatedResourcesAPI.DestroyWithAssociatedResources(this._client);
   autoscale: AutoscaleAPI.Autoscale = new AutoscaleAPI.Autoscale(this._client);
   firewalls: FirewallsAPI.Firewalls = new FirewallsAPI.Firewalls(this._client);
   floatingIPs: FloatingIPsAPI.FloatingIPs = new FloatingIPsAPI.FloatingIPs(this._client);
@@ -201,11 +104,7 @@ export class GPUDroplets extends APIResource {
    * ```
    */
   create(body: GPUDropletCreateParams, options?: RequestOptions): APIPromise<GPUDropletCreateResponse> {
-    return this._client.post('/v2/droplets', {
-      body,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+    return this._client.post('/v2/droplets', { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -220,10 +119,7 @@ export class GPUDroplets extends APIResource {
    * ```
    */
   retrieve(dropletID: number, options?: RequestOptions): APIPromise<GPUDropletRetrieveResponse> {
-    return this._client.get(path`/v2/droplets/${dropletID}`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+    return this._client.get(path`/v2/droplets/${dropletID}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -250,15 +146,8 @@ export class GPUDroplets extends APIResource {
    * const gpuDroplets = await client.gpuDroplets.list();
    * ```
    */
-  list(
-    query: GPUDropletListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<GPUDropletListResponse> {
-    return this._client.get('/v2/droplets', {
-      query,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  list(query: GPUDropletListParams | null | undefined = {}, options?: RequestOptions): APIPromise<GPUDropletListResponse> {
+    return this._client.get('/v2/droplets', { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -273,11 +162,7 @@ export class GPUDroplets extends APIResource {
    * ```
    */
   delete(dropletID: number, options?: RequestOptions): APIPromise<void> {
-    return this._client.delete(path`/v2/droplets/${dropletID}`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+    return this._client.delete(path`/v2/droplets/${dropletID}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
   }
 
   /**
@@ -298,13 +183,8 @@ export class GPUDroplets extends APIResource {
    * ```
    */
   deleteByTag(params: GPUDropletDeleteByTagParams, options?: RequestOptions): APIPromise<void> {
-    const { tag_name } = params;
-    return this._client.delete('/v2/droplets', {
-      query: { tag_name },
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+    const { tag_name } = params
+    return this._client.delete('/v2/droplets', { query: { tag_name }, defaultBaseURL: 'https://api.digitalocean.com', ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
   }
 
   /**
@@ -322,16 +202,8 @@ export class GPUDroplets extends APIResource {
    * );
    * ```
    */
-  listFirewalls(
-    dropletID: number,
-    query: GPUDropletListFirewallsParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<GPUDropletListFirewallsResponse> {
-    return this._client.get(path`/v2/droplets/${dropletID}/firewalls`, {
-      query,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  listFirewalls(dropletID: number, query: GPUDropletListFirewallsParams | null | undefined = {}, options?: RequestOptions): APIPromise<GPUDropletListFirewallsResponse> {
+    return this._client.get(path`/v2/droplets/${dropletID}/firewalls`, { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -349,16 +221,8 @@ export class GPUDroplets extends APIResource {
    * );
    * ```
    */
-  listKernels(
-    dropletID: number,
-    query: GPUDropletListKernelsParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<GPUDropletListKernelsResponse> {
-    return this._client.get(path`/v2/droplets/${dropletID}/kernels`, {
-      query,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  listKernels(dropletID: number, query: GPUDropletListKernelsParams | null | undefined = {}, options?: RequestOptions): APIPromise<GPUDropletListKernelsResponse> {
+    return this._client.get(path`/v2/droplets/${dropletID}/kernels`, { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -379,10 +243,7 @@ export class GPUDroplets extends APIResource {
    * ```
    */
   listNeighbors(dropletID: number, options?: RequestOptions): APIPromise<GPUDropletListNeighborsResponse> {
-    return this._client.get(path`/v2/droplets/${dropletID}/neighbors`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+    return this._client.get(path`/v2/droplets/${dropletID}/neighbors`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -400,16 +261,8 @@ export class GPUDroplets extends APIResource {
    * );
    * ```
    */
-  listSnapshots(
-    dropletID: number,
-    query: GPUDropletListSnapshotsParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<GPUDropletListSnapshotsResponse> {
-    return this._client.get(path`/v2/droplets/${dropletID}/snapshots`, {
-      query,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  listSnapshots(dropletID: number, query: GPUDropletListSnapshotsParams | null | undefined = {}, options?: RequestOptions): APIPromise<GPUDropletListSnapshotsResponse> {
+    return this._client.get(path`/v2/droplets/${dropletID}/snapshots`, { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 }
 
@@ -441,9 +294,7 @@ export interface DropletBackupPolicy {
   window_length_hours?: number;
 }
 
-export type GPUDropletCreateResponse =
-  | GPUDropletCreateResponse.SingleDropletResponse
-  | GPUDropletCreateResponse.MultipleDropletResponse;
+export type GPUDropletCreateResponse = GPUDropletCreateResponse.SingleDropletResponse | GPUDropletCreateResponse.MultipleDropletResponse
 
 export namespace GPUDropletCreateResponse {
   export interface SingleDropletResponse {
@@ -566,9 +417,7 @@ export namespace GPUDropletListSnapshotsResponse {
   }
 }
 
-export type GPUDropletCreateParams =
-  | GPUDropletCreateParams.DropletSingleCreate
-  | GPUDropletCreateParams.DropletMultiCreate;
+export type GPUDropletCreateParams = GPUDropletCreateParams.DropletSingleCreate | GPUDropletCreateParams.DropletMultiCreate
 
 export declare namespace GPUDropletCreateParams {
   export interface DropletSingleCreate {
@@ -882,7 +731,7 @@ export declare namespace GPUDroplets {
     type GPUDropletDeleteByTagParams as GPUDropletDeleteByTagParams,
     type GPUDropletListFirewallsParams as GPUDropletListFirewallsParams,
     type GPUDropletListKernelsParams as GPUDropletListKernelsParams,
-    type GPUDropletListSnapshotsParams as GPUDropletListSnapshotsParams,
+    type GPUDropletListSnapshotsParams as GPUDropletListSnapshotsParams
   };
 
   export {
@@ -892,7 +741,7 @@ export declare namespace GPUDroplets {
     type BackupListSupportedPoliciesResponse as BackupListSupportedPoliciesResponse,
     type BackupRetrievePolicyResponse as BackupRetrievePolicyResponse,
     type BackupListParams as BackupListParams,
-    type BackupListPoliciesParams as BackupListPoliciesParams,
+    type BackupListPoliciesParams as BackupListPoliciesParams
   };
 
   export {
@@ -904,7 +753,7 @@ export declare namespace GPUDroplets {
     type ActionRetrieveParams as ActionRetrieveParams,
     type ActionListParams as ActionListParams,
     type ActionBulkInitiateParams as ActionBulkInitiateParams,
-    type ActionInitiateParams as ActionInitiateParams,
+    type ActionInitiateParams as ActionInitiateParams
   };
 
   export {
@@ -914,7 +763,7 @@ export declare namespace GPUDroplets {
     type DestroyWithAssociatedResourceListResponse as DestroyWithAssociatedResourceListResponse,
     type DestroyWithAssociatedResourceCheckStatusResponse as DestroyWithAssociatedResourceCheckStatusResponse,
     type DestroyWithAssociatedResourceDeleteDangerousParams as DestroyWithAssociatedResourceDeleteDangerousParams,
-    type DestroyWithAssociatedResourceDeleteSelectiveParams as DestroyWithAssociatedResourceDeleteSelectiveParams,
+    type DestroyWithAssociatedResourceDeleteSelectiveParams as DestroyWithAssociatedResourceDeleteSelectiveParams
   };
 
   export {
@@ -935,7 +784,7 @@ export declare namespace GPUDroplets {
     type AutoscaleListParams as AutoscaleListParams,
     type AutoscaleDeleteDangerousParams as AutoscaleDeleteDangerousParams,
     type AutoscaleListHistoryParams as AutoscaleListHistoryParams,
-    type AutoscaleListMembersParams as AutoscaleListMembersParams,
+    type AutoscaleListMembersParams as AutoscaleListMembersParams
   };
 
   export {
@@ -947,7 +796,7 @@ export declare namespace GPUDroplets {
     type FirewallListResponse as FirewallListResponse,
     type FirewallCreateParams as FirewallCreateParams,
     type FirewallUpdateParams as FirewallUpdateParams,
-    type FirewallListParams as FirewallListParams,
+    type FirewallListParams as FirewallListParams
   };
 
   export {
@@ -957,7 +806,7 @@ export declare namespace GPUDroplets {
     type FloatingIPRetrieveResponse as FloatingIPRetrieveResponse,
     type FloatingIPListResponse as FloatingIPListResponse,
     type FloatingIPCreateParams as FloatingIPCreateParams,
-    type FloatingIPListParams as FloatingIPListParams,
+    type FloatingIPListParams as FloatingIPListParams
   };
 
   export {
@@ -968,7 +817,7 @@ export declare namespace GPUDroplets {
     type ImageListResponse as ImageListResponse,
     type ImageCreateParams as ImageCreateParams,
     type ImageUpdateParams as ImageUpdateParams,
-    type ImageListParams as ImageListParams,
+    type ImageListParams as ImageListParams
   };
 
   export {
@@ -986,16 +835,20 @@ export declare namespace GPUDroplets {
     type LoadBalancerListResponse as LoadBalancerListResponse,
     type LoadBalancerCreateParams as LoadBalancerCreateParams,
     type LoadBalancerUpdateParams as LoadBalancerUpdateParams,
-    type LoadBalancerListParams as LoadBalancerListParams,
+    type LoadBalancerListParams as LoadBalancerListParams
   };
 
-  export { Sizes as Sizes, type SizeListResponse as SizeListResponse, type SizeListParams as SizeListParams };
+  export {
+    Sizes as Sizes,
+    type SizeListResponse as SizeListResponse,
+    type SizeListParams as SizeListParams
+  };
 
   export {
     Snapshots as Snapshots,
     type SnapshotRetrieveResponse as SnapshotRetrieveResponse,
     type SnapshotListResponse as SnapshotListResponse,
-    type SnapshotListParams as SnapshotListParams,
+    type SnapshotListParams as SnapshotListParams
   };
 
   export {
@@ -1005,8 +858,10 @@ export declare namespace GPUDroplets {
     type VolumeListResponse as VolumeListResponse,
     type VolumeCreateParams as VolumeCreateParams,
     type VolumeListParams as VolumeListParams,
-    type VolumeDeleteByNameParams as VolumeDeleteByNameParams,
+    type VolumeDeleteByNameParams as VolumeDeleteByNameParams
   };
 
-  export { Account as Account };
+  export {
+    Account as Account
+  };
 }

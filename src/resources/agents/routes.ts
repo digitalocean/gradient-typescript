@@ -25,16 +25,9 @@ export class Routes extends APIResource {
    * );
    * ```
    */
-  update(
-    childAgentUuid: string,
-    params: RouteUpdateParams,
-    options?: RequestOptions,
-  ): APIPromise<RouteUpdateResponse> {
-    const { path_parent_agent_uuid, ...body } = params;
-    return this._client.put(
-      path`/v2/gen-ai/agents/${path_parent_agent_uuid}/child_agents/${childAgentUuid}`,
-      { body, defaultBaseURL: 'https://api.digitalocean.com', ...options },
-    );
+  update(childAgentUuid: string, params: RouteUpdateParams, options?: RequestOptions): APIPromise<RouteUpdateResponse> {
+    const { path_parent_agent_uuid, ...body } = params
+    return this._client.put(path`/v2/gen-ai/agents/${path_parent_agent_uuid}/child_agents/${childAgentUuid}`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -52,16 +45,9 @@ export class Routes extends APIResource {
    * );
    * ```
    */
-  delete(
-    childAgentUuid: string,
-    params: RouteDeleteParams,
-    options?: RequestOptions,
-  ): APIPromise<RouteDeleteResponse> {
-    const { parent_agent_uuid } = params;
-    return this._client.delete(path`/v2/gen-ai/agents/${parent_agent_uuid}/child_agents/${childAgentUuid}`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  delete(childAgentUuid: string, params: RouteDeleteParams, options?: RequestOptions): APIPromise<RouteDeleteResponse> {
+    const { parent_agent_uuid } = params
+    return this._client.delete(path`/v2/gen-ai/agents/${parent_agent_uuid}/child_agents/${childAgentUuid}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -79,16 +65,9 @@ export class Routes extends APIResource {
    * );
    * ```
    */
-  add(
-    childAgentUuid: string,
-    params: RouteAddParams,
-    options?: RequestOptions,
-  ): APIPromise<RouteAddResponse> {
-    const { path_parent_agent_uuid, ...body } = params;
-    return this._client.post(
-      path`/v2/gen-ai/agents/${path_parent_agent_uuid}/child_agents/${childAgentUuid}`,
-      { body, defaultBaseURL: 'https://api.digitalocean.com', ...options },
-    );
+  add(childAgentUuid: string, params: RouteAddParams, options?: RequestOptions): APIPromise<RouteAddResponse> {
+    const { path_parent_agent_uuid, ...body } = params
+    return this._client.post(path`/v2/gen-ai/agents/${path_parent_agent_uuid}/child_agents/${childAgentUuid}`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -103,10 +82,7 @@ export class Routes extends APIResource {
    * ```
    */
   view(uuid: string, options?: RequestOptions): APIPromise<RouteViewResponse> {
-    return this._client.get(path`/v2/gen-ai/agents/${uuid}/child_agents`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+    return this._client.get(path`/v2/gen-ai/agents/${uuid}/child_agents`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 }
 
@@ -246,6 +222,6 @@ export declare namespace Routes {
     type RouteViewResponse as RouteViewResponse,
     type RouteUpdateParams as RouteUpdateParams,
     type RouteDeleteParams as RouteDeleteParams,
-    type RouteAddParams as RouteAddParams,
+    type RouteAddParams as RouteAddParams
   };
 }

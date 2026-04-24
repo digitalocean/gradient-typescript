@@ -2,10 +2,7 @@
 
 import Gradient from '@digitalocean/gradient';
 
-const client = new Gradient({
-  accessToken: 'My Access Token',
-  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-});
+const client = new Gradient({ accessToken: 'My Access Token', baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010' });
 
 describe('resource scheduledIndexing', () => {
   // Mock server tests are disabled
@@ -23,23 +20,18 @@ describe('resource scheduledIndexing', () => {
   // Mock server tests are disabled
   test.skip('create: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.agents.evaluationMetrics.scheduledIndexing.create(
-        {
-          days: [123],
-          knowledge_base_uuid: '123e4567-e89b-12d3-a456-426614174000',
-          time: 'example string',
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Gradient.NotFoundError);
+    await expect(client.agents.evaluationMetrics.scheduledIndexing.create({
+    days: [123],
+    knowledge_base_uuid: '123e4567-e89b-12d3-a456-426614174000',
+    time: 'example string',
+  }, { path: '/_stainless_unknown_path' }))
+      .rejects
+      .toThrow(Gradient.NotFoundError);
   });
 
   // Mock server tests are disabled
   test.skip('retrieve', async () => {
-    const responsePromise = client.agents.evaluationMetrics.scheduledIndexing.retrieve(
-      '"123e4567-e89b-12d3-a456-426614174000"',
-    );
+    const responsePromise = client.agents.evaluationMetrics.scheduledIndexing.retrieve('"123e4567-e89b-12d3-a456-426614174000"');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -51,9 +43,7 @@ describe('resource scheduledIndexing', () => {
 
   // Mock server tests are disabled
   test.skip('delete', async () => {
-    const responsePromise = client.agents.evaluationMetrics.scheduledIndexing.delete(
-      '"123e4567-e89b-12d3-a456-426614174000"',
-    );
+    const responsePromise = client.agents.evaluationMetrics.scheduledIndexing.delete('"123e4567-e89b-12d3-a456-426614174000"');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

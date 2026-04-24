@@ -47,16 +47,8 @@ export class Actions extends APIResource {
    *   );
    * ```
    */
-  create(
-    floatingIP: string,
-    body: ActionCreateParams,
-    options?: RequestOptions,
-  ): APIPromise<ActionCreateResponse> {
-    return this._client.post(path`/v2/floating_ips/${floatingIP}/actions`, {
-      body,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  create(floatingIP: string, body: ActionCreateParams, options?: RequestOptions): APIPromise<ActionCreateResponse> {
+    return this._client.post(path`/v2/floating_ips/${floatingIP}/actions`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -72,16 +64,9 @@ export class Actions extends APIResource {
    *   );
    * ```
    */
-  retrieve(
-    actionID: number,
-    params: ActionRetrieveParams,
-    options?: RequestOptions,
-  ): APIPromise<ActionRetrieveResponse> {
-    const { floating_ip } = params;
-    return this._client.get(path`/v2/floating_ips/${floating_ip}/actions/${actionID}`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  retrieve(actionID: number, params: ActionRetrieveParams, options?: RequestOptions): APIPromise<ActionRetrieveResponse> {
+    const { floating_ip } = params
+    return this._client.get(path`/v2/floating_ips/${floating_ip}/actions/${actionID}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -97,10 +82,7 @@ export class Actions extends APIResource {
    * ```
    */
   list(floatingIP: string, options?: RequestOptions): APIPromise<ActionListResponse> {
-    return this._client.get(path`/v2/floating_ips/${floatingIP}/actions`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+    return this._client.get(path`/v2/floating_ips/${floatingIP}/actions`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 }
 
@@ -141,9 +123,7 @@ export interface ActionListResponse {
   links?: Shared.PageLinks;
 }
 
-export type ActionCreateParams =
-  | ActionCreateParams.FloatingIPActionUnassign
-  | ActionCreateParams.FloatingIPActionAssign;
+export type ActionCreateParams = ActionCreateParams.FloatingIPActionUnassign | ActionCreateParams.FloatingIPActionAssign
 
 export declare namespace ActionCreateParams {
   export interface FloatingIPActionUnassign {
@@ -179,6 +159,6 @@ export declare namespace Actions {
     type ActionRetrieveResponse as ActionRetrieveResponse,
     type ActionListResponse as ActionListResponse,
     type ActionCreateParams as ActionCreateParams,
-    type ActionRetrieveParams as ActionRetrieveParams,
+    type ActionRetrieveParams as ActionRetrieveParams
   };
 }

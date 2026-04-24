@@ -35,16 +35,8 @@ export class Retrieve extends APIResource {
    * );
    * ```
    */
-  documents(
-    knowledgeBaseID: string,
-    body: RetrieveDocumentsParams,
-    options?: RequestOptions,
-  ): APIPromise<RetrieveDocumentsResponse> {
-    return this._client.post(path`/${knowledgeBaseID}/retrieve`, {
-      body,
-      defaultBaseURL: 'https://kbaas.do-ai.run/v1',
-      ...options,
-    });
+  documents(knowledgeBaseID: string, body: RetrieveDocumentsParams, options?: RequestOptions): APIPromise<RetrieveDocumentsResponse> {
+    return this._client.post(path`/${knowledgeBaseID}/retrieve`, { body, defaultBaseURL: 'https://kbaas.do-ai.run/v1', ...options });
   }
 }
 
@@ -178,6 +170,6 @@ export namespace RetrieveDocumentsParams {
 export declare namespace Retrieve {
   export {
     type RetrieveDocumentsResponse as RetrieveDocumentsResponse,
-    type RetrieveDocumentsParams as RetrieveDocumentsParams,
+    type RetrieveDocumentsParams as RetrieveDocumentsParams
   };
 }

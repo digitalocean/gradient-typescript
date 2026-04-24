@@ -22,28 +22,11 @@ export class Completions extends APIResource {
    * });
    * ```
    */
-  create(
-    body: CompletionCreateParamsNonStreaming,
-    options?: RequestOptions,
-  ): APIPromise<CompletionCreateResponse>;
-  create(
-    body: CompletionCreateParamsStreaming,
-    options?: RequestOptions,
-  ): APIPromise<Stream<Shared.ChatCompletionChunk>>;
-  create(
-    body: CompletionCreateParamsBase,
-    options?: RequestOptions,
-  ): APIPromise<Stream<Shared.ChatCompletionChunk> | CompletionCreateResponse>;
-  create(
-    body: CompletionCreateParams,
-    options?: RequestOptions,
-  ): APIPromise<CompletionCreateResponse> | APIPromise<Stream<Shared.ChatCompletionChunk>> {
-    return this._client.post('/chat/completions', {
-      body,
-      defaultBaseURL: 'https://inference.do-ai.run/v1',
-      ...options,
-      stream: body.stream ?? false,
-    }) as APIPromise<CompletionCreateResponse> | APIPromise<Stream<Shared.ChatCompletionChunk>>;
+  create(body: CompletionCreateParamsNonStreaming, options?: RequestOptions): APIPromise<CompletionCreateResponse>
+  create(body: CompletionCreateParamsStreaming, options?: RequestOptions): APIPromise<Stream<Shared.ChatCompletionChunk>>
+  create(body: CompletionCreateParamsBase, options?: RequestOptions): APIPromise<Stream<Shared.ChatCompletionChunk> | CompletionCreateResponse>
+  create(body: CompletionCreateParams, options?: RequestOptions): APIPromise<CompletionCreateResponse> | APIPromise<Stream<Shared.ChatCompletionChunk>> {
+    return this._client.post('/chat/completions', { body, defaultBaseURL: 'https://inference.do-ai.run/v1', ...options, stream: body.stream ?? false }) as APIPromise<CompletionCreateResponse> | APIPromise<Stream<Shared.ChatCompletionChunk>>;
   }
 }
 
@@ -197,19 +180,13 @@ export namespace CompletionCreateResponse {
   }
 }
 
-export type CompletionCreateParams = CompletionCreateParamsNonStreaming | CompletionCreateParamsStreaming;
+export type CompletionCreateParams = CompletionCreateParamsNonStreaming | CompletionCreateParamsStreaming
 
 export interface CompletionCreateParamsBase {
   /**
    * A list of messages comprising the conversation so far.
    */
-  messages: Array<
-    | CompletionCreateParams.ChatCompletionRequestSystemMessage
-    | CompletionCreateParams.ChatCompletionRequestDeveloperMessage
-    | CompletionCreateParams.ChatCompletionRequestUserMessage
-    | CompletionCreateParams.ChatCompletionRequestAssistantMessage
-    | CompletionCreateParams.ChatCompletionRequestToolMessage
-  >;
+  messages: Array<CompletionCreateParams.ChatCompletionRequestSystemMessage | CompletionCreateParams.ChatCompletionRequestDeveloperMessage | CompletionCreateParams.ChatCompletionRequestUserMessage | CompletionCreateParams.ChatCompletionRequestAssistantMessage | CompletionCreateParams.ChatCompletionRequestToolMessage>;
 
   /**
    * Model ID used to generate the response.
@@ -353,7 +330,7 @@ export interface CompletionCreateParamsBase {
    */
   user?: string;
 
-  [k: string]: unknown;
+[k: string]: unknown
 }
 
 export namespace CompletionCreateParams {
@@ -365,10 +342,7 @@ export namespace CompletionCreateParams {
     /**
      * The contents of the system message.
      */
-    content:
-      | string
-      | ChatCompletionRequestSystemMessage.ChatCompletionRequestContentPartText
-      | Array<string | ChatCompletionRequestSystemMessage.ChatCompletionRequestContentPartText>;
+    content: string | ChatCompletionRequestSystemMessage.ChatCompletionRequestContentPartText | Array<string | ChatCompletionRequestSystemMessage.ChatCompletionRequestContentPartText>;
 
     /**
      * The role of the messages author, in this case `system`.
@@ -460,10 +434,7 @@ export namespace CompletionCreateParams {
     /**
      * The contents of the developer message.
      */
-    content:
-      | string
-      | ChatCompletionRequestDeveloperMessage.ChatCompletionRequestContentPartText
-      | Array<string | ChatCompletionRequestDeveloperMessage.ChatCompletionRequestContentPartText>;
+    content: string | ChatCompletionRequestDeveloperMessage.ChatCompletionRequestContentPartText | Array<string | ChatCompletionRequestDeveloperMessage.ChatCompletionRequestContentPartText>;
 
     /**
      * The role of the messages author, in this case `developer`.
@@ -555,17 +526,7 @@ export namespace CompletionCreateParams {
     /**
      * The contents of the user message.
      */
-    content:
-      | string
-      | ChatCompletionRequestUserMessage.ChatCompletionRequestContentPartText
-      | ChatCompletionRequestUserMessage.ChatCompletionRequestContentPartImageURL
-      | ChatCompletionRequestUserMessage.ChatCompletionRequestContentPartVideoURL
-      | Array<
-          | string
-          | ChatCompletionRequestUserMessage.ChatCompletionRequestContentPartText
-          | ChatCompletionRequestUserMessage.ChatCompletionRequestContentPartImageURL
-          | ChatCompletionRequestUserMessage.ChatCompletionRequestContentPartVideoURL
-        >;
+    content: string | ChatCompletionRequestUserMessage.ChatCompletionRequestContentPartText | ChatCompletionRequestUserMessage.ChatCompletionRequestContentPartImageURL | ChatCompletionRequestUserMessage.ChatCompletionRequestContentPartVideoURL | Array<string | ChatCompletionRequestUserMessage.ChatCompletionRequestContentPartText | ChatCompletionRequestUserMessage.ChatCompletionRequestContentPartImageURL | ChatCompletionRequestUserMessage.ChatCompletionRequestContentPartVideoURL>;
 
     /**
      * The role of the messages author, in this case `user`.
@@ -779,11 +740,7 @@ export namespace CompletionCreateParams {
     /**
      * The contents of the assistant message.
      */
-    content?:
-      | string
-      | ChatCompletionRequestAssistantMessage.ChatCompletionRequestContentPartText
-      | Array<string | ChatCompletionRequestAssistantMessage.ChatCompletionRequestContentPartText>
-      | null;
+    content?: string | ChatCompletionRequestAssistantMessage.ChatCompletionRequestContentPartText | Array<string | ChatCompletionRequestAssistantMessage.ChatCompletionRequestContentPartText> | null;
 
     /**
      * The tool calls generated by the model, such as function calls.
@@ -908,10 +865,7 @@ export namespace CompletionCreateParams {
     /**
      * The contents of the tool message.
      */
-    content:
-      | string
-      | ChatCompletionRequestToolMessage.ChatCompletionRequestContentPartText
-      | Array<string | ChatCompletionRequestToolMessage.ChatCompletionRequestContentPartText>;
+    content: string | ChatCompletionRequestToolMessage.ChatCompletionRequestContentPartText | Array<string | ChatCompletionRequestToolMessage.ChatCompletionRequestContentPartText>;
 
     /**
      * The role of the messages author, in this case `tool`.
@@ -1073,8 +1027,8 @@ export namespace CompletionCreateParams {
     }
   }
 
-  export type CompletionCreateParamsNonStreaming = CompletionsAPI.CompletionCreateParamsNonStreaming;
-  export type CompletionCreateParamsStreaming = CompletionsAPI.CompletionCreateParamsStreaming;
+  export type CompletionCreateParamsNonStreaming = CompletionsAPI.CompletionCreateParamsNonStreaming
+  export type CompletionCreateParamsStreaming = CompletionsAPI.CompletionCreateParamsStreaming
 }
 
 export interface CompletionCreateParamsNonStreaming extends CompletionCreateParamsBase {
@@ -1084,7 +1038,7 @@ export interface CompletionCreateParamsNonStreaming extends CompletionCreatePara
    */
   stream?: false | null;
 
-  [k: string]: unknown;
+[k: string]: unknown
 }
 
 export interface CompletionCreateParamsStreaming extends CompletionCreateParamsBase {
@@ -1094,7 +1048,7 @@ export interface CompletionCreateParamsStreaming extends CompletionCreateParamsB
    */
   stream: true;
 
-  [k: string]: unknown;
+[k: string]: unknown
 }
 
 export declare namespace Completions {
@@ -1102,6 +1056,6 @@ export declare namespace Completions {
     type CompletionCreateResponse as CompletionCreateResponse,
     type CompletionCreateParams as CompletionCreateParams,
     type CompletionCreateParamsNonStreaming as CompletionCreateParamsNonStreaming,
-    type CompletionCreateParamsStreaming as CompletionCreateParamsStreaming,
+    type CompletionCreateParamsStreaming as CompletionCreateParamsStreaming
   };
 }

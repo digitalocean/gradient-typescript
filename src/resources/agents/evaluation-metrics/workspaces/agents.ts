@@ -23,16 +23,8 @@ export class Agents extends APIResource {
    *   );
    * ```
    */
-  list(
-    workspaceUuid: string,
-    query: AgentListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<AgentListResponse> {
-    return this._client.get(path`/v2/gen-ai/workspaces/${workspaceUuid}/agents`, {
-      query,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  list(workspaceUuid: string, query: AgentListParams | null | undefined = {}, options?: RequestOptions): APIPromise<AgentListResponse> {
+    return this._client.get(path`/v2/gen-ai/workspaces/${workspaceUuid}/agents`, { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -47,16 +39,8 @@ export class Agents extends APIResource {
    *   );
    * ```
    */
-  move(
-    workspaceUuid: string,
-    body: AgentMoveParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<AgentMoveResponse> {
-    return this._client.put(path`/v2/gen-ai/workspaces/${workspaceUuid}/agents`, {
-      body,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  move(workspaceUuid: string, body: AgentMoveParams | null | undefined = {}, options?: RequestOptions): APIPromise<AgentMoveResponse> {
+    return this._client.put(path`/v2/gen-ai/workspaces/${workspaceUuid}/agents`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 }
 
@@ -112,6 +96,6 @@ export declare namespace Agents {
     type AgentListResponse as AgentListResponse,
     type AgentMoveResponse as AgentMoveResponse,
     type AgentListParams as AgentListParams,
-    type AgentMoveParams as AgentMoveParams,
+    type AgentMoveParams as AgentMoveParams
   };
 }

@@ -7,7 +7,7 @@ import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
 /**
- * NFS lets you create fully managed, POSIX-compliant network file storage that delivers secure,
+ * NFS lets you create fully managed, POSIX-compliant network file storage that delivers secure, 
  * high-performance shared storage right inside your VPC. This enables seamless data sharing across Droplets in a VPC.
  */
 export class Snapshots extends APIResource {
@@ -24,16 +24,8 @@ export class Snapshots extends APIResource {
    * );
    * ```
    */
-  retrieve(
-    nfsSnapshotID: string,
-    query: SnapshotRetrieveParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<SnapshotRetrieveResponse> {
-    return this._client.get(path`/v2/nfs/snapshots/${nfsSnapshotID}`, {
-      query,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  retrieve(nfsSnapshotID: string, query: SnapshotRetrieveParams | null | undefined = {}, options?: RequestOptions): APIPromise<SnapshotRetrieveResponse> {
+    return this._client.get(path`/v2/nfs/snapshots/${nfsSnapshotID}`, { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -51,15 +43,8 @@ export class Snapshots extends APIResource {
    * const snapshots = await client.nfs.snapshots.list();
    * ```
    */
-  list(
-    query: SnapshotListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<SnapshotListResponse> {
-    return this._client.get('/v2/nfs/snapshots', {
-      query,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  list(query: SnapshotListParams | null | undefined = {}, options?: RequestOptions): APIPromise<SnapshotListResponse> {
+    return this._client.get('/v2/nfs/snapshots', { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -75,18 +60,9 @@ export class Snapshots extends APIResource {
    * );
    * ```
    */
-  delete(
-    nfsSnapshotID: string,
-    params: SnapshotDeleteParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<void> {
-    const { region } = params ?? {};
-    return this._client.delete(path`/v2/nfs/snapshots/${nfsSnapshotID}`, {
-      query: { region },
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+  delete(nfsSnapshotID: string, params: SnapshotDeleteParams | null | undefined = {}, options?: RequestOptions): APIPromise<void> {
+    const { region } = params ?? {}
+    return this._client.delete(path`/v2/nfs/snapshots/${nfsSnapshotID}`, { query: { region }, defaultBaseURL: 'https://api.digitalocean.com', ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
   }
 }
 
@@ -218,6 +194,6 @@ export declare namespace Snapshots {
     type SnapshotListResponse as SnapshotListResponse,
     type SnapshotRetrieveParams as SnapshotRetrieveParams,
     type SnapshotListParams as SnapshotListParams,
-    type SnapshotDeleteParams as SnapshotDeleteParams,
+    type SnapshotDeleteParams as SnapshotDeleteParams
   };
 }
