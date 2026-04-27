@@ -26,7 +26,11 @@ export class Keys extends APIResource {
    * ```
    */
   create(body: KeyCreateParams, options?: RequestOptions): APIPromise<KeyCreateResponse> {
-    return this._client.post('/v2/account/keys', { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+    return this._client.post('/v2/account/keys', {
+      body,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -43,7 +47,10 @@ export class Keys extends APIResource {
    * ```
    */
   retrieve(sshKeyIdentifier: number | string, options?: RequestOptions): APIPromise<KeyRetrieveResponse> {
-    return this._client.get(path`/v2/account/keys/${sshKeyIdentifier}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
+    return this._client.get(path`/v2/account/keys/${sshKeyIdentifier}`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -58,8 +65,16 @@ export class Keys extends APIResource {
    * );
    * ```
    */
-  update(sshKeyIdentifier: number | string, body: KeyUpdateParams, options?: RequestOptions): APIPromise<KeyUpdateResponse> {
-    return this._client.put(path`/v2/account/keys/${sshKeyIdentifier}`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  update(
+    sshKeyIdentifier: number | string,
+    body: KeyUpdateParams,
+    options?: RequestOptions,
+  ): APIPromise<KeyUpdateResponse> {
+    return this._client.put(path`/v2/account/keys/${sshKeyIdentifier}`, {
+      body,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -74,7 +89,11 @@ export class Keys extends APIResource {
    * ```
    */
   list(query: KeyListParams | null | undefined = {}, options?: RequestOptions): APIPromise<KeyListResponse> {
-    return this._client.get('/v2/account/keys', { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+    return this._client.get('/v2/account/keys', {
+      query,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -89,7 +108,11 @@ export class Keys extends APIResource {
    * ```
    */
   delete(sshKeyIdentifier: number | string, options?: RequestOptions): APIPromise<void> {
-    return this._client.delete(path`/v2/account/keys/${sshKeyIdentifier}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
+    return this._client.delete(path`/v2/account/keys/${sshKeyIdentifier}`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
   }
 }
 
@@ -186,6 +209,6 @@ export declare namespace Keys {
     type KeyListResponse as KeyListResponse,
     type KeyCreateParams as KeyCreateParams,
     type KeyUpdateParams as KeyUpdateParams,
-    type KeyListParams as KeyListParams
+    type KeyListParams as KeyListParams,
   };
 }

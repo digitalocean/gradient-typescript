@@ -19,8 +19,15 @@ export class ScheduledIndexing extends APIResource {
    *   await client.agents.evaluationMetrics.scheduledIndexing.create();
    * ```
    */
-  create(body: ScheduledIndexingCreateParams | null | undefined = {}, options?: RequestOptions): APIPromise<ScheduledIndexingCreateResponse> {
-    return this._client.post('/v2/gen-ai/scheduled-indexing', { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  create(
+    body: ScheduledIndexingCreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ScheduledIndexingCreateResponse> {
+    return this._client.post('/v2/gen-ai/scheduled-indexing', {
+      body,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -35,8 +42,14 @@ export class ScheduledIndexing extends APIResource {
    *   );
    * ```
    */
-  retrieve(knowledgeBaseUuid: string, options?: RequestOptions): APIPromise<ScheduledIndexingRetrieveResponse> {
-    return this._client.get(path`/v2/gen-ai/scheduled-indexing/knowledge-base/${knowledgeBaseUuid}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  retrieve(
+    knowledgeBaseUuid: string,
+    options?: RequestOptions,
+  ): APIPromise<ScheduledIndexingRetrieveResponse> {
+    return this._client.get(path`/v2/gen-ai/scheduled-indexing/knowledge-base/${knowledgeBaseUuid}`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -52,7 +65,10 @@ export class ScheduledIndexing extends APIResource {
    * ```
    */
   delete(uuid: string, options?: RequestOptions): APIPromise<ScheduledIndexingDeleteResponse> {
-    return this._client.delete(path`/v2/gen-ai/scheduled-indexing/${uuid}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
+    return this._client.delete(path`/v2/gen-ai/scheduled-indexing/${uuid}`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 }
 
@@ -274,6 +290,6 @@ export declare namespace ScheduledIndexing {
     type ScheduledIndexingCreateResponse as ScheduledIndexingCreateResponse,
     type ScheduledIndexingRetrieveResponse as ScheduledIndexingRetrieveResponse,
     type ScheduledIndexingDeleteResponse as ScheduledIndexingDeleteResponse,
-    type ScheduledIndexingCreateParams as ScheduledIndexingCreateParams
+    type ScheduledIndexingCreateParams as ScheduledIndexingCreateParams,
   };
 }

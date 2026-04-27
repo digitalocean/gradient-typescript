@@ -29,9 +29,17 @@ export class Actions extends APIResource {
    *   );
    * ```
    */
-  retrieve(actionID: number, params: ActionRetrieveParams, options?: RequestOptions): APIPromise<ActionRetrieveResponse> {
-    const { volume_id, ...query } = params
-    return this._client.get(path`/v2/volumes/${volume_id}/actions/${actionID}`, { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  retrieve(
+    actionID: number,
+    params: ActionRetrieveParams,
+    options?: RequestOptions,
+  ): APIPromise<ActionRetrieveResponse> {
+    const { volume_id, ...query } = params;
+    return this._client.get(path`/v2/volumes/${volume_id}/actions/${actionID}`, {
+      query,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -46,8 +54,16 @@ export class Actions extends APIResource {
    *   );
    * ```
    */
-  list(volumeID: string, query: ActionListParams | null | undefined = {}, options?: RequestOptions): APIPromise<ActionListResponse> {
-    return this._client.get(path`/v2/volumes/${volumeID}/actions`, { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  list(
+    volumeID: string,
+    query: ActionListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ActionListResponse> {
+    return this._client.get(path`/v2/volumes/${volumeID}/actions`, {
+      query,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -102,9 +118,18 @@ export class Actions extends APIResource {
    *   );
    * ```
    */
-  initiateByID(volumeID: string, params: ActionInitiateByIDParams, options?: RequestOptions): APIPromise<ActionInitiateByIDResponse> {
-    const { page, per_page, ...body } = params
-    return this._client.post(path`/v2/volumes/${volumeID}/actions`, { query: { page, per_page }, body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  initiateByID(
+    volumeID: string,
+    params: ActionInitiateByIDParams,
+    options?: RequestOptions,
+  ): APIPromise<ActionInitiateByIDResponse> {
+    const { page, per_page, ...body } = params;
+    return this._client.post(path`/v2/volumes/${volumeID}/actions`, {
+      query: { page, per_page },
+      body,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -148,9 +173,17 @@ export class Actions extends APIResource {
    *   });
    * ```
    */
-  initiateByName(params: ActionInitiateByNameParams, options?: RequestOptions): APIPromise<ActionInitiateByNameResponse> {
-    const { page, per_page, ...body } = params
-    return this._client.post('/v2/volumes/actions', { query: { page, per_page }, body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  initiateByName(
+    params: ActionInitiateByNameParams,
+    options?: RequestOptions,
+  ): APIPromise<ActionInitiateByNameResponse> {
+    const { page, per_page, ...body } = params;
+    return this._client.post('/v2/volumes/actions', {
+      query: { page, per_page },
+      body,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 }
 
@@ -216,7 +249,10 @@ export interface ActionListParams {
   per_page?: number;
 }
 
-export type ActionInitiateByIDParams = ActionInitiateByIDParams.VolumeActionPostAttach | ActionInitiateByIDParams.VolumeActionPostDetach | ActionInitiateByIDParams.VolumeActionPostResize
+export type ActionInitiateByIDParams =
+  | ActionInitiateByIDParams.VolumeActionPostAttach
+  | ActionInitiateByIDParams.VolumeActionPostDetach
+  | ActionInitiateByIDParams.VolumeActionPostResize;
 
 export declare namespace ActionInitiateByIDParams {
   export interface VolumeActionPostAttach {
@@ -245,7 +281,22 @@ export declare namespace ActionInitiateByIDParams {
      * Body param: The slug identifier for the region where the resource will initially
      * be available.
      */
-    region?: 'ams1' | 'ams2' | 'ams3' | 'blr1' | 'fra1' | 'lon1' | 'nyc1' | 'nyc2' | 'nyc3' | 'sfo1' | 'sfo2' | 'sfo3' | 'sgp1' | 'tor1' | 'syd1';
+    region?:
+      | 'ams1'
+      | 'ams2'
+      | 'ams3'
+      | 'blr1'
+      | 'fra1'
+      | 'lon1'
+      | 'nyc1'
+      | 'nyc2'
+      | 'nyc3'
+      | 'sfo1'
+      | 'sfo2'
+      | 'sfo3'
+      | 'sgp1'
+      | 'tor1'
+      | 'syd1';
 
     /**
      * Body param: A flat array of tag names as strings to be applied to the resource.
@@ -282,7 +333,22 @@ export declare namespace ActionInitiateByIDParams {
      * Body param: The slug identifier for the region where the resource will initially
      * be available.
      */
-    region?: 'ams1' | 'ams2' | 'ams3' | 'blr1' | 'fra1' | 'lon1' | 'nyc1' | 'nyc2' | 'nyc3' | 'sfo1' | 'sfo2' | 'sfo3' | 'sgp1' | 'tor1' | 'syd1';
+    region?:
+      | 'ams1'
+      | 'ams2'
+      | 'ams3'
+      | 'blr1'
+      | 'fra1'
+      | 'lon1'
+      | 'nyc1'
+      | 'nyc2'
+      | 'nyc3'
+      | 'sfo1'
+      | 'sfo2'
+      | 'sfo3'
+      | 'sgp1'
+      | 'tor1'
+      | 'syd1';
   }
 
   export interface VolumeActionPostResize {
@@ -310,11 +376,28 @@ export declare namespace ActionInitiateByIDParams {
      * Body param: The slug identifier for the region where the resource will initially
      * be available.
      */
-    region?: 'ams1' | 'ams2' | 'ams3' | 'blr1' | 'fra1' | 'lon1' | 'nyc1' | 'nyc2' | 'nyc3' | 'sfo1' | 'sfo2' | 'sfo3' | 'sgp1' | 'tor1' | 'syd1';
+    region?:
+      | 'ams1'
+      | 'ams2'
+      | 'ams3'
+      | 'blr1'
+      | 'fra1'
+      | 'lon1'
+      | 'nyc1'
+      | 'nyc2'
+      | 'nyc3'
+      | 'sfo1'
+      | 'sfo2'
+      | 'sfo3'
+      | 'sgp1'
+      | 'tor1'
+      | 'syd1';
   }
 }
 
-export type ActionInitiateByNameParams = ActionInitiateByNameParams.VolumeActionPostAttach | ActionInitiateByNameParams.VolumeActionPostDetach
+export type ActionInitiateByNameParams =
+  | ActionInitiateByNameParams.VolumeActionPostAttach
+  | ActionInitiateByNameParams.VolumeActionPostDetach;
 
 export declare namespace ActionInitiateByNameParams {
   export interface VolumeActionPostAttach {
@@ -343,7 +426,22 @@ export declare namespace ActionInitiateByNameParams {
      * Body param: The slug identifier for the region where the resource will initially
      * be available.
      */
-    region?: 'ams1' | 'ams2' | 'ams3' | 'blr1' | 'fra1' | 'lon1' | 'nyc1' | 'nyc2' | 'nyc3' | 'sfo1' | 'sfo2' | 'sfo3' | 'sgp1' | 'tor1' | 'syd1';
+    region?:
+      | 'ams1'
+      | 'ams2'
+      | 'ams3'
+      | 'blr1'
+      | 'fra1'
+      | 'lon1'
+      | 'nyc1'
+      | 'nyc2'
+      | 'nyc3'
+      | 'sfo1'
+      | 'sfo2'
+      | 'sfo3'
+      | 'sgp1'
+      | 'tor1'
+      | 'syd1';
 
     /**
      * Body param: A flat array of tag names as strings to be applied to the resource.
@@ -380,7 +478,22 @@ export declare namespace ActionInitiateByNameParams {
      * Body param: The slug identifier for the region where the resource will initially
      * be available.
      */
-    region?: 'ams1' | 'ams2' | 'ams3' | 'blr1' | 'fra1' | 'lon1' | 'nyc1' | 'nyc2' | 'nyc3' | 'sfo1' | 'sfo2' | 'sfo3' | 'sgp1' | 'tor1' | 'syd1';
+    region?:
+      | 'ams1'
+      | 'ams2'
+      | 'ams3'
+      | 'blr1'
+      | 'fra1'
+      | 'lon1'
+      | 'nyc1'
+      | 'nyc2'
+      | 'nyc3'
+      | 'sfo1'
+      | 'sfo2'
+      | 'sfo3'
+      | 'sgp1'
+      | 'tor1'
+      | 'syd1';
   }
 }
 
@@ -394,6 +507,6 @@ export declare namespace Actions {
     type ActionRetrieveParams as ActionRetrieveParams,
     type ActionListParams as ActionListParams,
     type ActionInitiateByIDParams as ActionInitiateByIDParams,
-    type ActionInitiateByNameParams as ActionInitiateByNameParams
+    type ActionInitiateByNameParams as ActionInitiateByNameParams,
   };
 }

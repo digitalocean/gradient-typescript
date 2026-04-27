@@ -29,9 +29,17 @@ export class JobInvocations extends APIResource {
    * );
    * ```
    */
-  cancel(jobInvocationID: string, params: JobInvocationCancelParams, options?: RequestOptions): APIPromise<JobInvocationCancelResponse> {
-    const { app_id, job_name } = params
-    return this._client.post(path`/v2/apps/${app_id}/job-invocations/${jobInvocationID}/cancel`, { query: { job_name }, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  cancel(
+    jobInvocationID: string,
+    params: JobInvocationCancelParams,
+    options?: RequestOptions,
+  ): APIPromise<JobInvocationCancelResponse> {
+    const { app_id, job_name } = params;
+    return this._client.post(path`/v2/apps/${app_id}/job-invocations/${jobInvocationID}/cancel`, {
+      query: { job_name },
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 }
 
@@ -136,6 +144,6 @@ export interface JobInvocationCancelParams {
 export declare namespace JobInvocations {
   export {
     type JobInvocationCancelResponse as JobInvocationCancelResponse,
-    type JobInvocationCancelParams as JobInvocationCancelParams
+    type JobInvocationCancelParams as JobInvocationCancelParams,
   };
 }

@@ -68,7 +68,11 @@ export class LoadBalancers extends APIResource {
    * ```
    */
   create(body: LoadBalancerCreateParams, options?: RequestOptions): APIPromise<LoadBalancerCreateResponse> {
-    return this._client.post('/v2/load_balancers', { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+    return this._client.post('/v2/load_balancers', {
+      body,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -84,7 +88,10 @@ export class LoadBalancers extends APIResource {
    * ```
    */
   retrieve(lbID: string, options?: RequestOptions): APIPromise<LoadBalancerRetrieveResponse> {
-    return this._client.get(path`/v2/load_balancers/${lbID}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
+    return this._client.get(path`/v2/load_balancers/${lbID}`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -145,8 +152,16 @@ export class LoadBalancers extends APIResource {
    * );
    * ```
    */
-  update(lbID: string, body: LoadBalancerUpdateParams, options?: RequestOptions): APIPromise<LoadBalancerUpdateResponse> {
-    return this._client.put(path`/v2/load_balancers/${lbID}`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  update(
+    lbID: string,
+    body: LoadBalancerUpdateParams,
+    options?: RequestOptions,
+  ): APIPromise<LoadBalancerUpdateResponse> {
+    return this._client.put(path`/v2/load_balancers/${lbID}`, {
+      body,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -159,8 +174,15 @@ export class LoadBalancers extends APIResource {
    *   await client.gpuDroplets.loadBalancers.list();
    * ```
    */
-  list(query: LoadBalancerListParams | null | undefined = {}, options?: RequestOptions): APIPromise<LoadBalancerListResponse> {
-    return this._client.get('/v2/load_balancers', { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  list(
+    query: LoadBalancerListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<LoadBalancerListResponse> {
+    return this._client.get('/v2/load_balancers', {
+      query,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -179,7 +201,11 @@ export class LoadBalancers extends APIResource {
    * ```
    */
   delete(lbID: string, options?: RequestOptions): APIPromise<void> {
-    return this._client.delete(path`/v2/load_balancers/${lbID}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
+    return this._client.delete(path`/v2/load_balancers/${lbID}`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
   }
 
   /**
@@ -197,7 +223,11 @@ export class LoadBalancers extends APIResource {
    * ```
    */
   deleteCache(lbID: string, options?: RequestOptions): APIPromise<void> {
-    return this._client.delete(path`/v2/load_balancers/${lbID}/cache`, { defaultBaseURL: 'https://api.digitalocean.com', ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
+    return this._client.delete(path`/v2/load_balancers/${lbID}/cache`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
   }
 }
 
@@ -618,7 +648,9 @@ export interface LoadBalancerListResponse {
   load_balancers?: Array<LoadBalancer>;
 }
 
-export type LoadBalancerCreateParams = LoadBalancerCreateParams.AssignDropletsByID | LoadBalancerCreateParams.AssignDropletsByTag
+export type LoadBalancerCreateParams =
+  | LoadBalancerCreateParams.AssignDropletsByID
+  | LoadBalancerCreateParams.AssignDropletsByTag;
 
 export declare namespace LoadBalancerCreateParams {
   export interface AssignDropletsByID {
@@ -721,7 +753,22 @@ export declare namespace LoadBalancerCreateParams {
      * The slug identifier for the region where the resource will initially be
      * available.
      */
-    region?: 'ams1' | 'ams2' | 'ams3' | 'blr1' | 'fra1' | 'lon1' | 'nyc1' | 'nyc2' | 'nyc3' | 'sfo1' | 'sfo2' | 'sfo3' | 'sgp1' | 'tor1' | 'syd1';
+    region?:
+      | 'ams1'
+      | 'ams2'
+      | 'ams3'
+      | 'blr1'
+      | 'fra1'
+      | 'lon1'
+      | 'nyc1'
+      | 'nyc2'
+      | 'nyc3'
+      | 'sfo1'
+      | 'sfo2'
+      | 'sfo3'
+      | 'sgp1'
+      | 'tor1'
+      | 'syd1';
 
     /**
      * @deprecated This field has been replaced by the `size_unit` field for all
@@ -872,7 +919,22 @@ export declare namespace LoadBalancerCreateParams {
      * The slug identifier for the region where the resource will initially be
      * available.
      */
-    region?: 'ams1' | 'ams2' | 'ams3' | 'blr1' | 'fra1' | 'lon1' | 'nyc1' | 'nyc2' | 'nyc3' | 'sfo1' | 'sfo2' | 'sfo3' | 'sgp1' | 'tor1' | 'syd1';
+    region?:
+      | 'ams1'
+      | 'ams2'
+      | 'ams3'
+      | 'blr1'
+      | 'fra1'
+      | 'lon1'
+      | 'nyc1'
+      | 'nyc2'
+      | 'nyc3'
+      | 'sfo1'
+      | 'sfo2'
+      | 'sfo3'
+      | 'sgp1'
+      | 'tor1'
+      | 'syd1';
 
     /**
      * @deprecated This field has been replaced by the `size_unit` field for all
@@ -935,7 +997,9 @@ export declare namespace LoadBalancerCreateParams {
   }
 }
 
-export type LoadBalancerUpdateParams = LoadBalancerUpdateParams.AssignDropletsByID | LoadBalancerUpdateParams.AssignDropletsByTag
+export type LoadBalancerUpdateParams =
+  | LoadBalancerUpdateParams.AssignDropletsByID
+  | LoadBalancerUpdateParams.AssignDropletsByTag;
 
 export declare namespace LoadBalancerUpdateParams {
   export interface AssignDropletsByID {
@@ -1038,7 +1102,22 @@ export declare namespace LoadBalancerUpdateParams {
      * The slug identifier for the region where the resource will initially be
      * available.
      */
-    region?: 'ams1' | 'ams2' | 'ams3' | 'blr1' | 'fra1' | 'lon1' | 'nyc1' | 'nyc2' | 'nyc3' | 'sfo1' | 'sfo2' | 'sfo3' | 'sgp1' | 'tor1' | 'syd1';
+    region?:
+      | 'ams1'
+      | 'ams2'
+      | 'ams3'
+      | 'blr1'
+      | 'fra1'
+      | 'lon1'
+      | 'nyc1'
+      | 'nyc2'
+      | 'nyc3'
+      | 'sfo1'
+      | 'sfo2'
+      | 'sfo3'
+      | 'sgp1'
+      | 'tor1'
+      | 'syd1';
 
     /**
      * @deprecated This field has been replaced by the `size_unit` field for all
@@ -1189,7 +1268,22 @@ export declare namespace LoadBalancerUpdateParams {
      * The slug identifier for the region where the resource will initially be
      * available.
      */
-    region?: 'ams1' | 'ams2' | 'ams3' | 'blr1' | 'fra1' | 'lon1' | 'nyc1' | 'nyc2' | 'nyc3' | 'sfo1' | 'sfo2' | 'sfo3' | 'sgp1' | 'tor1' | 'syd1';
+    region?:
+      | 'ams1'
+      | 'ams2'
+      | 'ams3'
+      | 'blr1'
+      | 'fra1'
+      | 'lon1'
+      | 'nyc1'
+      | 'nyc2'
+      | 'nyc3'
+      | 'sfo1'
+      | 'sfo2'
+      | 'sfo3'
+      | 'sgp1'
+      | 'tor1'
+      | 'syd1';
 
     /**
      * @deprecated This field has been replaced by the `size_unit` field for all
@@ -1282,18 +1376,18 @@ export declare namespace LoadBalancers {
     type LoadBalancerListResponse as LoadBalancerListResponse,
     type LoadBalancerCreateParams as LoadBalancerCreateParams,
     type LoadBalancerUpdateParams as LoadBalancerUpdateParams,
-    type LoadBalancerListParams as LoadBalancerListParams
+    type LoadBalancerListParams as LoadBalancerListParams,
   };
 
   export {
     Droplets as Droplets,
     type DropletAddParams as DropletAddParams,
-    type DropletRemoveParams as DropletRemoveParams
+    type DropletRemoveParams as DropletRemoveParams,
   };
 
   export {
     ForwardingRules as ForwardingRules,
     type ForwardingRuleAddParams as ForwardingRuleAddParams,
-    type ForwardingRuleRemoveParams as ForwardingRuleRemoveParams
+    type ForwardingRuleRemoveParams as ForwardingRuleRemoveParams,
   };
 }

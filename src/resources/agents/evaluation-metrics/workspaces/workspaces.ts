@@ -25,8 +25,15 @@ export class Workspaces extends APIResource {
    *   await client.agents.evaluationMetrics.workspaces.create();
    * ```
    */
-  create(body: WorkspaceCreateParams | null | undefined = {}, options?: RequestOptions): APIPromise<WorkspaceCreateResponse> {
-    return this._client.post('/v2/gen-ai/workspaces', { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  create(
+    body: WorkspaceCreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<WorkspaceCreateResponse> {
+    return this._client.post('/v2/gen-ai/workspaces', {
+      body,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -43,7 +50,10 @@ export class Workspaces extends APIResource {
    * ```
    */
   retrieve(workspaceUuid: string, options?: RequestOptions): APIPromise<WorkspaceRetrieveResponse> {
-    return this._client.get(path`/v2/gen-ai/workspaces/${workspaceUuid}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
+    return this._client.get(path`/v2/gen-ai/workspaces/${workspaceUuid}`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -59,8 +69,16 @@ export class Workspaces extends APIResource {
    *   );
    * ```
    */
-  update(workspaceUuid: string, body: WorkspaceUpdateParams | null | undefined = {}, options?: RequestOptions): APIPromise<WorkspaceUpdateResponse> {
-    return this._client.put(path`/v2/gen-ai/workspaces/${workspaceUuid}`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  update(
+    workspaceUuid: string,
+    body: WorkspaceUpdateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<WorkspaceUpdateResponse> {
+    return this._client.put(path`/v2/gen-ai/workspaces/${workspaceUuid}`, {
+      body,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -73,7 +91,10 @@ export class Workspaces extends APIResource {
    * ```
    */
   list(options?: RequestOptions): APIPromise<WorkspaceListResponse> {
-    return this._client.get('/v2/gen-ai/workspaces', { defaultBaseURL: 'https://api.digitalocean.com', ...options });
+    return this._client.get('/v2/gen-ai/workspaces', {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -89,7 +110,10 @@ export class Workspaces extends APIResource {
    * ```
    */
   delete(workspaceUuid: string, options?: RequestOptions): APIPromise<WorkspaceDeleteResponse> {
-    return this._client.delete(path`/v2/gen-ai/workspaces/${workspaceUuid}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
+    return this._client.delete(path`/v2/gen-ai/workspaces/${workspaceUuid}`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -104,8 +128,14 @@ export class Workspaces extends APIResource {
    *   );
    * ```
    */
-  listEvaluationTestCases(workspaceUuid: string, options?: RequestOptions): APIPromise<WorkspaceListEvaluationTestCasesResponse> {
-    return this._client.get(path`/v2/gen-ai/workspaces/${workspaceUuid}/evaluation_test_cases`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  listEvaluationTestCases(
+    workspaceUuid: string,
+    options?: RequestOptions,
+  ): APIPromise<WorkspaceListEvaluationTestCasesResponse> {
+    return this._client.get(path`/v2/gen-ai/workspaces/${workspaceUuid}/evaluation_test_cases`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 }
 
@@ -184,7 +214,7 @@ export declare namespace Workspaces {
     type WorkspaceDeleteResponse as WorkspaceDeleteResponse,
     type WorkspaceListEvaluationTestCasesResponse as WorkspaceListEvaluationTestCasesResponse,
     type WorkspaceCreateParams as WorkspaceCreateParams,
-    type WorkspaceUpdateParams as WorkspaceUpdateParams
+    type WorkspaceUpdateParams as WorkspaceUpdateParams,
   };
 
   export {
@@ -192,6 +222,6 @@ export declare namespace Workspaces {
     type AgentListResponse as AgentListResponse,
     type AgentMoveResponse as AgentMoveResponse,
     type AgentListParams as AgentListParams,
-    type AgentMoveParams as AgentMoveParams
+    type AgentMoveParams as AgentMoveParams,
   };
 }

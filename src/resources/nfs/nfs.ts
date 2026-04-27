@@ -2,7 +2,14 @@
 
 import { APIResource } from '../../core/resource';
 import * as SnapshotsAPI from './snapshots';
-import { SnapshotDeleteParams, SnapshotListParams, SnapshotListResponse, SnapshotRetrieveParams, SnapshotRetrieveResponse, Snapshots } from './snapshots';
+import {
+  SnapshotDeleteParams,
+  SnapshotListParams,
+  SnapshotListResponse,
+  SnapshotRetrieveParams,
+  SnapshotRetrieveResponse,
+  Snapshots,
+} from './snapshots';
 import { APIPromise } from '../../core/api-promise';
 import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
@@ -41,8 +48,16 @@ export class Nfs extends APIResource {
    * );
    * ```
    */
-  retrieve(nfsID: string, query: NfRetrieveParams | null | undefined = {}, options?: RequestOptions): APIPromise<NfRetrieveResponse> {
-    return this._client.get(path`/v2/nfs/${nfsID}`, { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  retrieve(
+    nfsID: string,
+    query: NfRetrieveParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<NfRetrieveResponse> {
+    return this._client.get(path`/v2/nfs/${nfsID}`, {
+      query,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -73,9 +88,18 @@ export class Nfs extends APIResource {
    * );
    * ```
    */
-  delete(nfsID: string, params: NfDeleteParams | null | undefined = {}, options?: RequestOptions): APIPromise<void> {
-    const { region } = params ?? {}
-    return this._client.delete(path`/v2/nfs/${nfsID}`, { query: { region }, defaultBaseURL: 'https://api.digitalocean.com', ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
+  delete(
+    nfsID: string,
+    params: NfDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<void> {
+    const { region } = params ?? {};
+    return this._client.delete(path`/v2/nfs/${nfsID}`, {
+      query: { region },
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
   }
 
   /**
@@ -99,8 +123,16 @@ export class Nfs extends APIResource {
    * );
    * ```
    */
-  initiateAction(nfsID: string, body: NfInitiateActionParams, options?: RequestOptions): APIPromise<NfInitiateActionResponse> {
-    return this._client.post(path`/v2/nfs/${nfsID}/actions`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  initiateAction(
+    nfsID: string,
+    body: NfInitiateActionParams,
+    options?: RequestOptions,
+  ): APIPromise<NfInitiateActionResponse> {
+    return this._client.post(path`/v2/nfs/${nfsID}/actions`, {
+      body,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 }
 
@@ -361,7 +393,12 @@ export interface NfDeleteParams {
   region?: string;
 }
 
-export type NfInitiateActionParams = NfInitiateActionParams.NfsActionResize | NfInitiateActionParams.NfsActionSnapshot | NfInitiateActionParams.NfsActionAttach | NfInitiateActionParams.NfsActionDetach | NfInitiateActionParams.NfsActionSwitchPerformanceTier
+export type NfInitiateActionParams =
+  | NfInitiateActionParams.NfsActionResize
+  | NfInitiateActionParams.NfsActionSnapshot
+  | NfInitiateActionParams.NfsActionAttach
+  | NfInitiateActionParams.NfsActionDetach
+  | NfInitiateActionParams.NfsActionSwitchPerformanceTier;
 
 export declare namespace NfInitiateActionParams {
   export interface NfsActionResize {
@@ -493,7 +530,7 @@ export declare namespace Nfs {
     type NfRetrieveParams as NfRetrieveParams,
     type NfListParams as NfListParams,
     type NfDeleteParams as NfDeleteParams,
-    type NfInitiateActionParams as NfInitiateActionParams
+    type NfInitiateActionParams as NfInitiateActionParams,
   };
 
   export {
@@ -502,6 +539,6 @@ export declare namespace Nfs {
     type SnapshotListResponse as SnapshotListResponse,
     type SnapshotRetrieveParams as SnapshotRetrieveParams,
     type SnapshotListParams as SnapshotListParams,
-    type SnapshotDeleteParams as SnapshotDeleteParams
+    type SnapshotDeleteParams as SnapshotDeleteParams,
   };
 }

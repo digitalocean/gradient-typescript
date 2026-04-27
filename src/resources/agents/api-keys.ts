@@ -22,8 +22,16 @@ export class APIKeys extends APIResource {
    * );
    * ```
    */
-  create(agentUuid: string, body: APIKeyCreateParams | null | undefined = {}, options?: RequestOptions): APIPromise<APIKeyCreateResponse> {
-    return this._client.post(path`/v2/gen-ai/agents/${agentUuid}/api_keys`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  create(
+    agentUuid: string,
+    body: APIKeyCreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<APIKeyCreateResponse> {
+    return this._client.post(path`/v2/gen-ai/agents/${agentUuid}/api_keys`, {
+      body,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -41,9 +49,17 @@ export class APIKeys extends APIResource {
    * );
    * ```
    */
-  update(apiKeyUuid: string, params: APIKeyUpdateParams, options?: RequestOptions): APIPromise<APIKeyUpdateResponse> {
-    const { path_agent_uuid, ...body } = params
-    return this._client.put(path`/v2/gen-ai/agents/${path_agent_uuid}/api_keys/${apiKeyUuid}`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  update(
+    apiKeyUuid: string,
+    params: APIKeyUpdateParams,
+    options?: RequestOptions,
+  ): APIPromise<APIKeyUpdateResponse> {
+    const { path_agent_uuid, ...body } = params;
+    return this._client.put(path`/v2/gen-ai/agents/${path_agent_uuid}/api_keys/${apiKeyUuid}`, {
+      body,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -57,8 +73,16 @@ export class APIKeys extends APIResource {
    * );
    * ```
    */
-  list(agentUuid: string, query: APIKeyListParams | null | undefined = {}, options?: RequestOptions): APIPromise<APIKeyListResponse> {
-    return this._client.get(path`/v2/gen-ai/agents/${agentUuid}/api_keys`, { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  list(
+    agentUuid: string,
+    query: APIKeyListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<APIKeyListResponse> {
+    return this._client.get(path`/v2/gen-ai/agents/${agentUuid}/api_keys`, {
+      query,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -73,9 +97,16 @@ export class APIKeys extends APIResource {
    * );
    * ```
    */
-  delete(apiKeyUuid: string, params: APIKeyDeleteParams, options?: RequestOptions): APIPromise<APIKeyDeleteResponse> {
-    const { agent_uuid } = params
-    return this._client.delete(path`/v2/gen-ai/agents/${agent_uuid}/api_keys/${apiKeyUuid}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  delete(
+    apiKeyUuid: string,
+    params: APIKeyDeleteParams,
+    options?: RequestOptions,
+  ): APIPromise<APIKeyDeleteResponse> {
+    const { agent_uuid } = params;
+    return this._client.delete(path`/v2/gen-ai/agents/${agent_uuid}/api_keys/${apiKeyUuid}`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -90,9 +121,16 @@ export class APIKeys extends APIResource {
    * );
    * ```
    */
-  regenerate(apiKeyUuid: string, params: APIKeyRegenerateParams, options?: RequestOptions): APIPromise<APIKeyRegenerateResponse> {
-    const { agent_uuid } = params
-    return this._client.put(path`/v2/gen-ai/agents/${agent_uuid}/api_keys/${apiKeyUuid}/regenerate`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  regenerate(
+    apiKeyUuid: string,
+    params: APIKeyRegenerateParams,
+    options?: RequestOptions,
+  ): APIPromise<APIKeyRegenerateResponse> {
+    const { agent_uuid } = params;
+    return this._client.put(path`/v2/gen-ai/agents/${agent_uuid}/api_keys/${apiKeyUuid}/regenerate`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 }
 
@@ -212,6 +250,6 @@ export declare namespace APIKeys {
     type APIKeyUpdateParams as APIKeyUpdateParams,
     type APIKeyListParams as APIKeyListParams,
     type APIKeyDeleteParams as APIKeyDeleteParams,
-    type APIKeyRegenerateParams as APIKeyRegenerateParams
+    type APIKeyRegenerateParams as APIKeyRegenerateParams,
   };
 }

@@ -463,7 +463,11 @@ export interface CreateResponseResponse {
    * function calls, reasoning items, and other output types. Use this field for
    * Responses API compatibility.
    */
-  output?: Array<CreateResponseResponse.UnionMember0 | CreateResponseResponse.UnionMember1 | CreateResponseResponse.UnionMember2>;
+  output?: Array<
+    | CreateResponseResponse.UnionMember0
+    | CreateResponseResponse.UnionMember1
+    | CreateResponseResponse.UnionMember2
+  >;
 
   /**
    * Output messages (if applicable)
@@ -1239,7 +1243,15 @@ export interface GarbageCollection {
   /**
    * The current status of this garbage collection.
    */
-  status?: 'requested' | 'waiting for write JWTs to expire' | 'scanning manifests' | 'deleting unreferenced blobs' | 'cancelling' | 'failed' | 'succeeded' | 'cancelled';
+  status?:
+    | 'requested'
+    | 'waiting for write JWTs to expire'
+    | 'scanning manifests'
+    | 'deleting unreferenced blobs'
+    | 'cancelling'
+    | 'failed'
+    | 'succeeded'
+    | 'cancelled';
 
   /**
    * The time the garbage collection was last updated.
@@ -1308,7 +1320,20 @@ export interface Image {
    * `Unknown`. Any other value will be accepted but ignored, and `Unknown` will be
    * used in its place.
    */
-  distribution?: 'Arch Linux' | 'CentOS' | 'CoreOS' | 'Debian' | 'Fedora' | 'Fedora Atomic' | 'FreeBSD' | 'Gentoo' | 'openSUSE' | 'RancherOS' | 'Rocky Linux' | 'Ubuntu' | 'Unknown';
+  distribution?:
+    | 'Arch Linux'
+    | 'CentOS'
+    | 'CoreOS'
+    | 'Debian'
+    | 'Fedora'
+    | 'Fedora Atomic'
+    | 'FreeBSD'
+    | 'Gentoo'
+    | 'openSUSE'
+    | 'RancherOS'
+    | 'Rocky Linux'
+    | 'Ubuntu'
+    | 'Unknown';
 
   /**
    * A string containing information about errors that may occur when importing a
@@ -1338,7 +1363,23 @@ export interface Image {
    * This attribute is an array of the regions that the image is available in. The
    * regions are represented by their identifying slug values.
    */
-  regions?: Array<'ams1' | 'ams2' | 'ams3' | 'blr1' | 'fra1' | 'lon1' | 'nyc1' | 'nyc2' | 'nyc3' | 'sfo1' | 'sfo2' | 'sfo3' | 'sgp1' | 'tor1' | 'syd1'>;
+  regions?: Array<
+    | 'ams1'
+    | 'ams2'
+    | 'ams3'
+    | 'blr1'
+    | 'fra1'
+    | 'lon1'
+    | 'nyc1'
+    | 'nyc2'
+    | 'nyc3'
+    | 'sfo1'
+    | 'sfo2'
+    | 'sfo3'
+    | 'sgp1'
+    | 'tor1'
+    | 'syd1'
+  >;
 
   /**
    * The size of the image in gigabytes.
@@ -1513,7 +1554,7 @@ export interface ImageGenPartialImageEvent {
 /**
  * Emitted when a partial image is available during image generation streaming.
  */
-export type ImageGenStreamEvent = ImageGenPartialImageEvent | ImageGenCompletedEvent
+export type ImageGenStreamEvent = ImageGenPartialImageEvent | ImageGenCompletedEvent;
 
 /**
  * @deprecated **Note**: All Droplets created after March 2017 use internal kernels

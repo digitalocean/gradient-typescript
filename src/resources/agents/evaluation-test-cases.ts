@@ -20,8 +20,15 @@ export class EvaluationTestCases extends APIResource {
    *   await client.agents.evaluationTestCases.create();
    * ```
    */
-  create(body: EvaluationTestCaseCreateParams | null | undefined = {}, options?: RequestOptions): APIPromise<EvaluationTestCaseCreateResponse> {
-    return this._client.post('/v2/gen-ai/evaluation_test_cases', { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  create(
+    body: EvaluationTestCaseCreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<EvaluationTestCaseCreateResponse> {
+    return this._client.post('/v2/gen-ai/evaluation_test_cases', {
+      body,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -36,8 +43,16 @@ export class EvaluationTestCases extends APIResource {
    *   );
    * ```
    */
-  retrieve(testCaseUuid: string, query: EvaluationTestCaseRetrieveParams | null | undefined = {}, options?: RequestOptions): APIPromise<EvaluationTestCaseRetrieveResponse> {
-    return this._client.get(path`/v2/gen-ai/evaluation_test_cases/${testCaseUuid}`, { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  retrieve(
+    testCaseUuid: string,
+    query: EvaluationTestCaseRetrieveParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<EvaluationTestCaseRetrieveResponse> {
+    return this._client.get(path`/v2/gen-ai/evaluation_test_cases/${testCaseUuid}`, {
+      query,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -52,8 +67,16 @@ export class EvaluationTestCases extends APIResource {
    *   );
    * ```
    */
-  update(testCaseUuid: string, body: EvaluationTestCaseUpdateParams | null | undefined = {}, options?: RequestOptions): APIPromise<EvaluationTestCaseUpdateResponse> {
-    return this._client.put(path`/v2/gen-ai/evaluation_test_cases/${testCaseUuid}`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  update(
+    testCaseUuid: string,
+    body: EvaluationTestCaseUpdateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<EvaluationTestCaseUpdateResponse> {
+    return this._client.put(path`/v2/gen-ai/evaluation_test_cases/${testCaseUuid}`, {
+      body,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -67,7 +90,10 @@ export class EvaluationTestCases extends APIResource {
    * ```
    */
   list(options?: RequestOptions): APIPromise<EvaluationTestCaseListResponse> {
-    return this._client.get('/v2/gen-ai/evaluation_test_cases', { defaultBaseURL: 'https://api.digitalocean.com', ...options });
+    return this._client.get('/v2/gen-ai/evaluation_test_cases', {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -82,8 +108,15 @@ export class EvaluationTestCases extends APIResource {
    *   );
    * ```
    */
-  listEvaluationRuns(evaluationTestCaseUuid: string, query: EvaluationTestCaseListEvaluationRunsParams | null | undefined = {}, options?: RequestOptions): APIPromise<EvaluationTestCaseListEvaluationRunsResponse> {
-    return this._client.get(path`/v2/gen-ai/evaluation_test_cases/${evaluationTestCaseUuid}/evaluation_runs`, { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  listEvaluationRuns(
+    evaluationTestCaseUuid: string,
+    query: EvaluationTestCaseListEvaluationRunsParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<EvaluationTestCaseListEvaluationRunsResponse> {
+    return this._client.get(
+      path`/v2/gen-ai/evaluation_test_cases/${evaluationTestCaseUuid}/evaluation_runs`,
+      { query, defaultBaseURL: 'https://api.digitalocean.com', ...options },
+    );
   }
 }
 
@@ -301,6 +334,6 @@ export declare namespace EvaluationTestCases {
     type EvaluationTestCaseCreateParams as EvaluationTestCaseCreateParams,
     type EvaluationTestCaseRetrieveParams as EvaluationTestCaseRetrieveParams,
     type EvaluationTestCaseUpdateParams as EvaluationTestCaseUpdateParams,
-    type EvaluationTestCaseListEvaluationRunsParams as EvaluationTestCaseListEvaluationRunsParams
+    type EvaluationTestCaseListEvaluationRunsParams as EvaluationTestCaseListEvaluationRunsParams,
   };
 }

@@ -42,9 +42,16 @@ export class Actions extends APIResource {
    * );
    * ```
    */
-  retrieve(actionID: number, params: ActionRetrieveParams, options?: RequestOptions): APIPromise<ActionRetrieveResponse> {
-    const { droplet_id } = params
-    return this._client.get(path`/v2/droplets/${droplet_id}/actions/${actionID}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  retrieve(
+    actionID: number,
+    params: ActionRetrieveParams,
+    options?: RequestOptions,
+  ): APIPromise<ActionRetrieveResponse> {
+    const { droplet_id } = params;
+    return this._client.get(path`/v2/droplets/${droplet_id}/actions/${actionID}`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -62,8 +69,16 @@ export class Actions extends APIResource {
    * );
    * ```
    */
-  list(dropletID: number, query: ActionListParams | null | undefined = {}, options?: RequestOptions): APIPromise<ActionListResponse> {
-    return this._client.get(path`/v2/droplets/${dropletID}/actions`, { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  list(
+    dropletID: number,
+    query: ActionListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ActionListResponse> {
+    return this._client.get(path`/v2/droplets/${dropletID}/actions`, {
+      query,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -90,9 +105,17 @@ export class Actions extends APIResource {
    *   });
    * ```
    */
-  bulkInitiate(params: ActionBulkInitiateParams, options?: RequestOptions): APIPromise<ActionBulkInitiateResponse> {
-    const { tag_name, ...body } = params
-    return this._client.post('/v2/droplets/actions', { query: { tag_name }, body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  bulkInitiate(
+    params: ActionBulkInitiateParams,
+    options?: RequestOptions,
+  ): APIPromise<ActionBulkInitiateResponse> {
+    const { tag_name, ...body } = params;
+    return this._client.post('/v2/droplets/actions', {
+      query: { tag_name },
+      body,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -127,8 +150,16 @@ export class Actions extends APIResource {
    * );
    * ```
    */
-  initiate(dropletID: number, body: ActionInitiateParams, options?: RequestOptions): APIPromise<ActionInitiateResponse> {
-    return this._client.post(path`/v2/droplets/${dropletID}/actions`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  initiate(
+    dropletID: number,
+    body: ActionInitiateParams,
+    options?: RequestOptions,
+  ): APIPromise<ActionInitiateResponse> {
+    return this._client.post(path`/v2/droplets/${dropletID}/actions`, {
+      body,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 }
 
@@ -174,14 +205,31 @@ export interface ActionListParams {
   per_page?: number;
 }
 
-export type ActionBulkInitiateParams = ActionBulkInitiateParams.DropletAction | ActionBulkInitiateParams.DropletActionSnapshot
+export type ActionBulkInitiateParams =
+  | ActionBulkInitiateParams.DropletAction
+  | ActionBulkInitiateParams.DropletActionSnapshot;
 
 export declare namespace ActionBulkInitiateParams {
   export interface DropletAction {
     /**
      * Body param: The type of action to initiate for the Droplet.
      */
-    type: 'enable_backups' | 'disable_backups' | 'reboot' | 'power_cycle' | 'shutdown' | 'power_off' | 'power_on' | 'restore' | 'password_reset' | 'resize' | 'rebuild' | 'rename' | 'change_kernel' | 'enable_ipv6' | 'snapshot';
+    type:
+      | 'enable_backups'
+      | 'disable_backups'
+      | 'reboot'
+      | 'power_cycle'
+      | 'shutdown'
+      | 'power_off'
+      | 'power_on'
+      | 'restore'
+      | 'password_reset'
+      | 'resize'
+      | 'rebuild'
+      | 'rename'
+      | 'change_kernel'
+      | 'enable_ipv6'
+      | 'snapshot';
 
     /**
      * Query param: Used to filter Droplets by a specific tag. Can not be combined with
@@ -194,7 +242,22 @@ export declare namespace ActionBulkInitiateParams {
     /**
      * Body param: The type of action to initiate for the Droplet.
      */
-    type: 'enable_backups' | 'disable_backups' | 'reboot' | 'power_cycle' | 'shutdown' | 'power_off' | 'power_on' | 'restore' | 'password_reset' | 'resize' | 'rebuild' | 'rename' | 'change_kernel' | 'enable_ipv6' | 'snapshot';
+    type:
+      | 'enable_backups'
+      | 'disable_backups'
+      | 'reboot'
+      | 'power_cycle'
+      | 'shutdown'
+      | 'power_off'
+      | 'power_on'
+      | 'restore'
+      | 'password_reset'
+      | 'resize'
+      | 'rebuild'
+      | 'rename'
+      | 'change_kernel'
+      | 'enable_ipv6'
+      | 'snapshot';
 
     /**
      * Query param: Used to filter Droplets by a specific tag. Can not be combined with
@@ -209,21 +272,60 @@ export declare namespace ActionBulkInitiateParams {
   }
 }
 
-export type ActionInitiateParams = ActionInitiateParams.DropletAction | ActionInitiateParams.DropletActionEnableBackups | ActionInitiateParams.DropletActionChangeBackupPolicy | ActionInitiateParams.DropletActionRestore | ActionInitiateParams.DropletActionResize | ActionInitiateParams.DropletActionRebuild | ActionInitiateParams.DropletActionRename | ActionInitiateParams.DropletActionChangeKernel | ActionInitiateParams.DropletActionSnapshot
+export type ActionInitiateParams =
+  | ActionInitiateParams.DropletAction
+  | ActionInitiateParams.DropletActionEnableBackups
+  | ActionInitiateParams.DropletActionChangeBackupPolicy
+  | ActionInitiateParams.DropletActionRestore
+  | ActionInitiateParams.DropletActionResize
+  | ActionInitiateParams.DropletActionRebuild
+  | ActionInitiateParams.DropletActionRename
+  | ActionInitiateParams.DropletActionChangeKernel
+  | ActionInitiateParams.DropletActionSnapshot;
 
 export declare namespace ActionInitiateParams {
   export interface DropletAction {
     /**
      * The type of action to initiate for the Droplet.
      */
-    type: 'enable_backups' | 'disable_backups' | 'reboot' | 'power_cycle' | 'shutdown' | 'power_off' | 'power_on' | 'restore' | 'password_reset' | 'resize' | 'rebuild' | 'rename' | 'change_kernel' | 'enable_ipv6' | 'snapshot';
+    type:
+      | 'enable_backups'
+      | 'disable_backups'
+      | 'reboot'
+      | 'power_cycle'
+      | 'shutdown'
+      | 'power_off'
+      | 'power_on'
+      | 'restore'
+      | 'password_reset'
+      | 'resize'
+      | 'rebuild'
+      | 'rename'
+      | 'change_kernel'
+      | 'enable_ipv6'
+      | 'snapshot';
   }
 
   export interface DropletActionEnableBackups {
     /**
      * The type of action to initiate for the Droplet.
      */
-    type: 'enable_backups' | 'disable_backups' | 'reboot' | 'power_cycle' | 'shutdown' | 'power_off' | 'power_on' | 'restore' | 'password_reset' | 'resize' | 'rebuild' | 'rename' | 'change_kernel' | 'enable_ipv6' | 'snapshot';
+    type:
+      | 'enable_backups'
+      | 'disable_backups'
+      | 'reboot'
+      | 'power_cycle'
+      | 'shutdown'
+      | 'power_off'
+      | 'power_on'
+      | 'restore'
+      | 'password_reset'
+      | 'resize'
+      | 'rebuild'
+      | 'rename'
+      | 'change_kernel'
+      | 'enable_ipv6'
+      | 'snapshot';
 
     /**
      * An object specifying the backup policy for the Droplet. If omitted, the backup
@@ -236,7 +338,22 @@ export declare namespace ActionInitiateParams {
     /**
      * The type of action to initiate for the Droplet.
      */
-    type: 'enable_backups' | 'disable_backups' | 'reboot' | 'power_cycle' | 'shutdown' | 'power_off' | 'power_on' | 'restore' | 'password_reset' | 'resize' | 'rebuild' | 'rename' | 'change_kernel' | 'enable_ipv6' | 'snapshot';
+    type:
+      | 'enable_backups'
+      | 'disable_backups'
+      | 'reboot'
+      | 'power_cycle'
+      | 'shutdown'
+      | 'power_off'
+      | 'power_on'
+      | 'restore'
+      | 'password_reset'
+      | 'resize'
+      | 'rebuild'
+      | 'rename'
+      | 'change_kernel'
+      | 'enable_ipv6'
+      | 'snapshot';
 
     /**
      * An object specifying the backup policy for the Droplet.
@@ -248,7 +365,22 @@ export declare namespace ActionInitiateParams {
     /**
      * The type of action to initiate for the Droplet.
      */
-    type: 'enable_backups' | 'disable_backups' | 'reboot' | 'power_cycle' | 'shutdown' | 'power_off' | 'power_on' | 'restore' | 'password_reset' | 'resize' | 'rebuild' | 'rename' | 'change_kernel' | 'enable_ipv6' | 'snapshot';
+    type:
+      | 'enable_backups'
+      | 'disable_backups'
+      | 'reboot'
+      | 'power_cycle'
+      | 'shutdown'
+      | 'power_off'
+      | 'power_on'
+      | 'restore'
+      | 'password_reset'
+      | 'resize'
+      | 'rebuild'
+      | 'rename'
+      | 'change_kernel'
+      | 'enable_ipv6'
+      | 'snapshot';
 
     /**
      * The ID of a backup of the current Droplet instance to restore from.
@@ -260,7 +392,22 @@ export declare namespace ActionInitiateParams {
     /**
      * The type of action to initiate for the Droplet.
      */
-    type: 'enable_backups' | 'disable_backups' | 'reboot' | 'power_cycle' | 'shutdown' | 'power_off' | 'power_on' | 'restore' | 'password_reset' | 'resize' | 'rebuild' | 'rename' | 'change_kernel' | 'enable_ipv6' | 'snapshot';
+    type:
+      | 'enable_backups'
+      | 'disable_backups'
+      | 'reboot'
+      | 'power_cycle'
+      | 'shutdown'
+      | 'power_off'
+      | 'power_on'
+      | 'restore'
+      | 'password_reset'
+      | 'resize'
+      | 'rebuild'
+      | 'rename'
+      | 'change_kernel'
+      | 'enable_ipv6'
+      | 'snapshot';
 
     /**
      * When `true`, the Droplet's disk will be resized in addition to its RAM and CPU.
@@ -279,7 +426,22 @@ export declare namespace ActionInitiateParams {
     /**
      * The type of action to initiate for the Droplet.
      */
-    type: 'enable_backups' | 'disable_backups' | 'reboot' | 'power_cycle' | 'shutdown' | 'power_off' | 'power_on' | 'restore' | 'password_reset' | 'resize' | 'rebuild' | 'rename' | 'change_kernel' | 'enable_ipv6' | 'snapshot';
+    type:
+      | 'enable_backups'
+      | 'disable_backups'
+      | 'reboot'
+      | 'power_cycle'
+      | 'shutdown'
+      | 'power_off'
+      | 'power_on'
+      | 'restore'
+      | 'password_reset'
+      | 'resize'
+      | 'rebuild'
+      | 'rename'
+      | 'change_kernel'
+      | 'enable_ipv6'
+      | 'snapshot';
 
     /**
      * The image ID of a public or private image or the slug identifier for a public
@@ -292,7 +454,22 @@ export declare namespace ActionInitiateParams {
     /**
      * The type of action to initiate for the Droplet.
      */
-    type: 'enable_backups' | 'disable_backups' | 'reboot' | 'power_cycle' | 'shutdown' | 'power_off' | 'power_on' | 'restore' | 'password_reset' | 'resize' | 'rebuild' | 'rename' | 'change_kernel' | 'enable_ipv6' | 'snapshot';
+    type:
+      | 'enable_backups'
+      | 'disable_backups'
+      | 'reboot'
+      | 'power_cycle'
+      | 'shutdown'
+      | 'power_off'
+      | 'power_on'
+      | 'restore'
+      | 'password_reset'
+      | 'resize'
+      | 'rebuild'
+      | 'rename'
+      | 'change_kernel'
+      | 'enable_ipv6'
+      | 'snapshot';
 
     /**
      * The new name for the Droplet.
@@ -304,7 +481,22 @@ export declare namespace ActionInitiateParams {
     /**
      * The type of action to initiate for the Droplet.
      */
-    type: 'enable_backups' | 'disable_backups' | 'reboot' | 'power_cycle' | 'shutdown' | 'power_off' | 'power_on' | 'restore' | 'password_reset' | 'resize' | 'rebuild' | 'rename' | 'change_kernel' | 'enable_ipv6' | 'snapshot';
+    type:
+      | 'enable_backups'
+      | 'disable_backups'
+      | 'reboot'
+      | 'power_cycle'
+      | 'shutdown'
+      | 'power_off'
+      | 'power_on'
+      | 'restore'
+      | 'password_reset'
+      | 'resize'
+      | 'rebuild'
+      | 'rename'
+      | 'change_kernel'
+      | 'enable_ipv6'
+      | 'snapshot';
 
     /**
      * A unique number used to identify and reference a specific kernel.
@@ -316,7 +508,22 @@ export declare namespace ActionInitiateParams {
     /**
      * The type of action to initiate for the Droplet.
      */
-    type: 'enable_backups' | 'disable_backups' | 'reboot' | 'power_cycle' | 'shutdown' | 'power_off' | 'power_on' | 'restore' | 'password_reset' | 'resize' | 'rebuild' | 'rename' | 'change_kernel' | 'enable_ipv6' | 'snapshot';
+    type:
+      | 'enable_backups'
+      | 'disable_backups'
+      | 'reboot'
+      | 'power_cycle'
+      | 'shutdown'
+      | 'power_off'
+      | 'power_on'
+      | 'restore'
+      | 'password_reset'
+      | 'resize'
+      | 'rebuild'
+      | 'rename'
+      | 'change_kernel'
+      | 'enable_ipv6'
+      | 'snapshot';
 
     /**
      * The name to give the new snapshot of the Droplet.
@@ -334,6 +541,6 @@ export declare namespace Actions {
     type ActionRetrieveParams as ActionRetrieveParams,
     type ActionListParams as ActionListParams,
     type ActionBulkInitiateParams as ActionBulkInitiateParams,
-    type ActionInitiateParams as ActionInitiateParams
+    type ActionInitiateParams as ActionInitiateParams,
   };
 }

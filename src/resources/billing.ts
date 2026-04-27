@@ -6,7 +6,7 @@ import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
 /**
- * The billing endpoints allow you to retrieve your account balance, invoices, 
+ * The billing endpoints allow you to retrieve your account balance, invoices,
  * billing history, and insights.
  *
  * **Balance:** By sending requests to the `/v2/customers/my/balance` endpoint, you can
@@ -25,12 +25,12 @@ import { path } from '../internal/utils/path';
  * will generally send requests to the invoices endpoint at
  * `/v2/customers/my/billing_history`.
  *
- * **Billing Insights:** Day-over-day changes in billing resource usage based on nightly invoice items, 
- * including total amount, region, SKU, and description for a specified date range. 
- * It is important to note that the daily resource usage may not reflect month-end billing totals when totaled for 
+ * **Billing Insights:** Day-over-day changes in billing resource usage based on nightly invoice items,
+ * including total amount, region, SKU, and description for a specified date range.
+ * It is important to note that the daily resource usage may not reflect month-end billing totals when totaled for
  * a given month as nightly invoice items do not necessarily encompass all invoicing factors for the entire month.
- *   `v2/billing/{account_urn}/insights/{start_date}/{end_date}` where account_urn is the URN of the customer 
- * account, can be a team (do:team:uuid) or an organization (do:teamgroup:uuid). The date range specified by 
+ *   `v2/billing/{account_urn}/insights/{start_date}/{end_date}` where account_urn is the URN of the customer
+ * account, can be a team (do:team:uuid) or an organization (do:teamgroup:uuid). The date range specified by
  * start_date and end_date must be in YYYY-MM-DD format.
  */
 export class Billing extends APIResource {
@@ -54,9 +54,17 @@ export class Billing extends APIResource {
    * );
    * ```
    */
-  listInsights(endDate: string, params: BillingListInsightsParams, options?: RequestOptions): APIPromise<BillingListInsightsResponse> {
-    const { account_urn, start_date, ...query } = params
-    return this._client.get(path`/v2/billing/${account_urn}/insights/${start_date}/${endDate}`, { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  listInsights(
+    endDate: string,
+    params: BillingListInsightsParams,
+    options?: RequestOptions,
+  ): APIPromise<BillingListInsightsResponse> {
+    const { account_urn, start_date, ...query } = params;
+    return this._client.get(path`/v2/billing/${account_urn}/insights/${start_date}/${endDate}`, {
+      query,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 }
 
@@ -149,6 +157,6 @@ export interface BillingListInsightsParams {
 export declare namespace Billing {
   export {
     type BillingListInsightsResponse as BillingListInsightsResponse,
-    type BillingListInsightsParams as BillingListInsightsParams
+    type BillingListInsightsParams as BillingListInsightsParams,
   };
 }

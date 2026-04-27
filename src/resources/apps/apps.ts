@@ -14,6 +14,6 @@ export declare namespace Apps {
   export {
     JobInvocations as JobInvocations,
     type JobInvocationCancelResponse as JobInvocationCancelResponse,
-    type JobInvocationCancelParams as JobInvocationCancelParams
+    type JobInvocationCancelParams as JobInvocationCancelParams,
   };
 }

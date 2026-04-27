@@ -2,7 +2,16 @@
 
 import { APIResource } from '../../../core/resource';
 import * as ConfigAPI from './config';
-import { Config, ConfigRetrieveResponse, ConfigRetrieveSubjectParams, ConfigRetrieveSubjectResponse, ConfigUpdateParams, ConfigUpdateResponse, ConfigUpdateSubjectParams, ConfigUpdateSubjectResponse } from './config';
+import {
+  Config,
+  ConfigRetrieveResponse,
+  ConfigRetrieveSubjectParams,
+  ConfigRetrieveSubjectResponse,
+  ConfigUpdateParams,
+  ConfigUpdateResponse,
+  ConfigUpdateSubjectParams,
+  ConfigUpdateSubjectResponse,
+} from './config';
 
 export class SchemaRegistry extends APIResource {
   config: ConfigAPI.Config = new ConfigAPI.Config(this._client);
@@ -19,6 +28,6 @@ export declare namespace SchemaRegistry {
     type ConfigUpdateSubjectResponse as ConfigUpdateSubjectResponse,
     type ConfigUpdateParams as ConfigUpdateParams,
     type ConfigRetrieveSubjectParams as ConfigRetrieveSubjectParams,
-    type ConfigUpdateSubjectParams as ConfigUpdateSubjectParams
+    type ConfigUpdateSubjectParams as ConfigUpdateSubjectParams,
   };
 }

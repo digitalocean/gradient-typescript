@@ -2,7 +2,10 @@
 
 import Gradient from '@digitalocean/gradient';
 
-const client = new Gradient({ accessToken: 'My Access Token', baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010' });
+const client = new Gradient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+});
 
 describe('resource apiKeys', () => {
   // Mock server tests are disabled
@@ -20,9 +23,9 @@ describe('resource apiKeys', () => {
   // Mock server tests are disabled
   test.skip('create: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.inference.apiKeys.create({ name: 'Production Key' }, { path: '/_stainless_unknown_path' }))
-      .rejects
-      .toThrow(Gradient.NotFoundError);
+    await expect(
+      client.inference.apiKeys.create({ name: 'Production Key' }, { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Gradient.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -40,9 +43,13 @@ describe('resource apiKeys', () => {
   // Mock server tests are disabled
   test.skip('update: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.inference.apiKeys.update('"123e4567-e89b-12d3-a456-426614174000"', { api_key_uuid: '"12345678-1234-1234-1234-123456789012"', name: '"Production Key"' }, { path: '/_stainless_unknown_path' }))
-      .rejects
-      .toThrow(Gradient.NotFoundError);
+    await expect(
+      client.inference.apiKeys.update(
+        '"123e4567-e89b-12d3-a456-426614174000"',
+        { api_key_uuid: '"12345678-1234-1234-1234-123456789012"', name: '"Production Key"' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Gradient.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -60,9 +67,9 @@ describe('resource apiKeys', () => {
   // Mock server tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.inference.apiKeys.list({ page: 0, per_page: 0 }, { path: '/_stainless_unknown_path' }))
-      .rejects
-      .toThrow(Gradient.NotFoundError);
+    await expect(
+      client.inference.apiKeys.list({ page: 0, per_page: 0 }, { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Gradient.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -79,7 +86,9 @@ describe('resource apiKeys', () => {
 
   // Mock server tests are disabled
   test.skip('updateRegenerate', async () => {
-    const responsePromise = client.inference.apiKeys.updateRegenerate('"123e4567-e89b-12d3-a456-426614174000"');
+    const responsePromise = client.inference.apiKeys.updateRegenerate(
+      '"123e4567-e89b-12d3-a456-426614174000"',
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

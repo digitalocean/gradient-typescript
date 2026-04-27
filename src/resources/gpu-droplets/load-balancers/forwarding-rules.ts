@@ -43,7 +43,12 @@ export class ForwardingRules extends APIResource {
    * ```
    */
   add(lbID: string, body: ForwardingRuleAddParams, options?: RequestOptions): APIPromise<void> {
-    return this._client.post(path`/v2/load_balancers/${lbID}/forwarding_rules`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
+    return this._client.post(path`/v2/load_balancers/${lbID}/forwarding_rules`, {
+      body,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
   }
 
   /**
@@ -74,7 +79,12 @@ export class ForwardingRules extends APIResource {
    * ```
    */
   remove(lbID: string, body: ForwardingRuleRemoveParams, options?: RequestOptions): APIPromise<void> {
-    return this._client.delete(path`/v2/load_balancers/${lbID}/forwarding_rules`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
+    return this._client.delete(path`/v2/load_balancers/${lbID}/forwarding_rules`, {
+      body,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
   }
 }
 
@@ -89,6 +99,6 @@ export interface ForwardingRuleRemoveParams {
 export declare namespace ForwardingRules {
   export {
     type ForwardingRuleAddParams as ForwardingRuleAddParams,
-    type ForwardingRuleRemoveParams as ForwardingRuleRemoveParams
+    type ForwardingRuleRemoveParams as ForwardingRuleRemoveParams,
   };
 }

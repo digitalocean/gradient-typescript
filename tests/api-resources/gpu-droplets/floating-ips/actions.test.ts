@@ -2,7 +2,10 @@
 
 import Gradient from '@digitalocean/gradient';
 
-const client = new Gradient({ accessToken: 'My Access Token', baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010' });
+const client = new Gradient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+});
 
 describe('resource actions', () => {
   // Mock server tests are disabled
@@ -24,7 +27,9 @@ describe('resource actions', () => {
 
   // Mock server tests are disabled
   test.skip('retrieve: only required params', async () => {
-    const responsePromise = client.gpuDroplets.floatingIPs.actions.retrieve(36804636, { floating_ip: '45.55.96.47' });
+    const responsePromise = client.gpuDroplets.floatingIPs.actions.retrieve(36804636, {
+      floating_ip: '45.55.96.47',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -36,7 +41,9 @@ describe('resource actions', () => {
 
   // Mock server tests are disabled
   test.skip('retrieve: required and optional params', async () => {
-    const response = await client.gpuDroplets.floatingIPs.actions.retrieve(36804636, { floating_ip: '45.55.96.47' });
+    const response = await client.gpuDroplets.floatingIPs.actions.retrieve(36804636, {
+      floating_ip: '45.55.96.47',
+    });
   });
 
   // Mock server tests are disabled

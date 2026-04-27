@@ -46,7 +46,10 @@ export class Config extends APIResource {
    * ```
    */
   retrieve(databaseClusterUuid: string, options?: RequestOptions): APIPromise<ConfigRetrieveResponse> {
-    return this._client.get(path`/v2/databases/${databaseClusterUuid}/schema-registry/config`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
+    return this._client.get(path`/v2/databases/${databaseClusterUuid}/schema-registry/config`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -64,8 +67,16 @@ export class Config extends APIResource {
    *   );
    * ```
    */
-  update(databaseClusterUuid: string, body: ConfigUpdateParams, options?: RequestOptions): APIPromise<ConfigUpdateResponse> {
-    return this._client.put(path`/v2/databases/${databaseClusterUuid}/schema-registry/config`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  update(
+    databaseClusterUuid: string,
+    body: ConfigUpdateParams,
+    options?: RequestOptions,
+  ): APIPromise<ConfigUpdateResponse> {
+    return this._client.put(path`/v2/databases/${databaseClusterUuid}/schema-registry/config`, {
+      body,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -87,9 +98,16 @@ export class Config extends APIResource {
    *   );
    * ```
    */
-  retrieveSubject(subjectName: string, params: ConfigRetrieveSubjectParams, options?: RequestOptions): APIPromise<ConfigRetrieveSubjectResponse> {
-    const { database_cluster_uuid } = params
-    return this._client.get(path`/v2/databases/${database_cluster_uuid}/schema-registry/config/${subjectName}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  retrieveSubject(
+    subjectName: string,
+    params: ConfigRetrieveSubjectParams,
+    options?: RequestOptions,
+  ): APIPromise<ConfigRetrieveSubjectResponse> {
+    const { database_cluster_uuid } = params;
+    return this._client.get(
+      path`/v2/databases/${database_cluster_uuid}/schema-registry/config/${subjectName}`,
+      { defaultBaseURL: 'https://api.digitalocean.com', ...options },
+    );
   }
 
   /**
@@ -112,9 +130,16 @@ export class Config extends APIResource {
    *   );
    * ```
    */
-  updateSubject(subjectName: string, params: ConfigUpdateSubjectParams, options?: RequestOptions): APIPromise<ConfigUpdateSubjectResponse> {
-    const { database_cluster_uuid, ...body } = params
-    return this._client.put(path`/v2/databases/${database_cluster_uuid}/schema-registry/config/${subjectName}`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  updateSubject(
+    subjectName: string,
+    params: ConfigUpdateSubjectParams,
+    options?: RequestOptions,
+  ): APIPromise<ConfigUpdateSubjectResponse> {
+    const { database_cluster_uuid, ...body } = params;
+    return this._client.put(
+      path`/v2/databases/${database_cluster_uuid}/schema-registry/config/${subjectName}`,
+      { body, defaultBaseURL: 'https://api.digitalocean.com', ...options },
+    );
   }
 }
 
@@ -122,21 +147,42 @@ export interface ConfigRetrieveResponse {
   /**
    * The compatibility level of the schema registry.
    */
-  compatibility_level: 'NONE' | 'BACKWARD' | 'BACKWARD_TRANSITIVE' | 'FORWARD' | 'FORWARD_TRANSITIVE' | 'FULL' | 'FULL_TRANSITIVE';
+  compatibility_level:
+    | 'NONE'
+    | 'BACKWARD'
+    | 'BACKWARD_TRANSITIVE'
+    | 'FORWARD'
+    | 'FORWARD_TRANSITIVE'
+    | 'FULL'
+    | 'FULL_TRANSITIVE';
 }
 
 export interface ConfigUpdateResponse {
   /**
    * The compatibility level of the schema registry.
    */
-  compatibility_level: 'NONE' | 'BACKWARD' | 'BACKWARD_TRANSITIVE' | 'FORWARD' | 'FORWARD_TRANSITIVE' | 'FULL' | 'FULL_TRANSITIVE';
+  compatibility_level:
+    | 'NONE'
+    | 'BACKWARD'
+    | 'BACKWARD_TRANSITIVE'
+    | 'FORWARD'
+    | 'FORWARD_TRANSITIVE'
+    | 'FULL'
+    | 'FULL_TRANSITIVE';
 }
 
 export interface ConfigRetrieveSubjectResponse {
   /**
    * The compatibility level of the schema registry.
    */
-  compatibility_level: 'NONE' | 'BACKWARD' | 'BACKWARD_TRANSITIVE' | 'FORWARD' | 'FORWARD_TRANSITIVE' | 'FULL' | 'FULL_TRANSITIVE';
+  compatibility_level:
+    | 'NONE'
+    | 'BACKWARD'
+    | 'BACKWARD_TRANSITIVE'
+    | 'FORWARD'
+    | 'FORWARD_TRANSITIVE'
+    | 'FULL'
+    | 'FULL_TRANSITIVE';
 
   /**
    * The name of the schema subject.
@@ -148,7 +194,14 @@ export interface ConfigUpdateSubjectResponse {
   /**
    * The compatibility level of the schema registry.
    */
-  compatibility_level: 'NONE' | 'BACKWARD' | 'BACKWARD_TRANSITIVE' | 'FORWARD' | 'FORWARD_TRANSITIVE' | 'FULL' | 'FULL_TRANSITIVE';
+  compatibility_level:
+    | 'NONE'
+    | 'BACKWARD'
+    | 'BACKWARD_TRANSITIVE'
+    | 'FORWARD'
+    | 'FORWARD_TRANSITIVE'
+    | 'FULL'
+    | 'FULL_TRANSITIVE';
 
   /**
    * The name of the schema subject.
@@ -160,7 +213,14 @@ export interface ConfigUpdateParams {
   /**
    * The compatibility level of the schema registry.
    */
-  compatibility_level: 'NONE' | 'BACKWARD' | 'BACKWARD_TRANSITIVE' | 'FORWARD' | 'FORWARD_TRANSITIVE' | 'FULL' | 'FULL_TRANSITIVE';
+  compatibility_level:
+    | 'NONE'
+    | 'BACKWARD'
+    | 'BACKWARD_TRANSITIVE'
+    | 'FORWARD'
+    | 'FORWARD_TRANSITIVE'
+    | 'FULL'
+    | 'FULL_TRANSITIVE';
 }
 
 export interface ConfigRetrieveSubjectParams {
@@ -179,7 +239,14 @@ export interface ConfigUpdateSubjectParams {
   /**
    * Body param: The compatibility level of the schema registry.
    */
-  compatibility_level: 'NONE' | 'BACKWARD' | 'BACKWARD_TRANSITIVE' | 'FORWARD' | 'FORWARD_TRANSITIVE' | 'FULL' | 'FULL_TRANSITIVE';
+  compatibility_level:
+    | 'NONE'
+    | 'BACKWARD'
+    | 'BACKWARD_TRANSITIVE'
+    | 'FORWARD'
+    | 'FORWARD_TRANSITIVE'
+    | 'FULL'
+    | 'FULL_TRANSITIVE';
 }
 
 export declare namespace Config {
@@ -190,6 +257,6 @@ export declare namespace Config {
     type ConfigUpdateSubjectResponse as ConfigUpdateSubjectResponse,
     type ConfigUpdateParams as ConfigUpdateParams,
     type ConfigRetrieveSubjectParams as ConfigRetrieveSubjectParams,
-    type ConfigUpdateSubjectParams as ConfigUpdateSubjectParams
+    type ConfigUpdateSubjectParams as ConfigUpdateSubjectParams,
   };
 }

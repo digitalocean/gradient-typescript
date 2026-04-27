@@ -19,8 +19,15 @@ export class Dropbox extends APIResource {
    *   await client.agents.evaluationMetrics.oauth2.dropbox.createTokens();
    * ```
    */
-  createTokens(body: DropboxCreateTokensParams | null | undefined = {}, options?: RequestOptions): APIPromise<DropboxCreateTokensResponse> {
-    return this._client.post('/v2/gen-ai/oauth2/dropbox/tokens', { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  createTokens(
+    body: DropboxCreateTokensParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<DropboxCreateTokensResponse> {
+    return this._client.post('/v2/gen-ai/oauth2/dropbox/tokens', {
+      body,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 }
 
@@ -54,6 +61,6 @@ export interface DropboxCreateTokensParams {
 export declare namespace Dropbox {
   export {
     type DropboxCreateTokensResponse as DropboxCreateTokensResponse,
-    type DropboxCreateTokensParams as DropboxCreateTokensParams
+    type DropboxCreateTokensParams as DropboxCreateTokensParams,
   };
 }

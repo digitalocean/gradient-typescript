@@ -2,7 +2,10 @@
 
 import Gradient from '@digitalocean/gradient';
 
-const client = new Gradient({ accessToken: 'My Access Token', baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010' });
+const client = new Gradient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+});
 
 describe('resource knowledgeBases', () => {
   // Mock server tests are disabled
@@ -19,7 +22,10 @@ describe('resource knowledgeBases', () => {
 
   // Mock server tests are disabled
   test.skip('attachSingle: only required params', async () => {
-    const responsePromise = client.agents.knowledgeBases.attachSingle('"123e4567-e89b-12d3-a456-426614174000"', { agent_uuid: '"123e4567-e89b-12d3-a456-426614174000"' });
+    const responsePromise = client.agents.knowledgeBases.attachSingle(
+      '"123e4567-e89b-12d3-a456-426614174000"',
+      { agent_uuid: '"123e4567-e89b-12d3-a456-426614174000"' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -31,12 +37,17 @@ describe('resource knowledgeBases', () => {
 
   // Mock server tests are disabled
   test.skip('attachSingle: required and optional params', async () => {
-    const response = await client.agents.knowledgeBases.attachSingle('"123e4567-e89b-12d3-a456-426614174000"', { agent_uuid: '"123e4567-e89b-12d3-a456-426614174000"' });
+    const response = await client.agents.knowledgeBases.attachSingle(
+      '"123e4567-e89b-12d3-a456-426614174000"',
+      { agent_uuid: '"123e4567-e89b-12d3-a456-426614174000"' },
+    );
   });
 
   // Mock server tests are disabled
   test.skip('detach: only required params', async () => {
-    const responsePromise = client.agents.knowledgeBases.detach('"123e4567-e89b-12d3-a456-426614174000"', { agent_uuid: '"123e4567-e89b-12d3-a456-426614174000"' });
+    const responsePromise = client.agents.knowledgeBases.detach('"123e4567-e89b-12d3-a456-426614174000"', {
+      agent_uuid: '"123e4567-e89b-12d3-a456-426614174000"',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -48,6 +59,8 @@ describe('resource knowledgeBases', () => {
 
   // Mock server tests are disabled
   test.skip('detach: required and optional params', async () => {
-    const response = await client.agents.knowledgeBases.detach('"123e4567-e89b-12d3-a456-426614174000"', { agent_uuid: '"123e4567-e89b-12d3-a456-426614174000"' });
+    const response = await client.agents.knowledgeBases.detach('"123e4567-e89b-12d3-a456-426614174000"', {
+      agent_uuid: '"123e4567-e89b-12d3-a456-426614174000"',
+    });
   });
 });

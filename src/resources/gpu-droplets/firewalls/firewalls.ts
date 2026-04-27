@@ -36,9 +36,16 @@ export class Firewalls extends APIResource {
    *   await client.gpuDroplets.firewalls.create();
    * ```
    */
-  create(params: FirewallCreateParams | null | undefined = undefined, options?: RequestOptions): APIPromise<FirewallCreateResponse> {
-    const { body } = params ?? {}
-    return this._client.post('/v2/firewalls', { body: body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  create(
+    params: FirewallCreateParams | null | undefined = undefined,
+    options?: RequestOptions,
+  ): APIPromise<FirewallCreateResponse> {
+    const { body } = params ?? {};
+    return this._client.post('/v2/firewalls', {
+      body: body,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -54,7 +61,10 @@ export class Firewalls extends APIResource {
    * ```
    */
   retrieve(firewallID: string, options?: RequestOptions): APIPromise<FirewallRetrieveResponse> {
-    return this._client.get(path`/v2/firewalls/${firewallID}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
+    return this._client.get(path`/v2/firewalls/${firewallID}`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -74,9 +84,17 @@ export class Firewalls extends APIResource {
    * );
    * ```
    */
-  update(firewallID: string, params: FirewallUpdateParams, options?: RequestOptions): APIPromise<FirewallUpdateResponse> {
-    const { firewall } = params
-    return this._client.put(path`/v2/firewalls/${firewallID}`, { body: firewall, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  update(
+    firewallID: string,
+    params: FirewallUpdateParams,
+    options?: RequestOptions,
+  ): APIPromise<FirewallUpdateResponse> {
+    const { firewall } = params;
+    return this._client.put(path`/v2/firewalls/${firewallID}`, {
+      body: firewall,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -88,8 +106,15 @@ export class Firewalls extends APIResource {
    * const firewalls = await client.gpuDroplets.firewalls.list();
    * ```
    */
-  list(query: FirewallListParams | null | undefined = {}, options?: RequestOptions): APIPromise<FirewallListResponse> {
-    return this._client.get('/v2/firewalls', { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  list(
+    query: FirewallListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<FirewallListResponse> {
+    return this._client.get('/v2/firewalls', {
+      query,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -107,7 +132,11 @@ export class Firewalls extends APIResource {
    * ```
    */
   delete(firewallID: string, options?: RequestOptions): APIPromise<void> {
-    return this._client.delete(path`/v2/firewalls/${firewallID}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
+    return this._client.delete(path`/v2/firewalls/${firewallID}`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
   }
 }
 
@@ -240,8 +269,7 @@ export interface FirewallCreateParams {
 }
 
 export namespace FirewallCreateParams {
-  export interface Body extends FirewallsAPI.Firewall {
-  }
+  export interface Body extends FirewallsAPI.Firewall {}
 }
 
 export interface FirewallUpdateParams {
@@ -273,24 +301,16 @@ export declare namespace Firewalls {
     type FirewallListResponse as FirewallListResponse,
     type FirewallCreateParams as FirewallCreateParams,
     type FirewallUpdateParams as FirewallUpdateParams,
-    type FirewallListParams as FirewallListParams
+    type FirewallListParams as FirewallListParams,
   };
 
   export {
     Droplets as Droplets,
     type DropletAddParams as DropletAddParams,
-    type DropletRemoveParams as DropletRemoveParams
+    type DropletRemoveParams as DropletRemoveParams,
   };
 
-  export {
-    Tags as Tags,
-    type TagAddParams as TagAddParams,
-    type TagRemoveParams as TagRemoveParams
-  };
+  export { Tags as Tags, type TagAddParams as TagAddParams, type TagRemoveParams as TagRemoveParams };
 
-  export {
-    Rules as Rules,
-    type RuleAddParams as RuleAddParams,
-    type RuleRemoveParams as RuleRemoveParams
-  };
+  export { Rules as Rules, type RuleAddParams as RuleAddParams, type RuleRemoveParams as RuleRemoveParams };
 }

@@ -27,8 +27,15 @@ export class Sizes extends APIResource {
    * const sizes = await client.gpuDroplets.sizes.list();
    * ```
    */
-  list(query: SizeListParams | null | undefined = {}, options?: RequestOptions): APIPromise<SizeListResponse> {
-    return this._client.get('/v2/sizes', { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  list(
+    query: SizeListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SizeListResponse> {
+    return this._client.get('/v2/sizes', {
+      query,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 }
 
@@ -56,8 +63,5 @@ export interface SizeListParams {
 }
 
 export declare namespace Sizes {
-  export {
-    type SizeListResponse as SizeListResponse,
-    type SizeListParams as SizeListParams
-  };
+  export { type SizeListResponse as SizeListResponse, type SizeListParams as SizeListParams };
 }

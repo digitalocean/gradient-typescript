@@ -25,15 +25,32 @@ export class Responses extends APIResource {
    *   });
    * ```
    */
-  create(body: ResponseCreateParamsNonStreaming, options?: RequestOptions): APIPromise<Shared.CreateResponseResponse>
-  create(body: ResponseCreateParamsStreaming, options?: RequestOptions): APIPromise<Stream<Shared.CreateResponseStreamResponse>>
-  create(body: ResponseCreateParamsBase, options?: RequestOptions): APIPromise<Stream<Shared.CreateResponseStreamResponse> | Shared.CreateResponseResponse>
-  create(body: ResponseCreateParams, options?: RequestOptions): APIPromise<Shared.CreateResponseResponse> | APIPromise<Stream<Shared.CreateResponseStreamResponse>> {
-    return this._client.post('/responses', { body, defaultBaseURL: 'https://inference.do-ai.run/v1', ...options, stream: body.stream ?? false }) as APIPromise<Shared.CreateResponseResponse> | APIPromise<Stream<Shared.CreateResponseStreamResponse>>;
+  create(
+    body: ResponseCreateParamsNonStreaming,
+    options?: RequestOptions,
+  ): APIPromise<Shared.CreateResponseResponse>;
+  create(
+    body: ResponseCreateParamsStreaming,
+    options?: RequestOptions,
+  ): APIPromise<Stream<Shared.CreateResponseStreamResponse>>;
+  create(
+    body: ResponseCreateParamsBase,
+    options?: RequestOptions,
+  ): APIPromise<Stream<Shared.CreateResponseStreamResponse> | Shared.CreateResponseResponse>;
+  create(
+    body: ResponseCreateParams,
+    options?: RequestOptions,
+  ): APIPromise<Shared.CreateResponseResponse> | APIPromise<Stream<Shared.CreateResponseStreamResponse>> {
+    return this._client.post('/responses', {
+      body,
+      defaultBaseURL: 'https://inference.do-ai.run/v1',
+      ...options,
+      stream: body.stream ?? false,
+    }) as APIPromise<Shared.CreateResponseResponse> | APIPromise<Stream<Shared.CreateResponseStreamResponse>>;
   }
 }
 
-export type ResponseCreateParams = ResponseCreateParamsNonStreaming | ResponseCreateParamsStreaming
+export type ResponseCreateParams = ResponseCreateParamsNonStreaming | ResponseCreateParamsStreaming;
 
 export interface ResponseCreateParamsBase {
   /**
@@ -147,7 +164,7 @@ export interface ResponseCreateParamsBase {
    */
   user?: string;
 
-[k: string]: unknown
+  [k: string]: unknown;
 }
 
 export namespace ResponseCreateParams {
@@ -203,7 +220,7 @@ export namespace ResponseCreateParams {
      */
     summary?: Array<unknown>;
 
-  [k: string]: unknown
+    [k: string]: unknown;
   }
 
   export namespace UnionMember0 {
@@ -218,7 +235,7 @@ export namespace ResponseCreateParams {
        */
       type?: 'reasoning_text';
 
-    [k: string]: unknown
+      [k: string]: unknown;
     }
   }
 
@@ -248,7 +265,7 @@ export namespace ResponseCreateParams {
      */
     type?: 'message';
 
-  [k: string]: unknown
+    [k: string]: unknown;
   }
 
   export namespace UnionMember1 {
@@ -375,8 +392,8 @@ export namespace ResponseCreateParams {
     parameters?: { [key: string]: unknown };
   }
 
-  export type ResponseCreateParamsNonStreaming = ResponsesAPI.ResponseCreateParamsNonStreaming
-  export type ResponseCreateParamsStreaming = ResponsesAPI.ResponseCreateParamsStreaming
+  export type ResponseCreateParamsNonStreaming = ResponsesAPI.ResponseCreateParamsNonStreaming;
+  export type ResponseCreateParamsStreaming = ResponsesAPI.ResponseCreateParamsStreaming;
 }
 
 export interface ResponseCreateParamsNonStreaming extends ResponseCreateParamsBase {
@@ -386,7 +403,7 @@ export interface ResponseCreateParamsNonStreaming extends ResponseCreateParamsBa
    */
   stream?: false | null;
 
-[k: string]: unknown
+  [k: string]: unknown;
 }
 
 export interface ResponseCreateParamsStreaming extends ResponseCreateParamsBase {
@@ -396,13 +413,13 @@ export interface ResponseCreateParamsStreaming extends ResponseCreateParamsBase 
    */
   stream: true;
 
-[k: string]: unknown
+  [k: string]: unknown;
 }
 
 export declare namespace Responses {
   export {
     type ResponseCreateParams as ResponseCreateParams,
     type ResponseCreateParamsNonStreaming as ResponseCreateParamsNonStreaming,
-    type ResponseCreateParamsStreaming as ResponseCreateParamsStreaming
+    type ResponseCreateParamsStreaming as ResponseCreateParamsStreaming,
   };
 }

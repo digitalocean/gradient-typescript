@@ -8,7 +8,7 @@ import { encodeUTF8 } from '../internal/utils/bytes';
 import { loggerFor } from '../internal/utils/log';
 import type { Gradient } from '../client';
 
-import { APIError } from './error';;
+import { APIError } from './error';
 
 type Bytes = string | ArrayBuffer | Uint8Array | null | undefined;
 
@@ -31,32 +31,30 @@ export class Stream<Item> implements AsyncIterable<Item> {
     this.#client = client;
   }
 
-  static fromSSEResponse<Item>(response: Response,
-controller: AbortController,
-client?: Gradient,): Stream<Item> {
+  static fromSSEResponse<Item>(
+    response: Response,
+    controller: AbortController,
+    client?: Gradient,
+  ): Stream<Item> {
     let consumed = false;
     const logger = client ? loggerFor(client) : console;
 
     async function* iterator(): AsyncIterator<Item, any, undefined> {
       if (consumed) {
-        throw new GradientError(
-          'Cannot iterate over a consumed stream, use `.tee()` to split the stream.',
-        );
+        throw new GradientError('Cannot iterate over a consumed stream, use `.tee()` to split the stream.');
       }
       consumed = true;
       let done = false;
       try {
         for await (const sse of _iterSSEMessages(response, controller)) {
           if (done) continue;
-          
+
           if (sse.data.startsWith('[DONE]')) {
             done = true;
             continue;
-          }
-          
-          else {
+          } else {
             let data;
-          
+
             try {
               data = JSON.parse(sse.data) as any;
             } catch (e) {
@@ -64,13 +62,13 @@ client?: Gradient,): Stream<Item> {
               logger.error(`From chunk:`, sse.raw);
               throw e;
             }
-          
+
             if (data && data.error) {
-              throw new APIError(undefined, data.error, undefined, response.headers)
+              throw new APIError(undefined, data.error, undefined, response.headers);
             }
-          
-            yield data
-          };
+
+            yield data;
+          }
         }
         done = true;
       } catch (e) {
@@ -114,9 +112,7 @@ client?: Gradient,): Stream<Item> {
 
     async function* iterator(): AsyncIterator<Item, any, undefined> {
       if (consumed) {
-        throw new GradientError(
-          'Cannot iterate over a consumed stream, use `.tee()` to split the stream.',
-        );
+        throw new GradientError('Cannot iterate over a consumed stream, use `.tee()` to split the stream.');
       }
       consumed = true;
       let done = false;

@@ -3,9 +3,39 @@
 import { APIResource } from '../../core/resource';
 import * as Shared from '../shared';
 import * as DataSourcesAPI from './data-sources';
-import { APIFileUploadDataSource, APIKnowledgeBaseDataSource, APISpacesDataSource, APIWebCrawlerDataSource, AwsDataSource, DataSourceCreateParams, DataSourceCreatePresignedURLsParams, DataSourceCreatePresignedURLsResponse, DataSourceCreateResponse, DataSourceDeleteParams, DataSourceDeleteResponse, DataSourceListParams, DataSourceListResponse, DataSourceUpdateParams, DataSourceUpdateResponse, DataSources } from './data-sources';
+import {
+  APIFileUploadDataSource,
+  APIKnowledgeBaseDataSource,
+  APISpacesDataSource,
+  APIWebCrawlerDataSource,
+  AwsDataSource,
+  DataSourceCreateParams,
+  DataSourceCreatePresignedURLsParams,
+  DataSourceCreatePresignedURLsResponse,
+  DataSourceCreateResponse,
+  DataSourceDeleteParams,
+  DataSourceDeleteResponse,
+  DataSourceListParams,
+  DataSourceListResponse,
+  DataSourceUpdateParams,
+  DataSourceUpdateResponse,
+  DataSources,
+} from './data-sources';
 import * as IndexingJobsAPI from './indexing-jobs';
-import { APIIndexedDataSource, APIIndexingJob, IndexingJobCreateParams, IndexingJobCreateResponse, IndexingJobListParams, IndexingJobListResponse, IndexingJobRetrieveDataSourcesResponse, IndexingJobRetrieveResponse, IndexingJobRetrieveSignedURLResponse, IndexingJobUpdateCancelParams, IndexingJobUpdateCancelResponse, IndexingJobs } from './indexing-jobs';
+import {
+  APIIndexedDataSource,
+  APIIndexingJob,
+  IndexingJobCreateParams,
+  IndexingJobCreateResponse,
+  IndexingJobListParams,
+  IndexingJobListResponse,
+  IndexingJobRetrieveDataSourcesResponse,
+  IndexingJobRetrieveResponse,
+  IndexingJobRetrieveSignedURLResponse,
+  IndexingJobUpdateCancelParams,
+  IndexingJobUpdateCancelResponse,
+  IndexingJobs,
+} from './indexing-jobs';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
@@ -25,8 +55,15 @@ export class KnowledgeBases extends APIResource {
    * const knowledgeBase = await client.knowledgeBases.create();
    * ```
    */
-  create(body: KnowledgeBaseCreateParams | null | undefined = {}, options?: RequestOptions): APIPromise<KnowledgeBaseCreateResponse> {
-    return this._client.post('/v2/gen-ai/knowledge_bases', { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  create(
+    body: KnowledgeBaseCreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<KnowledgeBaseCreateResponse> {
+    return this._client.post('/v2/gen-ai/knowledge_bases', {
+      body,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -41,7 +78,10 @@ export class KnowledgeBases extends APIResource {
    * ```
    */
   retrieve(uuid: string, options?: RequestOptions): APIPromise<KnowledgeBaseRetrieveResponse> {
-    return this._client.get(path`/v2/gen-ai/knowledge_bases/${uuid}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
+    return this._client.get(path`/v2/gen-ai/knowledge_bases/${uuid}`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -55,8 +95,16 @@ export class KnowledgeBases extends APIResource {
    * );
    * ```
    */
-  update(uuid: string, body: KnowledgeBaseUpdateParams | null | undefined = {}, options?: RequestOptions): APIPromise<KnowledgeBaseUpdateResponse> {
-    return this._client.put(path`/v2/gen-ai/knowledge_bases/${uuid}`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  update(
+    uuid: string,
+    body: KnowledgeBaseUpdateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<KnowledgeBaseUpdateResponse> {
+    return this._client.put(path`/v2/gen-ai/knowledge_bases/${uuid}`, {
+      body,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -67,8 +115,15 @@ export class KnowledgeBases extends APIResource {
    * const knowledgeBases = await client.knowledgeBases.list();
    * ```
    */
-  list(query: KnowledgeBaseListParams | null | undefined = {}, options?: RequestOptions): APIPromise<KnowledgeBaseListResponse> {
-    return this._client.get('/v2/gen-ai/knowledge_bases', { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  list(
+    query: KnowledgeBaseListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<KnowledgeBaseListResponse> {
+    return this._client.get('/v2/gen-ai/knowledge_bases', {
+      query,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -83,7 +138,10 @@ export class KnowledgeBases extends APIResource {
    * ```
    */
   delete(uuid: string, options?: RequestOptions): APIPromise<KnowledgeBaseDeleteResponse> {
-    return this._client.delete(path`/v2/gen-ai/knowledge_bases/${uuid}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
+    return this._client.delete(path`/v2/gen-ai/knowledge_bases/${uuid}`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -98,8 +156,14 @@ export class KnowledgeBases extends APIResource {
    *   );
    * ```
    */
-  listIndexingJobs(knowledgeBaseUuid: string, options?: RequestOptions): APIPromise<KnowledgeBaseListIndexingJobsResponse> {
-    return this._client.get(path`/v2/gen-ai/knowledge_bases/${knowledgeBaseUuid}/indexing_jobs`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  listIndexingJobs(
+    knowledgeBaseUuid: string,
+    options?: RequestOptions,
+  ): APIPromise<KnowledgeBaseListIndexingJobsResponse> {
+    return this._client.get(path`/v2/gen-ai/knowledge_bases/${knowledgeBaseUuid}/indexing_jobs`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 }
 
@@ -178,7 +242,19 @@ export interface KnowledgeBaseCreateResponse {
  * The knowledge base
  */
 export interface KnowledgeBaseRetrieveResponse {
-  database_status?: 'CREATING' | 'ONLINE' | 'POWEROFF' | 'REBUILDING' | 'REBALANCING' | 'DECOMMISSIONED' | 'FORKING' | 'MIGRATING' | 'RESIZING' | 'RESTORING' | 'POWERING_ON' | 'UNHEALTHY';
+  database_status?:
+    | 'CREATING'
+    | 'ONLINE'
+    | 'POWEROFF'
+    | 'REBUILDING'
+    | 'REBALANCING'
+    | 'DECOMMISSIONED'
+    | 'FORKING'
+    | 'MIGRATING'
+    | 'RESIZING'
+    | 'RESTORING'
+    | 'POWERING_ON'
+    | 'UNHEALTHY';
 
   /**
    * Knowledgebase Description
@@ -316,7 +392,12 @@ export namespace KnowledgeBaseCreateParams {
      * **Note: This feature requires enabling the knowledgebase enhancements feature
      * preview flag.**
      */
-    chunking_algorithm?: 'CHUNKING_ALGORITHM_UNKNOWN' | 'CHUNKING_ALGORITHM_SECTION_BASED' | 'CHUNKING_ALGORITHM_HIERARCHICAL' | 'CHUNKING_ALGORITHM_SEMANTIC' | 'CHUNKING_ALGORITHM_FIXED_LENGTH';
+    chunking_algorithm?:
+      | 'CHUNKING_ALGORITHM_UNKNOWN'
+      | 'CHUNKING_ALGORITHM_SECTION_BASED'
+      | 'CHUNKING_ALGORITHM_HIERARCHICAL'
+      | 'CHUNKING_ALGORITHM_SEMANTIC'
+      | 'CHUNKING_ALGORITHM_FIXED_LENGTH';
 
     /**
      * Configuration options for the chunking algorithm.
@@ -469,7 +550,7 @@ export declare namespace KnowledgeBases {
     type KnowledgeBaseListIndexingJobsResponse as KnowledgeBaseListIndexingJobsResponse,
     type KnowledgeBaseCreateParams as KnowledgeBaseCreateParams,
     type KnowledgeBaseUpdateParams as KnowledgeBaseUpdateParams,
-    type KnowledgeBaseListParams as KnowledgeBaseListParams
+    type KnowledgeBaseListParams as KnowledgeBaseListParams,
   };
 
   export {
@@ -488,7 +569,7 @@ export declare namespace KnowledgeBases {
     type DataSourceUpdateParams as DataSourceUpdateParams,
     type DataSourceListParams as DataSourceListParams,
     type DataSourceDeleteParams as DataSourceDeleteParams,
-    type DataSourceCreatePresignedURLsParams as DataSourceCreatePresignedURLsParams
+    type DataSourceCreatePresignedURLsParams as DataSourceCreatePresignedURLsParams,
   };
 
   export {
@@ -503,6 +584,6 @@ export declare namespace KnowledgeBases {
     type IndexingJobUpdateCancelResponse as IndexingJobUpdateCancelResponse,
     type IndexingJobCreateParams as IndexingJobCreateParams,
     type IndexingJobListParams as IndexingJobListParams,
-    type IndexingJobUpdateCancelParams as IndexingJobUpdateCancelParams
+    type IndexingJobUpdateCancelParams as IndexingJobUpdateCancelParams,
   };
 }

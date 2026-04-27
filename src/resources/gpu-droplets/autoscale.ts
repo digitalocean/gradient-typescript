@@ -48,7 +48,11 @@ export class Autoscale extends APIResource {
    * ```
    */
   create(body: AutoscaleCreateParams, options?: RequestOptions): APIPromise<AutoscaleCreateResponse> {
-    return this._client.post('/v2/droplets/autoscale', { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+    return this._client.post('/v2/droplets/autoscale', {
+      body,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -64,7 +68,10 @@ export class Autoscale extends APIResource {
    * ```
    */
   retrieve(autoscalePoolID: string, options?: RequestOptions): APIPromise<AutoscaleRetrieveResponse> {
-    return this._client.get(path`/v2/droplets/autoscale/${autoscalePoolID}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
+    return this._client.get(path`/v2/droplets/autoscale/${autoscalePoolID}`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -97,8 +104,16 @@ export class Autoscale extends APIResource {
    * );
    * ```
    */
-  update(autoscalePoolID: string, body: AutoscaleUpdateParams, options?: RequestOptions): APIPromise<AutoscaleUpdateResponse> {
-    return this._client.put(path`/v2/droplets/autoscale/${autoscalePoolID}`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  update(
+    autoscalePoolID: string,
+    body: AutoscaleUpdateParams,
+    options?: RequestOptions,
+  ): APIPromise<AutoscaleUpdateResponse> {
+    return this._client.put(path`/v2/droplets/autoscale/${autoscalePoolID}`, {
+      body,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -113,8 +128,15 @@ export class Autoscale extends APIResource {
    *   await client.gpuDroplets.autoscale.list();
    * ```
    */
-  list(query: AutoscaleListParams | null | undefined = {}, options?: RequestOptions): APIPromise<AutoscaleListResponse> {
-    return this._client.get('/v2/droplets/autoscale', { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  list(
+    query: AutoscaleListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AutoscaleListResponse> {
+    return this._client.get('/v2/droplets/autoscale', {
+      query,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -131,7 +153,11 @@ export class Autoscale extends APIResource {
    * ```
    */
   delete(autoscalePoolID: string, options?: RequestOptions): APIPromise<void> {
-    return this._client.delete(path`/v2/droplets/autoscale/${autoscalePoolID}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
+    return this._client.delete(path`/v2/droplets/autoscale/${autoscalePoolID}`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
   }
 
   /**
@@ -147,9 +173,17 @@ export class Autoscale extends APIResource {
    * );
    * ```
    */
-  deleteDangerous(autoscalePoolID: string, params: AutoscaleDeleteDangerousParams, options?: RequestOptions): APIPromise<void> {
-    const { 'X-Dangerous': xDangerous } = params
-    return this._client.delete(path`/v2/droplets/autoscale/${autoscalePoolID}/dangerous`, { defaultBaseURL: 'https://api.digitalocean.com', ...options, headers: buildHeaders([{Accept: '*/*', 'X-Dangerous': xDangerous.toString()}, options?.headers]) });
+  deleteDangerous(
+    autoscalePoolID: string,
+    params: AutoscaleDeleteDangerousParams,
+    options?: RequestOptions,
+  ): APIPromise<void> {
+    const { 'X-Dangerous': xDangerous } = params;
+    return this._client.delete(path`/v2/droplets/autoscale/${autoscalePoolID}/dangerous`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*', 'X-Dangerous': xDangerous.toString() }, options?.headers]),
+    });
   }
 
   /**
@@ -167,8 +201,16 @@ export class Autoscale extends APIResource {
    *   );
    * ```
    */
-  listHistory(autoscalePoolID: string, query: AutoscaleListHistoryParams | null | undefined = {}, options?: RequestOptions): APIPromise<AutoscaleListHistoryResponse> {
-    return this._client.get(path`/v2/droplets/autoscale/${autoscalePoolID}/history`, { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  listHistory(
+    autoscalePoolID: string,
+    query: AutoscaleListHistoryParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AutoscaleListHistoryResponse> {
+    return this._client.get(path`/v2/droplets/autoscale/${autoscalePoolID}/history`, {
+      query,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -187,8 +229,16 @@ export class Autoscale extends APIResource {
    *   );
    * ```
    */
-  listMembers(autoscalePoolID: string, query: AutoscaleListMembersParams | null | undefined = {}, options?: RequestOptions): APIPromise<AutoscaleListMembersResponse> {
-    return this._client.get(path`/v2/droplets/autoscale/${autoscalePoolID}/members`, { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  listMembers(
+    autoscalePoolID: string,
+    query: AutoscaleListMembersParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AutoscaleListMembersResponse> {
+    return this._client.get(path`/v2/droplets/autoscale/${autoscalePoolID}/members`, {
+      query,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 }
 
@@ -247,7 +297,21 @@ export interface AutoscalePoolDropletTemplate {
   /**
    * The datacenter in which all of the Droplets will be created.
    */
-  region: 'nyc1' | 'nyc2' | 'nyc3' | 'ams2' | 'ams3' | 'sfo1' | 'sfo2' | 'sfo3' | 'sgp1' | 'lon1' | 'fra1' | 'tor1' | 'blr1' | 'syd1';
+  region:
+    | 'nyc1'
+    | 'nyc2'
+    | 'nyc3'
+    | 'ams2'
+    | 'ams3'
+    | 'sfo1'
+    | 'sfo2'
+    | 'sfo3'
+    | 'sgp1'
+    | 'lon1'
+    | 'fra1'
+    | 'tor1'
+    | 'blr1'
+    | 'syd1';
 
   /**
    * The Droplet size to be used for all Droplets in the autoscale pool.
@@ -577,6 +641,6 @@ export declare namespace Autoscale {
     type AutoscaleListParams as AutoscaleListParams,
     type AutoscaleDeleteDangerousParams as AutoscaleDeleteDangerousParams,
     type AutoscaleListHistoryParams as AutoscaleListHistoryParams,
-    type AutoscaleListMembersParams as AutoscaleListMembersParams
+    type AutoscaleListMembersParams as AutoscaleListMembersParams,
   };
 }

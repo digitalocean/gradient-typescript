@@ -22,8 +22,16 @@ export class Versions extends APIResource {
    * );
    * ```
    */
-  update(uuid: string, body: VersionUpdateParams | null | undefined = {}, options?: RequestOptions): APIPromise<VersionUpdateResponse> {
-    return this._client.put(path`/v2/gen-ai/agents/${uuid}/versions`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  update(
+    uuid: string,
+    body: VersionUpdateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<VersionUpdateResponse> {
+    return this._client.put(path`/v2/gen-ai/agents/${uuid}/versions`, {
+      body,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -37,8 +45,16 @@ export class Versions extends APIResource {
    * );
    * ```
    */
-  list(uuid: string, query: VersionListParams | null | undefined = {}, options?: RequestOptions): APIPromise<VersionListResponse> {
-    return this._client.get(path`/v2/gen-ai/agents/${uuid}/versions`, { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  list(
+    uuid: string,
+    query: VersionListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<VersionListResponse> {
+    return this._client.get(path`/v2/gen-ai/agents/${uuid}/versions`, {
+      query,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 }
 
@@ -351,6 +367,6 @@ export declare namespace Versions {
     type VersionUpdateResponse as VersionUpdateResponse,
     type VersionListResponse as VersionListResponse,
     type VersionUpdateParams as VersionUpdateParams,
-    type VersionListParams as VersionListParams
+    type VersionListParams as VersionListParams,
   };
 }

@@ -3,7 +3,14 @@
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import * as ActionsAPI from './actions';
-import { ActionCreateParams, ActionCreateResponse, ActionListResponse, ActionRetrieveParams, ActionRetrieveResponse, Actions } from './actions';
+import {
+  ActionCreateParams,
+  ActionCreateResponse,
+  ActionListResponse,
+  ActionRetrieveParams,
+  ActionRetrieveResponse,
+  Actions,
+} from './actions';
 import { APIPromise } from '../../../core/api-promise';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
@@ -52,7 +59,11 @@ export class FloatingIPs extends APIResource {
    * ```
    */
   create(body: FloatingIPCreateParams, options?: RequestOptions): APIPromise<FloatingIPCreateResponse> {
-    return this._client.post('/v2/floating_ips', { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+    return this._client.post('/v2/floating_ips', {
+      body,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -68,7 +79,10 @@ export class FloatingIPs extends APIResource {
    * ```
    */
   retrieve(floatingIP: string, options?: RequestOptions): APIPromise<FloatingIPRetrieveResponse> {
-    return this._client.get(path`/v2/floating_ips/${floatingIP}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
+    return this._client.get(path`/v2/floating_ips/${floatingIP}`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -81,8 +95,15 @@ export class FloatingIPs extends APIResource {
    *   await client.gpuDroplets.floatingIPs.list();
    * ```
    */
-  list(query: FloatingIPListParams | null | undefined = {}, options?: RequestOptions): APIPromise<FloatingIPListResponse> {
-    return this._client.get('/v2/floating_ips', { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  list(
+    query: FloatingIPListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<FloatingIPListResponse> {
+    return this._client.get('/v2/floating_ips', {
+      query,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -98,7 +119,11 @@ export class FloatingIPs extends APIResource {
    * ```
    */
   delete(floatingIP: string, options?: RequestOptions): APIPromise<void> {
-    return this._client.delete(path`/v2/floating_ips/${floatingIP}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
+    return this._client.delete(path`/v2/floating_ips/${floatingIP}`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
   }
 }
 
@@ -142,8 +167,7 @@ export namespace FloatingIP {
    * The region that the floating IP is reserved to. When you query a floating IP,
    * the entire region object will be returned.
    */
-  export interface Region extends Shared.Region {
-  }
+  export interface Region extends Shared.Region {}
 }
 
 export interface FloatingIPCreateResponse {
@@ -175,7 +199,9 @@ export interface FloatingIPListResponse {
   links?: Shared.PageLinks;
 }
 
-export type FloatingIPCreateParams = FloatingIPCreateParams.AssignToDroplet | FloatingIPCreateParams.ReserveToRegion
+export type FloatingIPCreateParams =
+  | FloatingIPCreateParams.AssignToDroplet
+  | FloatingIPCreateParams.ReserveToRegion;
 
 export declare namespace FloatingIPCreateParams {
   export interface AssignToDroplet {
@@ -219,7 +245,7 @@ export declare namespace FloatingIPs {
     type FloatingIPRetrieveResponse as FloatingIPRetrieveResponse,
     type FloatingIPListResponse as FloatingIPListResponse,
     type FloatingIPCreateParams as FloatingIPCreateParams,
-    type FloatingIPListParams as FloatingIPListParams
+    type FloatingIPListParams as FloatingIPListParams,
   };
 
   export {
@@ -228,6 +254,6 @@ export declare namespace FloatingIPs {
     type ActionRetrieveResponse as ActionRetrieveResponse,
     type ActionListResponse as ActionListResponse,
     type ActionCreateParams as ActionCreateParams,
-    type ActionRetrieveParams as ActionRetrieveParams
+    type ActionRetrieveParams as ActionRetrieveParams,
   };
 }

@@ -21,8 +21,15 @@ export class EvaluationRuns extends APIResource {
    *   await client.agents.evaluationRuns.create();
    * ```
    */
-  create(body: EvaluationRunCreateParams | null | undefined = {}, options?: RequestOptions): APIPromise<EvaluationRunCreateResponse> {
-    return this._client.post('/v2/gen-ai/evaluation_runs', { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  create(
+    body: EvaluationRunCreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<EvaluationRunCreateResponse> {
+    return this._client.post('/v2/gen-ai/evaluation_runs', {
+      body,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -38,7 +45,10 @@ export class EvaluationRuns extends APIResource {
    * ```
    */
   retrieve(evaluationRunUuid: string, options?: RequestOptions): APIPromise<EvaluationRunRetrieveResponse> {
-    return this._client.get(path`/v2/gen-ai/evaluation_runs/${evaluationRunUuid}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
+    return this._client.get(path`/v2/gen-ai/evaluation_runs/${evaluationRunUuid}`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -53,8 +63,16 @@ export class EvaluationRuns extends APIResource {
    *   );
    * ```
    */
-  listResults(evaluationRunUuid: string, query: EvaluationRunListResultsParams | null | undefined = {}, options?: RequestOptions): APIPromise<EvaluationRunListResultsResponse> {
-    return this._client.get(path`/v2/gen-ai/evaluation_runs/${evaluationRunUuid}/results`, { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  listResults(
+    evaluationRunUuid: string,
+    query: EvaluationRunListResultsParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<EvaluationRunListResultsResponse> {
+    return this._client.get(path`/v2/gen-ai/evaluation_runs/${evaluationRunUuid}/results`, {
+      query,
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 
   /**
@@ -70,14 +88,27 @@ export class EvaluationRuns extends APIResource {
    *   });
    * ```
    */
-  retrieveResults(promptID: number, params: EvaluationRunRetrieveResultsParams, options?: RequestOptions): APIPromise<EvaluationRunRetrieveResultsResponse> {
-    const { evaluation_run_uuid } = params
-    return this._client.get(path`/v2/gen-ai/evaluation_runs/${evaluation_run_uuid}/results/${promptID}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
+  retrieveResults(
+    promptID: number,
+    params: EvaluationRunRetrieveResultsParams,
+    options?: RequestOptions,
+  ): APIPromise<EvaluationRunRetrieveResultsResponse> {
+    const { evaluation_run_uuid } = params;
+    return this._client.get(path`/v2/gen-ai/evaluation_runs/${evaluation_run_uuid}/results/${promptID}`, {
+      defaultBaseURL: 'https://api.digitalocean.com',
+      ...options,
+    });
   }
 }
 
 export interface APIEvaluationMetric {
-  category?: 'METRIC_CATEGORY_UNSPECIFIED' | 'METRIC_CATEGORY_CORRECTNESS' | 'METRIC_CATEGORY_USER_OUTCOMES' | 'METRIC_CATEGORY_SAFETY_AND_SECURITY' | 'METRIC_CATEGORY_CONTEXT_QUALITY' | 'METRIC_CATEGORY_MODEL_FIT';
+  category?:
+    | 'METRIC_CATEGORY_UNSPECIFIED'
+    | 'METRIC_CATEGORY_CORRECTNESS'
+    | 'METRIC_CATEGORY_USER_OUTCOMES'
+    | 'METRIC_CATEGORY_SAFETY_AND_SECURITY'
+    | 'METRIC_CATEGORY_CONTEXT_QUALITY'
+    | 'METRIC_CATEGORY_MODEL_FIT';
 
   description?: string;
 
@@ -96,7 +127,11 @@ export interface APIEvaluationMetric {
 
   metric_uuid?: string;
 
-  metric_value_type?: 'METRIC_VALUE_TYPE_UNSPECIFIED' | 'METRIC_VALUE_TYPE_NUMBER' | 'METRIC_VALUE_TYPE_STRING' | 'METRIC_VALUE_TYPE_PERCENTAGE';
+  metric_value_type?:
+    | 'METRIC_VALUE_TYPE_UNSPECIFIED'
+    | 'METRIC_VALUE_TYPE_NUMBER'
+    | 'METRIC_VALUE_TYPE_STRING'
+    | 'METRIC_VALUE_TYPE_PERCENTAGE';
 
   /**
    * The maximum value for the metric.
@@ -120,7 +155,11 @@ export interface APIEvaluationMetricResult {
    */
   metric_name?: string;
 
-  metric_value_type?: 'METRIC_VALUE_TYPE_UNSPECIFIED' | 'METRIC_VALUE_TYPE_NUMBER' | 'METRIC_VALUE_TYPE_STRING' | 'METRIC_VALUE_TYPE_PERCENTAGE';
+  metric_value_type?:
+    | 'METRIC_VALUE_TYPE_UNSPECIFIED'
+    | 'METRIC_VALUE_TYPE_NUMBER'
+    | 'METRIC_VALUE_TYPE_STRING'
+    | 'METRIC_VALUE_TYPE_PERCENTAGE';
 
   /**
    * The value of the metric as a number.
@@ -223,7 +262,11 @@ export namespace APIEvaluationPrompt {
     /**
      * Types of spans in a trace
      */
-    type?: 'TRACE_SPAN_TYPE_UNKNOWN' | 'TRACE_SPAN_TYPE_LLM' | 'TRACE_SPAN_TYPE_RETRIEVER' | 'TRACE_SPAN_TYPE_TOOL';
+    type?:
+      | 'TRACE_SPAN_TYPE_UNKNOWN'
+      | 'TRACE_SPAN_TYPE_LLM'
+      | 'TRACE_SPAN_TYPE_RETRIEVER'
+      | 'TRACE_SPAN_TYPE_TOOL';
   }
 
   export namespace EvaluationTraceSpan {
@@ -365,7 +408,16 @@ export interface APIEvaluationRun {
   /**
    * Evaluation Run Statuses
    */
-  status?: 'EVALUATION_RUN_STATUS_UNSPECIFIED' | 'EVALUATION_RUN_QUEUED' | 'EVALUATION_RUN_RUNNING_DATASET' | 'EVALUATION_RUN_EVALUATING_RESULTS' | 'EVALUATION_RUN_CANCELLING' | 'EVALUATION_RUN_CANCELLED' | 'EVALUATION_RUN_SUCCESSFUL' | 'EVALUATION_RUN_PARTIALLY_SUCCESSFUL' | 'EVALUATION_RUN_FAILED';
+  status?:
+    | 'EVALUATION_RUN_STATUS_UNSPECIFIED'
+    | 'EVALUATION_RUN_QUEUED'
+    | 'EVALUATION_RUN_RUNNING_DATASET'
+    | 'EVALUATION_RUN_EVALUATING_RESULTS'
+    | 'EVALUATION_RUN_CANCELLING'
+    | 'EVALUATION_RUN_CANCELLED'
+    | 'EVALUATION_RUN_SUCCESSFUL'
+    | 'EVALUATION_RUN_PARTIALLY_SUCCESSFUL'
+    | 'EVALUATION_RUN_FAILED';
 
   /**
    * Test case description.
@@ -475,6 +527,6 @@ export declare namespace EvaluationRuns {
     type EvaluationRunRetrieveResultsResponse as EvaluationRunRetrieveResultsResponse,
     type EvaluationRunCreateParams as EvaluationRunCreateParams,
     type EvaluationRunListResultsParams as EvaluationRunListResultsParams,
-    type EvaluationRunRetrieveResultsParams as EvaluationRunRetrieveResultsParams
+    type EvaluationRunRetrieveResultsParams as EvaluationRunRetrieveResultsParams,
   };
 }

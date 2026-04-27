@@ -2,7 +2,18 @@
 
 import { APIResource } from '../../core/resource';
 import * as APIKeysAPI from './api-keys';
-import { APIKeyCreateParams, APIKeyCreateResponse, APIKeyDeleteResponse, APIKeyListParams, APIKeyListResponse, APIKeyUpdateParams, APIKeyUpdateRegenerateResponse, APIKeyUpdateResponse, APIKeys, APIModelAPIKeyInfo } from './api-keys';
+import {
+  APIKeyCreateParams,
+  APIKeyCreateResponse,
+  APIKeyDeleteResponse,
+  APIKeyListParams,
+  APIKeyListResponse,
+  APIKeyUpdateParams,
+  APIKeyUpdateRegenerateResponse,
+  APIKeyUpdateResponse,
+  APIKeys,
+  APIModelAPIKeyInfo,
+} from './api-keys';
 
 export class Inference extends APIResource {
   apiKeys: APIKeysAPI.APIKeys = new APIKeysAPI.APIKeys(this._client);
@@ -21,6 +32,6 @@ export declare namespace Inference {
     type APIKeyUpdateRegenerateResponse as APIKeyUpdateRegenerateResponse,
     type APIKeyCreateParams as APIKeyCreateParams,
     type APIKeyUpdateParams as APIKeyUpdateParams,
-    type APIKeyListParams as APIKeyListParams
+    type APIKeyListParams as APIKeyListParams,
   };
 }
