@@ -1,7 +1,6 @@
 import fs from 'fs';
 import type { ResponseLike } from '@digitalocean/gradient/internal/to-file';
 import { toFile } from '@digitalocean/gradient/core/uploads';
-import { File } from 'node:buffer';
 
 class MyClass {
   name: string = 'foo';
