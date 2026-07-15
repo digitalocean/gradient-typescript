@@ -1,3 +1,5 @@
+# **WARNING: This SDK is deprecated and will be retired on Aug-15. Please migrate to the unified DigitalOcean SDK: https://docs.digitalocean.com/reference/libraries/**
+
 # Gradient TypeScript API Library
 
 [![NPM version](<https://img.shields.io/npm/v/@digitalocean/gradient.svg?label=npm%20(stable)>)](https://npmjs.org/package/@digitalocean/gradient) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/@digitalocean/gradient)
