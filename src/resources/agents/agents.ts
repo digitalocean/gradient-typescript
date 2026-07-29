@@ -6,105 +6,27 @@ import * as AgentsAPI from './agents';
 import * as Shared from '../shared';
 import * as APIKeysAPI from './api-keys';
 import { GradientError } from '../../core/error';
-import {
-  APIKeyCreateParams,
-  APIKeyCreateResponse,
-  APIKeyDeleteParams,
-  APIKeyDeleteResponse,
-  APIKeyListParams,
-  APIKeyListResponse,
-  APIKeyRegenerateParams,
-  APIKeyRegenerateResponse,
-  APIKeyUpdateParams,
-  APIKeyUpdateResponse,
-  APIKeys,
-} from './api-keys';
+import { APIKeyCreateParams, APIKeyCreateResponse, APIKeyDeleteParams, APIKeyDeleteResponse, APIKeyListParams, APIKeyListResponse, APIKeyRegenerateParams, APIKeyRegenerateResponse, APIKeyUpdateParams, APIKeyUpdateResponse, APIKeys } from './api-keys';
 import * as EvaluationDatasetsAPI from './evaluation-datasets';
-import {
-  EvaluationDatasetCreateFileUploadPresignedURLsParams,
-  EvaluationDatasetCreateFileUploadPresignedURLsResponse,
-  EvaluationDatasetCreateParams,
-  EvaluationDatasetCreateResponse,
-  EvaluationDatasets,
-} from './evaluation-datasets';
+import { EvaluationDatasetCreateFileUploadPresignedURLsParams, EvaluationDatasetCreateFileUploadPresignedURLsResponse, EvaluationDatasetCreateParams, EvaluationDatasetCreateResponse, EvaluationDatasets } from './evaluation-datasets';
 import * as EvaluationRunsAPI from './evaluation-runs';
-import {
-  APIEvaluationMetric,
-  APIEvaluationMetricResult,
-  APIEvaluationPrompt,
-  APIEvaluationRun,
-  EvaluationRunCreateParams,
-  EvaluationRunCreateResponse,
-  EvaluationRunListResultsParams,
-  EvaluationRunListResultsResponse,
-  EvaluationRunRetrieveResponse,
-  EvaluationRunRetrieveResultsParams,
-  EvaluationRunRetrieveResultsResponse,
-  EvaluationRuns,
-} from './evaluation-runs';
+import { APIEvaluationMetric, APIEvaluationMetricResult, APIEvaluationPrompt, APIEvaluationRun, EvaluationRunCreateParams, EvaluationRunCreateResponse, EvaluationRunListResultsParams, EvaluationRunListResultsResponse, EvaluationRunRetrieveResponse, EvaluationRunRetrieveResultsParams, EvaluationRunRetrieveResultsResponse, EvaluationRuns } from './evaluation-runs';
 import * as EvaluationTestCasesAPI from './evaluation-test-cases';
-import {
-  APIEvaluationTestCase,
-  APIStarMetric,
-  EvaluationTestCaseCreateParams,
-  EvaluationTestCaseCreateResponse,
-  EvaluationTestCaseListEvaluationRunsParams,
-  EvaluationTestCaseListEvaluationRunsResponse,
-  EvaluationTestCaseListResponse,
-  EvaluationTestCaseRetrieveParams,
-  EvaluationTestCaseRetrieveResponse,
-  EvaluationTestCaseUpdateParams,
-  EvaluationTestCaseUpdateResponse,
-  EvaluationTestCases,
-} from './evaluation-test-cases';
+import { APIEvaluationTestCase, APIStarMetric, EvaluationTestCaseCreateParams, EvaluationTestCaseCreateResponse, EvaluationTestCaseListEvaluationRunsParams, EvaluationTestCaseListEvaluationRunsResponse, EvaluationTestCaseListResponse, EvaluationTestCaseRetrieveParams, EvaluationTestCaseRetrieveResponse, EvaluationTestCaseUpdateParams, EvaluationTestCaseUpdateResponse, EvaluationTestCases } from './evaluation-test-cases';
 import * as FunctionsAPI from './functions';
-import {
-  FunctionCreateParams,
-  FunctionCreateResponse,
-  FunctionDeleteParams,
-  FunctionDeleteResponse,
-  FunctionUpdateParams,
-  FunctionUpdateResponse,
-  Functions,
-} from './functions';
+import { FunctionCreateParams, FunctionCreateResponse, FunctionDeleteParams, FunctionDeleteResponse, FunctionUpdateParams, FunctionUpdateResponse, Functions } from './functions';
 import * as KnowledgeBasesAPI from './knowledge-bases';
-import {
-  APILinkKnowledgeBaseOutput,
-  KnowledgeBaseAttachSingleParams,
-  KnowledgeBaseDetachParams,
-  KnowledgeBaseDetachResponse,
-  KnowledgeBases,
-} from './knowledge-bases';
+import { APILinkKnowledgeBaseOutput, KnowledgeBaseAttachSingleParams, KnowledgeBaseDetachParams, KnowledgeBaseDetachResponse, KnowledgeBases } from './knowledge-bases';
 import * as RoutesAPI from './routes';
-import {
-  RouteAddParams,
-  RouteAddResponse,
-  RouteDeleteParams,
-  RouteDeleteResponse,
-  RouteUpdateParams,
-  RouteUpdateResponse,
-  RouteViewResponse,
-  Routes,
-} from './routes';
+import { RouteAddParams, RouteAddResponse, RouteDeleteParams, RouteDeleteResponse, RouteUpdateParams, RouteUpdateResponse, RouteViewResponse, Routes } from './routes';
 import * as VersionsAPI from './versions';
-import {
-  VersionListParams,
-  VersionListResponse,
-  VersionUpdateParams,
-  VersionUpdateResponse,
-  Versions,
-} from './versions';
-import * as KnowledgeBasesKnowledgeBasesAPI from '../knowledge-bases/knowledge-bases';
+import { VersionListParams, VersionListResponse, VersionUpdateParams, VersionUpdateResponse, Versions } from './versions';
+import * as ResourcesKnowledgeBasesAPI from '../knowledge-bases/knowledge-bases';
 import * as ModelsAPI from '../models/models';
 import * as ChatAPI from './chat/chat';
 import { Chat } from './chat/chat';
 import * as EvaluationMetricsAPI from './evaluation-metrics/evaluation-metrics';
-import {
-  EvaluationMetricListRegionsParams,
-  EvaluationMetricListRegionsResponse,
-  EvaluationMetricListResponse,
-  EvaluationMetrics,
-} from './evaluation-metrics/evaluation-metrics';
+import { EvaluationMetricListRegionsParams, EvaluationMetricListRegionsResponse, EvaluationMetricListResponse, EvaluationMetrics } from './evaluation-metrics/evaluation-metrics';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
@@ -136,18 +58,16 @@ export class AgentDeploymentError extends GradientError {
   }
 }
 
+/**
+ * The API lets you build GPU-powered AI agents with pre-built or custom foundation models, function and agent routes, and RAG pipelines with knowledge bases.
+ */
 export class Agents extends APIResource {
   apiKeys: APIKeysAPI.APIKeys = new APIKeysAPI.APIKeys(this._client);
   chat: ChatAPI.Chat = new ChatAPI.Chat(this._client);
-  evaluationMetrics: EvaluationMetricsAPI.EvaluationMetrics = new EvaluationMetricsAPI.EvaluationMetrics(
-    this._client,
-  );
+  evaluationMetrics: EvaluationMetricsAPI.EvaluationMetrics = new EvaluationMetricsAPI.EvaluationMetrics(this._client);
   evaluationRuns: EvaluationRunsAPI.EvaluationRuns = new EvaluationRunsAPI.EvaluationRuns(this._client);
-  evaluationTestCases: EvaluationTestCasesAPI.EvaluationTestCases =
-    new EvaluationTestCasesAPI.EvaluationTestCases(this._client);
-  evaluationDatasets: EvaluationDatasetsAPI.EvaluationDatasets = new EvaluationDatasetsAPI.EvaluationDatasets(
-    this._client,
-  );
+  evaluationTestCases: EvaluationTestCasesAPI.EvaluationTestCases = new EvaluationTestCasesAPI.EvaluationTestCases(this._client);
+  evaluationDatasets: EvaluationDatasetsAPI.EvaluationDatasets = new EvaluationDatasetsAPI.EvaluationDatasets(this._client);
   functions: FunctionsAPI.Functions = new FunctionsAPI.Functions(this._client);
   versions: VersionsAPI.Versions = new VersionsAPI.Versions(this._client);
   knowledgeBases: KnowledgeBasesAPI.KnowledgeBases = new KnowledgeBasesAPI.KnowledgeBases(this._client);
@@ -162,15 +82,8 @@ export class Agents extends APIResource {
    * const agent = await client.agents.create();
    * ```
    */
-  create(
-    body: AgentCreateParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<AgentCreateResponse> {
-    return this._client.post('/v2/gen-ai/agents', {
-      body,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  create(body: AgentCreateParams | null | undefined = {}, options?: RequestOptions): APIPromise<AgentCreateResponse> {
+    return this._client.post('/v2/gen-ai/agents', { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -185,10 +98,7 @@ export class Agents extends APIResource {
    * ```
    */
   retrieve(uuid: string, options?: RequestOptions): APIPromise<AgentRetrieveResponse> {
-    return this._client.get(path`/v2/gen-ai/agents/${uuid}`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+    return this._client.get(path`/v2/gen-ai/agents/${uuid}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -202,16 +112,8 @@ export class Agents extends APIResource {
    * );
    * ```
    */
-  update(
-    pathUuid: string,
-    body: AgentUpdateParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<AgentUpdateResponse> {
-    return this._client.put(path`/v2/gen-ai/agents/${pathUuid}`, {
-      body,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  update(uuid: string, body: AgentUpdateParams | null | undefined = {}, options?: RequestOptions): APIPromise<AgentUpdateResponse> {
+    return this._client.put(path`/v2/gen-ai/agents/${uuid}`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -222,15 +124,8 @@ export class Agents extends APIResource {
    * const agents = await client.agents.list();
    * ```
    */
-  list(
-    query: AgentListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<AgentListResponse> {
-    return this._client.get('/v2/gen-ai/agents', {
-      query,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  list(query: AgentListParams | null | undefined = {}, options?: RequestOptions): APIPromise<AgentListResponse> {
+    return this._client.get('/v2/gen-ai/agents', { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -244,10 +139,7 @@ export class Agents extends APIResource {
    * ```
    */
   delete(uuid: string, options?: RequestOptions): APIPromise<AgentDeleteResponse> {
-    return this._client.delete(path`/v2/gen-ai/agents/${uuid}`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+    return this._client.delete(path`/v2/gen-ai/agents/${uuid}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -261,16 +153,8 @@ export class Agents extends APIResource {
    * );
    * ```
    */
-  retrieveUsage(
-    uuid: string,
-    query: AgentRetrieveUsageParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<AgentRetrieveUsageResponse> {
-    return this._client.get(path`/v2/gen-ai/agents/${uuid}/usage`, {
-      query,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  retrieveUsage(uuid: string, query: AgentRetrieveUsageParams | null | undefined = {}, options?: RequestOptions): APIPromise<AgentRetrieveUsageResponse> {
+    return this._client.get(path`/v2/gen-ai/agents/${uuid}/usage`, { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -284,16 +168,8 @@ export class Agents extends APIResource {
    * );
    * ```
    */
-  updateStatus(
-    pathUuid: string,
-    body: AgentUpdateStatusParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<AgentUpdateStatusResponse> {
-    return this._client.put(path`/v2/gen-ai/agents/${pathUuid}/deployment_visibility`, {
-      body,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  updateStatus(uuid: string, body: AgentUpdateStatusParams | null | undefined = {}, options?: RequestOptions): APIPromise<AgentUpdateStatusResponse> {
+    return this._client.put(path`/v2/gen-ai/agents/${uuid}/deployment_visibility`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -421,7 +297,7 @@ export interface APIAgent {
   /**
    * Knowledge bases
    */
-  knowledge_bases?: Array<KnowledgeBasesKnowledgeBasesAPI.APIKnowledgeBase>;
+  knowledge_bases?: Array<ResourcesKnowledgeBasesAPI.APIKnowledgeBase>;
 
   logging_config?: APIAgent.LoggingConfig;
 
@@ -431,6 +307,8 @@ export interface APIAgent {
    * Description of a Model
    */
   model?: APIAgentModel;
+
+  model_provider_key?: APIAgent.ModelProviderKey;
 
   /**
    * Agent name
@@ -521,6 +399,13 @@ export interface APIAgent {
    */
   version_hash?: string;
 
+  /**
+   * VPC Egress IPs
+   */
+  vpc_egress_ips?: Array<string>;
+
+  vpc_uuid?: string;
+
   workspace?: APIWorkspace;
 }
 
@@ -539,6 +424,8 @@ export namespace APIAgent {
    * A Chatbot
    */
   export interface Chatbot {
+    allowed_domains?: Array<string>;
+
     button_background_color?: string;
 
     logo?: string;
@@ -579,16 +466,7 @@ export namespace APIAgent {
      */
     name?: string;
 
-    status?:
-      | 'STATUS_UNKNOWN'
-      | 'STATUS_WAITING_FOR_DEPLOYMENT'
-      | 'STATUS_DEPLOYING'
-      | 'STATUS_RUNNING'
-      | 'STATUS_FAILED'
-      | 'STATUS_WAITING_FOR_UNDEPLOYMENT'
-      | 'STATUS_UNDEPLOYING'
-      | 'STATUS_UNDEPLOYMENT_FAILED'
-      | 'STATUS_DELETED';
+    status?: 'STATUS_UNKNOWN' | 'STATUS_WAITING_FOR_DEPLOYMENT' | 'STATUS_DEPLOYING' | 'STATUS_RUNNING' | 'STATUS_FAILED' | 'STATUS_WAITING_FOR_UNDEPLOYMENT' | 'STATUS_UNDEPLOYING' | 'STATUS_UNDEPLOYMENT_FAILED' | 'STATUS_DELETED' | 'STATUS_BUILDING';
 
     /**
      * Last modified
@@ -695,11 +573,7 @@ export namespace APIAgent {
 
     priority?: number;
 
-    type?:
-      | 'GUARDRAIL_TYPE_UNKNOWN'
-      | 'GUARDRAIL_TYPE_JAILBREAK'
-      | 'GUARDRAIL_TYPE_SENSITIVE_DATA'
-      | 'GUARDRAIL_TYPE_CONTENT_MODERATION';
+    type?: 'GUARDRAIL_TYPE_UNKNOWN' | 'GUARDRAIL_TYPE_JAILBREAK' | 'GUARDRAIL_TYPE_SENSITIVE_DATA' | 'GUARDRAIL_TYPE_CONTENT_MODERATION';
 
     updated_at?: string;
 
@@ -738,6 +612,45 @@ export namespace APIAgent {
     log_stream_name?: string;
   }
 
+  export interface ModelProviderKey {
+    /**
+     * API key ID
+     */
+    api_key_uuid?: string;
+
+    /**
+     * Key creation date
+     */
+    created_at?: string;
+
+    /**
+     * Created by user id from DO
+     */
+    created_by?: string;
+
+    /**
+     * Key deleted date
+     */
+    deleted_at?: string;
+
+    /**
+     * Models supported by the openAI api key
+     */
+    models?: Array<AgentsAPI.APIAgentModel>;
+
+    /**
+     * Name of the key
+     */
+    name?: string;
+
+    provider?: 'MODEL_PROVIDER_DIGITALOCEAN' | 'MODEL_PROVIDER_ANTHROPIC' | 'MODEL_PROVIDER_OPENAI';
+
+    /**
+     * Key last updated date
+     */
+    updated_at?: string;
+  }
+
   /**
    * Represents an AgentTemplate entity
    */
@@ -770,7 +683,7 @@ export namespace APIAgent {
     /**
      * List of knowledge bases associated with the agent template
      */
-    knowledge_bases?: Array<KnowledgeBasesKnowledgeBasesAPI.APIKnowledgeBase>;
+    knowledge_bases?: Array<ResourcesKnowledgeBasesAPI.APIKnowledgeBase>;
 
     /**
      * The long description of the agent template
@@ -911,6 +824,21 @@ export interface APIAgentModel {
   is_foundational?: boolean;
 
   /**
+   * Default chunking size limit to show in UI
+   */
+  kb_default_chunk_size?: number;
+
+  /**
+   * Maximum chunk size limit of model
+   */
+  kb_max_chunk_size?: number;
+
+  /**
+   * Minimum chunking size token limits if model supports KNOWLEDGEBASE usecase
+   */
+  kb_min_chunk_size?: number;
+
+  /**
    * Additional meta data
    */
   metadata?: unknown;
@@ -945,15 +873,7 @@ export interface APIAgentModel {
   /**
    * Usecases of the model
    */
-  usecases?: Array<
-    | 'MODEL_USECASE_UNKNOWN'
-    | 'MODEL_USECASE_AGENT'
-    | 'MODEL_USECASE_FINETUNED'
-    | 'MODEL_USECASE_KNOWLEDGEBASE'
-    | 'MODEL_USECASE_GUARDRAIL'
-    | 'MODEL_USECASE_REASONING'
-    | 'MODEL_USECASE_SERVERLESS'
-  >;
+  usecases?: Array<'MODEL_USECASE_UNKNOWN' | 'MODEL_USECASE_AGENT' | 'MODEL_USECASE_FINETUNED' | 'MODEL_USECASE_KNOWLEDGEBASE' | 'MODEL_USECASE_GUARDRAIL' | 'MODEL_USECASE_REASONING' | 'MODEL_USECASE_SERVERLESS'>;
 
   /**
    * Unique id
@@ -1011,12 +931,7 @@ export interface APIAnthropicAPIKeyInfo {
  * - VISIBILITY_PRIVATE: The deployment is private and will only service requests
  *   from other agents, or through API keys
  */
-export type APIDeploymentVisibility =
-  | 'VISIBILITY_UNKNOWN'
-  | 'VISIBILITY_DISABLED'
-  | 'VISIBILITY_PLAYGROUND'
-  | 'VISIBILITY_PUBLIC'
-  | 'VISIBILITY_PRIVATE';
+export type APIDeploymentVisibility = 'VISIBILITY_UNKNOWN' | 'VISIBILITY_DISABLED' | 'VISIBILITY_PLAYGROUND' | 'VISIBILITY_PUBLIC' | 'VISIBILITY_PRIVATE'
 
 /**
  * OpenAI API Key Info
@@ -1065,12 +980,7 @@ export interface APIOpenAIAPIKeyInfo {
  * - RETRIEVAL_METHOD_SUB_QUERIES: The retrieval method is sub queries
  * - RETRIEVAL_METHOD_NONE: The retrieval method is none
  */
-export type APIRetrievalMethod =
-  | 'RETRIEVAL_METHOD_UNKNOWN'
-  | 'RETRIEVAL_METHOD_REWRITE'
-  | 'RETRIEVAL_METHOD_STEP_BACK'
-  | 'RETRIEVAL_METHOD_SUB_QUERIES'
-  | 'RETRIEVAL_METHOD_NONE';
+export type APIRetrievalMethod = 'RETRIEVAL_METHOD_UNKNOWN' | 'RETRIEVAL_METHOD_REWRITE' | 'RETRIEVAL_METHOD_STEP_BACK' | 'RETRIEVAL_METHOD_SUB_QUERIES' | 'RETRIEVAL_METHOD_NONE'
 
 export interface APIWorkspace {
   /**
@@ -1348,6 +1258,8 @@ export namespace AgentListResponse {
      * A Chatbot
      */
     export interface Chatbot {
+      allowed_domains?: Array<string>;
+
       button_background_color?: string;
 
       logo?: string;
@@ -1388,16 +1300,7 @@ export namespace AgentListResponse {
        */
       name?: string;
 
-      status?:
-        | 'STATUS_UNKNOWN'
-        | 'STATUS_WAITING_FOR_DEPLOYMENT'
-        | 'STATUS_DEPLOYING'
-        | 'STATUS_RUNNING'
-        | 'STATUS_FAILED'
-        | 'STATUS_WAITING_FOR_UNDEPLOYMENT'
-        | 'STATUS_UNDEPLOYING'
-        | 'STATUS_UNDEPLOYMENT_FAILED'
-        | 'STATUS_DELETED';
+      status?: 'STATUS_UNKNOWN' | 'STATUS_WAITING_FOR_DEPLOYMENT' | 'STATUS_DEPLOYING' | 'STATUS_RUNNING' | 'STATUS_FAILED' | 'STATUS_WAITING_FOR_UNDEPLOYMENT' | 'STATUS_UNDEPLOYING' | 'STATUS_UNDEPLOYMENT_FAILED' | 'STATUS_DELETED' | 'STATUS_BUILDING';
 
       /**
        * Last modified
@@ -1459,7 +1362,7 @@ export namespace AgentListResponse {
       /**
        * List of knowledge bases associated with the agent template
        */
-      knowledge_bases?: Array<KnowledgeBasesKnowledgeBasesAPI.APIKnowledgeBase>;
+      knowledge_bases?: Array<ResourcesKnowledgeBasesAPI.APIKnowledgeBase>;
 
       /**
        * The long description of the agent template
@@ -1648,6 +1551,8 @@ export interface AgentCreateParams {
    */
   knowledge_base_uuid?: Array<string>;
 
+  model_provider_key_uuid?: string;
+
   /**
    * Identifier for the foundation model.
    */
@@ -1677,10 +1582,21 @@ export interface AgentCreateParams {
    * Agent tag to organize related resources
    */
   tags?: Array<string>;
+
+  /**
+   * Identifier for the workspace
+   */
+  workspace_uuid?: string;
 }
 
 export interface AgentUpdateParams {
   agent_log_insights_enabled?: boolean;
+
+  /**
+   * Optional list of allowed domains for the chatbot - Must use fully qualified
+   * domain name (FQDN) such as https://example.com
+   */
+  allowed_domains?: Array<string>;
 
   /**
    * Optional anthropic key uuid for use with anthropic models
@@ -1716,6 +1632,11 @@ export interface AgentUpdateParams {
    * response.
    */
   max_tokens?: number;
+
+  /**
+   * Optional Model Provider uuid for use with provider models
+   */
+  model_provider_key_uuid?: string;
 
   /**
    * Identifier for the foundation model.
@@ -1770,7 +1691,7 @@ export interface AgentUpdateParams {
   /**
    * Unique agent id
    */
-  body_uuid?: string;
+  uuid?: string;
 }
 
 export interface AgentListParams {
@@ -1807,7 +1728,7 @@ export interface AgentUpdateStatusParams {
   /**
    * Unique id
    */
-  body_uuid?: string;
+  uuid?: string;
 
   /**
    * - VISIBILITY_UNKNOWN: The status of the deployment is unknown
@@ -1855,7 +1776,7 @@ export declare namespace Agents {
     type AgentUpdateParams as AgentUpdateParams,
     type AgentListParams as AgentListParams,
     type AgentRetrieveUsageParams as AgentRetrieveUsageParams,
-    type AgentUpdateStatusParams as AgentUpdateStatusParams,
+    type AgentUpdateStatusParams as AgentUpdateStatusParams
   };
 
   export {
@@ -1869,16 +1790,18 @@ export declare namespace Agents {
     type APIKeyUpdateParams as APIKeyUpdateParams,
     type APIKeyListParams as APIKeyListParams,
     type APIKeyDeleteParams as APIKeyDeleteParams,
-    type APIKeyRegenerateParams as APIKeyRegenerateParams,
+    type APIKeyRegenerateParams as APIKeyRegenerateParams
   };
 
-  export { Chat as Chat };
+  export {
+    Chat as Chat
+  };
 
   export {
     EvaluationMetrics as EvaluationMetrics,
     type EvaluationMetricListResponse as EvaluationMetricListResponse,
     type EvaluationMetricListRegionsResponse as EvaluationMetricListRegionsResponse,
-    type EvaluationMetricListRegionsParams as EvaluationMetricListRegionsParams,
+    type EvaluationMetricListRegionsParams as EvaluationMetricListRegionsParams
   };
 
   export {
@@ -1893,7 +1816,7 @@ export declare namespace Agents {
     type EvaluationRunRetrieveResultsResponse as EvaluationRunRetrieveResultsResponse,
     type EvaluationRunCreateParams as EvaluationRunCreateParams,
     type EvaluationRunListResultsParams as EvaluationRunListResultsParams,
-    type EvaluationRunRetrieveResultsParams as EvaluationRunRetrieveResultsParams,
+    type EvaluationRunRetrieveResultsParams as EvaluationRunRetrieveResultsParams
   };
 
   export {
@@ -1908,7 +1831,7 @@ export declare namespace Agents {
     type EvaluationTestCaseCreateParams as EvaluationTestCaseCreateParams,
     type EvaluationTestCaseRetrieveParams as EvaluationTestCaseRetrieveParams,
     type EvaluationTestCaseUpdateParams as EvaluationTestCaseUpdateParams,
-    type EvaluationTestCaseListEvaluationRunsParams as EvaluationTestCaseListEvaluationRunsParams,
+    type EvaluationTestCaseListEvaluationRunsParams as EvaluationTestCaseListEvaluationRunsParams
   };
 
   export {
@@ -1916,7 +1839,7 @@ export declare namespace Agents {
     type EvaluationDatasetCreateResponse as EvaluationDatasetCreateResponse,
     type EvaluationDatasetCreateFileUploadPresignedURLsResponse as EvaluationDatasetCreateFileUploadPresignedURLsResponse,
     type EvaluationDatasetCreateParams as EvaluationDatasetCreateParams,
-    type EvaluationDatasetCreateFileUploadPresignedURLsParams as EvaluationDatasetCreateFileUploadPresignedURLsParams,
+    type EvaluationDatasetCreateFileUploadPresignedURLsParams as EvaluationDatasetCreateFileUploadPresignedURLsParams
   };
 
   export {
@@ -1926,7 +1849,7 @@ export declare namespace Agents {
     type FunctionDeleteResponse as FunctionDeleteResponse,
     type FunctionCreateParams as FunctionCreateParams,
     type FunctionUpdateParams as FunctionUpdateParams,
-    type FunctionDeleteParams as FunctionDeleteParams,
+    type FunctionDeleteParams as FunctionDeleteParams
   };
 
   export {
@@ -1934,7 +1857,7 @@ export declare namespace Agents {
     type VersionUpdateResponse as VersionUpdateResponse,
     type VersionListResponse as VersionListResponse,
     type VersionUpdateParams as VersionUpdateParams,
-    type VersionListParams as VersionListParams,
+    type VersionListParams as VersionListParams
   };
 
   export {
@@ -1942,7 +1865,7 @@ export declare namespace Agents {
     type APILinkKnowledgeBaseOutput as APILinkKnowledgeBaseOutput,
     type KnowledgeBaseDetachResponse as KnowledgeBaseDetachResponse,
     type KnowledgeBaseAttachSingleParams as KnowledgeBaseAttachSingleParams,
-    type KnowledgeBaseDetachParams as KnowledgeBaseDetachParams,
+    type KnowledgeBaseDetachParams as KnowledgeBaseDetachParams
   };
 
   export {
@@ -1953,6 +1876,6 @@ export declare namespace Agents {
     type RouteViewResponse as RouteViewResponse,
     type RouteUpdateParams as RouteUpdateParams,
     type RouteDeleteParams as RouteDeleteParams,
-    type RouteAddParams as RouteAddParams,
+    type RouteAddParams as RouteAddParams
   };
 }

@@ -7,6 +7,9 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
+/**
+ * The API lets you build GPU-powered AI agents with pre-built or custom foundation models, function and agent routes, and RAG pipelines with knowledge bases.
+ */
 export class Anthropic extends APIResource {
   /**
    * To create an Anthropic API key, send a POST request to
@@ -18,15 +21,8 @@ export class Anthropic extends APIResource {
    *   await client.models.providers.anthropic.create();
    * ```
    */
-  create(
-    body: AnthropicCreateParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<AnthropicCreateResponse> {
-    return this._client.post('/v2/gen-ai/anthropic/keys', {
-      body,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  create(body: AnthropicCreateParams | null | undefined = {}, options?: RequestOptions): APIPromise<AnthropicCreateResponse> {
+    return this._client.post('/v2/gen-ai/anthropic/keys', { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -42,10 +38,7 @@ export class Anthropic extends APIResource {
    * ```
    */
   retrieve(apiKeyUuid: string, options?: RequestOptions): APIPromise<AnthropicRetrieveResponse> {
-    return this._client.get(path`/v2/gen-ai/anthropic/keys/${apiKeyUuid}`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+    return this._client.get(path`/v2/gen-ai/anthropic/keys/${apiKeyUuid}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -60,16 +53,8 @@ export class Anthropic extends APIResource {
    *   );
    * ```
    */
-  update(
-    apiKeyUuid: string,
-    body: AnthropicUpdateParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<AnthropicUpdateResponse> {
-    return this._client.put(path`/v2/gen-ai/anthropic/keys/${apiKeyUuid}`, {
-      body,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  update(apiKeyUuid: string, body: AnthropicUpdateParams | null | undefined = {}, options?: RequestOptions): APIPromise<AnthropicUpdateResponse> {
+    return this._client.put(path`/v2/gen-ai/anthropic/keys/${apiKeyUuid}`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -82,15 +67,8 @@ export class Anthropic extends APIResource {
    *   await client.models.providers.anthropic.list();
    * ```
    */
-  list(
-    query: AnthropicListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<AnthropicListResponse> {
-    return this._client.get('/v2/gen-ai/anthropic/keys', {
-      query,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  list(query: AnthropicListParams | null | undefined = {}, options?: RequestOptions): APIPromise<AnthropicListResponse> {
+    return this._client.get('/v2/gen-ai/anthropic/keys', { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -106,10 +84,7 @@ export class Anthropic extends APIResource {
    * ```
    */
   delete(apiKeyUuid: string, options?: RequestOptions): APIPromise<AnthropicDeleteResponse> {
-    return this._client.delete(path`/v2/gen-ai/anthropic/keys/${apiKeyUuid}`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+    return this._client.delete(path`/v2/gen-ai/anthropic/keys/${apiKeyUuid}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -123,16 +98,8 @@ export class Anthropic extends APIResource {
    *   );
    * ```
    */
-  listAgents(
-    uuid: string,
-    query: AnthropicListAgentsParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<AnthropicListAgentsResponse> {
-    return this._client.get(path`/v2/gen-ai/anthropic/keys/${uuid}/agents`, {
-      query,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  listAgents(uuid: string, query: AnthropicListAgentsParams | null | undefined = {}, options?: RequestOptions): APIPromise<AnthropicListAgentsResponse> {
+    return this._client.get(path`/v2/gen-ai/anthropic/keys/${uuid}/agents`, { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 }
 
@@ -233,7 +200,7 @@ export interface AnthropicUpdateParams {
   /**
    * API key ID
    */
-  body_api_key_uuid?: string;
+  api_key_uuid?: string;
 
   /**
    * Name of the key
@@ -276,6 +243,6 @@ export declare namespace Anthropic {
     type AnthropicCreateParams as AnthropicCreateParams,
     type AnthropicUpdateParams as AnthropicUpdateParams,
     type AnthropicListParams as AnthropicListParams,
-    type AnthropicListAgentsParams as AnthropicListAgentsParams,
+    type AnthropicListAgentsParams as AnthropicListAgentsParams
   };
 }

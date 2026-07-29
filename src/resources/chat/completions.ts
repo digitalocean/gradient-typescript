@@ -7,6 +7,9 @@ import { APIPromise } from '../../core/api-promise';
 import { Stream } from '../../core/streaming';
 import { RequestOptions } from '../../internal/request-options';
 
+/**
+ * Given a list of messages comprising a conversation, the model will return a response.
+ */
 export class Completions extends APIResource {
   /**
    * Creates a model response for the given chat conversation.
@@ -19,28 +22,11 @@ export class Completions extends APIResource {
    * });
    * ```
    */
-  create(
-    body: CompletionCreateParamsNonStreaming,
-    options?: RequestOptions,
-  ): APIPromise<CompletionCreateResponse>;
-  create(
-    body: CompletionCreateParamsStreaming,
-    options?: RequestOptions,
-  ): APIPromise<Stream<Shared.ChatCompletionChunk>>;
-  create(
-    body: CompletionCreateParamsBase,
-    options?: RequestOptions,
-  ): APIPromise<Stream<Shared.ChatCompletionChunk> | CompletionCreateResponse>;
-  create(
-    body: CompletionCreateParams,
-    options?: RequestOptions,
-  ): APIPromise<CompletionCreateResponse> | APIPromise<Stream<Shared.ChatCompletionChunk>> {
-    return this._client.post('/chat/completions', {
-      body,
-      defaultBaseURL: '{inferenceEndpoint}/v1',
-      ...options,
-      stream: body.stream ?? false,
-    }) as APIPromise<CompletionCreateResponse> | APIPromise<Stream<Shared.ChatCompletionChunk>>;
+  create(body: CompletionCreateParamsNonStreaming, options?: RequestOptions): APIPromise<CompletionCreateResponse>
+  create(body: CompletionCreateParamsStreaming, options?: RequestOptions): APIPromise<Stream<Shared.ChatCompletionChunk>>
+  create(body: CompletionCreateParamsBase, options?: RequestOptions): APIPromise<Stream<Shared.ChatCompletionChunk> | CompletionCreateResponse>
+  create(body: CompletionCreateParams, options?: RequestOptions): APIPromise<CompletionCreateResponse> | APIPromise<Stream<Shared.ChatCompletionChunk>> {
+    return this._client.post('/chat/completions', { body, defaultBaseURL: 'https://inference.do-ai.run/v1', ...options, stream: body.stream ?? false }) as APIPromise<CompletionCreateResponse> | APIPromise<Stream<Shared.ChatCompletionChunk>>;
   }
 }
 
@@ -194,19 +180,13 @@ export namespace CompletionCreateResponse {
   }
 }
 
-export type CompletionCreateParams = CompletionCreateParamsNonStreaming | CompletionCreateParamsStreaming;
+export type CompletionCreateParams = CompletionCreateParamsNonStreaming | CompletionCreateParamsStreaming
 
 export interface CompletionCreateParamsBase {
   /**
    * A list of messages comprising the conversation so far.
    */
-  messages: Array<
-    | CompletionCreateParams.ChatCompletionRequestSystemMessage
-    | CompletionCreateParams.ChatCompletionRequestDeveloperMessage
-    | CompletionCreateParams.ChatCompletionRequestUserMessage
-    | CompletionCreateParams.ChatCompletionRequestAssistantMessage
-    | CompletionCreateParams.ChatCompletionRequestToolMessage
-  >;
+  messages: Array<CompletionCreateParams.ChatCompletionRequestSystemMessage | CompletionCreateParams.ChatCompletionRequestDeveloperMessage | CompletionCreateParams.ChatCompletionRequestUserMessage | CompletionCreateParams.ChatCompletionRequestAssistantMessage | CompletionCreateParams.ChatCompletionRequestToolMessage>;
 
   /**
    * Model ID used to generate the response.
@@ -279,6 +259,12 @@ export interface CompletionCreateParamsBase {
   presence_penalty?: number | null;
 
   /**
+   * Constrains effort on reasoning for reasoning models. Reducing reasoning effort
+   * can result in faster responses and fewer tokens used on reasoning in a response.
+   */
+  reasoning_effort?: 'none' | 'minimal' | 'low' | 'medium' | 'high' | 'xhigh' | null;
+
+  /**
    * Up to 4 sequences where the API will stop generating further tokens. The
    * returned text will not contain the stop sequence.
    */
@@ -344,7 +330,7 @@ export interface CompletionCreateParamsBase {
    */
   user?: string;
 
-  [k: string]: unknown;
+[k: string]: unknown
 }
 
 export namespace CompletionCreateParams {
@@ -356,7 +342,7 @@ export namespace CompletionCreateParams {
     /**
      * The contents of the system message.
      */
-    content: string | Array<string | ChatCompletionRequestSystemMessage.UnionMember1>;
+    content: string | ChatCompletionRequestSystemMessage.ChatCompletionRequestContentPartText | Array<string | ChatCompletionRequestSystemMessage.ChatCompletionRequestContentPartText>;
 
     /**
      * The role of the messages author, in this case `system`.
@@ -368,7 +354,7 @@ export namespace CompletionCreateParams {
     /**
      * Content part with type and text
      */
-    export interface UnionMember1 {
+    export interface ChatCompletionRequestContentPartText {
       /**
        * The text content
        */
@@ -378,6 +364,65 @@ export namespace CompletionCreateParams {
        * The type of content part
        */
       type: 'text';
+
+      /**
+       * Cache control settings for the content part.
+       */
+      cache_control?: ChatCompletionRequestContentPartText.CacheControl;
+    }
+
+    export namespace ChatCompletionRequestContentPartText {
+      /**
+       * Cache control settings for the content part.
+       */
+      export interface CacheControl {
+        /**
+         * The cache control type.
+         */
+        type: 'ephemeral';
+
+        /**
+         * The cache TTL.
+         */
+        ttl?: '5m' | '1h';
+      }
+    }
+
+    /**
+     * Content part with type and text
+     */
+    export interface ChatCompletionRequestContentPartText {
+      /**
+       * The text content
+       */
+      text: string;
+
+      /**
+       * The type of content part
+       */
+      type: 'text';
+
+      /**
+       * Cache control settings for the content part.
+       */
+      cache_control?: ChatCompletionRequestContentPartText.CacheControl;
+    }
+
+    export namespace ChatCompletionRequestContentPartText {
+      /**
+       * Cache control settings for the content part.
+       */
+      export interface CacheControl {
+        /**
+         * The cache control type.
+         */
+        type: 'ephemeral';
+
+        /**
+         * The cache TTL.
+         */
+        ttl?: '5m' | '1h';
+      }
     }
   }
 
@@ -389,7 +434,7 @@ export namespace CompletionCreateParams {
     /**
      * The contents of the developer message.
      */
-    content: string | Array<string | ChatCompletionRequestDeveloperMessage.UnionMember1>;
+    content: string | ChatCompletionRequestDeveloperMessage.ChatCompletionRequestContentPartText | Array<string | ChatCompletionRequestDeveloperMessage.ChatCompletionRequestContentPartText>;
 
     /**
      * The role of the messages author, in this case `developer`.
@@ -401,7 +446,7 @@ export namespace CompletionCreateParams {
     /**
      * Content part with type and text
      */
-    export interface UnionMember1 {
+    export interface ChatCompletionRequestContentPartText {
       /**
        * The text content
        */
@@ -411,6 +456,65 @@ export namespace CompletionCreateParams {
        * The type of content part
        */
       type: 'text';
+
+      /**
+       * Cache control settings for the content part.
+       */
+      cache_control?: ChatCompletionRequestContentPartText.CacheControl;
+    }
+
+    export namespace ChatCompletionRequestContentPartText {
+      /**
+       * Cache control settings for the content part.
+       */
+      export interface CacheControl {
+        /**
+         * The cache control type.
+         */
+        type: 'ephemeral';
+
+        /**
+         * The cache TTL.
+         */
+        ttl?: '5m' | '1h';
+      }
+    }
+
+    /**
+     * Content part with type and text
+     */
+    export interface ChatCompletionRequestContentPartText {
+      /**
+       * The text content
+       */
+      text: string;
+
+      /**
+       * The type of content part
+       */
+      type: 'text';
+
+      /**
+       * Cache control settings for the content part.
+       */
+      cache_control?: ChatCompletionRequestContentPartText.CacheControl;
+    }
+
+    export namespace ChatCompletionRequestContentPartText {
+      /**
+       * Cache control settings for the content part.
+       */
+      export interface CacheControl {
+        /**
+         * The cache control type.
+         */
+        type: 'ephemeral';
+
+        /**
+         * The cache TTL.
+         */
+        ttl?: '5m' | '1h';
+      }
     }
   }
 
@@ -422,7 +526,7 @@ export namespace CompletionCreateParams {
     /**
      * The contents of the user message.
      */
-    content: string | Array<string | ChatCompletionRequestUserMessage.UnionMember1>;
+    content: string | ChatCompletionRequestUserMessage.ChatCompletionRequestContentPartText | ChatCompletionRequestUserMessage.ChatCompletionRequestContentPartImageURL | ChatCompletionRequestUserMessage.ChatCompletionRequestContentPartVideoURL | Array<string | ChatCompletionRequestUserMessage.ChatCompletionRequestContentPartText | ChatCompletionRequestUserMessage.ChatCompletionRequestContentPartImageURL | ChatCompletionRequestUserMessage.ChatCompletionRequestContentPartVideoURL>;
 
     /**
      * The role of the messages author, in this case `user`.
@@ -434,7 +538,7 @@ export namespace CompletionCreateParams {
     /**
      * Content part with type and text
      */
-    export interface UnionMember1 {
+    export interface ChatCompletionRequestContentPartText {
       /**
        * The text content
        */
@@ -444,6 +548,183 @@ export namespace CompletionCreateParams {
        * The type of content part
        */
       type: 'text';
+
+      /**
+       * Cache control settings for the content part.
+       */
+      cache_control?: ChatCompletionRequestContentPartText.CacheControl;
+    }
+
+    export namespace ChatCompletionRequestContentPartText {
+      /**
+       * Cache control settings for the content part.
+       */
+      export interface CacheControl {
+        /**
+         * The cache control type.
+         */
+        type: 'ephemeral';
+
+        /**
+         * The cache TTL.
+         */
+        ttl?: '5m' | '1h';
+      }
+    }
+
+    /**
+     * Content part with type and image URL.
+     */
+    export interface ChatCompletionRequestContentPartImageURL {
+      /**
+       * Image URL settings.
+       */
+      image_url: ChatCompletionRequestContentPartImageURL.ImageURL;
+
+      /**
+       * The type of content part
+       */
+      type: 'image_url';
+    }
+
+    export namespace ChatCompletionRequestContentPartImageURL {
+      /**
+       * Image URL settings.
+       */
+      export interface ImageURL {
+        /**
+         * A URL or data URL containing image content.
+         */
+        url: string;
+
+        /**
+         * Optional detail level for image understanding.
+         */
+        detail?: 'auto' | 'low' | 'high';
+      }
+    }
+
+    /**
+     * Content part with type and video URL.
+     */
+    export interface ChatCompletionRequestContentPartVideoURL {
+      /**
+       * The type of content part
+       */
+      type: 'video_url';
+
+      /**
+       * Video URL settings.
+       */
+      video_url: ChatCompletionRequestContentPartVideoURL.VideoURL;
+    }
+
+    export namespace ChatCompletionRequestContentPartVideoURL {
+      /**
+       * Video URL settings.
+       */
+      export interface VideoURL {
+        /**
+         * A URL or data URL containing video content.
+         */
+        url: string;
+      }
+    }
+
+    /**
+     * Content part with type and text
+     */
+    export interface ChatCompletionRequestContentPartText {
+      /**
+       * The text content
+       */
+      text: string;
+
+      /**
+       * The type of content part
+       */
+      type: 'text';
+
+      /**
+       * Cache control settings for the content part.
+       */
+      cache_control?: ChatCompletionRequestContentPartText.CacheControl;
+    }
+
+    export namespace ChatCompletionRequestContentPartText {
+      /**
+       * Cache control settings for the content part.
+       */
+      export interface CacheControl {
+        /**
+         * The cache control type.
+         */
+        type: 'ephemeral';
+
+        /**
+         * The cache TTL.
+         */
+        ttl?: '5m' | '1h';
+      }
+    }
+
+    /**
+     * Content part with type and image URL.
+     */
+    export interface ChatCompletionRequestContentPartImageURL {
+      /**
+       * Image URL settings.
+       */
+      image_url: ChatCompletionRequestContentPartImageURL.ImageURL;
+
+      /**
+       * The type of content part
+       */
+      type: 'image_url';
+    }
+
+    export namespace ChatCompletionRequestContentPartImageURL {
+      /**
+       * Image URL settings.
+       */
+      export interface ImageURL {
+        /**
+         * A URL or data URL containing image content.
+         */
+        url: string;
+
+        /**
+         * Optional detail level for image understanding.
+         */
+        detail?: 'auto' | 'low' | 'high';
+      }
+    }
+
+    /**
+     * Content part with type and video URL.
+     */
+    export interface ChatCompletionRequestContentPartVideoURL {
+      /**
+       * The type of content part
+       */
+      type: 'video_url';
+
+      /**
+       * Video URL settings.
+       */
+      video_url: ChatCompletionRequestContentPartVideoURL.VideoURL;
+    }
+
+    export namespace ChatCompletionRequestContentPartVideoURL {
+      /**
+       * Video URL settings.
+       */
+      export interface VideoURL {
+        /**
+         * A URL or data URL containing video content.
+         */
+        url: string;
+      }
     }
   }
 
@@ -459,7 +740,7 @@ export namespace CompletionCreateParams {
     /**
      * The contents of the assistant message.
      */
-    content?: string | Array<string | ChatCompletionRequestAssistantMessage.UnionMember1> | null;
+    content?: string | ChatCompletionRequestAssistantMessage.ChatCompletionRequestContentPartText | Array<string | ChatCompletionRequestAssistantMessage.ChatCompletionRequestContentPartText> | null;
 
     /**
      * The tool calls generated by the model, such as function calls.
@@ -471,7 +752,7 @@ export namespace CompletionCreateParams {
     /**
      * Content part with type and text
      */
-    export interface UnionMember1 {
+    export interface ChatCompletionRequestContentPartText {
       /**
        * The text content
        */
@@ -481,6 +762,65 @@ export namespace CompletionCreateParams {
        * The type of content part
        */
       type: 'text';
+
+      /**
+       * Cache control settings for the content part.
+       */
+      cache_control?: ChatCompletionRequestContentPartText.CacheControl;
+    }
+
+    export namespace ChatCompletionRequestContentPartText {
+      /**
+       * Cache control settings for the content part.
+       */
+      export interface CacheControl {
+        /**
+         * The cache control type.
+         */
+        type: 'ephemeral';
+
+        /**
+         * The cache TTL.
+         */
+        ttl?: '5m' | '1h';
+      }
+    }
+
+    /**
+     * Content part with type and text
+     */
+    export interface ChatCompletionRequestContentPartText {
+      /**
+       * The text content
+       */
+      text: string;
+
+      /**
+       * The type of content part
+       */
+      type: 'text';
+
+      /**
+       * Cache control settings for the content part.
+       */
+      cache_control?: ChatCompletionRequestContentPartText.CacheControl;
+    }
+
+    export namespace ChatCompletionRequestContentPartText {
+      /**
+       * Cache control settings for the content part.
+       */
+      export interface CacheControl {
+        /**
+         * The cache control type.
+         */
+        type: 'ephemeral';
+
+        /**
+         * The cache TTL.
+         */
+        ttl?: '5m' | '1h';
+      }
     }
 
     export interface ToolCall {
@@ -525,7 +865,7 @@ export namespace CompletionCreateParams {
     /**
      * The contents of the tool message.
      */
-    content: string;
+    content: string | ChatCompletionRequestToolMessage.ChatCompletionRequestContentPartText | Array<string | ChatCompletionRequestToolMessage.ChatCompletionRequestContentPartText>;
 
     /**
      * The role of the messages author, in this case `tool`.
@@ -536,6 +876,82 @@ export namespace CompletionCreateParams {
      * Tool call that this message is responding to.
      */
     tool_call_id: string;
+  }
+
+  export namespace ChatCompletionRequestToolMessage {
+    /**
+     * Content part with type and text
+     */
+    export interface ChatCompletionRequestContentPartText {
+      /**
+       * The text content
+       */
+      text: string;
+
+      /**
+       * The type of content part
+       */
+      type: 'text';
+
+      /**
+       * Cache control settings for the content part.
+       */
+      cache_control?: ChatCompletionRequestContentPartText.CacheControl;
+    }
+
+    export namespace ChatCompletionRequestContentPartText {
+      /**
+       * Cache control settings for the content part.
+       */
+      export interface CacheControl {
+        /**
+         * The cache control type.
+         */
+        type: 'ephemeral';
+
+        /**
+         * The cache TTL.
+         */
+        ttl?: '5m' | '1h';
+      }
+    }
+
+    /**
+     * Content part with type and text
+     */
+    export interface ChatCompletionRequestContentPartText {
+      /**
+       * The text content
+       */
+      text: string;
+
+      /**
+       * The type of content part
+       */
+      type: 'text';
+
+      /**
+       * Cache control settings for the content part.
+       */
+      cache_control?: ChatCompletionRequestContentPartText.CacheControl;
+    }
+
+    export namespace ChatCompletionRequestContentPartText {
+      /**
+       * Cache control settings for the content part.
+       */
+      export interface CacheControl {
+        /**
+         * The cache control type.
+         */
+        type: 'ephemeral';
+
+        /**
+         * The cache TTL.
+         */
+        ttl?: '5m' | '1h';
+      }
+    }
   }
 
   /**
@@ -611,8 +1027,8 @@ export namespace CompletionCreateParams {
     }
   }
 
-  export type CompletionCreateParamsNonStreaming = CompletionsAPI.CompletionCreateParamsNonStreaming;
-  export type CompletionCreateParamsStreaming = CompletionsAPI.CompletionCreateParamsStreaming;
+  export type CompletionCreateParamsNonStreaming = CompletionsAPI.CompletionCreateParamsNonStreaming
+  export type CompletionCreateParamsStreaming = CompletionsAPI.CompletionCreateParamsStreaming
 }
 
 export interface CompletionCreateParamsNonStreaming extends CompletionCreateParamsBase {
@@ -622,7 +1038,7 @@ export interface CompletionCreateParamsNonStreaming extends CompletionCreatePara
    */
   stream?: false | null;
 
-  [k: string]: unknown;
+[k: string]: unknown
 }
 
 export interface CompletionCreateParamsStreaming extends CompletionCreateParamsBase {
@@ -632,7 +1048,7 @@ export interface CompletionCreateParamsStreaming extends CompletionCreateParamsB
    */
   stream: true;
 
-  [k: string]: unknown;
+[k: string]: unknown
 }
 
 export declare namespace Completions {
@@ -640,6 +1056,6 @@ export declare namespace Completions {
     type CompletionCreateResponse as CompletionCreateResponse,
     type CompletionCreateParams as CompletionCreateParams,
     type CompletionCreateParamsNonStreaming as CompletionCreateParamsNonStreaming,
-    type CompletionCreateParamsStreaming as CompletionCreateParamsStreaming,
+    type CompletionCreateParamsStreaming as CompletionCreateParamsStreaming
   };
 }

@@ -6,6 +6,13 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
+/**
+ * [DigitalOcean Cloud Firewalls](https://docs.digitalocean.com/products/networking/firewalls/)
+ * provide the ability to restrict network access to and from a Droplet
+ * allowing you to define which ports will accept inbound or outbound
+ * connections. By sending requests to the `/v2/firewalls` endpoint, you can
+ * list, create, or delete firewalls as well as modify access rules.
+ */
 export class Tags extends APIResource {
   /**
    * To assign a tag representing a group of Droplets to a firewall, send a POST
@@ -25,12 +32,7 @@ export class Tags extends APIResource {
    * ```
    */
   add(firewallID: string, body: TagAddParams, options?: RequestOptions): APIPromise<void> {
-    return this._client.post(path`/v2/firewalls/${firewallID}/tags`, {
-      body,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+    return this._client.post(path`/v2/firewalls/${firewallID}/tags`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
   }
 
   /**
@@ -51,12 +53,7 @@ export class Tags extends APIResource {
    * ```
    */
   remove(firewallID: string, body: TagRemoveParams, options?: RequestOptions): APIPromise<void> {
-    return this._client.delete(path`/v2/firewalls/${firewallID}/tags`, {
-      body,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+    return this._client.delete(path`/v2/firewalls/${firewallID}/tags`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
   }
 }
 
@@ -81,5 +78,8 @@ export interface TagRemoveParams {
 }
 
 export declare namespace Tags {
-  export { type TagAddParams as TagAddParams, type TagRemoveParams as TagRemoveParams };
+  export {
+    type TagAddParams as TagAddParams,
+    type TagRemoveParams as TagRemoveParams
+  };
 }

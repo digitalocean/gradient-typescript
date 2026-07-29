@@ -6,6 +6,9 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
+/**
+ * The API lets you build GPU-powered AI agents with pre-built or custom foundation models, function and agent routes, and RAG pipelines with knowledge bases.
+ */
 export class KnowledgeBases extends APIResource {
   /**
    * To attach knowledge bases to an agent, send a POST request to
@@ -20,10 +23,7 @@ export class KnowledgeBases extends APIResource {
    * ```
    */
   attach(agentUuid: string, options?: RequestOptions): APIPromise<APILinkKnowledgeBaseOutput> {
-    return this._client.post(path`/v2/gen-ai/agents/${agentUuid}/knowledge_bases`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+    return this._client.post(path`/v2/gen-ai/agents/${agentUuid}/knowledge_bases`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -41,16 +41,9 @@ export class KnowledgeBases extends APIResource {
    *   );
    * ```
    */
-  attachSingle(
-    knowledgeBaseUuid: string,
-    params: KnowledgeBaseAttachSingleParams,
-    options?: RequestOptions,
-  ): APIPromise<APILinkKnowledgeBaseOutput> {
-    const { agent_uuid } = params;
-    return this._client.post(path`/v2/gen-ai/agents/${agent_uuid}/knowledge_bases/${knowledgeBaseUuid}`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  attachSingle(knowledgeBaseUuid: string, params: KnowledgeBaseAttachSingleParams, options?: RequestOptions): APIPromise<APILinkKnowledgeBaseOutput> {
+    const { agent_uuid } = params
+    return this._client.post(path`/v2/gen-ai/agents/${agent_uuid}/knowledge_bases/${knowledgeBaseUuid}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -65,16 +58,9 @@ export class KnowledgeBases extends APIResource {
    * );
    * ```
    */
-  detach(
-    knowledgeBaseUuid: string,
-    params: KnowledgeBaseDetachParams,
-    options?: RequestOptions,
-  ): APIPromise<KnowledgeBaseDetachResponse> {
-    const { agent_uuid } = params;
-    return this._client.delete(path`/v2/gen-ai/agents/${agent_uuid}/knowledge_bases/${knowledgeBaseUuid}`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  detach(knowledgeBaseUuid: string, params: KnowledgeBaseDetachParams, options?: RequestOptions): APIPromise<KnowledgeBaseDetachResponse> {
+    const { agent_uuid } = params
+    return this._client.delete(path`/v2/gen-ai/agents/${agent_uuid}/knowledge_bases/${knowledgeBaseUuid}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 }
 
@@ -117,6 +103,6 @@ export declare namespace KnowledgeBases {
     type APILinkKnowledgeBaseOutput as APILinkKnowledgeBaseOutput,
     type KnowledgeBaseDetachResponse as KnowledgeBaseDetachResponse,
     type KnowledgeBaseAttachSingleParams as KnowledgeBaseAttachSingleParams,
-    type KnowledgeBaseDetachParams as KnowledgeBaseDetachParams,
+    type KnowledgeBaseDetachParams as KnowledgeBaseDetachParams
   };
 }

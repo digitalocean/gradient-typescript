@@ -7,6 +7,9 @@ import { APIPromise } from '../core/api-promise';
 import { Stream } from '../core/streaming';
 import { RequestOptions } from '../internal/request-options';
 
+/**
+ * Generate images from text prompts using various AI models.
+ */
 export class Images extends APIResource {
   /**
    * Creates a high-quality image from a text prompt using GPT-IMAGE-1, the latest
@@ -21,28 +24,11 @@ export class Images extends APIResource {
    * });
    * ```
    */
-  generate(
-    body: ImageGenerateParamsNonStreaming,
-    options?: RequestOptions,
-  ): APIPromise<ImageGenerateResponse>;
-  generate(
-    body: ImageGenerateParamsStreaming,
-    options?: RequestOptions,
-  ): APIPromise<Stream<Shared.ImageGenStreamEvent>>;
-  generate(
-    body: ImageGenerateParamsBase,
-    options?: RequestOptions,
-  ): APIPromise<Stream<Shared.ImageGenStreamEvent> | ImageGenerateResponse>;
-  generate(
-    body: ImageGenerateParams,
-    options?: RequestOptions,
-  ): APIPromise<ImageGenerateResponse> | APIPromise<Stream<Shared.ImageGenStreamEvent>> {
-    return this._client.post('/images/generations', {
-      body,
-      defaultBaseURL: '{inferenceEndpoint}/v1',
-      ...options,
-      stream: body.stream ?? false,
-    }) as APIPromise<ImageGenerateResponse> | APIPromise<Stream<Shared.ImageGenStreamEvent>>;
+  generate(body: ImageGenerateParamsNonStreaming, options?: RequestOptions): APIPromise<ImageGenerateResponse>
+  generate(body: ImageGenerateParamsStreaming, options?: RequestOptions): APIPromise<Stream<Shared.ImageGenStreamEvent>>
+  generate(body: ImageGenerateParamsBase, options?: RequestOptions): APIPromise<Stream<Shared.ImageGenStreamEvent> | ImageGenerateResponse>
+  generate(body: ImageGenerateParams, options?: RequestOptions): APIPromise<ImageGenerateResponse> | APIPromise<Stream<Shared.ImageGenStreamEvent>> {
+    return this._client.post('/images/generations', { body, defaultBaseURL: 'https://inference.do-ai.run/v1', ...options, stream: body.stream ?? false }) as APIPromise<ImageGenerateResponse> | APIPromise<Stream<Shared.ImageGenStreamEvent>>;
   }
 }
 
@@ -142,7 +128,7 @@ export namespace ImageGenerateResponse {
   }
 }
 
-export type ImageGenerateParams = ImageGenerateParamsNonStreaming | ImageGenerateParamsStreaming;
+export type ImageGenerateParams = ImageGenerateParamsNonStreaming | ImageGenerateParamsStreaming
 
 export interface ImageGenerateParamsBase {
   /**
@@ -222,8 +208,8 @@ export interface ImageGenerateParamsBase {
 }
 
 export namespace ImageGenerateParams {
-  export type ImageGenerateParamsNonStreaming = ImagesAPI.ImageGenerateParamsNonStreaming;
-  export type ImageGenerateParamsStreaming = ImagesAPI.ImageGenerateParamsStreaming;
+  export type ImageGenerateParamsNonStreaming = ImagesAPI.ImageGenerateParamsNonStreaming
+  export type ImageGenerateParamsStreaming = ImagesAPI.ImageGenerateParamsStreaming
 }
 
 export interface ImageGenerateParamsNonStreaming extends ImageGenerateParamsBase {
@@ -251,6 +237,6 @@ export declare namespace Images {
     type ImageGenerateResponse as ImageGenerateResponse,
     type ImageGenerateParams as ImageGenerateParams,
     type ImageGenerateParamsNonStreaming as ImageGenerateParamsNonStreaming,
-    type ImageGenerateParamsStreaming as ImageGenerateParamsStreaming,
+    type ImageGenerateParamsStreaming as ImageGenerateParamsStreaming
   };
 }

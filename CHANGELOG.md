@@ -1,5 +1,74 @@
 # Changelog
 
+## 0.1.0-alpha.3 (2026-07-29)
+
+Full Changelog: [v0.1.0-alpha.2...v0.1.0-alpha.3](https://github.com/digitalocean/gradient-typescript/compare/v0.1.0-alpha.2...v0.1.0-alpha.3)
+
+### Features
+
+* add waitForAgentReady helper for agent deployment polling ([#9](https://github.com/digitalocean/gradient-typescript/issues/9)) ([48a9366](https://github.com/digitalocean/gradient-typescript/commit/48a9366dbb8879bb6a4be7b59a6bba26840d50d9))
+* **api:** include indexing jobs ([9b9f776](https://github.com/digitalocean/gradient-typescript/commit/9b9f776c88182c0c26fbc92dc3085f96250675c7))
+* **api:** manual updates ([5618f39](https://github.com/digitalocean/gradient-typescript/commit/5618f394ab5a374946cb1dd9349693863209a12b))
+* **api:** manual updates ([06dce24](https://github.com/digitalocean/gradient-typescript/commit/06dce245c0aebeea23e8a36e1cec7fc8810bcc89))
+* **api:** manual updates ([f1902bc](https://github.com/digitalocean/gradient-typescript/commit/f1902bc99ef0f8cb35914720c54e0ccee1ead5c1))
+* **api:** remove inf endpoint env ([6c3a74a](https://github.com/digitalocean/gradient-typescript/commit/6c3a74ac681c92b30b4c07bfc4a43f730a6a6373))
+* **api:** responses ([b07a208](https://github.com/digitalocean/gradient-typescript/commit/b07a208fc60c300d84e52b8e25b1613a50a9688a))
+* **api:** update urls for endpoints ([5160e2a](https://github.com/digitalocean/gradient-typescript/commit/5160e2ab9e4fefb2fa871843b38ac5247638e2c8))
+* knowledge base indexing poller ([#14](https://github.com/digitalocean/gradient-typescript/issues/14)) ([04e35f0](https://github.com/digitalocean/gradient-typescript/commit/04e35f0553c622fe33b422f611bb7f1592346510))
+* **knowledge-bases:** add waitForDatabase polling helper ([#8](https://github.com/digitalocean/gradient-typescript/issues/8)) ([12d1af3](https://github.com/digitalocean/gradient-typescript/commit/12d1af3c82962f420eef7160b8ac043aa96087f7))
+
+
+### Bug Fixes
+
+* **client:** avoid memory leak with abort signals ([ca552af](https://github.com/digitalocean/gradient-typescript/commit/ca552afb6f448731169e822608f8fb6a29325340))
+* **client:** avoid removing abort listener too early ([82b3689](https://github.com/digitalocean/gradient-typescript/commit/82b3689c13fc60009c9ff3c40b5cc3c4c800c5db))
+* **client:** improve parameter names ([d7270e4](https://github.com/digitalocean/gradient-typescript/commit/d7270e4e4a29b458daa5d7eceb5b640aff9a5ffe))
+* **docs/contributing:** correct pnpm link command ([a17c344](https://github.com/digitalocean/gradient-typescript/commit/a17c344075b2a92c102990fb4137e591239256bf))
+* **docs:** remove extraneous example object fields ([1eaa98c](https://github.com/digitalocean/gradient-typescript/commit/1eaa98c75d63934e5c3f16c4b021d7ff9958f399))
+* **internal:** set inference endpoint URL ([2611294](https://github.com/digitalocean/gradient-typescript/commit/2611294c68d30b23488b1d2290dc64515c05a48f))
+* **internal:** update default chat completions endpoint ([49a0a0c](https://github.com/digitalocean/gradient-typescript/commit/49a0a0c0f8895b3235da1378d01476e63b74812e))
+* **mcp:** correct code tool API endpoint ([630724d](https://github.com/digitalocean/gradient-typescript/commit/630724ddaea98da99a14cb42b0475378057a35a0))
+* **mcp:** return correct lines on typescript errors ([c35d0f7](https://github.com/digitalocean/gradient-typescript/commit/c35d0f71ac4bf58c702ea6a31a2cfe5a0d5126c3))
+
+
+### Chores
+
+* break long lines in snippets into multiline ([7d854f0](https://github.com/digitalocean/gradient-typescript/commit/7d854f0a63467bd8701d4e8ff8991ecfd0c330fd))
+* **ci:** skip lint on metadata-only changes ([1450f0a](https://github.com/digitalocean/gradient-typescript/commit/1450f0a819e7050550559ecf8ccd3e1d86876990))
+* **client:** do not parse responses with empty content-length ([b769165](https://github.com/digitalocean/gradient-typescript/commit/b769165fd73b45a53893c390a159018ddaa6bd1f))
+* **client:** fix logger property type ([ba0b91b](https://github.com/digitalocean/gradient-typescript/commit/ba0b91b64e8b5e86014ef7d9a21e7c55c0459eaa))
+* **client:** restructure abort controller binding ([ab12908](https://github.com/digitalocean/gradient-typescript/commit/ab12908cb196ae8d67415c506f2d222ac42fb42a))
+* fix typo in descriptions ([3013c92](https://github.com/digitalocean/gradient-typescript/commit/3013c9222ef4602cfe55ee7b7a677059375cb89c))
+* **formatter:** run prettier and eslint separately ([ecf993c](https://github.com/digitalocean/gradient-typescript/commit/ecf993cea0b0f17d269a9bb6c89b68b4764d8031))
+* formatting fixes ([b2388ec](https://github.com/digitalocean/gradient-typescript/commit/b2388ec757d21bdb00365969af5b083ae1e574b0))
+* **internal/client:** fix form-urlencoded requests ([ff211a6](https://github.com/digitalocean/gradient-typescript/commit/ff211a6b9444f7cb9c50ca3438ed1d201e3dcd14))
+* **internal:** avoid type checking errors with ts-reset ([e8fe038](https://github.com/digitalocean/gradient-typescript/commit/e8fe038c8b5fe1df4d8dbd480266eb43ae50cd1e))
+* **internal:** codegen related update ([29f7706](https://github.com/digitalocean/gradient-typescript/commit/29f7706a099d2158e096d7f89516fe0622dd8b5a))
+* **internal:** codegen related update ([200759f](https://github.com/digitalocean/gradient-typescript/commit/200759f7bb6b792f6ce1f669f2c9ea87f5558a80))
+* **internal:** codegen related update ([faaff42](https://github.com/digitalocean/gradient-typescript/commit/faaff427fd6d74899742c237b40b2a29f3c5c55a))
+* **internal:** codegen related update ([34d9a70](https://github.com/digitalocean/gradient-typescript/commit/34d9a7043b1aa3b37b388ba9d19f8eac514e7704))
+* **internal:** codegen related update ([600003a](https://github.com/digitalocean/gradient-typescript/commit/600003a3eb5f04dc56ec1b3248a6b9474b9abfae))
+* **internal:** codegen related update ([1ca1124](https://github.com/digitalocean/gradient-typescript/commit/1ca11248647b73d08bb9ddea00ff441a078d6342))
+* **internal:** codegen related update ([dbb66cf](https://github.com/digitalocean/gradient-typescript/commit/dbb66cf1059261dab15c7b296bee93876ea7cf36))
+* **internal:** codegen related update ([0d19438](https://github.com/digitalocean/gradient-typescript/commit/0d194383fd46a6bdb17fc56bd9458e2fe4164ac2))
+* **internal:** improve import alias names ([b385dcf](https://github.com/digitalocean/gradient-typescript/commit/b385dcf68e3b5c7ffc3103abd8d8e9d5dda71100))
+* **internal:** more robust bootstrap script ([ef7a88b](https://github.com/digitalocean/gradient-typescript/commit/ef7a88bd36f4b3abafd9f93e6ca7ffea96ae7bb9))
+* **internal:** move stringifyQuery implementation to internal function ([5042cb3](https://github.com/digitalocean/gradient-typescript/commit/5042cb353be22f28f0f41c4e5bafc946f0c27efb))
+* **internal:** remove mock server code ([caa3b9a](https://github.com/digitalocean/gradient-typescript/commit/caa3b9a9fc7cde0ef52d91aba6cbf4d255bb5a6d))
+* **internal:** tweak CI branches ([e1e13d1](https://github.com/digitalocean/gradient-typescript/commit/e1e13d11bb8087d98c0a0e6426313af3f2cab103))
+* **internal:** update `actions/checkout` version ([4443a16](https://github.com/digitalocean/gradient-typescript/commit/4443a167ef1f8fdaf6996583373387e5a9bae6d0))
+* **internal:** update dependencies to address dependabot vulnerabilities ([6728544](https://github.com/digitalocean/gradient-typescript/commit/6728544dea74c0968bbb365370a4740dbb603732))
+* **internal:** update gitignore ([f13993e](https://github.com/digitalocean/gradient-typescript/commit/f13993eb0c665e03a04898978ef33cc11802e6f3))
+* **internal:** upgrade babel, qs, js-yaml ([44e9f8e](https://github.com/digitalocean/gradient-typescript/commit/44e9f8e1d12b9281aa972b9f9c5fefe3c6b20eb7))
+* **internal:** upgrade eslint ([dda1ff1](https://github.com/digitalocean/gradient-typescript/commit/dda1ff112b3dd01e58718a8c52e5e30a6cc7aa97))
+* **mcp-server:** improve instructions ([05f9c0b](https://github.com/digitalocean/gradient-typescript/commit/05f9c0bf787dd80801e43622b9a02376d7cbcf4f))
+* update mock server docs ([026c664](https://github.com/digitalocean/gradient-typescript/commit/026c664dcedc9fc52ab8d49f469b52d88f54622a))
+
+
+### Refactors
+
+* normalize wait-for implementations ([#20](https://github.com/digitalocean/gradient-typescript/issues/20)) ([30419d1](https://github.com/digitalocean/gradient-typescript/commit/30419d1f1b238a5d2fcb4720c9599c66daa78ce9))
+
 ## 0.1.0-alpha.2 (2025-10-16)
 
 Full Changelog: [v0.1.0-alpha.1...v0.1.0-alpha.2](https://github.com/digitalocean/gradient-typescript/compare/v0.1.0-alpha.1...v0.1.0-alpha.2)

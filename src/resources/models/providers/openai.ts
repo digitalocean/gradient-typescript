@@ -7,6 +7,9 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
+/**
+ * The API lets you build GPU-powered AI agents with pre-built or custom foundation models, function and agent routes, and RAG pipelines with knowledge bases.
+ */
 export class OpenAI extends APIResource {
   /**
    * To create an OpenAI API key, send a POST request to `/v2/gen-ai/openai/keys`.
@@ -17,15 +20,8 @@ export class OpenAI extends APIResource {
    *   await client.models.providers.openai.create();
    * ```
    */
-  create(
-    body: OpenAICreateParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<OpenAICreateResponse> {
-    return this._client.post('/v2/gen-ai/openai/keys', {
-      body,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  create(body: OpenAICreateParams | null | undefined = {}, options?: RequestOptions): APIPromise<OpenAICreateResponse> {
+    return this._client.post('/v2/gen-ai/openai/keys', { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -41,10 +37,7 @@ export class OpenAI extends APIResource {
    * ```
    */
   retrieve(apiKeyUuid: string, options?: RequestOptions): APIPromise<OpenAIRetrieveResponse> {
-    return this._client.get(path`/v2/gen-ai/openai/keys/${apiKeyUuid}`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+    return this._client.get(path`/v2/gen-ai/openai/keys/${apiKeyUuid}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -58,16 +51,8 @@ export class OpenAI extends APIResource {
    * );
    * ```
    */
-  update(
-    apiKeyUuid: string,
-    body: OpenAIUpdateParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<OpenAIUpdateResponse> {
-    return this._client.put(path`/v2/gen-ai/openai/keys/${apiKeyUuid}`, {
-      body,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  update(apiKeyUuid: string, body: OpenAIUpdateParams | null | undefined = {}, options?: RequestOptions): APIPromise<OpenAIUpdateResponse> {
+    return this._client.put(path`/v2/gen-ai/openai/keys/${apiKeyUuid}`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -78,15 +63,8 @@ export class OpenAI extends APIResource {
    * const openais = await client.models.providers.openai.list();
    * ```
    */
-  list(
-    query: OpenAIListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<OpenAIListResponse> {
-    return this._client.get('/v2/gen-ai/openai/keys', {
-      query,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  list(query: OpenAIListParams | null | undefined = {}, options?: RequestOptions): APIPromise<OpenAIListResponse> {
+    return this._client.get('/v2/gen-ai/openai/keys', { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -101,10 +79,7 @@ export class OpenAI extends APIResource {
    * ```
    */
   delete(apiKeyUuid: string, options?: RequestOptions): APIPromise<OpenAIDeleteResponse> {
-    return this._client.delete(path`/v2/gen-ai/openai/keys/${apiKeyUuid}`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+    return this._client.delete(path`/v2/gen-ai/openai/keys/${apiKeyUuid}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -118,16 +93,8 @@ export class OpenAI extends APIResource {
    *   );
    * ```
    */
-  retrieveAgents(
-    uuid: string,
-    query: OpenAIRetrieveAgentsParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<OpenAIRetrieveAgentsResponse> {
-    return this._client.get(path`/v2/gen-ai/openai/keys/${uuid}/agents`, {
-      query,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  retrieveAgents(uuid: string, query: OpenAIRetrieveAgentsParams | null | undefined = {}, options?: RequestOptions): APIPromise<OpenAIRetrieveAgentsResponse> {
+    return this._client.get(path`/v2/gen-ai/openai/keys/${uuid}/agents`, { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 }
 
@@ -227,7 +194,7 @@ export interface OpenAIUpdateParams {
   /**
    * API key ID
    */
-  body_api_key_uuid?: string;
+  api_key_uuid?: string;
 
   /**
    * Name of the key
@@ -270,6 +237,6 @@ export declare namespace OpenAI {
     type OpenAICreateParams as OpenAICreateParams,
     type OpenAIUpdateParams as OpenAIUpdateParams,
     type OpenAIListParams as OpenAIListParams,
-    type OpenAIRetrieveAgentsParams as OpenAIRetrieveAgentsParams,
+    type OpenAIRetrieveAgentsParams as OpenAIRetrieveAgentsParams
   };
 }

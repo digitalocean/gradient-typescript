@@ -2,13 +2,10 @@
 
 import Gradient from '@digitalocean/gradient';
 
-const client = new Gradient({
-  accessToken: 'My Access Token',
-  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-});
+const client = new Gradient({ accessToken: 'My Access Token', baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010' });
 
 describe('resource evaluationMetrics', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.agents.evaluationMetrics.list();
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +17,7 @@ describe('resource evaluationMetrics', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('listRegions', async () => {
     const responsePromise = client.agents.evaluationMetrics.listRegions();
     const rawResponse = await responsePromise.asResponse();
@@ -32,14 +29,11 @@ describe('resource evaluationMetrics', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('listRegions: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.agents.evaluationMetrics.listRegions(
-        { serves_batch: true, serves_inference: true },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Gradient.NotFoundError);
+    await expect(client.agents.evaluationMetrics.listRegions({ serves_batch: true, serves_inference: true }, { path: '/_stainless_unknown_path' }))
+      .rejects
+      .toThrow(Gradient.NotFoundError);
   });
 });

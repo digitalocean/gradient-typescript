@@ -9,6 +9,32 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
+/**
+ * A DigitalOcean [image](https://docs.digitalocean.com/products/images/) can be
+ * used to create a Droplet and may come in a number of flavors. Currently,
+ * there are five types of images: snapshots, backups, applications,
+ * distributions, and custom images.
+ *
+ * * [Snapshots](https://docs.digitalocean.com/products/snapshots/) provide
+ * a full copy of an existing Droplet instance taken on demand.
+ *
+ * * [Backups](https://docs.digitalocean.com/products/backups/) are similar
+ * to snapshots but are created automatically at regular intervals when
+ * enabled for a Droplet.
+ *
+ * * [Custom images](https://docs.digitalocean.com/products/custom-images/)
+ * are Linux-based virtual machine images (raw, qcow2, vhdx, vdi, and vmdk
+ * formats are supported) that you may upload for use on DigitalOcean.
+ *
+ * * Distributions are the public Linux distributions that are available to
+ * be used as a base to create Droplets.
+ *
+ * * Applications, or [1-Click Apps](https://docs.digitalocean.com/products/marketplace/),
+ * are distributions pre-configured with additional software.
+ *
+ * To interact with images, you will generally send requests to the images
+ * endpoint at /v2/images.
+ */
 export class Images extends APIResource {
   actions: ActionsAPI.Actions = new ActionsAPI.Actions(this._client);
 
@@ -25,11 +51,7 @@ export class Images extends APIResource {
    * ```
    */
   create(body: ImageCreateParams, options?: RequestOptions): APIPromise<ImageCreateResponse> {
-    return this._client.post('/v2/images', {
-      body,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+    return this._client.post('/v2/images', { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -42,10 +64,7 @@ export class Images extends APIResource {
    * ```
    */
   retrieve(imageID: number | string, options?: RequestOptions): APIPromise<ImageRetrieveResponse> {
-    return this._client.get(path`/v2/images/${imageID}`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+    return this._client.get(path`/v2/images/${imageID}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -60,16 +79,8 @@ export class Images extends APIResource {
    * );
    * ```
    */
-  update(
-    imageID: number,
-    body: ImageUpdateParams,
-    options?: RequestOptions,
-  ): APIPromise<ImageUpdateResponse> {
-    return this._client.put(path`/v2/images/${imageID}`, {
-      body,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  update(imageID: number, body: ImageUpdateParams, options?: RequestOptions): APIPromise<ImageUpdateResponse> {
+    return this._client.put(path`/v2/images/${imageID}`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -112,15 +123,8 @@ export class Images extends APIResource {
    * const images = await client.gpuDroplets.images.list();
    * ```
    */
-  list(
-    query: ImageListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<ImageListResponse> {
-    return this._client.get('/v2/images', {
-      query,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  list(query: ImageListParams | null | undefined = {}, options?: RequestOptions): APIPromise<ImageListResponse> {
+    return this._client.get('/v2/images', { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -133,11 +137,7 @@ export class Images extends APIResource {
    * ```
    */
   delete(imageID: number, options?: RequestOptions): APIPromise<void> {
-    return this._client.delete(path`/v2/images/${imageID}`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+    return this._client.delete(path`/v2/images/${imageID}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
   }
 }
 
@@ -177,20 +177,7 @@ export interface ImageCreateParams {
    * `Unknown`. Any other value will be accepted but ignored, and `Unknown` will be
    * used in its place.
    */
-  distribution?:
-    | 'Arch Linux'
-    | 'CentOS'
-    | 'CoreOS'
-    | 'Debian'
-    | 'Fedora'
-    | 'Fedora Atomic'
-    | 'FreeBSD'
-    | 'Gentoo'
-    | 'openSUSE'
-    | 'RancherOS'
-    | 'Rocky Linux'
-    | 'Ubuntu'
-    | 'Unknown';
+  distribution?: 'Arch Linux' | 'CentOS' | 'CoreOS' | 'Debian' | 'Fedora' | 'Fedora Atomic' | 'FreeBSD' | 'Gentoo' | 'openSUSE' | 'RancherOS' | 'Rocky Linux' | 'Ubuntu' | 'Unknown';
 
   /**
    * The display name that has been given to an image. This is what is shown in the
@@ -202,22 +189,7 @@ export interface ImageCreateParams {
    * The slug identifier for the region where the resource will initially be
    * available.
    */
-  region?:
-    | 'ams1'
-    | 'ams2'
-    | 'ams3'
-    | 'blr1'
-    | 'fra1'
-    | 'lon1'
-    | 'nyc1'
-    | 'nyc2'
-    | 'nyc3'
-    | 'sfo1'
-    | 'sfo2'
-    | 'sfo3'
-    | 'sgp1'
-    | 'tor1'
-    | 'syd1';
+  region?: 'ams1' | 'ams2' | 'ams3' | 'blr1' | 'fra1' | 'lon1' | 'nyc1' | 'nyc2' | 'nyc3' | 'sfo1' | 'sfo2' | 'sfo3' | 'sgp1' | 'tor1' | 'syd1';
 
   /**
    * A flat array of tag names as strings to be applied to the resource. Tag names
@@ -249,20 +221,7 @@ export interface ImageUpdateParams {
    * `Unknown`. Any other value will be accepted but ignored, and `Unknown` will be
    * used in its place.
    */
-  distribution?:
-    | 'Arch Linux'
-    | 'CentOS'
-    | 'CoreOS'
-    | 'Debian'
-    | 'Fedora'
-    | 'Fedora Atomic'
-    | 'FreeBSD'
-    | 'Gentoo'
-    | 'openSUSE'
-    | 'RancherOS'
-    | 'Rocky Linux'
-    | 'Ubuntu'
-    | 'Unknown';
+  distribution?: 'Arch Linux' | 'CentOS' | 'CoreOS' | 'Debian' | 'Fedora' | 'Fedora Atomic' | 'FreeBSD' | 'Gentoo' | 'openSUSE' | 'RancherOS' | 'Rocky Linux' | 'Ubuntu' | 'Unknown';
 
   /**
    * The display name that has been given to an image. This is what is shown in the
@@ -309,13 +268,13 @@ export declare namespace Images {
     type ImageListResponse as ImageListResponse,
     type ImageCreateParams as ImageCreateParams,
     type ImageUpdateParams as ImageUpdateParams,
-    type ImageListParams as ImageListParams,
+    type ImageListParams as ImageListParams
   };
 
   export {
     Actions as Actions,
     type ActionListResponse as ActionListResponse,
     type ActionCreateParams as ActionCreateParams,
-    type ActionRetrieveParams as ActionRetrieveParams,
+    type ActionRetrieveParams as ActionRetrieveParams
   };
 }

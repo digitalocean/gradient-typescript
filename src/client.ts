@@ -11,94 +11,31 @@ import type { APIResponseProps } from './internal/parse';
 import { getPlatformHeaders } from './internal/detect-platform';
 import * as Shims from './internal/shims';
 import * as Opts from './internal/request-options';
-import * as qs from './internal/qs';
+import { stringifyQuery } from './internal/utils/query';
 import { VERSION } from './version';
 import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
-import {
-  ImageGenerateParams,
-  ImageGenerateParamsNonStreaming,
-  ImageGenerateParamsStreaming,
-  ImageGenerateResponse,
-  Images,
-} from './resources/images';
+import { Billing, BillingListInsightsParams, BillingListInsightsResponse } from './resources/billing';
+import { ImageGenerateParams, ImageGenerateParamsNonStreaming, ImageGenerateParamsStreaming, ImageGenerateResponse, Images } from './resources/images';
 import { RegionListParams, RegionListResponse, Regions } from './resources/regions';
-import {
-  APIAgent,
-  APIAgentAPIKeyInfo,
-  APIAgentModel,
-  APIAnthropicAPIKeyInfo,
-  APIDeploymentVisibility,
-  APIOpenAIAPIKeyInfo,
-  APIRetrievalMethod,
-  APIWorkspace,
-  AgentCreateParams,
-  AgentCreateResponse,
-  AgentDeleteResponse,
-  AgentListParams,
-  AgentListResponse,
-  AgentRetrieveResponse,
-  AgentRetrieveUsageParams,
-  AgentRetrieveUsageResponse,
-  AgentUpdateParams,
-  AgentUpdateResponse,
-  AgentUpdateStatusParams,
-  AgentUpdateStatusResponse,
-  Agents,
-} from './resources/agents/agents';
+import { ResponseCreateParams, ResponseCreateParamsNonStreaming, ResponseCreateParamsStreaming, Responses } from './resources/responses';
+import { Retrieve, RetrieveDocumentsParams, RetrieveDocumentsResponse } from './resources/retrieve';
+import { APIAgent, APIAgentAPIKeyInfo, APIAgentModel, APIAnthropicAPIKeyInfo, APIDeploymentVisibility, APIOpenAIAPIKeyInfo, APIRetrievalMethod, APIWorkspace, AgentCreateParams, AgentCreateResponse, AgentDeleteResponse, AgentListParams, AgentListResponse, AgentRetrieveResponse, AgentRetrieveUsageParams, AgentRetrieveUsageResponse, AgentUpdateParams, AgentUpdateResponse, AgentUpdateStatusParams, AgentUpdateStatusResponse, Agents } from './resources/agents/agents';
+import { Apps } from './resources/apps/apps';
 import { Chat } from './resources/chat/chat';
 import { Databases } from './resources/databases/databases';
-import {
-  DropletBackupPolicy,
-  GPUDropletCreateParams,
-  GPUDropletCreateResponse,
-  GPUDropletDeleteByTagParams,
-  GPUDropletListFirewallsParams,
-  GPUDropletListFirewallsResponse,
-  GPUDropletListKernelsParams,
-  GPUDropletListKernelsResponse,
-  GPUDropletListNeighborsResponse,
-  GPUDropletListParams,
-  GPUDropletListResponse,
-  GPUDropletListSnapshotsParams,
-  GPUDropletListSnapshotsResponse,
-  GPUDropletRetrieveResponse,
-  GPUDroplets,
-} from './resources/gpu-droplets/gpu-droplets';
+import { DropletBackupPolicy, GPUDropletCreateParams, GPUDropletCreateResponse, GPUDropletDeleteByTagParams, GPUDropletListFirewallsParams, GPUDropletListFirewallsResponse, GPUDropletListKernelsParams, GPUDropletListKernelsResponse, GPUDropletListNeighborsResponse, GPUDropletListParams, GPUDropletListResponse, GPUDropletListSnapshotsParams, GPUDropletListSnapshotsResponse, GPUDropletRetrieveResponse, GPUDroplets } from './resources/gpu-droplets/gpu-droplets';
 import { Inference } from './resources/inference/inference';
-import {
-  APIKnowledgeBase,
-  KnowledgeBaseCreateParams,
-  KnowledgeBaseCreateResponse,
-  KnowledgeBaseDeleteResponse,
-  KnowledgeBaseListParams,
-  KnowledgeBaseListResponse,
-  KnowledgeBaseRetrieveResponse,
-  KnowledgeBaseUpdateParams,
-  KnowledgeBaseUpdateResponse,
-  KnowledgeBases,
-} from './resources/knowledge-bases/knowledge-bases';
-import {
-  APIAgreement,
-  APIModel,
-  APIModelVersion,
-  ModelListParams,
-  ModelListResponse,
-  Models,
-} from './resources/models/models';
+import { APIKnowledgeBase, KnowledgeBaseCreateParams, KnowledgeBaseCreateResponse, KnowledgeBaseDeleteResponse, KnowledgeBaseListIndexingJobsResponse, KnowledgeBaseListParams, KnowledgeBaseListResponse, KnowledgeBaseRetrieveResponse, KnowledgeBaseUpdateParams, KnowledgeBaseUpdateResponse, KnowledgeBases } from './resources/knowledge-bases/knowledge-bases';
+import { APIAgreement, APIModel, APIModelVersion, ModelListParams, ModelListResponse, Models } from './resources/models/models';
+import { NfCreateParams, NfCreateResponse, NfDeleteParams, NfInitiateActionParams, NfInitiateActionResponse, NfListParams, NfListResponse, NfRetrieveParams, NfRetrieveResponse, Nfs } from './resources/nfs/nfs';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
 import { readEnv } from './internal/utils/env';
-import {
-  type LogLevel,
-  type Logger,
-  formatRequestDetails,
-  loggerFor,
-  parseLogLevel,
-} from './internal/utils/log';
+import { type LogLevel, type Logger, formatRequestDetails, loggerFor, parseLogLevel } from './internal/utils/log';
 import { isEmptyObj } from './internal/utils/values';
 
 export interface ClientOptions {
@@ -122,10 +59,12 @@ export interface ClientOptions {
    */
   agentEndpoint?: string | null | undefined;
 
-  /**
-   * Defaults to process.env['GRADIENT_INFERENCE_ENDPOINT'].
-   */
   inferenceEndpoint?: string | null | undefined;
+
+  /**
+   * Defaults to process.env['GRADIENT_KBASS_ENDPOINT'].
+   */
+  kbassEndpoint?: string | null | undefined;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
@@ -197,7 +136,7 @@ export interface ClientOptions {
 }
 
 /**
- * API Client for interfacing with the Gradient API.
+ * API Client for interfacing with the Gradient API. 
  */
 export class Gradient {
   accessToken: string | null;
@@ -205,11 +144,12 @@ export class Gradient {
   agentAccessKey: string | null;
   agentEndpoint: string | null;
   inferenceEndpoint: string | null;
+  kbassEndpoint: string | null;
 
   baseURL: string;
   maxRetries: number;
   timeout: number;
-  logger: Logger | undefined;
+  logger: Logger;
   logLevel: LogLevel | undefined;
   fetchOptions: MergedRequestInit | undefined;
 
@@ -225,7 +165,8 @@ export class Gradient {
    * @param {string | null | undefined} [opts.modelAccessKey=process.env['GRADIENT_MODEL_ACCESS_KEY'] ?? null]
    * @param {string | null | undefined} [opts.agentAccessKey=process.env['GRADIENT_AGENT_ACCESS_KEY'] ?? null]
    * @param {string | null | undefined} [opts.agentEndpoint=process.env['GRADIENT_AGENT_ENDPOINT'] ?? null]
-   * @param {string | null | undefined} [opts.inferenceEndpoint=process.env['GRADIENT_INFERENCE_ENDPOINT'] ?? inference.do-ai.run]
+   * @param {string | null | undefined} [opts.inferenceEndpoint=https://inference.do-ai.run]
+   * @param {string | null | undefined} [opts.kbassEndpoint=process.env['GRADIENT_KBASS_ENDPOINT'] ?? kbaas.do-ai.run]
    * @param {string} [opts.baseURL=process.env['GRADIENT_BASE_URL'] ?? https://api.digitalocean.com] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
@@ -240,15 +181,18 @@ export class Gradient {
     modelAccessKey = readEnv('GRADIENT_MODEL_ACCESS_KEY') ?? null,
     agentAccessKey = readEnv('GRADIENT_AGENT_ACCESS_KEY') ?? null,
     agentEndpoint = readEnv('GRADIENT_AGENT_ENDPOINT') ?? null,
-    inferenceEndpoint = readEnv('GRADIENT_INFERENCE_ENDPOINT') ?? 'inference.do-ai.run',
+    inferenceEndpoint = 'https://inference.do-ai.run',
+    kbassEndpoint = readEnv('GRADIENT_KBASS_ENDPOINT') ?? 'kbaas.do-ai.run',
     ...opts
   }: ClientOptions = {}) {
+
     const options: ClientOptions = {
       accessToken,
       modelAccessKey,
       agentAccessKey,
       agentEndpoint,
       inferenceEndpoint,
+      kbassEndpoint,
       ...opts,
       baseURL: baseURL || `https://api.digitalocean.com`,
     };
@@ -259,10 +203,7 @@ export class Gradient {
     const defaultLogLevel = 'warn';
     // Set default logLevel early so that we can log a warning in parseLogLevel.
     this.logLevel = defaultLogLevel;
-    this.logLevel =
-      parseLogLevel(options.logLevel, 'ClientOptions.logLevel', this) ??
-      parseLogLevel(readEnv('GRADIENT_LOG'), "process.env['GRADIENT_LOG']", this) ??
-      defaultLogLevel;
+    this.logLevel = parseLogLevel(options.logLevel, 'ClientOptions.logLevel', this) ?? parseLogLevel(readEnv('GRADIENT_LOG'), 'process.env[\'GRADIENT_LOG\']', this) ?? defaultLogLevel;
     this.fetchOptions = options.fetchOptions;
     this.maxRetries = options.maxRetries ?? 2;
     this.fetch = options.fetch ?? Shims.getDefaultFetch();
@@ -275,6 +216,7 @@ export class Gradient {
     this.agentAccessKey = agentAccessKey;
     this.agentEndpoint = agentEndpoint;
     this.inferenceEndpoint = inferenceEndpoint;
+    this.kbassEndpoint = kbassEndpoint;
   }
 
   /**
@@ -295,7 +237,8 @@ export class Gradient {
       agentAccessKey: this.agentAccessKey,
       agentEndpoint: this.agentEndpoint,
       inferenceEndpoint: this.inferenceEndpoint,
-      ...options,
+      kbassEndpoint: this.kbassEndpoint,
+      ...options
     });
     return client;
   }
@@ -308,7 +251,7 @@ export class Gradient {
   }
 
   protected defaultQuery(): Record<string, string | undefined> | undefined {
-    return this._options.defaultQuery;
+    return this._options.defaultQuery
   }
 
   protected validateHeaders({ values, nulls }: NullableHeaders) {
@@ -333,17 +276,11 @@ export class Gradient {
       return;
     }
 
-    throw new Error(
-      'Could not resolve authentication method. Expected one of accessToken, modelAccessKey or agentAccessKey to be set. Or for one of the "Authorization", "Authorization" or "Authorization" headers to be explicitly omitted',
-    );
+    throw new Error('Could not resolve authentication method. Expected one of accessToken, modelAccessKey or agentAccessKey to be set. Or for one of the "Authorization", "Authorization" or "Authorization" headers to be explicitly omitted')
   }
 
   protected async authHeaders(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
-    return buildHeaders([
-      await this.bearerAuth(opts),
-      await this.modelAccessKeyAuth(opts),
-      await this.agentAccessKeyAuth(opts),
-    ]);
+    return buildHeaders([await this.bearerAuth(opts), await this.modelAccessKeyAuth(opts), await this.agentAccessKeyAuth(opts)]);
   }
 
   protected async bearerAuth(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
@@ -367,8 +304,8 @@ export class Gradient {
     return buildHeaders([{ Authorization: `Bearer ${this.agentAccessKey}` }]);
   }
 
-  protected stringifyQuery(query: Record<string, unknown>): string {
-    return qs.stringify(query, { arrayFormat: 'comma' });
+  protected stringifyQuery(query: object | Record<string, unknown>): string {
+    return stringifyQuery(query);
   }
 
   private getUserAgent(): string {
@@ -388,11 +325,7 @@ export class Gradient {
     return Errors.APIError.generate(status, error, message, headers);
   }
 
-  buildURL(
-    path: string,
-    query: Record<string, unknown> | null | undefined,
-    defaultBaseURL?: string | undefined,
-  ): string {
+  buildURL(path: string, query: Record<string, unknown> | null | undefined, defaultBaseURL?: string | undefined): string {
     const baseURL = (!this.#baseURLOverridden() && defaultBaseURL) || this.baseURL;
     const url =
       isAbsoluteURL(path) ?
@@ -400,12 +333,13 @@ export class Gradient {
       : new URL(baseURL + (baseURL.endsWith('/') && path.startsWith('/') ? path.slice(1) : path));
 
     const defaultQuery = this.defaultQuery();
-    if (!isEmptyObj(defaultQuery)) {
-      query = { ...defaultQuery, ...query };
+    const pathQuery = Object.fromEntries(url.searchParams);
+    if (!isEmptyObj(defaultQuery) || !isEmptyObj(pathQuery)) {
+      query = { ...pathQuery, ...defaultQuery, ...query };
     }
 
     if (typeof query === 'object' && query && !Array.isArray(query)) {
-      url.search = this.stringifyQuery(query as Record<string, unknown>);
+      url.search = this.stringifyQuery(query);
     }
 
     return url.toString();
@@ -479,9 +413,7 @@ export class Gradient {
 
     await this.prepareOptions(options);
 
-    const { req, url, timeout } = await this.buildRequest(options, {
-      retryCount: maxRetries - retriesRemaining,
-    });
+    const { req, url, timeout } = await this.buildRequest(options, { retryCount: maxRetries - retriesRemaining });
 
     await this.prepareRequest(req, { url, options });
 
@@ -490,16 +422,7 @@ export class Gradient {
     const retryLogStr = retryOfRequestLogID === undefined ? '' : `, retryOf: ${retryOfRequestLogID}`;
     const startTime = Date.now();
 
-    loggerFor(this).debug(
-      `[${requestLogID}] sending request`,
-      formatRequestDetails({
-        retryOfRequestLogID,
-        method: options.method,
-        url,
-        options,
-        headers: req.headers,
-      }),
-    );
+    loggerFor(this).debug(`[${requestLogID}] sending request`, formatRequestDetails({ retryOfRequestLogID, method: options.method, url, options, headers: req.headers }));
 
     if (options.signal?.aborted) {
       throw new Errors.APIUserAbortError();
@@ -518,45 +441,21 @@ export class Gradient {
       // deno throws "TypeError: error sending request for url (https://example/): client error (Connect): tcp connect error: Operation timed out (os error 60): Operation timed out (os error 60)"
       // undici throws "TypeError: fetch failed" with cause "ConnectTimeoutError: Connect Timeout Error (attempted address: example:443, timeout: 1ms)"
       // others do not provide enough information to distinguish timeouts from other connection errors
-      const isTimeout =
-        isAbortError(response) ||
-        /timed? ?out/i.test(String(response) + ('cause' in response ? String(response.cause) : ''));
+      const isTimeout = isAbortError(response) || /timed? ?out/i.test(String(response) + ('cause' in response ? String(response.cause) : ''))
       if (retriesRemaining) {
-        loggerFor(this).info(
-          `[${requestLogID}] connection ${isTimeout ? 'timed out' : 'failed'} - ${retryMessage}`,
-        );
-        loggerFor(this).debug(
-          `[${requestLogID}] connection ${isTimeout ? 'timed out' : 'failed'} (${retryMessage})`,
-          formatRequestDetails({
-            retryOfRequestLogID,
-            url,
-            durationMs: headersTime - startTime,
-            message: response.message,
-          }),
-        );
+        loggerFor(this).info(`[${requestLogID}] connection ${isTimeout ? 'timed out' : 'failed'} - ${retryMessage}`)
+        loggerFor(this).debug(`[${requestLogID}] connection ${isTimeout ? 'timed out' : 'failed'} (${retryMessage})`, formatRequestDetails({ retryOfRequestLogID, url, durationMs: headersTime - startTime, message: response.message }));
         return this.retryRequest(options, retriesRemaining, retryOfRequestLogID ?? requestLogID);
       }
-      loggerFor(this).info(
-        `[${requestLogID}] connection ${isTimeout ? 'timed out' : 'failed'} - error; no more retries left`,
-      );
-      loggerFor(this).debug(
-        `[${requestLogID}] connection ${isTimeout ? 'timed out' : 'failed'} (error; no more retries left)`,
-        formatRequestDetails({
-          retryOfRequestLogID,
-          url,
-          durationMs: headersTime - startTime,
-          message: response.message,
-        }),
-      );
+      loggerFor(this).info(`[${requestLogID}] connection ${isTimeout ? 'timed out' : 'failed'} - error; no more retries left`)
+      loggerFor(this).debug(`[${requestLogID}] connection ${isTimeout ? 'timed out' : 'failed'} (error; no more retries left)`, formatRequestDetails({ retryOfRequestLogID, url, durationMs: headersTime - startTime, message: response.message }));
       if (isTimeout) {
         throw new Errors.APIConnectionTimeoutError();
       }
       throw new Errors.APIConnectionError({ cause: response });
     }
 
-    const responseInfo = `[${requestLogID}${retryLogStr}] ${req.method} ${url} ${
-      response.ok ? 'succeeded' : 'failed'
-    } with status ${response.status} in ${headersTime - startTime}ms`;
+    const responseInfo = `[${requestLogID}${retryLogStr}] ${req.method} ${url} ${response.ok ? 'succeeded' : 'failed'} with status ${response.status} in ${headersTime - startTime}ms`;
 
     if (!response.ok) {
       const shouldRetry = await this.shouldRetry(response);
@@ -565,60 +464,27 @@ export class Gradient {
 
         // We don't need the body of this response.
         await Shims.CancelReadableStream(response.body);
-        loggerFor(this).info(`${responseInfo} - ${retryMessage}`);
-        loggerFor(this).debug(
-          `[${requestLogID}] response error (${retryMessage})`,
-          formatRequestDetails({
-            retryOfRequestLogID,
-            url: response.url,
-            status: response.status,
-            headers: response.headers,
-            durationMs: headersTime - startTime,
-          }),
-        );
-        return this.retryRequest(
-          options,
-          retriesRemaining,
-          retryOfRequestLogID ?? requestLogID,
-          response.headers,
-        );
+        loggerFor(this).info(`${responseInfo} - ${retryMessage}`)
+        loggerFor(this).debug(`[${requestLogID}] response error (${retryMessage})`, formatRequestDetails({ retryOfRequestLogID, url: response.url, status: response.status, headers: response.headers, durationMs: headersTime - startTime }));
+        return this.retryRequest(options, retriesRemaining, retryOfRequestLogID ?? requestLogID, response.headers);
       }
 
       const retryMessage = shouldRetry ? `error; no more retries left` : `error; not retryable`;
 
-      loggerFor(this).info(`${responseInfo} - ${retryMessage}`);
+      loggerFor(this).info(`${responseInfo} - ${retryMessage}`)
 
       const errText = await response.text().catch((err: any) => castToError(err).message);
-      const errJSON = safeJSON(errText);
+      const errJSON = safeJSON(errText) as any;
       const errMessage = errJSON ? undefined : errText;
 
-      loggerFor(this).debug(
-        `[${requestLogID}] response error (${retryMessage})`,
-        formatRequestDetails({
-          retryOfRequestLogID,
-          url: response.url,
-          status: response.status,
-          headers: response.headers,
-          message: errMessage,
-          durationMs: Date.now() - startTime,
-        }),
-      );
+      loggerFor(this).debug(`[${requestLogID}] response error (${retryMessage})`, formatRequestDetails({ retryOfRequestLogID, url: response.url, status: response.status, headers: response.headers, message: errMessage, durationMs: Date.now() - startTime }));
 
       const err = this.makeStatusError(response.status, errJSON, errMessage, response.headers);
       throw err;
     }
 
-    loggerFor(this).info(responseInfo);
-    loggerFor(this).debug(
-      `[${requestLogID}] response start`,
-      formatRequestDetails({
-        retryOfRequestLogID,
-        url: response.url,
-        status: response.status,
-        headers: response.headers,
-        durationMs: headersTime - startTime,
-      }),
-    );
+    loggerFor(this).info(responseInfo)
+    loggerFor(this).debug(`[${requestLogID}] response start`, formatRequestDetails({ retryOfRequestLogID, url: response.url, status: response.status, headers: response.headers, durationMs: headersTime - startTime }));
 
     return { response, options, controller, requestLogID, retryOfRequestLogID, startTime };
   }
@@ -630,13 +496,12 @@ export class Gradient {
     controller: AbortController,
   ): Promise<Response> {
     const { signal, method, ...options } = init || {};
-    if (signal) signal.addEventListener('abort', () => controller.abort());
+    const abort = this._makeAbort(controller);
+    if (signal) signal.addEventListener('abort', abort, { once: true });
 
-    const timeout = setTimeout(() => controller.abort(), ms);
+    const timeout = setTimeout(abort, ms);
 
-    const isReadableBody =
-      ((globalThis as any).ReadableStream && options.body instanceof (globalThis as any).ReadableStream) ||
-      (typeof options.body === 'object' && options.body !== null && Symbol.asyncIterator in options.body);
+    const isReadableBody = ((globalThis as any).ReadableStream && options.body instanceof (globalThis as any).ReadableStream) || (typeof options.body === "object" && options.body !== null && Symbol.asyncIterator in options.body);
 
     const fetchOptions: RequestInit = {
       signal: controller.signal as any,
@@ -651,6 +516,7 @@ export class Gradient {
     }
 
     try {
+
       // use undefined this binding; fetch errors if bound to something else in browser/cloudflare
       return await this.fetch.call(undefined, url, fetchOptions);
     } finally {
@@ -709,9 +575,9 @@ export class Gradient {
       }
     }
 
-    // If the API asks us to wait a certain amount of time (and it's a reasonable amount),
-    // just do what it says, but otherwise calculate a default
-    if (!(timeoutMillis && 0 <= timeoutMillis && timeoutMillis < 60 * 1000)) {
+    // If the API asks us to wait a certain amount of time, just do what it
+    // says, but otherwise calculate a default
+    if (timeoutMillis === undefined) {
       const maxRetries = options.maxRetries ?? this.maxRetries;
       timeoutMillis = this.calculateDefaultRetryTimeoutMillis(retriesRemaining, maxRetries);
     }
@@ -751,12 +617,11 @@ export class Gradient {
     const req: FinalizedRequestInit = {
       method,
       headers: reqHeaders,
-      ...(options.signal && { signal: options.signal }),
-      ...((globalThis as any).ReadableStream &&
-        body instanceof (globalThis as any).ReadableStream && { duplex: 'half' }),
+      ...(options.signal && { signal: options.signal}),
+      ...((globalThis as any).ReadableStream && body instanceof (globalThis as any).ReadableStream && { duplex: "half" }),
       ...(body && { body }),
-      ...((this.fetchOptions as any) ?? {}),
-      ...((options.fetchOptions as any) ?? {}),
+      ...(this.fetchOptions as any ?? {}),
+      ...(options.fetchOptions as any ?? {}),
     };
 
     return { req, url, timeout: options.timeout };
@@ -781,22 +646,26 @@ export class Gradient {
 
     const headers = buildHeaders([
       idempotencyHeaders,
-      {
-        Accept: 'application/json',
-        'User-Agent': this.getUserAgent(),
-        'X-Stainless-Retry-Count': String(retryCount),
-        ...(options.timeout ? { 'X-Stainless-Timeout': String(Math.trunc(options.timeout / 1000)) } : {}),
-        ...getPlatformHeaders(),
-      },
+      {Accept: 'application/json',
+      'User-Agent': this.getUserAgent(),
+      'X-Stainless-Retry-Count': String(retryCount),
+      ...(options.timeout ? { 'X-Stainless-Timeout': String(Math.trunc(options.timeout / 1000)) } : {}),
+      ...getPlatformHeaders()},
       await this.authHeaders(options),
       this._options.defaultHeaders,
       bodyHeaders,
-      options.headers,
+      options.headers
     ]);
 
     this.validateHeaders(headers);
 
     return headers.values;
+  }
+
+  private _makeAbort(controller: AbortController) {
+    // note: we can't just inline this method inside `fetchWithTimeout()` because then the closure
+    //       would capture all request options, and cause a memory leak.
+    return () => controller.abort();
   }
 
   private buildBody({ options: { body, headers: rawHeaders } }: { options: FinalRequestOptions }): {
@@ -812,9 +681,11 @@ export class Gradient {
       ArrayBuffer.isView(body) ||
       body instanceof ArrayBuffer ||
       body instanceof DataView ||
-      (typeof body === 'string' &&
+      (
+        typeof body === 'string' &&
         // Preserve legacy string encoding behavior for now
-        headers.values.has('content-type')) ||
+        headers.values.has('content-type')
+      ) ||
       // `Blob` is superset of `File`
       ((globalThis as any).Blob && body instanceof (globalThis as any).Blob) ||
       // `FormData` -> `multipart/form-data`
@@ -831,13 +702,21 @@ export class Gradient {
         (Symbol.iterator in body && 'next' in body && typeof body.next === 'function'))
     ) {
       return { bodyHeaders: undefined, body: Shims.ReadableStreamFrom(body as AsyncIterable<Uint8Array>) };
+    } else if (
+      typeof body === 'object' &&
+      headers.values.get('content-type') === 'application/x-www-form-urlencoded'
+    ) {
+      return {
+        bodyHeaders: { 'content-type': 'application/x-www-form-urlencoded' },
+        body: this.stringifyQuery(body),
+      };
     } else {
       return this.#encoder({ body, headers });
     }
   }
 
   static Gradient = this;
-  static DEFAULT_TIMEOUT = 60000; // 1 minute
+  static DEFAULT_TIMEOUT = 60000 // 1 minute
 
   static GradientError = Errors.GradientError;
   static APIError = Errors.APIError;
@@ -862,142 +741,253 @@ export class Gradient {
 
   static toFile = Uploads.toFile;
 
+  /**
+   * The API lets you build GPU-powered AI agents with pre-built or custom foundation models, function and agent routes, and RAG pipelines with knowledge bases.
+   */
   agents: API.Agents = new API.Agents(this);
   chat: API.Chat = new API.Chat(this);
+  /**
+   * Generate images from text prompts using various AI models.
+   */
   images: API.Images = new API.Images(this);
+  /**
+   * Generate text-to-text responses from text prompts.
+   */
+  responses: API.Responses = new API.Responses(this);
+  /**
+   * A [Droplet](https://docs.digitalocean.com/products/droplets/) is a DigitalOcean
+   * virtual machine. By sending requests to the Droplet endpoint, you can
+   * list, create, or delete Droplets.
+   *
+   * Some of the attributes will have an object value. The `region` and `image`
+   * objects will all contain the standard attributes of their associated
+   * types. Find more information about each of these objects in their
+   * respective sections.
+   */
   gpuDroplets: API.GPUDroplets = new API.GPUDroplets(this);
   inference: API.Inference = new API.Inference(this);
+  /**
+   * The API lets you build GPU-powered AI agents with pre-built or custom foundation models, function and agent routes, and RAG pipelines with knowledge bases.
+   */
   knowledgeBases: API.KnowledgeBases = new API.KnowledgeBases(this);
+  /**
+   * The API lets you build GPU-powered AI agents with pre-built or custom foundation models, function and agent routes, and RAG pipelines with knowledge bases.
+   */
   models: API.Models = new API.Models(this);
+  /**
+   * Provides information about DigitalOcean data center regions.
+   */
   regions: API.Regions = new API.Regions(this);
   databases: API.Databases = new API.Databases(this);
+  nfs: API.Nfs = new API.Nfs(this);
+  retrieve: API.Retrieve = new API.Retrieve(this);
+  apps: API.Apps = new API.Apps(this);
+  /**
+   * The billing endpoints allow you to retrieve your account balance, invoices, 
+   * billing history, and insights.
+   *
+   * **Balance:** By sending requests to the `/v2/customers/my/balance` endpoint, you can
+   * retrieve the balance information for the requested customer account.
+   *
+   * **Invoices:** [Invoices](https://docs.digitalocean.com/platform/billing/invoices/)
+   * are generated on the first of each month for every DigitalOcean
+   * customer. An invoice preview is generated daily, which can be accessed
+   * with the `preview` keyword in place of `$INVOICE_UUID`. To interact with
+   * invoices, you will generally send requests to the invoices endpoint at
+   * `/v2/customers/my/invoices`.
+   *
+   * **Billing History:** Billing history is a record of billing events for your account.
+   * For example, entries may include events like payments made, invoices
+   * issued, or credits granted. To interact with invoices, you
+   * will generally send requests to the invoices endpoint at
+   * `/v2/customers/my/billing_history`.
+   *
+   * **Billing Insights:** Day-over-day changes in billing resource usage based on nightly invoice items, 
+   * including total amount, region, SKU, and description for a specified date range. 
+   * It is important to note that the daily resource usage may not reflect month-end billing totals when totaled for 
+   * a given month as nightly invoice items do not necessarily encompass all invoicing factors for the entire month.
+   *   `v2/billing/{account_urn}/insights/{start_date}/{end_date}` where account_urn is the URN of the customer 
+   * account, can be a team (do:team:uuid) or an organization (do:teamgroup:uuid). The date range specified by 
+   * start_date and end_date must be in YYYY-MM-DD format.
+   */
+  billing: API.Billing = new API.Billing(this);
 }
 
 Gradient.Agents = Agents;
 Gradient.Chat = Chat;
 Gradient.Images = Images;
+Gradient.Responses = Responses;
 Gradient.GPUDroplets = GPUDroplets;
 Gradient.Inference = Inference;
 Gradient.KnowledgeBases = KnowledgeBases;
 Gradient.Models = Models;
 Gradient.Regions = Regions;
 Gradient.Databases = Databases;
+Gradient.Nfs = Nfs;
+Gradient.Retrieve = Retrieve;
+Gradient.Apps = Apps;
+Gradient.Billing = Billing;
 
 export declare namespace Gradient {
-  export type RequestOptions = Opts.RequestOptions;
+      export type RequestOptions = Opts.RequestOptions;
 
-  export {
-    Agents as Agents,
-    type APIAgent as APIAgent,
-    type APIAgentAPIKeyInfo as APIAgentAPIKeyInfo,
-    type APIAgentModel as APIAgentModel,
-    type APIAnthropicAPIKeyInfo as APIAnthropicAPIKeyInfo,
-    type APIDeploymentVisibility as APIDeploymentVisibility,
-    type APIOpenAIAPIKeyInfo as APIOpenAIAPIKeyInfo,
-    type APIRetrievalMethod as APIRetrievalMethod,
-    type APIWorkspace as APIWorkspace,
-    type AgentCreateResponse as AgentCreateResponse,
-    type AgentRetrieveResponse as AgentRetrieveResponse,
-    type AgentUpdateResponse as AgentUpdateResponse,
-    type AgentListResponse as AgentListResponse,
-    type AgentDeleteResponse as AgentDeleteResponse,
-    type AgentRetrieveUsageResponse as AgentRetrieveUsageResponse,
-    type AgentUpdateStatusResponse as AgentUpdateStatusResponse,
-    type AgentCreateParams as AgentCreateParams,
-    type AgentUpdateParams as AgentUpdateParams,
-    type AgentListParams as AgentListParams,
-    type AgentRetrieveUsageParams as AgentRetrieveUsageParams,
-    type AgentUpdateStatusParams as AgentUpdateStatusParams,
-  };
+      export {
+  Agents as Agents,
+  type APIAgent as APIAgent,
+  type APIAgentAPIKeyInfo as APIAgentAPIKeyInfo,
+  type APIAgentModel as APIAgentModel,
+  type APIAnthropicAPIKeyInfo as APIAnthropicAPIKeyInfo,
+  type APIDeploymentVisibility as APIDeploymentVisibility,
+  type APIOpenAIAPIKeyInfo as APIOpenAIAPIKeyInfo,
+  type APIRetrievalMethod as APIRetrievalMethod,
+  type APIWorkspace as APIWorkspace,
+  type AgentCreateResponse as AgentCreateResponse,
+  type AgentRetrieveResponse as AgentRetrieveResponse,
+  type AgentUpdateResponse as AgentUpdateResponse,
+  type AgentListResponse as AgentListResponse,
+  type AgentDeleteResponse as AgentDeleteResponse,
+  type AgentRetrieveUsageResponse as AgentRetrieveUsageResponse,
+  type AgentUpdateStatusResponse as AgentUpdateStatusResponse,
+  type AgentCreateParams as AgentCreateParams,
+  type AgentUpdateParams as AgentUpdateParams,
+  type AgentListParams as AgentListParams,
+  type AgentRetrieveUsageParams as AgentRetrieveUsageParams,
+  type AgentUpdateStatusParams as AgentUpdateStatusParams
+};
 
-  export { Chat as Chat };
+export {
+  Chat as Chat
+};
 
-  export {
-    Images as Images,
-    type ImageGenerateResponse as ImageGenerateResponse,
-    type ImageGenerateParams as ImageGenerateParams,
-    type ImageGenerateParamsNonStreaming as ImageGenerateParamsNonStreaming,
-    type ImageGenerateParamsStreaming as ImageGenerateParamsStreaming,
-  };
+export {
+  Images as Images,
+  type ImageGenerateResponse as ImageGenerateResponse,
+  type ImageGenerateParams as ImageGenerateParams,
+  type ImageGenerateParamsNonStreaming as ImageGenerateParamsNonStreaming,
+  type ImageGenerateParamsStreaming as ImageGenerateParamsStreaming
+};
 
-  export {
-    GPUDroplets as GPUDroplets,
-    type DropletBackupPolicy as DropletBackupPolicy,
-    type GPUDropletCreateResponse as GPUDropletCreateResponse,
-    type GPUDropletRetrieveResponse as GPUDropletRetrieveResponse,
-    type GPUDropletListResponse as GPUDropletListResponse,
-    type GPUDropletListFirewallsResponse as GPUDropletListFirewallsResponse,
-    type GPUDropletListKernelsResponse as GPUDropletListKernelsResponse,
-    type GPUDropletListNeighborsResponse as GPUDropletListNeighborsResponse,
-    type GPUDropletListSnapshotsResponse as GPUDropletListSnapshotsResponse,
-    type GPUDropletCreateParams as GPUDropletCreateParams,
-    type GPUDropletListParams as GPUDropletListParams,
-    type GPUDropletDeleteByTagParams as GPUDropletDeleteByTagParams,
-    type GPUDropletListFirewallsParams as GPUDropletListFirewallsParams,
-    type GPUDropletListKernelsParams as GPUDropletListKernelsParams,
-    type GPUDropletListSnapshotsParams as GPUDropletListSnapshotsParams,
-  };
+export {
+  Responses as Responses,
+  type ResponseCreateParams as ResponseCreateParams,
+  type ResponseCreateParamsNonStreaming as ResponseCreateParamsNonStreaming,
+  type ResponseCreateParamsStreaming as ResponseCreateParamsStreaming
+};
 
-  export { Inference as Inference };
+export {
+  GPUDroplets as GPUDroplets,
+  type DropletBackupPolicy as DropletBackupPolicy,
+  type GPUDropletCreateResponse as GPUDropletCreateResponse,
+  type GPUDropletRetrieveResponse as GPUDropletRetrieveResponse,
+  type GPUDropletListResponse as GPUDropletListResponse,
+  type GPUDropletListFirewallsResponse as GPUDropletListFirewallsResponse,
+  type GPUDropletListKernelsResponse as GPUDropletListKernelsResponse,
+  type GPUDropletListNeighborsResponse as GPUDropletListNeighborsResponse,
+  type GPUDropletListSnapshotsResponse as GPUDropletListSnapshotsResponse,
+  type GPUDropletCreateParams as GPUDropletCreateParams,
+  type GPUDropletListParams as GPUDropletListParams,
+  type GPUDropletDeleteByTagParams as GPUDropletDeleteByTagParams,
+  type GPUDropletListFirewallsParams as GPUDropletListFirewallsParams,
+  type GPUDropletListKernelsParams as GPUDropletListKernelsParams,
+  type GPUDropletListSnapshotsParams as GPUDropletListSnapshotsParams
+};
 
-  export {
-    KnowledgeBases as KnowledgeBases,
-    type APIKnowledgeBase as APIKnowledgeBase,
-    type KnowledgeBaseCreateResponse as KnowledgeBaseCreateResponse,
-    type KnowledgeBaseRetrieveResponse as KnowledgeBaseRetrieveResponse,
-    type KnowledgeBaseUpdateResponse as KnowledgeBaseUpdateResponse,
-    type KnowledgeBaseListResponse as KnowledgeBaseListResponse,
-    type KnowledgeBaseDeleteResponse as KnowledgeBaseDeleteResponse,
-    type KnowledgeBaseCreateParams as KnowledgeBaseCreateParams,
-    type KnowledgeBaseUpdateParams as KnowledgeBaseUpdateParams,
-    type KnowledgeBaseListParams as KnowledgeBaseListParams,
-  };
+export {
+  Inference as Inference
+};
 
-  export {
-    Models as Models,
-    type APIAgreement as APIAgreement,
-    type APIModel as APIModel,
-    type APIModelVersion as APIModelVersion,
-    type ModelListResponse as ModelListResponse,
-    type ModelListParams as ModelListParams,
-  };
+export {
+  KnowledgeBases as KnowledgeBases,
+  type APIKnowledgeBase as APIKnowledgeBase,
+  type KnowledgeBaseCreateResponse as KnowledgeBaseCreateResponse,
+  type KnowledgeBaseRetrieveResponse as KnowledgeBaseRetrieveResponse,
+  type KnowledgeBaseUpdateResponse as KnowledgeBaseUpdateResponse,
+  type KnowledgeBaseListResponse as KnowledgeBaseListResponse,
+  type KnowledgeBaseDeleteResponse as KnowledgeBaseDeleteResponse,
+  type KnowledgeBaseListIndexingJobsResponse as KnowledgeBaseListIndexingJobsResponse,
+  type KnowledgeBaseCreateParams as KnowledgeBaseCreateParams,
+  type KnowledgeBaseUpdateParams as KnowledgeBaseUpdateParams,
+  type KnowledgeBaseListParams as KnowledgeBaseListParams
+};
 
-  export {
-    Regions as Regions,
-    type RegionListResponse as RegionListResponse,
-    type RegionListParams as RegionListParams,
-  };
+export {
+  Models as Models,
+  type APIAgreement as APIAgreement,
+  type APIModel as APIModel,
+  type APIModelVersion as APIModelVersion,
+  type ModelListResponse as ModelListResponse,
+  type ModelListParams as ModelListParams
+};
 
-  export { Databases as Databases };
+export {
+  Regions as Regions,
+  type RegionListResponse as RegionListResponse,
+  type RegionListParams as RegionListParams
+};
 
-  export type Action = API.Action;
-  export type ActionLink = API.ActionLink;
-  export type APILinks = API.APILinks;
-  export type APIMeta = API.APIMeta;
-  export type BackwardLinks = API.BackwardLinks;
-  export type ChatCompletionChunk = API.ChatCompletionChunk;
-  export type ChatCompletionTokenLogprob = API.ChatCompletionTokenLogprob;
-  export type CompletionUsage = API.CompletionUsage;
-  export type DiskInfo = API.DiskInfo;
-  export type Droplet = API.Droplet;
-  export type DropletNextBackupWindow = API.DropletNextBackupWindow;
-  export type FirewallRuleTarget = API.FirewallRuleTarget;
-  export type ForwardLinks = API.ForwardLinks;
-  export type GarbageCollection = API.GarbageCollection;
-  export type GPUInfo = API.GPUInfo;
-  export type Image = API.Image;
-  export type ImageGenCompletedEvent = API.ImageGenCompletedEvent;
-  export type ImageGenPartialImageEvent = API.ImageGenPartialImageEvent;
-  export type ImageGenStreamEvent = API.ImageGenStreamEvent;
-  export type Kernel = API.Kernel;
-  export type MetaProperties = API.MetaProperties;
-  export type NetworkV4 = API.NetworkV4;
-  export type NetworkV6 = API.NetworkV6;
-  export type PageLinks = API.PageLinks;
-  export type Region = API.Region;
-  export type Size = API.Size;
-  export type Snapshots = API.Snapshots;
-  export type Subscription = API.Subscription;
-  export type SubscriptionTierBase = API.SubscriptionTierBase;
-  export type VpcPeering = API.VpcPeering;
-}
+export {
+  Databases as Databases
+};
+
+export {
+  Nfs as Nfs,
+  type NfCreateResponse as NfCreateResponse,
+  type NfRetrieveResponse as NfRetrieveResponse,
+  type NfListResponse as NfListResponse,
+  type NfInitiateActionResponse as NfInitiateActionResponse,
+  type NfCreateParams as NfCreateParams,
+  type NfRetrieveParams as NfRetrieveParams,
+  type NfListParams as NfListParams,
+  type NfDeleteParams as NfDeleteParams,
+  type NfInitiateActionParams as NfInitiateActionParams
+};
+
+export {
+  Retrieve as Retrieve,
+  type RetrieveDocumentsResponse as RetrieveDocumentsResponse,
+  type RetrieveDocumentsParams as RetrieveDocumentsParams
+};
+
+export {
+  Apps as Apps
+};
+
+export {
+  Billing as Billing,
+  type BillingListInsightsResponse as BillingListInsightsResponse,
+  type BillingListInsightsParams as BillingListInsightsParams
+};
+
+export type Action = API.Action;
+export type ActionLink = API.ActionLink;
+export type APILinks = API.APILinks;
+export type APIMeta = API.APIMeta;
+export type BackwardLinks = API.BackwardLinks;
+export type ChatCompletionChunk = API.ChatCompletionChunk;
+export type ChatCompletionTokenLogprob = API.ChatCompletionTokenLogprob;
+export type CompletionUsage = API.CompletionUsage;
+export type CreateResponseResponse = API.CreateResponseResponse;
+export type CreateResponseStreamResponse = API.CreateResponseStreamResponse;
+export type DiskInfo = API.DiskInfo;
+export type Droplet = API.Droplet;
+export type DropletNextBackupWindow = API.DropletNextBackupWindow;
+export type FirewallRuleTarget = API.FirewallRuleTarget;
+export type ForwardLinks = API.ForwardLinks;
+export type GarbageCollection = API.GarbageCollection;
+export type GPUInfo = API.GPUInfo;
+export type Image = API.Image;
+export type ImageGenCompletedEvent = API.ImageGenCompletedEvent;
+export type ImageGenPartialImageEvent = API.ImageGenPartialImageEvent;
+export type ImageGenStreamEvent = API.ImageGenStreamEvent;
+export type Kernel = API.Kernel;
+export type MetaProperties = API.MetaProperties;
+export type NetworkV4 = API.NetworkV4;
+export type NetworkV6 = API.NetworkV6;
+export type PageLinks = API.PageLinks;
+export type Region = API.Region;
+export type Size = API.Size;
+export type Snapshots = API.Snapshots;
+export type Subscription = API.Subscription;
+export type SubscriptionTierBase = API.SubscriptionTierBase;
+export type VpcPeering = API.VpcPeering;
+    }

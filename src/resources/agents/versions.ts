@@ -7,6 +7,9 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
+/**
+ * The API lets you build GPU-powered AI agents with pre-built or custom foundation models, function and agent routes, and RAG pipelines with knowledge bases.
+ */
 export class Versions extends APIResource {
   /**
    * To update to a specific agent version, send a PUT request to
@@ -19,16 +22,8 @@ export class Versions extends APIResource {
    * );
    * ```
    */
-  update(
-    pathUuid: string,
-    body: VersionUpdateParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<VersionUpdateResponse> {
-    return this._client.put(path`/v2/gen-ai/agents/${pathUuid}/versions`, {
-      body,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  update(uuid: string, body: VersionUpdateParams | null | undefined = {}, options?: RequestOptions): APIPromise<VersionUpdateResponse> {
+    return this._client.put(path`/v2/gen-ai/agents/${uuid}/versions`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -42,16 +37,8 @@ export class Versions extends APIResource {
    * );
    * ```
    */
-  list(
-    uuid: string,
-    query: VersionListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<VersionListResponse> {
-    return this._client.get(path`/v2/gen-ai/agents/${uuid}/versions`, {
-      query,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  list(uuid: string, query: VersionListParams | null | undefined = {}, options?: RequestOptions): APIPromise<VersionListResponse> {
+    return this._client.get(path`/v2/gen-ai/agents/${uuid}/versions`, { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 }
 
@@ -339,7 +326,7 @@ export interface VersionUpdateParams {
   /**
    * Agent unique identifier
    */
-  body_uuid?: string;
+  uuid?: string;
 
   /**
    * Unique identifier
@@ -364,6 +351,6 @@ export declare namespace Versions {
     type VersionUpdateResponse as VersionUpdateResponse,
     type VersionListResponse as VersionListResponse,
     type VersionUpdateParams as VersionUpdateParams,
-    type VersionListParams as VersionListParams,
+    type VersionListParams as VersionListParams
   };
 }

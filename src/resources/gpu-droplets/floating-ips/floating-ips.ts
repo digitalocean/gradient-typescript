@@ -3,19 +3,33 @@
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import * as ActionsAPI from './actions';
-import {
-  ActionCreateParams,
-  ActionCreateResponse,
-  ActionListResponse,
-  ActionRetrieveParams,
-  ActionRetrieveResponse,
-  Actions,
-} from './actions';
+import { ActionCreateParams, ActionCreateResponse, ActionListResponse, ActionRetrieveParams, ActionRetrieveResponse, Actions } from './actions';
 import { APIPromise } from '../../../core/api-promise';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
+/**
+ * As of 16 June 2022, we have renamed the Floating IP product to [Reserved IPs](https://docs.digitalocean.com/reference/api/api-reference/#tag/Reserved-IPs).
+ * The Reserved IP product's endpoints function the exact same way as Floating IPs.
+ * The only difference is the name change throughout the URLs and fields.
+ * For example, the `floating_ips` field is now the `reserved_ips` field.
+ * The Floating IP endpoints will remain active until fall 2023 before being
+ * permanently deprecated.
+ *
+ * With the exception of the [Projects API](https://docs.digitalocean.com/reference/api/api-reference/#tag/Projects),
+ * we will reflect this change as an additional field in the responses across the API
+ * where the `floating_ip` field is used. For example, the Droplet metadata response
+ * will contain the field `reserved_ips` in addition to the `floating_ips` field.
+ * Floating IPs retrieved using the Projects API will retain the original name.
+ *
+ * [DigitalOcean Floating IPs](https://docs.digitalocean.com/products/networking/reserved-ips/)
+ * are publicly-accessible static IP addresses that can be mapped to one of
+ * your Droplets. They can be used to create highly available setups or other
+ * configurations requiring movable addresses.
+ *
+ * Floating IPs are bound to a specific region.
+ */
 export class FloatingIPs extends APIResource {
   actions: ActionsAPI.Actions = new ActionsAPI.Actions(this._client);
 
@@ -38,11 +52,7 @@ export class FloatingIPs extends APIResource {
    * ```
    */
   create(body: FloatingIPCreateParams, options?: RequestOptions): APIPromise<FloatingIPCreateResponse> {
-    return this._client.post('/v2/floating_ips', {
-      body,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+    return this._client.post('/v2/floating_ips', { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -58,10 +68,7 @@ export class FloatingIPs extends APIResource {
    * ```
    */
   retrieve(floatingIP: string, options?: RequestOptions): APIPromise<FloatingIPRetrieveResponse> {
-    return this._client.get(path`/v2/floating_ips/${floatingIP}`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+    return this._client.get(path`/v2/floating_ips/${floatingIP}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -74,15 +81,8 @@ export class FloatingIPs extends APIResource {
    *   await client.gpuDroplets.floatingIPs.list();
    * ```
    */
-  list(
-    query: FloatingIPListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<FloatingIPListResponse> {
-    return this._client.get('/v2/floating_ips', {
-      query,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  list(query: FloatingIPListParams | null | undefined = {}, options?: RequestOptions): APIPromise<FloatingIPListResponse> {
+    return this._client.get('/v2/floating_ips', { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -98,11 +98,7 @@ export class FloatingIPs extends APIResource {
    * ```
    */
   delete(floatingIP: string, options?: RequestOptions): APIPromise<void> {
-    return this._client.delete(path`/v2/floating_ips/${floatingIP}`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+    return this._client.delete(path`/v2/floating_ips/${floatingIP}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
   }
 }
 
@@ -146,7 +142,8 @@ export namespace FloatingIP {
    * The region that the floating IP is reserved to. When you query a floating IP,
    * the entire region object will be returned.
    */
-  export interface Region extends Shared.Region {}
+  export interface Region extends Shared.Region {
+  }
 }
 
 export interface FloatingIPCreateResponse {
@@ -178,9 +175,7 @@ export interface FloatingIPListResponse {
   links?: Shared.PageLinks;
 }
 
-export type FloatingIPCreateParams =
-  | FloatingIPCreateParams.AssignToDroplet
-  | FloatingIPCreateParams.ReserveToRegion;
+export type FloatingIPCreateParams = FloatingIPCreateParams.AssignToDroplet | FloatingIPCreateParams.ReserveToRegion
 
 export declare namespace FloatingIPCreateParams {
   export interface AssignToDroplet {
@@ -224,7 +219,7 @@ export declare namespace FloatingIPs {
     type FloatingIPRetrieveResponse as FloatingIPRetrieveResponse,
     type FloatingIPListResponse as FloatingIPListResponse,
     type FloatingIPCreateParams as FloatingIPCreateParams,
-    type FloatingIPListParams as FloatingIPListParams,
+    type FloatingIPListParams as FloatingIPListParams
   };
 
   export {
@@ -233,6 +228,6 @@ export declare namespace FloatingIPs {
     type ActionRetrieveResponse as ActionRetrieveResponse,
     type ActionListResponse as ActionListResponse,
     type ActionCreateParams as ActionCreateParams,
-    type ActionRetrieveParams as ActionRetrieveParams,
+    type ActionRetrieveParams as ActionRetrieveParams
   };
 }

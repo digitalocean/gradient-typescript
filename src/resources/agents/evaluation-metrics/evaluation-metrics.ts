@@ -2,8 +2,8 @@
 
 import { APIResource } from '../../../core/resource';
 import * as EvaluationRunsAPI from '../evaluation-runs';
-import * as ModelsAPI from './models';
-import { ModelListParams, ModelListResponse, Models } from './models';
+import * as ScheduledIndexingAPI from './scheduled-indexing';
+import { ScheduledIndexing, ScheduledIndexingCreateParams, ScheduledIndexingCreateResponse, ScheduledIndexingDeleteResponse, ScheduledIndexingRetrieveResponse } from './scheduled-indexing';
 import * as AnthropicAPI from './anthropic/anthropic';
 import { Anthropic } from './anthropic/anthropic';
 import * as Oauth2API from './oauth2/oauth2';
@@ -11,26 +11,19 @@ import { Oauth2, Oauth2GenerateURLParams, Oauth2GenerateURLResponse } from './oa
 import * as OpenAIAPI from './openai/openai';
 import { OpenAI } from './openai/openai';
 import * as WorkspacesAPI from './workspaces/workspaces';
-import {
-  WorkspaceCreateParams,
-  WorkspaceCreateResponse,
-  WorkspaceDeleteResponse,
-  WorkspaceListEvaluationTestCasesResponse,
-  WorkspaceListResponse,
-  WorkspaceRetrieveResponse,
-  WorkspaceUpdateParams,
-  WorkspaceUpdateResponse,
-  Workspaces,
-} from './workspaces/workspaces';
+import { WorkspaceCreateParams, WorkspaceCreateResponse, WorkspaceDeleteResponse, WorkspaceListEvaluationTestCasesResponse, WorkspaceListResponse, WorkspaceRetrieveResponse, WorkspaceUpdateParams, WorkspaceUpdateResponse, Workspaces } from './workspaces/workspaces';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
+/**
+ * The API lets you build GPU-powered AI agents with pre-built or custom foundation models, function and agent routes, and RAG pipelines with knowledge bases.
+ */
 export class EvaluationMetrics extends APIResource {
   workspaces: WorkspacesAPI.Workspaces = new WorkspacesAPI.Workspaces(this._client);
-  models: ModelsAPI.Models = new ModelsAPI.Models(this._client);
   anthropic: AnthropicAPI.Anthropic = new AnthropicAPI.Anthropic(this._client);
   openai: OpenAIAPI.OpenAI = new OpenAIAPI.OpenAI(this._client);
   oauth2: Oauth2API.Oauth2 = new Oauth2API.Oauth2(this._client);
+  scheduledIndexing: ScheduledIndexingAPI.ScheduledIndexing = new ScheduledIndexingAPI.ScheduledIndexing(this._client);
 
   /**
    * To list all evaluation metrics, send a GET request to
@@ -43,10 +36,7 @@ export class EvaluationMetrics extends APIResource {
    * ```
    */
   list(options?: RequestOptions): APIPromise<EvaluationMetricListResponse> {
-    return this._client.get('/v2/gen-ai/evaluation_metrics', {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+    return this._client.get('/v2/gen-ai/evaluation_metrics', { defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -58,15 +48,8 @@ export class EvaluationMetrics extends APIResource {
    *   await client.agents.evaluationMetrics.listRegions();
    * ```
    */
-  listRegions(
-    query: EvaluationMetricListRegionsParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<EvaluationMetricListRegionsResponse> {
-    return this._client.get('/v2/gen-ai/regions', {
-      query,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  listRegions(query: EvaluationMetricListRegionsParams | null | undefined = {}, options?: RequestOptions): APIPromise<EvaluationMetricListRegionsResponse> {
+    return this._client.get('/v2/gen-ai/regions', { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 }
 
@@ -129,16 +112,16 @@ export interface EvaluationMetricListRegionsParams {
 }
 
 EvaluationMetrics.Workspaces = Workspaces;
-EvaluationMetrics.Models = Models;
 EvaluationMetrics.Anthropic = Anthropic;
 EvaluationMetrics.OpenAI = OpenAI;
 EvaluationMetrics.Oauth2 = Oauth2;
+EvaluationMetrics.ScheduledIndexing = ScheduledIndexing;
 
 export declare namespace EvaluationMetrics {
   export {
     type EvaluationMetricListResponse as EvaluationMetricListResponse,
     type EvaluationMetricListRegionsResponse as EvaluationMetricListRegionsResponse,
-    type EvaluationMetricListRegionsParams as EvaluationMetricListRegionsParams,
+    type EvaluationMetricListRegionsParams as EvaluationMetricListRegionsParams
   };
 
   export {
@@ -150,22 +133,28 @@ export declare namespace EvaluationMetrics {
     type WorkspaceDeleteResponse as WorkspaceDeleteResponse,
     type WorkspaceListEvaluationTestCasesResponse as WorkspaceListEvaluationTestCasesResponse,
     type WorkspaceCreateParams as WorkspaceCreateParams,
-    type WorkspaceUpdateParams as WorkspaceUpdateParams,
+    type WorkspaceUpdateParams as WorkspaceUpdateParams
   };
 
   export {
-    Models as Models,
-    type ModelListResponse as ModelListResponse,
-    type ModelListParams as ModelListParams,
+    Anthropic as Anthropic
   };
 
-  export { Anthropic as Anthropic };
-
-  export { OpenAI as OpenAI };
+  export {
+    OpenAI as OpenAI
+  };
 
   export {
     Oauth2 as Oauth2,
     type Oauth2GenerateURLResponse as Oauth2GenerateURLResponse,
-    type Oauth2GenerateURLParams as Oauth2GenerateURLParams,
+    type Oauth2GenerateURLParams as Oauth2GenerateURLParams
+  };
+
+  export {
+    ScheduledIndexing as ScheduledIndexing,
+    type ScheduledIndexingCreateResponse as ScheduledIndexingCreateResponse,
+    type ScheduledIndexingRetrieveResponse as ScheduledIndexingRetrieveResponse,
+    type ScheduledIndexingDeleteResponse as ScheduledIndexingDeleteResponse,
+    type ScheduledIndexingCreateParams as ScheduledIndexingCreateParams
   };
 }

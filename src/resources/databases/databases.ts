@@ -11,5 +11,7 @@ export class Databases extends APIResource {
 Databases.SchemaRegistry = SchemaRegistry;
 
 export declare namespace Databases {
-  export { SchemaRegistry as SchemaRegistry };
+  export {
+    SchemaRegistry as SchemaRegistry
+  };
 }

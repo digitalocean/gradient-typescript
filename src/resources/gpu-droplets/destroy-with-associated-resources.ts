@@ -7,6 +7,16 @@ import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
+/**
+ * A [Droplet](https://docs.digitalocean.com/products/droplets/) is a DigitalOcean
+ * virtual machine. By sending requests to the Droplet endpoint, you can
+ * list, create, or delete Droplets.
+ *
+ * Some of the attributes will have an object value. The `region` and `image`
+ * objects will all contain the standard attributes of their associated
+ * types. Find more information about each of these objects in their
+ * respective sections.
+ */
 export class DestroyWithAssociatedResources extends APIResource {
   /**
    * To list the associated billable resources that can be destroyed along with a
@@ -29,10 +39,7 @@ export class DestroyWithAssociatedResources extends APIResource {
    * ```
    */
   list(dropletID: number, options?: RequestOptions): APIPromise<DestroyWithAssociatedResourceListResponse> {
-    return this._client.get(path`/v2/droplets/${dropletID}/destroy_with_associated_resources`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+    return this._client.get(path`/v2/droplets/${dropletID}/destroy_with_associated_resources`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -48,14 +55,8 @@ export class DestroyWithAssociatedResources extends APIResource {
    *   );
    * ```
    */
-  checkStatus(
-    dropletID: number,
-    options?: RequestOptions,
-  ): APIPromise<DestroyWithAssociatedResourceCheckStatusResponse> {
-    return this._client.get(path`/v2/droplets/${dropletID}/destroy_with_associated_resources/status`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  checkStatus(dropletID: number, options?: RequestOptions): APIPromise<DestroyWithAssociatedResourceCheckStatusResponse> {
+    return this._client.get(path`/v2/droplets/${dropletID}/destroy_with_associated_resources/status`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -78,17 +79,9 @@ export class DestroyWithAssociatedResources extends APIResource {
    * );
    * ```
    */
-  deleteDangerous(
-    dropletID: number,
-    params: DestroyWithAssociatedResourceDeleteDangerousParams,
-    options?: RequestOptions,
-  ): APIPromise<void> {
-    const { 'X-Dangerous': xDangerous } = params;
-    return this._client.delete(path`/v2/droplets/${dropletID}/destroy_with_associated_resources/dangerous`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*', 'X-Dangerous': xDangerous.toString() }, options?.headers]),
-    });
+  deleteDangerous(dropletID: number, params: DestroyWithAssociatedResourceDeleteDangerousParams, options?: RequestOptions): APIPromise<void> {
+    const { 'X-Dangerous': xDangerous } = params
+    return this._client.delete(path`/v2/droplets/${dropletID}/destroy_with_associated_resources/dangerous`, { defaultBaseURL: 'https://api.digitalocean.com', ...options, headers: buildHeaders([{Accept: '*/*', 'X-Dangerous': xDangerous.toString()}, options?.headers]) });
   }
 
   /**
@@ -112,17 +105,8 @@ export class DestroyWithAssociatedResources extends APIResource {
    * );
    * ```
    */
-  deleteSelective(
-    dropletID: number,
-    body: DestroyWithAssociatedResourceDeleteSelectiveParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<void> {
-    return this._client.delete(path`/v2/droplets/${dropletID}/destroy_with_associated_resources/selective`, {
-      body,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+  deleteSelective(dropletID: number, body: DestroyWithAssociatedResourceDeleteSelectiveParams | null | undefined = {}, options?: RequestOptions): APIPromise<void> {
+    return this._client.delete(path`/v2/droplets/${dropletID}/destroy_with_associated_resources/selective`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
   }
 
   /**
@@ -142,11 +126,7 @@ export class DestroyWithAssociatedResources extends APIResource {
    * ```
    */
   retry(dropletID: number, options?: RequestOptions): APIPromise<void> {
-    return this._client.post(path`/v2/droplets/${dropletID}/destroy_with_associated_resources/retry`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+    return this._client.post(path`/v2/droplets/${dropletID}/destroy_with_associated_resources/retry`, { defaultBaseURL: 'https://api.digitalocean.com', ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
   }
 }
 
@@ -319,6 +299,6 @@ export declare namespace DestroyWithAssociatedResources {
     type DestroyWithAssociatedResourceListResponse as DestroyWithAssociatedResourceListResponse,
     type DestroyWithAssociatedResourceCheckStatusResponse as DestroyWithAssociatedResourceCheckStatusResponse,
     type DestroyWithAssociatedResourceDeleteDangerousParams as DestroyWithAssociatedResourceDeleteDangerousParams,
-    type DestroyWithAssociatedResourceDeleteSelectiveParams as DestroyWithAssociatedResourceDeleteSelectiveParams,
+    type DestroyWithAssociatedResourceDeleteSelectiveParams as DestroyWithAssociatedResourceDeleteSelectiveParams
   };
 }

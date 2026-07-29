@@ -2,13 +2,10 @@
 
 import Gradient from '@digitalocean/gradient';
 
-const client = new Gradient({
-  accessToken: 'My Access Token',
-  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-});
+const client = new Gradient({ accessToken: 'My Access Token', baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010' });
 
 describe('resource images', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create', async () => {
     const responsePromise = client.gpuDroplets.images.create({});
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +17,7 @@ describe('resource images', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.gpuDroplets.images.retrieve(0);
     const rawResponse = await responsePromise.asResponse();
@@ -32,7 +29,7 @@ describe('resource images', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('update', async () => {
     const responsePromise = client.gpuDroplets.images.update(62137902, {});
     const rawResponse = await responsePromise.asResponse();
@@ -44,7 +41,7 @@ describe('resource images', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.gpuDroplets.images.list();
     const rawResponse = await responsePromise.asResponse();
@@ -56,18 +53,21 @@ describe('resource images', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.gpuDroplets.images.list(
-        { page: 1, per_page: 1, private: true, tag_name: 'tag_name', type: 'application' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Gradient.NotFoundError);
+    await expect(client.gpuDroplets.images.list({
+    page: 1,
+    per_page: 1,
+    private: true,
+    tag_name: 'tag_name',
+    type: 'application',
+  }, { path: '/_stainless_unknown_path' }))
+      .rejects
+      .toThrow(Gradient.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('delete', async () => {
     const responsePromise = client.gpuDroplets.images.delete(62137902);
     const rawResponse = await responsePromise.asResponse();

@@ -5,6 +5,9 @@ import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 
+/**
+ * Provides information about DigitalOcean data center regions.
+ */
 export class Regions extends APIResource {
   /**
    * To list all of the regions that are available, send a GET request to
@@ -17,15 +20,8 @@ export class Regions extends APIResource {
    * const regions = await client.regions.list();
    * ```
    */
-  list(
-    query: RegionListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<RegionListResponse> {
-    return this._client.get('/v2/regions', {
-      query,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  list(query: RegionListParams | null | undefined = {}, options?: RequestOptions): APIPromise<RegionListResponse> {
+    return this._client.get('/v2/regions', { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 }
 
@@ -53,5 +49,8 @@ export interface RegionListParams {
 }
 
 export declare namespace Regions {
-  export { type RegionListResponse as RegionListResponse, type RegionListParams as RegionListParams };
+  export {
+    type RegionListResponse as RegionListResponse,
+    type RegionListParams as RegionListParams
+  };
 }

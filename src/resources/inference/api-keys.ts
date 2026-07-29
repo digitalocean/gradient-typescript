@@ -6,6 +6,9 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
+/**
+ * The API lets you build GPU-powered AI agents with pre-built or custom foundation models, function and agent routes, and RAG pipelines with knowledge bases.
+ */
 export class APIKeys extends APIResource {
   /**
    * To create a model API key, send a POST request to `/v2/gen-ai/models/api_keys`.
@@ -15,15 +18,8 @@ export class APIKeys extends APIResource {
    * const apiKey = await client.inference.apiKeys.create();
    * ```
    */
-  create(
-    body: APIKeyCreateParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<APIKeyCreateResponse> {
-    return this._client.post('/v2/gen-ai/models/api_keys', {
-      body,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  create(body: APIKeyCreateParams | null | undefined = {}, options?: RequestOptions): APIPromise<APIKeyCreateResponse> {
+    return this._client.post('/v2/gen-ai/models/api_keys', { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -37,16 +33,8 @@ export class APIKeys extends APIResource {
    * );
    * ```
    */
-  update(
-    apiKeyUuid: string,
-    body: APIKeyUpdateParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<APIKeyUpdateResponse> {
-    return this._client.put(path`/v2/gen-ai/models/api_keys/${apiKeyUuid}`, {
-      body,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  update(apiKeyUuid: string, body: APIKeyUpdateParams | null | undefined = {}, options?: RequestOptions): APIPromise<APIKeyUpdateResponse> {
+    return this._client.put(path`/v2/gen-ai/models/api_keys/${apiKeyUuid}`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -57,15 +45,8 @@ export class APIKeys extends APIResource {
    * const apiKeys = await client.inference.apiKeys.list();
    * ```
    */
-  list(
-    query: APIKeyListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<APIKeyListResponse> {
-    return this._client.get('/v2/gen-ai/models/api_keys', {
-      query,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  list(query: APIKeyListParams | null | undefined = {}, options?: RequestOptions): APIPromise<APIKeyListResponse> {
+    return this._client.get('/v2/gen-ai/models/api_keys', { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -80,10 +61,7 @@ export class APIKeys extends APIResource {
    * ```
    */
   delete(apiKeyUuid: string, options?: RequestOptions): APIPromise<APIKeyDeleteResponse> {
-    return this._client.delete(path`/v2/gen-ai/models/api_keys/${apiKeyUuid}`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+    return this._client.delete(path`/v2/gen-ai/models/api_keys/${apiKeyUuid}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -99,10 +77,7 @@ export class APIKeys extends APIResource {
    * ```
    */
   updateRegenerate(apiKeyUuid: string, options?: RequestOptions): APIPromise<APIKeyUpdateRegenerateResponse> {
-    return this._client.put(path`/v2/gen-ai/models/api_keys/${apiKeyUuid}/regenerate`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+    return this._client.put(path`/v2/gen-ai/models/api_keys/${apiKeyUuid}/regenerate`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 }
 
@@ -194,7 +169,7 @@ export interface APIKeyUpdateParams {
   /**
    * API key ID
    */
-  body_api_key_uuid?: string;
+  api_key_uuid?: string;
 
   /**
    * Name
@@ -224,6 +199,6 @@ export declare namespace APIKeys {
     type APIKeyUpdateRegenerateResponse as APIKeyUpdateRegenerateResponse,
     type APIKeyCreateParams as APIKeyCreateParams,
     type APIKeyUpdateParams as APIKeyUpdateParams,
-    type APIKeyListParams as APIKeyListParams,
+    type APIKeyListParams as APIKeyListParams
   };
 }

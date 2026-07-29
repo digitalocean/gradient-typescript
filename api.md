@@ -10,6 +10,8 @@ Types:
 - <code><a href="./src/resources/shared.ts">ChatCompletionChunk</a></code>
 - <code><a href="./src/resources/shared.ts">ChatCompletionTokenLogprob</a></code>
 - <code><a href="./src/resources/shared.ts">CompletionUsage</a></code>
+- <code><a href="./src/resources/shared.ts">CreateResponseResponse</a></code>
+- <code><a href="./src/resources/shared.ts">CreateResponseStreamResponse</a></code>
 - <code><a href="./src/resources/shared.ts">DiskInfo</a></code>
 - <code><a href="./src/resources/shared.ts">Droplet</a></code>
 - <code><a href="./src/resources/shared.ts">DropletNextBackupWindow</a></code>
@@ -57,11 +59,11 @@ Methods:
 
 - <code title="post /v2/gen-ai/agents">client.agents.<a href="./src/resources/agents/agents.ts">create</a>({ ...params }) -> AgentCreateResponse</code>
 - <code title="get /v2/gen-ai/agents/{uuid}">client.agents.<a href="./src/resources/agents/agents.ts">retrieve</a>(uuid) -> AgentRetrieveResponse</code>
-- <code title="put /v2/gen-ai/agents/{uuid}">client.agents.<a href="./src/resources/agents/agents.ts">update</a>(pathUuid, { ...params }) -> AgentUpdateResponse</code>
+- <code title="put /v2/gen-ai/agents/{uuid}">client.agents.<a href="./src/resources/agents/agents.ts">update</a>(uuid, { ...params }) -> AgentUpdateResponse</code>
 - <code title="get /v2/gen-ai/agents">client.agents.<a href="./src/resources/agents/agents.ts">list</a>({ ...params }) -> AgentListResponse</code>
 - <code title="delete /v2/gen-ai/agents/{uuid}">client.agents.<a href="./src/resources/agents/agents.ts">delete</a>(uuid) -> AgentDeleteResponse</code>
 - <code title="get /v2/gen-ai/agents/{uuid}/usage">client.agents.<a href="./src/resources/agents/agents.ts">retrieveUsage</a>(uuid, { ...params }) -> AgentRetrieveUsageResponse</code>
-- <code title="put /v2/gen-ai/agents/{uuid}/deployment_visibility">client.agents.<a href="./src/resources/agents/agents.ts">updateStatus</a>(pathUuid, { ...params }) -> AgentUpdateStatusResponse</code>
+- <code title="put /v2/gen-ai/agents/{uuid}/deployment_visibility">client.agents.<a href="./src/resources/agents/agents.ts">updateStatus</a>(uuid, { ...params }) -> AgentUpdateStatusResponse</code>
 
 ## APIKeys
 
@@ -137,16 +139,6 @@ Methods:
 - <code title="get /v2/gen-ai/workspaces/{workspace_uuid}/agents">client.agents.evaluationMetrics.workspaces.agents.<a href="./src/resources/agents/evaluation-metrics/workspaces/agents.ts">list</a>(workspaceUuid, { ...params }) -> AgentListResponse</code>
 - <code title="put /v2/gen-ai/workspaces/{workspace_uuid}/agents">client.agents.evaluationMetrics.workspaces.agents.<a href="./src/resources/agents/evaluation-metrics/workspaces/agents.ts">move</a>(workspaceUuid, { ...params }) -> AgentMoveResponse</code>
 
-### Models
-
-Types:
-
-- <code><a href="./src/resources/agents/evaluation-metrics/models.ts">ModelListResponse</a></code>
-
-Methods:
-
-- <code title="get /v2/gen-ai/models">client.agents.evaluationMetrics.models.<a href="./src/resources/agents/evaluation-metrics/models.ts">list</a>({ ...params }) -> ModelListResponse</code>
-
 ### Anthropic
 
 #### Keys
@@ -210,6 +202,20 @@ Types:
 Methods:
 
 - <code title="post /v2/gen-ai/oauth2/dropbox/tokens">client.agents.evaluationMetrics.oauth2.dropbox.<a href="./src/resources/agents/evaluation-metrics/oauth2/dropbox.ts">createTokens</a>({ ...params }) -> DropboxCreateTokensResponse</code>
+
+### ScheduledIndexing
+
+Types:
+
+- <code><a href="./src/resources/agents/evaluation-metrics/scheduled-indexing.ts">ScheduledIndexingCreateResponse</a></code>
+- <code><a href="./src/resources/agents/evaluation-metrics/scheduled-indexing.ts">ScheduledIndexingRetrieveResponse</a></code>
+- <code><a href="./src/resources/agents/evaluation-metrics/scheduled-indexing.ts">ScheduledIndexingDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /v2/gen-ai/scheduled-indexing">client.agents.evaluationMetrics.scheduledIndexing.<a href="./src/resources/agents/evaluation-metrics/scheduled-indexing.ts">create</a>({ ...params }) -> ScheduledIndexingCreateResponse</code>
+- <code title="get /v2/gen-ai/scheduled-indexing/knowledge-base/{knowledge_base_uuid}">client.agents.evaluationMetrics.scheduledIndexing.<a href="./src/resources/agents/evaluation-metrics/scheduled-indexing.ts">retrieve</a>(knowledgeBaseUuid) -> ScheduledIndexingRetrieveResponse</code>
+- <code title="delete /v2/gen-ai/scheduled-indexing/{uuid}">client.agents.evaluationMetrics.scheduledIndexing.<a href="./src/resources/agents/evaluation-metrics/scheduled-indexing.ts">delete</a>(uuid) -> ScheduledIndexingDeleteResponse</code>
 
 ## EvaluationRuns
 
@@ -286,7 +292,7 @@ Types:
 
 Methods:
 
-- <code title="put /v2/gen-ai/agents/{uuid}/versions">client.agents.versions.<a href="./src/resources/agents/versions.ts">update</a>(pathUuid, { ...params }) -> VersionUpdateResponse</code>
+- <code title="put /v2/gen-ai/agents/{uuid}/versions">client.agents.versions.<a href="./src/resources/agents/versions.ts">update</a>(uuid, { ...params }) -> VersionUpdateResponse</code>
 - <code title="get /v2/gen-ai/agents/{uuid}/versions">client.agents.versions.<a href="./src/resources/agents/versions.ts">list</a>(uuid, { ...params }) -> VersionListResponse</code>
 
 ## KnowledgeBases
@@ -339,6 +345,12 @@ Types:
 Methods:
 
 - <code title="post /images/generations">client.images.<a href="./src/resources/images.ts">generate</a>({ ...params }) -> ImageGenerateResponse</code>
+
+# Responses
+
+Methods:
+
+- <code title="post /responses">client.responses.<a href="./src/resources/responses.ts">create</a>({ ...params }) -> CreateResponseResponse</code>
 
 # GPUDroplets
 
@@ -700,14 +712,16 @@ Types:
 - <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">KnowledgeBaseUpdateResponse</a></code>
 - <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">KnowledgeBaseListResponse</a></code>
 - <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">KnowledgeBaseDeleteResponse</a></code>
+- <code><a href="./src/resources/knowledge-bases/knowledge-bases.ts">KnowledgeBaseListIndexingJobsResponse</a></code>
 
 Methods:
 
 - <code title="post /v2/gen-ai/knowledge_bases">client.knowledgeBases.<a href="./src/resources/knowledge-bases/knowledge-bases.ts">create</a>({ ...params }) -> KnowledgeBaseCreateResponse</code>
 - <code title="get /v2/gen-ai/knowledge_bases/{uuid}">client.knowledgeBases.<a href="./src/resources/knowledge-bases/knowledge-bases.ts">retrieve</a>(uuid) -> KnowledgeBaseRetrieveResponse</code>
-- <code title="put /v2/gen-ai/knowledge_bases/{uuid}">client.knowledgeBases.<a href="./src/resources/knowledge-bases/knowledge-bases.ts">update</a>(pathUuid, { ...params }) -> KnowledgeBaseUpdateResponse</code>
+- <code title="put /v2/gen-ai/knowledge_bases/{uuid}">client.knowledgeBases.<a href="./src/resources/knowledge-bases/knowledge-bases.ts">update</a>(uuid, { ...params }) -> KnowledgeBaseUpdateResponse</code>
 - <code title="get /v2/gen-ai/knowledge_bases">client.knowledgeBases.<a href="./src/resources/knowledge-bases/knowledge-bases.ts">list</a>({ ...params }) -> KnowledgeBaseListResponse</code>
 - <code title="delete /v2/gen-ai/knowledge_bases/{uuid}">client.knowledgeBases.<a href="./src/resources/knowledge-bases/knowledge-bases.ts">delete</a>(uuid) -> KnowledgeBaseDeleteResponse</code>
+- <code title="get /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/indexing_jobs">client.knowledgeBases.<a href="./src/resources/knowledge-bases/knowledge-bases.ts">listIndexingJobs</a>(knowledgeBaseUuid) -> KnowledgeBaseListIndexingJobsResponse</code>
 
 ## DataSources
 
@@ -719,6 +733,7 @@ Types:
 - <code><a href="./src/resources/knowledge-bases/data-sources.ts">APIWebCrawlerDataSource</a></code>
 - <code><a href="./src/resources/knowledge-bases/data-sources.ts">AwsDataSource</a></code>
 - <code><a href="./src/resources/knowledge-bases/data-sources.ts">DataSourceCreateResponse</a></code>
+- <code><a href="./src/resources/knowledge-bases/data-sources.ts">DataSourceUpdateResponse</a></code>
 - <code><a href="./src/resources/knowledge-bases/data-sources.ts">DataSourceListResponse</a></code>
 - <code><a href="./src/resources/knowledge-bases/data-sources.ts">DataSourceDeleteResponse</a></code>
 - <code><a href="./src/resources/knowledge-bases/data-sources.ts">DataSourceCreatePresignedURLsResponse</a></code>
@@ -726,6 +741,7 @@ Types:
 Methods:
 
 - <code title="post /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources">client.knowledgeBases.dataSources.<a href="./src/resources/knowledge-bases/data-sources.ts">create</a>(knowledgeBaseUuid, { ...params }) -> DataSourceCreateResponse</code>
+- <code title="put /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources/{data_source_uuid}">client.knowledgeBases.dataSources.<a href="./src/resources/knowledge-bases/data-sources.ts">update</a>(dataSourceUuid, { ...params }) -> DataSourceUpdateResponse</code>
 - <code title="get /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources">client.knowledgeBases.dataSources.<a href="./src/resources/knowledge-bases/data-sources.ts">list</a>(knowledgeBaseUuid, { ...params }) -> DataSourceListResponse</code>
 - <code title="delete /v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources/{data_source_uuid}">client.knowledgeBases.dataSources.<a href="./src/resources/knowledge-bases/data-sources.ts">delete</a>(dataSourceUuid, { ...params }) -> DataSourceDeleteResponse</code>
 - <code title="post /v2/gen-ai/knowledge_bases/data_sources/file_upload_presigned_urls">client.knowledgeBases.dataSources.<a href="./src/resources/knowledge-bases/data-sources.ts">createPresignedURLs</a>({ ...params }) -> DataSourceCreatePresignedURLsResponse</code>
@@ -740,6 +756,7 @@ Types:
 - <code><a href="./src/resources/knowledge-bases/indexing-jobs.ts">IndexingJobRetrieveResponse</a></code>
 - <code><a href="./src/resources/knowledge-bases/indexing-jobs.ts">IndexingJobListResponse</a></code>
 - <code><a href="./src/resources/knowledge-bases/indexing-jobs.ts">IndexingJobRetrieveDataSourcesResponse</a></code>
+- <code><a href="./src/resources/knowledge-bases/indexing-jobs.ts">IndexingJobRetrieveSignedURLResponse</a></code>
 - <code><a href="./src/resources/knowledge-bases/indexing-jobs.ts">IndexingJobUpdateCancelResponse</a></code>
 
 Methods:
@@ -748,6 +765,8 @@ Methods:
 - <code title="get /v2/gen-ai/indexing_jobs/{uuid}">client.knowledgeBases.indexingJobs.<a href="./src/resources/knowledge-bases/indexing-jobs.ts">retrieve</a>(uuid) -> IndexingJobRetrieveResponse</code>
 - <code title="get /v2/gen-ai/indexing_jobs">client.knowledgeBases.indexingJobs.<a href="./src/resources/knowledge-bases/indexing-jobs.ts">list</a>({ ...params }) -> IndexingJobListResponse</code>
 - <code title="get /v2/gen-ai/indexing_jobs/{indexing_job_uuid}/data_sources">client.knowledgeBases.indexingJobs.<a href="./src/resources/knowledge-bases/indexing-jobs.ts">retrieveDataSources</a>(indexingJobUuid) -> IndexingJobRetrieveDataSourcesResponse</code>
+- <code title="get /v2/gen-ai/indexing_jobs/{indexing_job_uuid}/details_signed_url">client.knowledgeBases.indexingJobs.<a href="./src/resources/knowledge-bases/indexing-jobs.ts">retrieveSignedURL</a>(indexingJobUuid) -> IndexingJobRetrieveSignedURLResponse</code>
+- <code title="put /v2/gen-ai/indexing_jobs/{uuid}/cancel">client.knowledgeBases.indexingJobs.<a href="./src/resources/knowledge-bases/indexing-jobs.ts">updateCancel</a>(uuid, { ...params }) -> IndexingJobUpdateCancelResponse</code>
 - <code title="put /v2/gen-ai/indexing_jobs/{uuid}/cancel">client.knowledgeBases.indexingJobs.<a href="./src/resources/knowledge-bases/indexing-jobs.ts">updateCancel</a>(pathUuid, { ...params }) -> IndexingJobUpdateCancelResponse</code>
 - <code title="polling helper">client.knowledgeBases.indexingJobs.<a href="./src/resources/knowledge-bases/indexing-jobs.ts">waitForCompletion</a>(uuid, { ...options }) -> IndexingJobRetrieveResponse</code>
 
@@ -835,3 +854,65 @@ Methods:
 - <code title="put /v2/databases/{database_cluster_uuid}/schema-registry/config">client.databases.schemaRegistry.config.<a href="./src/resources/databases/schema-registry/config.ts">update</a>(databaseClusterUuid, { ...params }) -> ConfigUpdateResponse</code>
 - <code title="get /v2/databases/{database_cluster_uuid}/schema-registry/config/{subject_name}">client.databases.schemaRegistry.config.<a href="./src/resources/databases/schema-registry/config.ts">retrieveSubject</a>(subjectName, { ...params }) -> ConfigRetrieveSubjectResponse</code>
 - <code title="put /v2/databases/{database_cluster_uuid}/schema-registry/config/{subject_name}">client.databases.schemaRegistry.config.<a href="./src/resources/databases/schema-registry/config.ts">updateSubject</a>(subjectName, { ...params }) -> ConfigUpdateSubjectResponse</code>
+
+# Nfs
+
+Types:
+
+- <code><a href="./src/resources/nfs/nfs.ts">NfCreateResponse</a></code>
+- <code><a href="./src/resources/nfs/nfs.ts">NfRetrieveResponse</a></code>
+- <code><a href="./src/resources/nfs/nfs.ts">NfListResponse</a></code>
+- <code><a href="./src/resources/nfs/nfs.ts">NfInitiateActionResponse</a></code>
+
+Methods:
+
+- <code title="post /v2/nfs">client.nfs.<a href="./src/resources/nfs/nfs.ts">create</a>({ ...params }) -> NfCreateResponse</code>
+- <code title="get /v2/nfs/{nfs_id}">client.nfs.<a href="./src/resources/nfs/nfs.ts">retrieve</a>(nfsID, { ...params }) -> NfRetrieveResponse</code>
+- <code title="get /v2/nfs">client.nfs.<a href="./src/resources/nfs/nfs.ts">list</a>({ ...params }) -> NfListResponse</code>
+- <code title="delete /v2/nfs/{nfs_id}">client.nfs.<a href="./src/resources/nfs/nfs.ts">delete</a>(nfsID, { ...params }) -> void</code>
+- <code title="post /v2/nfs/{nfs_id}/actions">client.nfs.<a href="./src/resources/nfs/nfs.ts">initiateAction</a>(nfsID, { ...params }) -> NfInitiateActionResponse</code>
+
+## Snapshots
+
+Types:
+
+- <code><a href="./src/resources/nfs/snapshots.ts">SnapshotRetrieveResponse</a></code>
+- <code><a href="./src/resources/nfs/snapshots.ts">SnapshotListResponse</a></code>
+
+Methods:
+
+- <code title="get /v2/nfs/snapshots/{nfs_snapshot_id}">client.nfs.snapshots.<a href="./src/resources/nfs/snapshots.ts">retrieve</a>(nfsSnapshotID, { ...params }) -> SnapshotRetrieveResponse</code>
+- <code title="get /v2/nfs/snapshots">client.nfs.snapshots.<a href="./src/resources/nfs/snapshots.ts">list</a>({ ...params }) -> SnapshotListResponse</code>
+- <code title="delete /v2/nfs/snapshots/{nfs_snapshot_id}">client.nfs.snapshots.<a href="./src/resources/nfs/snapshots.ts">delete</a>(nfsSnapshotID, { ...params }) -> void</code>
+
+# Retrieve
+
+Types:
+
+- <code><a href="./src/resources/retrieve.ts">RetrieveDocumentsResponse</a></code>
+
+Methods:
+
+- <code title="post /{knowledgeBaseId}/retrieve">client.retrieve.<a href="./src/resources/retrieve.ts">documents</a>(knowledgeBaseID, { ...params }) -> RetrieveDocumentsResponse</code>
+
+# Apps
+
+## JobInvocations
+
+Types:
+
+- <code><a href="./src/resources/apps/job-invocations.ts">JobInvocationCancelResponse</a></code>
+
+Methods:
+
+- <code title="post /v2/apps/{app_id}/job-invocations/{job_invocation_id}/cancel">client.apps.jobInvocations.<a href="./src/resources/apps/job-invocations.ts">cancel</a>(jobInvocationID, { ...params }) -> JobInvocationCancelResponse</code>
+
+# Billing
+
+Types:
+
+- <code><a href="./src/resources/billing.ts">BillingListInsightsResponse</a></code>
+
+Methods:
+
+- <code title="get /v2/billing/{account_urn}/insights/{start_date}/{end_date}">client.billing.<a href="./src/resources/billing.ts">listInsights</a>(endDate, { ...params }) -> BillingListInsightsResponse</code>

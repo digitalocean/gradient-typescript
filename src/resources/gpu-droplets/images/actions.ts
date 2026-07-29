@@ -6,6 +6,14 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
+/**
+ * Image actions are commands that can be given to a DigitalOcean image. In
+ * general, these requests are made on the actions endpoint of a specific
+ * image.
+ *
+ * An image action object is returned. These objects hold the current status
+ * of the requested action.
+ */
 export class Actions extends APIResource {
   /**
    * The following actions are available on an Image.
@@ -30,11 +38,7 @@ export class Actions extends APIResource {
    * ```
    */
   create(imageID: number, body: ActionCreateParams, options?: RequestOptions): APIPromise<Shared.Action> {
-    return this._client.post(path`/v2/images/${imageID}/actions`, {
-      body,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+    return this._client.post(path`/v2/images/${imageID}/actions`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -50,16 +54,9 @@ export class Actions extends APIResource {
    *   );
    * ```
    */
-  retrieve(
-    actionID: number,
-    params: ActionRetrieveParams,
-    options?: RequestOptions,
-  ): APIPromise<Shared.Action> {
-    const { image_id } = params;
-    return this._client.get(path`/v2/images/${image_id}/actions/${actionID}`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  retrieve(actionID: number, params: ActionRetrieveParams, options?: RequestOptions): APIPromise<Shared.Action> {
+    const { image_id } = params
+    return this._client.get(path`/v2/images/${image_id}/actions/${actionID}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -73,10 +70,7 @@ export class Actions extends APIResource {
    * ```
    */
   list(imageID: number, options?: RequestOptions): APIPromise<ActionListResponse> {
-    return this._client.get(path`/v2/images/${imageID}/actions`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+    return this._client.get(path`/v2/images/${imageID}/actions`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 }
 
@@ -91,7 +85,7 @@ export interface ActionListResponse {
   links?: Shared.PageLinks;
 }
 
-export type ActionCreateParams = ActionCreateParams.ImageActionBase | ActionCreateParams.ImageActionTransfer;
+export type ActionCreateParams = ActionCreateParams.ImageActionBase | ActionCreateParams.ImageActionTransfer
 
 export declare namespace ActionCreateParams {
   export interface ImageActionBase {
@@ -106,22 +100,7 @@ export declare namespace ActionCreateParams {
      * The slug identifier for the region where the resource will initially be
      * available.
      */
-    region:
-      | 'ams1'
-      | 'ams2'
-      | 'ams3'
-      | 'blr1'
-      | 'fra1'
-      | 'lon1'
-      | 'nyc1'
-      | 'nyc2'
-      | 'nyc3'
-      | 'sfo1'
-      | 'sfo2'
-      | 'sfo3'
-      | 'sgp1'
-      | 'tor1'
-      | 'syd1';
+    region: 'ams1' | 'ams2' | 'ams3' | 'blr1' | 'fra1' | 'lon1' | 'nyc1' | 'nyc2' | 'nyc3' | 'sfo1' | 'sfo2' | 'sfo3' | 'sgp1' | 'tor1' | 'syd1';
 
     /**
      * The action to be taken on the image. Can be either `convert` or `transfer`.
@@ -141,6 +120,6 @@ export declare namespace Actions {
   export {
     type ActionListResponse as ActionListResponse,
     type ActionCreateParams as ActionCreateParams,
-    type ActionRetrieveParams as ActionRetrieveParams,
+    type ActionRetrieveParams as ActionRetrieveParams
   };
 }

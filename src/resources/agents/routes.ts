@@ -6,6 +6,9 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
+/**
+ * The API lets you build GPU-powered AI agents with pre-built or custom foundation models, function and agent routes, and RAG pipelines with knowledge bases.
+ */
 export class Routes extends APIResource {
   /**
    * To update an agent route for an agent, send a PUT request to
@@ -22,16 +25,9 @@ export class Routes extends APIResource {
    * );
    * ```
    */
-  update(
-    childAgentUuid: string,
-    params: RouteUpdateParams,
-    options?: RequestOptions,
-  ): APIPromise<RouteUpdateResponse> {
-    const { path_parent_agent_uuid, ...body } = params;
-    return this._client.put(
-      path`/v2/gen-ai/agents/${path_parent_agent_uuid}/child_agents/${childAgentUuid}`,
-      { body, defaultBaseURL: 'https://api.digitalocean.com', ...options },
-    );
+  update(childAgentUuid: string, params: RouteUpdateParams, options?: RequestOptions): APIPromise<RouteUpdateResponse> {
+    const { path_parent_agent_uuid, ...body } = params
+    return this._client.put(path`/v2/gen-ai/agents/${path_parent_agent_uuid}/child_agents/${childAgentUuid}`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -49,16 +45,9 @@ export class Routes extends APIResource {
    * );
    * ```
    */
-  delete(
-    childAgentUuid: string,
-    params: RouteDeleteParams,
-    options?: RequestOptions,
-  ): APIPromise<RouteDeleteResponse> {
-    const { parent_agent_uuid } = params;
-    return this._client.delete(path`/v2/gen-ai/agents/${parent_agent_uuid}/child_agents/${childAgentUuid}`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  delete(childAgentUuid: string, params: RouteDeleteParams, options?: RequestOptions): APIPromise<RouteDeleteResponse> {
+    const { parent_agent_uuid } = params
+    return this._client.delete(path`/v2/gen-ai/agents/${parent_agent_uuid}/child_agents/${childAgentUuid}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -76,16 +65,9 @@ export class Routes extends APIResource {
    * );
    * ```
    */
-  add(
-    childAgentUuid: string,
-    params: RouteAddParams,
-    options?: RequestOptions,
-  ): APIPromise<RouteAddResponse> {
-    const { path_parent_agent_uuid, ...body } = params;
-    return this._client.post(
-      path`/v2/gen-ai/agents/${path_parent_agent_uuid}/child_agents/${childAgentUuid}`,
-      { body, defaultBaseURL: 'https://api.digitalocean.com', ...options },
-    );
+  add(childAgentUuid: string, params: RouteAddParams, options?: RequestOptions): APIPromise<RouteAddResponse> {
+    const { path_parent_agent_uuid, ...body } = params
+    return this._client.post(path`/v2/gen-ai/agents/${path_parent_agent_uuid}/child_agents/${childAgentUuid}`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -100,10 +82,7 @@ export class Routes extends APIResource {
    * ```
    */
   view(uuid: string, options?: RequestOptions): APIPromise<RouteViewResponse> {
-    return this._client.get(path`/v2/gen-ai/agents/${uuid}/child_agents`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+    return this._client.get(path`/v2/gen-ai/agents/${uuid}/child_agents`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 }
 
@@ -178,7 +157,7 @@ export interface RouteUpdateParams {
   /**
    * Body param: Routed agent id
    */
-  body_child_agent_uuid?: string;
+  child_agent_uuid?: string;
 
   /**
    * Body param: Describes the case in which the child agent should be used
@@ -217,10 +196,10 @@ export interface RouteAddParams {
   /**
    * Body param: Routed agent id
    */
-  body_child_agent_uuid?: string;
+  child_agent_uuid?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   if_case?: string;
 
@@ -243,6 +222,6 @@ export declare namespace Routes {
     type RouteViewResponse as RouteViewResponse,
     type RouteUpdateParams as RouteUpdateParams,
     type RouteDeleteParams as RouteDeleteParams,
-    type RouteAddParams as RouteAddParams,
+    type RouteAddParams as RouteAddParams
   };
 }

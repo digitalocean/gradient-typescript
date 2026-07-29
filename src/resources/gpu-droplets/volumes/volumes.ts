@@ -3,32 +3,27 @@
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import * as ActionsAPI from './actions';
-import {
-  ActionInitiateByIDParams,
-  ActionInitiateByIDResponse,
-  ActionInitiateByNameParams,
-  ActionInitiateByNameResponse,
-  ActionListParams,
-  ActionListResponse,
-  ActionRetrieveParams,
-  ActionRetrieveResponse,
-  Actions,
-  VolumeAction,
-} from './actions';
+import { ActionInitiateByIDParams, ActionInitiateByIDResponse, ActionInitiateByNameParams, ActionInitiateByNameResponse, ActionListParams, ActionListResponse, ActionRetrieveParams, ActionRetrieveResponse, Actions, VolumeAction } from './actions';
 import * as SnapshotsAPI from './snapshots';
-import {
-  SnapshotCreateParams,
-  SnapshotCreateResponse,
-  SnapshotListParams,
-  SnapshotListResponse,
-  SnapshotRetrieveResponse,
-  Snapshots,
-} from './snapshots';
+import { SnapshotCreateParams, SnapshotCreateResponse, SnapshotListParams, SnapshotListResponse, SnapshotRetrieveResponse, Snapshots } from './snapshots';
 import { APIPromise } from '../../../core/api-promise';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
+/**
+ * [DigitalOcean Block Storage Volumes](https://docs.digitalocean.com/products/volumes/)
+ * provide expanded storage capacity for your Droplets and can be moved
+ * between Droplets within a specific region.
+ *
+ * Volumes function as raw block devices, meaning they appear to the
+ * operating system as locally attached storage which can be formatted using
+ * any file system supported by the OS. They may be created in sizes from
+ * 1GiB to 16TiB.
+ *
+ * By sending requests to the `/v2/volumes` endpoint, you can list, create, or
+ * delete volumes as well as attach and detach them from Droplets
+ */
 export class Volumes extends APIResource {
   actions: ActionsAPI.Actions = new ActionsAPI.Actions(this._client);
   snapshots: SnapshotsAPI.Snapshots = new SnapshotsAPI.Snapshots(this._client);
@@ -54,11 +49,7 @@ export class Volumes extends APIResource {
    * ```
    */
   create(body: VolumeCreateParams, options?: RequestOptions): APIPromise<VolumeCreateResponse> {
-    return this._client.post('/v2/volumes', {
-      body,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+    return this._client.post('/v2/volumes', { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -73,10 +64,7 @@ export class Volumes extends APIResource {
    * ```
    */
   retrieve(volumeID: string, options?: RequestOptions): APIPromise<VolumeRetrieveResponse> {
-    return this._client.get(path`/v2/volumes/${volumeID}`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+    return this._client.get(path`/v2/volumes/${volumeID}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -109,15 +97,8 @@ export class Volumes extends APIResource {
    * const volumes = await client.gpuDroplets.volumes.list();
    * ```
    */
-  list(
-    query: VolumeListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<VolumeListResponse> {
-    return this._client.get('/v2/volumes', {
-      query,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  list(query: VolumeListParams | null | undefined = {}, options?: RequestOptions): APIPromise<VolumeListResponse> {
+    return this._client.get('/v2/volumes', { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -135,11 +116,7 @@ export class Volumes extends APIResource {
    * ```
    */
   delete(volumeID: string, options?: RequestOptions): APIPromise<void> {
-    return this._client.delete(path`/v2/volumes/${volumeID}`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+    return this._client.delete(path`/v2/volumes/${volumeID}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
   }
 
   /**
@@ -155,17 +132,9 @@ export class Volumes extends APIResource {
    * await client.gpuDroplets.volumes.deleteByName();
    * ```
    */
-  deleteByName(
-    params: VolumeDeleteByNameParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<void> {
-    const { name, region } = params ?? {};
-    return this._client.delete('/v2/volumes', {
-      query: { name, region },
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+  deleteByName(params: VolumeDeleteByNameParams | null | undefined = {}, options?: RequestOptions): APIPromise<void> {
+    const { name, region } = params ?? {}
+    return this._client.delete('/v2/volumes', { query: { name, region }, defaultBaseURL: 'https://api.digitalocean.com', ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
   }
 }
 
@@ -380,7 +349,7 @@ export namespace VolumeListResponse {
   }
 }
 
-export type VolumeCreateParams = VolumeCreateParams.VolumesExt4 | VolumeCreateParams.VolumesXfs;
+export type VolumeCreateParams = VolumeCreateParams.VolumesExt4 | VolumeCreateParams.VolumesXfs
 
 export declare namespace VolumeCreateParams {
   export interface VolumesExt4 {
@@ -395,22 +364,7 @@ export declare namespace VolumeCreateParams {
      * The slug identifier for the region where the resource will initially be
      * available.
      */
-    region:
-      | 'ams1'
-      | 'ams2'
-      | 'ams3'
-      | 'blr1'
-      | 'fra1'
-      | 'lon1'
-      | 'nyc1'
-      | 'nyc2'
-      | 'nyc3'
-      | 'sfo1'
-      | 'sfo2'
-      | 'sfo3'
-      | 'sgp1'
-      | 'tor1'
-      | 'syd1';
+    region: 'ams1' | 'ams2' | 'ams3' | 'blr1' | 'fra1' | 'lon1' | 'nyc1' | 'nyc2' | 'nyc3' | 'sfo1' | 'sfo2' | 'sfo3' | 'sgp1' | 'tor1' | 'syd1';
 
     /**
      * The size of the block storage volume in GiB (1024^3). This field does not apply
@@ -466,22 +420,7 @@ export declare namespace VolumeCreateParams {
      * The slug identifier for the region where the resource will initially be
      * available.
      */
-    region:
-      | 'ams1'
-      | 'ams2'
-      | 'ams3'
-      | 'blr1'
-      | 'fra1'
-      | 'lon1'
-      | 'nyc1'
-      | 'nyc2'
-      | 'nyc3'
-      | 'sfo1'
-      | 'sfo2'
-      | 'sfo3'
-      | 'sgp1'
-      | 'tor1'
-      | 'syd1';
+    region: 'ams1' | 'ams2' | 'ams3' | 'blr1' | 'fra1' | 'lon1' | 'nyc1' | 'nyc2' | 'nyc3' | 'sfo1' | 'sfo2' | 'sfo3' | 'sgp1' | 'tor1' | 'syd1';
 
     /**
      * The size of the block storage volume in GiB (1024^3). This field does not apply
@@ -545,22 +484,7 @@ export interface VolumeListParams {
   /**
    * The slug identifier for the region where the resource is available.
    */
-  region?:
-    | 'ams1'
-    | 'ams2'
-    | 'ams3'
-    | 'blr1'
-    | 'fra1'
-    | 'lon1'
-    | 'nyc1'
-    | 'nyc2'
-    | 'nyc3'
-    | 'sfo1'
-    | 'sfo2'
-    | 'sfo3'
-    | 'sgp1'
-    | 'tor1'
-    | 'syd1';
+  region?: 'ams1' | 'ams2' | 'ams3' | 'blr1' | 'fra1' | 'lon1' | 'nyc1' | 'nyc2' | 'nyc3' | 'sfo1' | 'sfo2' | 'sfo3' | 'sgp1' | 'tor1' | 'syd1';
 }
 
 export interface VolumeDeleteByNameParams {
@@ -572,22 +496,7 @@ export interface VolumeDeleteByNameParams {
   /**
    * The slug identifier for the region where the resource is available.
    */
-  region?:
-    | 'ams1'
-    | 'ams2'
-    | 'ams3'
-    | 'blr1'
-    | 'fra1'
-    | 'lon1'
-    | 'nyc1'
-    | 'nyc2'
-    | 'nyc3'
-    | 'sfo1'
-    | 'sfo2'
-    | 'sfo3'
-    | 'sgp1'
-    | 'tor1'
-    | 'syd1';
+  region?: 'ams1' | 'ams2' | 'ams3' | 'blr1' | 'fra1' | 'lon1' | 'nyc1' | 'nyc2' | 'nyc3' | 'sfo1' | 'sfo2' | 'sfo3' | 'sgp1' | 'tor1' | 'syd1';
 }
 
 Volumes.Actions = Actions;
@@ -600,7 +509,7 @@ export declare namespace Volumes {
     type VolumeListResponse as VolumeListResponse,
     type VolumeCreateParams as VolumeCreateParams,
     type VolumeListParams as VolumeListParams,
-    type VolumeDeleteByNameParams as VolumeDeleteByNameParams,
+    type VolumeDeleteByNameParams as VolumeDeleteByNameParams
   };
 
   export {
@@ -613,7 +522,7 @@ export declare namespace Volumes {
     type ActionRetrieveParams as ActionRetrieveParams,
     type ActionListParams as ActionListParams,
     type ActionInitiateByIDParams as ActionInitiateByIDParams,
-    type ActionInitiateByNameParams as ActionInitiateByNameParams,
+    type ActionInitiateByNameParams as ActionInitiateByNameParams
   };
 
   export {
@@ -622,6 +531,6 @@ export declare namespace Volumes {
     type SnapshotRetrieveResponse as SnapshotRetrieveResponse,
     type SnapshotListResponse as SnapshotListResponse,
     type SnapshotCreateParams as SnapshotCreateParams,
-    type SnapshotListParams as SnapshotListParams,
+    type SnapshotListParams as SnapshotListParams
   };
 }

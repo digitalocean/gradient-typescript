@@ -2,13 +2,10 @@
 
 import Gradient from '@digitalocean/gradient';
 
-const client = new Gradient({
-  accessToken: 'My Access Token',
-  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-});
+const client = new Gradient({ accessToken: 'My Access Token', baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010' });
 
 describe('resource backups', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.gpuDroplets.backups.list(3164444);
     const rawResponse = await responsePromise.asResponse();
@@ -20,19 +17,15 @@ describe('resource backups', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.gpuDroplets.backups.list(
-        3164444,
-        { page: 1, per_page: 1 },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Gradient.NotFoundError);
+    await expect(client.gpuDroplets.backups.list(3164444, { page: 1, per_page: 1 }, { path: '/_stainless_unknown_path' }))
+      .rejects
+      .toThrow(Gradient.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('listPolicies', async () => {
     const responsePromise = client.gpuDroplets.backups.listPolicies();
     const rawResponse = await responsePromise.asResponse();
@@ -44,15 +37,15 @@ describe('resource backups', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('listPolicies: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.gpuDroplets.backups.listPolicies({ page: 1, per_page: 1 }, { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Gradient.NotFoundError);
+    await expect(client.gpuDroplets.backups.listPolicies({ page: 1, per_page: 1 }, { path: '/_stainless_unknown_path' }))
+      .rejects
+      .toThrow(Gradient.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('listSupportedPolicies', async () => {
     const responsePromise = client.gpuDroplets.backups.listSupportedPolicies();
     const rawResponse = await responsePromise.asResponse();
@@ -64,7 +57,7 @@ describe('resource backups', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrievePolicy', async () => {
     const responsePromise = client.gpuDroplets.backups.retrievePolicy(3164444);
     const rawResponse = await responsePromise.asResponse();

@@ -7,6 +7,13 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
+/**
+ * [DigitalOcean Cloud Firewalls](https://docs.digitalocean.com/products/networking/firewalls/)
+ * provide the ability to restrict network access to and from a Droplet
+ * allowing you to define which ports will accept inbound or outbound
+ * connections. By sending requests to the `/v2/firewalls` endpoint, you can
+ * list, create, or delete firewalls as well as modify access rules.
+ */
 export class Rules extends APIResource {
   /**
    * To add additional access rules to a firewall, send a POST request to
@@ -41,17 +48,8 @@ export class Rules extends APIResource {
    * );
    * ```
    */
-  add(
-    firewallID: string,
-    body: RuleAddParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<void> {
-    return this._client.post(path`/v2/firewalls/${firewallID}/rules`, {
-      body,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+  add(firewallID: string, body: RuleAddParams | null | undefined = {}, options?: RequestOptions): APIPromise<void> {
+    return this._client.post(path`/v2/firewalls/${firewallID}/rules`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
   }
 
   /**
@@ -87,17 +85,8 @@ export class Rules extends APIResource {
    * );
    * ```
    */
-  remove(
-    firewallID: string,
-    body: RuleRemoveParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<void> {
-    return this._client.delete(path`/v2/firewalls/${firewallID}/rules`, {
-      body,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+  remove(firewallID: string, body: RuleRemoveParams | null | undefined = {}, options?: RequestOptions): APIPromise<void> {
+    return this._client.delete(path`/v2/firewalls/${firewallID}/rules`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
   }
 }
 
@@ -194,5 +183,8 @@ export namespace RuleRemoveParams {
 }
 
 export declare namespace Rules {
-  export { type RuleAddParams as RuleAddParams, type RuleRemoveParams as RuleRemoveParams };
+  export {
+    type RuleAddParams as RuleAddParams,
+    type RuleRemoveParams as RuleRemoveParams
+  };
 }

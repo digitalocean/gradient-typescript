@@ -7,6 +7,17 @@ import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
+/**
+ * [Snapshots](https://docs.digitalocean.com/products/snapshots/) are saved
+ * instances of a Droplet or a block storage volume, which is reflected in
+ * the `resource_type` attribute. In order to avoid problems with compressing
+ * filesystems, each defines a `min_disk_size` attribute which is the minimum
+ * size of the Droplet or volume disk when creating a new resource from the
+ * saved snapshot.
+ *
+ * To interact with snapshots, you will generally send requests to the
+ * snapshots endpoint at `/v2/snapshots`.
+ */
 export class Snapshots extends APIResource {
   /**
    * To retrieve information about a snapshot, send a GET request to
@@ -22,10 +33,7 @@ export class Snapshots extends APIResource {
    * ```
    */
   retrieve(snapshotID: number | string, options?: RequestOptions): APIPromise<SnapshotRetrieveResponse> {
-    return this._client.get(path`/v2/snapshots/${snapshotID}`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+    return this._client.get(path`/v2/snapshots/${snapshotID}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -55,15 +63,8 @@ export class Snapshots extends APIResource {
    * const snapshots = await client.gpuDroplets.snapshots.list();
    * ```
    */
-  list(
-    query: SnapshotListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<SnapshotListResponse> {
-    return this._client.get('/v2/snapshots', {
-      query,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  list(query: SnapshotListParams | null | undefined = {}, options?: RequestOptions): APIPromise<SnapshotListResponse> {
+    return this._client.get('/v2/snapshots', { query, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -80,11 +81,7 @@ export class Snapshots extends APIResource {
    * ```
    */
   delete(snapshotID: number | string, options?: RequestOptions): APIPromise<void> {
-    return this._client.delete(path`/v2/snapshots/${snapshotID}`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+    return this._client.delete(path`/v2/snapshots/${snapshotID}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
   }
 }
 
@@ -124,6 +121,6 @@ export declare namespace Snapshots {
   export {
     type SnapshotRetrieveResponse as SnapshotRetrieveResponse,
     type SnapshotListResponse as SnapshotListResponse,
-    type SnapshotListParams as SnapshotListParams,
+    type SnapshotListParams as SnapshotListParams
   };
 }

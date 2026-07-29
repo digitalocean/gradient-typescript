@@ -43,6 +43,12 @@ export async function defaultParseResponse<T>(client: Gradient, props: APIRespon
     const mediaType = contentType?.split(';')[0]?.trim();
     const isJSON = mediaType?.includes('application/json') || mediaType?.endsWith('+json');
     if (isJSON) {
+      const contentLength = response.headers.get('content-length');
+      if (contentLength === '0') {
+        // if there is no content we can't do anything
+        return undefined as T;
+      }
+
       const json = await response.json();
       return json as T;
     }
@@ -50,15 +56,6 @@ export async function defaultParseResponse<T>(client: Gradient, props: APIRespon
     const text = await response.text();
     return text as unknown as T;
   })();
-  loggerFor(client).debug(
-    `[${requestLogID}] response parsed`,
-    formatRequestDetails({
-      retryOfRequestLogID,
-      url: response.url,
-      status: response.status,
-      body,
-      durationMs: Date.now() - startTime,
-    }),
-  );
+  loggerFor(client).debug(`[${requestLogID}] response parsed`, formatRequestDetails({ retryOfRequestLogID, url: response.url, status: response.status, body, durationMs: Date.now() - startTime }));
   return body;
 }

@@ -5,6 +5,31 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
+/**
+ * DigitalOcean's [managed database service](https://docs.digitalocean.com/products/databases)
+ * simplifies the creation and management of highly available database clusters. Currently, it
+ * offers support for [PostgreSQL](http://docs.digitalocean.com/products/databases/postgresql/),
+ * [Caching](https://docs.digitalocean.com/products/databases/redis/),
+ * [Valkey](https://docs.digitalocean.com/products/databases/valkey/),
+ * [MySQL](https://docs.digitalocean.com/products/databases/mysql/),
+ * [MongoDB](https://docs.digitalocean.com/products/databases/mongodb/), and
+ * [OpenSearch](https://docs.digitalocean.com/products/databases/opensearch/).
+ *
+ * By sending requests to the `/v2/databases` endpoint, you can list, create, or delete
+ * database clusters as well as scale the size of a cluster, add or remove read-only replicas,
+ * and manage other configuration details.
+ *
+ * Database clusters may be deployed in a multi-node, high-availability configuration.
+ * If your machine type is above the basic nodes, your node plan is above the smallest option,
+ * or you are running MongoDB, you may additionally include up to two standby nodes in your cluster.
+ *
+ * The size of individual nodes in a database cluster is represented by a human-readable slug,
+ * which is used in some of the following requests. Each slug denotes the node's identifier,
+ * CPU count, and amount of RAM, in that order.
+ *
+ * For a list of currently available database slugs and options, use the `/v2/databases/options` endpoint or use the
+ * `doctl databases options` [command](https://docs.digitalocean.com/reference/doctl/reference/databases/options).
+ */
 export class Config extends APIResource {
   /**
    * To retrieve the Schema Registry configuration for a Kafka cluster, send a GET
@@ -21,10 +46,7 @@ export class Config extends APIResource {
    * ```
    */
   retrieve(databaseClusterUuid: string, options?: RequestOptions): APIPromise<ConfigRetrieveResponse> {
-    return this._client.get(path`/v2/databases/${databaseClusterUuid}/schema-registry/config`, {
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+    return this._client.get(path`/v2/databases/${databaseClusterUuid}/schema-registry/config`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -42,16 +64,8 @@ export class Config extends APIResource {
    *   );
    * ```
    */
-  update(
-    databaseClusterUuid: string,
-    body: ConfigUpdateParams,
-    options?: RequestOptions,
-  ): APIPromise<ConfigUpdateResponse> {
-    return this._client.put(path`/v2/databases/${databaseClusterUuid}/schema-registry/config`, {
-      body,
-      defaultBaseURL: 'https://api.digitalocean.com',
-      ...options,
-    });
+  update(databaseClusterUuid: string, body: ConfigUpdateParams, options?: RequestOptions): APIPromise<ConfigUpdateResponse> {
+    return this._client.put(path`/v2/databases/${databaseClusterUuid}/schema-registry/config`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -73,16 +87,9 @@ export class Config extends APIResource {
    *   );
    * ```
    */
-  retrieveSubject(
-    subjectName: string,
-    params: ConfigRetrieveSubjectParams,
-    options?: RequestOptions,
-  ): APIPromise<ConfigRetrieveSubjectResponse> {
-    const { database_cluster_uuid } = params;
-    return this._client.get(
-      path`/v2/databases/${database_cluster_uuid}/schema-registry/config/${subjectName}`,
-      { defaultBaseURL: 'https://api.digitalocean.com', ...options },
-    );
+  retrieveSubject(subjectName: string, params: ConfigRetrieveSubjectParams, options?: RequestOptions): APIPromise<ConfigRetrieveSubjectResponse> {
+    const { database_cluster_uuid } = params
+    return this._client.get(path`/v2/databases/${database_cluster_uuid}/schema-registry/config/${subjectName}`, { defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 
   /**
@@ -105,16 +112,9 @@ export class Config extends APIResource {
    *   );
    * ```
    */
-  updateSubject(
-    subjectName: string,
-    params: ConfigUpdateSubjectParams,
-    options?: RequestOptions,
-  ): APIPromise<ConfigUpdateSubjectResponse> {
-    const { database_cluster_uuid, ...body } = params;
-    return this._client.put(
-      path`/v2/databases/${database_cluster_uuid}/schema-registry/config/${subjectName}`,
-      { body, defaultBaseURL: 'https://api.digitalocean.com', ...options },
-    );
+  updateSubject(subjectName: string, params: ConfigUpdateSubjectParams, options?: RequestOptions): APIPromise<ConfigUpdateSubjectResponse> {
+    const { database_cluster_uuid, ...body } = params
+    return this._client.put(path`/v2/databases/${database_cluster_uuid}/schema-registry/config/${subjectName}`, { body, defaultBaseURL: 'https://api.digitalocean.com', ...options });
   }
 }
 
@@ -122,42 +122,21 @@ export interface ConfigRetrieveResponse {
   /**
    * The compatibility level of the schema registry.
    */
-  compatibility_level:
-    | 'NONE'
-    | 'BACKWARD'
-    | 'BACKWARD_TRANSITIVE'
-    | 'FORWARD'
-    | 'FORWARD_TRANSITIVE'
-    | 'FULL'
-    | 'FULL_TRANSITIVE';
+  compatibility_level: 'NONE' | 'BACKWARD' | 'BACKWARD_TRANSITIVE' | 'FORWARD' | 'FORWARD_TRANSITIVE' | 'FULL' | 'FULL_TRANSITIVE';
 }
 
 export interface ConfigUpdateResponse {
   /**
    * The compatibility level of the schema registry.
    */
-  compatibility_level:
-    | 'NONE'
-    | 'BACKWARD'
-    | 'BACKWARD_TRANSITIVE'
-    | 'FORWARD'
-    | 'FORWARD_TRANSITIVE'
-    | 'FULL'
-    | 'FULL_TRANSITIVE';
+  compatibility_level: 'NONE' | 'BACKWARD' | 'BACKWARD_TRANSITIVE' | 'FORWARD' | 'FORWARD_TRANSITIVE' | 'FULL' | 'FULL_TRANSITIVE';
 }
 
 export interface ConfigRetrieveSubjectResponse {
   /**
    * The compatibility level of the schema registry.
    */
-  compatibility_level:
-    | 'NONE'
-    | 'BACKWARD'
-    | 'BACKWARD_TRANSITIVE'
-    | 'FORWARD'
-    | 'FORWARD_TRANSITIVE'
-    | 'FULL'
-    | 'FULL_TRANSITIVE';
+  compatibility_level: 'NONE' | 'BACKWARD' | 'BACKWARD_TRANSITIVE' | 'FORWARD' | 'FORWARD_TRANSITIVE' | 'FULL' | 'FULL_TRANSITIVE';
 
   /**
    * The name of the schema subject.
@@ -169,14 +148,7 @@ export interface ConfigUpdateSubjectResponse {
   /**
    * The compatibility level of the schema registry.
    */
-  compatibility_level:
-    | 'NONE'
-    | 'BACKWARD'
-    | 'BACKWARD_TRANSITIVE'
-    | 'FORWARD'
-    | 'FORWARD_TRANSITIVE'
-    | 'FULL'
-    | 'FULL_TRANSITIVE';
+  compatibility_level: 'NONE' | 'BACKWARD' | 'BACKWARD_TRANSITIVE' | 'FORWARD' | 'FORWARD_TRANSITIVE' | 'FULL' | 'FULL_TRANSITIVE';
 
   /**
    * The name of the schema subject.
@@ -188,14 +160,7 @@ export interface ConfigUpdateParams {
   /**
    * The compatibility level of the schema registry.
    */
-  compatibility_level:
-    | 'NONE'
-    | 'BACKWARD'
-    | 'BACKWARD_TRANSITIVE'
-    | 'FORWARD'
-    | 'FORWARD_TRANSITIVE'
-    | 'FULL'
-    | 'FULL_TRANSITIVE';
+  compatibility_level: 'NONE' | 'BACKWARD' | 'BACKWARD_TRANSITIVE' | 'FORWARD' | 'FORWARD_TRANSITIVE' | 'FULL' | 'FULL_TRANSITIVE';
 }
 
 export interface ConfigRetrieveSubjectParams {
@@ -214,14 +179,7 @@ export interface ConfigUpdateSubjectParams {
   /**
    * Body param: The compatibility level of the schema registry.
    */
-  compatibility_level:
-    | 'NONE'
-    | 'BACKWARD'
-    | 'BACKWARD_TRANSITIVE'
-    | 'FORWARD'
-    | 'FORWARD_TRANSITIVE'
-    | 'FULL'
-    | 'FULL_TRANSITIVE';
+  compatibility_level: 'NONE' | 'BACKWARD' | 'BACKWARD_TRANSITIVE' | 'FORWARD' | 'FORWARD_TRANSITIVE' | 'FULL' | 'FULL_TRANSITIVE';
 }
 
 export declare namespace Config {
@@ -232,6 +190,6 @@ export declare namespace Config {
     type ConfigUpdateSubjectResponse as ConfigUpdateSubjectResponse,
     type ConfigUpdateParams as ConfigUpdateParams,
     type ConfigRetrieveSubjectParams as ConfigRetrieveSubjectParams,
-    type ConfigUpdateSubjectParams as ConfigUpdateSubjectParams,
+    type ConfigUpdateSubjectParams as ConfigUpdateSubjectParams
   };
 }
