@@ -1,5 +1,15 @@
 # **WARNING: This SDK is deprecated and will be retired on Aug-15. Please migrate to the unified DigitalOcean SDK: https://docs.digitalocean.com/reference/libraries/**
 
+## Migrate to DoTs / `@digitalocean/dots` (required)
+
+**This package (`@digitalocean/gradient`) is deprecated and retires on August 15, 2026.**
+
+- **Replace with:** [`@digitalocean/dots`](https://github.com/digitalocean/dots) (`npm i @digitalocean/dots`)
+- **Step-by-step migration guide (public):** [MIGRATION.md](./MIGRATION.md)
+- **Official SDK overview:** https://docs.digitalocean.com/reference/libraries/
+
+Already-installed copies of this SDK can continue calling existing APIs. New installs, documentation, and ongoing maintenance for this package end on the retirement date. Please complete migration before **August 15, 2026**.
+
 # Gradient TypeScript API Library
 
 [![NPM version](<https://img.shields.io/npm/v/@digitalocean/gradient.svg?label=npm%20(stable)>)](https://npmjs.org/package/@digitalocean/gradient) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/@digitalocean/gradient)
